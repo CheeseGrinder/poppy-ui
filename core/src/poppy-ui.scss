@@ -1,0 +1,90 @@
+@use "./global/styles/theme";
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--font, theme.$font);
+  background-color: oklch(var(--base-100));
+  color: oklch(var(--base-content));
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --font: system-ui;
+
+  --radius-xs: 2px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@supports (color: oklch(0 0 0)) {
+  @media (prefers-color-scheme: light) {
+    :root {
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --base-100: #{theme.get-theme($color: base, $variant: 100)};
+      --base-200: #{theme.get-theme($color: base, $variant: 200)};
+      --base-300: #{theme.get-theme($color: base, $variant: 300)};
+
+      --base-content: #{theme.get-theme($color: base, $variant: content)};
+
+      --neutral: #{theme.get-theme($color: neutral, $variant: base)};
+      --neutral-content: #{theme.get-theme($color: neutral, $variant: content)};
+
+      --primary: #{theme.get-theme($color: primary, $variant: base)};
+      --primary-content: #{theme.get-theme($color: primary, $variant: content)};
+
+      --secondary: #{theme.get-theme($color: secondary, $variant: base)};
+      --secondary-content: #{theme.get-theme($color: secondary, $variant: content)};
+
+      --accent: #{theme.get-theme($color: accent, $variant: base)};
+      --accent-content: #{theme.get-theme($color: accent, $variant: content)};
+
+      --info: #{theme.get-theme($color: info, $variant: base)};
+      --info-content: #{theme.get-theme($color: info, $variant: content)};
+
+      --success: #{theme.get-theme($color: success, $variant: base)};
+      --success-content: #{theme.get-theme($color: success, $variant: content)};
+
+      --warning: #{theme.get-theme($color: warning, $variant: base)};
+      --warning-content: #{theme.get-theme($color: warning, $variant: content)};
+
+      --error: #{theme.get-theme($color: error, $variant: base)};
+      --error-content: #{theme.get-theme($color: error, $variant: content)};
+    }
+
+    @supports not (color: color-mix(in oklab, black, black)) {
+      :root {
+        --neutral-shade: #{theme.get-theme($color: neutral, $variant: shade)};
+        --primary-shade: #{theme.get-theme($color: primary, $variant: shade)};
+        --secondary-shade: #{theme.get-theme($color: secondary, $variant: shade)};
+        --accent-shade: #{theme.get-theme($color: accent, $variant: shade)};
+        --info-shade: #{theme.get-theme($color: info, $variant: shade)};
+        --success-shade: #{theme.get-theme($color: success, $variant: shade)};
+        --warning-shade: #{theme.get-theme($color: warning, $variant: shade)};
+        --error-shade: #{theme.get-theme($color: error, $variant: shade)};
+      }
+    }
+  }
+}

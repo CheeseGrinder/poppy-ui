@@ -1,0 +1,256 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+@use "../../global/styles/join-item";
+
+/**
+ * @prop --border-radius: Border radius
+ *
+ * @prop --background: Color of the background
+ * @prop --background-opacity: Background opacity
+ * @prop --color: Color of the text
+ * @prop --text-opacity: Text opacity
+ *
+ * @prop --animation-duration: Duration of press animation
+ * @prop --focus-scale: Scale transformation when the button is active
+ *
+ */
+
+@include join-item.item(button);
+
+// Button
+// ----------------------------------------------------------------
+
+:host {
+  > button {
+    box-sizing: border-box;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: var(--border-radius, #{radius.$md});
+
+    background-color: var(
+      --background,
+      oklch(#{theme.get-color($color: base, $variant: 200)} / var(--background-opacity, 1))
+    );
+    color: var(--color, oklch(#{theme.get-color($color: base, $variant: content)} / var(--text-opacity, 1)));
+    outline-color: var(
+      --background,
+      oklch(#{theme.get-color($color: base, $variant: 200)} / var(--background-opacity, 1))
+    );
+
+    font-weight: 600;
+    line-height: 1em;
+    text-align: center;
+    text-decoration-line: none;
+    text-rendering: optimizeLegibility;
+
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+    animation: button-pop var(--animation-duration, 0.25s) ease-out;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+
+    user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active:hover,
+    &:active:focus {
+      animation: button-pop 0s ease-out;
+      transform: scale(var(--focus-scale, 0.97));
+    }
+
+    &:focus-visible {
+      outline-style: solid;
+      outline-width: 2px;
+      outline-offset: 2px;
+    }
+  }
+
+  @keyframes button-pop {
+    0% {
+      transform: scale(var(--focus-scale, 0.97));
+    }
+    40% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+// Button Size
+// ----------------------------------------------------------------
+
+:host([size="xs"]) {
+  > button {
+    height: 1.5rem;
+    min-height: 1.5rem;
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+:host([size="sm"]) {
+  > button {
+    height: 2rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+:host([size="md"]),
+:host(:not([size])) {
+  > button {
+    height: 3rem;
+    min-height: 3rem;
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+:host([size="lg"]) {
+  > button {
+    height: 4rem;
+    min-height: 4rem;
+    font-size: 1.125rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+// Button Color
+// ----------------------------------------------------------------
+
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color(
+      $color: $color,
+      $variant: base,
+    );
+    $shade: theme.get-color(
+      $color: $color,
+      $variant: shade,
+    );
+    $text: theme.get-color(
+      $color: $color,
+      $variant: content,
+    );
+
+    :host([color="#{$color}"]) {
+      --background: oklch(#{$base} / var(--background-opacity, 1));
+      --color: oklch(#{$text} / var(--text-opacity, 1));
+
+      > button:hover {
+        @supports (color: color-mix(in oklab, black, black)) {
+          --background: color-mix(in oklab, oklch(#{$base}) 90%, black);
+        }
+        @supports not (color: color-mix(in oklab, black, black)) {
+          --background: oklch(#{$shade} / var(--background-opacity, 1));
+        }
+      }
+    }
+  }
+}
+@include generate-color(neutral, primary, secondary, accent, info, success, warning, error);
+
+:host(:not([color]):not([outlined])) {
+  --background: oklch(#{theme.get-color($color: base, $variant: 200)} / var(--background-opacity, 1));
+  --color: oklch(#{theme.get-color($color: base, $variant: content)} / var(--text-opacity, 1));
+
+  > button {
+    outline-color: oklch(#{theme.get-color($color: base, $variant: content)} / var(--background-opacity, 1));
+
+    &:hover {
+      --background: oklch(#{theme.get-color($color: base, $variant: 300)} / var(--background-opacity, 1));
+    }
+  }
+}
+
+// Button Outlined
+// ----------------------------------------------------------------
+
+:host([outlined]) {
+  > button {
+    box-shadow: none;
+
+    &:hover {
+      border-color: transparent;
+    }
+
+    &:not(:hover) {
+      border-color: currentColor;
+      color: var(--background);
+      background-color: transparent;
+    }
+  }
+}
+:host(:not([color])[outlined]) {
+  color: var(--color, oklch(#{theme.get-color($color: base, $variant: content)} / var(--text-opacity, 1)));
+
+  > button:hover {
+    background-color: var(
+      --background,
+      oklch(#{theme.get-color($color: base, $variant: content)} / var(--background-opacity, 1))
+    );
+    color: var(--color, oklch(#{theme.get-color($color: base, $variant: 200)} / var(--text-opacity, 1)));
+  }
+}
+
+// Button Expand
+// ----------------------------------------------------------------
+
+:host([expand="block"]) {
+  width: 100%;
+
+  > button {
+    width: 100%;
+  }
+}
+:host([expand="wide"]) {
+  > button {
+    width: 16rem;
+  }
+}
+
+// Button Shape
+// ----------------------------------------------------------------
+
+:host([shape="square"]),
+:host([shape="circle"]) {
+  > button {
+    aspect-ratio: 1 / 1;
+    padding: 0;
+  }
+}
+:host([shape="circle"]) {
+  --border-radius: #{radius.$full};
+}
+
+// Button State
+// ----------------------------------------------------------------
+
+:host([disabled]) {
+  > button:disabled {
+    --background: oklch(#{theme.get-color($color: neutral, $variant: base)} / var(--background-opacity, 1));
+    --color: oklch(#{theme.get-color($color: neutral, $variant: content)} / var(--text-opacity, 1));
+    --background-opacity: 0.2;
+    --text-opacity: 0.2;
+
+    pointer-events: none;
+    border-color: transparent;
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "poppy-ui",
+  "version": "0.0.1",
+  "description": "Base components for Daisy-ui",
+  "keywords": [
+    "daisy-ui",
+    "framework",
+    "stencil",
+    "mobile",
+    "app",
+    "webapp",
+    "electron",
+    "tauri",
+    "progressive web app",
+    "pwa"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "jsnext:main": "dist/esm/index.js",
+  "collection:main": "dist/collection/index.js",
+  "collection": "dist/collection/collection-manifest.json",
+  "types": "dist/types/interface.d.ts",
+  "scripts": {
+    "prebuild": "rimraf ./dist",
+    "prestart": "rimraf ./dist",
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "eslint": "eslint src",
+    "prettier": "prettier \"./src/**/*.{html,ts,tsx,scss}\" --write",
+    "prettier:check": "prettier \"./src/**/*.{html,ts,tsx,scss}\" --check",
+    "audit-ci": "audit-ci --config ./audit-ci.json"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.9.0"
+  },
+  "devDependencies": {
+    "@stencil-community/postcss": "^2.2.0",
+    "@stencil/sass": "^3.0.8",
+    "@types/node": "^18.19.4",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "audit-ci": "^6.6.1",
+    "daisyui": "^4.4.24",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "lit": "^3.1.0",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.0"
+  },
+  "license": "MIT"
+}
