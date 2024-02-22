@@ -341,37 +341,41 @@ export class Input implements ComponentInterface {
             <slot />
           </label>
         </div>
-        <input
-          part="native"
-          id={inputId}
-          name={this.name}
-          type={this.type}
-          placeholder={this.placeholder || ''}
-          min={this.min}
-          max={this.max}
-          step={this.step}
-          value={this.value}
-          multiple={this.multiple}
-          pattern={this.pattern}
-          minLength={this.minLength}
-          maxLength={this.maxLength}
-          required={this.required}
-          readonly={this.readonly}
-          disabled={this.disabled}
-          autoFocus={this.autoFocus}
-          inputMode={this.keyboard}
-          enterKeyHint={this.enterkeyhint}
-          spellcheck={this.spellcheck}
-          autoComplete={this.autocomplete}
-          autoCapitalize={this.autoCapitalize}
-          autoCorrect={this.autoCorrect}
-          onChange={this.#onChange}
-          onInput={this.#onInput}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
-        />
+        <label htmlFor={inputId} class="input-wrapper">
+          <slot name="start" />
+          <input
+            part="native"
+            id={inputId}
+            name={this.name}
+            type={this.type}
+            placeholder={this.placeholder || ''}
+            min={this.min}
+            max={this.max}
+            step={this.step}
+            value={this.value}
+            multiple={this.multiple}
+            pattern={this.pattern}
+            minLength={this.minLength}
+            maxLength={this.maxLength}
+            required={this.required}
+            readonly={this.readonly}
+            disabled={this.disabled}
+            autoFocus={this.autoFocus}
+            inputMode={this.keyboard}
+            enterKeyHint={this.enterkeyhint}
+            spellcheck={this.spellcheck}
+            autoComplete={this.autocomplete}
+            autoCapitalize={this.autoCapitalize}
+            autoCorrect={this.autoCorrect}
+            onChange={this.#onChange}
+            onInput={this.#onInput}
+            onFocus={this.#onFocus}
+            onBlur={this.#onBlur}
+            ref={el => (this.#nativeInput = el)}
+            {...this.#inheritedAttributes}
+          />
+          <slot name="end" />
+        </label>
         <div class="text-wrapper">
           {this.errorText ? <span class="error-text">{this.errorText}</span> : null}
           {this.helperText ? <span class="helper-text">{this.helperText}</span> : null}

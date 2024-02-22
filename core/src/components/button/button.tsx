@@ -93,9 +93,7 @@ export class Button implements ComponentInterface {
     const { disabled } = this;
 
     return (
-      <Host
-        aria-disabled={disabled ? 'true' : null}
-      >
+      <Host aria-disabled={disabled ? 'true' : null}>
         <button
           part="native"
           disabled={disabled}
