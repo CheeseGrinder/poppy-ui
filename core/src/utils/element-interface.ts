@@ -3,6 +3,7 @@ export type StateColor = 'info' | 'success' | 'warning' | 'error';
 export type Color = BrandColor | StateColor;
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
+export type Placement = 'start' | 'end';
 
 export type AutoCapitalize = 'none' | 'on' | 'characters' | 'sentences' | 'words' | 'none' | 'characters';
 export type Wrap = 'hard' | 'soft';
