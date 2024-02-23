@@ -16,7 +16,7 @@
  * @prop --font: Change text font
  */
 
-@include join-item.item('.input-wrapper');
+@include join-item.item(".input-wrapper");
 
 // Input
 // ----------------------------------------------------------------
@@ -24,7 +24,7 @@
 $minWidth: 12rem;
 :host {
   @include input.label;
-  @include input.helper('.input-wrapper', $counter: true);
+  @include input.helper(".input-wrapper", $counter: true);
 
   display: inline-flex;
   flex-direction: column;
@@ -36,14 +36,14 @@ $minWidth: 12rem;
     justify-content: center;
     align-items: center;
     flex-shrink: 1;
-    gap: .5rem;
+    gap: 0.5rem;
 
     border-style: solid;
     border-width: 1px;
     border-radius: var(--border-radius, #{radius.$md});
     border-color: var(--border-color, transparent);
 
-    background-color: var(--background, oklch(#{theme.get-color($color: base, $variant: 100)} / var(--opacity, 1)));
+    background-color: var(--background, oklch(#{theme.get-color("base.100")} / var(--opacity, 1)));
 
     min-width: $minWidth;
     width: 100%;
@@ -52,7 +52,7 @@ $minWidth: 12rem;
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--border-color, oklch(#{theme.get-color($color: base, $variant: content)} / 0.2));
+      outline-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
     }
 
     > input {
@@ -61,7 +61,7 @@ $minWidth: 12rem;
       border: none;
       outline: none;
 
-      color: var(--color, oklch(#{theme.get-color($color: base, $variant: content)}));
+      color: var(--color, oklch(#{theme.get-color("base.content")}));
       background-color: transparent;
 
       font-family: #{theme.$font};
@@ -77,23 +77,21 @@ $minWidth: 12rem;
       }
     }
   }
-
 }
 
 :host([bordered]) {
-  --border-color: oklch(#{theme.get-color($color: base, $variant: content)} / 0.2);
+  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
 }
-
 
 // Input Slot
 // ----------------------------------------------------------------
 
-::slotted([slot=start]),
-::slotted([slot=end]) {
+::slotted([slot="start"]),
+::slotted([slot="end"]) {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 // Input Size
@@ -132,10 +130,7 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color(
-      $color: $color,
-      $variant: base,
-    );
+    $base: theme.get-color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: oklch(#{$base});
@@ -156,24 +151,15 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([readonly]) {
-  $base: theme.get-color(
-    $color: base,
-    $variant: 200,
-  );
-  $neutral: theme.get-color(
-    $color: neutral,
-    $variant: base,
-  );
-  $text: theme.get-color(
-    $color: base,
-    $variant: content,
-  );
+  $base: theme.get-color("base.200");
+  $neutral: theme.get-color("neutral.base");
+  $text: theme.get-color("base.content");
 
   --background: oklch(#{$base});
   --border-color: oklch(#{$neutral});
   --color: oklch(#{$text} / 0.8);
 
-  cursor: text ;
+  cursor: text;
 
   input::placeholder {
     color: oklch(#{$text} / 0.2);
@@ -181,14 +167,8 @@ $minWidth: 12rem;
 }
 
 :host([disabled]) {
-  $base: theme.get-color(
-    $color: base,
-    $variant: 200,
-  );
-  $text: theme.get-color(
-    $color: base,
-    $variant: content,
-  );
+  $base: theme.get-color("base.200");
+  $text: theme.get-color("base.content");
 
   --background: oklch(#{$base});
   --border-color: oklch(#{$base});

@@ -1,10 +1,13 @@
+@use "sass:string";
+@use "sass:list";
+
 $font: system-ui;
 
 $dark_theme: (
   base: (
-    100: 0.253267 0.015896 252.417568,
-    200: 0.232607 0.013807 253.100675,
-    300: 0.211484 0.01165 254.087939,
+    "100": 0.253267 0.015896 252.417568,
+    "200": 0.232607 0.013807 253.100675,
+    "300": 0.211484 0.01165 254.087939,
     content: 0.746477 0.0216 264.435964,
   ),
   neutral: (
@@ -49,16 +52,24 @@ $dark_theme: (
   ),
 );
 
-@function get-color($theme: $dark_theme, $color, $variant) {
-  $value: map-get($theme, $color, $variant);
+@function get-theme($color, $theme: $dark_theme) {
+  $colors: string.split($color, ".");
+  $base: list.nth($colors, 1);
+  $variant: list.nth($colors, 2);
 
-  @if $variant == base {
-    @return var(--#{$color}, #{$value});
-  } @else {
-    @return var(--#{$color}-#{$variant}, #{$value});
-  }
+  @return map-get($theme, $base, $variant);
 }
 
-@function get-theme($theme: $dark_theme, $color, $variant) {
-  @return map-get($map: map-get($theme, $color), $key: $variant);
+@function get-color($color, $theme: $dark_theme) {
+  $colors: string.split($color, ".");
+  $base: list.nth($colors, 1);
+  $variant: list.nth($colors, 2);
+
+  $value: get-theme($color, $theme);
+
+  @if $variant == base {
+    @return var(--#{$base}, #{$value});
+  } @else {
+    @return var(--#{$base}-#{$variant}, #{$value});
+  }
 }

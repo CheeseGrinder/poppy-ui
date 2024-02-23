@@ -19,6 +19,7 @@ import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
 })
 export class Button implements ComponentInterface {
   #inheritedAttributes: Attributes = {};
+  #inJoin: boolean = false;
 
   @Element() host!: HTMLElement;
 
@@ -79,6 +80,7 @@ export class Button implements ComponentInterface {
 
   componentWillRender(): void | Promise<void> {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.#inJoin = !!this.host.closest('pop-join');
   }
 
   #onFocus = () => {
@@ -93,7 +95,10 @@ export class Button implements ComponentInterface {
     const { disabled } = this;
 
     return (
-      <Host aria-disabled={disabled ? 'true' : null}>
+      <Host aria-disabled={disabled ? 'true' : null}
+      class={{
+        'join-item': this.#inJoin,
+      }}>
         <button
           part="native"
           disabled={disabled}

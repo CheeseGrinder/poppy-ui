@@ -43,47 +43,47 @@ body {
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --base-100: #{theme.get-theme($color: base, $variant: 100)};
-      --base-200: #{theme.get-theme($color: base, $variant: 200)};
-      --base-300: #{theme.get-theme($color: base, $variant: 300)};
+      --base-100: #{theme.get-theme("base.100")};
+      --base-200: #{theme.get-theme("base.200")};
+      --base-300: #{theme.get-theme("base.300")};
 
-      --base-content: #{theme.get-theme($color: base, $variant: content)};
+      --base-content: #{theme.get-theme("base.content")};
 
-      --neutral: #{theme.get-theme($color: neutral, $variant: base)};
-      --neutral-content: #{theme.get-theme($color: neutral, $variant: content)};
+      --neutral: #{theme.get-theme("neutral.base")};
+      --neutral-content: #{theme.get-theme("neutral.content")};
 
-      --primary: #{theme.get-theme($color: primary, $variant: base)};
-      --primary-content: #{theme.get-theme($color: primary, $variant: content)};
+      --primary: #{theme.get-theme("primary.base")};
+      --primary-content: #{theme.get-theme("primary.content")};
 
-      --secondary: #{theme.get-theme($color: secondary, $variant: base)};
-      --secondary-content: #{theme.get-theme($color: secondary, $variant: content)};
+      --secondary: #{theme.get-theme("secondary.base")};
+      --secondary-content: #{theme.get-theme("secondary.content")};
 
-      --accent: #{theme.get-theme($color: accent, $variant: base)};
-      --accent-content: #{theme.get-theme($color: accent, $variant: content)};
+      --accent: #{theme.get-theme("accent.base")};
+      --accent-content: #{theme.get-theme("accent.content")};
 
-      --info: #{theme.get-theme($color: info, $variant: base)};
-      --info-content: #{theme.get-theme($color: info, $variant: content)};
+      --info: #{theme.get-theme("info.base")};
+      --info-content: #{theme.get-theme("info.content")};
 
-      --success: #{theme.get-theme($color: success, $variant: base)};
-      --success-content: #{theme.get-theme($color: success, $variant: content)};
+      --success: #{theme.get-theme("success.base")};
+      --success-content: #{theme.get-theme("success.content")};
 
-      --warning: #{theme.get-theme($color: warning, $variant: base)};
-      --warning-content: #{theme.get-theme($color: warning, $variant: content)};
+      --warning: #{theme.get-theme("warning.base")};
+      --warning-content: #{theme.get-theme("warning.content")};
 
-      --error: #{theme.get-theme($color: error, $variant: base)};
-      --error-content: #{theme.get-theme($color: error, $variant: content)};
+      --error: #{theme.get-theme("error.base")};
+      --error-content: #{theme.get-theme("error.content")};
     }
 
     @supports not (color: color-mix(in oklab, black, black)) {
       :root {
-        --neutral-shade: #{theme.get-theme($color: neutral, $variant: shade)};
-        --primary-shade: #{theme.get-theme($color: primary, $variant: shade)};
-        --secondary-shade: #{theme.get-theme($color: secondary, $variant: shade)};
-        --accent-shade: #{theme.get-theme($color: accent, $variant: shade)};
-        --info-shade: #{theme.get-theme($color: info, $variant: shade)};
-        --success-shade: #{theme.get-theme($color: success, $variant: shade)};
-        --warning-shade: #{theme.get-theme($color: warning, $variant: shade)};
-        --error-shade: #{theme.get-theme($color: error, $variant: shade)};
+        --neutral-shade: #{theme.get-theme("neutral.shade")};
+        --primary-shade: #{theme.get-theme("primary.shade")};
+        --secondary-shade: #{theme.get-theme("secondary.shade")};
+        --accent-shade: #{theme.get-theme("accent.shade")};
+        --info-shade: #{theme.get-theme("info.shade")};
+        --success-shade: #{theme.get-theme("success.shade")};
+        --warning-shade: #{theme.get-theme("warning.shade")};
+        --error-shade: #{theme.get-theme("error.shade")};
       }
     }
   }

@@ -40,6 +40,8 @@ export class Input implements ComponentInterface {
   #inputId = `pop-input-${inputIds++}`;
   #inheritedAttributes: Attributes;
 
+  #inJoin: boolean = false;
+
   #nativeInput!: HTMLInputElement;
   #debounceTimer: NodeJS.Timeout;
 
@@ -274,6 +276,7 @@ export class Input implements ComponentInterface {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
+    this.#inJoin = !!this.host.closest('pop-join');
 
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);
@@ -335,7 +338,10 @@ export class Input implements ComponentInterface {
     const inputId = this.#inputId;
 
     return (
-      <Host aria-labelledby={inputId} aria-hidden={this.disabled ? 'true' : null}>
+      <Host aria-labelledby={inputId} aria-hidden={this.disabled ? 'true' : null}
+      class={{
+        'join-item': this.#inJoin,
+      }}>
         <div class="label">
           <label htmlFor={inputId} part="label">
             <slot />

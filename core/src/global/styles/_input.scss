@@ -38,7 +38,7 @@
   }
 
   .error-text {
-    color: var(--error-color, oklch(#{theme.get-color($color: error, $variant: base)}));
+    color: var(--error-color, oklch(#{theme.get-color("error.base")}));
   }
   @if ($counter) {
     .counter-text {
