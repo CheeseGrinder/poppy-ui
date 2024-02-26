@@ -1,0 +1,210 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+@use "../../global/styles/input";
+@use "../../global/styles/join-item";
+
+/**
+ * @prop --border-radius: Change border radius.
+ * @prop --border-color: Change border and outline color.
+ *
+ * @prop --button-background: Change button background.
+ * @prop --button-color: Change button text color.
+ * @prop --button-animation: Change animation duration of the button.
+ *
+ * @prop --background: Change background color.
+ * @prop --background-opacity: CHange background opacity.
+ * @prop --color: Change text color.
+ *
+ * @prop --error-color: Change error text .
+ */
+
+@include join-item.item(input);
+
+// Input-File
+// ----------------------------------------------------------------
+
+$minWidth: 12rem;
+:host {
+  @include input.label;
+  @include input.helper;
+
+  display: inline-flex;
+  flex-direction: column;
+
+  > input {
+    box-sizing: border-box;
+    overflow: hidden;
+
+    padding: 0;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--border-radius, #{radius.$md});
+    border-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0));
+
+    background-color: var(--background, oklch(#{theme.get-color("base.100")} / var(--background-opacity, 1)));
+    color: var(--color, oklch(#{theme.get-color("base.content")}));
+
+    min-width: $minWidth;
+    width: 100%;
+
+    cursor: pointer;
+
+    &:focus-visible {
+      outline-style: solid;
+      outline-width: 2px;
+      outline-offset: 2px;
+      outline-color: var(--border-color, oklch(theme.get-color("base.content") / 0.2));
+    }
+    &::file-selector-button {
+      border: none;
+
+      padding-left: 1rem;
+      padding-right: 1rem;
+      height: 100%;
+
+      background-color: var(--button-background, oklch(#{theme.get-color("neutral.base")}));
+
+      color: var(--button-color, oklch(#{theme.get-color("neutral.content")}));
+      text-align: center;
+      text-transform: uppercase;
+      text-decoration-line: none;
+      font-weight: 600;
+
+      cursor: pointer;
+      user-select: none;
+
+      transition-property: color, background-color, border-color, opacity;
+      transition-timing-function: ease-out;
+      transition-duration: 200ms;
+      animation: button-pop var(--button-animation, 0.25s) ease-out;
+    }
+  }
+}
+
+// Bordered
+:host([bordered]) {
+  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
+}
+
+// Input-File Size
+// ----------------------------------------------------------------
+
+:host([size="xs"]) > input {
+  padding-inline-end: 0.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.625;
+
+  &::file-selector-button {
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+:host([size="sm"]) > input {
+  padding-inline-end: 0.75rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  line-height: 2;
+
+  &::file-selector-button {
+    margin-right: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+:host([size="md"]),
+:host(:not([size])) {
+  > input {
+    padding-inline-end: 1rem;
+    height: 3rem;
+    font-size: 0.875rem;
+    line-height: 2;
+
+    &::file-selector-button {
+      margin-right: 1rem;
+      font-size: 0.875rem;
+    }
+  }
+}
+:host([size="lg"]) > input {
+  padding-inline-end: 1.5rem;
+  height: 4rem;
+  font-size: 1.125rem;
+  line-height: 2;
+
+  &::file-selector-button {
+    margin-right: 1.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+// Input-File Color
+// ----------------------------------------------------------------
+
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+    $shade: theme.get-color("#{$color}.shade");
+    $text: theme.get-color("#{$color}.content");
+
+    :host([color="#{$color}"]) {
+      --button-background: oklch(#{$base});
+      --button-color: oklch(#{$text});
+      --border-color: oklch(#{$base});
+
+      > input:hover {
+        --button-background: color-mix(in oklab, oklch(#{$base}) 90%, black);
+
+        @supports (color: color-mix(in oklab, black, black)) {
+          --button-background: oklch(#{$shade});
+        }
+      }
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, info, success, warning, error);
+
+:host(:not([color]):not([disabled])) {
+  $color: theme.get-color("neutral.base");
+  $shade: theme.get-color("neutral.shade");
+
+  > input:hover {
+    --button-background: color-mix(in oklab, oklch(#{$color}) 90%, black);
+
+    @supports not (color: color-mix(in oklab, black, black)) {
+      --button-background: oklch(#{$shade});
+    }
+  }
+}
+:host([color="ghost"]) {
+  --background-opacity: 0.05;
+  --button-background: transparent;
+  --button-color: currentColor;
+
+  > input:focus {
+    --background-opacity: 1;
+
+    color: var(--text-color, oklch(theme.get-color("base.content")));
+  }
+}
+
+// Input-File State
+// ----------------------------------------------------------------
+
+:host([disabled]) {
+  $background: theme.get-color("base.200");
+  $color: theme.get-color("base.content");
+  $btn-background: theme.get-color("neutral.base");
+
+  --background: oklch(#{$background});
+  --border-color: oklch(#{$background});
+  --color: oklch(#{$color} / 0.2);
+
+  --button-color: oklch(#{$color} / 0.2);
+  --button-background: oklch(#{$btn-background} / 0.2);
+
+  > input,
+  input::file-selector-button {
+    cursor: not-allowed;
+  }
+}

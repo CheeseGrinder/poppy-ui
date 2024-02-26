@@ -338,10 +338,13 @@ export class Input implements ComponentInterface {
     const inputId = this.#inputId;
 
     return (
-      <Host aria-labelledby={inputId} aria-hidden={this.disabled ? 'true' : null}
-      class={{
-        'join-item': this.#inJoin,
-      }}>
+      <Host
+        aria-labelledby={inputId}
+        aria-hidden={this.disabled ? 'true' : null}
+        class={{
+          'join-item': this.#inJoin,
+        }}
+      >
         <div class="label">
           <label htmlFor={inputId} part="label">
             <slot />
