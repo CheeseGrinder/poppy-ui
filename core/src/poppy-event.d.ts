@@ -1,3 +1,9 @@
+// Toggle
+interface ToggleChangeEventDetail<T = unknown> {
+  checked: boolean;
+  value: T;
+}
+
 // Checkbox
 interface CheckboxChangeEventDetail<T = unknown> {
   checked: boolean;
