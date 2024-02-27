@@ -95,10 +95,12 @@ export class Button implements ComponentInterface {
     const { disabled } = this;
 
     return (
-      <Host aria-disabled={disabled ? 'true' : null}
-      class={{
-        'join-item': this.#inJoin,
-      }}>
+      <Host
+        aria-disabled={disabled ? 'true' : null}
+        class={{
+          'join-item': this.#inJoin,
+        }}
+      >
         <button
           part="native"
           disabled={disabled}
