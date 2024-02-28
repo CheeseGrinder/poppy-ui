@@ -1,5 +1,5 @@
 import { Color, Size } from '#utils/element-interface';
-import { Attributes, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
+import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
 import { Show } from '../Show';
 
@@ -20,8 +20,6 @@ import { Show } from '../Show';
 export class InputFile implements ComponentInterface {
   #inputId = `pop-input-file-${inputIds++}`;
   #inheritedAttributes: Attributes;
-
-  #inJoin: boolean = false;
 
   #nativeInput!: HTMLInputElement;
   #debounceTimer: NodeJS.Timeout;
@@ -117,7 +115,6 @@ export class InputFile implements ComponentInterface {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
-    this.#inJoin = !!this.host.closest('pop-join');
   }
 
   // TODO: Tester si ça fonctionne
@@ -172,7 +169,7 @@ export class InputFile implements ComponentInterface {
         aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
         class={{
-          'join-item': this.#inJoin,
+          'join-item': hostContext(host, 'pop-join'),
         }}
       >
         <Show when={hasLabel}>

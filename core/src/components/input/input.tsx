@@ -7,7 +7,7 @@ import type {
   KeyboardType,
   Size,
 } from '#utils/element-interface';
-import { Attributes, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
+import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   Component,
   ComponentInterface,
@@ -17,9 +17,8 @@ import {
   Host,
   Method,
   Prop,
-  State,
   Watch,
-  h,
+  h
 } from '@stencil/core';
 import { Show } from '../Show';
 
@@ -41,14 +40,10 @@ export class Input implements ComponentInterface {
   #inputId = `pop-input-${inputIds++}`;
   #inheritedAttributes: Attributes;
 
-  #inJoin: boolean = false;
-
   #nativeInput!: HTMLInputElement;
   #debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
-
-  @State() eventList: Event[] = [];
 
   /**
    * The name of the control, which is submitted with the form data.
@@ -277,7 +272,6 @@ export class Input implements ComponentInterface {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
-    this.#inJoin = !!this.host.closest('pop-join');
 
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);
@@ -352,7 +346,7 @@ export class Input implements ComponentInterface {
         aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
         class={{
-          'join-item': this.#inJoin,
+          'join-item': hostContext(host, 'pop-join'),
         }}
       >
         <Show when={hasLabel}>

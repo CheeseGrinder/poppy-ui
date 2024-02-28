@@ -1,5 +1,5 @@
 import type { Color, Size } from '#utils/element-interface';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
 
@@ -19,7 +19,6 @@ import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
 })
 export class Button implements ComponentInterface {
   #inheritedAttributes: Attributes = {};
-  #inJoin: boolean = false;
 
   @Element() host!: HTMLElement;
 
@@ -80,7 +79,6 @@ export class Button implements ComponentInterface {
 
   componentWillRender(): void | Promise<void> {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
-    this.#inJoin = !!this.host.closest('pop-join');
   }
 
   #onFocus = () => {
@@ -92,13 +90,13 @@ export class Button implements ComponentInterface {
   };
 
   render() {
-    const { disabled } = this;
+    const { host, disabled } = this;
 
     return (
       <Host
         aria-disabled={disabled ? 'true' : null}
         class={{
-          'join-item': this.#inJoin,
+          'join-item': hostContext(host, 'pop-join'),
         }}
       >
         <button

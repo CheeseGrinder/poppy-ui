@@ -1,5 +1,5 @@
 import type { Color, Placement, Size } from '#utils/element-interface';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   Component,
   ComponentInterface,
@@ -35,9 +35,7 @@ export class Checkbox implements ComponentInterface {
   #inheritedAttributes: Attributes;
   #nativeInput!: HTMLInputElement;
 
-  #inList: boolean = false;
   #listSize?: Size;
-  #inItem: boolean = false;
 
   @Element() host!: HTMLElement;
 
@@ -126,9 +124,7 @@ export class Checkbox implements ComponentInterface {
 
   componentWillLoad() {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
-    this.#inList = !!this.host.closest('pop-list');
     this.#listSize = this.host.closest('pop-list')?.size || null;
-    this.#inItem = !!this.host.closest('pop-item');
   }
 
   /**
@@ -173,9 +169,9 @@ export class Checkbox implements ComponentInterface {
         aria-hidden={disabled ? 'true' : null}
         onClick={this.#onClick}
         class={{
-          'in-list': this.#inList,
+          'in-list': hostContext(host, 'pop-list'),
           [`in-list-${this.#listSize}`]: this.#listSize !== null,
-          'in-item': this.#inItem,
+          'in-item': hostContext(host, 'pop-item'),
         }}
       >
         <Show when={hasLabel}>

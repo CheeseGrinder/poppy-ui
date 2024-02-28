@@ -1,3 +1,4 @@
+
 export type Attributes = { [key: string]: any };
 
 /**
@@ -99,3 +100,7 @@ export const inheritAriaAttributes = (el: HTMLElement, ignoreList?: string[]) =>
   }
   return inheritAttributes(el, attributesToInherit);
 };
+
+export const hostContext = (host: Element, parent: string): boolean => {
+  return !!host.closest(parent);
+}

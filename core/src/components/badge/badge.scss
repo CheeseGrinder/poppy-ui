@@ -18,6 +18,7 @@
 
 :host {
   display: inline-flex;
+  width: max-content;
 
   > .badge {
     box-sizing: border-box;
