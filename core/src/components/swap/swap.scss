@@ -1,0 +1,95 @@
+// Swap
+// ----------------------------------------------------------------
+
+:host {
+  position: relative;
+
+  display: inline-grid;
+  place-content: center;
+
+  user-select: none;
+  cursor: pointer;
+
+  ::slotted(*) {
+    grid-column-start: 1;
+    grid-row-start: 1;
+
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-property: transform, opacity;
+  }
+}
+
+// Swap State
+// ----------------------------------------------------------------
+
+@mixin slot($names...) {
+  @each $name in $names {
+    ::slotted([slot="#{$name}"]) {
+      @content;
+    }
+  }
+}
+
+:host(:not([active])) {
+  @include slot("on") {
+    opacity: 0;
+    z-index: 0;
+  }
+  @include slot("off") {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+:host([active]) {
+  @include slot("on") {
+    opacity: 1;
+    z-index: 1;
+  }
+  @include slot("off") {
+    opacity: 0;
+    z-index: 0;
+  }
+}
+
+// Swap rotate animation
+// ----------------------------------------------------------------
+
+:host([animation="rotate"]:not([active])) {
+  @include slot("on") {
+    transform: rotate(45deg);
+  }
+}
+:host([animation="rotate"][active]) {
+  @include slot("on") {
+    transform: rotate(0deg);
+  }
+  @include slot("off") {
+    transform: rotate(-45deg);
+  }
+}
+
+// Swap Flip animation
+// ----------------------------------------------------------------
+
+:host([animation="flip"]) {
+  @include slot("on", "off") {
+    opacity: 1;
+    z-index: 1;
+    backface-visibility: hidden;
+  }
+}
+:host([animation="flip"]:not([active])) {
+  @include slot("on") {
+    transform: rotateY(180deg);
+  }
+}
+:host([animation="flip"][active]) {
+  @include slot("on") {
+    transform: rotateY(0deg);
+  }
+  @include slot("off") {
+    transform: rotateY(-180deg);
+  }
+}
