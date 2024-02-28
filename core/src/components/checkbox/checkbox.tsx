@@ -12,6 +12,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { Show } from '../Show';
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -160,8 +161,10 @@ export class Checkbox implements ComponentInterface {
   };
 
   render() {
-    const { name, disabled, checked } = this;
+    const { host, name, disabled, checked } = this;
     const inputId = this.#inputId;
+
+    const hasLabel = host.textContent !== '';
 
     return (
       <Host
@@ -175,11 +178,13 @@ export class Checkbox implements ComponentInterface {
           'in-item': this.#inItem,
         }}
       >
-        <div class="label">
-          <label htmlFor={inputId} part="label">
-            <slot />
-          </label>
-        </div>
+        <Show when={hasLabel}>
+          <div class="label">
+            <label htmlFor={inputId} part="label">
+              <slot />
+            </label>
+          </div>
+        </Show>
         <input
           type="checkbox"
           part="native"

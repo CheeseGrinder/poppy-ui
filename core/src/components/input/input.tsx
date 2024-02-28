@@ -21,6 +21,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { Show } from '../Show';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -302,11 +303,12 @@ export class Input implements ComponentInterface {
   }
 
   get #counterText(): string {
-    if (!this.counter) return null;
-    const { maxLength } = this;
+    const { counter, maxLength, counterFormatter } = this;
+
+    if (!counter || maxLength < 0) return '';
     const length = this.#getValue().length;
 
-    return this.counterFormatter?.(length, maxLength) ?? `${length} / ${maxLength}`;
+    return counterFormatter?.(length, maxLength) ?? `${length} / ${maxLength}`;
   }
 
   #onChange = () => {
@@ -335,7 +337,15 @@ export class Input implements ComponentInterface {
   };
 
   render() {
+    const { host, errorText, helperText } = this;
     const inputId = this.#inputId;
+    const counter = this.#counterText;
+
+    const hasLabel = host.textContent !== '';
+    const hasError = !!errorText;
+    const hasHelper = !!helperText;
+    const hasCounter = counter !== '';
+    const hasBottomText = hasError || hasHelper || hasCounter;
 
     return (
       <Host
@@ -345,11 +355,13 @@ export class Input implements ComponentInterface {
           'join-item': this.#inJoin,
         }}
       >
-        <div class="label">
-          <label htmlFor={inputId} part="label">
-            <slot />
-          </label>
-        </div>
+        <Show when={hasLabel}>
+          <div class="label">
+            <label htmlFor={inputId} part="label">
+              <slot />
+            </label>
+          </div>
+        </Show>
         <label htmlFor={inputId} class="input-wrapper">
           <slot name="start" />
           <input
@@ -385,11 +397,19 @@ export class Input implements ComponentInterface {
           />
           <slot name="end" />
         </label>
-        <div class="text-wrapper">
-          {this.errorText ? <span class="error-text">{this.errorText}</span> : null}
-          {this.helperText ? <span class="helper-text">{this.helperText}</span> : null}
-          {this.maxLength !== undefined ? <span class="counter-text">{this.#counterText}</span> : null}
-        </div>
+        <Show when={hasBottomText}>
+          <div class="text-wrapper">
+            <Show when={hasError}>
+              <span class="error-text">{errorText}</span>
+            </Show>
+            <Show when={hasHelper}>
+              <span class="helper-text">{helperText}</span>
+            </Show>
+            <Show when={hasCounter}>
+              <span class="counter-text">{counter}</span>
+            </Show>
+          </div>
+        </Show>
       </Host>
     );
   }

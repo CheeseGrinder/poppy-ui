@@ -1,6 +1,7 @@
 import { Color, Size } from '#utils/element-interface';
 import { Attributes, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
+import { Show } from '../Show';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -158,7 +159,13 @@ export class InputFile implements ComponentInterface {
   };
 
   render() {
-    const { #inputId: inputId } = this;
+    const { host, errorText, helperText } = this;
+    const inputId = this.#inputId;
+
+    const hasLabel = host.textContent !== '';
+    const hasError = !!errorText;
+    const hasHelper = !!helperText;
+    const hasBottomText = hasError || hasHelper;
 
     return (
       <Host
@@ -168,11 +175,13 @@ export class InputFile implements ComponentInterface {
           'join-item': this.#inJoin,
         }}
       >
-        <div class="label">
-          <label htmlFor={inputId} part="label">
-            <slot />
-          </label>
-        </div>
+        <Show when={hasLabel}>
+          <div class="label">
+            <label htmlFor={inputId} part="label">
+              <slot />
+            </label>
+          </div>
+        </Show>
         <input
           part="native"
           type="file"
@@ -189,10 +198,16 @@ export class InputFile implements ComponentInterface {
           ref={el => (this.#nativeInput = el)}
           {...this.#inheritedAttributes}
         />
-        <div class="text-wrapper">
-          {this.errorText ? <span class="error-text">{this.errorText}</span> : null}
-          {this.helperText ? <span class="helper-text">{this.helperText}</span> : null}
-        </div>
+        <Show when={hasBottomText}>
+          <div class="text-wrapper">
+            <Show when={hasError}>
+              <span class="error-text">{errorText}</span>
+            </Show>
+            <Show when={hasHelper}>
+              <span class="helper-text">{helperText}</span>
+            </Show>
+          </div>
+        </Show>
       </Host>
     );
   }

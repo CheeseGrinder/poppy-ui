@@ -12,6 +12,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { Show } from '../Show';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -144,8 +145,10 @@ export class Toggle implements ComponentInterface {
   };
 
   render() {
-    const { name, disabled, checked } = this;
+    const { host, name, disabled, checked } = this;
     const inputId = this.#inputId;
+
+    const hasLabel = host.textContent !== '';
 
     return (
       <Host
@@ -154,11 +157,13 @@ export class Toggle implements ComponentInterface {
         aria-hidden={disabled ? 'true' : null}
         onClick={this.#onClick}
       >
-        <div class="label">
-          <label htmlFor={inputId} part="label">
-            <slot />
-          </label>
-        </div>
+        <Show when={hasLabel}>
+          <div class="label">
+            <label htmlFor={inputId} part="label">
+              <slot />
+            </label>
+          </div>
+        </Show>
         <input
           type="checkbox"
           role="switch"

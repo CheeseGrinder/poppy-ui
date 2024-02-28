@@ -14,6 +14,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { Show } from '../Show';
 
 /**
  * Radio buttons allow the user to select one option from a set.
@@ -155,8 +156,10 @@ export class Radio implements ComponentInterface {
   };
 
   render() {
-    const { checked } = this;
+    const { host, checked } = this;
     const inputId = this.#inputId;
+
+    const hasLabel = host.textContent !== '';
 
     return (
       <Host
@@ -166,11 +169,13 @@ export class Radio implements ComponentInterface {
         aria-hidden={this.disabled ? 'true' : null}
         onClick={this.#onClick}
       >
-        <div class="label">
-          <label htmlFor={inputId} part="label">
-            <slot />
-          </label>
-        </div>
+        <Show when={hasLabel}>
+          <div class="label">
+            <label htmlFor={inputId} part="label">
+              <slot />
+            </label>
+          </div>
+        </Show>
         <input
           part="native"
           type="radio"

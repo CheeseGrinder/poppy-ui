@@ -7,7 +7,7 @@
 
 ## Overview
 
-Checkboxes are used to select or deselect a value.
+Toggles are switches that change the state of a single option.
 They can be switched on or off by pressing.
 Toggles can also be `"checked"` programmatically by setting the checked property.
 
@@ -20,7 +20,7 @@ Toggles can also be `"checked"` programmatically by setting the checked property
 | `disabled`      | `disabled`      | If true, the user cannot interact with the native element.                                                                                                                                                                                            | `boolean`                                                                             | `undefined`     |
 | `indeterminate` | `indeterminate` | If a developer want to use `indeterminate`, `checked` property should be set to `false`                                                                                                                                                               | `boolean`                                                                             | `false`         |
 | `name`          | `name`          | The name of the control, which is submitted with the form data.                                                                                                                                                                                       | `string`                                                                              | `this.#inputId` |
-| `placement`     | `placement`     | Where to place the label relative to the checkbox.  - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.       | `"end" \| "start"`                                                                    | `'start'`       |
+| `placement`     | `placement`     | Where to place the label relative to the checkbox. - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.        | `"end" \| "start"`                                                                    | `'start'`       |
 | `readonly`      | `readonly`      | If `true`, the user cannot modify the value.                                                                                                                                                                                                          | `boolean`                                                                             | `false`         |
 | `required`      | `required`      | If `true`, the user must fill in a value before submitting a form.                                                                                                                                                                                    | `boolean`                                                                             | `false`         |
 | `size`          | `size`          | Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.                                                                                                                                                                             | `"lg" \| "md" \| "sm" \| "xs"`                                                        | `undefined`     |
