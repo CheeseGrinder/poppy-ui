@@ -1,0 +1,158 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+
+/**
+ * @prop --tail: Tooltip arrow size
+ *
+ * @prop --background: Background color
+ * @prop --background-opacity: Background opacity
+ *
+ * @prop --color: Text color
+ * @prop --text-opacity: Text opacity
+ *
+ */
+
+// Tooltip
+// ----------------------------------------------------------------
+
+pop-tooltip {
+  --tail: 0.1875rem;
+  --bg: var(--background, oklch(#{theme.get-color("neutral.base")} / var(--background-opacity, 1)));
+
+  position: relative;
+  display: inline-flex;
+  text-align: center;
+
+  &:before,
+  &:after {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+      transform, filter, backdrop-filter;
+    transition-timing-function: ease-in-out;
+    transition-duration: 200ms;
+    transition-delay: 100ms;
+  }
+  &:before {
+    --offset: calc(100% + 1px + var(--tail, 0px));
+
+    content: attr(data-tip);
+    max-width: 20rem;
+    border-radius: radius.$sm;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    background-color: var(--bg);
+    color: var(--color, oklch(#{theme.get-color("neutral.content")} / var(--text-opacity, 1)));
+    width: max-content;
+    pointer-events: none;
+  }
+  &:after {
+    --tail-offset: calc(100% + 0.0625rem - var(--tail));
+
+    content: "";
+    border-style: solid;
+    border-width: var(--tail, 0);
+    width: 0;
+    height: 0;
+  }
+}
+
+// Tooltip Open
+// ----------------------------------------------------------------
+
+pop-tooltip[data-tip][open],
+pop-tooltip[data-tip]:hover,
+pop-tooltip[data-tip]:has(:focus-visible) {
+  &::before,
+  &::after {
+    opacity: 1;
+    transition-delay: 75ms;
+  }
+}
+
+// Tooltip Position
+// ----------------------------------------------------------------
+
+pop-tooltip:not([position]),
+pop-tooltip[position="top"] {
+  &:before,
+  &:after {
+    transform: translateX(-50%);
+    top: auto;
+    left: 50%;
+    right: auto;
+  }
+  &:before {
+    bottom: var(--offset);
+  }
+  &:after {
+    border-color: var(--bg) transparent transparent transparent;
+    bottom: var(--tail-offset);
+  }
+}
+pop-tooltip[position="bottom"] {
+  &:before,
+  &:after {
+    transform: translateX(-50%);
+    left: 50%;
+    right: auto;
+    bottom: auto;
+  }
+  &:before {
+    top: var(--offset);
+  }
+  &:after {
+    border-color: transparent transparent var(--bg) transparent;
+    top: var(--tail-offset);
+  }
+}
+pop-tooltip[position="left"] {
+  &:before,
+  &:after {
+    transform: translateY(-50%);
+    top: 50%;
+    left: auto;
+    bottom: auto;
+  }
+  &:before {
+    right: var(--offset);
+  }
+  &:after {
+    border-color: transparent transparent transparent var(--bg);
+    right: calc(var(--tail-offset) + 0.0625rem);
+  }
+}
+pop-tooltip[position="right"] {
+  &:before,
+  &:after {
+    transform: translateY(-50%);
+    top: 50%;
+    right: auto;
+    bottom: auto;
+  }
+  &:before {
+    left: var(--offset);
+  }
+  &:after {
+    border-color: transparent var(--bg) transparent transparent;
+    left: calc(var(--tail-offset) + 0.0625rem);
+  }
+}
+
+// Tooltip color
+// ----------------------------------------------------------------
+
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+    $text: theme.get-color("#{$color}.content");
+
+    pop-tooltip[color="#{$color}"] {
+      --background: oklch(#{$base} / var(--background-opacity, 1));
+      --color: oklch(#{$text} / var(--text-opacity, 1));
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, info, success, warning, error);
