@@ -1,4 +1,3 @@
-import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from '#utils/element-interface';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   Component,
@@ -12,6 +11,7 @@ import {
   State,
   h,
 } from '@stencil/core';
+import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/type';
 import { Show } from '../Show';
 
 /**

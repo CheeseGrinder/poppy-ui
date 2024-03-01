@@ -1,4 +1,4 @@
-import type { Color, Placement, Size } from '#utils/element-interface';
+import type { Color, Placement, Size } from 'src/type';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   Component,

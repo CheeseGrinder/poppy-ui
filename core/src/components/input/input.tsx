@@ -6,7 +6,7 @@ import type {
   InputType,
   KeyboardType,
   Size,
-} from '#utils/element-interface';
+} from 'src/type';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   Component,

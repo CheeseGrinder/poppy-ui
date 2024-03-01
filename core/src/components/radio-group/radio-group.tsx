@@ -1,4 +1,4 @@
-import type { Color, Size } from '#utils/element-interface';
+import type { Color, Size } from 'src/type';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
 import type { RadioGroupCompareFn } from './radio-group.interface';
 

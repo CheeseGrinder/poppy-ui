@@ -1,4 +1,4 @@
-import type { Color, Size } from '#utils/element-interface';
+import type { Color, Size } from 'src/type';
 import { compareOptions } from '#utils/forms';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
