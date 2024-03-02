@@ -1,12 +1,3 @@
-import type {
-  AutoCapitalize,
-  Autocomplete,
-  Color,
-  EnterKeyHint,
-  InputType,
-  KeyboardType,
-  Size,
-} from 'src/type';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   Component,
@@ -18,8 +9,9 @@ import {
   Method,
   Prop,
   Watch,
-  h
+  h,
 } from '@stencil/core';
+import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputType, KeyboardType, Size } from 'src/type';
 import { Show } from '../Show';
 
 /**

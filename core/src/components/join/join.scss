@@ -6,10 +6,10 @@
 pop-join {
   display: inline-flex;
 
-  .join-item:not(:first-of-type):not(:last-of-type),
-  .join-item:not(:first-child):not(:last-child),
-  :not(:first-of-type):not(:last-of-type) .join-item,
-  :not(:first-child):not(:last-child) .join-item {
+  .join-item:not(:first-of-type, :last-of-type),
+  .join-item:not(:first-child, :last-child),
+  :not(:first-of-type, :last-of-type) .join-item,
+  :not(:first-child, :last-child) .join-item {
     --border-radius: 0;
     border-radius: 0;
   }

@@ -164,7 +164,7 @@ $minWidth: 12rem;
 }
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
-:host(:not([color]):not([disabled])) {
+:host(:not([color], [disabled])) {
   $color: theme.get-color("neutral.base");
   $shade: theme.get-color("neutral.shade");
 
