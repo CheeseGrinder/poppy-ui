@@ -1,5 +1,16 @@
+import {
+  AttachInternals,
+  Component,
+  ComponentInterface,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  Watch,
+  h,
+} from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
-import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
 import type { RadioGroupCompareFn } from './radio-group.interface';
 
 let radioGroupIds = 0;
@@ -9,11 +20,14 @@ let radioGroupIds = 0;
  */
 @Component({
   tag: 'pop-radio-group',
+  formAssociated: true,
 })
 export class RadioGroup implements ComponentInterface {
   #inputId = `ion-rg-${radioGroupIds++}`;
 
   @Element() host!: HTMLElement;
+
+  @AttachInternals() internals: ElementInternals;
 
   /**
    * The name of the control, which is submitted with the form data.
@@ -26,6 +40,7 @@ export class RadioGroup implements ComponentInterface {
   @Prop({ mutable: true }) value?: any | null;
   @Watch('value')
   onValueChange(value: any) {
+    this.internals.setFormValue(value, value);
     this.popValueChange.emit({
       value: value,
     });
@@ -90,6 +105,14 @@ export class RadioGroup implements ComponentInterface {
    */
   @Event() popValueChange!: EventEmitter<RadioGroupChangeEventDetail>;
 
+  formResetCallback(): void {
+    this.value = undefined;
+  }
+
+  formStateRestoreCallback(state: string): void {
+    this.value = state;
+  }
+
   componentDidLoad(): void {
     this.#radios.forEach(radio => {
       radio.name = this.name;
@@ -142,7 +165,7 @@ export class RadioGroup implements ComponentInterface {
     const currentValue = this.value;
     const newValue = radio.value;
 
-    this.value = currentValue !== newValue ? newValue : undefined;
+    this.value = currentValue !== newValue ? newValue : this.allowEmpty ? undefined : newValue;
   };
 
   render() {
