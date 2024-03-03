@@ -1,5 +1,6 @@
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
+  AttachInternals,
   Component,
   ComponentInterface,
   Element,
@@ -9,6 +10,7 @@ import {
   Method,
   Prop,
   State,
+  Watch,
   h,
 } from '@stencil/core';
 import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/type';
@@ -37,6 +39,8 @@ export class Textarea implements ComponentInterface {
   #debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
+  
+  @AttachInternals() internals: ElementInternals;
 
   @State() textareaWidth: string;
 
@@ -58,6 +62,10 @@ export class Textarea implements ComponentInterface {
    * it's only used when the toggle participates in a native `<form>`.
    */
   @Prop({ mutable: true }) value?: string | null = '';
+  @Watch('value')
+  onValueChange(value: string): void {
+    this.internals.setFormValue(value, value);
+  }
 
   /**
    * This attribute specifies the minimum number of characters that the user can enter.
@@ -217,6 +225,14 @@ export class Textarea implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
+  formResetCallback() {
+    this.value = '';
+  }
+
+  formStateRestoreCallback(state: string) {
+    this.value = state;
+  }
+
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
@@ -265,6 +281,7 @@ export class Textarea implements ComponentInterface {
   }
 
   #onChange = () => {
+    this.value = this.#nativeInput.value;
     this.popChange.emit({
       value: this.#getValue(),
     });

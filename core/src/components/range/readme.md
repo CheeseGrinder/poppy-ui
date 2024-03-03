@@ -39,8 +39,8 @@ Range slider is used to select a value by sliding a handle.
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global
-`textarea.focus()`.
+Sets focus on the native `input` in `pop-range`. Use this method instead of the global
+`input.focus()`.
 
 #### Returns
 

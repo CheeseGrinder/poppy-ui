@@ -1,6 +1,7 @@
 import type { Color, Size } from 'src/type';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
+  AttachInternals,
   Component,
   ComponentInterface,
   Element,
@@ -35,6 +36,8 @@ export class Toggle implements ComponentInterface {
 
   @Element() host!: HTMLElement;
 
+  @AttachInternals() internals: ElementInternals;
+
   /**
    * The name of the control, which is submitted with the form data.
    */
@@ -64,11 +67,12 @@ export class Toggle implements ComponentInterface {
    */
   @Prop({ reflect: true, mutable: true }) checked?: boolean = false;
   @Watch('checked')
-  onCheckedChange(newChecked: boolean): void {
+  onCheckedChange(checked: boolean): void {
     this.indeterminate = false;
 
+    this.internals.setFormValue(this.value, checked.toString());
     this.popChange.emit({
-      checked: newChecked,
+      checked,
       value: this.value || '',
     });
   }
@@ -110,6 +114,14 @@ export class Toggle implements ComponentInterface {
    * Emitted when the input loses focus.
    */
   @Event() popBlur: EventEmitter<void>;
+
+  formResetCallback() {
+    this.checked = false;
+  }
+
+  formStateRestoreCallback(state: string) {
+    this.checked = state === "true";
+  }
 
   componentWillLoad() {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);

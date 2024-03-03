@@ -38,3 +38,9 @@ interface RadioChangeEventDetail<T = any> {
 interface RadioGroupChangeEventDetail<T = any> {
   value: T;
 }
+
+// Range
+interface RangeChangeEventDetail {
+  value: number;
+}
+

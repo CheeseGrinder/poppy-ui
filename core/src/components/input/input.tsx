@@ -1,5 +1,6 @@
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
+  AttachInternals,
   Component,
   ComponentInterface,
   Element,
@@ -37,6 +38,8 @@ export class Input implements ComponentInterface {
 
   @Element() host!: HTMLElement;
 
+  @AttachInternals() internals: ElementInternals;
+
   /**
    * The name of the control, which is submitted with the form data.
    */
@@ -66,11 +69,12 @@ export class Input implements ComponentInterface {
   @Watch('value')
   protected onValueChange() {
     const value = this.#getValue();
+    this.internals.setFormValue(value, value);
 
     if (value !== this.#nativeInput.value) {
       /**
        * Assigning the native input's value on attribute
-       * value change, allows `ionInput` implementations
+       * value change, allows `popInput` implementations
        * to override the control's value.
        *
        * Used for patterns such as input trimming (removing whitespace),
@@ -258,6 +262,14 @@ export class Input implements ComponentInterface {
    * Emitted when the input loses focus.
    */
   @Event() popBlur: EventEmitter<void>;
+
+  formResetCallback() {
+    this.value = '';
+  }
+
+  formStateRestoreCallback(state: string) {
+    this.value = state;
+  }
 
   componentWillLoad(): void {
     this.#inheritedAttributes = {

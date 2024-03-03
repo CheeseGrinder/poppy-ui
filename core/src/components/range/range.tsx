@@ -1,4 +1,3 @@
-import type { Color, Size } from 'src/type';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -10,10 +9,10 @@ import {
   Host,
   Method,
   Prop,
-  State,
   Watch,
-  h,
+  h
 } from '@stencil/core';
+import type { Color, Size } from 'src/type';
 
 /**
  * Range slider is used to select a value by sliding a handle.
@@ -37,8 +36,6 @@ export class Range implements ComponentInterface {
 
   @AttachInternals() internals: ElementInternals;
 
-  @State() _value: number;
-
   /**
    * The name of the control, which is submitted with the form data.
    */
@@ -53,9 +50,8 @@ export class Range implements ComponentInterface {
    */
   @Prop({ mutable: true }) value?: number | null;
   @Watch('value')
-  protected onValueChange(value: number) {
-    this._value = value;
-    this.internals?.setFormValue(value.toString());
+  onValueChange(value: number) {
+    this.internals.setFormValue(value.toString(), value.toString());
   }
 
   /**
@@ -122,6 +118,14 @@ export class Range implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
+  formResetCallback() {
+    this.value = 0;
+  }
+
+  formStateRestoreCallback(state: string) {
+    this.value = +state;
+  }
+
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
   }
@@ -131,8 +135,8 @@ export class Range implements ComponentInterface {
   }
 
   /**
-   * Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global
-   * `textarea.focus()`.
+   * Sets focus on the native `input` in `pop-range`. Use this method instead of the global
+   * `input.focus()`.
    */
   @Method()
   async setFocus(): Promise<void> {

@@ -1,8 +1,6 @@
-import type { Color, Size } from 'src/type';
 import { compareOptions } from '#utils/forms';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
-  AttachInternals,
   Component,
   ComponentInterface,
   Element,
@@ -11,9 +9,9 @@ import {
   Host,
   Method,
   Prop,
-  Watch,
-  h,
+  h
 } from '@stencil/core';
+import type { Color, Size } from 'src/type';
 import { Show } from '../Show';
 
 /**
@@ -28,7 +26,6 @@ import { Show } from '../Show';
   tag: 'pop-radio',
   styleUrl: 'radio.scss',
   shadow: true,
-  formAssociated: true,
 })
 export class Radio implements ComponentInterface {
   #inputId = `pop-radio-${radioIds++}`;
@@ -38,8 +35,6 @@ export class Radio implements ComponentInterface {
   #nativeInput!: HTMLInputElement;
 
   @Element() host!: HTMLElement;
-
-  @AttachInternals() internals: ElementInternals;
 
   /**
    * The name of the control, which is submitted with the form data.
@@ -59,12 +54,6 @@ export class Radio implements ComponentInterface {
    * If `true`, the radio is selected.
    */
   @Prop({ reflect: true, mutable: true }) checked?: boolean = false;
-  @Watch('checked')
-  onChecked(newChecked: boolean): void {
-    if (!newChecked) return;
-
-    this.internals.setFormValue(this.value);
-  }
 
   /**
    * If `true`, the user must fill in a value before submitting a form.

@@ -1,6 +1,6 @@
 import { Color, Size } from 'src/type';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
+import { AttachInternals, Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
 import { Show } from '../Show';
 
 /**
@@ -26,6 +26,8 @@ export class InputFile implements ComponentInterface {
 
   @Element() host!: HTMLElement;
 
+  @AttachInternals() internals: ElementInternals;
+
   /**
    * The name of the control, which is submitted with the form data.
    */
@@ -39,6 +41,10 @@ export class InputFile implements ComponentInterface {
    * it's only used when the toggle participates in a native `<form>`.
    */
   @Prop({ mutable: true }) value?: File | File[] | null;
+  @Watch('value')
+  onValueChange(file: File): void {
+    this.internals.setFormValue(file, file);
+  }
 
   /**
    * If `true`, the user can enter more than one value.
@@ -109,6 +115,15 @@ export class InputFile implements ComponentInterface {
    * Emitted when the input loses focus.
    */
   @Event() popBlur: EventEmitter<void>;
+
+  formResetCallback() {
+    this.value = null;
+    this.#nativeInput.value = null;
+  }
+
+  formStateRestoreCallback(state: File) {
+    this.value = state;
+  }
 
   componentWillLoad(): void {
     this.#inheritedAttributes = {

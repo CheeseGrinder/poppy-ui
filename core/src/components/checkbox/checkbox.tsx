@@ -1,6 +1,7 @@
 import type { Color, Placement, Size } from 'src/type';
-import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
+  AttachInternals,
   Component,
   ComponentInterface,
   Element,
@@ -35,9 +36,9 @@ export class Checkbox implements ComponentInterface {
   #inheritedAttributes: Attributes;
   #nativeInput!: HTMLInputElement;
 
-  #listSize?: Size;
-
   @Element() host!: HTMLElement;
+
+  @AttachInternals() internals: ElementInternals;
 
   /**
    * The name of the control, which is submitted with the form data.
@@ -75,6 +76,8 @@ export class Checkbox implements ComponentInterface {
       checked: newChecked,
       value: this.value || '',
     });
+    this.internals.setFormValue(newChecked ? this.value : '', newChecked.toString());
+    this.internals.ariaChecked = newChecked.toString();
   }
 
   /**
@@ -85,7 +88,7 @@ export class Checkbox implements ComponentInterface {
   /**
    * If true, the user cannot interact with the native element.
    */
-  @Prop({ reflect: true }) disabled: boolean;
+  @Prop({ reflect: true }) disabled: boolean = false;
 
   /**
    * The color to use from your application's color palette.
@@ -122,9 +125,16 @@ export class Checkbox implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
+  formResetCallback() {
+    this.checked = false;
+  }
+
+  formStateRestoreCallback(state: string) {
+    this.checked = state === 'true';
+  }
+
   componentWillLoad() {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
-    this.#listSize = this.host.closest('pop-list')?.size || null;
   }
 
   /**
@@ -161,6 +171,7 @@ export class Checkbox implements ComponentInterface {
     const inputId = this.#inputId;
 
     const hasLabel = host.textContent !== '';
+    const listSize = getHostContextProperty(host, 'pop-list', 'size', 'md');
 
     return (
       <Host
@@ -170,7 +181,7 @@ export class Checkbox implements ComponentInterface {
         onClick={this.#onClick}
         class={{
           'in-list': hostContext(host, 'pop-list'),
-          [`in-list-${this.#listSize}`]: this.#listSize !== null,
+          [`in-list-${listSize}`]: listSize !== null,
           'in-item': hostContext(host, 'pop-item'),
         }}
       >
