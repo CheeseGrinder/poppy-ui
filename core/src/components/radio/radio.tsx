@@ -11,7 +11,7 @@ import {
   Prop,
   h
 } from '@stencil/core';
-import type { Color, Size } from 'src/type';
+import type { Color, Size } from 'src/interfaces';
 import { Show } from '../Show';
 
 /**

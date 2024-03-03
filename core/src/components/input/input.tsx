@@ -12,7 +12,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputType, KeyboardType, Size } from 'src/type';
+import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputType, KeyboardType, Size } from 'src/interfaces';
 import { Show } from '../Show';
 
 /**

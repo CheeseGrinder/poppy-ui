@@ -102,5 +102,27 @@ export const inheritAriaAttributes = (el: HTMLElement, ignoreList?: string[]) =>
 };
 
 export const hostContext = (host: Element, parent: string): boolean => {
+
+type PopElements = JSX.IntrinsicElements;
+type ComponentTags = keyof PopElements;
+
+export const hostContext = (host: Element, parent: ComponentTags): boolean => {
   return !!host.closest(parent);
-}
+};
+
+export const getHostContextProperty = <
+  Tag extends keyof PopElements,
+  Prop extends keyof Omit<PopElements[Tag], keyof Omit<JSXBase.HTMLAttributes, 'color'>>,
+  Type extends PopElements[Tag][Prop],
+>(
+  host: Element,
+  parent: Tag,
+  prop: Prop,
+  placeholder: Type,
+): null| PopElements[Tag][Prop] => {
+  const hostContext = host.closest(parent);
+  if (!hostContext) {
+    return null;
+  }
+  return hostContext[prop as string] ?? placeholder;
+};

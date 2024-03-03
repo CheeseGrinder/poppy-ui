@@ -1,6 +1,6 @@
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/type';
+import type { Color, Size } from 'src/interfaces';
 import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
 
 /**

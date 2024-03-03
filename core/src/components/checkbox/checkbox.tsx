@@ -1,4 +1,4 @@
-import type { Color, Placement, Size } from 'src/type';
+import type { Color, Placement, Size } from 'src/interfaces';
 import { Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,

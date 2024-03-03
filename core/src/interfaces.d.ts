@@ -1,24 +1,26 @@
-export type BrandColor = 'primary' | 'secondary' | 'accent';
-export type StateColor = 'info' | 'success' | 'warning' | 'error';
-export type Color = BrandColor | StateColor;
+import { JSX, JSXBase } from '@stencil/core/internal';
 
-export type Size = 'xs' | 'sm' | 'md' | 'lg';
-export type Placement = 'start' | 'end';
+type BrandColor = 'primary' | 'secondary' | 'accent';
+type StateColor = 'info' | 'success' | 'warning' | 'error';
+type Color = BrandColor | StateColor;
+
+type Size = 'xs' | 'sm' | 'md' | 'lg';
+type Placement = 'start' | 'end';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
-export type AutoCapitalize = 'none' | 'off' | 'on' | 'characters' | 'sentences' | 'words' | 'characters';
+type AutoCapitalize = 'none' | 'off' | 'on' | 'characters' | 'sentences' | 'words' | 'characters';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap
-export type Wrap = 'hard' | 'soft';
+type Wrap = 'hard' | 'soft';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
-export type KeyboardType = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+type KeyboardType = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterKeyHint
-export type EnterKeyHint = 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+type EnterKeyHint = 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
-export type InputType =
+type InputType =
   | 'text'
   | 'date'
   | 'email'
@@ -33,7 +35,7 @@ export type InputType =
   | 'datetime-local';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
-export type Autocomplete =
+type Autocomplete =
   | 'on'
   | 'off'
   | 'name'
@@ -90,11 +92,18 @@ export type Autocomplete =
   | 'url'
   | 'photo';
 
-export type ComponentRef = Function | HTMLElement | string | null;
+type ComponentRef = Function | HTMLElement | string | null;
 
-export type ComponentProps<T = null> = { [key: string]: any };
+type ComponentProps<T = null> = { [key: string]: any };
 
-export interface FrameworkDelegate {
+interface FrameworkDelegate {
   attachViewToDom(container: any, component: any, propsOrDataObj?: any, cssClasses?: string[]): Promise<HTMLElement>;
   removeViewFromDom(container: any, component: any): Promise<void>;
 }
+
+type PopElements = JSX.IntrinsicElements;
+type ComponentsOption = {
+  [Tag in keyof PopElements]?: {
+    [Prop in keyof Omit<PopElements[Tag], keyof Omit<JSXBase.HTMLAttributes, 'color'>>]?: PopElements[Tag][Prop];
+  };
+};

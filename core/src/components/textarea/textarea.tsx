@@ -13,7 +13,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/type';
+import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/interfaces';
 import { Show } from '../Show';
 
 /**

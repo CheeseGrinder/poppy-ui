@@ -1,4 +1,4 @@
-import { Size } from 'src/type';
+import { Size } from 'src/interfaces';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
