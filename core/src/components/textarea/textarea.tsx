@@ -39,7 +39,7 @@ export class Textarea implements ComponentInterface {
   #debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
-  
+
   @AttachInternals() internals: ElementInternals;
 
   @State() textareaWidth: string;

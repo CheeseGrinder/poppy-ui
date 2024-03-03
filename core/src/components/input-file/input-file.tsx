@@ -1,6 +1,18 @@
 import { Color, Size } from 'src/interfaces';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
-import { AttachInternals, Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, Watch, h } from '@stencil/core';
+import {
+  AttachInternals,
+  Component,
+  ComponentInterface,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Method,
+  Prop,
+  Watch,
+  h,
+} from '@stencil/core';
 import { Show } from '../Show';
 
 /**

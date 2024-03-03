@@ -10,7 +10,7 @@ import {
   Method,
   Prop,
   Watch,
-  h
+  h,
 } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
 

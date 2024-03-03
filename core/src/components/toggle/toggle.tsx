@@ -120,7 +120,7 @@ export class Toggle implements ComponentInterface {
   }
 
   formStateRestoreCallback(state: string) {
-    this.checked = state === "true";
+    this.checked = state === 'true';
   }
 
   componentWillLoad() {
