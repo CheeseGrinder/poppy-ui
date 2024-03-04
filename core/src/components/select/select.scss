@@ -1,0 +1,172 @@
+@use "../../global/styles/theme";
+@use "../../global/styles/shadow";
+@use "../../global/styles/radius";
+@use "../../global/styles/input";
+@use "../../global/styles/join-item";
+
+/**
+ * @prop --border-radius: Border radius
+ * @prop --border-color: Border color & outline color
+ *
+ * @prop --background: Background color
+ * @prop --opacity: Change background opacity
+ *
+ * @prop --color: Change text color
+ * @prop --error-color: Change error text color
+ */
+
+$minWidth: 12rem;
+
+// @include join-item.item(".select-wrapper");
+@include join-item.item(".select-wrapper button");
+
+:host {
+  @include input.label;
+  @include input.helper;
+
+  display: inline-flex;
+  flex-direction: column;
+  min-width: $minWidth;
+
+  .select-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+    // border-radius: var(--border-radius, #{radius.$md});
+    background-color: var(--background, oklch(#{theme.get-color("base.100")} / var(--opacity, 1)));
+
+    &:has(button:focus-visible) {
+      outline-style: solid;
+      outline-width: 2px;
+      outline-offset: 2px;
+      outline-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
+    }
+  }
+
+  .select-placeholder {
+    opacity: 0.6;
+  }
+
+  .text-wrapper {
+    transition: opacity 150ms ease 0ms;
+  }
+
+  button {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    width: 100%;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--border-radius, #{radius.$md});
+    border-color: var(--border-color, transparent);
+
+    background-color: transparent;
+    color: var(--color, oklch(#{theme.get-color("base.content")}));
+
+    user-select: none;
+    outline: none;
+  }
+
+  svg {
+    margin-inline-start: auto;
+    transition: transform 150ms ease 0ms;
+  }
+}
+
+:host(.select-expanded) {
+  .select-wrapper {
+    box-shadow: shadow.$md;
+
+    svg {
+      transform: rotateX(180deg);
+    }
+
+    + .text-wrapper {
+      opacity: 0;
+    }
+  }
+}
+
+:host([bordered]) {
+  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
+}
+
+// Color
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+
+    :host([color="#{$color}"]) {
+      --border-color: oklch(#{$base});
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, info, success, warning, error);
+
+:host([color="ghost"]) {
+  --opacity: 0.05;
+
+  .select-wrapper:has(button:focus-visible) {
+    --opacity: 1;
+  }
+}
+
+:host(.select-expanded[color="ghost"]) {
+  .select-wrapper {
+    --opacity: 1;
+  }
+}
+
+// Size
+:host([size="xs"]) .select-wrapper {
+  padding-inline-start: 0.65rem;
+  padding-inline-end: 0.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.625;
+}
+:host([size="sm"]) .select-wrapper {
+  padding-inline-start: 0.75rem;
+  padding-inline-end: 0.85rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  line-height: 2rem;
+}
+:host([size="md"]),
+:host(:not([size])) {
+  .select-wrapper {
+    padding-inline-start: 1rem;
+    padding-inline-end: 1.15rem;
+    height: 3rem;
+    font-size: 0.875rem;
+    line-height: 2;
+  }
+}
+:host([size="lg"]) .select-wrapper {
+  padding-inline-start: 1.15rem;
+  padding-inline-end: 1.35rem;
+  height: 4rem;
+  font-size: 1.125rem;
+  line-height: 2;
+}
+
+:host([disabled]) button {
+  $base: theme.get-color("base.200");
+  $text: theme.get-color("base.content");
+
+  --background: oklch(#{$base});
+  --border-color: oklch(#{$base});
+  --color: oklch(#{$text} / 0.2);
+
+  cursor: not-allowed;
+
+  &::placeholder {
+    color: oklch(#{$text} / 0.2);
+  }
+}

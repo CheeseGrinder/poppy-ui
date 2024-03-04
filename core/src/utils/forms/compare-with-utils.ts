@@ -20,3 +20,25 @@ export const compareOptions = (
     return Array.isArray(compareValue) ? compareValue.includes(currentValue) : currentValue === compareValue;
   }
 };
+
+/**
+ * Compares a value against the current value(s) to determine if it is selected.
+ *
+ * @param currentValue The current value of the control.
+ * @param compareValue The value to compare against.
+ * @param compareWith The function or property name to use to compare values.
+ */
+export const isOptionSelected = (
+  currentValue: any[] | any,
+  compareValue: any,
+  compareWith?: string | CompareFn | null,
+) => {
+  if (currentValue === undefined) {
+    return false;
+  }
+  if (Array.isArray(currentValue)) {
+    return currentValue.some(val => compareOptions(val, compareValue, compareWith));
+  } else {
+    return compareOptions(currentValue, compareValue, compareWith);
+  }
+};

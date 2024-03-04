@@ -80,8 +80,17 @@
 // ----------------------------------------------------------------
 
 // start is the default in flex so no css needed here.
+:host([placement="start"]) {
+  > input {
+    margin-inline-end: auto;
+  }
+}
 :host([placement="end"]) {
   flex-direction: row-reverse;
+
+  > input {
+    margin-inline-start: auto;
+  }
 }
 
 // Checkbox size

@@ -92,6 +92,37 @@ type Autocomplete =
   | 'url'
   | 'photo';
 
+interface FormAssociatedInterface {
+  internals: ElementInternals;
+
+  /**
+   * This callback is called when the browser both associates
+   * the element with and disassociates the element from a form element.
+   */
+  formAssociatedCallback?(form: HTMLFormElement): void;
+
+  /**
+   * This is called whenever the `disabled` state on the element `changes`.
+   */
+  formDisabledCallback?(disabled: boolean): void;
+
+  /**
+   * This is called when the form is reset,
+   * and should be used to reset the form-associated component's internal state and validation.
+   */
+  formResetCallback?(): void;
+
+  /**
+   * This method will be called in the event that the browser automatically fills out your form element, 
+   * an event that could take place in two different scenarios.
+   *
+   * The first is that the browser can restore the state of an element after navigating or restarting,
+   * and the second is that an input was made using a form auto-filling feature.
+   * 
+   */
+  formStateRestoreCallback?(state: any, mode: 'restore' | 'autocomplete'): void;
+}
+
 type ComponentRef = Function | HTMLElement | string | null;
 
 type ComponentProps<T = null> = { [key: string]: any };

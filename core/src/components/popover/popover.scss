@@ -1,0 +1,29 @@
+@use "../../global/styles/theme";
+
+:host {
+  z-index: 20000;
+
+  > dialog {
+    // box-sizing: border-box;
+    position: absolute;
+    z-index: 20000;
+
+    display: block;
+
+    margin: 0.5rem 0;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    transition: opacity 150ms ease 0ms;
+
+    &:not([popover], [open]) {
+      opacity: 0;
+    }
+
+    &::backdrop {
+      background-color: rgb(0 0 0 / 0.05);
+    }
+  }
+}

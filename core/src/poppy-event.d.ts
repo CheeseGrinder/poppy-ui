@@ -44,3 +44,7 @@ interface RangeChangeEventDetail {
   value: number;
 }
 
+// Select
+interface SelectChangeEventDetail<T = any> {
+  value: T;
+}

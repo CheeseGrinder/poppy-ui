@@ -1,3 +1,6 @@
+import { JSX } from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
+import { APP_TAG } from 'src/framework.constant';
 
 export type Attributes = { [key: string]: any };
 
@@ -101,7 +104,46 @@ export const inheritAriaAttributes = (el: HTMLElement, ignoreList?: string[]) =>
   return inheritAttributes(el, attributesToInherit);
 };
 
-export const hostContext = (host: Element, parent: string): boolean => {
+declare const __zone_symbol__requestAnimationFrame: typeof window.requestAnimationFrame;
+
+/**
+ * Patched version of requestAnimationFrame that avoids ngzone
+ * Use only when you know ngzone should not run
+ */
+export const raf = (h: FrameRequestCallback) => {
+  if (typeof __zone_symbol__requestAnimationFrame === 'function') {
+    return __zone_symbol__requestAnimationFrame(h);
+  }
+  if (typeof requestAnimationFrame === 'function') {
+    return requestAnimationFrame(h);
+  }
+  return setTimeout(h);
+};
+
+/**
+ * Waits for a component to be ready for
+ * both custom element and non-custom element builds.
+ * If non-custom element build, el.componentOnReady
+ * will be used.
+ * For custom element builds, we wait a frame
+ * so that the inner contents of the component
+ * have a chance to render.
+ *
+ * Use this utility rather than calling
+ * el.componentOnReady yourself.
+ */
+export const componentOnReady = (el: any, callback: any) => {
+  if (el.componentOnReady) {
+    // eslint-disable-next-line custom-rules/no-component-on-ready-method
+    el.componentOnReady().then((resolvedEl: any) => callback(resolvedEl));
+  } else {
+    raf(() => callback(el));
+  }
+};
+
+export const getAppRoot = (doc: Document) => {
+  return doc.querySelector(APP_TAG) || doc.body;
+};
 
 type PopElements = JSX.IntrinsicElements;
 type ComponentTags = keyof PopElements;
@@ -119,7 +161,7 @@ export const getHostContextProperty = <
   parent: Tag,
   prop: Prop,
   placeholder: Type,
-): null| PopElements[Tag][Prop] => {
+): null | PopElements[Tag][Prop] => {
   const hostContext = host.closest(parent);
   if (!hostContext) {
     return null;

@@ -34,6 +34,7 @@
     border-color: var(--border-color, oklch(theme.get-color("base.content") / var(--border-opacity, 0.2)));
 
     margin: 0;
+    margin-inline-start: auto;
     appearance: none;
     cursor: pointer;
 
