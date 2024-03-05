@@ -10,3 +10,13 @@
     border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{radius.$md}));
   }
 }
+
+@mixin item_root {
+  :host(.join-item) {
+    border-start-start-radius: var(--border-radius-start-start, var(--border-radius, #{radius.$md}));
+    border-end-start-radius: var(--border-radius-end-start, var(--border-radius, #{radius.$md}));
+
+    border-start-end-radius: var(--border-radius-start-end, var(--border-radius, #{radius.$md}));
+    border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{radius.$md}));
+  }
+}
