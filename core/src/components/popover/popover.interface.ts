@@ -1,6 +1,5 @@
+import { TriggerAction } from '#utils/trigger';
 import { Size, ComponentProps, ComponentRef, FrameworkDelegate } from 'src/interfaces';
-
-export type TriggerAction = 'click' | 'hover' | 'context-menu';
 
 export interface PopoverOptions<T extends ComponentRef = ComponentRef> {
   component: T;
@@ -23,7 +22,7 @@ export interface PopoverOptions<T extends ComponentRef = ComponentRef> {
   alignment?: PositionAlign;
 
   trigger?: string;
-  triggerAction?: string;
+  triggerAction?: TriggerAction;
 }
 
 export type PositionReference = 'trigger' | 'event';

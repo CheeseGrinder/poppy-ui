@@ -8,19 +8,23 @@ import {
   h,
   Element,
   ComponentInterface,
+  Watch,
 } from '@stencil/core';
-import { ComponentRef } from 'src/interfaces';
-import { TriggerAction } from './popover.interface';
+import { ComponentProps, ComponentRef } from 'src/interfaces';
 import { componentOnReady, raf } from '#utils/helpers';
+import { OverlayInterface } from '#utils/overlay';
+import { TriggerAction, TriggerController } from '#utils/trigger';
 
 @Component({
   tag: 'pop-popover',
   styleUrl: 'popover.scss',
   shadow: true,
 })
-export class Popover implements ComponentInterface {
+export class Popover implements ComponentInterface, OverlayInterface {
   #dialog: HTMLDialogElement;
   #handler: (event: ToggleEvent) => void;
+
+  #triggerController = TriggerController.create();
 
   @Element() host: HTMLPopPopoverElement;
 
@@ -32,6 +36,14 @@ export class Popover implements ComponentInterface {
    * the popover dismisses. You will need to do that in your code.
    */
   @Prop({ reflect: true }) open = false;
+  @Watch('open')
+  onOpenChange(isOpen: boolean): void {
+    if (isOpen) {
+      this.present();
+    } else {
+      this.dismiss(null);
+    }
+  }
 
   /**
    * If `true`, the popover will animate.
@@ -58,6 +70,20 @@ export class Popover implements ComponentInterface {
   @Prop() event: Event;
 
   /**
+   * An ID corresponding to the trigger element that
+   * causes the popover to open. Use the `trigger-action`
+   * property to customize the interaction that results in
+   * the popover opening.
+   */
+  @Prop() trigger?: string;
+  @Watch('trigger')
+  onTriggerChange(trigger: string) {
+    if (trigger) {
+      this.#triggerController.addListener(this.host, trigger);
+    }
+  }
+
+  /**
    * Describes what kind of interaction with the trigger that
    * should cause the popover to open. Does not apply when the `trigger`
    * property is `undefined`.
@@ -68,14 +94,6 @@ export class Popover implements ComponentInterface {
    * device's normal context menu from appearing.
    */
   @Prop() triggerAction: TriggerAction = 'click';
-
-  /**
-   * An ID corresponding to the trigger element that
-   * causes the popover to open. Use the `trigger-action`
-   * property to customize the interaction that results in
-   * the popover opening.
-   */
-  @Prop() trigger: string | undefined;
 
   /**
    * The component to display inside of the popover.
@@ -91,7 +109,7 @@ export class Popover implements ComponentInterface {
    * a JavaScript framework. Otherwise, you can just
    * set the props directly on your component.
    */
-  @Prop() componentProps?: ComponentRef;
+  @Prop() componentProps?: ComponentProps;
 
   /**
    * Emitted before the popover has presented.
@@ -127,6 +145,12 @@ export class Popover implements ComponentInterface {
     );
   }
 
+  connectedCallback(): void {
+    const { trigger } = this;
+
+    this.onTriggerChange(trigger);
+  }
+
   componentDidLoad(): void {
     this.#setupListener();
 
@@ -140,13 +164,18 @@ export class Popover implements ComponentInterface {
   }
 
   disconnectedCallback(): void {
+    this.#triggerController.removeListener();
     this.#dialog.removeEventListener('beforetoggle', this.#handler);
     this.#didDismiss();
   }
 
   @Method()
-  async present(): Promise<void> {
-    const { component, componentProps, host } = this;
+  async present(): Promise<boolean> {
+    const { open, component, componentProps, host } = this;
+    if (open) {
+      return false;
+    }
+
     this.willPresent.emit();
 
     const el: any = typeof component === 'string' ? host.ownerDocument?.createElement(component) : component;
@@ -162,16 +191,19 @@ export class Popover implements ComponentInterface {
     this.#present();
     this.didPresent.emit();
 
-    return el;
+    return true;
   }
 
   @Method()
-  async dismiss(): Promise<void> {
-    const { backdropDismiss } = this;
+  async dismiss(data?: any): Promise<boolean> {
+    const { open, backdropDismiss } = this;
+    if (!open) return false;
 
     this.willDismiss.emit();
-    backdropDismiss ? this.#dialog.hidePopover() : this.#dialog.close();
+    backdropDismiss ? this.#dialog.hidePopover() : this.#dialog.close(data);
     this.#didDismiss();
+
+    return true;
   }
 
   #setupListener() {
@@ -189,13 +221,13 @@ export class Popover implements ComponentInterface {
     const { backdropDismiss, event } = this;
     const target = event.target as Element;
     const rect = target.getBoundingClientRect();
-    const padding = parseFloat(this.#dialog.computedStyleMap().get('padding').toString());
 
     this.#dialog.style.setProperty('top', `${rect.bottom}px`);
-    this.#dialog.style.setProperty('left', `${rect.left - padding}px`);
-    this.#dialog.style.setProperty('width', `${rect.width + padding * 2}px`);
+    this.#dialog.style.setProperty('left', `${rect.left}px`);
+    this.#dialog.style.setProperty('width', `${rect.width}px`);
 
     backdropDismiss ? this.#dialog.showPopover() : this.#dialog.showModal();
+    this.#dialog.focus();
   }
 
   render() {
@@ -203,13 +235,10 @@ export class Popover implements ComponentInterface {
 
     return (
       <Host aria-modal="true">
-        <dialog
-          popover={backdropDismiss ? '' : null}
-          part="content"
-          class="popover-content"
-          ref={el => (this.#dialog = el)}
-        >
-          <slot />
+        <dialog popover={backdropDismiss ? '' : null} class="popover" ref={el => (this.#dialog = el)}>
+          <div part="content" class="popover-content">
+            <slot />
+          </div>
         </dialog>
       </Host>
     );

@@ -20,7 +20,6 @@
 
 ### Depends on
 
-- [pop-card](../card)
 - [pop-list](../list)
 - [pop-radio-group](../radio-group)
 - [pop-item](../item)
@@ -30,7 +29,6 @@
 ### Graph
 ```mermaid
 graph TD;
-  pop-select-popover --> pop-card
   pop-select-popover --> pop-list
   pop-select-popover --> pop-radio-group
   pop-select-popover --> pop-item

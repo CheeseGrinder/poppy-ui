@@ -154,9 +154,7 @@ export class SelectPopover implements ComponentInterface {
   render() {
     return (
       <Host>
-        <pop-card>
-          <pop-list size={this.size}>{this.#renderOptions()}</pop-list>
-        </pop-card>
+        <pop-list size={this.size}>{this.#renderOptions()}</pop-list>
       </Host>
     );
   }

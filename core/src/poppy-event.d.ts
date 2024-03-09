@@ -48,3 +48,11 @@ interface RangeChangeEventDetail {
 interface SelectChangeEventDetail<T = any> {
   value: T;
 }
+
+// Accordion
+interface AccordionChangeEventDetail {
+  value: string | string[];
+}
+interface AccordionGroupChangeEventDetail {
+  value: string | string[];
+}

@@ -72,9 +72,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   /**
    * If `true`, the user can enter more than one value.
-   * This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
    */
-  @Prop({ reflect: true }) multiple?: boolean;
+  @Prop({ reflect: true }) multiple?: boolean = false;
 
   /**
    * Only apply when `multiple` property is used.
@@ -190,7 +189,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#trigger?.focus();
+    this.#trigger.focus();
   }
 
   @Method()

@@ -113,12 +113,12 @@ interface FormAssociatedInterface {
   formResetCallback?(): void;
 
   /**
-   * This method will be called in the event that the browser automatically fills out your form element, 
+   * This method will be called in the event that the browser automatically fills out your form element,
    * an event that could take place in two different scenarios.
    *
    * The first is that the browser can restore the state of an element after navigating or restarting,
    * and the second is that an input was made using a form auto-filling feature.
-   * 
+   *
    */
   formStateRestoreCallback?(state: any, mode: 'restore' | 'autocomplete'): void;
 }
