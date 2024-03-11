@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
 import type { RadioGroupCompareFn } from './radio-group.interface';
+import { componentConfig } from '#global/component-config';
 
 let radioGroupIds = 0;
 
@@ -52,17 +53,17 @@ export class RadioGroup implements ComponentInterface {
   /**
    * If `true`, apply the required property to all `pop-radio`.
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
 
   /**
    * If `true`, apply the disabled property to all `pop-radio`.
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
 
   /**
    * If `true`, the radios can be deselected.
    */
-  @Prop() allowEmpty?: boolean;
+  @Prop({ mutable: true }) allowEmpty?: boolean;
 
   /**
    * This property allows developers to specify a custom function
@@ -70,7 +71,7 @@ export class RadioGroup implements ComponentInterface {
    * ion-radio-group. When not specified, the default behavior will use strict
    * equality (===) for comparison.
    */
-  @Prop() compare?: RadioGroupCompareFn | string | null;
+  @Prop({ mutable: true }) compare?: RadioGroupCompareFn | string | null;
 
   /**
    * The color to use from your application's color palette.
@@ -79,7 +80,7 @@ export class RadioGroup implements ComponentInterface {
    *
    * If the `pop-radio` as no color, it will apply to it
    */
-  @Prop({ reflect: true }) color?: Color;
+  @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Change size of the component
@@ -87,7 +88,7 @@ export class RadioGroup implements ComponentInterface {
    *
    * If the `pop-radio` as no size, it will apply to it
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * The `popChange` event is fired when the user select an option.
@@ -111,6 +112,16 @@ export class RadioGroup implements ComponentInterface {
 
   formStateRestoreCallback(state: string): void {
     this.value = state;
+  }
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-radio-group');
+    this.required ??= config.required ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.allowEmpty ??= config.allowEmpty ?? false;
+    this.compare ??= config.compare;
+    this.color ??= config.color;
+    this.size ??= config.size;
   }
 
   componentDidLoad(): void {

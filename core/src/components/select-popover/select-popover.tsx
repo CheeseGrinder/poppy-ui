@@ -2,6 +2,7 @@ import { Component, ComponentInterface, Fragment, Host, Prop, h } from '@stencil
 import { PopCheckboxCustomEvent, PopRadioGroupCustomEvent } from 'src/components';
 import { Color, Size } from 'src/interfaces';
 import type { SelectPopoverOption } from './select-popover-interface';
+import { componentConfig } from '#global/component-config';
 
 @Component({
   tag: 'pop-select-popover',
@@ -12,30 +13,38 @@ export class SelectPopover implements ComponentInterface {
   /**
    * If `true`, allow empty on radio options
    */
-  @Prop() required?: boolean;
+  @Prop({ mutable: true }) required?: boolean;
 
   /**
    * If `true`, the select accepts multiple values
    */
-  @Prop() multiple?: boolean;
+  @Prop({ mutable: true }) multiple?: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop() color?: Color;
+  @Prop({ mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop() size?: Size;
+  @Prop({ mutable: true }) size?: Size;
 
   /**
    * An array of options for the popover
    */
   @Prop() options: SelectPopoverOption[] = [];
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-select-popover');
+    this.required ??= config.required ?? false;
+    this.multiple ??= config.multiple ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
+  }
 
   #findOptionFromEvent(ev: PopCheckboxCustomEvent<any> | PopRadioGroupCustomEvent<any>) {
     const { options } = this;
@@ -57,7 +66,7 @@ export class SelectPopover implements ComponentInterface {
     return option ? option.value : undefined;
   }
 
-  #setChecked(ev: PopCheckboxCustomEvent<CheckboxChangeEventDetail>) {
+  #setChecked(ev: PopCheckboxCustomEvent<CheckboxChangeEventDetail>): void {
     const { multiple } = this;
     const option = this.#findOptionFromEvent(ev);
 

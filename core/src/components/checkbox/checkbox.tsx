@@ -14,6 +14,7 @@ import {
   h,
 } from '@stencil/core';
 import { Show } from '../Show';
+import { componentConfig } from '#global/component-config';
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -57,12 +58,12 @@ export class Checkbox implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
 
   /**
    * If `true`, the user cannot modify the value.
    */
-  @Prop({ reflect: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
 
   /**
    * If `true`, the toggle is selected.
@@ -88,27 +89,27 @@ export class Checkbox implements ComponentInterface {
   /**
    * If true, the user cannot interact with the native element.
    */
-  @Prop({ reflect: true }) disabled: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled: boolean = false;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color;
+  @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Where to place the label relative to the checkbox.
    * - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL.
    * - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
    */
-  @Prop({ reflect: true }) placement?: Placement = 'start';
+  @Prop({ reflect: true, mutable: true }) placement?: Placement;
 
   /**
    * Emitted when the user switches the toggle on or off.
@@ -125,16 +126,26 @@ export class Checkbox implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
-  formResetCallback() {
+  formResetCallback(): void {
     this.checked = false;
   }
 
-  formStateRestoreCallback(state: string) {
+  formStateRestoreCallback(state: string): void {
     this.checked = state === 'true';
   }
 
-  componentWillLoad() {
+  componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
+
+    const config = componentConfig.get('pop-checkbox');
+    this.required ??= config.required ?? false;
+    this.readonly ??= config.readonly ?? false;
+    this.checked ??= config.checked ?? false;
+    this.indeterminate ??= config.indeterminate ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
+    this.placement ??= config.placement ?? 'start';
   }
 
   /**
@@ -146,23 +157,23 @@ export class Checkbox implements ComponentInterface {
     this.#nativeInput?.focus();
   }
 
-  #onClick = () => {
+  #onClick = (): void => {
     const { disabled, readonly } = this;
     if (disabled || readonly) return;
 
     this.checked = !this.checked;
   };
 
-  #onChecked = (ev: Event) => {
+  #onChecked = (ev: Event): void => {
     const input = ev.target as HTMLInputElement;
     this.checked = input.checked;
   };
 
-  #onFocus = () => {
+  #onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  #onBlur = (): void => {
     this.popBlur.emit();
   };
 

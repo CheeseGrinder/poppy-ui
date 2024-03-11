@@ -62,11 +62,11 @@ export class Img implements ComponentInterface {
    */
   @Event() popError: EventEmitter<void>;
 
-  componentWillLoad() {
+  componentWillLoad(): void {
     this.#inheritedAttributes = inheritAttributes(this.host, ['draggable']);
   }
 
-  componentDidLoad() {
+  componentDidLoad(): void {
     this.#initObserver();
   }
 
@@ -88,22 +88,22 @@ export class Img implements ComponentInterface {
     }
   }
 
-  #removeObserver() {
+  #removeObserver(): void {
     this.#observer?.disconnect();
     this.#observer = undefined;
   }
 
-  #load() {
+  #load(): void {
     this.loadError = this.#onError;
     this.loadSrc = this.src;
     this.popWillLoad.emit();
   }
 
-  #onLoad = () => {
+  #onLoad = (): void => {
     this.popDidLoad.emit();
   };
 
-  #onError = () => {
+  #onError = (): void => {
     this.popError.emit();
   };
 
@@ -116,7 +116,7 @@ export class Img implements ComponentInterface {
           part="image"
           decoding="async"
           src={this.loadSrc}
-          alt={this.alt}
+          alt={this.alt || ''}
           onLoad={this.#onLoad}
           onError={this.#onError}
           draggable={isDraggable(draggable)}

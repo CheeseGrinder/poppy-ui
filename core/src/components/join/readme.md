@@ -12,9 +12,9 @@ Join applies border radius to the first and last item. Join can be used to creat
 
 ## Properties
 
-| Property      | Attribute     | Description                            | Type                         | Default        |
-| ------------- | ------------- | -------------------------------------- | ---------------------------- | -------------- |
-| `orientation` | `orientation` | Define content disposition orientation | `"horizontal" \| "vertical"` | `'horizontal'` |
+| Property      | Attribute     | Description                            | Type                         | Default     |
+| ------------- | ------------- | -------------------------------------- | ---------------------------- | ----------- |
+| `orientation` | `orientation` | Define content disposition orientation | `"horizontal" \| "vertical"` | `undefined` |
 
 
 ## Slots

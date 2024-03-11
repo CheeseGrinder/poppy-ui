@@ -14,6 +14,7 @@ import { ComponentProps, ComponentRef } from 'src/interfaces';
 import { componentOnReady, raf } from '#utils/helpers';
 import { OverlayInterface } from '#utils/overlay';
 import { TriggerAction, TriggerController } from '#utils/trigger';
+import { componentConfig } from '#global/component-config';
 
 @Component({
   tag: 'pop-popover',
@@ -35,7 +36,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * Note: `open` will not automatically be set back to `false` when
    * the popover dismisses. You will need to do that in your code.
    */
-  @Prop({ reflect: true }) open = false;
+  @Prop({ reflect: true, mutable: true }) open = false;
   @Watch('open')
   onOpenChange(isOpen: boolean): void {
     if (isOpen) {
@@ -48,7 +49,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
   /**
    * If `true`, the popover will animate.
    */
-  @Prop({ reflect: true }) animated = true;
+  @Prop({ reflect: true, mutable: true }) animated = true;
 
   /**
    * If `true`, a backdrop will be displayed behind the popover.
@@ -57,12 +58,12 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * It does not control whether or not the backdrop
    * is active or present in the DOM.
    */
-  @Prop({ reflect: true }) showBackdrop: boolean = true;
+  @Prop({ reflect: true, mutable: true }) showBackdrop: boolean = false;
 
   /**
    * If `true`, the popover will be dismissed when the backdrop is clicked.
    */
-  @Prop({ reflect: true }) backdropDismiss: boolean = true;
+  @Prop({ reflect: true, mutable: true }) backdropDismiss: boolean = false;
 
   /**
    * The event to pass to the popover animation.
@@ -93,7 +94,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * clicked on desktop and long pressed on mobile. This will also prevent your
    * device's normal context menu from appearing.
    */
-  @Prop() triggerAction: TriggerAction = 'click';
+  @Prop({ mutable: true }) triggerAction: TriggerAction = 'click';
 
   /**
    * The component to display inside of the popover.
@@ -101,7 +102,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * a JavaScript framework. Otherwise, you can just
    * slot your component inside of `pop-popover`.
    */
-  @Prop() component?: ComponentRef;
+  @Prop({ mutable: true }) component?: ComponentRef;
 
   /**
    * The data to pass to the popover component.
@@ -109,7 +110,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * a JavaScript framework. Otherwise, you can just
    * set the props directly on your component.
    */
-  @Prop() componentProps?: ComponentProps;
+  @Prop({ mutable: true }) componentProps?: ComponentProps;
 
   /**
    * Emitted before the popover has presented.
@@ -135,7 +136,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * Use this function to emit `didDismiss` event instead of the StencilEvent because when this event is fired the element doesnt exist anymore in the DOM.
    * The live above is only here for compilation and documentation purpose.
    */
-  #didDismiss() {
+  #didDismiss(): void {
     if (this.host.isConnected) return;
 
     this.host.dispatchEvent(
@@ -149,6 +150,18 @@ export class Popover implements ComponentInterface, OverlayInterface {
     const { trigger } = this;
 
     this.onTriggerChange(trigger);
+  }
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-popover');
+    this.open ??= config.open ?? false;
+    this.animated ??= config.animated ?? false;
+    this.showBackdrop ??= config.showBackdrop ?? false;
+    this.backdropDismiss ??= config.backdropDismiss ?? false;
+    this.backdropDismiss ??= config.backdropDismiss ?? false;
+    this.triggerAction ??= config.triggerAction ?? 'click';
+    this.component ??= config.component;
+    this.componentProps ??= config.componentProps;
   }
 
   componentDidLoad(): void {
@@ -206,7 +219,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
     return true;
   }
 
-  #setupListener() {
+  #setupListener(): void {
     this.#handler = (event: ToggleEvent) => {
       if (event.oldState === 'open') {
         this.willDismiss.emit();
@@ -217,7 +230,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
     this.#dialog.addEventListener('beforetoggle', this.#handler);
   }
 
-  #present() {
+  #present(): void {
     const { backdropDismiss, event } = this;
     const target = event.target as Element;
     const rect = target.getBoundingClientRect();

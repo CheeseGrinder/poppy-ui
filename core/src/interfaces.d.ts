@@ -1,3 +1,4 @@
+import { ComponentConfig } from '#global/component-config';
 import { JSX, JSXBase } from '@stencil/core/internal';
 
 type BrandColor = 'primary' | 'secondary' | 'accent';
@@ -138,3 +139,13 @@ type ComponentsOption = {
     [Prop in keyof Omit<PopElements[Tag], keyof Omit<JSXBase.HTMLAttributes, 'color'>>]?: PopElements[Tag][Prop];
   };
 };
+
+interface Poppy {
+  components: ComponentConfig;
+}
+
+declare global {
+  interface Window {
+    Poppy: Poppy;
+  }
+}

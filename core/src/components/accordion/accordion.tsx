@@ -1,7 +1,7 @@
 import { compareOptions } from '#utils/forms';
+import { hostContext } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
 import { ChevronDown } from '../ChevronDown';
-import { hostContext } from '#utils/helpers';
 
 /**
  * Accordion is used for showing and hiding content.

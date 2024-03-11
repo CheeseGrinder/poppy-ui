@@ -14,6 +14,7 @@ import {
   h,
 } from '@stencil/core';
 import { Show } from '../Show';
+import { componentConfig } from '#global/component-config';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -55,12 +56,12 @@ export class Toggle implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
 
   /**
    * If `true`, the user cannot modify the value.
    */
-  @Prop({ reflect: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
 
   /**
    * If `true`, the toggle is selected.
@@ -85,20 +86,20 @@ export class Toggle implements ComponentInterface {
   /**
    * If true, the user cannot interact with the native element.
    */
-  @Prop({ reflect: true }) disabled: boolean;
+  @Prop({ reflect: true, mutable: true }) disabled: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Emitted when the input checked attribut change
@@ -115,16 +116,25 @@ export class Toggle implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
-  formResetCallback() {
+  formResetCallback(): void {
     this.checked = false;
   }
 
-  formStateRestoreCallback(state: string) {
+  formStateRestoreCallback(state: string): void {
     this.checked = state === 'true';
   }
 
-  componentWillLoad() {
+  componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
+
+    const config = componentConfig.get('pop-toggle');
+    this.required ??= config.required ?? false;
+    this.readonly ??= config.readonly ?? false;
+    this.checked ??= config.checked ?? false;
+    this.indeterminate ??= config.indeterminate ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
   }
 
   /**

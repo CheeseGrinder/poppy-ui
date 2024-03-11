@@ -15,6 +15,7 @@ import {
 } from '@stencil/core';
 import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/interfaces';
 import { Show } from '../Show';
+import { componentConfig } from '#global/component-config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -70,23 +71,23 @@ export class Textarea implements ComponentInterface {
   /**
    * This attribute specifies the minimum number of characters that the user can enter.
    */
-  @Prop() minLength?: number;
+  @Prop({ mutable: true }) minLength?: number;
 
   /**
    * This attribute specifies the maximum number of characters that the user can enter.
    */
-  @Prop() maxLength?: number;
+  @Prop({ mutable: true }) maxLength?: number;
 
   /**
    * The visible width of the text control, in average character widths.
    * If it is specified, it must be a positive integer.
    */
-  @Prop() cols?: number;
+  @Prop({ mutable: true }) cols?: number;
 
   /**
    * The number of visible text lines for the control.
    */
-  @Prop() rows?: number;
+  @Prop({ mutable: true }) rows?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
@@ -112,7 +113,7 @@ export class Textarea implements ComponentInterface {
    * A hint to the browser for which virtual keyboard to display.
    * Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
    */
-  @Prop() keyboard?: KeyboardType;
+  @Prop({ mutable: true }) keyboard?: KeyboardType;
 
   /**
    * A hint to the browser for which keyboard to display.
@@ -126,13 +127,13 @@ export class Textarea implements ComponentInterface {
    * - `search`: Typically taking the user to the results of searching for the text they have typed.
    * - `send`: Typically delivering the text to its target.
    */
-  @Prop() enterkeyhint?: EnterKeyHint;
+  @Prop({ mutable: true }) enterkeyhint?: EnterKeyHint;
 
   /**
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
    */
-  @Prop() spellcheck: boolean = false;
+  @Prop({ mutable: true }) spellcheck: boolean = false;
 
   /**
    * This features work only on mobile and tablet devices.
@@ -143,7 +144,7 @@ export class Textarea implements ComponentInterface {
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
    */
-  @Prop() autoCapitalize?: AutoCapitalize;
+  @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
    * Indicates how the control wraps text.
@@ -153,25 +154,25 @@ export class Textarea implements ComponentInterface {
    *
    * If wrap attribute is in the `hard` state, the `cols` property must be specified.
    */
-  @Prop() wrap?: Wrap;
+  @Prop({ mutable: true }) wrap?: Wrap;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    */
-  @Prop({ reflect: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Text that is placed under the textarea and displayed when no error is detected.
@@ -187,18 +188,18 @@ export class Textarea implements ComponentInterface {
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
    */
-  @Prop() counter?: boolean = false;
+  @Prop({ mutable: true }) counter?: boolean = false;
 
   /**
    * A callback used to format the counter text.
    * By default the counter text is set to "itemLength / maxLength".
    */
-  @Prop() counterFormatter?: (inputLength: number, maxLength: number) => string;
+  @Prop({ mutable: true }) counterFormatter?: (inputLength: number, maxLength: number) => string;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
    */
-  @Prop() debounce?: number = 0;
+  @Prop({ mutable: true }) debounce?: number = 0;
 
   /**
    * The `popChange` event is fired when the user modifies the textarea's value.
@@ -225,16 +226,33 @@ export class Textarea implements ComponentInterface {
    */
   @Event() popBlur: EventEmitter<void>;
 
-  formResetCallback() {
+  formResetCallback(): void {
     this.value = '';
   }
 
-  formStateRestoreCallback(state: string) {
+  formStateRestoreCallback(state: string): void {
     this.value = state;
   }
 
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
+
+    const config = componentConfig.get('pop-textarea');
+    this.minLength ??= config.minLength;
+    this.maxLength ??= config.maxLength;
+    this.required ??= config.required ?? false;
+    this.readonly ??= config.readonly ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.autoFocus ??= config.autoFocus ?? false;
+    this.keyboard ??= config.keyboard;
+    // this.enterkeyhint ??= config.enterkeyhint;
+    // this.spellcheck ??= config.spellcheck ?? false;
+    this.bordered ??= config.bordered ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
+    this.counter ??= config.counter ?? false;
+    this.counterFormatter ??= config.counterFormatter;
+    this.debounce ??= config.debounce ?? 0;
 
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);
@@ -280,14 +298,14 @@ export class Textarea implements ComponentInterface {
     return this.counterFormatter?.(length, maxLength) ?? `${length} / ${maxLength}`;
   }
 
-  #onChange = () => {
+  #onChange = (): void => {
     this.value = this.#nativeInput.value;
     this.popChange.emit({
       value: this.#getValue(),
     });
   };
 
-  #onInput = () => {
+  #onInput = (): void => {
     this.value = this.#nativeInput.value;
 
     clearTimeout(this.#debounceTimer);
@@ -298,11 +316,11 @@ export class Textarea implements ComponentInterface {
     }, this.debounce || 0);
   };
 
-  #onFocus = () => {
+  #onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  #onBlur = (): void => {
     this.popBlur.emit();
   };
 

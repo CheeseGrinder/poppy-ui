@@ -20,6 +20,7 @@ import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
 import { SelectPopoverOption } from '../select-popover/select-popover-interface';
 import type { SelectCompareFn } from './select.interface';
+import { componentConfig } from '#global/component-config';
 
 @Component({
   tag: 'pop-select',
@@ -73,52 +74,52 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * If `true`, the user can enter more than one value.
    */
-  @Prop({ reflect: true }) multiple?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) multiple?: boolean = false;
 
   /**
    * Only apply when `multiple` property is used.
    * The minimum amount of values that can be selected, which must not be greater than its maximum (max attribute) value.
    */
-  @Prop({ reflect: true }) min?: number;
+  @Prop({ reflect: true, mutable: true }) min?: number;
 
   /**
    * Only apply when `multiple` property is used.
    * The maximum amount of values that can be selected, which must not be less than its minimum (min attribute) value.
    */
-  @Prop({ reflect: true }) max?: number;
+  @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
 
   /**
    * If `true`, the user cannot interact with the element.
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
 
   /**
    * If `true`, the element will be focused on page load.
    */
-  @Prop({ reflect: true }) autoFocus?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean = false;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    */
-  @Prop({ reflect: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * The text to display instead of the selected option's value.
@@ -148,7 +149,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * ion-radio-group. When not specified, the default behavior will use strict
    * equality (===) for comparison.
    */
-  @Prop() compare?: SelectCompareFn | string | null;
+  @Prop({ mutable: true }) compare?: SelectCompareFn | string | null;
 
   /**
    * Emitted when the overlay is dismissed.
@@ -181,6 +182,18 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAttributes(this.host, ['aria-label']);
+
+    const config = componentConfig.get('pop-select');
+    this.multiple ??= config.multiple ?? false;
+    this.min ??= config.min ?? 0;
+    this.max ??= config.max ?? 100;
+    this.required ??= config.required ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.autoFocus ??= config.autoFocus ?? false;
+    this.bordered ??= config.bordered ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
+    this.compare ??= config.compare;
   }
 
   /**

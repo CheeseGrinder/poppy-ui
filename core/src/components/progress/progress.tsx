@@ -1,3 +1,4 @@
+import { componentConfig } from '#global/component-config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 import { Color } from 'src/interfaces';
 
@@ -15,19 +16,26 @@ export class Progress implements ComponentInterface {
   /**
    * The value of a progress is analogous to the value of a `<progress>`
    */
-  @Prop({ mutable: true }) value?: number;
+  @Prop({ reflect: true }) value?: number;
 
   /**
    *
    */
-  @Prop({ reflect: true }) max?: number = 100;
+  @Prop({ reflect: true, mutable: true }) max?: number = 100;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color;
+  @Prop({ reflect: true, mutable: true }) color?: Color;
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-progress');
+    this.value ??= config.value;
+    this.max ??= config.max ?? 100;
+    this.color ??= config.color;
+  }
 
   render() {
     return (

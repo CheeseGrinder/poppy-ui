@@ -3,6 +3,7 @@ import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
 import { Show } from '../Show';
+import { componentConfig } from '#global/component-config';
 
 /**
  * Radio buttons allow the user to select one option from a set.
@@ -48,30 +49,30 @@ export class Radio implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
 
   /**
    * If `true`, the user cannot interact with the element.
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
 
   /**
    * If `true`, the element will be focused on page load.
    */
-  @Prop({ reflect: true }) autoFocus?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean = false;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color;
+  @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Emitted when the input has focus.
@@ -85,6 +86,14 @@ export class Radio implements ComponentInterface {
 
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
+
+    const config = componentConfig.get('pop-radio');
+    this.checked ??= config.checked ?? false;
+    this.required ??= config.required ?? false;
+    this.disabled ??= config.disabled ?? false;
+    this.autoFocus ??= config.autoFocus ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
   }
 
   connectedCallback(): void {

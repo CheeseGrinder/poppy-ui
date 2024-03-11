@@ -1,3 +1,4 @@
+import { componentConfig } from '#global/component-config';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
@@ -35,37 +36,37 @@ export class Button implements ComponentInterface {
   /**
    * If `true`, the user cannot interact with the element.
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'neutral' | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: Color | 'neutral' | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Transparent Button with colored border
    */
-  @Prop({ reflect: true }) outlined?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) outlined?: boolean = false;
 
   /**
    * `square` set button width and heigth with 1:1 ratio
    * `round` set button width and heigth with 1:1 ratio and rounded corners.
    */
-  @Prop({ reflect: true }) shape?: ButtonShape;
+  @Prop({ reflect: true, mutable: true }) shape?: ButtonShape;
 
   /**
    * `wide` Add more horizontal padding
    * `block` make a full width button
    */
-  @Prop({ reflect: true }) expand?: ButtonExpand;
+  @Prop({ reflect: true, mutable: true }) expand?: ButtonExpand;
 
   /**
    * Emitted when the button has focus.
@@ -77,15 +78,26 @@ export class Button implements ComponentInterface {
    */
   @Event() popBlur!: EventEmitter<void>;
 
-  componentWillRender(): void | Promise<void> {
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-button');
+
+    this.disabled ??= config.disabled ?? false;
+    this.color ??= config.color;
+    this.size ??= config.size;
+    this.outlined ??= config.outlined ?? false;
+    this.shape ??= config.shape;
+    this.expand ??= config.expand;
+  }
+
+  componentWillRender(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
   }
 
-  #onFocus = () => {
+  #onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  #onBlur = (): void => {
     this.popBlur.emit();
   };
 

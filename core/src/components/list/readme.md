@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property      | Attribute     | Description                                                               | Type                           | Default      |
-| ------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------ | ------------ |
-| `orientation` | `orientation` | Define content disposition orientation                                    | `"horizontal" \| "vertical"`   | `'vertical'` |
-| `size`        | `size`        | Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. | `"lg" \| "md" \| "sm" \| "xs"` | `undefined`  |
+| Property      | Attribute     | Description                                                               | Type                           | Default     |
+| ------------- | ------------- | ------------------------------------------------------------------------- | ------------------------------ | ----------- |
+| `orientation` | `orientation` | Define content disposition orientation                                    | `"horizontal" \| "vertical"`   | `undefined` |
+| `size`        | `size`        | Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. | `"lg" \| "md" \| "sm" \| "xs"` | `undefined` |
 
 
 ## Dependencies

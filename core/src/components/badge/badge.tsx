@@ -2,6 +2,7 @@ import type { Color, Size } from 'src/interfaces';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import type { BadgeAs } from './badge.interface';
+import { componentConfig } from '#global/component-config';
 
 /**
  * Badges are used to inform the user of the status of specific data.
@@ -25,25 +26,35 @@ export class Badge implements ComponentInterface {
    * Default options are: `"neutral"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'neutral';
+  @Prop({ reflect: true, mutable: true }) color?: Color | 'neutral';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    */
-  @Prop({ reflect: true }) size?: Size;
+  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Transparent Badge with colored border
    */
-  @Prop({ reflect: true }) outlined?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) outlined?: boolean = false;
 
   /**
    * Used HTML element for accessibility
    */
-  @Prop() as?: BadgeAs = 'div';
+  @Prop({ mutable: true }) as?: BadgeAs = 'div';
 
-  componentWillRender(): void | Promise<void> {
+  componentWillLoad(): void {
+    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+
+    const config = componentConfig.get('pop-badge');
+    this.color ??= config.color;
+    this.size ??= config.size;
+    this.outlined ??= config.outlined ?? false;
+    this.as ??= config.as ?? 'div';
+  }
+
+  componentWillRender(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
   }
 

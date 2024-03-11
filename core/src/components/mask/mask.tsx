@@ -1,3 +1,4 @@
+import { componentConfig } from '#global/component-config';
 import { Component, Host, Prop, h } from '@stencil/core';
 
 type MaskParallelogram = 'parallelogram' | 'parallelogram-2' | 'parallelogram-3' | 'parallelogram-4';
@@ -22,7 +23,12 @@ export class Mask {
   /**
    * Mask that should be applied
    */
-  @Prop({ reflect: true }) type: MaskType;
+  @Prop({ reflect: true, mutable: true }) type: MaskType;
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-mask');
+    this.type ??= config.type;
+  }
 
   render() {
     return (

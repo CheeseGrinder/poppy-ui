@@ -1,3 +1,4 @@
+import { componentConfig } from '#global/component-config';
 import { getHostContextProperty, hostContext } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 
@@ -14,7 +15,12 @@ export class Item implements ComponentInterface {
   /**
    * If `true`, the user cannot interact with the item.
    */
-  @Prop() disabled = false;
+  @Prop({ mutable: true }) disabled = false;
+
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-item');
+    this.disabled ??= config.disabled ?? false;
+  }
 
   #onClick = (ev: PointerEvent): void => {
     const path = ev.composedPath();
@@ -29,7 +35,7 @@ export class Item implements ComponentInterface {
     }
   };
 
-  #getFirstInteractive() {
+  #getFirstInteractive(): HTMLElement {
     const controls = this.host.querySelectorAll<HTMLElement>(
       'pop-toggle:not([disabled]), pop-checkbox:not([disabled]), pop-radio:not([disabled]), pop-select:not([disabled])',
     );

@@ -1,3 +1,4 @@
+import { componentConfig } from '#global/component-config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
@@ -15,7 +16,7 @@ export class Swap implements ComponentInterface {
   /**
    * Choose what animation is used on click.
    */
-  @Prop({ reflect: true }) animation?: 'rotate' | 'flip';
+  @Prop({ reflect: true, mutable: true }) animation?: 'rotate' | 'flip';
 
   /**
    * Activates the swap.
@@ -26,9 +27,16 @@ export class Swap implements ComponentInterface {
   /**
    * Activates the swap on hover.
    */
-  @Prop({ reflect: true }) swapOnHover?: boolean;
+  @Prop({ reflect: true, mutable: true }) swapOnHover?: boolean;
 
-  #onClick = () => {
+  componentWillLoad(): void {
+    const config = componentConfig.get('pop-swap');
+    this.animation ??= config.animation;
+    this.active ??= config.active ?? false;
+    this.swapOnHover ??= config.swapOnHover ?? false;
+  }
+
+  #onClick = (): void => {
     if (!this.swapOnHover) this.active = !this.active;
   };
 
