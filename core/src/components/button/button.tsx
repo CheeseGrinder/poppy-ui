@@ -39,10 +39,10 @@ export class Button implements ComponentInterface {
 
   /**
    * The color to use from your application's color palette.
-   * Default options are: `"neutral"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
+   * Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
    */
-  @Prop({ reflect: true }) color?: Color | 'neutral';
+  @Prop({ reflect: true }) color?: Color | 'neutral' | 'ghost';
 
   /**
    * Change size of the component

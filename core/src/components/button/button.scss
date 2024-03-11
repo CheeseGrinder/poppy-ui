@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------
 
 :host {
+  width: max-content;
+
   > button {
     box-sizing: border-box;
 
@@ -152,6 +154,18 @@
 }
 @include generate-color(neutral, primary, secondary, accent, info, success, warning, error);
 
+:host([color="ghost"]:not([outlined])) {
+  --background: transparent;
+  --color: currentColor;
+
+  > button {
+    outline-color: currentColor;
+
+    &:hover {
+      --background: oklch(#{theme.get-color("base.content")} / var(--background-opacity, 0.2));
+    }
+  }
+}
 :host(:not([color], [outlined])) {
   --background: oklch(#{theme.get-color("base.200")} / var(--background-opacity, 1));
   --color: oklch(#{theme.get-color("base.content")} / var(--text-opacity, 1));
