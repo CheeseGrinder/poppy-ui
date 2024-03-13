@@ -41,4 +41,4 @@ export class ComponentConfig {
   }
 }
 
-export const componentConfig = /*@__PURE__*/ new ComponentConfig();
+export const componentConfig = new ComponentConfig();
