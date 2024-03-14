@@ -1,9 +1,9 @@
 import { postcss } from '@stencil-community/postcss';
-import { Build, Config } from '@stencil/core';
+import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import tailwindcss from 'tailwindcss';
 
-const isDev = process.argv.includes('--dev')
+const isDev = process.argv.includes('--dev');
 
 
 const tailwindPlugin = [isDev ? postcss({
