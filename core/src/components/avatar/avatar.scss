@@ -1,0 +1,35 @@
+@use "../../global/styles/theme";
+
+/**
+ * @prop --placeholder-background: Color of the background in placeholder mode
+ * @prop --placeholder-color: Color of the text in placeholder mode
+ */
+
+:host {
+  position: relative;
+  display: inline-flex;
+  aspect-ratio: 1;
+
+  > div {
+    width: 100%;
+    overflow: hidden;
+    min-width: 24px;
+  }
+
+  ::slotted(pop-img),
+  ::slotted(img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  ::slotted(*) {
+    background-color: var(--placeholder-background, oklch(#{theme.get-color("neutral.base")}));
+    color: var(--placeholder-color, oklch(#{theme.get-color("neutral.content")}));
+  }
+}
+
+:host([placeholder]) > div {
+  display: grid;
+  place-items: center;
+}
