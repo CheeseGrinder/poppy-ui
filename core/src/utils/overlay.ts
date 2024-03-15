@@ -1,6 +1,6 @@
+import { ModalOptions } from 'src/components/modal/modal.interface';
 import { PopoverOptions } from 'src/components/popover/popover.interface';
 import { componentOnReady, getAppRoot } from './helpers';
-import { ModalOptions } from 'src/components/modal/modal.interface';
 
 export interface OverlayInterface {
   open?: boolean;
@@ -20,7 +20,7 @@ export class OverlayController<O extends object, Elem extends Element> {
     return overlay.classList.contains('overlay-hidden');
   }
 
-  #getOverlays(doc: Document, selector: string) {
+  #getOverlays(doc: Document, selector: string): OverlayInterface[] {
     if (selector === undefined) {
       selector = 'pop-popover, pop-modal';
     }
@@ -80,7 +80,7 @@ export class OverlayController<O extends object, Elem extends Element> {
     return this.#create(this.#tag, options) as any;
   }
 
-  dismiss(data?: any, role?: string, id?: string) {
+  dismiss(data?: any, role?: string, id?: string): Promise<boolean> {
     return this.#dismiss(document, data, role, this.#tag, id);
   }
 
@@ -88,7 +88,7 @@ export class OverlayController<O extends object, Elem extends Element> {
     return this.#getPresented(doc, this.#tag);
   }
 
-  static create<O extends object, Elem extends Element>(tag: string) {
+  static create<O extends object, Elem extends Element>(tag: string): OverlayController<O, Elem> {
     return new OverlayController<O, Elem>(tag);
   }
 }

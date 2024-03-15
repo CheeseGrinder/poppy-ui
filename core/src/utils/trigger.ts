@@ -9,15 +9,14 @@ export class TriggerController {
    * Removes the click listener from the trigger element.
    */
   removeListener(): void {
-    if (this.#destroy) {
-      this.#destroy();
-      this.#destroy = undefined;
-    }
+    this.#destroy?.();
+    this.#destroy = undefined;
   }
 
   /**
    * Adds a click listener to the trigger element.
    * Presents the overlay when the trigger is clicked.
+   *
    * @param overlay The overlay element.
    * @param trigger The ID of the element to add a click listener to.
    */
@@ -34,7 +33,7 @@ export class TriggerController {
     }
 
     const configureTriggerInteraction = (targetEl: HTMLElement, overlayEl: OverlayInterface) => {
-      const openOverlay = (ev: Event) => {
+      const openOverlay = (ev: Event): void => {
         ev.preventDefault();
         overlayEl.present();
       };
@@ -49,7 +48,7 @@ export class TriggerController {
   }
 
   #getEvent(action: TriggerAction) {
-    const triggers: Record<TriggerAction, string> = {
+    const triggers: Record<TriggerAction, keyof HTMLElementEventMap> = {
       click: 'click',
       hover: 'mouseenter',
       'context-menu': 'contextmenu',
