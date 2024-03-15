@@ -80,7 +80,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
   @Watch('trigger')
   onTriggerChange(trigger: string) {
     if (trigger) {
-      this.#triggerController.addListener(this.host, trigger);
+      this.#triggerController.addListener(this.host, trigger, this.triggerAction);
     }
   }
 
@@ -95,6 +95,10 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * device's normal context menu from appearing.
    */
   @Prop({ mutable: true }) triggerAction: TriggerAction = 'click';
+  @Watch('triggerAction')
+  onTriggerActionChange(triggerAction: TriggerAction) {
+    this.#triggerController.addListener(this.host, this.trigger, triggerAction);
+  }
 
   /**
    * The component to display inside of the popover.
