@@ -71,7 +71,7 @@ export class Img implements ComponentInterface {
   }
 
   #initObserver(): void {
-    if (!this.src || this.#nativeImg.loading === 'lazy') return;
+    if (!this.src) return;
 
     if (supportIntersectionObserver()) {
       this.#removeObserver();
@@ -114,7 +114,8 @@ export class Img implements ComponentInterface {
       <Host>
         <img
           part="image"
-          decoding="async"
+          loading="eager"
+          // decoding="sync"
           src={this.loadSrc}
           alt={this.alt || ''}
           onLoad={this.#onLoad}

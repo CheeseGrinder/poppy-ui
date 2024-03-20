@@ -15,19 +15,23 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 export class Indicator implements ComponentInterface {
   /**
    * Align horizontally the indicator.
+   * 
+   * @config @default 'left'
    */
   @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'start' | 'center' | 'end';
 
   /**
    * Align vertically the indicator.
+   * 
+   * @config @default 'top'
    */
   @Prop({ reflect: true, mutable: true }) position?: 'top' | 'middle' | 'bottom';
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-indicator');
-
-    this.side ??= config.side;
-    this.position ??= config.position;
+    componentConfig.apply(this, 'pop-indicator', {
+      side: 'left',
+      position: 'top',
+    });
   }
 
   render() {

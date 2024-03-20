@@ -3,23 +3,26 @@
 @use "../../global/styles/input";
 
 /**
- * @prop --border-radius: Border radius
- * @prop --border-opacity: Border opacity
+ * @prop --border-radius: Change border radius
+ * @prop --border-color: Change border color
  *
- * @prop --background: Background color
- * @prop --opacity: Change background opacity
- * @prop --required-color: Change required star color
- * @prop --check-mark-color: Change mark color
+ * @prop --background: Change background color
+ * @prop --checkmark-color: Change checkmark color
  *
- * @prop --animation-duration: Animation duration
+ * @prop --animation: Change animation duration
  */
 
 // Checkbox
 // ----------------------------------------------------------------
 
 :host {
+  --border-radius: #{radius.$md};
+  --border-color: oklch(theme.get-color("base.content") / .2);
+
   --background: #{theme.get-color("base.content")};
-  --check-mark-color: #{theme.get-color("base.100")};
+  --checkmark-color: #{theme.get-color("base.100")};
+
+  --animation: .2s ease-out;
 
   @include input.label;
 
@@ -29,11 +32,9 @@
   gap: 4px;
   flex-shrink: 0;
 
-  > input {
-    border-width: 1px;
-    border-style: solid;
-    border-radius: var(--border-radius, #{radius.$md});
-    border-color: var(--border-color, oklch(theme.get-color("base.content") / var(--border-opacity, 0.2)));
+  input {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 
     appearance: none;
     cursor: pointer;
@@ -43,11 +44,11 @@
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--background, oklch(theme.get-color("base.content")));
+      outline-color: var(--background);
     }
     &:checked {
       background-repeat: no-repeat;
-      animation: checkmark var(--animation-duration, 0.2s) ease-out;
+      animation: checkmark var(--animation);
       background-color: var(--background);
       background-image: linear-gradient(-45deg, transparent 65%, var(--background) 65.99%),
         linear-gradient(45deg, transparent 75%, var(--background) 75.99%),
@@ -55,11 +56,11 @@
         linear-gradient(
           45deg,
           var(--background) 30%,
-          var(--check-mark-color) 30.99%,
-          var(--check-mark-color) 40%,
+          var(--checkmark-color) 30.99%,
+          var(--checkmark-color) 40%,
           transparent 40.99%
         ),
-        linear-gradient(-45deg, var(--check-mark-color) 50%, var(--background) 50.99%);
+        linear-gradient(-45deg, var(--checkmark-color) 50%, var(--background) 50.99%);
     }
   }
 
@@ -81,14 +82,14 @@
 
 // start is the default in flex so no css needed here.
 :host([placement="start"]) {
-  > input {
+  input {
     margin-inline-end: auto;
   }
 }
 :host([placement="end"]) {
   flex-direction: row-reverse;
 
-  > input {
+  input {
     margin-inline-start: auto;
   }
 }
@@ -98,28 +99,27 @@
 
 :host([size="xs"]),
 :host(.in-list.in-list-xs) {
-  > input {
+  input {
     height: 1rem;
     width: 1rem;
   }
 }
 :host([size="sm"]),
 :host(.in-list.in-list-sm) {
-  > input {
+  input {
     height: 1.25rem;
     width: 1.25rem;
   }
 }
-:host([size="md"]),
-:host(:not([size])) {
-  > input {
+:host([size="md"]) {
+  input {
     height: 1.5rem;
     width: 1.5rem;
   }
 }
 :host([size="lg"]),
 :host(.in-list.in-list-lg) {
-  > input {
+  input {
     height: 2rem;
     width: 2rem;
   }
@@ -135,8 +135,8 @@
 
     :host([color="#{$color}"]) {
       --background: oklch(#{$base});
-      --border-color: oklch(#{$base} / var(--border-opacity, 0.2));
-      --check-mark-color: oklch(#{$text});
+      --border-color: oklch(#{$base} / .2);
+      --checkmark-color: oklch(#{$text});
     }
   }
 }
@@ -144,8 +144,8 @@
 
 :host(:not([color])) > input {
   --background: oklch(#{theme.get-color("base.content")});
-  --border-color: oklch(#{theme.get-color("base.content")} / var(--border-opacity, 0.2));
-  --check-mark-color: oklch(#{theme.get-color("base.100")});
+  --border-color: oklch(#{theme.get-color("base.content")} / .2);
+  --checkmark-color: oklch(#{theme.get-color("base.100")});
 }
 
 // Checkbox status
@@ -164,23 +164,23 @@
     linear-gradient(
       45deg,
       var(--background) 30%,
-      var(--check-mark-color) 30.99%,
-      var(--check-mark-color) 40%,
+      var(--checkmark-color) 30.99%,
+      var(--checkmark-color) 40%,
       transparent 40.99%
     ),
-    linear-gradient(-45deg, var(--check-mark-color) 50%, var(--background) 50.99%);
+    linear-gradient(-45deg, var(--checkmark-color) 50%, var(--background) 50.99%);
 }
 :host([indeterminate]) > input {
   background-repeat: no-repeat;
-  background-color: var(--background, oklch(theme.get-color("base.content") / var(--opacity, 1)));
+  background-color: var(--background, oklch(theme.get-color("base.content")));
   animation: checkmark var(--animation-duration, 0.2s) ease-out;
   background-image: linear-gradient(90deg, transparent 80%, var(--background) 80%),
     linear-gradient(-90deg, transparent 80%, var(--background) 80%),
     linear-gradient(
       0deg,
       var(--background) 43%,
-      var(--check-mark-color) 43%,
-      var(--check-mark-color) 57%,
+      var(--checkmark-color) 43%,
+      var(--checkmark-color) 57%,
       var(--background) 57%
     );
 }

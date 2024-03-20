@@ -1,4 +1,5 @@
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 import { Size } from 'src/interfaces';
 
@@ -13,19 +14,24 @@ import { Size } from 'src/interfaces';
 export class Loading implements ComponentInterface {
   /**
    * Apply different animation
+   * 
+   * @config @default 'spinner'
    */
   @Prop({ reflect: true, mutable: true }) type?: 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-loading');
-    this.type ??= config.type;
-    this.size ??= config.size;
+    componentConfig.apply(this, 'pop-loading', {
+      size: config.get('defaultSize', 'md'),
+      type: 'spinner'
+    });
   }
 
   render() {

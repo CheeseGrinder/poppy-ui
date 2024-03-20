@@ -14,12 +14,15 @@ export class Item implements ComponentInterface {
 
   /**
    * If `true`, the user cannot interact with the item.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) disabled = false;
+  @Prop({ mutable: true }) disabled: boolean;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-item');
-    this.disabled ??= config.disabled ?? false;
+    componentConfig.apply(this, 'pop-item', {
+      disabled: false,
+    });
   }
 
   #onClick = (ev: PointerEvent): void => {

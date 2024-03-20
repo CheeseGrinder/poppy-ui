@@ -1,19 +1,28 @@
 @use "../../global/styles/theme";
 
 /**
- * @prop --placeholder-background: Color of the background in placeholder mode
- * @prop --placeholder-color: Color of the text in placeholder mode
+ * @prop --background: Change background color
+ * @prop --color: Change text color
  */
 
 :host {
+  --background: oklch(#{theme.get-color("neutral.base")});
+  --color: oklch(#{theme.get-color("neutral.content")});
+
   position: relative;
   display: inline-flex;
   aspect-ratio: 1;
 
   > div {
+    display: grid;
+    place-items: center;
+
     width: 100%;
     overflow: hidden;
     min-width: 24px;
+
+    background-color: var(--background);
+    color: var(--color);
   }
 
   ::slotted(pop-img),
@@ -22,14 +31,4 @@
     width: 100%;
     object-fit: cover;
   }
-
-  ::slotted(*) {
-    background-color: var(--placeholder-background, oklch(#{theme.get-color("neutral.base")}));
-    color: var(--placeholder-color, oklch(#{theme.get-color("neutral.content")}));
-  }
-}
-
-:host([placeholder]) > div {
-  display: grid;
-  place-items: center;
 }

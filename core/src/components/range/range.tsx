@@ -1,4 +1,5 @@
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -57,28 +58,38 @@ export class Range implements ComponentInterface {
 
   /**
    * The minimum value, which must not be greater than its maximum (max attribute) value.
+   * 
+   * @config @default 0
    */
-  @Prop({ reflect: true, mutable: true }) min?: number = 0;
+  @Prop({ reflect: true, mutable: true }) min?: number;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
+   * 
+   * @config @default 100
    */
-  @Prop({ reflect: true, mutable: true }) max?: number = 100;
+  @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * Works with the min and max attributes to limit the increments at which a value can be set.
+   * 
+   * @config @default 1
    */
-  @Prop({ reflect: true, mutable: true }) step?: number = 1;
+  @Prop({ reflect: true, mutable: true }) step?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
@@ -89,17 +100,23 @@ export class Range implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+   * 
+   * @config @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;
 
@@ -130,16 +147,15 @@ export class Range implements ComponentInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
-    const config = componentConfig.get('pop-range');
-    this.min ??= config.min ?? 0;
-    this.max ??= config.max ?? 100;
-    this.step ??= config.step ?? 1;
-    this.required ??= config.required ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-    this.debounce ??= config.debounce ?? 0;
+    componentConfig.apply(this, 'pop-range', {
+      min: 0,
+      max: 100,
+      step: 1,
+      required: false,
+      disabled: false,
+      size: config.get('defaultSize', 'md'),
+      debounce: 0,
+    });
   }
 
   disconnectedCallback(): void {

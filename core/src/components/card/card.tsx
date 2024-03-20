@@ -1,5 +1,4 @@
-import { Size } from 'src/interfaces';
-import { Component, Host, Prop, h } from '@stencil/core';
+import { Component, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'pop-card',
@@ -7,8 +6,6 @@ import { Component, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class Card {
-  @Prop({ reflect: true }) shadow: Size;
-
   render() {
     return (
       <Host>

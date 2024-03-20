@@ -1,6 +1,7 @@
 import { Size } from 'src/interfaces';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Kbd is used to display keyboard shortcuts.
@@ -18,12 +19,15 @@ export class Kbd implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-kbd');
-    this.size ??= config.size;
+    componentConfig.apply(this, 'pop-kbd', {
+      size: config.get('defaultSize', 'md'),
+    });
   }
 
   render() {

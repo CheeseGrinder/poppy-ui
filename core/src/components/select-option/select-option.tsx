@@ -1,5 +1,4 @@
-import { componentConfig } from '#global/component-config';
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 import { Color, Size } from 'src/interfaces';
 
 @Component({
@@ -23,21 +22,18 @@ export class SelectOption {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @internal
    */
   @Prop({ mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @internal
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
-
-  componentWillLoad(): void {
-    const config = componentConfig.get('pop-select-option');
-    this.disabled ??= config.disabled ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-  }
 
   render() {
     return <Host role="option" id={this.#inputId}></Host>;

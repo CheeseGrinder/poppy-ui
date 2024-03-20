@@ -8,7 +8,6 @@
  * @prop --border-color: Border color & outline color
  *
  * @prop --background: Background color
- * @prop --opacity: Change background opacity
  *
  * @prop --color: Change text color
  * @prop --required-color: Change star color
@@ -23,6 +22,13 @@
 
 $minWidth: 12rem;
 :host {
+  --border-radius: #{radius.$md};
+  --border-color: transparent;
+  --outline-color: oklch(#{theme.get-color("base.content")} / 0.2);
+  --background: oklch(#{theme.get-color("base.100")});
+  --color: oklch(#{theme.get-color("base.content")});
+
+
   @include input.label;
   @include input.helper(".input-wrapper", $counter: true);
 
@@ -40,10 +46,10 @@ $minWidth: 12rem;
 
     border-style: solid;
     border-width: 1px;
-    border-radius: var(--border-radius, #{radius.$md});
+    border-radius: var(--border-radius);
     border-color: var(--border-color, transparent);
 
-    background-color: var(--background, oklch(#{theme.get-color("base.100")} / var(--opacity, 1)));
+    background-color: var(--background);
 
     min-width: $minWidth;
     width: 100%;
@@ -52,7 +58,7 @@ $minWidth: 12rem;
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
+      outline-color: var(--outline-color, var(--border-color));
     }
 
     > input {
@@ -61,7 +67,7 @@ $minWidth: 12rem;
       border: none;
       outline: none;
 
-      color: var(--color, oklch(#{theme.get-color("base.content")}));
+      color: var(--color);
       background-color: transparent;
 
       font-family: #{theme.$font};
@@ -109,14 +115,11 @@ $minWidth: 12rem;
   font-size: 0.875rem;
   line-height: 2rem;
 }
-:host([size="md"]),
-:host(:not([size])) {
-  > .input-wrapper {
-    padding: 0 1rem;
-    height: 3rem;
-    font-size: 0.875rem;
-    line-height: 2;
-  }
+:host([size="md"]) .input-wrapper {
+  padding: 0 1rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  line-height: 2;
 }
 :host([size="lg"]) > .input-wrapper {
   padding: 1.5rem;

@@ -9,6 +9,9 @@
 $slot_name: indicator;
 
 :host {
+  --translate-x: -50%;
+  --translate-y: -50%;
+
   position: relative;
 
   display: inline-flex;
@@ -19,7 +22,7 @@ $slot_name: indicator;
     z-index: 1;
 
     white-space: nowrap;
-    translate: var(--translate-x, -50%) var(--translate-y, -50%);
+    translate: var(--translate-x) var(--translate-y);
   }
 }
 

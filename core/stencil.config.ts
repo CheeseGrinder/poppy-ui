@@ -1,27 +1,19 @@
-import { postcss } from '@stencil-community/postcss';
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
-import tailwindcss from 'tailwindcss';
-
-const isDev = process.argv.includes('--dev');
-
-
-const tailwindPlugin = [isDev ? postcss({
-  plugins: [tailwindcss()]
-}) : []];
+import { customDocsReadme } from './custom-docs-readme';
+import { componentConfig } from './component-config';
+import { Plugin } from '@stencil/core/internal';
 
 export const config: Config = {
-  namespace: 'poppy-ui',
-  globalStyle: './src/poppy-ui.scss',
+  namespace: 'Poppy',
+  globalStyle: './src/poppy.scss',
   globalScript: './src/global/poppy-global.ts',
   plugins: [
     sass(),
-
-    // Only iin dev mode to copy all Daisy-ui element
-    // Should be uninstalled after to reduce node_module size and clear unused css var
-    ...tailwindPlugin
   ],
   outputTargets: [
+    customDocsReadme(),
+    componentConfig(),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
@@ -29,9 +21,9 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
     },
-    {
-      type: 'docs-readme',
-    },
+    // {
+    //   type: 'docs-readme',
+    // },
     {
       type: 'www',
       serviceWorker: null, // disable service workers

@@ -21,25 +21,31 @@ export class Tooltip {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Define the position of tooltip
    * By default the tootip appear on top
+   * 
+   * @config @default 'top'
    */
   @Prop({ reflect: true, mutable: true }) position?: 'top' | 'bottom' | 'left' | 'right';
 
   /**
    * Force open tooltip
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) open: boolean = false;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-tooltip');
-    this.color ??= config.color;
-    this.position ??= config.position;
-    this.open ??= config.open ?? false;
+    componentConfig.apply(this, 'pop-tooltip', {
+      position: 'top',
+      open: false,
+    });
   }
 
   render() {

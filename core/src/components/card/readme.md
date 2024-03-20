@@ -5,12 +5,14 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+
+
 ## Properties
 
-| Property | Attribute | Description | Type                           | Default     |
-| -------- | --------- | ----------- | ------------------------------ | ----------- |
-| `shadow` | `shadow`  |             | `"lg" \| "md" \| "sm" \| "xs"` | `undefined` |
-
+| Property | Attribute | Description | Type | Default     |
+|-|-|-|-|-------------|
 
 ----------------------------------------------
 

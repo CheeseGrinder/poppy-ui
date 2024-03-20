@@ -20,21 +20,23 @@ export class Progress implements ComponentInterface {
 
   /**
    *
+   * @config @default 100
    */
-  @Prop({ reflect: true, mutable: true }) max?: number = 100;
+  @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-progress');
-    this.value ??= config.value;
-    this.max ??= config.max ?? 100;
-    this.color ??= config.color;
+    componentConfig.apply(this, 'pop-progress', {
+      max: 100,
+    });
   }
 
   render() {

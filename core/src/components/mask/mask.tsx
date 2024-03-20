@@ -22,12 +22,15 @@ export type MaskType = MaskClassic | MaskComplexe | MaskTriangle | MaskStar | Ma
 export class Mask {
   /**
    * Mask that should be applied
+   * 
+   * @config @default 'squircle
    */
   @Prop({ reflect: true, mutable: true }) type: MaskType;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-mask');
-    this.type ??= config.type;
+    componentConfig.apply(this, 'pop-mask', {
+      type: 'squircle'
+    });
   }
 
   render() {

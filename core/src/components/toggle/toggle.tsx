@@ -15,6 +15,7 @@ import {
 } from '@stencil/core';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -55,18 +56,24 @@ export class Toggle implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the toggle is selected.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) checked?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) checked?: boolean;
   @Watch('checked')
   onCheckedChange(checked: boolean): void {
     this.indeterminate = false;
@@ -80,11 +87,15 @@ export class Toggle implements ComponentInterface {
 
   /**
    * If a developer want to use `indeterminate`, `checked` property should be set to `false`
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) indeterminate?: boolean = false;
 
   /**
    * If true, the user cannot interact with the native element.
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled: boolean;
 
@@ -92,12 +103,16 @@ export class Toggle implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md''
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -127,14 +142,14 @@ export class Toggle implements ComponentInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
-    const config = componentConfig.get('pop-toggle');
-    this.required ??= config.required ?? false;
-    this.readonly ??= config.readonly ?? false;
-    this.checked ??= config.checked ?? false;
-    this.indeterminate ??= config.indeterminate ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
+    componentConfig.apply(this, 'pop-toggle', {
+      required: false,
+      readonly: false,
+      checked: false,
+      indeterminate: false,
+      disabled: false,
+      size: config.get('defaultSize', 'md'),
+    });
   }
 
   /**

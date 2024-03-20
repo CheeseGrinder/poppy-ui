@@ -23,27 +23,42 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
 
   @Element() host: HTMLElement & OverlayInterface;
 
+  /**
+   * 
+   * 
+   * @config @default 'bottom'
+   */
   @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'top' | 'bottom';
 
-  @Prop({ reflect: true, mutable: true }) align?: 'start' | 'center' | 'end';
-
-  @Prop({ reflect: true, mutable: true }) open?: boolean = false;
+  /**
+   * 
+   * 
+   * @config @default 'start'
+   */
+  @Prop({ reflect: true, mutable: true }) align?: 'start' | 'end';
 
   /**
-   * Describes what kind of interaction with the trigger that
-   * should cause the popover to open. Does not apply when the `trigger`
-   * property is `undefined`.
-   * If `"click"`, the popover will be presented when the trigger is left clicked.
-   * If `"hover"`, the popover will be presented when a pointer hovers over the trigger.
-   * If `"context-menu"`, the popover will be presented when the trigger is right
-   * clicked on desktop and long pressed on mobile. This will also prevent your
-   * device's normal context menu from appearing.
+   * 
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) triggerAction: TriggerAction = 'click';
+  @Prop({ reflect: true, mutable: true }) open?: boolean;
+
+  /**
+   * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open.
+   * - `"click"`: the dropdown will be presented when the trigger is left clicked.
+   * - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger.
+   * - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
+   * 
+   * @config @default 'click'
+   */
+  @Prop({ mutable: true }) triggerAction: TriggerAction;
 
   /**
    * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss.
    * Only apply on `triggerAction=hover`
+   * 
+   * @config @default 100
    */
   @Prop({ mutable: true }) debounce?: number = 100;
 
@@ -51,8 +66,10 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    * If `true`, a backdrop will be displayed behind the modal.
    * This property controls whether or not the backdrop
    * darkens the screen when the modal is presented.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean;
 
   /**
    * Emitted after the modal has presented.
@@ -65,14 +82,14 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   @Event() didDismiss: EventEmitter<void>;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-dropdown');
-
-    this.side ??= config.side;
-    this.align ??= config.align;
-    this.open ??= config.open ?? false;
-    this.triggerAction ??= config.triggerAction ?? 'click';
-    this.debounce ??= config.debounce ?? 100;
-    this.showBackdrop ??= config.showBackdrop ?? false;
+    componentConfig.apply(this, 'pop-dropdown', {
+      side: 'bottom',
+      align: 'start',
+      open: false,
+      triggerAction: 'click',
+      debounce: 100,
+      showBackdrop: false,
+    });
   }
 
   componentDidRender(): void {

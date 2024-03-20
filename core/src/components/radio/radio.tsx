@@ -4,6 +4,7 @@ import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Meth
 import type { Color, Size } from 'src/interfaces';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Radio buttons allow the user to select one option from a set.
@@ -48,13 +49,17 @@ export class Radio implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
@@ -65,12 +70,16 @@ export class Radio implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -87,13 +96,11 @@ export class Radio implements ComponentInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
-    const config = componentConfig.get('pop-radio');
-    this.checked ??= config.checked ?? false;
-    this.required ??= config.required ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
+    componentConfig.apply(this, 'pop-radio', {
+      required: false,
+      disabled: false,
+      size: config.get('defaultSize', 'md'),
+    });
   }
 
   connectedCallback(): void {

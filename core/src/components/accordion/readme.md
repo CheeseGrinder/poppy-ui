@@ -9,14 +9,16 @@
 
 Accordion is used for showing and hiding content.
 
+
+
 ## Properties
 
-| Property            | Attribute  | Description                                                                                                                                                                                          | Type      | Default     |
-| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
-| `disabled`          | `disabled` | If `true`, the user cannot interact with the element.                                                                                                                                                | `boolean` | `false`     |
-| `isOpen`            | `is-open`  | If `true`, the accordion is open.  The developer must not set this value to `true` if the accordion is used in `<accordion-group>` element and set the active property to the name of the accordion. | `boolean` | `false`     |
-| `name` _(required)_ | `name`     | name of the accordion                                                                                                                                                                                | `string`  | `undefined` |
-| `readonly`          | `readonly` | If `true`, the user cannot interact with the element.                                                                                                                                                | `boolean` | `false`     |
+| Property   | Attribute  | Description                                                                                                                                                                                            | Type      | Default     |
+|------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------|
+| `disabled` | `disabled` | If `true`, the user cannot interact with the element.                                                                                                                                                  | `boolean` | `false`     |
+| `isOpen`   | `is-open`  | If `true`, the accordion is open.<br>The developer must not set this value to `true` if the accordion is used in `<accordion-group>` element and set the active property to the name of the accordion. | `boolean` | `false`     |
+| `name`     | `name`     | name of the accordion                                                                                                                                                                                  | `string`  | `undefined` |
+| `readonly` | `readonly` | If `true`, the user cannot interact with the element.                                                                                                                                                  | `boolean` | `false`     |
 
 
 ## Methods
@@ -30,8 +32,6 @@ If the method returns `false`, the accordion was already closed. otherwise it re
 
 Type: `Promise<boolean>`
 
-
-
 ### `open() => Promise<boolean>`
 
 Open the accordion.
@@ -40,8 +40,6 @@ If the method returns `false`, the accordion was already open. otherwise it retu
 #### Returns
 
 Type: `Promise<boolean>`
-
-
 
 ### `toggle() => Promise<void>`
 
@@ -53,44 +51,20 @@ Type: `Promise<void>`
 
 
 
-
 ## Slots
 
-| Slot       | Description                          |
-| ---------- | ------------------------------------ |
-|            | Content that will be hiding or shown |
-| `"header"` | Content of the accordion header      |
+| Slot     | Description                            |
+|----------|----------------------------------------|
+| ``       | Content that will be hiding or shown   |
+| `header` | Content of the accordion header        |
 
 
 ## Shadow Parts
 
-| Part        | Description              |
-| ----------- | ------------------------ |
-| `"content"` | Content of the accordion |
-| `"header"`  | Header of the accordion  |
-
-
-## CSS Custom Properties
-
-| Name              | Description      |
-| ----------------- | ---------------- |
-| `--background`    | Background color |
-| `--border-color`  | Border color     |
-| `--border-radius` | Border radius    |
-
-
-## Dependencies
-
-### Used by
-
- - [pop-app](../app)
-
-### Graph
-```mermaid
-graph TD;
-  pop-app --> pop-accordion
-  style pop-accordion fill:#f9f,stroke:#333,stroke-width:4px
-```
+| Part      | Description                |
+|-----------|----------------------------|
+| `content` | Content of the accordion   |
+| `header`  | Header of the accordion    |
 
 ----------------------------------------------
 

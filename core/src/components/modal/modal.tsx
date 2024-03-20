@@ -68,13 +68,17 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * If `true`, a backdrop will be displayed behind the modal.
    * This property controls whether or not the backdrop
    * darkens the screen when the modal is presented.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean;
 
   /**
    * If `true`, the modal will be dismissed when the backdrop is clicked.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) backdropDismiss?: boolean = false;
+  @Prop({ mutable: true }) backdropDismiss?: boolean;
 
   /**
    * If `true`, the modal will open. If `false`, the modal will close.
@@ -82,8 +86,10 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * just use the modalController or the `trigger` property.
    * Note: `open` will automatically be set back to `false` when
    * the modal dismisses.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) open?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) open?: boolean;
   @Watch('open')
   onOpenChange(isOpen: boolean): void {
     if (isOpen) {
@@ -110,12 +116,11 @@ export class Modal implements ComponentInterface, OverlayInterface {
   }
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-modal');
-    this.component ??= config.component;
-    this.componentProps ??= config.componentProps;
-    this.showBackdrop ??= config.showBackdrop ?? false;
-    this.backdropDismiss ??= config.backdropDismiss ?? false;
-    this.open ??= config.open ?? false;
+    componentConfig.apply(this, 'pop-modal', {
+      showBackdrop: false,
+      backdropDismiss: false,
+      open: false,
+    });
   }
 
   componentDidRender(): void {
@@ -148,6 +153,11 @@ export class Modal implements ComponentInterface, OverlayInterface {
     return true;
   }
 
+  /**
+   * Close the modal
+   * @param data Data to return on close
+   * @returns `true` if the modal has been closed, otherwise `false`
+   */
   @Method()
   async dismiss(data: any): Promise<boolean> {
     const { open } = this;

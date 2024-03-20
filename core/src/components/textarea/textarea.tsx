@@ -16,6 +16,7 @@ import {
 import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/interfaces';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -70,39 +71,53 @@ export class Textarea implements ComponentInterface {
 
   /**
    * This attribute specifies the minimum number of characters that the user can enter.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) minLength?: number;
 
   /**
    * This attribute specifies the maximum number of characters that the user can enter.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) maxLength?: number;
 
   /**
    * The visible width of the text control, in average character widths.
    * If it is specified, it must be a positive integer.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) cols?: number;
 
   /**
    * The number of visible text lines for the control.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) rows?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true }) required?: boolean = false;
+  @Prop({ reflect: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true }) readonly?: boolean = false;
+  @Prop({ reflect: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
@@ -132,8 +147,10 @@ export class Textarea implements ComponentInterface {
   /**
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) spellcheck: boolean = false;
+  @Prop({ mutable: true }) spellcheck: boolean;
 
   /**
    * This features work only on mobile and tablet devices.
@@ -143,6 +160,8 @@ export class Textarea implements ComponentInterface {
    * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
+   * 
+   * @config @default 'off'
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
@@ -153,11 +172,15 @@ export class Textarea implements ComponentInterface {
    * - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.
    *
    * If wrap attribute is in the `hard` state, the `cols` property must be specified.
+   * 
+   * @config @default 'soft'
    */
   @Prop({ mutable: true }) wrap?: Wrap;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
 
@@ -165,12 +188,16 @@ export class Textarea implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -187,19 +214,25 @@ export class Textarea implements ComponentInterface {
   /**
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) counter?: boolean = false;
+  @Prop({ mutable: true }) counter?: boolean;
 
   /**
    * A callback used to format the counter text.
    * By default the counter text is set to "itemLength / maxLength".
+   * 
+   * @config
    */
   @Prop({ mutable: true }) counterFormatter?: (inputLength: number, maxLength: number) => string;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+   * 
+   * @config @default 0
    */
-  @Prop({ mutable: true }) debounce?: number = 0;
+  @Prop({ mutable: true }) debounce?: number;
 
   /**
    * The `popChange` event is fired when the user modifies the textarea's value.
@@ -237,22 +270,15 @@ export class Textarea implements ComponentInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
-    const config = componentConfig.get('pop-textarea');
-    this.minLength ??= config.minLength;
-    this.maxLength ??= config.maxLength;
-    this.required ??= config.required ?? false;
-    this.readonly ??= config.readonly ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.keyboard ??= config.keyboard;
-    // this.enterkeyhint ??= config.enterkeyhint;
-    // this.spellcheck ??= config.spellcheck ?? false;
-    this.bordered ??= config.bordered ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-    this.counter ??= config.counter ?? false;
-    this.counterFormatter ??= config.counterFormatter;
-    this.debounce ??= config.debounce ?? 0;
+    componentConfig.apply(this, 'pop-textarea', {
+      required: false,
+      readonly: false,
+      disabled: false,
+      spellcheck: false,
+      bordered: false,
+      size: config.get('defaultSize', 'md'),
+      debounce: 0,
+    });
 
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);

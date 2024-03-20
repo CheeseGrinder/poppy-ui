@@ -15,6 +15,7 @@ import {
 } from '@stencil/core';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -62,44 +63,60 @@ export class InputFile implements ComponentInterface {
   /**
    * If `true`, the user can enter more than one value.
    * This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
+   * 
+   * @config @default false
    */
   @Prop({ mutable: true }) multiple?: boolean;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -143,16 +160,15 @@ export class InputFile implements ComponentInterface {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
-
-    const config = componentConfig.get('pop-input-file');
-    this.multiple ??= config.multiple ?? false;
-    this.required ??= config.required ?? false;
-    this.readonly ??= config.readonly ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.bordered ??= config.bordered ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
+    componentConfig.apply(this, 'pop-input-file', {
+      multiple: false,
+      required: false,
+      readonly: false,
+      disabled: false,
+      autoFocus: false,
+      bordered: false,
+      size: config.get('defaultSize', 'md'),
+    });
   }
 
   // TODO: Tester si ça fonctionne

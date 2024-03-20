@@ -3,15 +3,22 @@
 @use "../../global/styles/join-item";
 
 /**
- * @prop --border-radius: Border radius
- * @prop --border-color: Border color
+ * @prop --border-radius: Change border radius
+ * @prop --border-color: Change border color
  *
- * @prop --background: Background color
+ * @prop --background: Change background color
+ *
+ * @prop --animation: Change animation timing
  */
 
 @include join-item.item_root;
 
 :host {
+  --border-radius: #{radius.$xl};
+  --border-color: oklch(#{theme.get-color("base.300")});
+  --background: oklch(#{theme.get-color("base.200")});
+  --animation: .2s;
+
   box-sizing: border-box;
   position: relative;
   display: grid;
@@ -20,14 +27,12 @@
 
   width: 100%;
 
-  border-style: solid;
-  border-width: 1px;
-  border-radius: var(--border-radius, #{radius.$xl});
-  border-color: var(--border-color, oklch(theme.get-color("base.300")));
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
 
-  transition: grid-template-rows 0.2s;
+  background-color: var(--background);
 
-  background-color: var(--background, oklch(theme.get-color("base.200")));
+  transition: grid-template-rows var(--animation);
 
   > .accordion-title {
     box-sizing: border-box;
@@ -49,7 +54,7 @@
     cursor: pointer;
     user-select: none;
 
-    transition: background-color 0.2s ease-out;
+    transition: background-color var(--animation) ease-out;
   }
 
   > .accordion-content {
@@ -62,9 +67,9 @@
     min-height: 0;
 
     transition:
-      visibility 0.2s,
-      padding 0.2s ease-out,
-      background-color 0.2s ease-out;
+      visibility var(--animation),
+      padding var(--animation) ease-out,
+      background-color var(--animation) ease-out;
 
     cursor: unset;
   }

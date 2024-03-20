@@ -10,18 +10,24 @@ export class AccordionGroup implements ComponentInterface {
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default "false"
    */
-  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default "false"
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the user can open multiple accordion.
+   * 
+   * @config @default "false"
    */
-  @Prop({ reflect: true, mutable: true }) multiple: boolean = false;
+  @Prop({ reflect: true, mutable: true }) multiple: boolean;
 
   /**
    * name of the active the accordion.
@@ -38,11 +44,11 @@ export class AccordionGroup implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-accordion-group');
-
-    this.readonly ??= config.readonly ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.multiple ??= config.multiple ?? false;
+    componentConfig.apply(this, 'pop-accordion-group', {
+      readonly: false,
+      disabled: false,
+      multiple: false,
+    })
   }
 
   componentDidLoad(): void {

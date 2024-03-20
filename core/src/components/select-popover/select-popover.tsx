@@ -2,8 +2,11 @@ import { Component, ComponentInterface, Fragment, Host, Prop, h } from '@stencil
 import { PopCheckboxCustomEvent, PopRadioGroupCustomEvent } from 'src/components';
 import { Color, Size } from 'src/interfaces';
 import type { SelectPopoverOption } from './select-popover-interface';
-import { componentConfig } from '#global/component-config';
 
+/**
+ *
+ * @internal
+ */
 @Component({
   tag: 'pop-select-popover',
   styleUrl: 'select-popover.scss',
@@ -37,14 +40,6 @@ export class SelectPopover implements ComponentInterface {
    * An array of options for the popover
    */
   @Prop() options: SelectPopoverOption[] = [];
-
-  componentWillLoad(): void {
-    const config = componentConfig.get('pop-select-popover');
-    this.required ??= config.required ?? false;
-    this.multiple ??= config.multiple ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-  }
 
   #findOptionFromEvent(ev: PopCheckboxCustomEvent<any> | PopRadioGroupCustomEvent<any>) {
     const { options } = this;

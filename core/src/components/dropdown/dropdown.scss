@@ -2,21 +2,30 @@
 @use "../../global/styles/shadow";
 @use "../../global/styles/radius";
 
+/**
+ * @prop --border-radius: Change border radius
+ * @prop --border-color: Change border color
+ *
+ * @prop --background: Change sidebar background
+ * @prop --color: Change sidebar text color
+ *
+ * @prop --shadow: Change box-shadow
+ */
+
+// Dropdown
+// ----------------------------------------------------------------
+
 :host {
+  --border-radius: #{radius.$md};
+  --border-color: oklch(#{theme.get-color("base.200")});
+  --background: oklch(#{theme.get-color("base.100")});
+  --color: oklch(#{theme.get-color("base.content")});
+  --shadow: #{shadow.$md};
+
   .dropdown {
     position: relative;
     display: grid;
     width: 100%;
-
-    // &:not([open]) > .dropdown-content {
-    //   opacity: 0;
-    //   pointer-events: none;
-    // }
-
-    // &[open] > .dropdown-content {
-    //   z-index: 100;
-    //   opacity: 1;
-    // }
 
     &-trigger {
       display: inline-block;
@@ -29,29 +38,22 @@
 
       min-height: 2rem;
 
-      border: solid;
-      border-color: oklch(#{theme.get-color("base.200")});
-      border-width: 1px;
-      border-radius: var(--border-radius, #{radius.$md});
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
 
-      color: var(--color, oklch(#{theme.get-color("base.content")}));
-      background-color: var(--background, oklch(#{theme.get-color("base.100")}));
+      color: var(--color);
+      background-color: var(--background);
 
-      box-shadow: shadow.$md;
+      box-shadow: var(--shadow);
 
       animation-name: present;
       animation-duration: 200ms;
     }
-
-    &-backdrop {
-      position: fixed;
-      inset: 0;
-      background-color: #0006;
-
-      overscroll-behavior: contain;
-    }
   }
 }
+
+// Dropdown Open state
+// ----------------------------------------------------------------
 
 :host(:not([open])) {
   .dropdown-content {
@@ -66,11 +68,11 @@
   }
 }
 
-:host(:not([side])[align="end"]),
-:host([side="bottom"][align="end"]) {
-  .dropdown-content {
-    inset-inline-end: 0;
-  }
+// Dropdown Placement
+// ----------------------------------------------------------------
+
+:host([side="bottom"][align="end"]) .dropdown-content {
+  inset-inline-end: 0;
 }
 
 :host([side="top"]) .dropdown-content {
@@ -100,10 +102,6 @@
   top: auto;
   bottom: 0;
 }
-
-// :where(pop-dropdown) :host .dropdown-backdrop {
-//   background-color: transparent;
-// }
 
 @keyframes present {
   from {

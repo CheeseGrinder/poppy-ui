@@ -15,6 +15,7 @@ import {
 } from '@stencil/core';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -57,18 +58,24 @@ export class Checkbox implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the toggle is selected.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) checked?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) checked?: boolean;
   @Watch('checked')
   onCheckedChange(newChecked: boolean): void {
     this.indeterminate = false;
@@ -83,24 +90,32 @@ export class Checkbox implements ComponentInterface {
 
   /**
    * If a developer want to use `indeterminate`, `checked` property should be set to `false`
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) indeterminate?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) indeterminate?: boolean;
 
   /**
    * If true, the user cannot interact with the native element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -108,6 +123,8 @@ export class Checkbox implements ComponentInterface {
    * Where to place the label relative to the checkbox.
    * - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL.
    * - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
+   * 
+   * @config @default 'start'
    */
   @Prop({ reflect: true, mutable: true }) placement?: Placement;
 
@@ -137,15 +154,15 @@ export class Checkbox implements ComponentInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAriaAttributes(this.host);
 
-    const config = componentConfig.get('pop-checkbox');
-    this.required ??= config.required ?? false;
-    this.readonly ??= config.readonly ?? false;
-    this.checked ??= config.checked ?? false;
-    this.indeterminate ??= config.indeterminate ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-    this.placement ??= config.placement ?? 'start';
+    componentConfig.apply(this, 'pop-checkbox', {
+      required: false,
+      readonly: false,
+      checked: false,
+      indeterminate: false,
+      disabled: false,
+      size: config.get('defaultSize', 'md'),
+      placement: 'start'
+    });
   }
 
   /**
@@ -178,8 +195,9 @@ export class Checkbox implements ComponentInterface {
   };
 
   render() {
-    const { host, name, disabled, checked } = this;
+    const { host, name, disabled, checked, indeterminate } = this;
     const inputId = this.#inputId;
+    const ariaChecked = indeterminate ? 'mixed' : checked ? 'true' : 'false';
 
     const hasLabel = host.textContent !== '';
     const listSize = getHostContextProperty(host, 'pop-list', 'size', 'md');
@@ -187,7 +205,7 @@ export class Checkbox implements ComponentInterface {
     return (
       <Host
         aria-labelledby={inputId}
-        aria-checked={`${checked}`}
+        aria-checked={ariaChecked}
         aria-hidden={disabled ? 'true' : null}
         onClick={this.#onClick}
         class={{
@@ -208,7 +226,7 @@ export class Checkbox implements ComponentInterface {
           part="native"
           id={inputId}
           name={name}
-          aria-checked={`${checked}`}
+          aria-checked={ariaChecked}
           indeterminate={this.indeterminate}
           required={this.required}
           readOnly={this.readonly}

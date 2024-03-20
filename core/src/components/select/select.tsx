@@ -21,6 +21,7 @@ import { Show } from '../Show';
 import { SelectPopoverOption } from '../select-popover/select-popover-interface';
 import type { SelectCompareFn } from './select.interface';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 @Component({
   tag: 'pop-select',
@@ -73,30 +74,40 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   /**
    * If `true`, the user can enter more than one value.
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) multiple?: boolean = false;
 
   /**
    * Only apply when `multiple` property is used.
    * The minimum amount of values that can be selected, which must not be greater than its maximum (max attribute) value.
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) min?: number;
 
   /**
    * Only apply when `multiple` property is used.
    * The maximum amount of values that can be selected, which must not be less than its minimum (min attribute) value.
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
@@ -105,19 +116,25 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -148,6 +165,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * for comparing objects when determining the selected option in the
    * ion-radio-group. When not specified, the default behavior will use strict
    * equality (===) for comparison.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) compare?: SelectCompareFn | string | null;
 
@@ -183,17 +202,13 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   componentWillLoad(): void {
     this.#inheritedAttributes = inheritAttributes(this.host, ['aria-label']);
 
-    const config = componentConfig.get('pop-select');
-    this.multiple ??= config.multiple ?? false;
-    this.min ??= config.min ?? 0;
-    this.max ??= config.max ?? 100;
-    this.required ??= config.required ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.bordered ??= config.bordered ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-    this.compare ??= config.compare;
+    componentConfig.apply(this, 'pop-select', {
+      multiple: false,
+      required: false,
+      disabled: false,
+      bordered: false,
+      size: config.get('defaultSize', 'md'),
+    });
   }
 
   /**

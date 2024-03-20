@@ -4,7 +4,7 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 /**
  * Avatars are used to show a thumbnail representation of an individual or business in the interface.
  *
- * @slot - Where goes img of avatar
+ * @slot - Avatar content
  */
 @Component({
   tag: 'pop-avatar',
@@ -13,15 +13,16 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 })
 export class Avatar implements ComponentInterface {
   /**
-   * @config
    * To show some letters as avatar placeholder
+   * 
+   * @config @default false
    */
   @Prop({ reflect: true }) placeholder: boolean = false;
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-avatar');
-
-    this.placeholder ??= config.placeholder ?? false;
+    componentConfig.apply(this, 'pop-avatar', {
+      placeholder: false,
+    });
   }
 
   render() {

@@ -15,6 +15,7 @@ import {
 import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputType, KeyboardType, Size } from 'src/interfaces';
 import { Show } from '../Show';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -87,27 +88,37 @@ export class Input implements ComponentInterface {
 
   /**
    * The minimum value, which must not be greater than its maximum (max attribute) value.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) min?: number;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) max?: number | string;
 
   /**
    * Works with the min and max attributes to limit the increments at which a value can be set.
    * Possible values are: `"any"` or a positive floating point number.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) step?: string;
 
   /**
    * This attribute specifies the minimum number of characters that the user can enter.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) minLength?: number;
 
   /**
    * This attribute specifies the maximum number of characters that the user can enter.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) maxLength?: number;
 
@@ -129,23 +140,31 @@ export class Input implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) required?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) readonly?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
 
   /**
    * A hint to the browser for which virtual keyboard to display.
@@ -164,14 +183,18 @@ export class Input implements ComponentInterface {
    * - `previous`: Typically taking the user to the previous field that will accept text.
    * - `search`: Typically taking the user to the results of searching for the text they have typed.
    * - `send`: Typically delivering the text to its target.
+   * 
+   * @config
    */
   @Prop({ mutable: true }) enterkeyhint?: EnterKeyHint;
 
   /**
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) spellcheck: boolean = false;
+  @Prop({ mutable: true }) spellcheck: boolean;
 
   /**
    * Indicates whether the value of the control can be automatically completed by the browser.
@@ -186,29 +209,39 @@ export class Input implements ComponentInterface {
    * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
+   * 
+   * @config @default 'off'
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
    * Whether auto correction should be enabled when the user is entering/editing the text value.
+   * 
+   * @config @default 'off'
    */
-  @Prop({ mutable: true }) autoCorrect: 'on' | 'off' = 'off';
+  @Prop({ mutable: true }) autoCorrect: 'on' | 'off';
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
+   * 
+   * @config @default false
    */
-  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
   /**
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
+   * 
+   * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -225,17 +258,23 @@ export class Input implements ComponentInterface {
   /**
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
+   * 
+   * @config @default false
    */
-  @Prop({ mutable: true }) counter?: boolean = false;
+  @Prop({ mutable: true }) counter?: boolean;
 
   /**
    * A callback used to format the counter text.
    * By default the counter text is set to "itemLength / maxLength".
+   * 
+   * @config
    */
   @Prop({ mutable: true }) counterFormatter?: (inputLength: number, maxLength: number) => string;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+   * 
+   * @config @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;
 
@@ -278,31 +317,22 @@ export class Input implements ComponentInterface {
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
 
-    const config = componentConfig.get('pop-input');
-    this.type ??= config.type ?? 'text';
-    this.min ??= config.min;
-    this.max ??= config.max;
-    this.step ??= config.step;
-    this.minLength ??= config.minLength;
-    this.maxLength ??= config.maxLength;
-    this.multiple ??= config.multiple ?? false;
-    this.pattern ??= config.pattern;
-    this.required ??= config.required ?? false;
-    this.readonly ??= config.readonly ?? false;
-    this.disabled ??= config.disabled ?? false;
-    this.autoFocus ??= config.autoFocus ?? false;
-    this.keyboard ??= config.keyboard;
-    // this.enterkeyhint ??= config.enterkeyhint;
-    // this.spellcheck ??= config.spellcheck ?? false;
-    this.autoComplete ??= config.autoComplete ?? 'off';
-    // this.autoCapitalize ??= config.autoCapitalize;
-    // this.autoCorrect ??= config.autoCorrect ?? 'off';
-    this.bordered ??= config.bordered ?? false;
-    this.color ??= config.color;
-    this.size ??= config.size;
-    this.counter ??= config.counter ?? false;
-    this.counterFormatter ??= config.counterFormatter;
-    this.debounce ??= config.debounce ?? 0;
+    componentConfig.apply(this, 'pop-input', {
+      type: 'text',
+      multiple: false,
+      required: false,
+      readonly: false,
+      disabled: false,
+      autoFocus: false,
+      spellcheck: false,
+      autoComplete: 'off',
+      autoCapitalize: 'off',
+      autoCorrect: 'off',
+      bordered: false,
+      size: config.get('defaultSize', 'md'),
+      counter: false,
+      debounce: 0,
+    });
 
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);

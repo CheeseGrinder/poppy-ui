@@ -2,6 +2,7 @@ import type { Size } from 'src/interfaces';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import { hostContext } from '#utils/helpers';
 import { componentConfig } from '#global/component-config';
+import { config } from '#global/config';
 
 @Component({
   tag: 'pop-list',
@@ -13,18 +14,23 @@ export class List implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+   * 
+   * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Define content disposition orientation
+   * 
+   * @config @default 'vertical'
    */
   @Prop({ reflect: true, mutable: true }) orientation?: 'horizontal' | 'vertical';
 
   componentWillLoad(): void {
-    const config = componentConfig.get('pop-list');
-    this.size ??= config.size;
-    this.orientation ??= config.orientation ?? 'vertical';
+    componentConfig.apply(this, 'pop-list', {
+      size: config.get('defaultSize', 'md'),
+      orientation: 'vertical',
+    });
   }
 
   render() {
