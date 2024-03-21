@@ -1,7 +1,6 @@
-import { OutputTargetCustom, TypesImportData, Config, ValidatedConfig } from '@stencil/core/internal';
-import { CompilerCtx, BuildCtx, JsonDocs } from '@stencil/core/internal';
-import { loadConfig } from '@stencil/core/compiler';
 import { parseFlags } from '@stencil/core/cli';
+import { loadConfig } from '@stencil/core/compiler';
+import { BuildCtx, CompilerCtx, ComponentCompilerProperty, Config, JsonDocs, OutputTargetCustom, TypesImportData, ValidatedConfig } from '@stencil/core/internal';
 import { writeFileSync } from 'fs';
 import { isAbsolute, join } from 'path';
 import { normalizePath, relative, sortImportNames, updateReferenceTypeImports } from './components-config.stencil';
@@ -20,110 +19,75 @@ export function componentConfig(): OutputTargetCustom {
         ' * It contains typing information for all configurable components that exist in this project.',
         ' */',
       );
-  
-      const flags = parseFlags(process.argv);
+
       const validated = await loadConfig({
         config: {
-          flags,
+          flags: parseFlags(process.argv),
         },
         configPath: config.configPath,
         logger: config.logger,
         sys: config.sys,
       });
       const types = typeImportData(validated.config, buildCtx);
-      const typeLines = Object.keys(types).map(filePath => {
-        const typeData = types[filePath];
-
-        let importFilePath = filePath;
-        if (isAbsolute(filePath)) {
-          importFilePath = normalizePath('./' + relative(config.srcDir!, filePath)).replace(/\.(tsx|ts)$/, '');
-        }
-        
-        return `import { ${typeData
-          .sort(sortImportNames)
-          .map((td) => {
-            if (td.localName === td.importName) {
-              return `${td.importName}`;
-            } else {
-              return `${td.localName} as ${td.importName}`;
-            }
-          })
-          .join(`, `)} } from "${importFilePath}";`;
-      });
-      lines.push(...typeLines);
+      types.forEach(type => lines.push(`import ${type}`));
       lines.push('');
 
       lines.push('export interface ComponentOptions {');
-      buildCtx.components
-        .filter(component => (
-          component.properties
-            .some(prop => (
-              prop.docs.tags.some(tag => tag.name === 'config')
-            ))
-        ))
-        .forEach(component => {
-          lines.push(`  "${component.tagName}"?: {`);
+      buildCtx.components.forEach(component => {
+        const props = component.properties.filter(hasConfigProp);
+        if (props.length === 0) {
+          return;
+        }
 
-          component.properties
-            .filter(prop => prop.docs.tags.some(tag => tag.name === 'config'))
-            .forEach(prop => {
-              if (prop.docs.text) {
+        lines.push(`  "${component.tagName}"?: {`);
 
-                lines.push('    /**');
-                lines.push('     *');
-                prop.docs.text.split('\r\n').forEach(line => (
-                  lines.push(`     * ${line}`)
-                ));
-                lines.push('     */');
-              }
-              const type = prop.complexType.original in prop.complexType.references
-                ? prop.complexType.original
-                : prop.complexType.resolved;
-
-              lines.push(`    ${prop.name}?: ${type};`)
-            });
-          lines.push('  }');
+        props.forEach(prop => {
+          if (prop.docs.text) {
+            lines.push('    /**');
+            prop.docs.text.split(/[\r\n]+/).forEach(line => lines.push(`     * ${line}`));
+            lines.push('     */');
+          }
+          lines.push(`    ${prop.name}?: ${prop.complexType.original};`);
         });
-
+        lines.push('  }');
+      });
       lines.push('}');
 
-      config.srcDir
-      writeFileSync(join(
-        config.srcDir!, 'component-config.d.ts'
-      ), lines.join('\n'));
+      writeFileSync(join(config.srcDir!, 'component-config.d.ts'), lines.join('\n'));
     },
   };
 }
 
+function hasConfigProp(prop: ComponentCompilerProperty): boolean {
+  return prop.docs.tags.some(tag => tag.name === 'config')
+}
 
 function typeImportData(config: ValidatedConfig, { components }: BuildCtx) {
-  let importTypeData: TypesImportData = {};
   const allTypes = new Map<string, number>();
 
-  components
+  const importTypeData = components
     .filter(c => !c.isCollectionDependency)
-    .forEach((comp) => {
-      importTypeData = updateReferenceTypeImports(importTypeData, allTypes, comp, comp.sourceFilePath, config)
-    })
-    const expressions = Object.keys(typeImportData).map((filePath) => {
-      const typeData = typeImportData[filePath];
+    .reduce((importType, comp) => (
+      updateReferenceTypeImports(importType, allTypes, comp, comp.sourceFilePath, config)
+    ), {} as TypesImportData);
 
-      let importFilePath = filePath;
-      if (isAbsolute(filePath)) {
-        importFilePath = normalizePath('./' + relative(config.srcDir!, filePath)).replace(/\.(tsx|ts)$/, '');
-      }
+   return Object.keys(importTypeData).map(filePath => {
+    const typeData = importTypeData[filePath];
 
-      return `{ ${typeData
-        .sort(sortImportNames)
-        .map((td) => {
-          if (td.localName === td.importName) {
-            return `${td.importName}`;
-          } else {
-            return `${td.localName} as ${td.importName}`;
-          }
-        })
-        .join(`, `)} } from "${importFilePath}";`;
-    });
+    let importFilePath = filePath;
+    if (isAbsolute(filePath)) {
+      importFilePath = normalizePath('./' + relative(config.srcDir!, filePath)).replace(/\.(tsx|ts)$/, '');
+    }
 
-  return importTypeData;
+    return `{ ${typeData
+      .sort(sortImportNames)
+      .map(td => {
+        if (td.localName === td.importName) {
+          return `${td.importName}`;
+        } else {
+          return `${td.localName} as ${td.importName}`;
+        }
+      })
+      .join(`, `)} } from "${importFilePath}";`;
+  });
 }

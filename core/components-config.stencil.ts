@@ -19,14 +19,12 @@ export const updateReferenceTypeImports = (
 ): d.TypesImportData => {
   const updateImportReferences = updateImportReferenceFactory(typeCounts, filePath, config);
 
-  return [...cmp.properties, ...cmp.events, ...cmp.methods]
-    .filter(
-      (cmpProp: d.ComponentCompilerProperty | d.ComponentCompilerEvent | d.ComponentCompilerMethod) =>
-        cmpProp.complexType && cmpProp.complexType.references,
-    )
-    .reduce((typesImportData: d.TypesImportData, cmpProp) => {
-      return updateImportReferences(typesImportData, cmpProp.complexType.references);
-    }, importDataObj);
+  return cmp.properties
+    .filter(prop => prop.docs.tags.some(tag => tag.name === 'config'))
+    .filter(prop => prop.complexType?.references)
+    .reduce((typesImportData: d.TypesImportData, cmpProp) => (
+      updateImportReferences(typesImportData, cmpProp.complexType.references)
+    ), importDataObj);
 };
 
 /**

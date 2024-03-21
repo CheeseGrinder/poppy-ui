@@ -1,42 +1,47 @@
-import { ComponentsOption } from 'src/interfaces';
+import { ComponentOptions as Components } from 'src/component-config';
 
 export class ComponentConfig {
-  private config = new Map<keyof ComponentsOption, any>();
+  private config = new Map<keyof Components, any>();
 
-  reset(components: ComponentsOption): void {
-    this.config = new Map(Object.entries(components) as any);
+  reset(Components: Components): void {
+    this.config = new Map(Object.entries(Components) as any);
   }
 
-  set<Comp extends keyof ComponentsOption>(component: Comp, config: ComponentsOption[Comp]): void {
-    debugger;
+  set<Tag extends keyof Components>(component: Tag, config: Components[Tag]): void {
     this.config.set(component, config);
   }
 
-  get<Comp extends keyof ComponentsOption>(
-    component: Comp,
-    fallback: ComponentsOption[Comp] = {} as ComponentsOption[Comp],
-  ): ComponentsOption[Comp] {
+  get<Tag extends keyof Components>(
+    component: Tag,
+    fallback: Components[Tag] = {} as Components[Tag],
+  ): Components[Tag] {
     return this.config.get(component) ?? fallback;
   }
 
-  setProp<Comp extends keyof ComponentsOption, Prop extends keyof ComponentsOption[Comp]>(
-    component: Comp,
+  apply<Tag extends keyof Components>(ref: any, tag: Tag, defaultValue: Components[Tag]): void {
+    Object.entries(
+      {...this.get(tag, {}), ...defaultValue}
+    ).forEach(([key, value]) => ref[key] ??= value);
+  }
+
+  setProp<Tag extends keyof Components, Prop extends keyof Components[Tag]>(
+    component: Tag,
     prop: Prop,
-    value: ComponentsOption[Comp][Prop],
+    value: Components[Tag][Prop],
   ): void {
-    const config = this.get(component, {} as ComponentsOption[Comp]);
+    const config = this.get(component, {} as Components[Tag]);
     this.config.set(component, {
       ...config,
       [prop]: value,
     });
   }
 
-  getProp<Comp extends keyof ComponentsOption, Prop extends keyof ComponentsOption[Comp]>(
-    component: Comp,
+  getProp<Tag extends keyof Components, Prop extends keyof Components[Tag]>(
+    component: Tag,
     prop: Prop,
-    fallback?: ComponentsOption[Comp][Prop],
-  ): ComponentsOption[Comp][Prop] {
-    const config = this.get(component, {} as ComponentsOption[Comp]);
+    fallback?: Components[Tag][Prop],
+  ): Components[Tag][Prop] {
+    const config = this.get(component, {} as Components[Tag]);
     return config[prop] ?? fallback;
   }
 }
