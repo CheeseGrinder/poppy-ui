@@ -1,7 +1,6 @@
 # pop-avatar
 
 
-
 <!-- Auto Generated Below -->
 
 
@@ -9,20 +8,27 @@
 
 Avatars are used to show a thumbnail representation of an individual or business in the interface.
 
-
-
 ## Properties
 
-| Property      | Attribute     | Description                                | Type      | Default     |
-|---------------|---------------|--------------------------------------------|-----------|-------------|
-| `placeholder` | `placeholder` | To show some letters as avatar placeholder | `boolean` | `false`     |
+| Property      | Attribute     | Description                                | Type      | Default |
+| ------------- | ------------- | ------------------------------------------ | --------- | ------- |
+| `placeholder` | `placeholder` | To show some letters as avatar placeholder | `boolean` | `false` |
 
 
 ## Slots
 
-| Slot | Description      |
-|----|------------------|
-| `` | Avatar content   |
+| Slot | Description    |
+| ---- | -------------- |
+|      | Avatar content |
+
+
+## CSS Custom Properties
+
+| Name           | Description             |
+| -------------- | ----------------------- |
+| `--background` | Change background color |
+| `--color`      | Change text color       |
+
 
 ----------------------------------------------
 

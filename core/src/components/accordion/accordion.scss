@@ -11,6 +11,9 @@
  * @prop --animation: Change animation timing
  */
 
+// Accordion
+// ----------------------------------------------------------------
+
 @include join-item.item_root;
 
 :host {
@@ -80,6 +83,17 @@
   }
 }
 
+// Accordion Open State
+// ----------------------------------------------------------------
+
+:host(:not([is-open])) {
+  grid-template-rows: auto 0fr;
+
+  > .accordion-content {
+    visibility: hidden;
+  }
+}
+
 :host([is-open]) {
   grid-template-rows: auto 1fr;
 
@@ -91,13 +105,5 @@
     visibility: visible;
     min-height: fit-content;
     padding-bottom: 1rem;
-  }
-}
-
-:host(:not([is-open])) {
-  grid-template-rows: auto 0fr;
-
-  > .accordion-content {
-    visibility: hidden;
   }
 }

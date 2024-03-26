@@ -1,18 +1,15 @@
 # pop-card
 
 
-
 <!-- Auto Generated Below -->
 
 
-## Overview
+## CSS Custom Properties
 
+| Name              | Description          |
+| ----------------- | -------------------- |
+| `--border-radius` | Change border radius |
 
-
-## Properties
-
-| Property | Attribute | Description | Type | Default     |
-|-|-|-|-|-------------|
 
 ----------------------------------------------
 

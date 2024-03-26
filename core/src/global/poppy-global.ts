@@ -1,17 +1,18 @@
-import { ComponentsOption, Poppy } from 'src/interfaces';
-import { componentConfig } from '#global/component-config';
+import { PoppyConfigInit, config } from '#config';
+import { componentConfig } from '@cheese-grinder/stencil-component-config';
 
-type DefaultComponent = ComponentsOption;
+import { Poppy } from 'src/interfaces';
 
-interface PoppyConfig {
-  components: DefaultComponent;
-}
 
-export const initialize = (userConfig: PoppyConfig = {} as PoppyConfig) => {
+export const initialize = (frameworkConfig?: PoppyConfigInit): void => {
+  console.log('initialize')
   const win = window;
   const Poppy = (win.Poppy = win.Poppy || ({} as Poppy));
 
-  componentConfig.reset(userConfig?.components ?? {});
+  componentConfig.reset(frameworkConfig?.components ?? {});
+  delete frameworkConfig?.components;
+
+  config.reset(frameworkConfig ?? {});
 
   Poppy.components = componentConfig;
 };

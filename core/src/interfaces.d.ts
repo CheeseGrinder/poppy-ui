@@ -1,4 +1,4 @@
-import { ComponentConfig } from '#global/component-config';
+import { FrameworkConfig } from '#config';
 import { JSX, JSXBase } from '@stencil/core/internal';
 
 type BrandColor = 'primary' | 'secondary' | 'accent';
@@ -133,16 +133,9 @@ interface FrameworkDelegate {
   removeViewFromDom(container: any, component: any): Promise<void>;
 }
 
-type PopElements = JSX.IntrinsicElements;
-type ComponentsOption = {
-  [Tag in keyof PopElements]?: {
-    [Prop in keyof Omit<PopElements[Tag], keyof Omit<JSXBase.HTMLAttributes, 'color'>>]?: PopElements[Tag][Prop];
-  };
-};
-
-interface Poppy {
-  components: ComponentConfig;
-}
+type Poppy = {
+  components?: ComponentConfig;
+} & FrameworkConfig;
 
 declare global {
   interface Window {

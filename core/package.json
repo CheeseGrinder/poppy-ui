@@ -23,9 +23,10 @@
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/interface.d.ts",
   "scripts": {
-    "prebuild": "rimraf ./dist",
-    "prestart": "rimraf ./dist",
-    "build": "stencil build --docs",
+    "clean": "rm -rf ./dist ./loader ./.stencil",
+    "prebuild": "npm run clean",
+    "prestart": "npm run clean",
+    "build": "stencil build --debug",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -39,6 +40,7 @@
     "@stencil/core": "^4.9.0"
   },
   "devDependencies": {
+    "@cheese-grinder/stencil-custom-readme": "^0.1.1",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/sass": "^3.0.8",
     "@types/node": "^18.19.4",

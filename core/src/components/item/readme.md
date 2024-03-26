@@ -1,19 +1,15 @@
 # pop-item
 
 
-
 <!-- Auto Generated Below -->
-
-
-## Overview
-
 
 
 ## Properties
 
-| Property   | Attribute  | Description                                        | Type      | Default     |
-|------------|------------|----------------------------------------------------|-----------|-------------|
-| `disabled` | `disabled` | If `true`, the user cannot interact with the item. | `boolean` | `false`     |
+| Property   | Attribute  | Description                                        | Type      | Default |
+| ---------- | ---------- | -------------------------------------------------- | --------- | ------- |
+| `disabled` | `disabled` | If `true`, the user cannot interact with the item. | `boolean` | `false` |
+
 
 ----------------------------------------------
 

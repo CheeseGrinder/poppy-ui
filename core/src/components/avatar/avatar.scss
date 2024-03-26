@@ -5,6 +5,10 @@
  * @prop --color: Change text color
  */
 
+
+// Avatar
+// ----------------------------------------------------------------
+
 :host {
   --background: oklch(#{theme.get-color("neutral.base")});
   --color: oklch(#{theme.get-color("neutral.content")});
