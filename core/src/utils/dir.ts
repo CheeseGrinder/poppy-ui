@@ -7,4 +7,4 @@ import { getElement } from '@stencil/core';
  */
 export function isRTL(ref: any): boolean {
   return getElement(ref).closest<HTMLElement>('[dir]').dir.toLowerCase() === 'rtl';
-};
+}

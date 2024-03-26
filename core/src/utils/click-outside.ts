@@ -4,10 +4,7 @@
 
 import { Build, ComponentInterface, getElement } from '@stencil/core';
 
-declare type ClickOutsideDecorator = (
-  target: ComponentInterface,
-  propertyKey: string
-) => void;
+declare type ClickOutsideDecorator = (target: ComponentInterface, propertyKey: string) => void;
 
 declare interface ClickOutsideOptions {
   triggerEvents?: string;
@@ -15,16 +12,14 @@ declare interface ClickOutsideOptions {
 }
 
 const ClickOutsideOptionsDefaults: ClickOutsideOptions = {
-  triggerEvents: "click",
-  exclude: ""
+  triggerEvents: 'click',
+  exclude: '',
 };
 
 /**
  * Call this function as soon as the click outside of annotated method's host is done.
  */
-export function ClickOutside(
-  opt: ClickOutsideOptions = ClickOutsideOptionsDefaults
-): ClickOutsideDecorator {
+export function ClickOutside(opt: ClickOutsideOptions = ClickOutsideOptionsDefaults): ClickOutsideDecorator {
   return (proto: ComponentInterface, methodName: string) => {
     // this is to resolve the 'compiler optimization issue':
     // lifecycle events not being called when not explicitly declared in at least one of components from bundle
@@ -33,14 +28,14 @@ export function ClickOutside(
 
     const { connectedCallback, disconnectedCallback } = proto;
 
-    proto.connectedCallback = function() {
+    proto.connectedCallback = function () {
       const host = getElement(this);
       const method = this[methodName];
       registerClickOutside(this, host, method, opt);
       return connectedCallback?.call(this);
     };
 
-    proto.disconnectedCallback = function() {
+    proto.disconnectedCallback = function () {
       const host = getElement(this);
       const method = this[methodName];
       removeClickOutside(this, host, method, opt);
@@ -56,7 +51,7 @@ export function registerClickOutside(
   component: ComponentInterface,
   element: HTMLElement,
   callback: () => void,
-  opt: ClickOutsideOptions = ClickOutsideOptionsDefaults
+  opt: ClickOutsideOptions = ClickOutsideOptionsDefaults,
 ): void {
   const excludedNodes = getExcludedNodes(opt);
   getTriggerEvents(opt).forEach(triggerEvent => {
@@ -65,7 +60,7 @@ export function registerClickOutside(
       (e: Event) => {
         initClickOutside(e, component, element, callback, excludedNodes);
       },
-      false
+      false,
     );
   });
 }
@@ -77,7 +72,7 @@ export function removeClickOutside(
   component: ComponentInterface,
   element: HTMLElement,
   callback: () => void,
-  opt: ClickOutsideOptions = ClickOutsideOptionsDefaults
+  opt: ClickOutsideOptions = ClickOutsideOptionsDefaults,
 ): void {
   getTriggerEvents(opt).forEach(triggerEvent => {
     window.removeEventListener(
@@ -85,7 +80,7 @@ export function removeClickOutside(
       (e: Event) => {
         initClickOutside(e, component, element, callback);
       },
-      false
+      false,
     );
   });
 }
@@ -95,7 +90,7 @@ function initClickOutside(
   component: ComponentInterface,
   element: HTMLElement,
   callback: () => void,
-  excludedNodes?: Array<HTMLElement>
+  excludedNodes?: Array<HTMLElement>,
 ) {
   const target = event.target as HTMLElement;
   if (!element.contains(target) && !isExcluded(target, excludedNodes)) {
@@ -105,31 +100,26 @@ function initClickOutside(
 
 function getTriggerEvents(opt: ClickOutsideOptions): Array<string> {
   if (opt.triggerEvents) {
-    return opt.triggerEvents.split(",").map(e => e.trim());
+    return opt.triggerEvents.split(',').map(e => e.trim());
   }
-  return ["click"];
+  return ['click'];
 }
 
 function getExcludedNodes(opt: ClickOutsideOptions): Array<HTMLElement> {
   if (opt.exclude) {
     try {
-      return Array.from(document.querySelectorAll(opt.exclude))
+      return Array.from(document.querySelectorAll(opt.exclude));
     } catch (err) {
       console.warn(
-        `@ClickOutside: Exclude: '${
-          opt.exclude
-        }' will not be evaluated. Check your exclude selector syntax.`,
-        err
+        `@ClickOutside: Exclude: '${opt.exclude}' will not be evaluated. Check your exclude selector syntax.`,
+        err,
       );
     }
   }
   return;
 }
 
-function isExcluded(
-  target: HTMLElement,
-  excudedNodes?: Array<HTMLElement>
-): boolean {
+function isExcluded(target: HTMLElement, excudedNodes?: Array<HTMLElement>): boolean {
   if (target && excudedNodes) {
     for (let excludedNode of excudedNodes) {
       if (excludedNode.contains(target)) {
