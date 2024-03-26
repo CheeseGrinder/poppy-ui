@@ -1,3 +1,4 @@
+import { componentConfig, config } from '#config';
 import {
   AttachInternals,
   Component,
@@ -12,8 +13,6 @@ import {
 } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
 import type { RadioGroupCompareFn } from './radio-group.interface';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 let radioGroupIds = 0;
 
@@ -53,21 +52,21 @@ export class RadioGroup implements ComponentInterface {
 
   /**
    * If `true`, apply the required property to all `pop-radio`.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, apply the disabled property to all `pop-radio`.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the radios can be deselected.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) allowEmpty?: boolean;
@@ -77,7 +76,7 @@ export class RadioGroup implements ComponentInterface {
    * for comparing objects when determining the selected option in the
    * ion-radio-group. When not specified, the default behavior will use strict
    * equality (===) for comparison.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) compare?: RadioGroupCompareFn | string | null;
@@ -88,7 +87,7 @@ export class RadioGroup implements ComponentInterface {
    * For more information on colors, see [theming](/docs/theming/basics).
    *
    * If the `pop-radio` as no color, it will apply to it
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
@@ -98,7 +97,7 @@ export class RadioGroup implements ComponentInterface {
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
    * If the `pop-radio` as no size, it will apply to it
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;

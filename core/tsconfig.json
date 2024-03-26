@@ -17,6 +17,7 @@
     "jsxFactory": "h",
     "baseUrl": ".",
     "paths": {
+      "#config": ["src/config"],
       "#global/*": ["src/global/*"],
       "#utils/*": ["src/utils/*"],
     }

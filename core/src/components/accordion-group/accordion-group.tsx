@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
 
 @Component({
@@ -10,21 +10,21 @@ export class AccordionGroup implements ComponentInterface {
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default "false"
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default "false"
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the user can open multiple accordion.
-   * 
+   *
    * @config @default "false"
    */
   @Prop({ reflect: true, mutable: true }) multiple: boolean;
@@ -48,7 +48,7 @@ export class AccordionGroup implements ComponentInterface {
       readonly: false,
       disabled: false,
       multiple: false,
-    })
+    });
   }
 
   componentDidLoad(): void {

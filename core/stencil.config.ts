@@ -1,3 +1,5 @@
+import { componentConfigTarget } from '@cheese-grinder/stencil-component-config';
+import { docsReadme } from '@cheese-grinder/stencil-custom-readme';
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import { customDocsReadme } from './custom-docs-readme';
@@ -7,13 +9,13 @@ import { Plugin } from '@stencil/core/internal';
 export const config: Config = {
   namespace: 'Poppy',
   globalStyle: './src/poppy.scss',
-  globalScript: './src/global/poppy-global.ts',
+  globalScript: './src/global/poppy.ts',
   plugins: [
     sass(),
   ],
   outputTargets: [
-    customDocsReadme(),
-    componentConfig(),
+    docsReadme(),
+    componentConfigTarget(),
     {
       type: 'dist',
       esmLoaderPath: '../loader',

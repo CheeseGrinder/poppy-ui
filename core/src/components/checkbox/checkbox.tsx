@@ -1,4 +1,4 @@
-import type { Color, Placement, Size } from 'src/interfaces';
+import { componentConfig, config } from '#config';
 import { Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -13,9 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import type { Color, Placement, Size } from 'src/interfaces';
 import { Show } from '../Show';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -58,21 +57,21 @@ export class Checkbox implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the toggle is selected.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) checked?: boolean;
@@ -90,14 +89,14 @@ export class Checkbox implements ComponentInterface {
 
   /**
    * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) indeterminate?: boolean;
 
   /**
    * If true, the user cannot interact with the native element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled: boolean;
@@ -106,7 +105,7 @@ export class Checkbox implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color;
@@ -114,7 +113,7 @@ export class Checkbox implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
@@ -123,7 +122,7 @@ export class Checkbox implements ComponentInterface {
    * Where to place the label relative to the checkbox.
    * - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL.
    * - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
-   * 
+   *
    * @config @default 'start'
    */
   @Prop({ reflect: true, mutable: true }) placement?: Placement;
@@ -161,7 +160,7 @@ export class Checkbox implements ComponentInterface {
       indeterminate: false,
       disabled: false,
       size: config.get('defaultSize', 'md'),
-      placement: 'start'
+      placement: 'start',
     });
   }
 

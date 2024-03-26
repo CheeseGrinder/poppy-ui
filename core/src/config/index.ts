@@ -1,2 +1,2 @@
-export * from './components.config'
-export * from './framework.config'
+export * from './components.config';
+export * from './config';

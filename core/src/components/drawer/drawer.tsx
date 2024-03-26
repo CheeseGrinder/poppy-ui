@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
 import { OverlayInterface } from '#utils/overlay';
 import { TriggerAction, TriggerController } from '#utils/trigger';
@@ -21,7 +21,7 @@ import { Component, ComponentInterface, Element, Host, Method, Prop, Watch, h } 
 export class Drawer implements ComponentInterface, OverlayInterface {
   #triggerController = TriggerController.create();
 
-  @Element() host: HTMLPopDrawerElement
+  @Element() host: HTMLPopDrawerElement;
 
   /**
    * An ID corresponding to the trigger element that
@@ -38,15 +38,14 @@ export class Drawer implements ComponentInterface, OverlayInterface {
   }
 
   /**
-   * Describes what kind of interaction with the trigger that
-   * should cause the sidebar to open. Does not apply when the `trigger`
-   * property is `undefined`.
+   * Describes what kind of interaction with the trigger that should
+   * cause the sidebar to open. Does not apply when the `trigger` property is `undefined`.
    * - `"click"`: the sidebar will be presented when the trigger is left clicked.
    * - `"hover"`: the sidebar will be presented when a pointer hovers over the trigger.
    * - `"context-menu"`: the sidebar will be presented when the trigger is right
    * clicked on desktop and long pressed on mobile. This will also prevent your
    * device's normal context menu from appearing.
-   * 
+   *
    * @config @default "click"
    */
   @Prop() triggerAction?: TriggerAction;
@@ -59,7 +58,7 @@ export class Drawer implements ComponentInterface, OverlayInterface {
    * Where to place the sidebar relative to the screen.
    * - `"start"`: The sidebar will appear to the left of the screen in LTR and to the right in RTL.
    * - `"end"`: The sidebar will appear to the right of the screen in LTR and to the left in RTL.
-   * 
+   *
    * @config @default "start"
    */
   @Prop({ reflect: true, mutable: true }) side?: 'start' | 'end';
@@ -109,16 +108,18 @@ export class Drawer implements ComponentInterface, OverlayInterface {
 
   #onClick = (): void => {
     this.dismiss();
-  }
+  };
 
   render() {
     const { host } = this;
 
     return (
-      <Host class={{
-        'drawer': true,
-        'drawer-rtl': isRTL(host),
-      }}>
+      <Host
+        class={{
+          drawer: true,
+          'drawer-rtl': isRTL(host),
+        }}
+      >
         <div class="drawer-content">
           <slot />
         </div>

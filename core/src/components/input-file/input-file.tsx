@@ -1,4 +1,4 @@
-import { Color, Size } from 'src/interfaces';
+import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -13,9 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { Color, Size } from 'src/interfaces';
 import { Show } from '../Show';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -63,42 +62,42 @@ export class InputFile implements ComponentInterface {
   /**
    * If `true`, the user can enter more than one value.
    * This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) multiple?: boolean;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
@@ -107,7 +106,7 @@ export class InputFile implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
@@ -115,7 +114,7 @@ export class InputFile implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;

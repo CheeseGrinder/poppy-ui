@@ -1,8 +1,7 @@
-import type { Size } from 'src/interfaces';
-import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
+import { componentConfig, config } from '#config';
 import { hostContext } from '#utils/helpers';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
+import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
+import type { Size } from 'src/interfaces';
 
 @Component({
   tag: 'pop-list',
@@ -14,14 +13,14 @@ export class List implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Define content disposition orientation
-   * 
+   *
    * @config @default 'vertical'
    */
   @Prop({ reflect: true, mutable: true }) orientation?: 'horizontal' | 'vertical';

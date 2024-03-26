@@ -1,5 +1,4 @@
-import { FrameworkConfig } from '#config';
-import { JSX, JSXBase } from '@stencil/core/internal';
+import { ComponentConfig, FrameworkConfig } from '#config';
 
 type BrandColor = 'primary' | 'secondary' | 'accent';
 type StateColor = 'info' | 'success' | 'warning' | 'error';

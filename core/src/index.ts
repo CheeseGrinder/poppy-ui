@@ -1,3 +1,3 @@
 export * from './components';
 
-export { initialize } from './global/poppy-global';
+export { initialize } from './global/poppy';

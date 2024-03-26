@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
@@ -15,14 +15,14 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 export class Join implements ComponentInterface {
   /**
    * Define content disposition orientation
-   * 
-   * @config @default 
+   *
+   * @config @default "horizontal"
    */
   @Prop({ reflect: true }) orientation: 'horizontal' | 'vertical';
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-join', {
-      orientation: 'horizontal'
+      orientation: 'horizontal',
     });
   }
 

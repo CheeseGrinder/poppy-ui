@@ -1,7 +1,6 @@
 import { Size } from 'src/interfaces';
 import { Configuration } from '@cheese-grinder/stencil-component-config';
 
-
 export class Config {
   private config = new Map<keyof FrameworkConfig, any>();
 
@@ -13,16 +12,12 @@ export class Config {
     this.config.set(key, value);
   }
 
-  get<Conf extends keyof FrameworkConfig>(
-    key: Conf,
-    fallback?: FrameworkConfig[Conf],
-  ): FrameworkConfig[Conf] {
+  get<Conf extends keyof FrameworkConfig>(key: Conf, fallback?: FrameworkConfig[Conf]): FrameworkConfig[Conf] {
     return this.config.get(key) ?? fallback;
   }
 }
 
 export const config = new Config();
-
 
 export interface FrameworkConfig {
   defaultSize?: Size;

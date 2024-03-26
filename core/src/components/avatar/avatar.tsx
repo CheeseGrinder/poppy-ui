@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
@@ -14,7 +14,7 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 export class Avatar implements ComponentInterface {
   /**
    * To show some letters as avatar placeholder
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true }) placeholder: boolean = false;

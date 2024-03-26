@@ -1,9 +1,9 @@
+import { componentConfig } from '#config';
+import { ClickOutside } from '#utils/click-outside';
 import { OverlayInterface } from '#utils/overlay';
 import { TriggerAction } from '#utils/trigger';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
 import { Show } from '../Show';
-import { ClickOutside } from '#utils/click-outside';
-import { componentConfig } from '#global/component-config';
 
 /**
  * Describe whats does the component
@@ -24,22 +24,22 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   @Element() host: HTMLElement & OverlayInterface;
 
   /**
-   * 
-   * 
+   *
+   *
    * @config @default 'bottom'
    */
   @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'top' | 'bottom';
 
   /**
-   * 
-   * 
+   *
+   *
    * @config @default 'start'
    */
   @Prop({ reflect: true, mutable: true }) align?: 'start' | 'end';
 
   /**
-   * 
-   * 
+   *
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) open?: boolean;
@@ -49,7 +49,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    * - `"click"`: the dropdown will be presented when the trigger is left clicked.
    * - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger.
    * - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-   * 
+   *
    * @config @default 'click'
    */
   @Prop({ mutable: true }) triggerAction: TriggerAction;
@@ -57,7 +57,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   /**
    * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss.
    * Only apply on `triggerAction=hover`
-   * 
+   *
    * @config @default 100
    */
   @Prop({ mutable: true }) debounce?: number = 100;
@@ -66,7 +66,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    * If `true`, a backdrop will be displayed behind the modal.
    * This property controls whether or not the backdrop
    * darkens the screen when the modal is presented.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean;

@@ -1,9 +1,8 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import type { Color, Size } from 'src/interfaces';
 import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
-import { config } from '#global/config';
 
 /**
  * Buttons allow the user to take actions or make choices.
@@ -36,7 +35,7 @@ export class Button implements ComponentInterface {
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
@@ -45,7 +44,7 @@ export class Button implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'neutral' | 'ghost';
@@ -53,14 +52,14 @@ export class Button implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Transparent Button with colored border
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) outlined?: boolean;
@@ -68,7 +67,7 @@ export class Button implements ComponentInterface {
   /**
    * `square` set button width and heigth with 1:1 ratio
    * `round` set button width and heigth with 1:1 ratio and rounded corners.
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) shape?: ButtonShape;
@@ -76,7 +75,7 @@ export class Button implements ComponentInterface {
   /**
    * `wide` Add more horizontal padding
    * `block` make a full width button
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) expand?: ButtonExpand;

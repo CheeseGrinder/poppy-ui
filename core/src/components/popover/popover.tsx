@@ -1,20 +1,20 @@
+import { componentConfig } from '#config';
+import { componentOnReady, raf } from '#utils/helpers';
+import { OverlayInterface } from '#utils/overlay';
+import { TriggerAction, TriggerController } from '#utils/trigger';
 import {
   Component,
-  Event as StencilEvent,
+  ComponentInterface,
+  Element,
   EventEmitter,
   Host,
   Method,
   Prop,
-  h,
-  Element,
-  ComponentInterface,
+  Event as StencilEvent,
   Watch,
+  h,
 } from '@stencil/core';
 import { ComponentProps, ComponentRef } from 'src/interfaces';
-import { componentOnReady, raf } from '#utils/helpers';
-import { OverlayInterface } from '#utils/overlay';
-import { TriggerAction, TriggerController } from '#utils/trigger';
-import { componentConfig } from '#global/component-config';
 
 @Component({
   tag: 'pop-popover',
@@ -35,7 +35,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * just use the popoverController or the `trigger` property.
    * Note: `open` will not automatically be set back to `false` when
    * the popover dismisses. You will need to do that in your code.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) open: boolean;
@@ -50,7 +50,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
 
   /**
    * If `true`, the popover will animate.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) animated = true;
@@ -61,14 +61,14 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * darkens the screen when the popover is presented.
    * It does not control whether or not the backdrop
    * is active or present in the DOM.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) showBackdrop: boolean = false;
 
   /**
    * If `true`, the popover will be dismissed when the backdrop is clicked.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) backdropDismiss: boolean = false;
@@ -101,7 +101,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * If `"context-menu"`, the popover will be presented when the trigger is right
    * clicked on desktop and long pressed on mobile. This will also prevent your
    * device's normal context menu from appearing.
-   * 
+   *
    * @config @default 'click'
    */
   @Prop({ mutable: true }) triggerAction: TriggerAction;

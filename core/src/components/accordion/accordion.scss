@@ -20,7 +20,7 @@
   --border-radius: #{radius.$xl};
   --border-color: oklch(#{theme.get-color("base.300")});
   --background: oklch(#{theme.get-color("base.200")});
-  --animation: .2s;
+  --animation: 0.2s;
 
   box-sizing: border-box;
   position: relative;

@@ -1,3 +1,4 @@
+import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -14,8 +15,6 @@ import {
 } from '@stencil/core';
 import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputType, KeyboardType, Size } from 'src/interfaces';
 import { Show } from '../Show';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -88,14 +87,14 @@ export class Input implements ComponentInterface {
 
   /**
    * The minimum value, which must not be greater than its maximum (max attribute) value.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) min?: number;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) max?: number | string;
@@ -103,21 +102,21 @@ export class Input implements ComponentInterface {
   /**
    * Works with the min and max attributes to limit the increments at which a value can be set.
    * Possible values are: `"any"` or a positive floating point number.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) step?: string;
 
   /**
    * This attribute specifies the minimum number of characters that the user can enter.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) minLength?: number;
 
   /**
    * This attribute specifies the maximum number of characters that the user can enter.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) maxLength?: number;
@@ -140,28 +139,28 @@ export class Input implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
@@ -183,7 +182,7 @@ export class Input implements ComponentInterface {
    * - `previous`: Typically taking the user to the previous field that will accept text.
    * - `search`: Typically taking the user to the results of searching for the text they have typed.
    * - `send`: Typically delivering the text to its target.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) enterkeyhint?: EnterKeyHint;
@@ -191,7 +190,7 @@ export class Input implements ComponentInterface {
   /**
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) spellcheck: boolean;
@@ -209,21 +208,21 @@ export class Input implements ComponentInterface {
    * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
-   * 
+   *
    * @config @default 'off'
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
    * Whether auto correction should be enabled when the user is entering/editing the text value.
-   * 
+   *
    * @config @default 'off'
    */
   @Prop({ mutable: true }) autoCorrect: 'on' | 'off';
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
@@ -232,7 +231,7 @@ export class Input implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
@@ -240,7 +239,7 @@ export class Input implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
@@ -258,7 +257,7 @@ export class Input implements ComponentInterface {
   /**
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) counter?: boolean;
@@ -266,14 +265,14 @@ export class Input implements ComponentInterface {
   /**
    * A callback used to format the counter text.
    * By default the counter text is set to "itemLength / maxLength".
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) counterFormatter?: (inputLength: number, maxLength: number) => string;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-   * 
+   *
    * @config @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;
@@ -331,6 +330,7 @@ export class Input implements ComponentInterface {
       bordered: false,
       size: config.get('defaultSize', 'md'),
       counter: false,
+      counterFormatter: (length, max) => `${length} / ${max}`,
       debounce: 0,
     });
 
@@ -363,7 +363,7 @@ export class Input implements ComponentInterface {
     if (!counter || maxLength < 0) return '';
     const length = this.#getValue().length;
 
-    return counterFormatter?.(length, maxLength) ?? `${length} / ${maxLength}`;
+    return counterFormatter(length, maxLength);
   }
 
   #onChange = (): void => {

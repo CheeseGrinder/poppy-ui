@@ -1,6 +1,6 @@
 import { Component, ComponentInterface, Fragment, Host, Prop, h } from '@stencil/core';
 import { PopCheckboxCustomEvent, PopRadioGroupCustomEvent } from 'src/components';
-import { Color, Size } from 'src/interfaces';
+import type { Color, Size } from 'src/interfaces';
 import type { SelectPopoverOption } from './select-popover-interface';
 
 /**

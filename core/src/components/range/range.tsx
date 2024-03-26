@@ -1,5 +1,4 @@
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
+import { componentConfig, config } from '#config';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -58,35 +57,35 @@ export class Range implements ComponentInterface {
 
   /**
    * The minimum value, which must not be greater than its maximum (max attribute) value.
-   * 
+   *
    * @config @default 0
    */
   @Prop({ reflect: true, mutable: true }) min?: number;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
-   * 
+   *
    * @config @default 100
    */
   @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * Works with the min and max attributes to limit the increments at which a value can be set.
-   * 
+   *
    * @config @default 1
    */
   @Prop({ reflect: true, mutable: true }) step?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
@@ -100,7 +99,7 @@ export class Range implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
@@ -108,14 +107,14 @@ export class Range implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-   * 
+   *
    * @config @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;

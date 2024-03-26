@@ -1,4 +1,4 @@
-import type { Color, Size } from 'src/interfaces';
+import { componentConfig, config } from '#config';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
@@ -13,9 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import type { Color, Size } from 'src/interfaces';
 import { Show } from '../Show';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -56,21 +55,21 @@ export class Toggle implements ComponentInterface {
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the toggle is selected.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) checked?: boolean;
@@ -87,14 +86,14 @@ export class Toggle implements ComponentInterface {
 
   /**
    * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) indeterminate?: boolean = false;
 
   /**
    * If true, the user cannot interact with the native element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled: boolean;
@@ -103,7 +102,7 @@ export class Toggle implements ComponentInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
@@ -111,7 +110,7 @@ export class Toggle implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md''
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;

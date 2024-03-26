@@ -1,3 +1,4 @@
+import { componentConfig, config } from '#config';
 import { compareOptions, isOptionSelected } from '#utils/forms';
 import { Attributes, hostContext, inheritAttributes } from '#utils/helpers';
 import { popoverController } from '#utils/overlay';
@@ -20,8 +21,6 @@ import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
 import { SelectPopoverOption } from '../select-popover/select-popover-interface';
 import type { SelectCompareFn } from './select.interface';
-import { componentConfig } from '#global/component-config';
-import { config } from '#global/config';
 
 @Component({
   tag: 'pop-select',
@@ -74,7 +73,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   /**
    * If `true`, the user can enter more than one value.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) multiple?: boolean = false;
@@ -82,7 +81,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * Only apply when `multiple` property is used.
    * The minimum amount of values that can be selected, which must not be greater than its maximum (max attribute) value.
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) min?: number;
@@ -90,21 +89,21 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * Only apply when `multiple` property is used.
    * The maximum amount of values that can be selected, which must not be less than its minimum (min attribute) value.
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
@@ -116,7 +115,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
@@ -125,7 +124,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * The color to use from your application's color palette.
    * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
    * For more information on colors, see [theming](/docs/theming/basics).
-   * 
+   *
    * @config
    */
   @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
@@ -133,7 +132,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   * 
+   *
    * @config @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
@@ -165,7 +164,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * for comparing objects when determining the selected option in the
    * ion-radio-group. When not specified, the default behavior will use strict
    * equality (===) for comparison.
-   * 
+   *
    * @config
    */
   @Prop({ mutable: true }) compare?: SelectCompareFn | string | null;

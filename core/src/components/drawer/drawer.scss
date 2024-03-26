@@ -1,5 +1,5 @@
-@use '../../global/styles/theme';
-@use '../../global/styles/radius';
+@use "../../global/styles/theme";
+@use "../../global/styles/radius";
 
 /**
  * @prop --background: Change sidebar background
@@ -13,8 +13,8 @@
 
 :host {
   --backdrop-background: #0006;
-  --background: oklch(#{theme.get-color('base.200')});
-  --color: oklch(#{theme.get-color('base.content')});
+  --background: oklch(#{theme.get-color("base.200")});
+  --color: oklch(#{theme.get-color("base.content")});
 
   position: relative;
 
@@ -94,7 +94,7 @@
 
 // using .drawer-rtl because [dir=rtl] :host() is impossible
 
-:host([side=start]) {
+:host([side="start"]) {
   grid-auto-columns: max-content auto;
 
   .drawer {
@@ -113,13 +113,13 @@
     }
   }
 }
-:host([side=start].drawer-rtl) {
+:host([side="start"].drawer-rtl) {
   .drawer-side-inner {
     transform: translateX(100%);
   }
 }
 
-:host([side=end]) {
+:host([side="end"]) {
   grid-auto-columns: auto max-content;
 
   .drawer {
@@ -139,7 +139,7 @@
     }
   }
 }
-:host([side=end].drawer-rtl) {
+:host([side="end"].drawer-rtl) {
   .drawer-side-inner {
     transform: translateX(-100%);
   }

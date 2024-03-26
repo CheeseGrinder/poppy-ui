@@ -1,3 +1,4 @@
+import { componentConfig } from '#config';
 import { OverlayInterface } from '#utils/overlay';
 import { TriggerController } from '#utils/trigger';
 import {
@@ -12,9 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { Show } from '../Show';
 import { ComponentProps, ComponentRef } from 'src/interfaces';
-import { componentConfig } from '#global/component-config';
+import { Show } from '../Show';
 
 /**
  * Describe whats does the component
@@ -68,14 +68,14 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * If `true`, a backdrop will be displayed behind the modal.
    * This property controls whether or not the backdrop
    * darkens the screen when the modal is presented.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean;
 
   /**
    * If `true`, the modal will be dismissed when the backdrop is clicked.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) backdropDismiss?: boolean;
@@ -86,7 +86,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * just use the modalController or the `trigger` property.
    * Note: `open` will automatically be set back to `false` when
    * the modal dismisses.
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) open?: boolean;

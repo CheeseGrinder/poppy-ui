@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
@@ -15,7 +15,7 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 export class Swap implements ComponentInterface {
   /**
    * Choose what animation is used on click.
-   * 
+   *
    * @config @default 'rotate'
    */
   @Prop({ reflect: true, mutable: true }) type?: 'rotate' | 'flip';
@@ -23,7 +23,7 @@ export class Swap implements ComponentInterface {
   /**
    * Activates the swap.
    * Show whats inside the slot `on`
-   * 
+   *
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) active?: boolean;

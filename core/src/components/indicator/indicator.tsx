@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 
 /**
@@ -15,14 +15,14 @@ import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 export class Indicator implements ComponentInterface {
   /**
    * Align horizontally the indicator.
-   * 
+   *
    * @config @default 'left'
    */
   @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'start' | 'center' | 'end';
 
   /**
    * Align vertically the indicator.
-   * 
+   *
    * @config @default 'top'
    */
   @Prop({ reflect: true, mutable: true }) position?: 'top' | 'middle' | 'bottom';

@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
 
 type MaskParallelogram = 'parallelogram' | 'parallelogram-2' | 'parallelogram-3' | 'parallelogram-4';
@@ -22,14 +22,14 @@ export type MaskType = MaskClassic | MaskComplexe | MaskTriangle | MaskStar | Ma
 export class Mask {
   /**
    * Mask that should be applied
-   * 
+   *
    * @config @default 'squircle
    */
   @Prop({ reflect: true, mutable: true }) type: MaskType;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-mask', {
-      type: 'squircle'
+      type: 'squircle',
     });
   }
 

@@ -17,12 +17,12 @@
 
 :host {
   --border-radius: #{radius.$md};
-  --border-color: oklch(theme.get-color("base.content") / .2);
+  --border-color: oklch(theme.get-color("base.content") / 0.2);
 
   --background: #{theme.get-color("base.content")};
   --checkmark-color: #{theme.get-color("base.100")};
 
-  --animation: .2s ease-out;
+  --animation: 0.2s ease-out;
 
   @include input.label;
 
@@ -136,7 +136,7 @@
 
     :host([color="#{$color}"]) {
       --background: oklch(#{$base});
-      --border-color: oklch(#{$base} / .2);
+      --border-color: oklch(#{$base} / 0.2);
       --checkmark-color: oklch(#{$text});
     }
   }
@@ -145,7 +145,7 @@
 
 :host(:not([color])) > input {
   --background: oklch(#{theme.get-color("base.content")});
-  --border-color: oklch(#{theme.get-color("base.content")} / .2);
+  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
   --checkmark-color: oklch(#{theme.get-color("base.100")});
 }
 

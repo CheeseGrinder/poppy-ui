@@ -1,4 +1,4 @@
-import { componentConfig } from '#global/component-config';
+import { componentConfig } from '#config';
 import { getHostContextProperty, hostContext } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 
@@ -14,7 +14,7 @@ export class Item implements ComponentInterface {
 
   /**
    * If `true`, the user cannot interact with the item.
-   * 
+   *
    * @config @default false
    */
   @Prop({ mutable: true }) disabled: boolean;

@@ -28,7 +28,6 @@ $minWidth: 12rem;
   --background: oklch(#{theme.get-color("base.100")});
   --color: oklch(#{theme.get-color("base.content")});
 
-
   @include input.label;
   @include input.helper(".input-wrapper", $counter: true);
 
