@@ -1,0 +1,107 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+@use "../../global/styles/input";
+
+/**
+ * @prop --background: Change background color
+ */
+
+// Divider
+// ----------------------------------------------------------------
+
+:host {
+  --background: oklch(#{theme.get-color("base.content")} / 0.1);
+
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    content: "";
+    flex-grow: 1;
+
+    background-color: var(--background);
+  }
+}
+
+:host(:not(:empty)) {
+  gap: 1rem;
+}
+
+// Divider orientation
+// ----------------------------------------------------------------
+:host([orientation="horizontal"]) {
+  margin: 1rem 0;
+
+  width: 100%;
+  height: 1rem;
+
+  &::before,
+  &::after {
+    width: 100%;
+    height: 0.125rem;
+  }
+}
+:host([orientation="vertical"]) {
+  flex-direction: column;
+
+  margin: 0 1rem;
+
+  width: 1rem;
+  height: auto;
+
+  &::before,
+  &::after {
+    width: 0.125rem;
+    height: 100%;
+  }
+}
+
+// Divider Content Placement
+// ----------------------------------------------------------------
+
+:host([placement="left"])::before {
+  display: none;
+}
+:host([placement="left"].divider-rtl) {
+  &::before {
+    display: block;
+  }
+  &::after {
+    display: none;
+  }
+}
+:host([placement="start"])::before {
+  display: none;
+}
+:host([placement="end"])::after {
+  display: none;
+}
+:host([placement="right"])::after {
+  display: none;
+}
+:host([placement="right"].divider-rtl) {
+  &::before {
+    display: none;
+  }
+  &::after {
+    display: block;
+  }
+}
+
+// Divider Color
+// ----------------------------------------------------------------
+
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+
+    :host([color="#{$color}"]) {
+      --background: oklch(#{$base});
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, neutral, info, success, warning, error);
