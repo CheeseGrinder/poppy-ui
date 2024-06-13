@@ -1,6 +1,0 @@
-{
-  "name": "@poppy/core/hydrate",
-  "description": "Poppy component hydration app.",
-  "main": "index.js",
-  "types": "index.d.ts"
-}
