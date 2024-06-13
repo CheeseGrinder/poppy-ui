@@ -1,0 +1,115 @@
+@use "../../global/styles/theme";
+@use "../../global/styles/shadow";
+@use "../../global/styles/radius";
+
+/**
+ * @prop --border-radius: Change border radius
+ * @prop --border-color: Change border color
+ *
+ * @prop --background: Change sidebar background
+ * @prop --color: Change sidebar text color
+ *
+ * @prop --shadow: Change box-shadow
+ */
+
+// Dropdown
+// ----------------------------------------------------------------
+
+:host {
+  --border-radius: #{radius.$md};
+  --border-color: oklch(#{theme.get-color("base.200")});
+  --background: oklch(#{theme.get-color("base.100")});
+  --color: oklch(#{theme.get-color("base.content")});
+  --shadow: #{shadow.$md};
+
+  .dropdown {
+    position: relative;
+    display: grid;
+    width: 100%;
+
+    &-trigger {
+      display: inline-block;
+      grid-column-start: 1;
+      grid-row-start: 1;
+    }
+
+    &-content {
+      position: absolute;
+
+      min-height: 2rem;
+
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+
+      color: var(--color);
+      background-color: var(--background);
+
+      box-shadow: var(--shadow);
+
+      animation-name: present;
+      animation-duration: 200ms;
+    }
+  }
+}
+
+// Dropdown Open state
+// ----------------------------------------------------------------
+
+:host(:not([open])) {
+  .dropdown-content {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+:host([open]) {
+  .dropdown-content {
+    z-index: 100;
+    opacity: 1;
+  }
+}
+
+// Dropdown Placement
+// ----------------------------------------------------------------
+
+:host([side="bottom"][align="end"]) .dropdown-content {
+  inset-inline-end: 0;
+}
+
+:host([side="top"]) .dropdown-content {
+  top: auto;
+  bottom: 100%;
+}
+:host([side="top"][align="end"]) .dropdown-content {
+  inset-inline-end: 0;
+}
+
+:host([side="left"]) .dropdown-content {
+  top: 0;
+  bottom: auto;
+  inset-inline-end: 100%;
+}
+:host([side="left"][align="end"]) .dropdown-content {
+  top: auto;
+  bottom: 0;
+}
+
+:host([side="right"]) .dropdown-content {
+  top: 0;
+  bottom: auto;
+  inset-inline-start: 100%;
+}
+:host([side="right"][align="end"]) .dropdown-content {
+  top: auto;
+  bottom: 0;
+}
+
+@keyframes present {
+  from {
+    opacity: 0.6;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}

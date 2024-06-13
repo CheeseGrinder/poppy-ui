@@ -1,0 +1,50 @@
+@use "../../global/styles/theme";
+
+@mixin label {
+  > .label {
+    display: flex;
+    user-select: none;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.5rem 0.25rem;
+
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+@mixin helper($selector: input, $counter: false) {
+  > #{$selector} + .text-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding: 0.5rem 0.25rem;
+
+    font-size: 0.75rem;
+    line-height: 1rem;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  > #{$selector}:not(:user-invalid) + .text-wrapper > .error-text {
+    display: none;
+  }
+  > #{$selector}:user-invalid + .text-wrapper > .helper-text {
+    display: none;
+  }
+
+  .error-text {
+    color: var(--error-color, oklch(#{theme.get-color("error.base")}));
+  }
+  @if ($counter) {
+    .counter-text {
+      margin-inline-start: auto;
+      font-size: 0.75rem;
+      line-height: 1rem;
+    }
+  }
+}

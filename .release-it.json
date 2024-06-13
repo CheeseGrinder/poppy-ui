@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "@release-it/bumper": {
+      "out": {
+        "file": "package.json"
+      }
+    }
+  },
+  "git": {
+    "requireCleanWorkingDir": false
+  },
+  "github": {
+    "release": true,
+    "comments": {
+      "submit": true
+    }
+  }
+}
