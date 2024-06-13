@@ -1,0 +1,423 @@
+/* eslint-disable */
+/* tslint:disable */
+/* auto-generated vue proxies */
+import { defineContainer } from './vue-component-lib/utils';
+
+import type { JSX } from '@poppy/core/components';
+
+import { defineCustomElement as definePopAccordion } from '@poppy/core/components/pop-accordion.js';
+import { defineCustomElement as definePopAccordionGroup } from '@poppy/core/components/pop-accordion-group.js';
+import { defineCustomElement as definePopAvatar } from '@poppy/core/components/pop-avatar.js';
+import { defineCustomElement as definePopBadge } from '@poppy/core/components/pop-badge.js';
+import { defineCustomElement as definePopButton } from '@poppy/core/components/pop-button.js';
+import { defineCustomElement as definePopCard } from '@poppy/core/components/pop-card.js';
+import { defineCustomElement as definePopCheckbox } from '@poppy/core/components/pop-checkbox.js';
+import { defineCustomElement as definePopDivider } from '@poppy/core/components/pop-divider.js';
+import { defineCustomElement as definePopDrawer } from '@poppy/core/components/pop-drawer.js';
+import { defineCustomElement as definePopDropdown } from '@poppy/core/components/pop-dropdown.js';
+import { defineCustomElement as definePopImg } from '@poppy/core/components/pop-img.js';
+import { defineCustomElement as definePopIndicator } from '@poppy/core/components/pop-indicator.js';
+import { defineCustomElement as definePopInput } from '@poppy/core/components/pop-input.js';
+import { defineCustomElement as definePopInputFile } from '@poppy/core/components/pop-input-file.js';
+import { defineCustomElement as definePopItem } from '@poppy/core/components/pop-item.js';
+import { defineCustomElement as definePopJoin } from '@poppy/core/components/pop-join.js';
+import { defineCustomElement as definePopKbd } from '@poppy/core/components/pop-kbd.js';
+import { defineCustomElement as definePopList } from '@poppy/core/components/pop-list.js';
+import { defineCustomElement as definePopLoading } from '@poppy/core/components/pop-loading.js';
+import { defineCustomElement as definePopMask } from '@poppy/core/components/pop-mask.js';
+import { defineCustomElement as definePopModal } from '@poppy/core/components/pop-modal.js';
+import { defineCustomElement as definePopNavbar } from '@poppy/core/components/pop-navbar.js';
+import { defineCustomElement as definePopPopover } from '@poppy/core/components/pop-popover.js';
+import { defineCustomElement as definePopProgress } from '@poppy/core/components/pop-progress.js';
+import { defineCustomElement as definePopRadio } from '@poppy/core/components/pop-radio.js';
+import { defineCustomElement as definePopRadioGroup } from '@poppy/core/components/pop-radio-group.js';
+import { defineCustomElement as definePopRange } from '@poppy/core/components/pop-range.js';
+import { defineCustomElement as definePopSelect } from '@poppy/core/components/pop-select.js';
+import { defineCustomElement as definePopSelectOption } from '@poppy/core/components/pop-select-option.js';
+import { defineCustomElement as definePopSwap } from '@poppy/core/components/pop-swap.js';
+import { defineCustomElement as definePopTextarea } from '@poppy/core/components/pop-textarea.js';
+import { defineCustomElement as definePopToggle } from '@poppy/core/components/pop-toggle.js';
+import { defineCustomElement as definePopTooltip } from '@poppy/core/components/pop-tooltip.js';
+
+
+export const PopAccordion = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop-accordion', definePopAccordion, [
+  'readonly',
+  'disabled',
+  'name',
+  'isOpen'
+]);
+
+
+export const PopAccordionGroup = /*@__PURE__*/ defineContainer<JSX.PopAccordionGroup, JSX.PopAccordionGroup["active"]>('pop-accordion-group', definePopAccordionGroup, [
+  'readonly',
+  'disabled',
+  'multiple',
+  'active',
+  'popChange',
+  'popActiveChange'
+],
+'active', 'pop-change');
+
+
+export const PopAvatar = /*@__PURE__*/ defineContainer<JSX.PopAvatar>('pop-avatar', definePopAvatar, [
+  'placeholder'
+]);
+
+
+export const PopBadge = /*@__PURE__*/ defineContainer<JSX.PopBadge>('pop-badge', definePopBadge, [
+  'color',
+  'size',
+  'outlined',
+  'as'
+]);
+
+
+export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-button', definePopButton, [
+  'type',
+  'form',
+  'disabled',
+  'color',
+  'size',
+  'outlined',
+  'shape',
+  'expand',
+  'popFocus',
+  'popBlur'
+]);
+
+
+export const PopCard = /*@__PURE__*/ defineContainer<JSX.PopCard>('pop-card', definePopCard);
+
+
+export const PopCheckbox = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.PopCheckbox["checked"]>('pop-checkbox', definePopCheckbox, [
+  'name',
+  'value',
+  'required',
+  'readonly',
+  'checked',
+  'indeterminate',
+  'disabled',
+  'color',
+  'size',
+  'placement',
+  'popChange',
+  'popFocus',
+  'popBlur'
+],
+'checked', 'pop-change');
+
+
+export const PopDivider = /*@__PURE__*/ defineContainer<JSX.PopDivider>('pop-divider', definePopDivider, [
+  'orientation',
+  'placement',
+  'color'
+]);
+
+
+export const PopDrawer = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawer', definePopDrawer, [
+  'trigger',
+  'triggerAction',
+  'side',
+  'open'
+]);
+
+
+export const PopDropdown = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-dropdown', definePopDropdown, [
+  'side',
+  'align',
+  'open',
+  'triggerAction',
+  'debounce',
+  'showBackdrop',
+  'didPresent',
+  'didDismiss'
+]);
+
+
+export const PopImg = /*@__PURE__*/ defineContainer<JSX.PopImg>('pop-img', definePopImg, [
+  'src',
+  'alt',
+  'popWillLoad',
+  'popDidLoad',
+  'popError'
+]);
+
+
+export const PopIndicator = /*@__PURE__*/ defineContainer<JSX.PopIndicator>('pop-indicator', definePopIndicator, [
+  'side',
+  'position'
+]);
+
+
+export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput>('pop-input', definePopInput, [
+  'name',
+  'type',
+  'placeholder',
+  'value',
+  'min',
+  'max',
+  'step',
+  'minLength',
+  'maxLength',
+  'multiple',
+  'pattern',
+  'required',
+  'readonly',
+  'disabled',
+  'autoFocus',
+  'keyboard',
+  'enterkeyhint',
+  'spellcheck',
+  'autoComplete',
+  'autoCapitalize',
+  'autoCorrect',
+  'bordered',
+  'color',
+  'size',
+  'helperText',
+  'errorText',
+  'counter',
+  'counterFormatter',
+  'debounce',
+  'popChange',
+  'popInput',
+  'popFocus',
+  'popBlur'
+]);
+
+
+export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop-input-file', definePopInputFile, [
+  'name',
+  'value',
+  'multiple',
+  'required',
+  'readonly',
+  'disabled',
+  'autoFocus',
+  'bordered',
+  'color',
+  'size',
+  'helperText',
+  'errorText',
+  'popChange',
+  'popFocus',
+  'popBlur'
+]);
+
+
+export const PopItem = /*@__PURE__*/ defineContainer<JSX.PopItem>('pop-item', definePopItem, [
+  'disabled'
+]);
+
+
+export const PopJoin = /*@__PURE__*/ defineContainer<JSX.PopJoin>('pop-join', definePopJoin, [
+  'orientation'
+]);
+
+
+export const PopKbd = /*@__PURE__*/ defineContainer<JSX.PopKbd>('pop-kbd', definePopKbd, [
+  'size'
+]);
+
+
+export const PopList = /*@__PURE__*/ defineContainer<JSX.PopList>('pop-list', definePopList, [
+  'size',
+  'orientation'
+]);
+
+
+export const PopLoading = /*@__PURE__*/ defineContainer<JSX.PopLoading>('pop-loading', definePopLoading, [
+  'type',
+  'size'
+]);
+
+
+export const PopMask = /*@__PURE__*/ defineContainer<JSX.PopMask>('pop-mask', definePopMask, [
+  'type'
+]);
+
+
+export const PopModal = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal', definePopModal, [
+  'trigger',
+  'component',
+  'componentProps',
+  'showBackdrop',
+  'backdropDismiss',
+  'open',
+  'didPresent',
+  'didDismiss'
+]);
+
+
+export const PopNavbar = /*@__PURE__*/ defineContainer<JSX.PopNavbar>('pop-navbar', definePopNavbar);
+
+
+export const PopPopover = /*@__PURE__*/ defineContainer<JSX.PopPopover>('pop-popover', definePopPopover, [
+  'open',
+  'animated',
+  'showBackdrop',
+  'backdropDismiss',
+  'event',
+  'trigger',
+  'triggerAction',
+  'component',
+  'componentProps',
+  'willPresent',
+  'didPresent',
+  'willDismiss',
+  'didDismiss'
+]);
+
+
+export const PopProgress = /*@__PURE__*/ defineContainer<JSX.PopProgress>('pop-progress', definePopProgress, [
+  'value',
+  'max',
+  'color'
+]);
+
+
+export const PopRadio = /*@__PURE__*/ defineContainer<JSX.PopRadio, JSX.PopRadio["value"]>('pop-radio', definePopRadio, [
+  'name',
+  'value',
+  'checked',
+  'required',
+  'disabled',
+  'autoFocus',
+  'color',
+  'size',
+  'popFocus',
+  'popBlur'
+],
+'value', 'pop-change');
+
+
+export const PopRadioGroup = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JSX.PopRadioGroup["value"]>('pop-radio-group', definePopRadioGroup, [
+  'name',
+  'value',
+  'required',
+  'disabled',
+  'allowEmpty',
+  'compare',
+  'color',
+  'size',
+  'popChange',
+  'popValueChange'
+],
+'value', 'pop-change');
+
+
+export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange>('pop-range', definePopRange, [
+  'name',
+  'value',
+  'min',
+  'max',
+  'step',
+  'required',
+  'disabled',
+  'autoFocus',
+  'color',
+  'size',
+  'debounce',
+  'popChange',
+  'popFocus',
+  'popBlur'
+]);
+
+
+export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSelect["value"]>('pop-select', definePopSelect, [
+  'name',
+  'placeholder',
+  'value',
+  'multiple',
+  'min',
+  'max',
+  'required',
+  'disabled',
+  'autoFocus',
+  'bordered',
+  'color',
+  'size',
+  'selectedText',
+  'helperText',
+  'notEnoughErrorText',
+  'tooManyErrorText',
+  'compare',
+  'popDismiss',
+  'popChange',
+  'popFocus',
+  'popBlur'
+],
+'value', 'pop-change');
+
+
+export const PopSelectOption = /*@__PURE__*/ defineContainer<JSX.PopSelectOption>('pop-select-option', definePopSelectOption, [
+  'value',
+  'disabled',
+  'color',
+  'size'
+]);
+
+
+export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["active"]>('pop-swap', definePopSwap, [
+  'type',
+  'active'
+],
+'active', 'pop-change');
+
+
+export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea>('pop-textarea', definePopTextarea, [
+  'name',
+  'placeholder',
+  'value',
+  'minLength',
+  'maxLength',
+  'cols',
+  'rows',
+  'required',
+  'readonly',
+  'disabled',
+  'autoFocus',
+  'keyboard',
+  'enterkeyhint',
+  'spellcheck',
+  'autoCapitalize',
+  'wrap',
+  'bordered',
+  'color',
+  'size',
+  'helperText',
+  'errorText',
+  'counter',
+  'counterFormatter',
+  'debounce',
+  'popChange',
+  'popInput',
+  'popFocus',
+  'popBlur'
+]);
+
+
+export const PopToggle = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopToggle["checked"]>('pop-toggle', definePopToggle, [
+  'name',
+  'value',
+  'required',
+  'readonly',
+  'checked',
+  'indeterminate',
+  'disabled',
+  'color',
+  'size',
+  'popChange',
+  'popFocus',
+  'popBlur'
+],
+'checked', 'pop-change');
+
+
+export const PopTooltip = /*@__PURE__*/ defineContainer<JSX.PopTooltip>('pop-tooltip', definePopTooltip, [
+  'value',
+  'color',
+  'position',
+  'open'
+]);
+

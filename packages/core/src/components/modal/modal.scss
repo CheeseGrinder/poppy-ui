@@ -1,0 +1,138 @@
+@use "../../global/styles/theme";
+@use "../../global/styles/radius";
+
+:host {
+  .modal {
+    position: fixed;
+    inset: 0;
+
+    display: grid;
+    place-items: center;
+
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+
+    // overscroll-behavior: contain;
+
+    background-color: transparent;
+    color: inherit;
+
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-property: transform, opacity, visibility;
+    overflow-y: hidden;
+
+    &:not([open]) {
+      opacity: 0;
+      pointer-events: none;
+
+      > .model-content {
+        scale: 0.9;
+      }
+    }
+    &[open] > .model-content {
+      scale: 1;
+    }
+
+    &::backdrop {
+      animation: modal-pop 0.2s ease-out;
+
+      @keyframes modal-pop {
+        0% {
+          opacity: 0;
+        }
+      }
+    }
+
+    &-content {
+      box-sizing: border-box;
+
+      grid-column-start: 1;
+      grid-row-start: 1;
+
+      padding: 1.5rem;
+
+      border-radius: var(--border-radius, #{radius.$md});
+
+      width: calc(100% / 12 * 11);
+      max-width: 32rem;
+      max-height: calc(100vh - 5em);
+
+      background-color: var(--background, oklch(#{theme.get-color("base.100")}));
+
+      box-shadow: #00000040 0 25px 50px -12px;
+
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      transition-property:
+        color,
+        background-color,
+        border-color,
+        text-decoration-color,
+        fill,
+        stroke,
+        opacity,
+        box-shadow,
+        transform,
+        scale,
+        filter,
+        backdrop-filter,
+        -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      transition-duration: 0.2s;
+    }
+
+    &-actions {
+      display: flex;
+      margin-top: 1.5rem;
+      justify-content: flex-end;
+    }
+
+    &-backdrop {
+      z-index: -1;
+
+      display: grid;
+      align-self: stretch;
+      justify-self: stretch;
+
+      grid-column-start: 1;
+      grid-row-start: 1;
+
+      color: transparent;
+
+      > button {
+        cursor: pointer;
+        opacity: 0;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      place-items: end;
+
+      & > .modal-content {
+        width: 100%;
+        max-width: none;
+
+        border-top-left-radius: var(--border-radius, #{radius.$md});
+        border-top-right-radius: var(--border-radius, #{radius.$md});
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}
+
+:host(:not([showBackdrop])) .modal::backdrop {
+  background-color: transparent;
+}
+
+:host([showBackdrop]) .modal::backdrop {
+  background-color: #0006;
+}

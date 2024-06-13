@@ -1,0 +1,55 @@
+@use "../../global/styles/theme";
+@use "../../global/styles/shadow";
+@use "../../global/styles/radius";
+
+:host {
+  .popover {
+    box-sizing: border-box;
+    position: absolute;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+
+    color: var(--color, oklch(#{theme.get-color("base.content")}));
+
+    background: transparent;
+
+    &:not([popover], [open]) {
+      opacity: 0;
+    }
+
+    &::backdrop {
+      background-color: rgb(0 0 0 / 0.125);
+      transition: opacity 15s ease 0ms;
+    }
+
+    &-content {
+      min-height: 2rem;
+
+      border: solid;
+      border-color: oklch(#{theme.get-color("base.200")});
+      border-width: 1px;
+      border-radius: var(--border-radius, #{radius.$md});
+
+      background-color: var(--background, oklch(#{theme.get-color("base.100")}));
+
+      box-shadow: shadow.$md;
+
+      animation-name: present;
+      animation-duration: 200ms;
+    }
+  }
+}
+
+@keyframes present {
+  from {
+    opacity: 0.6;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}

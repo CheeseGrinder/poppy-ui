@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/docs",
+    "packages/vue"
+  ],
+  "scripts": {
+    "release": "npm run release --workspaces && release-it"
+  },
+  "devDependencies": {
+    "@release-it/bumper": "^6.0.1",
+    "@types/node": "^20.14.2",
+    "lerna": "^8.1.3",
+    "release-it": "^17.3.0",
+    "typescript": "^5.4.5"
+  }
+}

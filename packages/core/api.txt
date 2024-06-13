@@ -1,0 +1,455 @@
+
+pop-accordion,shadow
+pop-accordion,prop,disabled,boolean,false,false,true
+pop-accordion,prop,isOpen,boolean,false,false,true
+pop-accordion,prop,name,string,undefined,true,true
+pop-accordion,prop,readonly,boolean,false,false,true
+pop-accordion,method,close,close() => Promise<boolean>
+pop-accordion,method,open,open() => Promise<boolean>
+pop-accordion,method,toggle,toggle() => Promise<void>
+pop-accordion,css-prop,--animation
+pop-accordion,css-prop,--background
+pop-accordion,css-prop,--border-color
+pop-accordion,css-prop,--border-radius
+pop-accordion,part,content
+pop-accordion,part,header
+
+pop-accordion-group,shadow
+pop-accordion-group,prop,active,string | string[],undefined,false,false
+pop-accordion-group,prop,disabled,boolean,undefined,false,true
+pop-accordion-group,prop,multiple,boolean,undefined,false,true
+pop-accordion-group,prop,readonly,boolean,undefined,false,true
+pop-accordion-group,event,popChange,AccordionGroupChangeEventDetail,true
+
+pop-avatar,shadow
+pop-avatar,prop,placeholder,boolean,false,false,true
+pop-avatar,css-prop,--background
+pop-avatar,css-prop,--color
+
+pop-badge,shadow
+pop-badge,prop,as,"div" | "span",undefined,false,false
+pop-badge,prop,color,"accent" | "error" | "info" | "neutral" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-badge,prop,outlined,boolean,false,false,true
+pop-badge,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-badge,css-prop,--background
+pop-badge,css-prop,--border-color
+pop-badge,css-prop,--border-radius
+pop-badge,css-prop,--color
+pop-badge,part,native
+
+pop-button,shadow
+pop-button,prop,color,"accent" | "error" | "ghost" | "info" | "neutral" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-button,prop,disabled,boolean,undefined,false,true
+pop-button,prop,expand,"block" | "wide",undefined,false,true
+pop-button,prop,form,string,undefined,false,false
+pop-button,prop,outlined,boolean,undefined,false,true
+pop-button,prop,shape,"circle" | "square",undefined,false,true
+pop-button,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-button,prop,type,"button" | "reset" | "submit",'button',false,false
+pop-button,event,popBlur,void,true
+pop-button,event,popFocus,void,true
+pop-button,css-prop,--animation
+pop-button,css-prop,--background
+pop-button,css-prop,--border-color
+pop-button,css-prop,--border-radius
+pop-button,css-prop,--color
+pop-button,css-prop,--focus-scale
+pop-button,part,native
+
+pop-card,shadow
+pop-card,css-prop,--border-radius
+
+pop-checkbox,shadow
+pop-checkbox,prop,checked,boolean,undefined,false,true
+pop-checkbox,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-checkbox,prop,disabled,boolean,undefined,false,true
+pop-checkbox,prop,indeterminate,boolean,undefined,false,true
+pop-checkbox,prop,name,string,this.#inputId,false,false
+pop-checkbox,prop,placement,"end" | "start",undefined,false,true
+pop-checkbox,prop,readonly,boolean,undefined,false,true
+pop-checkbox,prop,required,boolean,undefined,false,true
+pop-checkbox,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-checkbox,prop,value,string,'on',false,true
+pop-checkbox,method,setFocus,setFocus() => Promise<void>
+pop-checkbox,event,popBlur,void,true
+pop-checkbox,event,popChange,CheckboxChangeEventDetail<string>,true
+pop-checkbox,event,popFocus,void,true
+pop-checkbox,css-prop,--animation
+pop-checkbox,css-prop,--background
+pop-checkbox,css-prop,--border-color
+pop-checkbox,css-prop,--border-radius
+pop-checkbox,css-prop,--checkmark-color
+pop-checkbox,part,label
+pop-checkbox,part,native
+
+pop-divider,shadow
+pop-divider,prop,color,"accent" | "error" | "info" | "neutral" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-divider,prop,orientation,"horizontal" | "vertical",undefined,false,true
+pop-divider,prop,placement,"center" | "end" | "left" | "right" | "start",undefined,false,true
+pop-divider,css-prop,--background
+
+pop-drawer,shadow
+pop-drawer,prop,open,boolean,undefined,false,true
+pop-drawer,prop,side,"end" | "start",undefined,false,true
+pop-drawer,prop,trigger,string,undefined,false,false
+pop-drawer,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false,false
+pop-drawer,method,dismiss,dismiss() => Promise<boolean>
+pop-drawer,method,present,present() => Promise<boolean>
+pop-drawer,method,toggle,toggle() => Promise<void>
+pop-drawer,css-prop,--background
+pop-drawer,css-prop,--background-backdrop
+pop-drawer,css-prop,--color
+pop-drawer,part,backdrop
+pop-drawer,part,side
+
+pop-dropdown,shadow
+pop-dropdown,prop,align,"end" | "start",undefined,false,true
+pop-dropdown,prop,debounce,number,100,false,false
+pop-dropdown,prop,open,boolean,undefined,false,true
+pop-dropdown,prop,showBackdrop,boolean,undefined,false,true
+pop-dropdown,prop,side,"bottom" | "left" | "right" | "top",undefined,false,true
+pop-dropdown,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false,false
+pop-dropdown,method,dismiss,dismiss() => Promise<boolean>
+pop-dropdown,method,present,present() => Promise<boolean>
+pop-dropdown,event,didDismiss,void,true
+pop-dropdown,event,didPresent,void,true
+pop-dropdown,css-prop,--background
+pop-dropdown,css-prop,--border-color
+pop-dropdown,css-prop,--border-radius
+pop-dropdown,css-prop,--color
+pop-dropdown,css-prop,--shadow
+pop-dropdown,part,backdrop
+pop-dropdown,part,content
+pop-dropdown,part,dropdown
+pop-dropdown,part,trigger
+pop-dropdown,part,{name}
+
+pop-img,shadow
+pop-img,prop,alt,string,undefined,false,false
+pop-img,prop,src,string,undefined,false,false
+pop-img,event,popDidLoad,void,true
+pop-img,event,popError,void,true
+pop-img,event,popWillLoad,void,true
+pop-img,part,image
+
+pop-indicator,shadow
+pop-indicator,prop,position,"bottom" | "middle" | "top",undefined,false,true
+pop-indicator,prop,side,"center" | "end" | "left" | "right" | "start",undefined,false,true
+pop-indicator,css-prop,--translate-x
+pop-indicator,css-prop,--translate-y
+
+pop-input,shadow
+pop-input,prop,autoCapitalize,"characters" | "none" | "off" | "on" | "sentences" | "words",undefined,false,false
+pop-input,prop,autoComplete,"name" | "off" | "on" | "tel" | "email" | "url" | "honorific-prefix" | "given-name" | "additional-name" | "family-name" | "honorific-suffix" | "nickname" | "username" | "new-password" | "current-password" | "one-time-code" | "organization-title" | "organization" | "street-address" | "address-line1" | "address-line2" | "address-line3" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "country" | "country-name" | "postal-code" | "cc-name" | "cc-given-name" | "cc-additional-name" | "cc-family-name" | "cc-number" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-csc" | "cc-type" | "transaction-currency" | "transaction-amount" | "language" | "bday" | "bday-day" | "bday-month" | "bday-year" | "sex" | "tel-country-code" | "tel-national" | "tel-area-code" | "tel-local" | "tel-extension" | "impp" | "photo",'off',false,false
+pop-input,prop,autoCorrect,"off" | "on",undefined,false,false
+pop-input,prop,autoFocus,boolean,undefined,false,true
+pop-input,prop,bordered,boolean,undefined,false,true
+pop-input,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-input,prop,counter,boolean,undefined,false,false
+pop-input,prop,counterFormatter,(inputLength: number, maxLength: number) => string,undefined,false,false
+pop-input,prop,debounce,number,0,false,false
+pop-input,prop,disabled,boolean,undefined,false,true
+pop-input,prop,enterkeyhint,"done" | "enter" | "go" | "next" | "previous" | "search" | "send",undefined,false,false
+pop-input,prop,errorText,string,undefined,false,false
+pop-input,prop,helperText,string,undefined,false,false
+pop-input,prop,keyboard,"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url",undefined,false,false
+pop-input,prop,max,number | string,undefined,false,false
+pop-input,prop,maxLength,number,undefined,false,false
+pop-input,prop,min,number,undefined,false,false
+pop-input,prop,minLength,number,undefined,false,false
+pop-input,prop,multiple,boolean,undefined,false,false
+pop-input,prop,name,string,this.#inputId,false,false
+pop-input,prop,pattern,string,undefined,false,false
+pop-input,prop,placeholder,string,undefined,false,false
+pop-input,prop,readonly,boolean,undefined,false,true
+pop-input,prop,required,boolean,undefined,false,true
+pop-input,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-input,prop,spellcheck,boolean,undefined,false,false
+pop-input,prop,step,string,undefined,false,false
+pop-input,prop,type,"date" | "datetime-local" | "email" | "month" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "week",'text',false,false
+pop-input,prop,value,number | string,'',false,false
+pop-input,method,setFocus,setFocus() => Promise<void>
+pop-input,event,popBlur,void,true
+pop-input,event,popChange,InputChangeEventDetail,true
+pop-input,event,popFocus,void,true
+pop-input,event,popInput,InputInputEventDetail,true
+pop-input,css-prop,--background
+pop-input,css-prop,--border-color
+pop-input,css-prop,--border-radius
+pop-input,css-prop,--color
+pop-input,css-prop,--error-color
+pop-input,css-prop,--font
+pop-input,css-prop,--required-color
+pop-input,part,label
+pop-input,part,native
+
+pop-input-file,shadow
+pop-input-file,prop,autoFocus,boolean,undefined,false,true
+pop-input-file,prop,bordered,boolean,undefined,false,true
+pop-input-file,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-input-file,prop,disabled,boolean,undefined,false,true
+pop-input-file,prop,errorText,string,undefined,false,false
+pop-input-file,prop,helperText,string,undefined,false,false
+pop-input-file,prop,multiple,boolean,undefined,false,false
+pop-input-file,prop,name,string,this.#inputId,false,false
+pop-input-file,prop,readonly,boolean,undefined,false,true
+pop-input-file,prop,required,boolean,undefined,false,true
+pop-input-file,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-input-file,prop,value,File | File[],undefined,false,false
+pop-input-file,method,setFocus,setFocus() => Promise<void>
+pop-input-file,event,popBlur,void,true
+pop-input-file,event,popChange,InputFileChangeEventDetail,true
+pop-input-file,event,popFocus,void,true
+pop-input-file,css-prop,--background
+pop-input-file,css-prop,--background-opacity
+pop-input-file,css-prop,--border-color
+pop-input-file,css-prop,--border-radius
+pop-input-file,css-prop,--button-animation
+pop-input-file,css-prop,--button-background
+pop-input-file,css-prop,--button-color
+pop-input-file,css-prop,--color
+pop-input-file,css-prop,--error-color
+pop-input-file,part,label
+pop-input-file,part,native
+
+pop-item,shadow
+pop-item,prop,disabled,boolean,undefined,false,false
+
+pop-join,none
+pop-join,prop,orientation,"horizontal" | "vertical",undefined,false,true
+
+pop-kbd,shadow
+pop-kbd,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-kbd,css-prop,--background
+pop-kbd,css-prop,--border-color
+pop-kbd,css-prop,--border-radius
+pop-kbd,css-prop,--font
+pop-kbd,part,native
+
+pop-list,none
+pop-list,prop,orientation,"horizontal" | "vertical",undefined,false,true
+pop-list,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+
+pop-loading,shadow
+pop-loading,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-loading,prop,type,"ball" | "bars" | "dots" | "infinity" | "ring" | "spinner",undefined,false,true
+pop-loading,css-prop,--background
+
+pop-mask,shadow
+pop-mask,prop,type,"circle" | "decagon" | "diamond" | "heart" | "hexagon" | "hexagon-2" | "parallelogram" | "parallelogram-2" | "parallelogram-3" | "parallelogram-4" | "pentagon" | "square" | "squircle" | "star" | "star-2" | "triangle" | "triangle-2" | "triangle-3" | "triangle-4",undefined,false,true
+
+pop-modal,shadow
+pop-modal,prop,backdropDismiss,boolean,undefined,false,false
+pop-modal,prop,component,Function | HTMLElement | string,undefined,false,false
+pop-modal,prop,componentProps,{ [key: string]: any; },undefined,false,false
+pop-modal,prop,open,boolean,undefined,false,true
+pop-modal,prop,showBackdrop,boolean,undefined,false,true
+pop-modal,prop,trigger,string,undefined,false,false
+pop-modal,method,dismiss,dismiss(data: any) => Promise<boolean>
+pop-modal,method,present,present() => Promise<boolean>
+pop-modal,event,didDismiss,void,true
+pop-modal,event,didPresent,void,true
+pop-modal,part,{name}
+
+pop-navbar,shadow
+pop-navbar,part,header
+
+pop-popover,shadow
+pop-popover,prop,animated,boolean,true,false,true
+pop-popover,prop,backdropDismiss,boolean,false,false,true
+pop-popover,prop,component,Function | HTMLElement | string,undefined,false,false
+pop-popover,prop,componentProps,{ [key: string]: any; },undefined,false,false
+pop-popover,prop,event,Event,undefined,false,false
+pop-popover,prop,open,boolean,undefined,false,true
+pop-popover,prop,showBackdrop,boolean,false,false,true
+pop-popover,prop,trigger,string,undefined,false,false
+pop-popover,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false,false
+pop-popover,method,dismiss,dismiss(data?: any) => Promise<boolean>
+pop-popover,method,present,present() => Promise<boolean>
+pop-popover,event,didDismiss,void,true
+pop-popover,event,didPresent,void,true
+pop-popover,event,willDismiss,void,true
+pop-popover,event,willPresent,void,true
+pop-popover,part,content
+
+pop-progress,shadow
+pop-progress,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-progress,prop,max,number,undefined,false,true
+pop-progress,prop,value,number,undefined,false,true
+pop-progress,css-prop,--background
+pop-progress,css-prop,--background-active
+pop-progress,css-prop,--border-radius
+pop-progress,part,native
+
+pop-radio,shadow
+pop-radio,prop,autoFocus,boolean,false,false,true
+pop-radio,prop,checked,boolean,false,false,true
+pop-radio,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-radio,prop,disabled,boolean,undefined,false,true
+pop-radio,prop,name,string,this.#inputId,false,false
+pop-radio,prop,required,boolean,undefined,false,true
+pop-radio,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-radio,prop,value,any,'',false,false
+pop-radio,method,setFocus,setFocus() => Promise<void>
+pop-radio,event,popBlur,void,true
+pop-radio,event,popFocus,void,true
+pop-radio,css-prop,--animation-duration
+pop-radio,css-prop,--background
+pop-radio,css-prop,--border-color
+pop-radio,css-prop,--border-opacity
+pop-radio,css-prop,--border-radius
+pop-radio,css-prop,--opacity
+pop-radio,part,label
+pop-radio,part,native
+
+pop-radio-group,none
+pop-radio-group,prop,allowEmpty,boolean,undefined,false,false
+pop-radio-group,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-radio-group,prop,compare,((currentValue: any, newValue: any) => boolean) | string,undefined,false,false
+pop-radio-group,prop,disabled,boolean,undefined,false,true
+pop-radio-group,prop,name,string,this.#inputId,false,false
+pop-radio-group,prop,required,boolean,undefined,false,true
+pop-radio-group,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-radio-group,prop,value,any,undefined,false,false
+pop-radio-group,event,popChange,RadioGroupChangeEventDetail<any>,true
+
+pop-range,shadow
+pop-range,prop,autoFocus,boolean,false,false,false
+pop-range,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-range,prop,debounce,number,0,false,false
+pop-range,prop,disabled,boolean,undefined,false,true
+pop-range,prop,max,number,undefined,false,true
+pop-range,prop,min,number,undefined,false,true
+pop-range,prop,name,string,this.#inputId,false,false
+pop-range,prop,required,boolean,undefined,false,true
+pop-range,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-range,prop,step,number,undefined,false,true
+pop-range,prop,value,number,undefined,false,false
+pop-range,method,setFocus,setFocus() => Promise<void>
+pop-range,event,popBlur,void,true
+pop-range,event,popChange,RangeChangeEventDetail,true
+pop-range,event,popFocus,void,true
+pop-range,css-prop,--active-track-color
+pop-range,css-prop,--border-radius
+pop-range,css-prop,--thumb-color
+pop-range,css-prop,--thumb-size
+pop-range,css-prop,--track-color
+pop-range,css-prop,--track-size
+pop-range,part,native
+
+pop-select,shadow
+pop-select,prop,autoFocus,boolean,false,false,true
+pop-select,prop,bordered,boolean,undefined,false,true
+pop-select,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-select,prop,compare,((currentValue: any, newValue: any) => boolean) | string,undefined,false,false
+pop-select,prop,disabled,boolean,undefined,false,true
+pop-select,prop,helperText,string,undefined,false,false
+pop-select,prop,max,number,undefined,false,true
+pop-select,prop,min,number,undefined,false,true
+pop-select,prop,multiple,boolean,false,false,true
+pop-select,prop,name,string,this.#inputId,false,false
+pop-select,prop,notEnoughErrorText,string,undefined,false,false
+pop-select,prop,placeholder,string,undefined,false,false
+pop-select,prop,required,boolean,undefined,false,true
+pop-select,prop,selectedText,string,undefined,false,false
+pop-select,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-select,prop,tooManyErrorText,string,undefined,false,false
+pop-select,prop,value,any,undefined,false,false
+pop-select,method,close,close() => Promise<void>
+pop-select,method,open,open(event?: any) => Promise<HTMLPopPopoverElement>
+pop-select,method,setFocus,setFocus() => Promise<void>
+pop-select,event,popBlur,void,true
+pop-select,event,popChange,SelectChangeEventDetail<any>,true
+pop-select,event,popDismiss,void,true
+pop-select,event,popFocus,void,true
+pop-select,css-prop,--background
+pop-select,css-prop,--border-color
+pop-select,css-prop,--border-radius
+pop-select,css-prop,--color
+pop-select,css-prop,--error-color
+pop-select,css-prop,--opacity
+pop-select,part,label
+
+pop-select-option,none
+pop-select-option,prop,disabled,boolean,undefined,false,false
+pop-select-option,prop,value,any,undefined,false,false
+
+pop-swap,shadow
+pop-swap,prop,active,boolean,undefined,false,true
+pop-swap,prop,type,"flip" | "rotate",undefined,false,true
+
+pop-textarea,shadow
+pop-textarea,prop,autoCapitalize,"characters" | "none" | "off" | "on" | "sentences" | "words",undefined,false,false
+pop-textarea,prop,autoFocus,boolean,false,false,true
+pop-textarea,prop,bordered,boolean,false,false,true
+pop-textarea,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-textarea,prop,cols,number,undefined,false,false
+pop-textarea,prop,counter,boolean,undefined,false,false
+pop-textarea,prop,counterFormatter,(inputLength: number, maxLength: number) => string,undefined,false,false
+pop-textarea,prop,debounce,number,undefined,false,false
+pop-textarea,prop,disabled,boolean,undefined,false,true
+pop-textarea,prop,enterkeyhint,"done" | "enter" | "go" | "next" | "previous" | "search" | "send",undefined,false,false
+pop-textarea,prop,errorText,string,undefined,false,false
+pop-textarea,prop,helperText,string,undefined,false,false
+pop-textarea,prop,keyboard,"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url",undefined,false,false
+pop-textarea,prop,maxLength,number,undefined,false,false
+pop-textarea,prop,minLength,number,undefined,false,false
+pop-textarea,prop,name,string,this.#inputId,false,false
+pop-textarea,prop,placeholder,string,undefined,false,false
+pop-textarea,prop,readonly,boolean,undefined,false,true
+pop-textarea,prop,required,boolean,undefined,false,true
+pop-textarea,prop,rows,number,undefined,false,false
+pop-textarea,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-textarea,prop,spellcheck,boolean,undefined,false,false
+pop-textarea,prop,value,string,'',false,false
+pop-textarea,prop,wrap,"hard" | "soft",undefined,false,false
+pop-textarea,method,setFocus,setFocus() => Promise<void>
+pop-textarea,event,popBlur,void,true
+pop-textarea,event,popChange,TextareaChangeEventDetail,true
+pop-textarea,event,popFocus,void,true
+pop-textarea,event,popInput,TextareaInputEventDetail,true
+pop-textarea,css-prop,--background
+pop-textarea,css-prop,--border-color
+pop-textarea,css-prop,--border-radius
+pop-textarea,css-prop,--color
+pop-textarea,css-prop,--error-color
+pop-textarea,css-prop,--font
+pop-textarea,css-prop,--opacity
+pop-textarea,css-prop,--required-color
+pop-textarea,part,label
+pop-textarea,part,native
+
+pop-toggle,shadow
+pop-toggle,prop,checked,boolean,undefined,false,true
+pop-toggle,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-toggle,prop,disabled,boolean,undefined,false,true
+pop-toggle,prop,indeterminate,boolean,false,false,true
+pop-toggle,prop,name,string,this.#inputId,false,false
+pop-toggle,prop,readonly,boolean,undefined,false,true
+pop-toggle,prop,required,boolean,undefined,false,true
+pop-toggle,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
+pop-toggle,prop,value,string,'on',false,true
+pop-toggle,method,setFocus,setFocus() => Promise<void>
+pop-toggle,event,popBlur,void,true
+pop-toggle,event,popChange,ToggleChangeEventDetail<string>,true
+pop-toggle,event,popFocus,void,true
+pop-toggle,css-prop,--animation-duration
+pop-toggle,css-prop,--background
+pop-toggle,css-prop,--border-radius
+pop-toggle,css-prop,--checked-color
+pop-toggle,css-prop,--color
+pop-toggle,css-prop,--opacity
+pop-toggle,css-prop,--required-color
+pop-toggle,part,label
+pop-toggle,part,native
+
+pop-tooltip,none
+pop-tooltip,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
+pop-tooltip,prop,open,boolean,false,false,true
+pop-tooltip,prop,position,"bottom" | "left" | "right" | "top",undefined,false,true
+pop-tooltip,prop,value,string,undefined,true,false
+pop-tooltip,css-prop,--background
+pop-tooltip,css-prop,--background-opacity
+pop-tooltip,css-prop,--color
+pop-tooltip,css-prop,--tail
+pop-tooltip,css-prop,--text-opacity

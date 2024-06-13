@@ -1,0 +1,81 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+
+/**
+ * @prop --border-radius: Border radius
+ *
+ * @prop --background: Background progress bar
+ * @prop --background-active: Background progress bar value
+ */
+
+// Badge
+// ----------------------------------------------------------------
+
+@mixin bar() {
+  &::-webkit-progress-bar {
+    @content;
+  }
+  &::-moz-progress-bar {
+    @content;
+  }
+}
+@mixin value() {
+  &::-webkit-progress-value {
+    @content;
+  }
+}
+
+:host {
+  --background: oklch(#{theme.get-color("base.content")} / 0.2);
+  --background-active: oklch(#{theme.get-color("base.content")});
+
+  > progress {
+    appearance: none;
+    position: relative;
+    vertical-align: baseline;
+    width: 100%;
+
+    overflow: hidden;
+    height: 0.5rem;
+    border-radius: var(--border-radius, #{radius.$xl});
+
+    @include bar {
+      border-radius: var(--border-radius, #{radius.$xl});
+      background-color: var(--background);
+    }
+    @include value {
+      border-radius: var(--border-radius, #{radius.$xl});
+      background-color: var(--background-active);
+    }
+    &:indeterminate {
+      background-image: repeating-linear-gradient(
+        90deg,
+        var(--background-active) -1%,
+        var(--background-active) 10%,
+        transparent 10%,
+        transparent 90%
+      );
+      background-size: 200%;
+      background-position-x: 15%;
+      animation: progress-loading 5s ease-in-out infinite;
+    }
+  }
+
+  @keyframes progress-loading {
+    50% {
+      background-position-x: -115%;
+    }
+  }
+}
+
+// Color
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+
+    :host([color="#{$color}"]) {
+      --background-active: oklch(#{$base});
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, info, success, warning, error);

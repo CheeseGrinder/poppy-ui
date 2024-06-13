@@ -1,0 +1,75 @@
+@use "sass:string";
+@use "sass:list";
+
+$font: system-ui;
+
+$dark_theme: (
+  base: (
+    "100": 0.253267 0.015896 252.417568,
+    "200": 0.232607 0.013807 253.100675,
+    "300": 0.211484 0.01165 254.087939,
+    content: 0.746477 0.0216 264.435964,
+  ),
+  neutral: (
+    base: 0.313815 0.021108 254.139175,
+    shade: 28.22% 0.019 254.82,
+    content: 0.746477 0.0216 264.435964,
+  ),
+  primary: (
+    base: 0.6569 0.196 275.75,
+    shade: 59% 0.181 275.81,
+    content: 0.13138 0.0392 275.75,
+  ),
+  secondary: (
+    base: 0.748 0.26 342.55,
+    shade: 67.31% 0.233 342.57,
+    content: 0.1496 0.052 342.55,
+  ),
+  accent: (
+    base: 0.7451 0.167 183.61,
+    shade: 68.49% 0.12294277809975417 181.66988347932354,
+    content: 0.14902 0.0334 183.61,
+  ),
+  info: (
+    base: 0.7206 0.191 231.6,
+    shade: 66.25% 0.14987799890861897 239.25359427498648,
+    content: 0 0 0,
+  ),
+  success: (
+    base: 64.8% 0.15 160,
+    shade: 58.5% 0.133 159.63,
+    content: 0 0 0,
+  ),
+  warning: (
+    base: 0.8471 0.199 83.87,
+    shade: 76.51% 0.15856154102999329 79.77383626616243,
+    content: 0 0 0,
+  ),
+  error: (
+    base: 0.7176 0.221 22.18,
+    shade: 64.53% 0.198 22.33,
+    content: 0 0 0,
+  ),
+);
+
+@function get-theme($color, $theme: $dark_theme) {
+  $colors: string.split($color, ".");
+  $base: list.nth($colors, 1);
+  $variant: list.nth($colors, 2);
+
+  @return map-get($theme, $base, $variant);
+}
+
+@function get-color($color, $theme: $dark_theme) {
+  $colors: string.split($color, ".");
+  $base: list.nth($colors, 1);
+  $variant: list.nth($colors, 2);
+
+  $value: get-theme($color, $theme);
+
+  @if $variant == base {
+    @return var(--#{$base}, #{$value});
+  } @else {
+    @return var(--#{$base}-#{$variant}, #{$value});
+  }
+}

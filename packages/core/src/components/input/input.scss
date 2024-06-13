@@ -1,0 +1,184 @@
+@use "../../global/styles/radius";
+@use "../../global/styles/theme";
+@use "../../global/styles/input";
+@use "../../global/styles/join-item";
+
+/**
+ * @prop --border-radius: Border radius
+ * @prop --border-color: Border color & outline color
+ *
+ * @prop --background: Background color
+ *
+ * @prop --color: Change text color
+ * @prop --required-color: Change star color
+ * @prop --error-color: Change error text color
+ * @prop --font: Change text font
+ */
+
+@include join-item.item(".input-wrapper");
+
+// Input
+// ----------------------------------------------------------------
+
+$minWidth: 12rem;
+:host {
+  --border-radius: #{radius.$md};
+  --border-color: transparent;
+  --outline-color: oklch(#{theme.get-color("base.content")} / 0.2);
+  --background: oklch(#{theme.get-color("base.100")});
+  --color: oklch(#{theme.get-color("base.content")});
+
+  @include input.label;
+  @include input.helper(".input-wrapper", $counter: true);
+
+  display: inline-flex;
+  flex-direction: column;
+
+  > .input-wrapper {
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 1;
+    gap: 0.5rem;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--border-radius);
+    border-color: var(--border-color, transparent);
+
+    background-color: var(--background);
+
+    min-width: $minWidth;
+    width: 100%;
+
+    &:has(input:not([readonly]):focus-visible) {
+      outline-style: solid;
+      outline-width: 2px;
+      outline-offset: 2px;
+      outline-color: var(--outline-color, var(--border-color));
+    }
+
+    > input {
+      flex-grow: 1;
+
+      border: none;
+      outline: none;
+
+      color: var(--color);
+      background-color: transparent;
+
+      font-family: #{theme.$font};
+      white-space: pre-wrap;
+
+      cursor: inherit;
+
+      &::-webkit-calendar-picker-indicator {
+        line-height: 1em;
+      }
+      &::-webkit-date-and-time-value {
+        text-align: inherit;
+      }
+    }
+  }
+}
+
+:host([bordered]) {
+  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
+}
+
+// Input Slot
+// ----------------------------------------------------------------
+
+::slotted([slot="start"]),
+::slotted([slot="end"]) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// Input Size
+// ----------------------------------------------------------------
+
+:host([size="xs"]) > .input-wrapper {
+  padding: 0 0.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.625;
+}
+:host([size="sm"]) > .input-wrapper {
+  padding: 0 0.75rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  line-height: 2rem;
+}
+:host([size="md"]) .input-wrapper {
+  padding: 0 1rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  line-height: 2;
+}
+:host([size="lg"]) > .input-wrapper {
+  padding: 1.5rem;
+  height: 4rem;
+  font-size: 1.125rem;
+  line-height: 2;
+}
+
+// Input Color
+// ----------------------------------------------------------------
+
+@mixin generate-color($colors...) {
+  @each $color in $colors {
+    $base: theme.get-color("#{$color}.base");
+
+    :host([color="#{$color}"]) {
+      --border-color: oklch(#{$base});
+    }
+  }
+}
+@include generate-color(primary, secondary, accent, info, success, warning, error);
+
+:host([color="ghost"]) {
+  --opacity: 0.05;
+
+  > .input-wrapper:has(input:focus) {
+    --opacity: 1;
+  }
+}
+
+// Input State
+// ----------------------------------------------------------------
+
+:host([readonly]) {
+  $base: theme.get-color("base.200");
+  $neutral: theme.get-color("neutral.base");
+  $text: theme.get-color("base.content");
+
+  --background: oklch(#{$base});
+  --border-color: oklch(#{$neutral});
+  --color: oklch(#{$text} / 0.8);
+
+  cursor: text;
+
+  input::placeholder {
+    color: oklch(#{$text} / 0.2);
+  }
+}
+
+:host([disabled]) {
+  $base: theme.get-color("base.200");
+  $text: theme.get-color("base.content");
+
+  --background: oklch(#{$base});
+  --border-color: oklch(#{$base});
+  --color: oklch(#{$text} / 0.2);
+
+  cursor: not-allowed;
+
+  input::placeholder {
+    color: oklch(#{$text} / 0.2);
+  }
+}

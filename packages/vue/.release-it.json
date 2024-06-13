@@ -1,0 +1,11 @@
+{
+  "plugins": {
+    "@release-it/bumper": {
+      "out": {
+        "file": "package.json",
+        "path": ["dependencies.@poppy/core"]
+      }
+    }
+  },
+  "git": false
+}
