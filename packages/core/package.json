@@ -1,6 +1,6 @@
 {
-  "name": "@poppy/core",
-  "version": "0.1.0-beta-0",
+  "name": "@poppy-ui/core",
+  "version": "0.1.0-beta-0.4",
   "description": "Base component for Poppy based on Daisy-ui",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "license": "MIT",
@@ -26,7 +26,6 @@
   "types": "dist/types/interface.d.ts",
   "files": [
     "components/",
-    "css/",
     "dist/",
     "hydrate/",
     "loader/"
@@ -37,7 +36,7 @@
   "scripts": {
     "clean": "rimraf -rf ./.stencil ./components ./dist ./hydrate ./loader",
     "prebuild": "npm run clean",
-    "build": "stencil build --debug",
+    "build": "stencil build",
     "prestart": "npm run clean",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",

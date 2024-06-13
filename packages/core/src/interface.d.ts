@@ -1,4 +1,23 @@
-import { ComponentConfig, FrameworkConfig } from './config';
+import { ComponentConfig, PoppyConfig } from './config';
+
+export * from './components';
+export * from './index';
+export {
+  AccordionChangeEventDetail,
+  AccordionGroupChangeEventDetail,
+  CheckboxChangeEventDetail,
+  InputChangeEventDetail,
+  InputFileChangeEventDetail,
+  InputInputEventDetail,
+  RadioChangeEventDetail,
+  RadioGroupChangeEventDetail,
+  RangeChangeEventDetail,
+  SelectChangeEventDetail,
+  TextareaChangeEventDetail,
+  TextareaInputEventDetail,
+  ToggleChangeEventDetail
+} from './event'
+export { PoppyuserConfig } from './config'
 
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';
@@ -133,7 +152,7 @@ export interface FrameworkDelegate {
 
 export type Poppy = {
   components?: ComponentConfig;
-} & FrameworkConfig;
+} & PoppyConfig;
 
 declare global {
   interface Window {

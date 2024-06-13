@@ -1,7 +1,7 @@
 import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import { Color } from 'src/interfaces';
+import { Color } from 'src/interface';
 
 /**
  * Divider will be used to separate content vertically or horizontally.

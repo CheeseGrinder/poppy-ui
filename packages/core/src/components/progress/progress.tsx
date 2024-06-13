@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import type { Color } from 'src/interfaces';
+import type { Color } from 'src/interface';
 
 /**
  * Progress bar can be used to show the progress of a task or to show the passing of time.

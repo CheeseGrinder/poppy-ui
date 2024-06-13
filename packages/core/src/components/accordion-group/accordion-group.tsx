@@ -1,5 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { AccordionGroupChangeEventDetail } from './accordion-group.interface';
 
 @Component({
   tag: 'pop-accordion-group',

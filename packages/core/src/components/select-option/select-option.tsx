@@ -1,5 +1,5 @@
 import { Component, Host, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/interfaces';
+import type { Color, Size } from 'src/interface';
 
 @Component({
   tag: 'pop-select-option',

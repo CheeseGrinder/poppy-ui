@@ -1,5 +1,5 @@
 import { TriggerAction } from '#utils/trigger';
-import { Size, ComponentProps, ComponentRef, FrameworkDelegate } from 'src/interfaces';
+import { Size, ComponentProps, ComponentRef, FrameworkDelegate } from 'src/interface';
 
 export interface PopoverOptions<T extends ComponentRef = ComponentRef> {
   component: T;

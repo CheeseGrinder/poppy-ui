@@ -1,7 +1,7 @@
 import { componentConfig, config } from '#config';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/interfaces';
+import type { Color, Size } from 'src/interface';
 import type { BadgeAs } from './badge.interface';
 
 /**
