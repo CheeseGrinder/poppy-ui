@@ -2,7 +2,7 @@ import { componentConfig, config } from '#config';
 import { compareOptions } from '#utils/forms';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/interfaces';
+import type { Color, Size } from 'src/interface';
 import { Show } from '../Show';
 
 /**

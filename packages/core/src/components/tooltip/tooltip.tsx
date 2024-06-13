@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
-import type { Color } from 'src/interfaces';
+import type { Color } from 'src/interface';
 
 /**
  * Tooltip can be used to show a message when hovering over an element.

@@ -14,7 +14,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, Wrap } from 'src/interfaces';
+import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, TextareaChangeEventDetail, TextareaInputEventDetail, Wrap } from 'src/interface';
 import { Show } from '../Show';
 
 /**

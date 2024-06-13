@@ -1,5 +1,5 @@
-import type { PoppyConfig } from '@poppy/core/components';
-import { initialize } from '@poppy/core/components';
+import type { PoppyuserConfig } from '@poppy-ui/core';
+import { initialize } from '@poppy-ui/core/components';
 import type { App, Plugin } from 'vue';
 
 const toKebabCase = (eventName: string) => {
@@ -15,7 +15,7 @@ const getHelperFunctions = () => {
 };
 
 export const PoppyVue: Plugin = {
-  async install(_: App, config: PoppyConfig = {}) {
+  async install(_: App, config: PoppyuserConfig = {}) {
     /**
      * By default Poppy UI hides elements that
      * are not hydrated, but in the CE build there is no

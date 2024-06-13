@@ -1,5 +1,5 @@
 {
-  "name": "@poppy/vue",
+  "name": "@poppy-ui/vue",
   "version": "0.1.0-beta-0",
   "description": "Vue specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
@@ -8,8 +8,7 @@
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "files": [
-    "dist/",
-    "css/"
+    "dist/"
   ],
   "repository": {
     "type": "git",
@@ -32,19 +31,17 @@
     "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
   },
   "scripts": {
-    "dev": "vite",
-    "prebuild": "npm run type-check",
-    "preview": "vite preview",
-    "build": "vite build",
-    "type-check": "vue-tsc --build --force",
     "audit-ci": "audit-ci --config ./audit-ci.json",
     "prettier": "prettier --write src/",
     "prettier:check": "prettier --check src/",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "clean": "rimraf dist",
+    "prebundle": "npm run clean",
+    "bundle": "rollup --config rollup.config.mjs",
     "release": "release-it"
   },
   "dependencies": {
-    "@poppy/core": "0.1.0-beta.1"
+    "@poppy-ui/core": "^0.1.0-beta-0.1"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
@@ -53,10 +50,11 @@
     "audit-ci": "^7.0.1",
     "eslint": "^9.4.0",
     "eslint-plugin-vue": "^9.26.0",
-    "npm-run-all2": "^6.2.0",
     "prettier": "^3.3.2",
+    "rimraf": "^5.0.7",
     "rollup": "^4.18.0",
     "typescript": "~5.4.5",
+    "vite": "^5.2.13",
     "vue": "^3.4.27"
   },
   "vetur": {

@@ -14,7 +14,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { ComponentProps, ComponentRef } from 'src/interfaces';
+import { ComponentProps, ComponentRef } from 'src/interface';
 
 @Component({
   tag: 'pop-popover',

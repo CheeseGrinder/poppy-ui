@@ -16,7 +16,7 @@ type VueComponentModel = {
   targetAttr: string;
 }
 
-const componentCorePackage = '@poppy/core';
+const componentCorePackage = '@poppy-ui/core';
 
 export const config: Config = {
   namespace: 'Poppy',
@@ -55,7 +55,7 @@ export const config: Config = {
       type: 'dist-custom-elements',
       dir: 'components',
       copy: [{
-        src: '../scripts/custom-elements',
+        src: '../assets/custom-elements',
         dest: 'components',
         warn: true
       }],

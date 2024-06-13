@@ -13,7 +13,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Size } from 'src/interfaces';
+import type { Color, Size, ToggleChangeEventDetail } from 'src/interface';
 import { Show } from '../Show';
 
 /**

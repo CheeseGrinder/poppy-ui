@@ -5,7 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AutoCapitalize, Autocomplete, Color, ComponentProps, ComponentRef, EnterKeyHint, InputType, KeyboardType, Placement, Size, Wrap } from "./interfaces.d";
+import { AccordionGroupChangeEventDetail } from "./event.d";
+import { AutoCapitalize, Autocomplete, CheckboxChangeEventDetail, Color, ComponentProps, ComponentRef, EnterKeyHint, InputChangeEventDetail, InputFileChangeEventDetail, InputInputEventDetail, InputType, KeyboardType, Placement, RadioGroupChangeEventDetail, RangeChangeEventDetail, SelectChangeEventDetail, Size, TextareaChangeEventDetail, TextareaInputEventDetail, ToggleChangeEventDetail, Wrap } from "./interface.d";
 import { BadgeAs } from "./components/badge/badge.interface";
 import { ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.interface";
 import { TriggerAction } from "./utils/trigger";
@@ -13,7 +14,8 @@ import { MaskType } from "./components/mask/mask";
 import { RadioGroupCompareFn } from "./components/radio-group/radio-group.interface";
 import { SelectCompareFn } from "./components/select/select.interface";
 import { SelectPopoverOption } from "./components/select-popover/select-popover-interface";
-export { AutoCapitalize, Autocomplete, Color, ComponentProps, ComponentRef, EnterKeyHint, InputType, KeyboardType, Placement, Size, Wrap } from "./interfaces.d";
+export { AccordionGroupChangeEventDetail } from "./event.d";
+export { AutoCapitalize, Autocomplete, CheckboxChangeEventDetail, Color, ComponentProps, ComponentRef, EnterKeyHint, InputChangeEventDetail, InputFileChangeEventDetail, InputInputEventDetail, InputType, KeyboardType, Placement, RadioGroupChangeEventDetail, RangeChangeEventDetail, SelectChangeEventDetail, Size, TextareaChangeEventDetail, TextareaInputEventDetail, ToggleChangeEventDetail, Wrap } from "./interface.d";
 export { BadgeAs } from "./components/badge/badge.interface";
 export { ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.interface";
 export { TriggerAction } from "./utils/trigger";

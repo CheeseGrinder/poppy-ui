@@ -3,41 +3,41 @@
 /* auto-generated vue proxies */
 import { defineContainer } from './vue-component-lib/utils';
 
-import type { JSX } from '@poppy/core/components';
+import type { JSX } from '@poppy-ui/core/components';
 
-import { defineCustomElement as definePopAccordion } from '@poppy/core/components/pop-accordion.js';
-import { defineCustomElement as definePopAccordionGroup } from '@poppy/core/components/pop-accordion-group.js';
-import { defineCustomElement as definePopAvatar } from '@poppy/core/components/pop-avatar.js';
-import { defineCustomElement as definePopBadge } from '@poppy/core/components/pop-badge.js';
-import { defineCustomElement as definePopButton } from '@poppy/core/components/pop-button.js';
-import { defineCustomElement as definePopCard } from '@poppy/core/components/pop-card.js';
-import { defineCustomElement as definePopCheckbox } from '@poppy/core/components/pop-checkbox.js';
-import { defineCustomElement as definePopDivider } from '@poppy/core/components/pop-divider.js';
-import { defineCustomElement as definePopDrawer } from '@poppy/core/components/pop-drawer.js';
-import { defineCustomElement as definePopDropdown } from '@poppy/core/components/pop-dropdown.js';
-import { defineCustomElement as definePopImg } from '@poppy/core/components/pop-img.js';
-import { defineCustomElement as definePopIndicator } from '@poppy/core/components/pop-indicator.js';
-import { defineCustomElement as definePopInput } from '@poppy/core/components/pop-input.js';
-import { defineCustomElement as definePopInputFile } from '@poppy/core/components/pop-input-file.js';
-import { defineCustomElement as definePopItem } from '@poppy/core/components/pop-item.js';
-import { defineCustomElement as definePopJoin } from '@poppy/core/components/pop-join.js';
-import { defineCustomElement as definePopKbd } from '@poppy/core/components/pop-kbd.js';
-import { defineCustomElement as definePopList } from '@poppy/core/components/pop-list.js';
-import { defineCustomElement as definePopLoading } from '@poppy/core/components/pop-loading.js';
-import { defineCustomElement as definePopMask } from '@poppy/core/components/pop-mask.js';
-import { defineCustomElement as definePopModal } from '@poppy/core/components/pop-modal.js';
-import { defineCustomElement as definePopNavbar } from '@poppy/core/components/pop-navbar.js';
-import { defineCustomElement as definePopPopover } from '@poppy/core/components/pop-popover.js';
-import { defineCustomElement as definePopProgress } from '@poppy/core/components/pop-progress.js';
-import { defineCustomElement as definePopRadio } from '@poppy/core/components/pop-radio.js';
-import { defineCustomElement as definePopRadioGroup } from '@poppy/core/components/pop-radio-group.js';
-import { defineCustomElement as definePopRange } from '@poppy/core/components/pop-range.js';
-import { defineCustomElement as definePopSelect } from '@poppy/core/components/pop-select.js';
-import { defineCustomElement as definePopSelectOption } from '@poppy/core/components/pop-select-option.js';
-import { defineCustomElement as definePopSwap } from '@poppy/core/components/pop-swap.js';
-import { defineCustomElement as definePopTextarea } from '@poppy/core/components/pop-textarea.js';
-import { defineCustomElement as definePopToggle } from '@poppy/core/components/pop-toggle.js';
-import { defineCustomElement as definePopTooltip } from '@poppy/core/components/pop-tooltip.js';
+import { defineCustomElement as definePopAccordion } from '@poppy-ui/core/components/pop-accordion.js';
+import { defineCustomElement as definePopAccordionGroup } from '@poppy-ui/core/components/pop-accordion-group.js';
+import { defineCustomElement as definePopAvatar } from '@poppy-ui/core/components/pop-avatar.js';
+import { defineCustomElement as definePopBadge } from '@poppy-ui/core/components/pop-badge.js';
+import { defineCustomElement as definePopButton } from '@poppy-ui/core/components/pop-button.js';
+import { defineCustomElement as definePopCard } from '@poppy-ui/core/components/pop-card.js';
+import { defineCustomElement as definePopCheckbox } from '@poppy-ui/core/components/pop-checkbox.js';
+import { defineCustomElement as definePopDivider } from '@poppy-ui/core/components/pop-divider.js';
+import { defineCustomElement as definePopDrawer } from '@poppy-ui/core/components/pop-drawer.js';
+import { defineCustomElement as definePopDropdown } from '@poppy-ui/core/components/pop-dropdown.js';
+import { defineCustomElement as definePopImg } from '@poppy-ui/core/components/pop-img.js';
+import { defineCustomElement as definePopIndicator } from '@poppy-ui/core/components/pop-indicator.js';
+import { defineCustomElement as definePopInput } from '@poppy-ui/core/components/pop-input.js';
+import { defineCustomElement as definePopInputFile } from '@poppy-ui/core/components/pop-input-file.js';
+import { defineCustomElement as definePopItem } from '@poppy-ui/core/components/pop-item.js';
+import { defineCustomElement as definePopJoin } from '@poppy-ui/core/components/pop-join.js';
+import { defineCustomElement as definePopKbd } from '@poppy-ui/core/components/pop-kbd.js';
+import { defineCustomElement as definePopList } from '@poppy-ui/core/components/pop-list.js';
+import { defineCustomElement as definePopLoading } from '@poppy-ui/core/components/pop-loading.js';
+import { defineCustomElement as definePopMask } from '@poppy-ui/core/components/pop-mask.js';
+import { defineCustomElement as definePopModal } from '@poppy-ui/core/components/pop-modal.js';
+import { defineCustomElement as definePopNavbar } from '@poppy-ui/core/components/pop-navbar.js';
+import { defineCustomElement as definePopPopover } from '@poppy-ui/core/components/pop-popover.js';
+import { defineCustomElement as definePopProgress } from '@poppy-ui/core/components/pop-progress.js';
+import { defineCustomElement as definePopRadio } from '@poppy-ui/core/components/pop-radio.js';
+import { defineCustomElement as definePopRadioGroup } from '@poppy-ui/core/components/pop-radio-group.js';
+import { defineCustomElement as definePopRange } from '@poppy-ui/core/components/pop-range.js';
+import { defineCustomElement as definePopSelect } from '@poppy-ui/core/components/pop-select.js';
+import { defineCustomElement as definePopSelectOption } from '@poppy-ui/core/components/pop-select-option.js';
+import { defineCustomElement as definePopSwap } from '@poppy-ui/core/components/pop-swap.js';
+import { defineCustomElement as definePopTextarea } from '@poppy-ui/core/components/pop-textarea.js';
+import { defineCustomElement as definePopToggle } from '@poppy-ui/core/components/pop-toggle.js';
+import { defineCustomElement as definePopTooltip } from '@poppy-ui/core/components/pop-tooltip.js';
 
 
 export const PopAccordion = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop-accordion', definePopAccordion, [
