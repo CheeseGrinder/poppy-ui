@@ -1,1 +1,0 @@
-{"version":3,"names":["globalScripts","appGlobalScript"],"sources":["@stencil/core/internal/app-globals"],"sourcesContent":["import appGlobalScript from 'C:/Users/KANOMA1/Documents/projects/poppy-ui/packages/core/src/global/poppy.ts';\nexport const globalScripts = appGlobalScript;\n"],"mappings":";;AACY,MAACA,IAAgBC","ignoreList":[]}

@@ -7,5 +7,10 @@
       }
     }
   },
-  "git": false
+  "git": false,
+  "npm": {
+    "publishArgs": [
+      "--access public"
+    ]
+  }
 }

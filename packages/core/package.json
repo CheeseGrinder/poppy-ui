@@ -1,7 +1,8 @@
 {
   "name": "@poppy/core",
-  "version": "0.1.0-beta-1",
+  "version": "0.1.0-beta-0",
   "description": "Base component for Poppy based on Daisy-ui",
+  "author": "Sukaato <sukaato.dev@proton.me>",
   "license": "MIT",
   "keywords": [
     "daisy-ui",

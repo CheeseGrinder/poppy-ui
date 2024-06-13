@@ -14,5 +14,10 @@
     "comments": {
       "submit": true
     }
+  },
+  "npm": {
+    "publishArgs": [
+      "--access public"
+    ]
   }
 }

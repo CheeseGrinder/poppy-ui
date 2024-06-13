@@ -1,6 +1,6 @@
 {
   "name": "@poppy/docs",
-  "version": "0.1.0-beta-1",
+  "version": "0.1.0-beta-0",
   "description": "Pre-packaged API documentation for the Poppy docs.",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
   "main": "core.json",
@@ -19,6 +19,10 @@
     "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
   },
   "scripts": {
+    "audit-ci": "audit-ci --config ./audit-ci.json",
     "release": "release-it"
+  },
+  "devDependencies": {
+    "audit-ci": "^7.0.1"
   }
 }
