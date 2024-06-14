@@ -1,6 +1,7 @@
 import { componentConfig, config } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
 import { Size } from 'src/interface';
+import { LoadingType } from './loading.type';
 
 /**
  * Loading shows an animation to indicate that something is loading.
@@ -16,7 +17,7 @@ export class Loading implements ComponentInterface {
    *
    * @config @default 'spinner'
    */
-  @Prop({ reflect: true, mutable: true }) type?: 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';
+  @Prop({ reflect: true, mutable: true }) type?: LoadingType;
 
   /**
    * Change size of the component

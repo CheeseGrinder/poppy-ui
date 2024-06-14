@@ -1,5 +1,6 @@
 import { componentConfig } from '#config';
-import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { Component, ComponentInterface, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { SwapChangeEventDetail, SwapType } from './swap.type';
 
 /**
  * Swap allows you to toggle the visibility of two elements.
@@ -18,7 +19,7 @@ export class Swap implements ComponentInterface {
    *
    * @config @default 'rotate'
    */
-  @Prop({ reflect: true, mutable: true }) type?: 'rotate' | 'flip';
+  @Prop({ reflect: true, mutable: true }) type?: SwapType;
 
   /**
    * Activates the swap.
@@ -27,27 +28,32 @@ export class Swap implements ComponentInterface {
    * @config @default false
    */
   @Prop({ reflect: true, mutable: true }) active?: boolean;
+  @Watch('active')
+  onActiveChange(active: boolean) :void {
+    this.popSwap.emit({
+      active
+    });
+  }
 
   /**
-   * Activates the swap on hover.
+   * Emitted when the swap active attribut change
    */
-  // @Prop({ reflect: true, mutable: true }) swapOnHover?: boolean;
+  @Event() popSwap: EventEmitter<SwapChangeEventDetail>;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-swap', {
       type: 'rotate',
       active: false,
-      // swapOnHover: false,
     });
   }
 
-  // #onClick = (): void => {
-  //   if (!this.swapOnHover) this.active = !this.active;
-  // };
+  #onClick = (): void => {
+    this.active = !this.active;
+  };
 
   render() {
     return (
-      <Host>
+      <Host onClick={this.#onClick}>
         <slot name="off" />
         <slot name="on" />
       </Host>

@@ -1,4 +1,4 @@
-import type { PoppyuserConfig } from '@poppy-ui/core';
+import type { PoppyUserConfig } from '@poppy-ui/core';
 import { initialize } from '@poppy-ui/core/components';
 import type { App, Plugin } from 'vue';
 
@@ -15,7 +15,7 @@ const getHelperFunctions = () => {
 };
 
 export const PoppyVue: Plugin = {
-  async install(_: App, config: PoppyuserConfig = {}) {
+  async install(_: App, config: PoppyUserConfig = {}) {
     /**
      * By default Poppy UI hides elements that
      * are not hydrated, but in the CE build there is no

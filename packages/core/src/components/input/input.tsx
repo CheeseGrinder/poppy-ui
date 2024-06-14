@@ -13,8 +13,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { AutoCapitalize, Autocomplete, Color, EnterKeyHint, InputChangeEventDetail, InputInputEventDetail, InputType, KeyboardType, Size } from 'src/interface';
+import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
 import { Show } from '../Show';
+import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -214,13 +215,6 @@ export class Input implements ComponentInterface {
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
-   * Whether auto correction should be enabled when the user is entering/editing the text value.
-   *
-   * @config @default 'off'
-   */
-  @Prop({ mutable: true }) autoCorrect: 'on' | 'off';
-
-  /**
    * if `true`, adds border to textarea when `color` property is not set.
    *
    * @config @default false
@@ -234,7 +228,7 @@ export class Input implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: InputColor;
 
   /**
    * Change size of the component
@@ -326,7 +320,6 @@ export class Input implements ComponentInterface {
       spellcheck: false,
       autoComplete: 'off',
       autoCapitalize: 'off',
-      autoCorrect: 'off',
       bordered: false,
       size: config.get('defaultSize', 'md'),
       counter: false,
@@ -442,7 +435,6 @@ export class Input implements ComponentInterface {
             spellcheck={this.spellcheck}
             autoComplete={this.autoComplete}
             autoCapitalize={this.autoCapitalize}
-            autoCorrect={this.autoCorrect}
             onChange={this.#onChange}
             onInput={this.#onInput}
             onFocus={this.#onFocus}

@@ -11,8 +11,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, RadioGroupChangeEventDetail, Size } from 'src/interface';
-import type { RadioGroupCompareFn } from './radio-group.interface';
+import type { Color, Size } from 'src/interface';
+import type { RadioGroupChangeEventDetail, RadioGroupCompareFn } from './radio-group.type';
 
 let radioGroupIds = 0;
 

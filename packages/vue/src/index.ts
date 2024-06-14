@@ -1,24 +1,40 @@
+export { PoppyVue } from './plugin'
+export * from './proxies'
+
+
+
 export {
+  AccordionGroupCustomEvent,
   AccordionGroupChangeEventDetail,
-  PopAccordionGroupCustomEvent,
-  // CheckboxChangeEventDetail,
-  // CheckboxCustomEvent,
-  // InputChangeEventDetail,
-  // InputInputEventDetail,
-  // InputCustomEvent,
-  // InputFileChangeEventDetail,
-  // InputFileCustomEvent,
-  // RadioGroupChangeEventDetail,
-  // RadioGroupCustomEvent,
-  // RangeChangeEventDetail,
-  // RangeCustomEvent,
-  // SelectChangeEventDetail,
-  // SelectCustomEvent,
-  // TextareaChangeEventDetail,
-  // TextareaInputEventDetail,
-  // TextareaCustomEvent,
-  // ToggleChangeEventDetail,
-  // ToggleCustomEvent,
-  // ModalOptions,
-  // PopoverOptions,
+
+  CheckboxCustomEvent,
+  CheckboxChangeEventDetail,
+
+  InputCustomEvent,
+  InputChangeEventDetail,
+  InputInputEventDetail,
+
+  InputFileCustomEvent,
+  InputFileChangeEventDetail,
+
+  RadioGroupCustomEvent,
+  RadioGroupChangeEventDetail,
+
+  RangeCustomEvent,
+  RangeChangeEventDetail,
+
+  SelectCustomEvent,
+  SelectChangeEventDetail,
+
+  TextareaCustomEvent,
+  TextareaChangeEventDetail,
+  TextareaInputEventDetail,
+
+  ToggleCustomEvent,
+  ToggleChangeEventDetail,
+
+  ModalOptions,
+  PopoverOptions,
+  
+
 } from '@poppy-ui/core/components';

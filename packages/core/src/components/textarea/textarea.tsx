@@ -14,8 +14,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size, TextareaChangeEventDetail, TextareaInputEventDetail, Wrap } from 'src/interface';
+import { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
 import { Show } from '../Show';
+import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from './textarea.type';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -190,7 +191,7 @@ export class Textarea implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: TextareaColor;
 
   /**
    * Change size of the component

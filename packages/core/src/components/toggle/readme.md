@@ -25,11 +25,11 @@ Toggle is a checkbox that is styled to look like a switch button.
 
 ## Events
 
-| Event       | Description                                    | Type                                           |
-| ----------- | ---------------------------------------------- | ---------------------------------------------- |
-| `popBlur`   | Emitted when the input loses focus.            | `CustomEvent<void>`                            |
-| `popChange` | Emitted when the input checked attribut change | `CustomEvent<ToggleChangeEventDetail<string>>` |
-| `popFocus`  | Emitted when the input has focus.              | `CustomEvent<void>`                            |
+| Event       | Description                                    | Type                                        |
+| ----------- | ---------------------------------------------- | ------------------------------------------- |
+| `popBlur`   | Emitted when the input loses focus.            | `CustomEvent<void>`                         |
+| `popChange` | Emitted when the input checked attribut change | `CustomEvent<ToggleChangeEventDetail<any>>` |
+| `popFocus`  | Emitted when the input has focus.              | `CustomEvent<void>`                         |
 
 
 ## Methods

@@ -1,8 +1,8 @@
 import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/interface';
-import type { ButtonExpand, ButtonShape, ButtonType } from './button.interface';
+import type { Size } from 'src/interface';
+import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './button.type';
 
 /**
  * Buttons allow the user to take actions or make choices.
@@ -47,7 +47,7 @@ export class Button implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'neutral' | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: ButtonColor;
 
   /**
    * Change size of the component

@@ -2,6 +2,7 @@ import { componentConfig, config } from '#config';
 import { hostContext } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { ListOrientation } from './list.type';
 
 @Component({
   tag: 'pop-list',
@@ -23,7 +24,7 @@ export class List implements ComponentInterface {
    *
    * @config @default 'vertical'
    */
-  @Prop({ reflect: true, mutable: true }) orientation?: 'horizontal' | 'vertical';
+  @Prop({ reflect: true, mutable: true }) orientation?: ListOrientation;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-list', {

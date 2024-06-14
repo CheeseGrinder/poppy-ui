@@ -28,11 +28,11 @@ Toggles can also be `"checked"` programmatically by setting the checked property
 
 ## Events
 
-| Event       | Description                                          | Type                                             |
-| ----------- | ---------------------------------------------------- | ------------------------------------------------ |
-| `popBlur`   | Emitted when the input loses focus.                  | `CustomEvent<void>`                              |
-| `popChange` | Emitted when the user switches the toggle on or off. | `CustomEvent<CheckboxChangeEventDetail<string>>` |
-| `popFocus`  | Emitted when the input has focus.                    | `CustomEvent<void>`                              |
+| Event       | Description                                          | Type                                          |
+| ----------- | ---------------------------------------------------- | --------------------------------------------- |
+| `popBlur`   | Emitted when the input loses focus.                  | `CustomEvent<void>`                           |
+| `popChange` | Emitted when the user switches the toggle on or off. | `CustomEvent<CheckboxChangeEventDetail<any>>` |
+| `popFocus`  | Emitted when the input has focus.                    | `CustomEvent<void>`                           |
 
 
 ## Methods

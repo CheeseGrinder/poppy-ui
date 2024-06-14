@@ -1,8 +1,8 @@
 import { componentConfig, config } from '#config';
 import { Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
-import type { Color, Size } from 'src/interface';
-import type { BadgeAs } from './badge.interface';
+import type { Size } from 'src/interface';
+import type { BadgeAs, BadgeColor } from './badge.type';
 
 /**
  * Badges are used to inform the user of the status of specific data.
@@ -28,7 +28,7 @@ export class Badge implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'neutral';
+  @Prop({ reflect: true, mutable: true }) color?: BadgeColor;
 
   /**
    * Change size of the component

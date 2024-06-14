@@ -19,7 +19,7 @@ export class Config {
 
 export const config = new Config();
 
-export interface PoppyuserConfig {
+export interface PoppyUserConfig {
   components?: Configuration.ComponentsConfig;
 
   defaultSize?: Size;
@@ -29,4 +29,4 @@ export type PoppyConfig = {
   _ael?: (el: any, name: string, cb: any, opts: any) => any;
   _rel?: (el: any, name: string, cb: any, opts: any) => any;
   _ce?: (eventName: string, opts: any) => any;
-} & PoppyuserConfig
+} & PoppyUserConfig;
