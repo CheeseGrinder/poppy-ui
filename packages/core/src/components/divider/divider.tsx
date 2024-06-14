@@ -1,7 +1,7 @@
 import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import { Color } from 'src/interface';
+import { DividerColor, DividerOrientation, DividerPlacement } from './divider.type';
 
 /**
  * Divider will be used to separate content vertically or horizontally.
@@ -19,7 +19,7 @@ export class Divider implements ComponentInterface {
    *
    * @config @default 'horizontal'
    */
-  @Prop({ reflect: true, mutable: true }) orientation: 'horizontal' | 'vertical';
+  @Prop({ reflect: true, mutable: true }) orientation: DividerOrientation;
 
   /**
    * Where to place the content.
@@ -31,7 +31,7 @@ export class Divider implements ComponentInterface {
    *
    * @config @default 'center'
    */
-  @Prop({ reflect: true, mutable: true }) placement: 'left' | 'right' | 'start' | 'center' | 'end';
+  @Prop({ reflect: true, mutable: true }) placement: DividerPlacement;
 
   /**
    * The color to use from your application's color palette.
@@ -40,7 +40,7 @@ export class Divider implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color: Color | 'neutral';
+  @Prop({ reflect: true, mutable: true }) color: DividerColor;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-divider', {

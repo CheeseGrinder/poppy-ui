@@ -1,6 +1,7 @@
 import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
 import type { Color } from 'src/interface';
+import type { TooltipPosition } from './tooltip.type';
 
 /**
  * Tooltip can be used to show a message when hovering over an element.
@@ -32,7 +33,7 @@ export class Tooltip {
    *
    * @config @default 'top'
    */
-  @Prop({ reflect: true, mutable: true }) position?: 'top' | 'bottom' | 'left' | 'right';
+  @Prop({ reflect: true, mutable: true }) position?: TooltipPosition;
 
   /**
    * Force open tooltip

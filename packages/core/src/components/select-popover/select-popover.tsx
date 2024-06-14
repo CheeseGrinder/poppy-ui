@@ -1,7 +1,8 @@
 import { Component, ComponentInterface, Fragment, Host, Prop, h } from '@stencil/core';
-import { PopCheckboxCustomEvent, PopRadioGroupCustomEvent } from 'src/components';
-import type { CheckboxChangeEventDetail, Color, Size } from 'src/interface';
-import type { SelectPopoverOption } from './select-popover-interface';
+import type { Color, Size } from 'src/interface';
+import { CheckboxCustomEvent } from '../checkbox/checkbox.type';
+import { RadioGroupCustomEvent } from '../radio-group/radio-group.type';
+import type { SelectPopoverOption } from './select-popover.type';
 
 /**
  *
@@ -41,12 +42,12 @@ export class SelectPopover implements ComponentInterface {
    */
   @Prop() options: SelectPopoverOption[] = [];
 
-  #findOptionFromEvent(ev: PopCheckboxCustomEvent<any> | PopRadioGroupCustomEvent<any>) {
+  #findOptionFromEvent(ev: CheckboxCustomEvent | RadioGroupCustomEvent) {
     const { options } = this;
     return options.find(o => o.value === ev.target.value);
   }
 
-  #getValues(ev: PopCheckboxCustomEvent<any> | PopRadioGroupCustomEvent<any>): string | string[] | undefined {
+  #getValues(ev: CheckboxCustomEvent | RadioGroupCustomEvent): string | string[] | undefined {
     const { multiple, options } = this;
 
     if (multiple) {
@@ -61,7 +62,7 @@ export class SelectPopover implements ComponentInterface {
     return option ? option.value : undefined;
   }
 
-  #setChecked(ev: PopCheckboxCustomEvent<CheckboxChangeEventDetail>): void {
+  #setChecked(ev: CheckboxCustomEvent): void {
     const { multiple } = this;
     const option = this.#findOptionFromEvent(ev);
 

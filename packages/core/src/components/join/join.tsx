@@ -1,5 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { JoinOrientation } from './join.type';
 
 /**
  * Join is a container for grouping multiple items, it can be used to group buttons, inputs, or any other element.
@@ -18,7 +19,7 @@ export class Join implements ComponentInterface {
    *
    * @config @default "horizontal"
    */
-  @Prop({ reflect: true }) orientation: 'horizontal' | 'vertical';
+  @Prop({ reflect: true }) orientation: JoinOrientation;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-join', {

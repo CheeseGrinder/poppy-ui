@@ -5,24 +5,54 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AccordionGroupChangeEventDetail } from "./event.d";
-import { AutoCapitalize, Autocomplete, CheckboxChangeEventDetail, Color, ComponentProps, ComponentRef, EnterKeyHint, InputChangeEventDetail, InputFileChangeEventDetail, InputInputEventDetail, InputType, KeyboardType, Placement, RadioGroupChangeEventDetail, RangeChangeEventDetail, SelectChangeEventDetail, Size, TextareaChangeEventDetail, TextareaInputEventDetail, ToggleChangeEventDetail, Wrap } from "./interface.d";
-import { BadgeAs } from "./components/badge/badge.interface";
-import { ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.interface";
+import { AccordionGroupChangeEventDetail } from "./components/accordion-group/accordion-group.type";
+import { BadgeAs, BadgeColor } from "./components/badge/badge.type";
+import { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
+import { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.type";
+import { CheckboxChangeEventDetail, CheckboxPlacement } from "./components/checkbox/checkbox.type";
+import { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
 import { TriggerAction } from "./utils/trigger";
-import { MaskType } from "./components/mask/mask";
-import { RadioGroupCompareFn } from "./components/radio-group/radio-group.interface";
-import { SelectCompareFn } from "./components/select/select.interface";
-import { SelectPopoverOption } from "./components/select-popover/select-popover-interface";
-export { AccordionGroupChangeEventDetail } from "./event.d";
-export { AutoCapitalize, Autocomplete, CheckboxChangeEventDetail, Color, ComponentProps, ComponentRef, EnterKeyHint, InputChangeEventDetail, InputFileChangeEventDetail, InputInputEventDetail, InputType, KeyboardType, Placement, RadioGroupChangeEventDetail, RangeChangeEventDetail, SelectChangeEventDetail, Size, TextareaChangeEventDetail, TextareaInputEventDetail, ToggleChangeEventDetail, Wrap } from "./interface.d";
-export { BadgeAs } from "./components/badge/badge.interface";
-export { ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.interface";
+import { DrawerSide } from "./components/drawer/drawer.type";
+import { DropdownAlign, DropdownSide } from "./components/dropdown/dropdown.type";
+import { IndicatorPosition, IndicatorSide } from "./components/indicator/indicator.type";
+import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from "./components/input/input.type";
+import { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
+import { JoinOrientation } from "./components/join/join.type";
+import { ListOrientation } from "./components/list/list.type";
+import { LoadingType } from "./components/loading/loading.type";
+import { MaskType } from "./components/mask/mask.type";
+import { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
+import { RangeChangeEventDetail } from "./components/range/range.type";
+import { SelectChangeEventDetail, SelectCompareFn } from "./components/select/select.type";
+import { SelectPopoverOption } from "./components/select-popover/select-popover.type";
+import { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
+import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
+import { ToggleChangeEventDetail } from "./components/toggle/toggle.type";
+import { TooltipPosition } from "./components/tooltip/tooltip.type";
+export { AccordionGroupChangeEventDetail } from "./components/accordion-group/accordion-group.type";
+export { BadgeAs, BadgeColor } from "./components/badge/badge.type";
+export { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
+export { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.type";
+export { CheckboxChangeEventDetail, CheckboxPlacement } from "./components/checkbox/checkbox.type";
+export { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
 export { TriggerAction } from "./utils/trigger";
-export { MaskType } from "./components/mask/mask";
-export { RadioGroupCompareFn } from "./components/radio-group/radio-group.interface";
-export { SelectCompareFn } from "./components/select/select.interface";
-export { SelectPopoverOption } from "./components/select-popover/select-popover-interface";
+export { DrawerSide } from "./components/drawer/drawer.type";
+export { DropdownAlign, DropdownSide } from "./components/dropdown/dropdown.type";
+export { IndicatorPosition, IndicatorSide } from "./components/indicator/indicator.type";
+export { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from "./components/input/input.type";
+export { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
+export { JoinOrientation } from "./components/join/join.type";
+export { ListOrientation } from "./components/list/list.type";
+export { LoadingType } from "./components/loading/loading.type";
+export { MaskType } from "./components/mask/mask.type";
+export { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
+export { RangeChangeEventDetail } from "./components/range/range.type";
+export { SelectChangeEventDetail, SelectCompareFn } from "./components/select/select.type";
+export { SelectPopoverOption } from "./components/select-popover/select-popover.type";
+export { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
+export { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
+export { ToggleChangeEventDetail } from "./components/toggle/toggle.type";
+export { TooltipPosition } from "./components/tooltip/tooltip.type";
 export namespace Components {
     /**
      * Accordion is used for showing and hiding content.
@@ -106,7 +136,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'neutral';
+        "color"?: BadgeColor;
         /**
           * Transparent Badge with colored border
           * @config 
@@ -128,7 +158,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'neutral' | 'ghost';
+        "color"?: ButtonColor;
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
@@ -206,7 +236,7 @@ export namespace Components {
           * @config 
           * @default 'start'
          */
-        "placement"?: Placement;
+        "placement"?: CheckboxPlacement;
         /**
           * If `true`, the user cannot modify the value.
           * @config 
@@ -242,19 +272,19 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"neutral"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color": Color | 'neutral';
+        "color": DividerColor;
         /**
           * Define content disposition orientation
           * @config 
           * @default 'horizontal'
          */
-        "orientation": 'horizontal' | 'vertical';
+        "orientation": DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
           * @config 
           * @default 'center'
          */
-        "placement": 'left' | 'right' | 'start' | 'center' | 'end';
+        "placement": DividerPlacement;
     }
     /**
      * Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page.
@@ -273,7 +303,7 @@ export namespace Components {
           * @config 
           * @default "start"
          */
-        "side"?: 'start' | 'end';
+        "side"?: DrawerSide;
         "toggle": () => Promise<void>;
         /**
           * An ID corresponding to the trigger element that causes the drawer to open. Use the `trigger-action` property to customize the interaction that results in the sidebar opening.
@@ -294,7 +324,7 @@ export namespace Components {
           * @config 
           * @default 'start'
          */
-        "align"?: 'start' | 'end';
+        "align"?: DropdownAlign;
         /**
           * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss. Only apply on `triggerAction=hover`
           * @config 
@@ -318,7 +348,7 @@ export namespace Components {
           * @config 
           * @default 'bottom'
          */
-        "side"?: 'left' | 'right' | 'top' | 'bottom';
+        "side"?: DropdownSide;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
@@ -345,13 +375,13 @@ export namespace Components {
           * @config 
           * @default 'top'
          */
-        "position"?: 'top' | 'middle' | 'bottom';
+        "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
           * @config 
           * @default 'left'
          */
-        "side"?: 'left' | 'right' | 'start' | 'center' | 'end';
+        "side"?: IndicatorSide;
     }
     /**
      * Textarea allows users to enter text in multiple lines.
@@ -368,12 +398,6 @@ export namespace Components {
          */
         "autoComplete"?: Autocomplete;
         /**
-          * Whether auto correction should be enabled when the user is entering/editing the text value.
-          * @config 
-          * @default 'off'
-         */
-        "autoCorrect": 'on' | 'off';
-        /**
           * If `true`, the element will be focused on page load.
           * @config 
           * @default false
@@ -389,7 +413,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: InputColor;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
           * @config 
@@ -528,7 +552,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: InputFileColor;
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
@@ -598,7 +622,7 @@ export namespace Components {
           * @config 
           * @default "horizontal"
          */
-        "orientation": 'horizontal' | 'vertical';
+        "orientation": JoinOrientation;
     }
     /**
      * Kbd is used to display keyboard shortcuts.
@@ -617,7 +641,7 @@ export namespace Components {
           * @config 
           * @default 'vertical'
          */
-        "orientation"?: 'horizontal' | 'vertical';
+        "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
@@ -640,7 +664,7 @@ export namespace Components {
           * @config 
           * @default 'spinner'
          */
-        "type"?: 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';
+        "type"?: LoadingType;
     }
     /**
      * Mask crops the content of the element to common shapes.
@@ -1074,7 +1098,7 @@ export namespace Components {
           * @config 
           * @default 'rotate'
          */
-        "type"?: 'rotate' | 'flip';
+        "type"?: SwapType;
     }
     /**
      * Textarea allows users to enter text in multiple lines.
@@ -1100,7 +1124,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: TextareaColor;
         /**
           * The visible width of the text control, in average character widths. If it is specified, it must be a positive integer.
           * @config
@@ -1285,7 +1309,7 @@ export namespace Components {
           * @config 
           * @default 'top'
          */
-        "position"?: 'top' | 'bottom' | 'left' | 'right';
+        "position"?: TooltipPosition;
         /**
           * Text to show on hover
          */
@@ -1343,6 +1367,10 @@ export interface PopRangeCustomEvent<T> extends CustomEvent<T> {
 export interface PopSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLPopSelectElement;
+}
+export interface PopSwapCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLPopSwapElement;
 }
 export interface PopTextareaCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1426,7 +1454,7 @@ declare global {
         new (): HTMLPopCardElement;
     };
     interface HTMLPopCheckboxElementEventMap {
-        "popChange": CheckboxChangeEventDetail<string>;
+        "popChange": CheckboxChangeEventDetail;
         "popFocus": void;
         "popBlur": void;
     }
@@ -1762,10 +1790,21 @@ declare global {
         prototype: HTMLPopSelectPopoverElement;
         new (): HTMLPopSelectPopoverElement;
     };
+    interface HTMLPopSwapElementEventMap {
+        "popSwap": SwapChangeEventDetail;
+    }
     /**
      * Swap allows you to toggle the visibility of two elements.
      */
     interface HTMLPopSwapElement extends Components.PopSwap, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLPopSwapElementEventMap>(type: K, listener: (this: HTMLPopSwapElement, ev: PopSwapCustomEvent<HTMLPopSwapElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLPopSwapElementEventMap>(type: K, listener: (this: HTMLPopSwapElement, ev: PopSwapCustomEvent<HTMLPopSwapElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLPopSwapElement: {
         prototype: HTMLPopSwapElement;
@@ -1795,7 +1834,7 @@ declare global {
         new (): HTMLPopTextareaElement;
     };
     interface HTMLPopToggleElementEventMap {
-        "popChange": ToggleChangeEventDetail<string>;
+        "popChange": ToggleChangeEventDetail;
         "popFocus": void;
         "popBlur": void;
     }
@@ -1941,7 +1980,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'neutral';
+        "color"?: BadgeColor;
         /**
           * Transparent Badge with colored border
           * @config 
@@ -1963,7 +2002,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'neutral' | 'ghost';
+        "color"?: ButtonColor;
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
@@ -2051,7 +2090,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the user switches the toggle on or off.
          */
-        "onPopChange"?: (event: PopCheckboxCustomEvent<CheckboxChangeEventDetail<string>>) => void;
+        "onPopChange"?: (event: PopCheckboxCustomEvent<CheckboxChangeEventDetail>) => void;
         /**
           * Emitted when the input has focus.
          */
@@ -2061,7 +2100,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'start'
          */
-        "placement"?: Placement;
+        "placement"?: CheckboxPlacement;
         /**
           * If `true`, the user cannot modify the value.
           * @config 
@@ -2093,19 +2132,19 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"neutral"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'neutral';
+        "color"?: DividerColor;
         /**
           * Define content disposition orientation
           * @config 
           * @default 'horizontal'
          */
-        "orientation"?: 'horizontal' | 'vertical';
+        "orientation"?: DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
           * @config 
           * @default 'center'
          */
-        "placement"?: 'left' | 'right' | 'start' | 'center' | 'end';
+        "placement"?: DividerPlacement;
     }
     /**
      * Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page.
@@ -2122,7 +2161,7 @@ declare namespace LocalJSX {
           * @config 
           * @default "start"
          */
-        "side"?: 'start' | 'end';
+        "side"?: DrawerSide;
         /**
           * An ID corresponding to the trigger element that causes the drawer to open. Use the `trigger-action` property to customize the interaction that results in the sidebar opening.
          */
@@ -2142,7 +2181,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'start'
          */
-        "align"?: 'start' | 'end';
+        "align"?: DropdownAlign;
         /**
           * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss. Only apply on `triggerAction=hover`
           * @config 
@@ -2172,7 +2211,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'bottom'
          */
-        "side"?: 'left' | 'right' | 'top' | 'bottom';
+        "side"?: DropdownSide;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
@@ -2211,13 +2250,13 @@ declare namespace LocalJSX {
           * @config 
           * @default 'top'
          */
-        "position"?: 'top' | 'middle' | 'bottom';
+        "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
           * @config 
           * @default 'left'
          */
-        "side"?: 'left' | 'right' | 'start' | 'center' | 'end';
+        "side"?: IndicatorSide;
     }
     /**
      * Textarea allows users to enter text in multiple lines.
@@ -2234,12 +2273,6 @@ declare namespace LocalJSX {
          */
         "autoComplete"?: Autocomplete;
         /**
-          * Whether auto correction should be enabled when the user is entering/editing the text value.
-          * @config 
-          * @default 'off'
-         */
-        "autoCorrect"?: 'on' | 'off';
-        /**
           * If `true`, the element will be focused on page load.
           * @config 
           * @default false
@@ -2255,7 +2288,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: InputColor;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
           * @config 
@@ -2406,7 +2439,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: InputFileColor;
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
@@ -2484,7 +2517,7 @@ declare namespace LocalJSX {
           * @config 
           * @default "horizontal"
          */
-        "orientation"?: 'horizontal' | 'vertical';
+        "orientation"?: JoinOrientation;
     }
     /**
      * Kbd is used to display keyboard shortcuts.
@@ -2503,7 +2536,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'vertical'
          */
-        "orientation"?: 'horizontal' | 'vertical';
+        "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
@@ -2526,7 +2559,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'spinner'
          */
-        "type"?: 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity';
+        "type"?: LoadingType;
     }
     /**
      * Mask crops the content of the element to common shapes.
@@ -3001,11 +3034,15 @@ declare namespace LocalJSX {
          */
         "active"?: boolean;
         /**
+          * Emitted when the swap active attribut change
+         */
+        "onPopSwap"?: (event: PopSwapCustomEvent<SwapChangeEventDetail>) => void;
+        /**
           * Choose what animation is used on click.
           * @config 
           * @default 'rotate'
          */
-        "type"?: 'rotate' | 'flip';
+        "type"?: SwapType;
     }
     /**
      * Textarea allows users to enter text in multiple lines.
@@ -3031,7 +3068,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: TextareaColor;
         /**
           * The visible width of the text control, in average character widths. If it is specified, it must be a positive integer.
           * @config
@@ -3188,7 +3225,7 @@ declare namespace LocalJSX {
         /**
           * Emitted when the input checked attribut change
          */
-        "onPopChange"?: (event: PopToggleCustomEvent<ToggleChangeEventDetail<string>>) => void;
+        "onPopChange"?: (event: PopToggleCustomEvent<ToggleChangeEventDetail>) => void;
         /**
           * Emitted when the input has focus.
          */
@@ -3236,7 +3273,7 @@ declare namespace LocalJSX {
           * @config 
           * @default 'top'
          */
-        "position"?: 'top' | 'bottom' | 'left' | 'right';
+        "position"?: TooltipPosition;
         /**
           * Text to show on hover
          */

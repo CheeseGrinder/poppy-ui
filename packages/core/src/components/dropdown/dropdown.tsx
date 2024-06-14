@@ -4,6 +4,7 @@ import { OverlayInterface } from '#utils/overlay';
 import { TriggerAction } from '#utils/trigger';
 import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
 import { Show } from '../Show';
+import { DropdownAlign, DropdownSide } from './dropdown.type';
 
 /**
  * Describe whats does the component
@@ -28,14 +29,14 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    *
    * @config @default 'bottom'
    */
-  @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'top' | 'bottom';
+  @Prop({ reflect: true, mutable: true }) side?: DropdownSide;
 
   /**
    *
    *
    * @config @default 'start'
    */
-  @Prop({ reflect: true, mutable: true }) align?: 'start' | 'end';
+  @Prop({ reflect: true, mutable: true }) align?: DropdownAlign;
 
   /**
    *

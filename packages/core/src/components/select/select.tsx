@@ -16,11 +16,11 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, FormAssociatedInterface, SelectChangeEventDetail, Size } from 'src/interface';
+import type { Color, FormAssociatedInterface, Size } from 'src/interface';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
-import { SelectPopoverOption } from '../select-popover/select-popover-interface';
-import type { SelectCompareFn } from './select.interface';
+import { SelectPopoverOption } from '../select-popover/select-popover.type';
+import type { SelectChangeEventDetail, SelectCompareFn } from './select.type';
 
 @Component({
   tag: 'pop-select',

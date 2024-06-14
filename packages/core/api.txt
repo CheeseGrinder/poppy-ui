@@ -72,7 +72,7 @@ pop-checkbox,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-checkbox,prop,value,string,'on',false,true
 pop-checkbox,method,setFocus,setFocus() => Promise<void>
 pop-checkbox,event,popBlur,void,true
-pop-checkbox,event,popChange,CheckboxChangeEventDetail<string>,true
+pop-checkbox,event,popChange,CheckboxChangeEventDetail<any>,true
 pop-checkbox,event,popFocus,void,true
 pop-checkbox,css-prop,--animation
 pop-checkbox,css-prop,--background
@@ -140,8 +140,7 @@ pop-indicator,css-prop,--translate-y
 
 pop-input,shadow
 pop-input,prop,autoCapitalize,"characters" | "none" | "off" | "on" | "sentences" | "words",undefined,false,false
-pop-input,prop,autoComplete,"name" | "off" | "on" | "honorific-prefix" | "given-name" | "additional-name" | "family-name" | "honorific-suffix" | "nickname" | "email" | "username" | "new-password" | "current-password" | "one-time-code" | "organization-title" | "organization" | "street-address" | "address-line1" | "address-line2" | "address-line3" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "country" | "country-name" | "postal-code" | "cc-name" | "cc-given-name" | "cc-additional-name" | "cc-family-name" | "cc-number" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-csc" | "cc-type" | "transaction-currency" | "transaction-amount" | "language" | "bday" | "bday-day" | "bday-month" | "bday-year" | "sex" | "tel" | "tel-country-code" | "tel-national" | "tel-area-code" | "tel-local" | "tel-extension" | "impp" | "url" | "photo",'off',false,false
-pop-input,prop,autoCorrect,"off" | "on",undefined,false,false
+pop-input,prop,autoComplete,"name" | "email" | "tel" | "url" | "on" | "off" | "honorific-prefix" | "given-name" | "additional-name" | "family-name" | "honorific-suffix" | "nickname" | "username" | "new-password" | "current-password" | "one-time-code" | "organization-title" | "organization" | "street-address" | "address-line1" | "address-line2" | "address-line3" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "country" | "country-name" | "postal-code" | "cc-name" | "cc-given-name" | "cc-additional-name" | "cc-family-name" | "cc-number" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-csc" | "cc-type" | "transaction-currency" | "transaction-amount" | "language" | "bday" | "bday-day" | "bday-month" | "bday-year" | "sex" | "tel-country-code" | "tel-national" | "tel-area-code" | "tel-local" | "tel-extension" | "impp" | "photo",'off',false,false
 pop-input,prop,autoFocus,boolean,undefined,false,true
 pop-input,prop,bordered,boolean,undefined,false,true
 pop-input,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
@@ -377,6 +376,7 @@ pop-select-option,prop,value,any,undefined,false,false
 pop-swap,shadow
 pop-swap,prop,active,boolean,undefined,false,true
 pop-swap,prop,type,"flip" | "rotate",undefined,false,true
+pop-swap,event,popSwap,SwapChangeEventDetail,true
 
 pop-textarea,shadow
 pop-textarea,prop,autoCapitalize,"characters" | "none" | "off" | "on" | "sentences" | "words",undefined,false,false
@@ -431,7 +431,7 @@ pop-toggle,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-toggle,prop,value,string,'on',false,true
 pop-toggle,method,setFocus,setFocus() => Promise<void>
 pop-toggle,event,popBlur,void,true
-pop-toggle,event,popChange,ToggleChangeEventDetail<string>,true
+pop-toggle,event,popChange,ToggleChangeEventDetail<any>,true
 pop-toggle,event,popFocus,void,true
 pop-toggle,css-prop,--animation-duration
 pop-toggle,css-prop,--background

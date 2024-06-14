@@ -13,8 +13,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { Color, InputFileChangeEventDetail, Size } from 'src/interface';
+import { Size } from 'src/interface';
 import { Show } from '../Show';
+import { InputFileChangeEventDetail, InputFileColor } from './input-file.type';
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -109,7 +110,7 @@ export class InputFile implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: InputFileColor;
 
   /**
    * Change size of the component

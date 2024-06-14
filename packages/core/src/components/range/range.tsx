@@ -13,7 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, RangeChangeEventDetail, Size } from 'src/interface';
+import type { Color, Size } from 'src/interface';
+import { RangeChangeEventDetail } from './range.type';
 
 /**
  * Range slider is used to select a value by sliding a handle.

@@ -13,9 +13,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Placement, Size } from 'src/interface';
+import type { Color, Size } from 'src/interface';
 import { Show } from '../Show';
-import { CheckboxChangeEventDetail } from './checkbox.interface';
+import { CheckboxChangeEventDetail, CheckboxPlacement } from './checkbox.type';
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -126,7 +126,7 @@ export class Checkbox implements ComponentInterface {
    *
    * @config @default 'start'
    */
-  @Prop({ reflect: true, mutable: true }) placement?: Placement;
+  @Prop({ reflect: true, mutable: true }) placement?: CheckboxPlacement;
 
   /**
    * Emitted when the user switches the toggle on or off.

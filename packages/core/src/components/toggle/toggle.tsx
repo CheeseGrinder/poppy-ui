@@ -13,8 +13,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Size, ToggleChangeEventDetail } from 'src/interface';
+import type { Color, Size } from 'src/interface';
 import { Show } from '../Show';
+import { ToggleChangeEventDetail } from './toggle.type';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -118,7 +119,7 @@ export class Toggle implements ComponentInterface {
   /**
    * Emitted when the input checked attribut change
    */
-  @Event() popChange: EventEmitter<ToggleChangeEventDetail<string>>;
+  @Event() popChange: EventEmitter<ToggleChangeEventDetail>;
 
   /**
    * Emitted when the input has focus.

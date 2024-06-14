@@ -170,7 +170,6 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput>('pop-input',
   'spellcheck',
   'autoComplete',
   'autoCapitalize',
-  'autoCorrect',
   'bordered',
   'color',
   'size',
@@ -360,7 +359,8 @@ export const PopSelectOption = /*@__PURE__*/ defineContainer<JSX.PopSelectOption
 
 export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["active"]>('pop-swap', definePopSwap, [
   'type',
-  'active'
+  'active',
+  'popSwap'
 ],
 'active', 'pop-change');
 

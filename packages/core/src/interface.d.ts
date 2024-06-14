@@ -2,35 +2,29 @@ import { ComponentConfig, PoppyConfig } from './config';
 
 export * from './components';
 export * from './index';
-export {
-  AccordionChangeEventDetail,
-  AccordionGroupChangeEventDetail,
-  CheckboxChangeEventDetail,
-  InputChangeEventDetail,
-  InputFileChangeEventDetail,
-  InputInputEventDetail,
-  RadioChangeEventDetail,
-  RadioGroupChangeEventDetail,
-  RangeChangeEventDetail,
-  SelectChangeEventDetail,
-  TextareaChangeEventDetail,
-  TextareaInputEventDetail,
-  ToggleChangeEventDetail
-} from './event'
-export { PoppyuserConfig } from './config'
+export { PoppyUserConfig } from './config';
+
+export { AccordionGroupCustomEvent } from './components/accordion-group/accordion-group.type';
+export { CheckboxCustomEvent } from './components/checkbox/checkbox.type';
+export { InputCustomEvent } from './components/input/input.type';
+export { InputFileCustomEvent } from './components/input-file/input-file.type';
+export { RadioGroupCustomEvent } from './components/radio-group/radio-group.type';
+export { RangeCustomEvent } from './components/range/range.type';
+export { SelectCustomEvent } from './components/select/select.type';
+export { TextareaCustomEvent } from './components/textarea/textarea.type';
+export { ToggleCustomEvent } from './components/toggle/toggle.type';
+
+export { ModalOptions } from './components/modal/modal.type';
+export * from './components/popover/popover.type';
 
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';
 export type Color = BrandColor | StateColor;
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
-export type Placement = 'start' | 'end';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
 export type AutoCapitalize = 'none' | 'off' | 'on' | 'characters' | 'sentences' | 'words' | 'characters';
-
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap
-export type Wrap = 'hard' | 'soft';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
 export type KeyboardType = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -38,78 +32,6 @@ export type KeyboardType = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'se
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterKeyHint
 export type EnterKeyHint = 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
-export type InputType =
-  | 'text'
-  | 'date'
-  | 'email'
-  | 'number'
-  | 'password'
-  | 'search'
-  | 'tel'
-  | 'url'
-  | 'time'
-  | 'week'
-  | 'month'
-  | 'datetime-local';
-
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
-export type Autocomplete =
-  | 'on'
-  | 'off'
-  | 'name'
-  | 'honorific-prefix'
-  | 'given-name'
-  | 'additional-name'
-  | 'family-name'
-  | 'honorific-suffix'
-  | 'nickname'
-  | 'email'
-  | 'username'
-  | 'new-password'
-  | 'current-password'
-  | 'one-time-code'
-  | 'organization-title'
-  | 'organization'
-  | 'street-address'
-  | 'address-line1'
-  | 'address-line2'
-  | 'address-line3'
-  | 'address-level1'
-  | 'address-level2'
-  | 'address-level3'
-  | 'address-level4'
-  | 'country'
-  | 'country-name'
-  | 'postal-code'
-  | 'cc-name'
-  | 'cc-given-name'
-  | 'cc-additional-name'
-  | 'cc-family-name'
-  | 'cc-family-name'
-  | 'cc-number'
-  | 'cc-exp'
-  | 'cc-exp-month'
-  | 'cc-exp-year'
-  | 'cc-csc'
-  | 'cc-type'
-  | 'transaction-currency'
-  | 'transaction-amount'
-  | 'language'
-  | 'bday'
-  | 'bday-day'
-  | 'bday-month'
-  | 'bday-year'
-  | 'sex'
-  | 'tel'
-  | 'tel-country-code'
-  | 'tel-national'
-  | 'tel-area-code'
-  | 'tel-local'
-  | 'tel-extension'
-  | 'impp'
-  | 'url'
-  | 'photo';
 export interface FormAssociatedInterface {
   internals: ElementInternals;
 

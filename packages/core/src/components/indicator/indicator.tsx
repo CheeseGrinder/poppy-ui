@@ -1,5 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { IndicatorPosition, IndicatorSide } from './indicator.type';
 
 /**
  * Indicators are used to place an element on the corner of another element.
@@ -18,14 +19,14 @@ export class Indicator implements ComponentInterface {
    *
    * @config @default 'left'
    */
-  @Prop({ reflect: true, mutable: true }) side?: 'left' | 'right' | 'start' | 'center' | 'end';
+  @Prop({ reflect: true, mutable: true }) side?: IndicatorSide;
 
   /**
    * Align vertically the indicator.
    *
    * @config @default 'top'
    */
-  @Prop({ reflect: true, mutable: true }) position?: 'top' | 'middle' | 'bottom';
+  @Prop({ reflect: true, mutable: true }) position?: IndicatorPosition;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-indicator', {
