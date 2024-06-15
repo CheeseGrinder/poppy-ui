@@ -15,5 +15,5 @@ export default {
     },
   ],
   plugins: [typescript()],
-  external: id => external.includes(id) || id.startsWith(internal),
+  external: id => external.includes(id) || id.startsWith(internal)
 };

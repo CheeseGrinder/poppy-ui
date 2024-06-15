@@ -1,6 +1,7 @@
 {
   "name": "@poppy-ui/vue",
-  "version": "0.1.0-beta-0.1",
+  "type": "module",
+  "version": "0.1.0-beta-0.3",
   "description": "Vue specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
@@ -36,18 +37,23 @@
     "prettier:check": "prettier --check src/",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "clean": "rimraf dist",
-    "prebundle": "npm run clean",
-    "bundle": "rollup --config rollup.config.mjs",
+    "prebuild": "npm run clean",
+    "build": "npm run build:bundle && npm run build:vetur && npm run build:web-types",
+    "build:bundle": "rollup --config rollup.config.mjs",
+    "build:vetur": "node --experimental-json-modules ./scripts/build-vetur.js",
+    "build:web-types": "node --experimental-json-modules ./scripts/build-web-types.js",
     "release": "release-it"
   },
   "dependencies": {
     "@poppy-ui/core": "^0.1.0-beta-0.5"
   },
   "devDependencies": {
+    "@poppy-ui/docs": "^0.1.0-beta-0.1",
     "@rollup/plugin-typescript": "^11.1.6",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "audit-ci": "^7.0.1",
+    "change-case": "^5.4.4",
     "eslint": "^9.4.0",
     "eslint-plugin-vue": "^9.26.0",
     "prettier": "^3.3.2",
@@ -56,6 +62,9 @@
     "typescript": "~5.4.5",
     "vite": "^5.2.13",
     "vue": "^3.4.27"
+  },
+  "peerDependencies": {
+    "vue": ">=3.4.27"
   },
   "vetur": {
     "tags": "dist/vetur/tags.json",

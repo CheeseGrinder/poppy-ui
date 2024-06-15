@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import { PopButton } from '@poppy-ui/vue'
 </script>
 
 <template>
@@ -13,7 +12,6 @@ import { PopButton } from '@poppy-ui/vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
-  <PopButton color="primary">Test</PopButton>
 </template>
 
 <style scoped>
