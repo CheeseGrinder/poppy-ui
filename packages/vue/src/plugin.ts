@@ -15,7 +15,7 @@ const getHelperFunctions = () => {
 };
 
 export const PoppyVue: Plugin<[PoppyUserConfig]> = {
-  async install(_, config) {
+  async install(_, config = {}) {
     /**
      * By default Poppy UI hides elements that
      * are not hydrated, but in the CE build there is no
