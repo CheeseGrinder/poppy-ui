@@ -14,7 +14,7 @@ const getHelperFunctions = () => {
   };
 };
 
-export const PoppyVue: Plugin<[PoppyUserConfig]> = {
+export const PoppyVue: Plugin<[PoppyUserConfig?]> = {
   async install(_, config = {}) {
     /**
      * By default Poppy UI hides elements that
