@@ -1,5 +1,4 @@
-import { Size } from 'src/interface';
-import { Configuration } from '@cheese-grinder/stencil-component-config';
+import { Configuration, Size } from 'src/interface';
 
 export class Config {
   private config = new Map<keyof PoppyConfig, any>();

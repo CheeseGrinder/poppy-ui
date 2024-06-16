@@ -1,6 +1,5 @@
 import { ComponentConfig, PoppyConfig } from './config';
 
-export * from './components';
 export * from './index';
 export { PoppyUserConfig } from './config';
 

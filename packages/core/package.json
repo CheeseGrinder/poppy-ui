@@ -52,7 +52,7 @@
     "@stencil/core": "^4.18.3"
   },
   "devDependencies": {
-    "@cheese-grinder/stencil-component-config": "^0.1.3",
+    "@cheese-grinder/stencil-component-config": "^0.2.1-beta.2",
     "@cheese-grinder/stencil-custom-readme": "^0.1.1",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/sass": "^3.0.12",
