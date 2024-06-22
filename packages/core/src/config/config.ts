@@ -1,4 +1,5 @@
-import { Configuration, Size } from 'src/interface';
+import type { Configuration } from 'src/components-config';
+import type { Size } from 'src/interface';
 
 export class Config {
   private config = new Map<keyof PoppyConfig, any>();

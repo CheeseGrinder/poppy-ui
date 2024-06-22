@@ -35,7 +35,7 @@ export const config: Config = {
     {
       type: 'docs-vscode',
       file: 'dist/html.html-data.json',
-      sourceCodeBaseUrl: 'https://github.com/CheeseGrinder/poppy-ui/tree/main/core/',
+      sourceCodeBaseUrl: 'https://github.com/CheeseGrinder/poppy-ui/tree/main/packages/core/',
     },
     apiSpecGenerator({
       file: 'api.txt',

@@ -1,4 +1,4 @@
-import { Configuration } from '../components-config';
+import { Configuration } from 'src/components-config';
 
 type Config = Configuration.ComponentsConfig;
 

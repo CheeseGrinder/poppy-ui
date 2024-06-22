@@ -173,7 +173,7 @@ export namespace Components {
         /**
           * The HTML form element id. Used to submit a form when the button is not a child of the form.
          */
-        "form"?: string;
+        "form"?: string | HTMLFormElement;
         /**
           * Transparent Button with colored border
           * @config 
@@ -2017,7 +2017,7 @@ declare namespace LocalJSX {
         /**
           * The HTML form element id. Used to submit a form when the button is not a child of the form.
          */
-        "form"?: string;
+        "form"?: string | HTMLFormElement;
         /**
           * Emitted when the button loses focus.
          */

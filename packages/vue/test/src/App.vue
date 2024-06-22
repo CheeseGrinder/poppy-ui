@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { PopButton } from '@poppy-ui/vue'
 import HelloWorld from './components/HelloWorld.vue'
+import { IonButton } from '@ionic/vue';
 </script>
 
 <template>
@@ -11,6 +13,10 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <form @submit.prevent="() => console.log('submit')" id="test">
+    <PopButton type="submit" form="test" outlined>button poppy</PopButton>
+    <IonButton type="submit">button ionic</IonButton>
+  </form>
   <HelloWorld msg="Vite + Vue" />
 </template>
 

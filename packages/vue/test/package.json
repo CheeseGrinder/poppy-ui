@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@poppy-ui/vue": "^0.1.0-beta-0",
-    "vue": "^3.4.21"
+    "@ionic/vue": "^8.2.2",
+    "@ionic/vue-router": "^8.2.2",
+    "@poppy-ui/vue": "file:../poppy-ui-vue-0.1.0-beta-1.tgz",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

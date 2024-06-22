@@ -1,21 +1,5 @@
 import { ComponentConfig, PoppyConfig } from './config';
 
-export * from './index';
-export { PoppyUserConfig } from './config';
-
-export { AccordionGroupCustomEvent } from './components/accordion-group/accordion-group.type';
-export { CheckboxCustomEvent } from './components/checkbox/checkbox.type';
-export { InputCustomEvent } from './components/input/input.type';
-export { InputFileCustomEvent } from './components/input-file/input-file.type';
-export { RadioGroupCustomEvent } from './components/radio-group/radio-group.type';
-export { RangeCustomEvent } from './components/range/range.type';
-export { SelectCustomEvent } from './components/select/select.type';
-export { TextareaCustomEvent } from './components/textarea/textarea.type';
-export { ToggleCustomEvent } from './components/toggle/toggle.type';
-
-export { ModalOptions } from './components/modal/modal.type';
-export * from './components/popover/popover.type';
-
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';
 export type Color = BrandColor | StateColor;
