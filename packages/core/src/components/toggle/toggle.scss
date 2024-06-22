@@ -1,6 +1,6 @@
-@use "../../global/styles/radius";
-@use "../../global/styles/theme";
-@use "../../global/styles/input";
+@use "@scss/radius";
+@use "@scss/theme";
+@use "@scss/input";
 
 /**
  * @prop --border-radius: Border radius

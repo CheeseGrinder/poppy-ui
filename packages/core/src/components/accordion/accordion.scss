@@ -1,6 +1,6 @@
-@use "../../global/styles/theme";
-@use "../../global/styles/radius";
-@use "../../global/styles/join-item";
+@use "@scss/theme";
+@use "@scss/radius";
+@use "@scss/join-item";
 
 /**
  * @prop --border-radius: Change border radius

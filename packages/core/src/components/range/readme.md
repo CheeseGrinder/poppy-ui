@@ -55,18 +55,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element. |
 
 
-## CSS Custom Properties
-
-| Name                   | Description                      |
-| ---------------------- | -------------------------------- |
-| `--active-track-color` | Color of active part             |
-| `--border-radius`      | Border radius                    |
-| `--thumb-color`        | Height of the active range track |
-| `--thumb-size`         | Height of the active range track |
-| `--track-color`        | Color of the unselected part     |
-| `--track-size`         | Height of the range track        |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

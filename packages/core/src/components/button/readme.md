@@ -46,18 +46,6 @@ Buttons allow the user to take actions or make choices.
 | `"native"` | The native HTML button or anchor element that wraps all child elements. |
 
 
-## CSS Custom Properties
-
-| Name              | Description                                           |
-| ----------------- | ----------------------------------------------------- |
-| `--animation`     | Change animation duration                             |
-| `--background`    | Change background color                               |
-| `--border-color`  | Change border color                                   |
-| `--border-radius` | Change border radius                                  |
-| `--color`         | Change text color                                     |
-| `--focus-scale`   | Change scale transformation when the button is active |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

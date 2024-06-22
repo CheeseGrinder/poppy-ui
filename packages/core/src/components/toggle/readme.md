@@ -61,19 +61,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element.                     |
 
 
-## CSS Custom Properties
-
-| Name                   | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `--animation-duration` | Animation duration                                   |
-| `--background`         | Background color                                     |
-| `--border-radius`      | Border radius                                        |
-| `--checked-color`      | Change border and thumd color when toggle is checked |
-| `--color`              | Change border and thumd color                        |
-| `--opacity`            | Change border and thumd opacity                      |
-| `--required-color`     | Change required star color                           |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

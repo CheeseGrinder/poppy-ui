@@ -69,16 +69,6 @@ Type: `Promise<void>`
 | `"header"`  | Header of the accordion  |
 
 
-## CSS Custom Properties
-
-| Name              | Description             |
-| ----------------- | ----------------------- |
-| `--animation`     | Change animation timing |
-| `--background`    | Change background color |
-| `--border-color`  | Change border color     |
-| `--border-radius` | Change border radius    |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

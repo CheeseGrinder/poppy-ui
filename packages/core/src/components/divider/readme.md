@@ -24,13 +24,6 @@ Divider will be used to separate content vertically or horizontally.
 |      | Text for describe the divider |
 
 
-## CSS Custom Properties
-
-| Name           | Description             |
-| -------------- | ----------------------- |
-| `--background` | Change background color |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

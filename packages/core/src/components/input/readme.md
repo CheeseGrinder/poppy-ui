@@ -81,19 +81,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element.                     |
 
 
-## CSS Custom Properties
-
-| Name               | Description                  |
-| ------------------ | ---------------------------- |
-| `--background`     | Background color             |
-| `--border-color`   | Border color & outline color |
-| `--border-radius`  | Border radius                |
-| `--color`          | Change text color            |
-| `--error-color`    | Change error text color      |
-| `--font`           | Change text font             |
-| `--required-color` | Change star color            |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

@@ -64,21 +64,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element.                     |
 
 
-## CSS Custom Properties
-
-| Name                   | Description                              |
-| ---------------------- | ---------------------------------------- |
-| `--background`         | Change background color.                 |
-| `--background-opacity` | CHange background opacity.               |
-| `--border-color`       | Change border and outline color.         |
-| `--border-radius`      | Change border radius.                    |
-| `--button-animation`   | Change animation duration of the button. |
-| `--button-background`  | Change button background.                |
-| `--button-color`       | Change button text color.                |
-| `--color`              | Change text color.                       |
-| `--error-color`        | Change error text .                      |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

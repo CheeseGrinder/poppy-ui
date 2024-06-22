@@ -24,15 +24,6 @@ Progress bar can be used to show the progress of a task or to show the passing o
 | `"native"` | Native `progress` HTML element. |
 
 
-## CSS Custom Properties
-
-| Name                  | Description                   |
-| --------------------- | ----------------------------- |
-| `--background`        | Background progress bar       |
-| `--background-active` | Background progress bar value |
-| `--border-radius`     | Border radius                 |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

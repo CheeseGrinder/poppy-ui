@@ -67,15 +67,6 @@ Type: `Promise<void>`
 | `"side"`     | The container for the menu content.                                   |
 
 
-## CSS Custom Properties
-
-| Name                    | Description                      |
-| ----------------------- | -------------------------------- |
-| `--background`          | Change sidebar background        |
-| `--background-backdrop` | Change backdrop background color |
-| `--color`               | Change sidebar text color        |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

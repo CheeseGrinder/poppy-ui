@@ -32,16 +32,6 @@ Badges are used to inform the user of the status of specific data.
 | `"native"` | The native HTML div or span element that wraps the content. |
 
 
-## CSS Custom Properties
-
-| Name              | Description             |
-| ----------------- | ----------------------- |
-| `--background`    | Color of the background |
-| `--border-color`  | Border color            |
-| `--border-radius` | Border radius           |
-| `--color`         | Color of the text       |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

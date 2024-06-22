@@ -69,17 +69,6 @@ Type: `Promise<boolean>`
 | `"{name}"`   | // Describe css part |
 
 
-## CSS Custom Properties
-
-| Name              | Description               |
-| ----------------- | ------------------------- |
-| `--background`    | Change sidebar background |
-| `--border-color`  | Change border color       |
-| `--border-radius` | Change border radius      |
-| `--color`         | Change sidebar text color |
-| `--shadow`        | Change box-shadow         |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

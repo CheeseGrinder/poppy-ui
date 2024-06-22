@@ -1,6 +1,6 @@
-@use "../../global/styles/theme";
-@use "../../global/styles/shadow";
-@use "../../global/styles/radius";
+@use "@scss/theme";
+@use "@scss/shadow";
+@use "@scss/radius";
 
 /**
  * @prop --border-radius: Change border radius

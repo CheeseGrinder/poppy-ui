@@ -84,18 +84,6 @@ Type: `Promise<void>`
 | `"label"` |             |
 
 
-## CSS Custom Properties
-
-| Name              | Description                  |
-| ----------------- | ---------------------------- |
-| `--background`    | Background color             |
-| `--border-color`  | Border color & outline color |
-| `--border-radius` | Border radius                |
-| `--color`         | Change text color            |
-| `--error-color`   | Change error text color      |
-| `--opacity`       | Change background opacity    |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

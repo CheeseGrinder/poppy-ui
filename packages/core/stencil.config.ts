@@ -1,5 +1,6 @@
 import { componentConfigTarget } from '@cheese-grinder/stencil-component-config';
 import { docsReadme } from '@cheese-grinder/stencil-custom-readme';
+import { sassAlias } from '@cheese-grinder/stencil-sass-alias';
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import { vueOutputTarget } from '@stencil/vue-output-target';
@@ -23,7 +24,11 @@ export const config: Config = {
   globalStyle: './src/poppy.scss',
   globalScript: './src/global/poppy.ts',
   plugins: [
-    sass(),
+    sass({
+      importer: [sassAlias({
+        path: 'src/global/styles',
+      })]
+    }),
   ],
   outputTargets: [
     docsReadme(),

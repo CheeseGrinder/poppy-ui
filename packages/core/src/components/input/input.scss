@@ -1,7 +1,7 @@
-@use "../../global/styles/radius";
-@use "../../global/styles/theme";
-@use "../../global/styles/input";
-@use "../../global/styles/join-item";
+@use "@scss/radius";
+@use "@scss/theme";
+@use "@scss/input";
+@use "@scss/join-item";
 
 /**
  * @prop --border-radius: Border radius

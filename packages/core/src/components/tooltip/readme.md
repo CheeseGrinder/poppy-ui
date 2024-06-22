@@ -25,17 +25,6 @@ Tooltip can be used to show a message when hovering over an element.
 |      | Slot for the content of the tooltip |
 
 
-## CSS Custom Properties
-
-| Name                   | Description        |
-| ---------------------- | ------------------ |
-| `--background`         | Background color   |
-| `--background-opacity` | Background opacity |
-| `--color`              | Text color         |
-| `--tail`               | Tooltip arrow size |
-| `--text-opacity`       | Text opacity       |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

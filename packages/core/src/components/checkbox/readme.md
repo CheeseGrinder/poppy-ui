@@ -64,17 +64,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element.        |
 
 
-## CSS Custom Properties
-
-| Name                | Description               |
-| ------------------- | ------------------------- |
-| `--animation`       | Change animation duration |
-| `--background`      | Change background color   |
-| `--border-color`    | Change border color       |
-| `--border-radius`   | Change border radius      |
-| `--checkmark-color` | Change checkmark color    |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

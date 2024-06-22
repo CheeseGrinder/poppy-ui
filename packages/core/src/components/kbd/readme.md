@@ -29,16 +29,6 @@ Kbd is used to display keyboard shortcuts.
 | `"native"` | The native HTML kbd element. |
 
 
-## CSS Custom Properties
-
-| Name              | Description                  |
-| ----------------- | ---------------------------- |
-| `--background`    | Background color             |
-| `--border-color`  | Border color & outline color |
-| `--border-radius` | Border radius                |
-| `--font`          | Change text font             |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

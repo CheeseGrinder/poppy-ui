@@ -59,18 +59,6 @@ Type: `Promise<void>`
 | `"native"` | The native HTML input element.                     |
 
 
-## CSS Custom Properties
-
-| Name                   | Description               |
-| ---------------------- | ------------------------- |
-| `--animation-duration` | Animation duration        |
-| `--background`         | Background color          |
-| `--border-color`       | Border color              |
-| `--border-opacity`     | Border opacity            |
-| `--border-radius`      | Border radius             |
-| `--opacity`            | Change background opacity |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

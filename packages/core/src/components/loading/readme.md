@@ -16,13 +16,6 @@ Loading shows an animation to indicate that something is loading.
 | `type`   | `type`    | Apply different animation                                                     | `"ball" \| "bars" \| "dots" \| "infinity" \| "ring" \| "spinner"` | `'spinner'` |
 
 
-## CSS Custom Properties
-
-| Name           | Description      |
-| -------------- | ---------------- |
-| `--background` | Background color |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
