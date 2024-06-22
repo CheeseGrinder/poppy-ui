@@ -1,6 +1,6 @@
 import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import { AttachInternals, Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
 import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './button.type';
 
@@ -17,11 +17,14 @@ import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './butto
   tag: 'pop-button',
   styleUrl: 'button.scss',
   shadow: true,
+  formAssociated: true,
 })
 export class Button implements ComponentInterface {
-  #inheritedAttributes: Attributes = {};
+  private inheritedAttributes: Attributes = {};
 
   @Element() host!: HTMLElement;
+
+  @AttachInternals() internals: ElementInternals;
 
   /**
    * The type of the button.
@@ -31,12 +34,13 @@ export class Button implements ComponentInterface {
   /**
    * The HTML form element id. Used to submit a form when the button is not a child of the form.
    */
-  @Prop() form?: string;
+  @Prop() form?: string | HTMLFormElement;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
@@ -53,14 +57,16 @@ export class Button implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default 'md'
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Transparent Button with colored border
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) outlined?: boolean;
 
@@ -99,19 +105,38 @@ export class Button implements ComponentInterface {
   }
 
   componentWillRender(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
   }
 
-  #onFocus = (): void => {
+  private getForm(): HTMLFormElement {
+    const { form } = this;
+    if (typeof form === 'string') return document.getElementById(form) as HTMLFormElement;
+    if (typeof form === 'object') return form;
+
+    return this.internals.form;
+  }
+
+  private onClick = (): void => {
+    const { type } = this;
+    const form = this.getForm()
+    const actions: Partial<Record<ButtonType, () => void>> = {
+      submit: () => form.requestSubmit(),
+      reset: () => form.reset(),
+    }
+
+    actions[type]?.();
+  }
+
+  private onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = (): void => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
   render() {
-    const { host, disabled } = this;
+    const { host, disabled, type } = this;
 
     return (
       <Host
@@ -119,17 +144,19 @@ export class Button implements ComponentInterface {
         class={{
           'join-item': hostContext(host, 'pop-join'),
         }}
+        onClick={this.onClick}
       >
         <button
           part="native"
+          type={type}
           disabled={disabled}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          {...this.#inheritedAttributes}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          {...this.inheritedAttributes}
         >
-          <slot name="start-icon"></slot>
-          <slot></slot>
-          <slot name="end-icon"></slot>
+          <slot name="start" />
+          <slot />
+          <slot name="end" />
         </button>
       </Host>
     );
