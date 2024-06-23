@@ -149,7 +149,7 @@ export const PopIndicator = /*@__PURE__*/ defineContainer<JSX.PopIndicator>('pop
 ]);
 
 
-export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput>('pop-input', definePopInput, [
+export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput["value"]>('pop-input', definePopInput, [
   'name',
   'type',
   'placeholder',
@@ -182,7 +182,8 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput>('pop-input',
   'popInput',
   'popFocus',
   'popBlur'
-]);
+],
+'value', 'pop-change');
 
 
 export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop-input-file', definePopInputFile, [
