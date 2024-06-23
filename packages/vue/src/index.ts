@@ -17,6 +17,8 @@ export {
   RangeChangeEventDetail,
   SelectCustomEvent,
   SelectChangeEventDetail,
+  SwapCustomEvent,
+  SwapChangeEventDetail,
   TextareaCustomEvent,
   TextareaChangeEventDetail,
   TextareaInputEventDetail,
@@ -26,5 +28,5 @@ export {
   PopoverOptions,
 } from '@poppy-ui/core/components';
 
-export type * from '@poppy-ui/core/dist/types/custom-types';
+export type * from '@poppy-ui/core/dist/types/custom-type';
 export type * from '@poppy-ui/core/dist/types/interface';
