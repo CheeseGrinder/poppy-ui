@@ -20,9 +20,11 @@ import { ListOrientation } from "./components/list/list.type";
 import { LoadingType } from "./components/loading/loading.type";
 import { MaskType } from "./components/mask/mask.type";
 import { RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
-import { SelectCompareFn } from "./components/select/select.type";
+import { RangeColor } from "./components/range/range.type";
+import { SelectColor, SelectCompareFn } from "./components/select/select.type";
 import { SwapType } from "./components/swap/swap.type";
 import { TextareaColor, Wrap } from "./components/textarea/textarea.type";
+import { ToggleColor } from "./components/toggle/toggle.type";
 import { TooltipPosition } from "./components/tooltip/tooltip.type";
 
 export namespace Configuration {
@@ -183,7 +185,15 @@ export namespace Configuration {
     }
     'pop-dropdown'?: {
       side?: DropdownSide;
+      /**
+       * Describes how the dropdown has to be alined
+       * - "start": Align to the left in LTR and to the right in RTL.
+       * - "end": Align to the right in LTR and to the left in RTL.
+       */
       align?: DropdownAlign;
+      /**
+       * Force the dropdown to be shown
+       */
       open?: boolean;
       /**
        * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open.
@@ -540,7 +550,7 @@ export namespace Configuration {
        * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
        * For more information on colors, see [theming](/docs/theming/basics).
        */
-      color?: Color | 'ghost';
+      color?: RangeColor;
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
@@ -583,7 +593,7 @@ export namespace Configuration {
        * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
        * For more information on colors, see [theming](/docs/theming/basics).
        */
-      color?: Color | 'ghost';
+      color?: SelectColor;
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
@@ -715,7 +725,7 @@ export namespace Configuration {
        * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.
        * For more information on colors, see [theming](/docs/theming/basics).
        */
-      color?: Color | 'ghost';
+      color?: ToggleColor;
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.

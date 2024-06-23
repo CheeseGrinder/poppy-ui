@@ -13,8 +13,8 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Size } from 'src/interface';
-import { RangeChangeEventDetail } from './range.type';
+import type { Size } from 'src/interface';
+import { RangeChangeEventDetail, RangeColor } from './range.type';
 
 /**
  * Range slider is used to select a value by sliding a handle.
@@ -28,11 +28,11 @@ import { RangeChangeEventDetail } from './range.type';
   formAssociated: true,
 })
 export class Range implements ComponentInterface {
-  #inputId = `pop-range-${rangeIds++}`;
-  #inheritedAttributes: Attributes;
+  private inputId = `pop-range-${rangeIds++}`;
+  private inheritedAttributes: Attributes;
 
-  #nativeInput!: HTMLInputElement;
-  #debounceTimer: NodeJS.Timeout;
+  private nativeInput!: HTMLInputElement;
+  private debounceTimer: NodeJS.Timeout;
 
   @Element() host: HTMLElement;
 
@@ -41,7 +41,7 @@ export class Range implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -59,35 +59,40 @@ export class Range implements ComponentInterface {
   /**
    * The minimum value, which must not be greater than its maximum (max attribute) value.
    *
-   * @config @default 0
+   * @config
+   * @default 0
    */
   @Prop({ reflect: true, mutable: true }) min?: number;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
    *
-   * @config @default 100
+   * @config
+   * @default 100
    */
   @Prop({ reflect: true, mutable: true }) max?: number;
 
   /**
    * Works with the min and max attributes to limit the increments at which a value can be set.
    *
-   * @config @default 1
+   * @config
+   * @default 1
    */
   @Prop({ reflect: true, mutable: true }) step?: number;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
@@ -103,20 +108,22 @@ export class Range implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: RangeColor;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
    *
-   * @config @default 0
+   * @config
+   * @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;
 
@@ -145,7 +152,7 @@ export class Range implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-range', {
       min: 0,
@@ -159,7 +166,7 @@ export class Range implements ComponentInterface {
   }
 
   disconnectedCallback(): void {
-    clearTimeout(this.#debounceTimer);
+    clearTimeout(this.debounceTimer);
   }
 
   /**
@@ -168,13 +175,13 @@ export class Range implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #onChange = (): void => {
-    clearTimeout(this.#debounceTimer);
-    this.#debounceTimer = setTimeout(() => {
-      this.value = this.#nativeInput.valueAsNumber;
+  private onChange = (): void => {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      this.value = this.nativeInput.valueAsNumber;
 
       this.popChange.emit({
         value: this.value,
@@ -182,16 +189,16 @@ export class Range implements ComponentInterface {
     }, this.debounce || 0);
   };
 
-  #onFocus = (): void => {
+  private onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = (): void => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
   render() {
-    const { #inputId: inputId } = this;
+    const { inputId } = this;
 
     return (
       <Host aria-labelledby={inputId} aria-hidden={this.disabled ? 'true' : null}>
@@ -207,11 +214,11 @@ export class Range implements ComponentInterface {
           required={this.required}
           disabled={this.disabled}
           autoFocus={this.autoFocus}
-          onInput={this.#onChange}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
+          onInput={this.onChange}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          ref={el => (this.nativeInput = el)}
+          {...this.inheritedAttributes}
         />
       </Host>
     );

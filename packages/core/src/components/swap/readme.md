@@ -13,7 +13,7 @@ Swap allows you to toggle the visibility of two elements.
 | Property | Attribute | Description                                             | Type                 | Default    |
 | -------- | --------- | ------------------------------------------------------- | -------------------- | ---------- |
 | `active` | `active`  | Activates the swap.<br> Show whats inside the slot `on` | `boolean`            | `false`    |
-| `type`   | `type`    | Choose what animation is used on click.                 | `"flip" \| "rotate"` | `'rotate'` |
+| `type`   | `type`    | Choose what animation is used on click.                 | `"flip" \| "rotate"` | `"rotate"` |
 
 
 ## Events

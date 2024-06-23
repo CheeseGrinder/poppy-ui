@@ -16,7 +16,8 @@ export class Mask {
   /**
    * Mask that should be applied
    *
-   * @config @default 'squircle
+   * @config
+   * @default "squircle"
    */
   @Prop({ reflect: true, mutable: true }) type: MaskType;
 

@@ -32,11 +32,11 @@ import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail
   formAssociated: true,
 })
 export class Input implements ComponentInterface {
-  #inputId = `pop-input-${inputIds++}`;
-  #inheritedAttributes: Attributes;
+  private inputId = `pop-input-${inputIds++}`;
+  private inheritedAttributes: Attributes;
 
-  #nativeInput!: HTMLInputElement;
-  #debounceTimer: NodeJS.Timeout;
+  private nativeInput!: HTMLInputElement;
+  private debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
 
@@ -45,7 +45,7 @@ export class Input implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * The type of control to display. The default type is text.
@@ -69,11 +69,11 @@ export class Input implements ComponentInterface {
    */
   @Prop({ mutable: true }) value?: string | number | null = '';
   @Watch('value')
-  protected onValueChange() {
-    const value = this.#getValue();
+  onValueChange() {
+    const value = this.getValue();
     this.internals.setFormValue(value, value);
 
-    if (value !== this.#nativeInput.value) {
+    if (value !== this.nativeInput.value) {
       /**
        * Assigning the native input's value on attribute
        * value change, allows `popInput` implementations
@@ -82,7 +82,7 @@ export class Input implements ComponentInterface {
        * Used for patterns such as input trimming (removing whitespace),
        * or input masking.
        */
-      this.#nativeInput.value = value;
+      this.nativeInput.value = value;
     }
   }
 
@@ -141,28 +141,32 @@ export class Input implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
 
@@ -192,7 +196,8 @@ export class Input implements ComponentInterface {
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) spellcheck: boolean;
 
@@ -210,14 +215,16 @@ export class Input implements ComponentInterface {
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
    *
-   * @config @default 'off'
+   * @config
+   * @default "off"
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
@@ -234,7 +241,8 @@ export class Input implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -252,7 +260,8 @@ export class Input implements ComponentInterface {
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) counter?: boolean;
 
@@ -267,7 +276,8 @@ export class Input implements ComponentInterface {
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
    *
-   * @config @default 0
+   * @config
+   * @default 0
    */
   @Prop({ mutable: true }) debounce?: number = 0;
 
@@ -305,7 +315,7 @@ export class Input implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = {
+    this.inheritedAttributes = {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
@@ -333,7 +343,7 @@ export class Input implements ComponentInterface {
   }
 
   disconnectedCallback(): void {
-    clearTimeout(this.#debounceTimer);
+    clearTimeout(this.debounceTimer);
   }
 
   /**
@@ -342,52 +352,52 @@ export class Input implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #getValue(): string {
+  private getValue(): string {
     if (typeof this.value === 'number') return this.value.toString();
     return this.value || '';
   }
 
-  get #counterText(): string {
+  private get counterText(): string {
     const { counter, maxLength, counterFormatter } = this;
 
     if (!counter || maxLength < 0) return '';
-    const length = this.#getValue().length;
+    const length = this.getValue().length;
 
     return counterFormatter(length, maxLength);
   }
 
-  #onChange = (): void => {
+  private onChange = (): void => {
     this.popChange.emit({
-      value: this.#getValue(),
+      value: this.getValue(),
     });
   };
 
-  #onInput = (): void => {
-    this.value = this.#nativeInput.value;
+  private onInput = (): void => {
+    this.value = this.nativeInput.value;
 
-    clearTimeout(this.#debounceTimer);
-    this.#debounceTimer = setTimeout(() => {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
       this.popInput.emit({
-        value: this.#getValue(),
+        value: this.getValue(),
       });
     }, this.debounce || 0);
   };
 
-  #onFocus = (): void => {
+  private onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = (): void => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
   render() {
     const { host, errorText, helperText } = this;
-    const inputId = this.#inputId;
-    const counter = this.#counterText;
+    const inputId = this.inputId;
+    const counter = this.counterText;
 
     const hasLabel = host.textContent !== '';
     const hasError = !!errorText;
@@ -435,12 +445,12 @@ export class Input implements ComponentInterface {
             spellcheck={this.spellcheck}
             autoComplete={this.autoComplete}
             autoCapitalize={this.autoCapitalize}
-            onChange={this.#onChange}
-            onInput={this.#onInput}
-            onFocus={this.#onFocus}
-            onBlur={this.#onBlur}
-            ref={el => (this.#nativeInput = el)}
-            {...this.#inheritedAttributes}
+            onChange={this.onChange}
+            onInput={this.onInput}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            ref={el => (this.nativeInput = el)}
+            {...this.inheritedAttributes}
           />
           <slot name="end" />
         </label>

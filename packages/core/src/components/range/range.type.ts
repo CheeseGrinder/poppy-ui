@@ -1,3 +1,7 @@
+import { Color } from 'src/interface';
+
+export type RangeColor = Color | 'ghost';
+
 export interface RangeChangeEventDetail {
   value: number;
 }

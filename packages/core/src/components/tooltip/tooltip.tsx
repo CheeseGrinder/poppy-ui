@@ -31,14 +31,16 @@ export class Tooltip {
    * Define the position of tooltip
    * By default the tootip appear on top
    *
-   * @config @default 'top'
+   * @config
+   * @default "top"
    */
   @Prop({ reflect: true, mutable: true }) position?: TooltipPosition;
 
   /**
    * Force open tooltip
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) open: boolean = false;
 

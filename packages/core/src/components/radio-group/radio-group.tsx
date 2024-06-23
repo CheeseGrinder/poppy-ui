@@ -24,7 +24,7 @@ let radioGroupIds = 0;
   formAssociated: true,
 })
 export class RadioGroup implements ComponentInterface {
-  #inputId = `ion-rg-${radioGroupIds++}`;
+  private inputId = `ion-rg-${radioGroupIds++}`;
 
   @Element() host!: HTMLElement;
 
@@ -33,7 +33,7 @@ export class RadioGroup implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * the value of the radio group.
@@ -53,21 +53,24 @@ export class RadioGroup implements ComponentInterface {
   /**
    * If `true`, apply the required property to all `pop-radio`.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, apply the disabled property to all `pop-radio`.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the radios can be deselected.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) allowEmpty?: boolean;
 
@@ -98,14 +101,14 @@ export class RadioGroup implements ComponentInterface {
    *
    * If the `pop-radio` as no size, it will apply to it
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * The `popChange` event is fired when the user select an option.
    * Unlike the ionInput event, the `popChange` event is fired when the user click on the element.
-   *
    */
   @Event() popChange: EventEmitter<RadioGroupChangeEventDetail>;
 
@@ -136,27 +139,27 @@ export class RadioGroup implements ComponentInterface {
   }
 
   componentDidLoad(): void {
-    this.#radios.forEach(radio => {
+    this.radios.forEach(radio => {
       radio.name = this.name;
       if (this.required) radio.required = this.required;
       if (this.disabled) radio.disabled = this.disabled;
     });
-    this.#applyColor();
-    this.#applySize();
-    this.#applyCheck();
+    this.applyColor();
+    this.applySize();
+    this.applyCheck();
   }
 
-  #applyColor(): void {
+  private applyColor(): void {
     if (!this.color) return;
-    this.#radios.filter(radio => !radio.color).forEach(radio => (radio.color = this.color));
+    this.radios.filter(radio => !radio.color).forEach(radio => (radio.color = this.color));
   }
 
-  #applySize(): void {
+  private applySize(): void {
     if (!this.size) return;
-    this.#radios.filter(radio => !radio.size).forEach(radio => (radio.size = this.size));
+    this.radios.filter(radio => !radio.size).forEach(radio => (radio.size = this.size));
   }
 
-  #applyCheck(): void {
+  private applyCheck(): void {
     if (this.value) {
       this.popValueChange.emit({
         value: this.value,
@@ -165,18 +168,18 @@ export class RadioGroup implements ComponentInterface {
     }
     if (this.allowEmpty) return;
 
-    const radios = this.#radios;
+    const radios = this.radios;
     const radio = radios.find(radio => !radio.disabled);
 
     if (!radio) return;
     radio.checked = true;
   }
 
-  get #radios() {
+  private get radios() {
     return Array.from(this.host.querySelectorAll('pop-radio'));
   }
 
-  #onClick = (ev: Event) => {
+  private onClick = (ev: Event) => {
     ev.preventDefault();
 
     const target = ev.target as HTMLElement;
@@ -192,7 +195,7 @@ export class RadioGroup implements ComponentInterface {
 
   render() {
     return (
-      <Host onClick={this.#onClick}>
+      <Host onClick={this.onClick}>
         <slot />
       </Host>
     );

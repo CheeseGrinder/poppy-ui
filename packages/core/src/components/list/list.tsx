@@ -15,14 +15,16 @@ export class List implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Define content disposition orientation
    *
-   * @config @default 'vertical'
+   * @config
+   * @default "vertical"
    */
   @Prop({ reflect: true, mutable: true }) orientation?: ListOrientation;
 

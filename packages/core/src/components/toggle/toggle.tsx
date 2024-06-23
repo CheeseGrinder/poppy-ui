@@ -13,9 +13,9 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Size } from 'src/interface';
+import type { Size } from 'src/interface';
 import { Show } from '../Show';
-import { ToggleChangeEventDetail } from './toggle.type';
+import { ToggleChangeEventDetail, ToggleColor } from './toggle.type';
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -32,9 +32,9 @@ import { ToggleChangeEventDetail } from './toggle.type';
   formAssociated: true,
 })
 export class Toggle implements ComponentInterface {
-  #inputId = `pop-tg-${toggleIds++}`;
-  #inheritedAttributes: Attributes;
-  #nativeInput!: HTMLInputElement;
+  private inputId = `pop-tg-${toggleIds++}`;
+  private inheritedAttributes: Attributes;
+  private nativeInput!: HTMLInputElement;
 
   @Element() host!: HTMLElement;
 
@@ -43,7 +43,7 @@ export class Toggle implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -57,21 +57,24 @@ export class Toggle implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the toggle is selected.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) checked?: boolean;
   @Watch('checked')
@@ -88,14 +91,16 @@ export class Toggle implements ComponentInterface {
   /**
    * If a developer want to use `indeterminate`, `checked` property should be set to `false`
    *
-   * @config @default false
+   * @config
+   * @default false
    */
-  @Prop({ reflect: true, mutable: true }) indeterminate?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) indeterminate?: boolean;
 
   /**
    * If true, the user cannot interact with the native element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled: boolean;
 
@@ -106,13 +111,14 @@ export class Toggle implements ComponentInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: ToggleColor;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -140,7 +146,7 @@ export class Toggle implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-toggle', {
       required: false,
@@ -158,32 +164,31 @@ export class Toggle implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #onClick = () => {
+  private onClick = () => {
     const { checked, disabled, readonly } = this;
     if (disabled || readonly) return;
 
     this.checked = !checked;
   };
 
-  #onChecked = (ev: Event) => {
+  private onChecked = (ev: Event) => {
     const input = ev.target as HTMLInputElement;
     this.checked = input.checked;
   };
 
-  #onFocus = () => {
+  private onFocus = () => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  private onBlur = () => {
     this.popBlur.emit();
   };
 
   render() {
-    const { host, name, disabled, checked } = this;
-    const inputId = this.#inputId;
+    const { host, name, disabled, checked, inputId } = this;
 
     const hasLabel = host.textContent !== '';
 
@@ -192,7 +197,7 @@ export class Toggle implements ComponentInterface {
         aria-labelledby={inputId}
         aria-checked={`${checked}`}
         aria-hidden={disabled ? 'true' : null}
-        onClick={this.#onClick}
+        onClick={this.onClick}
       >
         <Show when={hasLabel}>
           <div class="label">
@@ -213,11 +218,11 @@ export class Toggle implements ComponentInterface {
           readOnly={this.readonly}
           checked={checked}
           disabled={disabled}
-          onChange={this.#onChecked}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
+          onChange={this.onChecked}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          ref={el => (this.nativeInput = el)}
+          {...this.inheritedAttributes}
         />
       </Host>
     );

@@ -11,13 +11,13 @@ import { JoinOrientation } from './join.type';
 @Component({
   tag: 'pop-join',
   styleUrl: 'join.scss',
-  // scoped: true,
 })
 export class Join implements ComponentInterface {
   /**
    * Define content disposition orientation
    *
-   * @config @default "horizontal"
+   * @config
+   * @default "horizontal"
    */
   @Prop({ reflect: true }) orientation: JoinOrientation;
 

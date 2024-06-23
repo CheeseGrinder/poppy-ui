@@ -1,3 +1,7 @@
+import { Color } from 'src/interface';
+
+export type ToggleColor = Color | 'ghost';
+
 export interface ToggleChangeEventDetail<T = any> {
   checked: boolean;
   value: T;

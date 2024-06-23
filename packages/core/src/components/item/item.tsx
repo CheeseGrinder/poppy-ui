@@ -15,7 +15,8 @@ export class Item implements ComponentInterface {
   /**
    * If `true`, the user cannot interact with the item.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) disabled: boolean;
 
@@ -25,10 +26,10 @@ export class Item implements ComponentInterface {
     });
   }
 
-  #onClick = (ev: PointerEvent): void => {
+  private onClick = (ev: PointerEvent): void => {
     const path = ev.composedPath();
     const target = path[0] as HTMLElement;
-    const firstInteractive = this.#getFirstInteractive();
+    const firstInteractive = this.getFirstInteractive();
 
     if (!ev.isTrusted || firstInteractive === undefined) return;
 
@@ -38,7 +39,7 @@ export class Item implements ComponentInterface {
     }
   };
 
-  #getFirstInteractive(): HTMLElement {
+  private getFirstInteractive(): HTMLElement {
     const controls = this.host.querySelectorAll<HTMLElement>(
       'pop-toggle:not([disabled]), pop-checkbox:not([disabled]), pop-radio:not([disabled]), pop-select:not([disabled])',
     );
@@ -55,7 +56,7 @@ export class Item implements ComponentInterface {
       <Host
         role={inList ? 'listitem' : null}
         aria-disabled={disabled ? 'true' : null}
-        onClick={this.#onClick}
+        onClick={this.onClick}
         class={{
           'in-list': inList,
           [`in-list-${listSize}`]: inList,

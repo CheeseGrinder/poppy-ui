@@ -15,9 +15,10 @@ export class Avatar implements ComponentInterface {
   /**
    * To show some letters as avatar placeholder
    *
-   * @config @default false
+   * @config
+   * @default false
    */
-  @Prop({ reflect: true }) placeholder: boolean = false;
+  @Prop({ reflect: true, mutable: true }) placeholder: boolean;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-avatar', {

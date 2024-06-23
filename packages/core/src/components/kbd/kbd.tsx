@@ -19,7 +19,8 @@ export class Kbd implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 

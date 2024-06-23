@@ -22,10 +22,10 @@ import { ComponentProps, ComponentRef } from 'src/interface';
   shadow: true,
 })
 export class Popover implements ComponentInterface, OverlayInterface {
-  #dialog: HTMLDialogElement;
-  #handler: (event: ToggleEvent) => void;
+  private dialogEl: HTMLDialogElement;
+  private handler: (event: ToggleEvent) => void;
 
-  #triggerController = TriggerController.create();
+  private triggerController = TriggerController.create();
 
   @Element() host: HTMLPopPopoverElement;
 
@@ -36,7 +36,8 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * Note: `open` will not automatically be set back to `false` when
    * the popover dismisses. You will need to do that in your code.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) open: boolean;
   @Watch('open')
@@ -51,7 +52,8 @@ export class Popover implements ComponentInterface, OverlayInterface {
   /**
    * If `true`, the popover will animate.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) animated = true;
 
@@ -62,14 +64,16 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * It does not control whether or not the backdrop
    * is active or present in the DOM.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) showBackdrop: boolean = false;
 
   /**
    * If `true`, the popover will be dismissed when the backdrop is clicked.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) backdropDismiss: boolean = false;
 
@@ -88,7 +92,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
   @Watch('trigger')
   onTriggerChange(trigger: string) {
     if (trigger) {
-      this.#triggerController.addListener(this.host, trigger, this.triggerAction);
+      this.triggerController.addListener(this.host, trigger, this.triggerAction);
     }
   }
 
@@ -102,12 +106,13 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * clicked on desktop and long pressed on mobile. This will also prevent your
    * device's normal context menu from appearing.
    *
-   * @config @default 'click'
+   * @config
+   * @default "click"
    */
   @Prop({ mutable: true }) triggerAction: TriggerAction;
   @Watch('triggerAction')
   onTriggerActionChange(triggerAction: TriggerAction) {
-    this.#triggerController.addListener(this.host, this.trigger, triggerAction);
+    this.triggerController.addListener(this.host, this.trigger, triggerAction);
   }
 
   /**
@@ -150,7 +155,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * Use this function to emit `didDismiss` event instead of the StencilEvent because when this event is fired the element doesnt exist anymore in the DOM.
    * The live above is only here for compilation and documentation purpose.
    */
-  #didDismiss(): void {
+  private emitDidDismiss(): void {
     if (this.host.isConnected) return;
 
     this.host.dispatchEvent(
@@ -177,7 +182,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
   }
 
   componentDidLoad(): void {
-    this.#setupListener();
+    this.setupListener();
 
     /**
      * If popover was rendered with open="true"
@@ -189,9 +194,9 @@ export class Popover implements ComponentInterface, OverlayInterface {
   }
 
   disconnectedCallback(): void {
-    this.#triggerController.removeListener();
-    this.#dialog.removeEventListener('beforetoggle', this.#handler);
-    this.#didDismiss();
+    this.triggerController.removeListener();
+    this.dialogEl.removeEventListener('beforetoggle', this.handler);
+    this.emitDidDismiss();
   }
 
   @Method()
@@ -213,7 +218,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
 
     host.appendChild(el);
     await new Promise(resolve => componentOnReady(el, resolve));
-    this.#present();
+    this.show();
     this.didPresent.emit();
 
     return true;
@@ -225,34 +230,34 @@ export class Popover implements ComponentInterface, OverlayInterface {
     if (!open) return false;
 
     this.willDismiss.emit();
-    backdropDismiss ? this.#dialog.hidePopover() : this.#dialog.close(data);
-    this.#didDismiss();
+    backdropDismiss ? this.dialogEl.hidePopover() : this.dialogEl.close(data);
+    this.emitDidDismiss();
 
     return true;
   }
 
-  #setupListener(): void {
-    this.#handler = (event: ToggleEvent) => {
+  private setupListener(): void {
+    this.handler = (event: ToggleEvent) => {
       if (event.oldState === 'open') {
         this.willDismiss.emit();
         this.host.remove();
       }
     };
 
-    this.#dialog.addEventListener('beforetoggle', this.#handler);
+    this.dialogEl.addEventListener('beforetoggle', this.handler);
   }
 
-  #present(): void {
+  private show(): void {
     const { backdropDismiss, event } = this;
     const target = event.target as Element;
     const rect = target.getBoundingClientRect();
 
-    this.#dialog.style.setProperty('top', `${rect.bottom}px`);
-    this.#dialog.style.setProperty('left', `${rect.left}px`);
-    this.#dialog.style.setProperty('width', `${rect.width}px`);
+    this.dialogEl.style.setProperty('top', `${rect.bottom}px`);
+    this.dialogEl.style.setProperty('left', `${rect.left}px`);
+    this.dialogEl.style.setProperty('width', `${rect.width}px`);
 
-    backdropDismiss ? this.#dialog.showPopover() : this.#dialog.showModal();
-    this.#dialog.focus();
+    backdropDismiss ? this.dialogEl.showPopover() : this.dialogEl.showModal();
+    this.dialogEl.focus();
   }
 
   render() {
@@ -260,7 +265,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
 
     return (
       <Host aria-modal="true">
-        <dialog popover={backdropDismiss ? '' : null} class="popover" ref={el => (this.#dialog = el)}>
+        <dialog popover={backdropDismiss ? '' : null} class="popover" ref={el => (this.dialogEl = el)}>
           <div part="content" class="popover-content">
             <slot />
           </div>

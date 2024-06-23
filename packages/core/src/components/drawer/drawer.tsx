@@ -20,7 +20,7 @@ import { DrawerSide } from './drawer.type';
   shadow: true,
 })
 export class Drawer implements ComponentInterface, OverlayInterface {
-  #triggerController = TriggerController.create();
+  private triggerController = TriggerController.create();
 
   @Element() host: HTMLPopDrawerElement;
 
@@ -34,7 +34,7 @@ export class Drawer implements ComponentInterface, OverlayInterface {
   @Watch('trigger')
   onTriggerChange(trigger: string) {
     if (trigger) {
-      this.#triggerController.addListener(this.host, trigger, this.triggerAction);
+      this.triggerController.addListener(this.host, trigger, this.triggerAction);
     }
   }
 
@@ -47,12 +47,13 @@ export class Drawer implements ComponentInterface, OverlayInterface {
    * clicked on desktop and long pressed on mobile. This will also prevent your
    * device's normal context menu from appearing.
    *
-   * @config @default "click"
+   * @config
+   * @default "click"
    */
   @Prop() triggerAction?: TriggerAction;
   @Watch('triggerAction')
   onTriggerActionChange(triggerAction: TriggerAction) {
-    this.#triggerController.addListener(this.host, this.trigger, triggerAction);
+    this.triggerController.addListener(this.host, this.trigger, triggerAction);
   }
 
   /**
@@ -60,13 +61,16 @@ export class Drawer implements ComponentInterface, OverlayInterface {
    * - `"start"`: The sidebar will appear to the left of the screen in LTR and to the right in RTL.
    * - `"end"`: The sidebar will appear to the right of the screen in LTR and to the left in RTL.
    *
-   * @config @default "start"
+   * @config
+   * @default "start"
    */
   @Prop({ reflect: true, mutable: true }) side?: DrawerSide;
 
   /**
    * Forces the drawer to be open
-   * @config @default false
+   *
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) open?: boolean;
 
@@ -107,7 +111,7 @@ export class Drawer implements ComponentInterface, OverlayInterface {
     this.open = !this.open;
   }
 
-  #onClick = (): void => {
+  private onClick = (): void => {
     this.dismiss();
   };
 
@@ -126,7 +130,7 @@ export class Drawer implements ComponentInterface, OverlayInterface {
         </div>
 
         <aside class="drawer-side">
-          <div part="backdrop" class="drawer-backdrop" onClick={this.#onClick}></div>
+          <div part="backdrop" class="drawer-backdrop" onClick={this.onClick}></div>
           <div part="side" class="drawer-side-inner">
             <slot name="side" />
           </div>

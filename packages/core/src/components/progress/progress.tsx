@@ -20,7 +20,8 @@ export class Progress implements ComponentInterface {
 
   /**
    *
-   * @config @default 100
+   * @config
+   * @default 100
    */
   @Prop({ reflect: true, mutable: true }) max?: number;
 

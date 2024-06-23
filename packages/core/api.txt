@@ -22,7 +22,7 @@ pop-accordion-group,prop,readonly,boolean,undefined,false,true
 pop-accordion-group,event,popChange,AccordionGroupChangeEventDetail,true
 
 pop-avatar,shadow
-pop-avatar,prop,placeholder,boolean,false,false,true
+pop-avatar,prop,placeholder,boolean,undefined,false,true
 pop-avatar,css-prop,--background
 pop-avatar,css-prop,--color
 
@@ -64,7 +64,7 @@ pop-checkbox,prop,checked,boolean,undefined,false,true
 pop-checkbox,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-checkbox,prop,disabled,boolean,undefined,false,true
 pop-checkbox,prop,indeterminate,boolean,undefined,false,true
-pop-checkbox,prop,name,string,this.#inputId,false,false
+pop-checkbox,prop,name,string,this.inputId,false,false
 pop-checkbox,prop,placement,"end" | "start",undefined,false,true
 pop-checkbox,prop,readonly,boolean,undefined,false,true
 pop-checkbox,prop,required,boolean,undefined,false,true
@@ -157,7 +157,7 @@ pop-input,prop,maxLength,number,undefined,false,false
 pop-input,prop,min,number,undefined,false,false
 pop-input,prop,minLength,number,undefined,false,false
 pop-input,prop,multiple,boolean,undefined,false,false
-pop-input,prop,name,string,this.#inputId,false,false
+pop-input,prop,name,string,this.inputId,false,false
 pop-input,prop,pattern,string,undefined,false,false
 pop-input,prop,placeholder,string,undefined,false,false
 pop-input,prop,readonly,boolean,undefined,false,true
@@ -190,7 +190,7 @@ pop-input-file,prop,disabled,boolean,undefined,false,true
 pop-input-file,prop,errorText,string,undefined,false,false
 pop-input-file,prop,helperText,string,undefined,false,false
 pop-input-file,prop,multiple,boolean,undefined,false,false
-pop-input-file,prop,name,string,this.#inputId,false,false
+pop-input-file,prop,name,string,this.inputId,false,false
 pop-input-file,prop,readonly,boolean,undefined,false,true
 pop-input-file,prop,required,boolean,undefined,false,true
 pop-input-file,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
@@ -285,7 +285,7 @@ pop-radio,prop,autoFocus,boolean,false,false,true
 pop-radio,prop,checked,boolean,false,false,true
 pop-radio,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-radio,prop,disabled,boolean,undefined,false,true
-pop-radio,prop,name,string,this.#inputId,false,false
+pop-radio,prop,name,string,this.inputId,false,false
 pop-radio,prop,required,boolean,undefined,false,true
 pop-radio,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-radio,prop,value,any,'',false,false
@@ -306,7 +306,7 @@ pop-radio-group,prop,allowEmpty,boolean,undefined,false,false
 pop-radio-group,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-radio-group,prop,compare,((currentValue: any, newValue: any) => boolean) | string,undefined,false,false
 pop-radio-group,prop,disabled,boolean,undefined,false,true
-pop-radio-group,prop,name,string,this.#inputId,false,false
+pop-radio-group,prop,name,string,this.inputId,false,false
 pop-radio-group,prop,required,boolean,undefined,false,true
 pop-radio-group,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-radio-group,prop,value,any,undefined,false,false
@@ -319,7 +319,7 @@ pop-range,prop,debounce,number,0,false,false
 pop-range,prop,disabled,boolean,undefined,false,true
 pop-range,prop,max,number,undefined,false,true
 pop-range,prop,min,number,undefined,false,true
-pop-range,prop,name,string,this.#inputId,false,false
+pop-range,prop,name,string,this.inputId,false,false
 pop-range,prop,required,boolean,undefined,false,true
 pop-range,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-range,prop,step,number,undefined,false,true
@@ -346,7 +346,7 @@ pop-select,prop,helperText,string,undefined,false,false
 pop-select,prop,max,number,undefined,false,true
 pop-select,prop,min,number,undefined,false,true
 pop-select,prop,multiple,boolean,false,false,true
-pop-select,prop,name,string,this.#inputId,false,false
+pop-select,prop,name,string,this.inputId,false,false
 pop-select,prop,notEnoughErrorText,string,undefined,false,false
 pop-select,prop,placeholder,string,undefined,false,false
 pop-select,prop,required,boolean,undefined,false,true
@@ -394,7 +394,7 @@ pop-textarea,prop,helperText,string,undefined,false,false
 pop-textarea,prop,keyboard,"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url",undefined,false,false
 pop-textarea,prop,maxLength,number,undefined,false,false
 pop-textarea,prop,minLength,number,undefined,false,false
-pop-textarea,prop,name,string,this.#inputId,false,false
+pop-textarea,prop,name,string,this.inputId,false,false
 pop-textarea,prop,placeholder,string,undefined,false,false
 pop-textarea,prop,readonly,boolean,undefined,false,true
 pop-textarea,prop,required,boolean,undefined,false,true
@@ -423,8 +423,8 @@ pop-toggle,shadow
 pop-toggle,prop,checked,boolean,undefined,false,true
 pop-toggle,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-toggle,prop,disabled,boolean,undefined,false,true
-pop-toggle,prop,indeterminate,boolean,false,false,true
-pop-toggle,prop,name,string,this.#inputId,false,false
+pop-toggle,prop,indeterminate,boolean,undefined,false,true
+pop-toggle,prop,name,string,this.inputId,false,false
 pop-toggle,prop,readonly,boolean,undefined,false,true
 pop-toggle,prop,required,boolean,undefined,false,true
 pop-toggle,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true

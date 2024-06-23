@@ -6,7 +6,7 @@ import type { Color, Size } from 'src/interface';
   styleUrl: 'select-option.scss',
 })
 export class SelectOption {
-  #inputId = `pop-selopt-${selectOptionIds++}`;
+  private inputId = `pop-selopt-${selectOptionIds++}`;
 
   /**
    * The text value of the option.
@@ -36,7 +36,7 @@ export class SelectOption {
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   render() {
-    return <Host role="option" id={this.#inputId}></Host>;
+    return <Host role="option" id={this.inputId}></Host>;
   }
 }
 

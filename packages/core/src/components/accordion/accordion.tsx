@@ -18,7 +18,7 @@ import { ChevronDown } from '../ChevronDown';
   shadow: true,
 })
 export class Accordion implements ComponentInterface {
-  #accordionGroup?: HTMLPopAccordionGroupElement;
+  private accordionGroup?: HTMLPopAccordionGroupElement;
 
   @Element() host: HTMLElement;
 
@@ -45,13 +45,13 @@ export class Accordion implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) isOpen?: boolean = false;
 
   connectedCallback(): void {
-    this.#accordionGroup = this.host.closest('pop-accordion-group');
+    this.accordionGroup = this.host.closest('pop-accordion-group');
 
-    this.#accordionGroup?.addEventListener('popActiveChange', this.#handleValueChanged);
+    this.accordionGroup?.addEventListener('popActiveChange', this.#handleValueChanged);
   }
 
   disconnectedCallback(): void {
-    this.#accordionGroup?.removeEventListener('popActiveChange', this.#handleValueChanged);
+    this.accordionGroup?.removeEventListener('popActiveChange', this.#handleValueChanged);
   }
 
   /**
@@ -89,16 +89,16 @@ export class Accordion implements ComponentInterface {
   }
 
   #handleValueChanged = (): void => {
-    if (!this.#accordionGroup) return;
+    if (!this.accordionGroup) return;
 
-    const { active: newActive } = this.#accordionGroup;
+    const { active: newActive } = this.accordionGroup;
     const current = this.name;
 
     this.isOpen = compareOptions(current, newActive);
   };
 
-  #onClick = () => {
-    if (this.#accordionGroup) return;
+  private onClick = () => {
+    if (this.accordionGroup) return;
 
     const { readonly, disabled } = this;
     if (disabled || readonly) return;
@@ -114,7 +114,7 @@ export class Accordion implements ComponentInterface {
           'join-item': hostContext(host, 'pop-join'),
         }}
       >
-        <header part="header" class="accordion-title" onClick={this.#onClick}>
+        <header part="header" class="accordion-title" onClick={this.onClick}>
           <div class="header-content">
             <slot name="header" />
           </div>

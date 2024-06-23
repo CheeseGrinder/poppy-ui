@@ -19,18 +19,18 @@ import { Show } from '../Show';
   shadow: true,
 })
 export class Radio implements ComponentInterface {
-  #inputId = `pop-radio-${radioIds++}`;
-  #inheritedAttributes: Attributes;
+  private inputId = `pop-radio-${radioIds++}`;
+  private inheritedAttributes: Attributes;
 
-  #radioGroup?: HTMLPopRadioGroupElement;
-  #nativeInput!: HTMLInputElement;
+  private radioGroup?: HTMLPopRadioGroupElement;
+  private nativeInput!: HTMLInputElement;
 
   @Element() host!: HTMLElement;
 
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * The value of the radio does not mean if it's checked or not, use the `checked`
@@ -49,14 +49,16 @@ export class Radio implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
@@ -78,7 +80,8 @@ export class Radio implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -93,7 +96,7 @@ export class Radio implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-radio', {
       required: false,
@@ -103,19 +106,19 @@ export class Radio implements ComponentInterface {
   }
 
   connectedCallback(): void {
-    this.#radioGroup = this.host.closest('pop-radio-group');
+    this.radioGroup = this.host.closest('pop-radio-group');
 
-    this.#radioGroup?.addEventListener('popValueChange', this.#handleValueChanged);
+    this.radioGroup?.addEventListener('popValueChange', this.handleValueChanged);
   }
 
   disconnectedCallback(): void {
-    this.#radioGroup?.removeEventListener('popValueChange', this.#handleValueChanged);
+    this.radioGroup?.removeEventListener('popValueChange', this.handleValueChanged);
   }
 
-  #handleValueChanged = (): void => {
-    if (!this.#radioGroup) return;
+  private handleValueChanged = (): void => {
+    if (!this.radioGroup) return;
 
-    const { compare, value: newValue } = this.#radioGroup;
+    const { compare, value: newValue } = this.radioGroup;
     const currentValue = this.value;
 
     this.checked = compareOptions(currentValue, newValue, compare);
@@ -127,31 +130,31 @@ export class Radio implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #onClick = () => {
+  private onClick = () => {
     const { checked, disabled } = this;
     if (disabled) return;
 
-    if (checked && this.#radioGroup?.allowEmpty) {
+    if (checked && this.radioGroup?.allowEmpty) {
       this.checked = false;
     } else {
       this.checked = true;
     }
   };
 
-  #onFocus = () => {
+  private onFocus = () => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  private onBlur = () => {
     this.popBlur.emit();
   };
 
   render() {
     const { host, checked } = this;
-    const inputId = this.#inputId;
+    const inputId = this.inputId;
 
     const hasLabel = host.textContent !== '';
 
@@ -161,7 +164,7 @@ export class Radio implements ComponentInterface {
         aria-checked={`${checked}`}
         aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
-        onClick={this.#onClick}
+        onClick={this.onClick}
       >
         <Show when={hasLabel}>
           <div class="label">
@@ -179,10 +182,10 @@ export class Radio implements ComponentInterface {
           required={this.required}
           disabled={this.disabled}
           autoFocus={this.autoFocus}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          ref={el => (this.nativeInput = el)}
+          {...this.inheritedAttributes}
         />
       </Host>
     );

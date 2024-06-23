@@ -58,7 +58,7 @@ export class Button implements ComponentInterface {
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
    * @config
-   * @default 'md'
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 

@@ -17,7 +17,8 @@ export class Swap implements ComponentInterface {
   /**
    * Choose what animation is used on click.
    *
-   * @config @default 'rotate'
+   * @config
+   * @default "rotate"
    */
   @Prop({ reflect: true, mutable: true }) type?: SwapType;
 
@@ -25,7 +26,8 @@ export class Swap implements ComponentInterface {
    * Activates the swap.
    * Show whats inside the slot `on`
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) active?: boolean;
   @Watch('active')
@@ -47,13 +49,13 @@ export class Swap implements ComponentInterface {
     });
   }
 
-  #onClick = (): void => {
+  private onClick = (): void => {
     this.active = !this.active;
   };
 
   render() {
     return (
-      <Host onClick={this.#onClick}>
+      <Host onClick={this.onClick}>
         <slot name="off" />
         <slot name="on" />
       </Host>

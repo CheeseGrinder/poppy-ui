@@ -15,7 +15,8 @@ export class Loading implements ComponentInterface {
   /**
    * Apply different animation
    *
-   * @config @default 'spinner'
+   * @config
+   * @default "spinner"
    */
   @Prop({ reflect: true, mutable: true }) type?: LoadingType;
 
@@ -23,7 +24,8 @@ export class Loading implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 

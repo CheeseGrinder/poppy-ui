@@ -17,7 +17,8 @@ export class Divider implements ComponentInterface {
   /**
    * Define content disposition orientation
    *
-   * @config @default 'horizontal'
+   * @config
+   * @default "horizontal"
    */
   @Prop({ reflect: true, mutable: true }) orientation: DividerOrientation;
 
@@ -29,7 +30,8 @@ export class Divider implements ComponentInterface {
    * - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL.
    * - `"right"`: The content will appear to the right of the divider in LTR and RTL.
    *
-   * @config @default 'center'
+   * @config
+   * @default "center"
    */
   @Prop({ reflect: true, mutable: true }) placement: DividerPlacement;
 

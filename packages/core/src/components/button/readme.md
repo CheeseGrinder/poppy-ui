@@ -18,7 +18,7 @@ Buttons allow the user to take actions or make choices.
 | `form`     | `form`     | The HTML form element id. Used to submit a form when the button is not a child of the form.                                                                                                                                                                              | `HTMLFormElement \| string`                                                                                   | `undefined` |
 | `outlined` | `outlined` | Transparent Button with colored border                                                                                                                                                                                                                                   | `boolean`                                                                                                     | `false`     |
 | `shape`    | `shape`    | `square` set button width and heigth with 1:1 ratio<br> `round` set button width and heigth with 1:1 ratio and rounded corners.                                                                                                                                          | `"circle" \| "square"`                                                                                        | `undefined` |
-| `size`     | `size`     | Change size of the component<br> Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.                                                                                                                                                                                            | `"lg" \| "md" \| "sm" \| "xs"`                                                                                | `'md'`      |
+| `size`     | `size`     | Change size of the component<br> Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.                                                                                                                                                                                            | `"lg" \| "md" \| "sm" \| "xs"`                                                                                | `"md"`      |
 | `type`     | `type`     | The type of the button.                                                                                                                                                                                                                                                  | `"button" \| "reset" \| "submit"`                                                                             | `'button'`  |
 
 
@@ -44,6 +44,18 @@ Buttons allow the user to take actions or make choices.
 | Part       | Description                                                             |
 | ---------- | ----------------------------------------------------------------------- |
 | `"native"` | The native HTML button or anchor element that wraps all child elements. |
+
+
+## CSS Custom Properties
+
+| Name              | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `--animation`     | Change animation duration                             |
+| `--background`    | Change background color                               |
+| `--border-color`  | Change border color                                   |
+| `--border-radius` | Change border radius                                  |
+| `--color`         | Change text color                                     |
+| `--focus-scale`   | Change scale transformation when the button is active |
 
 
 ----------------------------------------------

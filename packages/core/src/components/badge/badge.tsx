@@ -17,7 +17,7 @@ import type { BadgeAs, BadgeColor } from './badge.type';
   shadow: true,
 })
 export class Badge implements ComponentInterface {
-  #inheritedAttributes: Attributes = {};
+  private inheritedAttributes: Attributes = {};
 
   @Element() host!: HTMLElement;
 
@@ -34,26 +34,29 @@ export class Badge implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * Transparent Badge with colored border
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) outlined?: boolean = false;
 
   /**
    * Used HTML element for
    *
-   * @config @default 'div'
+   * @config
+   * @default "div"
    */
   @Prop({ mutable: true }) as?: BadgeAs;
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-badge', {
       size: config.get('defaultSize', 'md'),
@@ -63,7 +66,7 @@ export class Badge implements ComponentInterface {
   }
 
   componentWillRender(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
   }
 
   render() {
@@ -71,7 +74,7 @@ export class Badge implements ComponentInterface {
 
     return (
       <Host>
-        <Tag class="badge" part="native" {...this.#inheritedAttributes}>
+        <Tag class="badge" part="native" {...this.inheritedAttributes}>
           <slot></slot>
         </Tag>
       </Host>

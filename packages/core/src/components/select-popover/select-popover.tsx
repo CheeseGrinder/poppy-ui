@@ -42,12 +42,12 @@ export class SelectPopover implements ComponentInterface {
    */
   @Prop() options: SelectPopoverOption[] = [];
 
-  #findOptionFromEvent(ev: CheckboxCustomEvent | RadioGroupCustomEvent) {
+  private findOptionFromEvent(ev: CheckboxCustomEvent | RadioGroupCustomEvent) {
     const { options } = this;
     return options.find(o => o.value === ev.target.value);
   }
 
-  #getValues(ev: CheckboxCustomEvent | RadioGroupCustomEvent): string | string[] | undefined {
+  private getValues(ev: CheckboxCustomEvent | RadioGroupCustomEvent): string | string[] | undefined {
     const { multiple, options } = this;
 
     if (multiple) {
@@ -58,20 +58,20 @@ export class SelectPopover implements ComponentInterface {
 
     // this is a popover with radio buttons (single value select)
     // return the value that was clicked, otherwise undefined
-    const option = this.#findOptionFromEvent(ev);
+    const option = this.findOptionFromEvent(ev);
     return option ? option.value : undefined;
   }
 
-  #setChecked(ev: CheckboxCustomEvent): void {
+  private setChecked(ev: CheckboxCustomEvent): void {
     const { multiple } = this;
-    const option = this.#findOptionFromEvent(ev);
+    const option = this.findOptionFromEvent(ev);
 
     if (multiple && option) {
       option.checked = ev.detail.checked;
     }
   }
 
-  #renderRadioOptions() {
+  private renderRadioOptions() {
     const { options, required, color, size } = this;
     const selected = options.filter(o => o.checked).map(o => o.value)[0];
 
@@ -87,8 +87,8 @@ export class SelectPopover implements ComponentInterface {
             return;
           }
 
-          const option = this.#findOptionFromEvent(ev);
-          option?.handler(this.#getValues(ev));
+          const option = this.findOptionFromEvent(ev);
+          option?.handler(this.getValues(ev));
         }}
       >
         {options.map(option => {
@@ -115,7 +115,7 @@ export class SelectPopover implements ComponentInterface {
     );
   }
 
-  #renderCheckboxOptions() {
+  private renderCheckboxOptions() {
     const { options } = this;
 
     return (
@@ -136,8 +136,8 @@ export class SelectPopover implements ComponentInterface {
                 disabled={option.disabled}
                 class={clazz}
                 onPopChange={ev => {
-                  this.#setChecked(ev);
-                  option.handler(this.#getValues(ev));
+                  this.setChecked(ev);
+                  option.handler(this.getValues(ev));
                 }}
               >
                 {option.text}
@@ -149,17 +149,17 @@ export class SelectPopover implements ComponentInterface {
     );
   }
 
-  #renderOptions() {
+  private renderOptions() {
     const { multiple } = this;
 
-    if (multiple) return this.#renderCheckboxOptions();
-    return this.#renderRadioOptions();
+    if (multiple) return this.renderCheckboxOptions();
+    return this.renderRadioOptions();
   }
 
   render() {
     return (
       <Host>
-        <pop-list size={this.size}>{this.#renderOptions()}</pop-list>
+        <pop-list size={this.size}>{this.renderOptions()}</pop-list>
       </Host>
     );
   }

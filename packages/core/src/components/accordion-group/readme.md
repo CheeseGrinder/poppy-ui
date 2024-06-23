@@ -9,9 +9,9 @@
 | Property   | Attribute  | Description                                           | Type                 | Default     |
 | ---------- | ---------- | ----------------------------------------------------- | -------------------- | ----------- |
 | `active`   | `active`   | name of the active the accordion.                     | `string \| string[]` | `undefined` |
-| `disabled` | `disabled` | If `true`, the user cannot interact with the element. | `boolean`            | `"false"`   |
-| `multiple` | `multiple` | If `true`, the user can open multiple accordion.      | `boolean`            | `"false"`   |
-| `readonly` | `readonly` | If `true`, the user cannot interact with the element. | `boolean`            | `"false"`   |
+| `disabled` | `disabled` | If `true`, the user cannot interact with the element. | `boolean`            | `false`     |
+| `multiple` | `multiple` | If `true`, the user can open multiple accordion.      | `boolean`            | `false`     |
+| `readonly` | `readonly` | If `true`, the user cannot interact with the element. | `boolean`            | `false`     |
 
 
 ## Events

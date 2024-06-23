@@ -29,10 +29,10 @@ import { Show } from '../Show';
   shadow: true,
 })
 export class Modal implements ComponentInterface, OverlayInterface {
-  #dialog: HTMLDialogElement;
-  #dialogObserver: MutationObserver;
+  private dialog: HTMLDialogElement;
+  private dialogObserver: MutationObserver;
 
-  #triggerController = TriggerController.create();
+  private triggerController = TriggerController.create();
 
   @Element() host: HTMLElement & OverlayInterface;
 
@@ -44,7 +44,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
   @Watch('trigger')
   onTriggerChange(trigger: string) {
     if (trigger) {
-      this.#triggerController.addListener(this.host, trigger);
+      this.triggerController.addListener(this.host, trigger);
     }
   }
 
@@ -69,14 +69,16 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * This property controls whether or not the backdrop
    * darkens the screen when the modal is presented.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) showBackdrop?: boolean;
 
   /**
    * If `true`, the modal will be dismissed when the backdrop is clicked.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) backdropDismiss?: boolean;
 
@@ -87,7 +89,8 @@ export class Modal implements ComponentInterface, OverlayInterface {
    * Note: `open` will automatically be set back to `false` when
    * the modal dismisses.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) open?: boolean;
   @Watch('open')
@@ -124,22 +127,22 @@ export class Modal implements ComponentInterface, OverlayInterface {
   }
 
   componentDidRender(): void {
-    this.#dialogObserver = new MutationObserver(() => {
-      this.open = this.#dialog.open;
+    this.dialogObserver = new MutationObserver(() => {
+      this.open = this.dialog.open;
     });
-    this.#dialogObserver.observe(this.#dialog, {
+    this.dialogObserver.observe(this.dialog, {
       attributes: true,
       attributeFilter: ['open'],
     });
 
     if (this.open) {
-      this.#dialog.showModal();
+      this.dialog.showModal();
     }
   }
 
   disconnectedCallback(): void {
-    this.#triggerController.removeListener();
-    this.#dialogObserver.disconnect();
+    this.triggerController.removeListener();
+    this.dialogObserver.disconnect();
   }
 
   @Method()
@@ -149,7 +152,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
       return false;
     }
 
-    this.#dialog.showModal();
+    this.dialog.showModal();
     return true;
   }
 
@@ -163,14 +166,14 @@ export class Modal implements ComponentInterface, OverlayInterface {
     const { open } = this;
     if (!open) return false;
 
-    this.#dialog.close(data);
+    this.dialog.close(data);
     return true;
   }
 
   render() {
     return (
       <Host>
-        <dialog class="modal" ref={el => (this.#dialog = el)}>
+        <dialog class="modal" ref={el => (this.dialog = el)}>
           <div class="modal-content">
             <slot />
 

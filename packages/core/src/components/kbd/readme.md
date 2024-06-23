@@ -12,7 +12,7 @@ Kbd is used to display keyboard shortcuts.
 
 | Property | Attribute | Description                                                                   | Type                           | Default |
 | -------- | --------- | ----------------------------------------------------------------------------- | ------------------------------ | ------- |
-| `size`   | `size`    | Change size of the component<br> Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. | `"lg" \| "md" \| "sm" \| "xs"` | `'md'`  |
+| `size`   | `size`    | Change size of the component<br> Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. | `"lg" \| "md" \| "sm" \| "xs"` | `"md"`  |
 
 
 ## Slots
@@ -27,6 +27,16 @@ Kbd is used to display keyboard shortcuts.
 | Part       | Description                  |
 | ---------- | ---------------------------- |
 | `"native"` | The native HTML kbd element. |
+
+
+## CSS Custom Properties
+
+| Name              | Description                  |
+| ----------------- | ---------------------------- |
+| `--background`    | Background color             |
+| `--border-color`  | Border color & outline color |
+| `--border-radius` | Border radius                |
+| `--font`          | Change text font             |
 
 
 ----------------------------------------------

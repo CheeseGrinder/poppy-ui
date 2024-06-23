@@ -32,11 +32,11 @@ import { InputFileChangeEventDetail, InputFileColor } from './input-file.type';
   formAssociated: true,
 })
 export class InputFile implements ComponentInterface {
-  #inputId = `pop-input-file-${inputIds++}`;
-  #inheritedAttributes: Attributes;
+  private inputId = `pop-input-file-${inputIds++}`;
+  private inheritedAttributes: Attributes;
 
-  #nativeInput!: HTMLInputElement;
-  #debounceTimer: NodeJS.Timeout;
+  private nativeInput!: HTMLInputElement;
+  private debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
 
@@ -45,7 +45,7 @@ export class InputFile implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -64,42 +64,48 @@ export class InputFile implements ComponentInterface {
    * If `true`, the user can enter more than one value.
    * This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) multiple?: boolean;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the element will be focused on page load.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) autoFocus?: boolean;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
@@ -116,7 +122,8 @@ export class InputFile implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default "md"
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -148,7 +155,7 @@ export class InputFile implements ComponentInterface {
 
   formResetCallback(): void {
     this.value = null;
-    this.#nativeInput.value = null;
+    this.nativeInput.value = null;
   }
 
   formStateRestoreCallback(state: File): void {
@@ -156,7 +163,7 @@ export class InputFile implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = {
+    this.inheritedAttributes = {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
@@ -175,11 +182,11 @@ export class InputFile implements ComponentInterface {
   componentDidLoad(): void {
     const { value } = this;
     const files = Array.isArray(value) ? value : [value];
-    files.forEach((file, idx) => (this.#nativeInput.files[idx] = file));
+    files.forEach((file, idx) => (this.nativeInput.files[idx] = file));
   }
 
   disconnectedCallback(): void {
-    clearTimeout(this.#debounceTimer);
+    clearTimeout(this.debounceTimer);
   }
 
   /**
@@ -188,31 +195,29 @@ export class InputFile implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #getValue(): File[] {
-    return Array.from(this.#nativeInput.files);
+  private getValue(): File[] {
+    return Array.from(this.nativeInput.files);
   }
 
-  #onChange = (): void => {
+  private onChange = (): void => {
     this.popChange.emit({
-      value: this.#getValue(),
+      value: this.getValue(),
     });
   };
 
-  #onFocus = (): void => {
+  private onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = (): void => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
   render() {
-    const { host, errorText, helperText } = this;
-    const inputId = this.#inputId;
-
+    const { host, errorText, helperText, inputId } = this;
     const hasLabel = host.textContent !== '';
     const hasError = !!errorText;
     const hasHelper = !!helperText;
@@ -243,11 +248,11 @@ export class InputFile implements ComponentInterface {
           readonly={this.readonly}
           disabled={this.disabled}
           autoFocus={this.autoFocus}
-          onChange={this.#onChange}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
+          onChange={this.onChange}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          ref={el => (this.nativeInput = el)}
+          {...this.inheritedAttributes}
         />
         <Show when={hasBottomText}>
           <div class="text-wrapper">

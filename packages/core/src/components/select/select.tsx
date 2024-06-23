@@ -16,11 +16,11 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, FormAssociatedInterface, Size } from 'src/interface';
+import type { FormAssociatedInterface, Size } from 'src/interface';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
 import { SelectPopoverOption } from '../select-popover/select-popover.type';
-import type { SelectChangeEventDetail, SelectCompareFn } from './select.type';
+import type { SelectChangeEventDetail, SelectColor, SelectCompareFn } from './select.type';
 
 @Component({
   tag: 'pop-select',
@@ -29,11 +29,11 @@ import type { SelectChangeEventDetail, SelectCompareFn } from './select.type';
   formAssociated: true,
 })
 export class Select implements ComponentInterface, FormAssociatedInterface {
-  #inputId = `pop-select-${selectIds++}`;
-  #inheritedAttributes: Attributes;
+  private inputId = `pop-select-${selectIds++}`;
+  private inheritedAttributes: Attributes;
 
-  #popover: HTMLPopPopoverElement;
-  #trigger: HTMLButtonElement;
+  private popover: HTMLPopPopoverElement;
+  private trigger: HTMLButtonElement;
 
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
@@ -45,7 +45,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * Instructional text that shows before the input has a value.
@@ -61,7 +61,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop({ mutable: true }) value?: any | null;
   @Watch('value')
   onValueChange(value: any) {
-    this.errorText = this.#errorText;
+    this.errorText = this.errorTextValue;
     if (this.errorText) {
       // No emit if the select has error.
       return;
@@ -74,7 +74,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * If `true`, the user can enter more than one value.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) multiple?: boolean = false;
 
@@ -97,14 +98,16 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
@@ -116,7 +119,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
@@ -127,13 +131,14 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    *
    * @config
    */
-  @Prop({ reflect: true, mutable: true }) color?: Color | 'ghost';
+  @Prop({ reflect: true, mutable: true }) color?: SelectColor;
 
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -199,7 +204,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAttributes(this.host, ['aria-label']);
+    this.inheritedAttributes = inheritAttributes(this.host, ['aria-label']);
 
     componentConfig.apply(this, 'pop-select', {
       multiple: false,
@@ -216,12 +221,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#trigger.focus();
+    this.trigger.focus();
   }
 
   @Method()
   async open(event?: any) {
-    if (this.disabled || this.isExpanded || this.#popover) return;
+    if (this.disabled || this.isExpanded || this.popover) return;
 
     this.isExpanded = true;
     const selectedValue = this.value;
@@ -229,12 +234,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     const popover = await popoverController.create({
       component: 'pop-select-popover',
       componentProps: {
-        value: this.#values,
+        value: this.values,
         required: this.required,
         multiple: this.multiple,
         color: this.color,
         size: this.size,
-        options: this.#options.map(option => {
+        options: this.options.map(option => {
           const value = getOptionValue(option);
           const clazz = Array.from(option.classList).filter(cls => cls !== 'hydrated');
 
@@ -265,10 +270,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       alignment: 'center',
       event: event,
     });
-    this.#popover = popover;
+    this.popover = popover;
 
     popover.addEventListener('didDismiss', () => {
-      this.#popover = undefined;
+      this.popover = undefined;
       this.isExpanded = false;
       this.popDismiss.emit();
       this.setFocus();
@@ -276,7 +281,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     await popover.present();
 
-    const indexOfSelected = this.#options.map(o => o.value).indexOf(this.value);
+    const indexOfSelected = this.options.map(o => o.value).indexOf(this.value);
     if (indexOfSelected === -1) {
       /**
        * If no value is set then focus the first enabled option.
@@ -314,49 +319,49 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     if (this.disabled || !this.isExpanded) return;
 
     this.isExpanded = false;
-    this.#popover.dismiss();
+    this.popover.dismiss();
   }
 
-  #onFocus = () => {
+  private onFocus = () => {
     this.popFocus.emit();
   };
 
-  #onBlur = () => {
+  private onBlur = () => {
     this.popBlur.emit();
   };
 
-  #onClick = async (ev: PointerEvent) => {
+  private onClick = async (ev: PointerEvent) => {
     await this.open({
       ...ev,
-      target: this.#trigger,
+      target: this.trigger,
     });
   };
 
-  get #values(): any[] {
+  private get values(): any[] {
     const { value } = this;
     if (!value) return [];
 
     return Array.isArray(value) ? value : [value];
   }
 
-  get #options() {
+  private get options() {
     return Array.from(this.host.querySelectorAll('pop-select-option'));
   }
 
-  get #text(): string {
+  private get text(): string {
     const selectedText = this.selectedText;
     if (selectedText) {
       return selectedText;
     }
 
-    const values = this.#values;
+    const values = this.values;
 
     if (values.length === 0) {
       return '';
     }
     return values
       .map(value => {
-        const selected = this.#options.find(option => {
+        const selected = this.options.find(option => {
           const optionValue = option.value ?? (option.textContent || '');
           return compareOptions(value, optionValue, this.compare);
         });
@@ -366,10 +371,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       .join(', ');
   }
 
-  get #ariaLabel(): string {
+  private get ariaLabel(): string {
     const { placeholder } = this;
-    const displayValue = this.#text;
-    const definedLabel = this.#inheritedAttributes['aria-label'];
+    const displayValue = this.text;
+    const definedLabel = this.inheritedAttributes['aria-label'];
 
     /**
      * If developer has specified a placeholder
@@ -395,19 +400,19 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     return renderedLabel;
   }
 
-  get #errorText(): string {
+  private get errorTextValue(): string {
     if (!this.multiple) return '';
 
-    const { length } = this.#values;
+    const { length } = this.values;
     if (length === 0 && !this.required) return '';
     if (length < this.min) return this.notEnoughErrorText ?? '';
     if (length > this.max) return this.tooManyErrorText ?? '';
     return '';
   }
 
-  #renderSelectText() {
+  private renderSelectText() {
     const { placeholder } = this;
-    const displayValue = this.#text;
+    const displayValue = this.text;
 
     let addPlaceholderClass = false;
     let selectText = displayValue;
@@ -425,29 +430,26 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     );
   }
 
-  #renderListbox() {
-    const { disabled, isExpanded } = this;
-    const inputId = this.#inputId;
+  private renderListbox() {
+    const { disabled, isExpanded, inputId } = this;
 
     return (
       <button
         disabled={disabled}
         id={inputId}
-        aria-label={this.#ariaLabel}
+        aria-label={this.ariaLabel}
         aria-haspopup="dialog"
         aria-expanded={`${isExpanded}`}
-        onClick={this.#onClick}
-        onFocus={this.#onFocus}
-        onBlur={this.#onBlur}
-        ref={ref => (this.#trigger = ref)}
+        onClick={this.onClick}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        ref={ref => (this.trigger = ref)}
       ></button>
     );
   }
 
   render() {
-    const { host, helperText, errorText } = this;
-
-    const inputId = this.#inputId;
+    const { host, helperText, errorText, inputId } = this;
 
     const hasError = !!errorText;
     const hasHelper = !!helperText;
@@ -472,8 +474,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           <slot name="start" />
 
           <div class="select-wrapper-inner">
-            {this.#renderSelectText()}
-            {this.#renderListbox()}
+            {this.renderSelectText()}
+            {this.renderListbox()}
           </div>
 
           <slot name="end" />

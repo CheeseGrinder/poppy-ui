@@ -12,21 +12,24 @@ export class AccordionGroup implements ComponentInterface {
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default "false"
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default "false"
+   * @config 
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;
 
   /**
    * If `true`, the user can open multiple accordion.
    *
-   * @config @default "false"
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) multiple: boolean;
 
@@ -53,14 +56,14 @@ export class AccordionGroup implements ComponentInterface {
   }
 
   componentDidLoad(): void {
-    this.#accordions.forEach(accordion => {
+    this.accordions.forEach(accordion => {
       if (this.readonly) accordion.readonly = this.readonly;
       if (this.disabled) accordion.disabled = this.disabled;
     });
-    this.#applyOpen();
+    this.applyOpen();
   }
 
-  #applyOpen(): void {
+  private applyOpen(): void {
     if (!this.active) return;
 
     this.popActiveChange.emit({
@@ -68,7 +71,7 @@ export class AccordionGroup implements ComponentInterface {
     });
   }
 
-  get #accordions() {
+  private get accordions() {
     return Array.from(this.host.querySelectorAll('pop-accordion'));
   }
 
@@ -87,7 +90,7 @@ export class AccordionGroup implements ComponentInterface {
    */
   @Event() popActiveChange!: EventEmitter<AccordionGroupChangeEventDetail>;
 
-  #onClick = (ev: Event) => {
+  private onClick = (ev: Event) => {
     ev.preventDefault();
 
     const accordion = ev.target as HTMLPopAccordionElement;
@@ -110,7 +113,7 @@ export class AccordionGroup implements ComponentInterface {
 
   render() {
     return (
-      <Host onClick={this.#onClick}>
+      <Host onClick={this.onClick}>
         <slot />
       </Host>
     );

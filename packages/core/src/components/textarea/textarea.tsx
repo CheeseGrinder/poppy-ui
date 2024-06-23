@@ -33,12 +33,12 @@ import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wra
   formAssociated: true,
 })
 export class Textarea implements ComponentInterface {
-  #inputId = `pop-textarea-${textareaIds++}`;
-  #inheritedAttributes: Attributes;
-  #resizeObserver: MutationObserver;
+  private inputId = `pop-textarea-${textareaIds++}`;
+  private inheritedAttributes: Attributes;
+  private resizeObserver: MutationObserver;
 
-  #nativeInput!: HTMLTextAreaElement;
-  #debounceTimer: NodeJS.Timeout;
+  private nativeInput!: HTMLTextAreaElement;
+  private debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
 
@@ -49,7 +49,7 @@ export class Textarea implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.#inputId;
+  @Prop() name: string = this.inputId;
 
   /**
    * Instructional text that shows before the input has a value.
@@ -101,21 +101,24 @@ export class Textarea implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true }) required?: boolean;
 
   /**
    * If `true`, the user cannot modify the value.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true }) disabled?: boolean;
 
@@ -128,7 +131,7 @@ export class Textarea implements ComponentInterface {
    * A hint to the browser for which virtual keyboard to display.
    * Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
    */
-  @Prop({ mutable: true }) keyboard?: KeyboardType;
+  @Prop() keyboard?: KeyboardType;
 
   /**
    * A hint to the browser for which keyboard to display.
@@ -142,13 +145,14 @@ export class Textarea implements ComponentInterface {
    * - `search`: Typically taking the user to the results of searching for the text they have typed.
    * - `send`: Typically delivering the text to its target.
    */
-  @Prop({ mutable: true }) enterkeyhint?: EnterKeyHint;
+  @Prop() enterkeyhint?: EnterKeyHint;
 
   /**
    * If `true`, the element will have its spelling and grammar checked.
    * By default the User Agent make their own default behavior.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) spellcheck: boolean;
 
@@ -161,7 +165,8 @@ export class Textarea implements ComponentInterface {
    * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
    * - `characters`: All letters should default to uppercase
    *
-   * @config @default 'off'
+   * @config
+   * @default "off"
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
@@ -173,14 +178,16 @@ export class Textarea implements ComponentInterface {
    *
    * If wrap attribute is in the `hard` state, the `cols` property must be specified.
    *
-   * @config @default 'soft'
+   * @config
+   * @default "soft"
    */
   @Prop({ mutable: true }) wrap?: Wrap;
 
   /**
    * if `true`, adds border to textarea when `color` property is not set.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
 
@@ -197,7 +204,8 @@ export class Textarea implements ComponentInterface {
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
    *
-   * @config @default 'md'
+   * @config
+   * @default "md"
    */
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
@@ -215,7 +223,8 @@ export class Textarea implements ComponentInterface {
    * If `true`, a character counter will display the ratio of characters used and the total character limit.
    * Developers must also set the `maxlength` property for the counter to be calculated correctly.
    *
-   * @config @default false
+   * @config
+   * @default false
    */
   @Prop({ mutable: true }) counter?: boolean;
 
@@ -230,7 +239,8 @@ export class Textarea implements ComponentInterface {
   /**
    * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
    *
-   * @config @default 0
+   * @config
+   * @default 0
    */
   @Prop({ mutable: true }) debounce?: number;
 
@@ -268,7 +278,7 @@ export class Textarea implements ComponentInterface {
   }
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAriaAttributes(this.host);
+    this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-textarea', {
       required: false,
@@ -289,18 +299,18 @@ export class Textarea implements ComponentInterface {
   }
 
   componentDidLoad(): void {
-    this.#resizeObserver = new MutationObserver(() => {
-      this.textareaWidth = this.#nativeInput.style.width;
+    this.resizeObserver = new MutationObserver(() => {
+      this.textareaWidth = this.nativeInput.style.width;
     });
-    this.#resizeObserver.observe(this.#nativeInput, {
+    this.resizeObserver.observe(this.nativeInput, {
       attributes: true,
       attributeFilter: ['style'],
     });
   }
 
   disconnectedCallback(): void {
-    clearTimeout(this.#debounceTimer);
-    this.#resizeObserver.disconnect();
+    clearTimeout(this.debounceTimer);
+    this.resizeObserver.disconnect();
   }
 
   /**
@@ -309,56 +319,54 @@ export class Textarea implements ComponentInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.#nativeInput?.focus();
+    this.nativeInput?.focus();
   }
 
-  #getValue(): string {
+  private getValue(): string {
     return this.value || '';
   }
 
-  get #counterText(): string {
+  private get counterText(): string {
     if (!this.counter) return null;
     const { maxLength } = this;
-    const length = this.#getValue().length;
+    const length = this.getValue().length;
 
     return this.counterFormatter?.(length, maxLength) ?? `${length} / ${maxLength}`;
   }
 
-  #onChange = (): void => {
-    this.value = this.#nativeInput.value;
+  private onChange = (): void => {
+    this.value = this.nativeInput.value;
     this.popChange.emit({
-      value: this.#getValue(),
+      value: this.getValue(),
     });
   };
 
-  #onInput = (): void => {
-    this.value = this.#nativeInput.value;
+  private onInput = (): void => {
+    this.value = this.nativeInput.value;
 
-    clearTimeout(this.#debounceTimer);
-    this.#debounceTimer = setTimeout(() => {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
       this.popInput.emit({
-        value: this.#getValue(),
+        value: this.getValue(),
       });
     }, this.debounce || 0);
   };
 
-  #onFocus = (): void => {
+  private onFocus = (): void => {
     this.popFocus.emit();
   };
 
-  #onBlur = (): void => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
   render() {
-    const { host, value, helperText, errorText } = this;
-    const inputId = this.#inputId;
-    const counter = this.#counterText;
+    const { host, value, helperText, errorText, counterText, inputId } = this;
 
     const hasLabel = host.textContent !== '';
     const hasError = !!errorText;
     const hasHelper = !!helperText;
-    const hasCounter = counter !== '';
+    const hasCounter = counterText !== '';
     const hasBottomText = hasError || hasHelper || hasCounter;
 
     return (
@@ -397,12 +405,12 @@ export class Textarea implements ComponentInterface {
           spellcheck={this.spellcheck}
           autoCapitalize={this.autoCapitalize}
           wrap={this.wrap}
-          onChange={this.#onChange}
-          onInput={this.#onInput}
-          onFocus={this.#onFocus}
-          onBlur={this.#onBlur}
-          ref={el => (this.#nativeInput = el)}
-          {...this.#inheritedAttributes}
+          onChange={this.onChange}
+          onInput={this.onInput}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          ref={el => (this.nativeInput = el)}
+          {...this.inheritedAttributes}
         >
           {value}
         </textarea>
@@ -415,7 +423,7 @@ export class Textarea implements ComponentInterface {
               <span class="helper-text">{helperText}</span>
             </Show>
             <Show when={hasCounter}>
-              <span class="counter-text">{counter}</span>
+              <span class="counter-text">{counterText}</span>
             </Show>
           </div>
         </Show>

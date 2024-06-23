@@ -22,12 +22,12 @@ import { ListOrientation } from "./components/list/list.type";
 import { LoadingType } from "./components/loading/loading.type";
 import { MaskType } from "./components/mask/mask.type";
 import { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
-import { RangeChangeEventDetail } from "./components/range/range.type";
-import { SelectChangeEventDetail, SelectCompareFn } from "./components/select/select.type";
+import { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
+import { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
 import { SelectPopoverOption } from "./components/select-popover/select-popover.type";
 import { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
-import { ToggleChangeEventDetail } from "./components/toggle/toggle.type";
+import { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
 import { TooltipPosition } from "./components/tooltip/tooltip.type";
 export { AccordionGroupChangeEventDetail } from "./components/accordion-group/accordion-group.type";
 export { BadgeAs, BadgeColor } from "./components/badge/badge.type";
@@ -46,12 +46,12 @@ export { ListOrientation } from "./components/list/list.type";
 export { LoadingType } from "./components/loading/loading.type";
 export { MaskType } from "./components/mask/mask.type";
 export { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
-export { RangeChangeEventDetail } from "./components/range/range.type";
-export { SelectChangeEventDetail, SelectCompareFn } from "./components/select/select.type";
+export { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
+export { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
 export { SelectPopoverOption } from "./components/select-popover/select-popover.type";
 export { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 export { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
-export { ToggleChangeEventDetail } from "./components/toggle/toggle.type";
+export { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
 export { TooltipPosition } from "./components/tooltip/tooltip.type";
 export namespace Components {
     /**
@@ -95,19 +95,19 @@ export namespace Components {
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
-          * @default "false"
+          * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the user can open multiple accordion.
           * @config 
-          * @default "false"
+          * @default false
          */
         "multiple": boolean;
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
-          * @default "false"
+          * @default false
          */
         "readonly"?: boolean;
     }
@@ -129,7 +129,7 @@ export namespace Components {
         /**
           * Used HTML element for
           * @config 
-          * @default 'div'
+          * @default "div"
          */
         "as"?: BadgeAs;
         /**
@@ -146,7 +146,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -188,7 +188,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -234,7 +234,7 @@ export namespace Components {
         /**
           * Where to place the label relative to the checkbox. - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
           * @config 
-          * @default 'start'
+          * @default "start"
          */
         "placement"?: CheckboxPlacement;
         /**
@@ -256,7 +256,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -276,13 +276,13 @@ export namespace Components {
         /**
           * Define content disposition orientation
           * @config 
-          * @default 'horizontal'
+          * @default "horizontal"
          */
         "orientation": DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
           * @config 
-          * @default 'center'
+          * @default "center"
          */
         "placement": DividerPlacement;
     }
@@ -321,8 +321,9 @@ export namespace Components {
      */
     interface PopDropdown {
         /**
+          * Describes how the dropdown has to be alined - "start": Align to the left in LTR and to the right in RTL. - "end": Align to the right in LTR and to the left in RTL.
           * @config 
-          * @default 'start'
+          * @default "start"
          */
         "align"?: DropdownAlign;
         /**
@@ -333,6 +334,7 @@ export namespace Components {
         "debounce"?: number;
         "dismiss": () => Promise<boolean>;
         /**
+          * Force the dropdown to be shown
           * @config 
           * @default false
          */
@@ -346,13 +348,13 @@ export namespace Components {
         "showBackdrop"?: boolean;
         /**
           * @config 
-          * @default 'bottom'
+          * @default "bottom"
          */
         "side"?: DropdownSide;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
-          * @default 'click'
+          * @default "click"
          */
         "triggerAction": TriggerAction;
     }
@@ -373,13 +375,13 @@ export namespace Components {
         /**
           * Align vertically the indicator.
           * @config 
-          * @default 'top'
+          * @default "top"
          */
         "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
           * @config 
-          * @default 'left'
+          * @default "left"
          */
         "side"?: IndicatorSide;
     }
@@ -390,7 +392,7 @@ export namespace Components {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
           * @config 
-          * @default 'off'
+          * @default "off"
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -509,7 +511,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -631,7 +633,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -639,13 +641,13 @@ export namespace Components {
         /**
           * Define content disposition orientation
           * @config 
-          * @default 'vertical'
+          * @default "vertical"
          */
         "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -656,13 +658,13 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
           * Apply different animation
           * @config 
-          * @default 'spinner'
+          * @default "spinner"
          */
         "type"?: LoadingType;
     }
@@ -673,7 +675,7 @@ export namespace Components {
         /**
           * Mask that should be applied
           * @config 
-          * @default 'squircle
+          * @default "squircle"
          */
         "type": MaskType;
     }
@@ -770,7 +772,7 @@ export namespace Components {
         /**
           * Describes what kind of interaction with the trigger that should cause the popover to open. Does not apply when the `trigger` property is `undefined`. If `"click"`, the popover will be presented when the trigger is left clicked. If `"hover"`, the popover will be presented when a pointer hovers over the trigger. If `"context-menu"`, the popover will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
-          * @default 'click'
+          * @default "click"
          */
         "triggerAction": TriggerAction;
     }
@@ -833,7 +835,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -877,7 +879,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.  If the `pop-radio` as no size, it will apply to it
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -897,7 +899,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: RangeColor;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
           * @config 
@@ -939,7 +941,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -969,7 +971,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: SelectColor;
         /**
           * This property allows developers to specify a custom function for comparing objects when determining the selected option in the ion-radio-group. When not specified, the default behavior will use strict equality (===) for comparison.
           * @config
@@ -1031,7 +1033,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -1096,7 +1098,7 @@ export namespace Components {
         /**
           * Choose what animation is used on click.
           * @config 
-          * @default 'rotate'
+          * @default "rotate"
          */
         "type"?: SwapType;
     }
@@ -1107,7 +1109,7 @@ export namespace Components {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
           * @config 
-          * @default 'off'
+          * @default "off"
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -1211,7 +1213,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -1227,7 +1229,7 @@ export namespace Components {
         /**
           * Indicates how the control wraps text.  - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering). - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 
-          * @default 'soft'
+          * @default "soft"
          */
         "wrap"?: Wrap;
     }
@@ -1245,7 +1247,7 @@ export namespace Components {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: ToggleColor;
         /**
           * If true, the user cannot interact with the native element.
           * @config 
@@ -1281,7 +1283,7 @@ export namespace Components {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -1307,7 +1309,7 @@ export namespace Components {
         /**
           * Define the position of tooltip By default the tootip appear on top
           * @config 
-          * @default 'top'
+          * @default "top"
          */
         "position"?: TooltipPosition;
         /**
@@ -1931,13 +1933,13 @@ declare namespace LocalJSX {
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
-          * @default "false"
+          * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the user can open multiple accordion.
           * @config 
-          * @default "false"
+          * @default false
          */
         "multiple"?: boolean;
         /**
@@ -1951,7 +1953,7 @@ declare namespace LocalJSX {
         /**
           * If `true`, the user cannot interact with the element.
           * @config 
-          * @default "false"
+          * @default false
          */
         "readonly"?: boolean;
     }
@@ -1973,7 +1975,7 @@ declare namespace LocalJSX {
         /**
           * Used HTML element for
           * @config 
-          * @default 'div'
+          * @default "div"
          */
         "as"?: BadgeAs;
         /**
@@ -1990,7 +1992,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -2040,7 +2042,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2098,7 +2100,7 @@ declare namespace LocalJSX {
         /**
           * Where to place the label relative to the checkbox. - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
           * @config 
-          * @default 'start'
+          * @default "start"
          */
         "placement"?: CheckboxPlacement;
         /**
@@ -2116,7 +2118,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2136,13 +2138,13 @@ declare namespace LocalJSX {
         /**
           * Define content disposition orientation
           * @config 
-          * @default 'horizontal'
+          * @default "horizontal"
          */
         "orientation"?: DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
           * @config 
-          * @default 'center'
+          * @default "center"
          */
         "placement"?: DividerPlacement;
     }
@@ -2178,8 +2180,9 @@ declare namespace LocalJSX {
      */
     interface PopDropdown {
         /**
+          * Describes how the dropdown has to be alined - "start": Align to the left in LTR and to the right in RTL. - "end": Align to the right in LTR and to the left in RTL.
           * @config 
-          * @default 'start'
+          * @default "start"
          */
         "align"?: DropdownAlign;
         /**
@@ -2197,6 +2200,7 @@ declare namespace LocalJSX {
          */
         "onDidPresent"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
+          * Force the dropdown to be shown
           * @config 
           * @default false
          */
@@ -2209,13 +2213,13 @@ declare namespace LocalJSX {
         "showBackdrop"?: boolean;
         /**
           * @config 
-          * @default 'bottom'
+          * @default "bottom"
          */
         "side"?: DropdownSide;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
-          * @default 'click'
+          * @default "click"
          */
         "triggerAction"?: TriggerAction;
     }
@@ -2248,13 +2252,13 @@ declare namespace LocalJSX {
         /**
           * Align vertically the indicator.
           * @config 
-          * @default 'top'
+          * @default "top"
          */
         "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
           * @config 
-          * @default 'left'
+          * @default "left"
          */
         "side"?: IndicatorSide;
     }
@@ -2265,7 +2269,7 @@ declare namespace LocalJSX {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
           * @config 
-          * @default 'off'
+          * @default "off"
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -2396,7 +2400,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2526,7 +2530,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -2534,13 +2538,13 @@ declare namespace LocalJSX {
         /**
           * Define content disposition orientation
           * @config 
-          * @default 'vertical'
+          * @default "vertical"
          */
         "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
     }
@@ -2551,13 +2555,13 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
           * Apply different animation
           * @config 
-          * @default 'spinner'
+          * @default "spinner"
          */
         "type"?: LoadingType;
     }
@@ -2568,7 +2572,7 @@ declare namespace LocalJSX {
         /**
           * Mask that should be applied
           * @config 
-          * @default 'squircle
+          * @default "squircle"
          */
         "type"?: MaskType;
     }
@@ -2680,7 +2684,7 @@ declare namespace LocalJSX {
         /**
           * Describes what kind of interaction with the trigger that should cause the popover to open. Does not apply when the `trigger` property is `undefined`. If `"click"`, the popover will be presented when the trigger is left clicked. If `"hover"`, the popover will be presented when a pointer hovers over the trigger. If `"context-menu"`, the popover will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
-          * @default 'click'
+          * @default "click"
          */
         "triggerAction"?: TriggerAction;
     }
@@ -2747,7 +2751,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2799,7 +2803,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.  If the `pop-radio` as no size, it will apply to it
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2819,7 +2823,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: RangeColor;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
           * @config 
@@ -2869,7 +2873,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -2898,7 +2902,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: SelectColor;
         /**
           * This property allows developers to specify a custom function for comparing objects when determining the selected option in the ion-radio-group. When not specified, the default behavior will use strict equality (===) for comparison.
           * @config
@@ -2971,7 +2975,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -3040,7 +3044,7 @@ declare namespace LocalJSX {
         /**
           * Choose what animation is used on click.
           * @config 
-          * @default 'rotate'
+          * @default "rotate"
          */
         "type"?: SwapType;
     }
@@ -3051,7 +3055,7 @@ declare namespace LocalJSX {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
           * @config 
-          * @default 'off'
+          * @default "off"
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -3167,7 +3171,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -3183,7 +3187,7 @@ declare namespace LocalJSX {
         /**
           * Indicates how the control wraps text.  - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering). - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 
-          * @default 'soft'
+          * @default "soft"
          */
         "wrap"?: Wrap;
     }
@@ -3201,7 +3205,7 @@ declare namespace LocalJSX {
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
-        "color"?: Color | 'ghost';
+        "color"?: ToggleColor;
         /**
           * If true, the user cannot interact with the native element.
           * @config 
@@ -3245,7 +3249,7 @@ declare namespace LocalJSX {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 
-          * @default 'md'
+          * @default "md"
          */
         "size"?: Size;
         /**
@@ -3271,7 +3275,7 @@ declare namespace LocalJSX {
         /**
           * Define the position of tooltip By default the tootip appear on top
           * @config 
-          * @default 'top'
+          * @default "top"
          */
         "position"?: TooltipPosition;
         /**

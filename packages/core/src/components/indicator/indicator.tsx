@@ -17,14 +17,16 @@ export class Indicator implements ComponentInterface {
   /**
    * Align horizontally the indicator.
    *
-   * @config @default 'left'
+   * @config
+   * @default "left"
    */
   @Prop({ reflect: true, mutable: true }) side?: IndicatorSide;
 
   /**
    * Align vertically the indicator.
    *
-   * @config @default 'top'
+   * @config
+   * @default "top"
    */
   @Prop({ reflect: true, mutable: true }) position?: IndicatorPosition;
 

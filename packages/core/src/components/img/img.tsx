@@ -21,10 +21,10 @@ import {
   shadow: true,
 })
 export class Img implements ComponentInterface {
-  #nativeImg: HTMLImageElement;
-  #inheritedAttributes: Attributes = {};
+  private nativeImg: HTMLImageElement;
+  private inheritedAttributes: Attributes = {};
 
-  #observer?: IntersectionObserver;
+  private observer?: IntersectionObserver;
 
   @Element() host!: HTMLElement;
 
@@ -37,7 +37,7 @@ export class Img implements ComponentInterface {
   @Prop() src: string;
   @Watch('src')
   onSrcChange() {
-    this.#initObserver();
+    this.initObserver();
   }
 
   /**
@@ -63,52 +63,52 @@ export class Img implements ComponentInterface {
   @Event() popError: EventEmitter<void>;
 
   componentWillLoad(): void {
-    this.#inheritedAttributes = inheritAttributes(this.host, ['draggable']);
+    this.inheritedAttributes = inheritAttributes(this.host, ['draggable']);
   }
 
   componentDidLoad(): void {
-    this.#initObserver();
+    this.initObserver();
   }
 
-  #initObserver(): void {
+  private initObserver(): void {
     if (!this.src) return;
 
     if (supportIntersectionObserver()) {
-      this.#removeObserver();
-      this.#observer = new IntersectionObserver(entries => {
+      this.removeObserver();
+      this.observer = new IntersectionObserver(entries => {
         if (entries.at(-1).isIntersecting) {
-          this.#load();
-          this.#removeObserver();
+          this.load();
+          this.removeObserver();
         }
       });
-      this.#observer.observe(this.host);
+      this.observer.observe(this.host);
     } else {
-      this.#nativeImg.loading = 'lazy';
-      this.#load();
+      this.nativeImg.loading = 'lazy';
+      this.load();
     }
   }
 
-  #removeObserver(): void {
-    this.#observer?.disconnect();
-    this.#observer = undefined;
+  private removeObserver(): void {
+    this.observer?.disconnect();
+    this.observer = undefined;
   }
 
-  #load(): void {
-    this.loadError = this.#onError;
+  private load(): void {
+    this.loadError = this.onError;
     this.loadSrc = this.src;
     this.popWillLoad.emit();
   }
 
-  #onLoad = (): void => {
+  private onLoad = (): void => {
     this.popDidLoad.emit();
   };
 
-  #onError = (): void => {
+  private onError = (): void => {
     this.popError.emit();
   };
 
   render() {
-    const { draggable } = this.#inheritedAttributes;
+    const { draggable } = this.inheritedAttributes;
 
     return (
       <Host>
@@ -118,10 +118,10 @@ export class Img implements ComponentInterface {
           // decoding="sync"
           src={this.loadSrc}
           alt={this.alt || ''}
-          onLoad={this.#onLoad}
-          onError={this.#onError}
+          onLoad={this.onLoad}
+          onError={this.onError}
           draggable={isDraggable(draggable)}
-          ref={el => (this.#nativeImg = el)}
+          ref={el => (this.nativeImg = el)}
         />
       </Host>
     );
