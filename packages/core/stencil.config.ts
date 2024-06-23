@@ -23,12 +23,45 @@ export const config: Config = {
   namespace: 'Poppy',
   globalStyle: './src/poppy.scss',
   globalScript: './src/global/poppy.ts',
+  preamble: '(C) Cheese Grinder - MIT License',
+  enableCache: true,
+  transformAliasedImportPaths: true,
+  buildEs5: 'prod',
   plugins: [
     sass({
       importer: [sassAlias({
         path: 'src/global/styles',
       })]
     }),
+  ],
+  bundles: <Bundle[]>[
+    { components: ['pop-accordion', 'pop-accordion-group'] },
+    { components: ['pop-avatar', 'pop-img'] },
+    { components: ['pop-badge', 'pop-indicator'] },
+    { components: ['pop-button'] },
+    { components: ['pop-card'] },
+    { components: ['pop-checkbox'] },
+    { components: ['pop-divider'] },
+    { components: ['pop-drawer'] },
+    { components: ['pop-dropdown'] },
+    { components: ['pop-input'] },
+    { components: ['pop-input-file'] },
+    { components: ['pop-list', 'pop-item'] },
+    { components: ['pop-join'] },
+    { components: ['pop-kbd'] },
+    { components: ['pop-loading'] },
+    { components: ['pop-mask'] },
+    { components: ['pop-modal'] },
+    { components: ['pop-navbar'] },
+    { components: ['pop-popover'] },
+    { components: ['pop-progress'] },
+    { components: ['pop-radio', 'pop-radio-group'] },
+    { components: ['pop-range'] },
+    { components: ['pop-select', 'pop-select-option', 'pop-select-popover'] },
+    { components: ['pop-swap'] },
+    { components: ['pop-textarea'] },
+    { components: ['pop-toggle'] },
+    { components: ['pop-tooltip'] },
   ],
   outputTargets: [
     docsReadme(),
@@ -96,36 +129,21 @@ export const config: Config = {
       ]
     })
   ],
-  bundles: <Bundle[]>[
-    { components: ['pop-accordion', 'pop-accordion-group'] },
-    { components: ['pop-avatar', 'pop-img'] },
-    { components: ['pop-badge', 'pop-indicator'] },
-    { components: ['pop-button'] },
-    { components: ['pop-card'] },
-    { components: ['pop-checkbox'] },
-    { components: ['pop-divider'] },
-    { components: ['pop-drawer'] },
-    { components: ['pop-dropdown'] },
-    { components: ['pop-input'] },
-    { components: ['pop-input-file'] },
-    { components: ['pop-list', 'pop-item'] },
-    { components: ['pop-join'] },
-    { components: ['pop-kbd'] },
-    { components: ['pop-loading'] },
-    { components: ['pop-mask'] },
-    { components: ['pop-modal'] },
-    { components: ['pop-navbar'] },
-    { components: ['pop-popover'] },
-    { components: ['pop-progress'] },
-    { components: ['pop-radio', 'pop-radio-group'] },
-    { components: ['pop-range'] },
-    { components: ['pop-select', 'pop-select-option', 'pop-select-popover'] },
-    { components: ['pop-swap'] },
-    { components: ['pop-textarea'] },
-    { components: ['pop-toggle'] },
-    { components: ['pop-tooltip'] },
-  ],
   testing: {
     browserHeadless: "new",
   },
+  extras: {
+    /**
+     * `experimentalSlotFixes` is necessary in Stencil v4 until the fixes described in
+     * {@link https://stenciljs.com/docs/config-extras#experimentalslotfixes the Stencil docs for the flag} are the
+     * default behavior (slated for a future Stencil major version).
+     */
+    experimentalSlotFixes: true,
+    /**
+     * `experimentalScopedSlotChanges` is necessary in Stencil v4 until the fixes described in
+     * {@link https://stenciljs.com/docs/config-extras#experimentalscopedslotchanges the Stencil docs for the flag} are
+     * the default behavior (slated for a future Stencil major version).
+     */
+    experimentalScopedSlotChanges: true,
+  }
 };

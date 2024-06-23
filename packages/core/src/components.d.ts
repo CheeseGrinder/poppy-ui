@@ -2366,7 +2366,7 @@ declare namespace LocalJSX {
          */
         "onPopBlur"?: (event: PopInputCustomEvent<void>) => void;
         /**
-          * The `popChange` event is fired when the user modifies the textarea's value. Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified.
+          * The `popChange` event is fired when the user modifies the input's value. Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified.
          */
         "onPopChange"?: (event: PopInputCustomEvent<InputChangeEventDetail>) => void;
         /**
@@ -2374,7 +2374,7 @@ declare namespace LocalJSX {
          */
         "onPopFocus"?: (event: PopInputCustomEvent<void>) => void;
         /**
-          * The `popInput` event is fired each time the user modifies the Input's value. Unlike the `popChange` event, the `popInput` event is fired for each alteration to the textarea's value. This typically happens for each keystroke as the user types.  This event can be debouced by the `debounce` property.
+          * The `popInput` event is fired each time the user modifies the Input's value. Unlike the `popChange` event, the `popInput` event is fired for each alteration to the input's value. This typically happens for each keystroke as the user types.  This event can be debounced by the `debounce` property.
          */
         "onPopInput"?: (event: PopInputCustomEvent<InputInputEventDetail>) => void;
         /**

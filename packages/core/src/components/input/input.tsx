@@ -39,6 +39,7 @@ export class Input implements ComponentInterface {
   private inheritedAttributes: Attributes;
 
   private nativeInput!: HTMLInputElement;
+  private isComposing = false;
   private debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
@@ -73,10 +74,11 @@ export class Input implements ComponentInterface {
   @Prop({ mutable: true }) value?: string | number | null = '';
   @Watch('value')
   onValueChange() {
+    const nativeInput = this.nativeInput;
     const value = this.getValue();
     this.internals.setFormValue(value, value);
 
-    if (value !== this.nativeInput.value) {
+    if (nativeInput?.value !== value && !this.isComposing) {
       /**
        * Assigning the native input's value on attribute
        * value change, allows `popInput` implementations
@@ -85,7 +87,7 @@ export class Input implements ComponentInterface {
        * Used for patterns such as input trimming (removing whitespace),
        * or input masking.
        */
-      this.nativeInput.value = value;
+      nativeInput.value = value;
     }
   }
 
@@ -285,17 +287,17 @@ export class Input implements ComponentInterface {
   @Prop({ mutable: true }) debounce?: number = 0;
 
   /**
-   * The `popChange` event is fired when the user modifies the textarea's value.
+   * The `popChange` event is fired when the user modifies the input's value.
    * Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified.
    */
   @Event() popChange: EventEmitter<InputChangeEventDetail>;
 
   /**
    * The `popInput` event is fired each time the user modifies the Input's value.
-   * Unlike the `popChange` event, the `popInput` event is fired for each alteration to the textarea's value.
+   * Unlike the `popChange` event, the `popInput` event is fired for each alteration to the input's value.
    * This typically happens for each keystroke as the user types.
    *
-   * This event can be debouced by the `debounce` property.
+   * This event can be debounced by the `debounce` property.
    */
   @Event() popInput: EventEmitter<InputInputEventDetail>;
 
@@ -379,14 +381,28 @@ export class Input implements ComponentInterface {
   };
 
   private onInput = (): void => {
-    this.value = this.nativeInput.value;
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+      delete this.debounceTimer;
+    }
 
-    clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
+      const input = this.nativeInput;
+      if (input) {
+        this.value = input.value || '';
+      }
       this.popInput.emit({
         value: this.getValue(),
       });
     }, this.debounce || 0);
+  };
+
+  private onCompositionStart = () => {
+    this.isComposing = true;
+  };
+
+  private onCompositionEnd = () => {
+    this.isComposing = false;
   };
 
   private onFocus = (): void => {
@@ -452,6 +468,8 @@ export class Input implements ComponentInterface {
             onInput={this.onInput}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            onCompositionstart={this.onCompositionStart}
+            onCompositionend={this.onCompositionEnd}
             ref={el => (this.nativeInput = el)}
             {...this.inheritedAttributes}
           />
