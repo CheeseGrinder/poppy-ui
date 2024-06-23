@@ -6,5 +6,5 @@ import { getElement } from '@stencil/core';
  * take priority over the root document value.
  */
 export function isRTL(ref: any): boolean {
-  return getElement(ref).closest<HTMLElement>('[dir]').dir.toLowerCase() === 'rtl';
+  return getElement(ref).closest<HTMLElement>('[dir]')?.dir.toLowerCase() === 'rtl';
 }
