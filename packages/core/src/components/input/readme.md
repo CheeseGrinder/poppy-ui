@@ -68,17 +68,20 @@ Type: `Promise<void>`
 
 ## Slots
 
-| Slot | Description                       |
-| ---- | --------------------------------- |
-|      | Slot for the content of the label |
+| Slot      | Description                                                                          |
+| --------- | ------------------------------------------------------------------------------------ |
+|           | Slot for the content of the label                                                    |
+| `"end"`   | The content will appear to the right of the native HTML input in LTR and left in RTL |
+| `"start"` | The content will appear to the left of the native HTML input in LTR and right in RTL |
 
 
 ## Parts
 
-| Part       | Description                                        |
-| ---------- | -------------------------------------------------- |
-| `"label"`  | The native HTML label element that wrap the text . |
-| `"native"` | The native HTML input element.                     |
+| Part        | Description                                       |
+| ----------- | ------------------------------------------------- |
+| `"label"`   | The native HTML label element that wrap the text  |
+| `"native"`  | The native HTML input element.                    |
+| `"wrapper"` | The wrapper around slot start, input and slot end |
 
 
 ## CSS Custom Properties

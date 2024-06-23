@@ -183,7 +183,7 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput
   'popFocus',
   'popBlur'
 ],
-'value', 'pop-change');
+'value', 'pop-input');
 
 
 export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop-input-file', definePopInputFile, [
@@ -306,7 +306,7 @@ export const PopRadioGroup = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JS
 'value', 'pop-change');
 
 
-export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange>('pop-range', definePopRange, [
+export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange, JSX.PopRange["value"]>('pop-range', definePopRange, [
   'name',
   'value',
   'min',
@@ -321,7 +321,8 @@ export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange>('pop-range',
   'popChange',
   'popFocus',
   'popBlur'
-]);
+],
+'value', 'pop-change');
 
 
 export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSelect["value"]>('pop-select', definePopSelect, [
@@ -366,7 +367,7 @@ export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["a
 'active', 'pop-change');
 
 
-export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea>('pop-textarea', definePopTextarea, [
+export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea, JSX.PopTextarea["value"]>('pop-textarea', definePopTextarea, [
   'name',
   'placeholder',
   'value',
@@ -395,7 +396,8 @@ export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea>('pop-t
   'popInput',
   'popFocus',
   'popBlur'
-]);
+],
+'value', 'pop-input');
 
 
 export const PopToggle = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopToggle["checked"]>('pop-toggle', definePopToggle, [

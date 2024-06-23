@@ -181,6 +181,7 @@ pop-input,css-prop,--font
 pop-input,css-prop,--required-color
 pop-input,part,label
 pop-input,part,native
+pop-input,part,wrapper
 
 pop-input-file,shadow
 pop-input-file,prop,autoFocus,boolean,undefined,false,true

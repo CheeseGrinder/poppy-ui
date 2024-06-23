@@ -21,8 +21,11 @@ import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail
  * Textarea allows users to enter text in multiple lines.
  *
  * @slot - Slot for the content of the label
+ * @slot start - The content will appear to the left of the native HTML input in LTR and right in RTL
+ * @slot end - The content will appear to the right of the native HTML input in LTR and left in RTL
  *
- * @part label - The native HTML label element that wrap the text .
+ * @part label - The native HTML label element that wrap the text
+ * @part wrapper - The wrapper around slot start, input and slot end
  * @part native - The native HTML input element.
  */
 @Component({
@@ -420,7 +423,7 @@ export class Input implements ComponentInterface {
             </label>
           </div>
         </Show>
-        <label htmlFor={inputId} class="input-wrapper">
+        <label htmlFor={inputId} class="input-wrapper" part="wrapper">
           <slot name="start" />
           <input
             part="native"

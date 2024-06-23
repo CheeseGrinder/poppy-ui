@@ -79,19 +79,19 @@ export const config: Config = {
           event: 'pop-change'
         },
         {
-          elements: ['pop-swap'],
+          elements: ['pop-swap', 'pop-accordion-group'],
           targetAttr: 'active',
           event: 'pop-change'
         },
         {
-          elements: ['pop-accordion-group'],
-          targetAttr: 'active',
-          event: 'pop-change'
-        },
-        {
-          elements: ['pop-radio-group', 'pop-radio', 'pop-select'],
+          elements: ['pop-radio', 'pop-radio-group', 'pop-select', 'pop-range'],
           targetAttr: 'value',
           event: 'pop-change',
+        },
+        {
+          elements: ['pop-input', 'pop-textarea'],
+          targetAttr: 'value',
+          event: 'pop-input',
         },
       ]
     })
