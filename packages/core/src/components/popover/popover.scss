@@ -12,9 +12,9 @@
 
     border: none;
 
-    color: var(--color, oklch(#{theme.get-color("base.content")}));
-
     background: transparent;
+
+    color: var(--color, oklch(#{theme.get-color("base.content")}));
 
     &:not([popover], [open]) {
       opacity: 0;
@@ -29,27 +29,27 @@
       min-height: 2rem;
 
       border: solid;
-      border-color: oklch(#{theme.get-color("base.200")});
       border-width: 1px;
       border-radius: var(--border-radius, #{radius.$md});
+      border-color: oklch(#{theme.get-color("base.200")});
 
       background-color: var(--background, oklch(#{theme.get-color("base.100")}));
 
       box-shadow: shadow.$md;
+      animation-duration: 200ms;
 
       animation-name: present;
-      animation-duration: 200ms;
     }
   }
 }
 
 @keyframes present {
   from {
-    opacity: 0.6;
     scale: 0.95;
+    opacity: 0.6;
   }
   to {
-    opacity: 1;
     scale: 1;
+    opacity: 1;
   }
 }

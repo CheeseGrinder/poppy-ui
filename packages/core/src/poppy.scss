@@ -1,13 +1,13 @@
 @use "./global/styles/theme";
 
 body {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-
-  font-family: var(--font, theme.$font);
   background-color: oklch(var(--base-100));
   color: oklch(var(--base-content));
-  box-sizing: border-box;
+
+  font-family: var(--font, theme.$font);
 }
 
 * {

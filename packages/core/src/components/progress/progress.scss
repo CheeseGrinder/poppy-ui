@@ -32,12 +32,12 @@
   > progress {
     appearance: none;
     position: relative;
-    vertical-align: baseline;
     width: 100%;
+    height: 0.5rem;
 
     overflow: hidden;
-    height: 0.5rem;
     border-radius: var(--border-radius, #{radius.$xl});
+    vertical-align: baseline;
 
     @include bar {
       border-radius: var(--border-radius, #{radius.$xl});

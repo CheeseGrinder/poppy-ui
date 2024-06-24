@@ -12,17 +12,17 @@ $slot_name: indicator;
   --translate-x: -50%;
   --translate-y: -50%;
 
-  position: relative;
-
   display: inline-flex;
+
+  position: relative;
   width: max-content;
 
   ::slotted([slot="#{$slot_name}"]) {
-    position: absolute;
     z-index: 1;
+    position: absolute;
+    translate: var(--translate-x) var(--translate-y);
 
     white-space: nowrap;
-    translate: var(--translate-x) var(--translate-y);
   }
 }
 
@@ -34,16 +34,16 @@ $slot_name: indicator;
   inset-inline-start: 0;
 }
 :host([side="left"]) ::slotted([slot="#{$slot_name}"]) {
-  left: 0;
   right: auto;
+  left: 0;
 }
 :host([side="center"]) ::slotted([slot="#{$slot_name}"]) {
   inset-inline-end: 50%;
   inset-inline-start: 50%;
 }
 :host([side="right"]) ::slotted([slot="#{$slot_name}"]) {
-  left: auto;
   right: 0;
+  left: auto;
 }
 :host([side="end"]) ::slotted([slot="#{$slot_name}"]) {
   --translate-x: 50%;

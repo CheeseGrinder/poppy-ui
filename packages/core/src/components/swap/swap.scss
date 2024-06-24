@@ -2,21 +2,20 @@
 // ----------------------------------------------------------------
 
 :host {
-  position: relative;
-
   display: inline-grid;
+  position: relative;
   place-content: center;
-
-  user-select: none;
   cursor: pointer;
 
+  user-select: none;
+
   ::slotted(*) {
-    grid-column-start: 1;
     grid-row-start: 1;
+    grid-column-start: 1;
 
     transition-duration: 0.3s;
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     transition-property: transform, opacity;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
@@ -33,23 +32,23 @@
 
 :host(:not([active])) {
   @include slot("on") {
-    opacity: 0;
     z-index: 0;
+    opacity: 0;
   }
   @include slot("off") {
-    opacity: 1;
     z-index: 1;
+    opacity: 1;
   }
 }
 
 :host([active]) {
   @include slot("on") {
-    opacity: 1;
     z-index: 1;
+    opacity: 1;
   }
   @include slot("off") {
-    opacity: 0;
     z-index: 0;
+    opacity: 0;
   }
 }
 
@@ -75,9 +74,9 @@
 
 :host([type="flip"]) {
   @include slot("on", "off") {
-    opacity: 1;
     z-index: 1;
     backface-visibility: hidden;
+    opacity: 1;
   }
 }
 :host([type="flip"]:not([active])) {

@@ -23,14 +23,14 @@
   --shadow: #{shadow.$md};
 
   .dropdown {
-    position: relative;
     display: grid;
+    position: relative;
     width: 100%;
 
     &-trigger {
       display: inline-block;
-      grid-column-start: 1;
       grid-row-start: 1;
+      grid-column-start: 1;
     }
 
     &-content {
@@ -40,14 +40,14 @@
 
       border: 1px solid var(--border-color);
       border-radius: var(--border-radius);
-
-      color: var(--color);
       background-color: var(--background);
 
       box-shadow: var(--shadow);
 
-      animation-name: present;
+      color: var(--color);
       animation-duration: 200ms;
+
+      animation-name: present;
     }
   }
 }
@@ -105,11 +105,11 @@
 
 @keyframes present {
   from {
-    opacity: 0.6;
     scale: 0.95;
+    opacity: 0.6;
   }
   to {
-    opacity: 1;
     scale: 1;
+    opacity: 1;
   }
 }

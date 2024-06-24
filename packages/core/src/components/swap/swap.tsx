@@ -31,9 +31,9 @@ export class Swap implements ComponentInterface {
    */
   @Prop({ reflect: true, mutable: true }) active?: boolean;
   @Watch('active')
-  onActiveChange(active: boolean) :void {
+  onActiveChange(active: boolean): void {
     this.popSwap.emit({
-      active
+      active,
     });
   }
 

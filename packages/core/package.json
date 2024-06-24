@@ -37,6 +37,7 @@
     "clean": "rimraf -rf ./.stencil ./components ./dist ./hydrate ./loader",
     "prebuild": "npm run clean",
     "build": "stencil build",
+    "style:sass": "sass --embed-sources --style compressed src/css:./css",
     "prestart": "npm run clean",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
@@ -54,7 +55,7 @@
   "devDependencies": {
     "@cheese-grinder/stencil-component-config": "^0.2.1-beta.2",
     "@cheese-grinder/stencil-custom-readme": "^0.1.2",
-    "@cheese-grinder/stencil-sass-alias": "~0.1.0",
+    "@cheese-grinder/stencil-sass-alias": "~0.2.2",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.8.8",
@@ -62,12 +63,11 @@
     "@typescript-eslint/eslint-plugin": "^7.12.0",
     "@typescript-eslint/parser": "^7.12.0",
     "audit-ci": "^7.0.1",
-    "daisyui": "^4.12.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "postcss": "^8.4.38",
     "prettier": "^3.3.2",
+    "prettier-plugin-css-order": "^2.1.2",
     "rimraf": "^5.0.7",
-    "tailwindcss": "^3.4.4"
+    "sass": "^1.77.6"
   }
 }

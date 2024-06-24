@@ -24,10 +24,18 @@
 
   > .badge {
     box-sizing: border-box;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    width: fit-content;
+    height: 100%;
+
+    border: solid 1px var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background);
+    color: var(--color);
+    transition-duration: 0.2s;
 
     transition-property:
       color,
@@ -43,15 +51,6 @@
       backdrop-filter,
       -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    transition-duration: 0.2s;
-
-    width: fit-content;
-    height: 100%;
-
-    border: solid 1px var(--border-color);
-    border-radius: var(--border-radius);
-    background-color: var(--background);
-    color: var(--color);
   }
 }
 
@@ -62,44 +61,44 @@
   height: 0.75rem;
 
   > .badge {
-    font-size: 0.75rem;
-    line-height: 0.75rem;
+    padding-right: 0.313rem;
 
     padding-left: 0.313rem;
-    padding-right: 0.313rem;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
   }
 }
 :host([size="sm"]) {
   height: 1rem;
 
   > .badge {
-    font-size: 0.75rem;
-    line-height: 1rem;
+    padding-right: 0.438rem;
 
     padding-left: 0.438rem;
-    padding-right: 0.438rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 :host([size="md"]) {
   height: 1.25rem;
 
   > .badge {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    padding-right: 0.563rem;
 
     padding-left: 0.563rem;
-    padding-right: 0.563rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 :host([size="lg"]) {
   height: 1.5rem;
 
   > .badge {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    padding-right: 0.688rem;
 
     padding-left: 0.688rem;
-    padding-right: 0.688rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 

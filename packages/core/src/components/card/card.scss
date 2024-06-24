@@ -9,14 +9,14 @@
 
 :host {
   --border-radius: #{radius.$xl};
+  display: flex;
 
   position: relative;
-  display: flex;
   flex-direction: column;
 
   border-radius: var(--border-radius);
-  color: var(--color);
-  background-color: var(--background);
 
   outline: none;
+  background-color: var(--background);
+  color: var(--color);
 }

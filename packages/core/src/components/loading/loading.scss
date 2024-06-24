@@ -11,12 +11,12 @@
   aspect-ratio: 1 / 1;
 
   background-color: var(--background, currentColor);
-
-  pointer-events: none;
+  mask-position: center;
+  mask-repeat: no-repeat;
 
   mask-size: 100%;
-  mask-repeat: no-repeat;
-  mask-position: center;
+
+  pointer-events: none;
 }
 
 // Loading size

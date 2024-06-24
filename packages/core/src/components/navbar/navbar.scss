@@ -1,11 +1,9 @@
 @use "@scss/theme";
 
 :host {
-  padding: var(--padding, 0.5rem);
-
   width: 100%;
   min-height: 4rem;
-
+  padding: var(--padding, 0.5rem);
   background: var(--background, oklch(#{theme.get-color("base.100")}));
 
   > header {
@@ -28,13 +26,13 @@
   flex-shrink: 0;
 }
 ::slotted([slot="start"]) {
-  width: 50%;
   justify-content: flex-start;
+  width: 50%;
 }
 ::slotted([slot="center"]) {
   flex-shrink: 0;
 }
 ::slotted([slot="end"]) {
-  width: 50%;
   justify-content: flex-end;
+  width: 50%;
 }

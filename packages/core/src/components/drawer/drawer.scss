@@ -16,13 +16,13 @@
   --background: oklch(#{theme.get-color("base.200")});
   --color: oklch(#{theme.get-color("base.content")});
 
-  position: relative;
-
   display: grid;
 
+  position: relative;
+
   width: 100%;
-  height: 100%;
   max-width: 100vw;
+  height: 100%;
 
   .drawer {
     &-content {
@@ -32,59 +32,58 @@
     }
 
     &-side {
-      position: fixed;
+      display: grid;
       z-index: 1000;
+      position: fixed;
       top: 0px;
+      grid-template-rows: repeat(1, minmax(0, 1fr));
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+
+      grid-row-start: 1;
+      align-items: flex-start;
+
+      width: 100%;
+      height: 100dvh;
       inset-inline-start: 0px;
 
       overflow-y: auto;
       overscroll-behavior: contain;
 
-      grid-row-start: 1;
-
-      display: grid;
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      grid-template-rows: repeat(1, minmax(0, 1fr));
-      align-items: flex-start;
-
-      width: 100%;
-      height: 100dvh;
-
       pointer-events: none;
 
       &-inner {
         z-index: 1;
-        grid-column-start: 1;
         grid-row-start: 1;
+        grid-column-start: 1;
 
         height: 100%;
 
         background-color: var(--background);
         color: var(--color);
-
-        will-change: transform;
+        transition-duration: 300ms;
 
         transition-property: transform;
         transition-timing-function: ease-out;
-        transition-duration: 300ms;
+
+        will-change: transform;
       }
     }
 
     &-backdrop {
       position: sticky;
       top: 0px;
+      grid-row-start: 1;
 
       grid-column-start: 1;
-      grid-row-start: 1;
       place-self: stretch;
 
       background-color: transparent;
 
       cursor: pointer;
+      transition-duration: 200ms;
 
       transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
       transition-timing-function: ease-out;
-      transition-duration: 200ms;
     }
   }
 }
@@ -102,10 +101,9 @@
       grid-column-start: 2;
     }
     &-side {
-      inset-inline-start: 0px;
-
       grid-column-start: 1;
       justify-items: start;
+      inset-inline-start: 0px;
 
       &-inner {
         transform: translateX(-100%);

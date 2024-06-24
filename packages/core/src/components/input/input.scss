@@ -36,28 +36,27 @@ $minWidth: 12rem;
 
   > .input-wrapper {
     box-sizing: border-box;
-
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-shrink: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    min-width: $minWidth;
     gap: 0.5rem;
+    border-width: 1px;
 
     border-style: solid;
-    border-width: 1px;
     border-radius: var(--border-radius);
     border-color: var(--border-color, transparent);
 
     background-color: var(--background);
 
-    min-width: $minWidth;
-    width: 100%;
-
     &:has(input:not([readonly]):focus-visible) {
+      outline-color: var(--outline-color, var(--border-color));
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--outline-color, var(--border-color));
     }
 
     > input {
@@ -65,9 +64,9 @@ $minWidth: 12rem;
 
       border: none;
       outline: none;
+      background-color: transparent;
 
       color: var(--color);
-      background-color: transparent;
 
       font-family: #{theme.$font};
       white-space: pre-wrap;
@@ -94,8 +93,8 @@ $minWidth: 12rem;
 ::slotted([slot="start"]),
 ::slotted([slot="end"]) {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -103,26 +102,26 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([size="xs"]) > .input-wrapper {
-  padding: 0 0.5rem;
   height: 1.5rem;
+  padding: 0 0.5rem;
   font-size: 0.75rem;
   line-height: 1.625;
 }
 :host([size="sm"]) > .input-wrapper {
-  padding: 0 0.75rem;
   height: 2rem;
+  padding: 0 0.75rem;
   font-size: 0.875rem;
   line-height: 2rem;
 }
 :host([size="md"]) .input-wrapper {
-  padding: 0 1rem;
   height: 3rem;
+  padding: 0 1rem;
   font-size: 0.875rem;
   line-height: 2;
 }
 :host([size="lg"]) > .input-wrapper {
-  padding: 1.5rem;
   height: 4rem;
+  padding: 1.5rem;
   font-size: 1.125rem;
   line-height: 2;
 }

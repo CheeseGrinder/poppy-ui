@@ -20,9 +20,8 @@
   background-color: var(--track-color, oklch(var(--base-content) / var(--track-opacity, 0.2)));
 }
 @mixin thumb {
-  height: var(--thumb-size);
   width: var(--thumb-size);
-
+  height: var(--thumb-size);
   border-style: none;
   border-radius: var(--border-radius, #{radius.$xl});
 
@@ -48,15 +47,15 @@
     appearance: none;
     -webkit-appearance: none;
 
-    overflow: hidden;
-
     width: 100%;
     height: var(--thumb-size);
     margin: 0;
+
+    overflow: hidden;
     border-radius: var(--border-radius, #{radius.$xl});
+    background-color: transparent;
 
     color: var(--active-track-color);
-    background-color: transparent;
 
     cursor: pointer;
 
@@ -138,7 +137,7 @@
 
 :host([disabled]) > input {
   --active-track-color: oklch(#{theme.get-color("base.content")} / var(--active-track-opacity, 1));
+  cursor: not-allowed;
 
   opacity: var(--opacity, 0.2);
-  cursor: not-allowed;
 }

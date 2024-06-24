@@ -17,8 +17,10 @@
     {
       "files": "*.scss",
       "options": {
+        "plugins": ["prettier-plugin-css-order"],
         "singleQuote": false,
-        "quoteProps": "as-needed"
+        "quoteProps": "as-needed",
+        "cssDeclarationSorterOrder": "smacss"
       }
     }
   ]

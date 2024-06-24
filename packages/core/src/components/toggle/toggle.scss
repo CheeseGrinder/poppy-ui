@@ -27,10 +27,10 @@
 
   box-sizing: border-box;
   display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4px;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
 
   > input {
     appearance: none;
@@ -39,32 +39,32 @@
     margin-inline-start: auto;
     border-width: 1px;
     border-style: solid;
-    border-color: currentColor;
     border-radius: var(--border-radius, #{radius.$xxl});
+    border-color: currentColor;
     background-color: currentColor;
-
-    color: var(--color, oklch(theme.get-color("base.content") / var(--opacity, 0.5)));
-    transition:
-      color,
-      background,
-      box-shadow var(--animation-duration, 0.2s) ease-out;
     box-shadow:
       var(--handleoffsetcalculator) 0 0 2px var(--background) inset,
       0 0 0 2px var(--background) inset,
       var(--togglehandleborder, 0 0);
 
+    color: var(--color, oklch(theme.get-color("base.content") / var(--opacity, 0.5)));
+
     cursor: pointer;
+    transition:
+      color,
+      background,
+      box-shadow var(--animation-duration, 0.2s) ease-out;
 
     &:focus-visible {
+      outline-color: var(--color, oklch(theme.get-color("base.content") / 0.2));
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--color, oklch(theme.get-color("base.content") / 0.2));
     }
     &:checked {
       --handleoffsetcalculator: var(--handleoffset);
-      color: var(--checked-color);
       background-image: none;
+      color: var(--checked-color);
     }
   }
 }
@@ -77,8 +77,8 @@
   --handleoffset: 0.5rem;
 
   > input {
-    height: 1rem;
     width: 1.5rem;
+    height: 1rem;
   }
 }
 :host([size="sm"]),
@@ -86,8 +86,8 @@
   --handleoffset: 0.75rem;
 
   > input {
-    height: 1.25rem;
     width: 2rem;
+    height: 1.25rem;
   }
 }
 :host([size="md"]),
@@ -95,8 +95,8 @@
   --handleoffset: 1.5rem;
 
   > input {
-    height: 1.5rem;
     width: 3rem;
+    height: 1.5rem;
   }
 }
 :host([size="lg"]),
@@ -104,8 +104,8 @@
   --handleoffset: 2rem;
 
   > input {
-    height: 2rem;
     width: 4rem;
+    height: 2rem;
   }
 }
 
@@ -132,14 +132,13 @@
 // ----------------------------------------------------------------
 
 :host([indeterminate]) > input {
-  color: var(--checked-color, oklch(theme.get-color("base.content")));
-
   box-shadow:
     calc(1.5rem / 2) 0 0 2px var(--background) inset,
     calc(1.5rem / -2) 0 0 2px var(--background) inset,
     0 0 0 2px var(--background) inset,
     calc(1.5rem / 2) 0 0 3px currentColor inset,
     calc(1.5rem / -2) 0 0 3px currentColor inset;
+  color: var(--checked-color, oklch(theme.get-color("base.content")));
 }
 
 :host([disabled]) > input {
@@ -150,8 +149,8 @@
 
   border-color: var(--color, oklch(#{$base}));
   background-color: transparent;
-  opacity: 0.3;
   cursor: not-allowed;
+  opacity: 0.3;
 }
 
 // Toggle Context

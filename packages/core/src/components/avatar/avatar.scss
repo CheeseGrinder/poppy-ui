@@ -11,9 +11,9 @@
 :host {
   --background: oklch(#{theme.get-color("neutral.base")});
   --color: oklch(#{theme.get-color("neutral.content")});
+  display: inline-flex;
 
   position: relative;
-  display: inline-flex;
   aspect-ratio: 1;
 
   > div {
@@ -21,8 +21,8 @@
     place-items: center;
 
     width: 100%;
-    overflow: hidden;
     min-width: 24px;
+    overflow: hidden;
 
     background-color: var(--background);
     color: var(--color);
@@ -30,8 +30,8 @@
 
   ::slotted(pop-img),
   ::slotted(img) {
-    height: 100%;
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }

@@ -20,42 +20,41 @@
   @include input.label;
 
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
   gap: 4px;
-  flex-shrink: 0;
 
   outline: none;
 
   > input {
+    appearance: none;
+
+    margin: 0;
+    margin-inline-start: auto;
     border-width: 1px;
     border-style: solid;
     border-radius: var(--border-radius, #{radius.$full});
     border-color: var(--border-color, oklch(theme.get-color("base.content") / var(--border-opacity, 0.2)));
-
-    margin: 0;
-    margin-inline-start: auto;
-    appearance: none;
     cursor: pointer;
 
     &:focus {
       box-shadow: none;
     }
     &:focus-visible {
+      outline-color: var(--border-color, oklch(theme.get-color("base.content")));
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--border-color, oklch(theme.get-color("base.content")));
     }
     &:checked {
-      background-color: var(--background, oklch(theme.get-color("base.content")));
       background-image: none;
-
-      animation: radiomark var(--animation-duration, 0.2s) ease-out;
+      background-color: var(--background, oklch(theme.get-color("base.content")));
 
       box-shadow:
         0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset,
         0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset;
+      animation: radiomark var(--animation-duration, 0.2s) ease-out;
     }
   }
 
@@ -84,29 +83,29 @@
 :host([size="xs"]),
 :host-context(pop-list[size="xs"]) {
   > input {
-    height: 1rem;
     width: 1rem;
+    height: 1rem;
   }
 }
 :host([size="sm"]),
 :host-context(pop-list[size="sm"]) {
   > input {
-    height: 1.25rem;
     width: 1.25rem;
+    height: 1.25rem;
   }
 }
 :host([size="md"]),
 :host(:not([size])) {
   > input {
-    height: 1.5rem;
     width: 1.5rem;
+    height: 1.5rem;
   }
 }
 :host([size="lg"]),
 :host-context(pop-list[size="lg"]) {
   > input {
-    height: 2rem;
     width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -138,9 +137,8 @@
   --background: oklch(#{theme.get-color("base.content")});
 
   > input {
-    opacity: var(--opacity, 0.2);
-
     cursor: not-allowed;
+    opacity: var(--opacity, 0.2);
   }
 }
 

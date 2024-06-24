@@ -1,6 +1,16 @@
 import { componentConfig, config } from '#config';
 import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
-import { AttachInternals, Component, ComponentInterface, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  AttachInternals,
+  Component,
+  ComponentInterface,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+} from '@stencil/core';
 import type { Size } from 'src/interface';
 import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './button.type';
 
@@ -118,14 +128,14 @@ export class Button implements ComponentInterface {
 
   private onClick = (): void => {
     const { type } = this;
-    const form = this.getForm()
+    const form = this.getForm();
     const actions: Partial<Record<ButtonType, () => void>> = {
       submit: () => form.requestSubmit(),
       reset: () => form.reset(),
-    }
+    };
 
     actions[type]?.();
-  }
+  };
 
   private onFocus = (): void => {
     this.popFocus.emit();

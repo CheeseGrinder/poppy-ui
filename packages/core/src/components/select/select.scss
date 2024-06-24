@@ -29,9 +29,8 @@ $minWidth: 12rem;
   min-width: $minWidth;
 
   .select-wrapper {
-    position: relative;
-
     display: flex;
+    position: relative;
     align-items: center;
 
     overflow: hidden;
@@ -39,10 +38,10 @@ $minWidth: 12rem;
     background-color: var(--background, oklch(#{theme.get-color("base.100")} / var(--opacity, 1)));
 
     &:has(button:focus-visible) {
+      outline-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
-      outline-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
     }
   }
 
@@ -55,22 +54,22 @@ $minWidth: 12rem;
   }
 
   button {
-    position: absolute;
-    inset: 0;
     z-index: 1;
+    position: absolute;
 
     width: 100%;
+    inset: 0;
+    border-width: 1px;
 
     border-style: solid;
-    border-width: 1px;
     border-radius: var(--border-radius, #{radius.$md});
     border-color: var(--border-color, transparent);
+    outline: none;
 
     background-color: transparent;
     color: var(--color, oklch(#{theme.get-color("base.content")}));
 
     user-select: none;
-    outline: none;
   }
 
   svg {
@@ -121,33 +120,33 @@ $minWidth: 12rem;
 
 // Size
 :host([size="xs"]) .select-wrapper {
+  height: 1.5rem;
   padding-inline-start: 0.65rem;
   padding-inline-end: 0.5rem;
-  height: 1.5rem;
   font-size: 0.75rem;
   line-height: 1.625;
 }
 :host([size="sm"]) .select-wrapper {
+  height: 2rem;
   padding-inline-start: 0.75rem;
   padding-inline-end: 0.85rem;
-  height: 2rem;
   font-size: 0.875rem;
   line-height: 2rem;
 }
 :host([size="md"]),
 :host(:not([size])) {
   .select-wrapper {
+    height: 3rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1.15rem;
-    height: 3rem;
     font-size: 0.875rem;
     line-height: 2;
   }
 }
 :host([size="lg"]) .select-wrapper {
+  height: 4rem;
   padding-inline-start: 1.15rem;
   padding-inline-end: 1.35rem;
-  height: 4rem;
   font-size: 1.125rem;
   line-height: 2;
 }

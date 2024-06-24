@@ -23,12 +23,12 @@
   --animation: 0.2s;
 
   box-sizing: border-box;
-  position: relative;
   display: grid;
-
-  overflow: hidden;
+  position: relative;
 
   width: 100%;
+
+  overflow: hidden;
 
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
@@ -39,42 +39,41 @@
 
   > .accordion-title {
     box-sizing: border-box;
-    position: relative;
-
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    grid-column-start: 1;
+    position: relative;
     grid-row-start: 1;
 
-    padding: 1rem;
-    padding-inline-end: 1.5rem;
+    grid-column-start: 1;
+    align-items: center;
+    justify-content: space-between;
 
     width: 100%;
     min-height: 3.75rem;
 
+    padding: 1rem;
+    padding-inline-end: 1.5rem;
+
     cursor: pointer;
-    user-select: none;
 
     transition: background-color var(--animation) ease-out;
+    user-select: none;
   }
 
   > .accordion-content {
-    grid-column-start: 1;
     grid-row-start: 2;
-
-    padding-left: 1rem;
-    padding-right: 1rem;
+    grid-column-start: 1;
 
     min-height: 0;
+    padding-right: 1rem;
+
+    padding-left: 1rem;
+
+    cursor: unset;
 
     transition:
       visibility var(--animation),
       padding var(--animation) ease-out,
       background-color var(--animation) ease-out;
-
-    cursor: unset;
   }
 
   > svg {

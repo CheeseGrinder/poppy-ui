@@ -6,8 +6,8 @@
 
 // TODO: Remove padding when item has clickable el children (radio, check, select, ... )
 :host {
-  position: relative;
   display: flex;
+  position: relative;
   flex-shrink: 0;
   flex-direction: column;
   flex-wrap: wrap;
@@ -15,12 +15,11 @@
 
   > .item-inner {
     box-sizing: border-box;
-
     display: grid;
+    grid-auto-columns: minmax(auto, max-content) auto max-content;
     grid-auto-flow: column;
     align-content: center;
     align-items: center;
-    grid-auto-columns: minmax(auto, max-content) auto max-content;
     gap: 0.5rem;
 
     border: none;
@@ -32,10 +31,10 @@
     text-wrap: balance;
 
     cursor: pointer;
+    transition-duration: 0.2s;
 
     transition-property: color, background-color, opacity;
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    transition-duration: 0.2s;
   }
 }
 
@@ -59,35 +58,32 @@
 // By making this it take in apply style of the top level list
 
 :host(.in-list-md) > .item-inner {
+  height: 36px;
   padding: 0.5rem 1rem;
   border-radius: radius.$md;
-
-  height: 36px;
 
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 :host(.in-list-xs) > .item-inner {
+  height: 24px;
   padding: 0.25rem 0.5rem;
   border-radius: radius.$sm;
-
-  height: 24px;
 
   font-size: 0.75rem;
   line-height: 1rem;
 }
 :host(.in-list-sm) > .item-inner {
+  height: 28px;
   padding: 0.25rem 0.75rem;
   border-radius: radius.$md;
-
-  height: 28px;
 
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 :host(.in-list-lg) > .item-inner {
-  border-radius: radius.$md;
   height: 52px;
+  border-radius: radius.$md;
 
   font-size: 1.125rem;
   line-height: 1.75rem;

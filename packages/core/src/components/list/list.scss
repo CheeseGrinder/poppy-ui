@@ -5,10 +5,9 @@
 // ----------------------------------------------------------------
 
 pop-list {
+  contain: content;
   flex-wrap: wrap;
   width: 100%;
-
-  contain: content;
 
   margin: 0;
   padding: 0.5rem;
@@ -30,54 +29,54 @@ pop-list[orientation="horizontal"] {
 // ----------------------------------------------------------------
 
 pop-list[size="xs"] {
+  border-radius: radius.$sm;
   font-size: 0.75rem;
   line-height: 1rem;
-  border-radius: radius.$sm;
 }
 pop-list[size="sm"] {
+  border-radius: radius.$md;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  border-radius: radius.$md;
 }
 pop-list[size="md"],
 pop-list:not([size]) {
+  border-radius: radius.$md;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  border-radius: radius.$md;
 }
 pop-list[size="lg"] {
+  border-radius: radius.$md;
   font-size: 1.125rem;
   line-height: 1.75rem;
-  border-radius: radius.$md;
 }
 
 // List Title & Item Size
 // ----------------------------------------------------------------
 
 pop-list[size="xs"] > :is(pop-list-title, pop-item) {
+  border-radius: radius.$sm;
   font-size: 0.75rem;
   line-height: 1rem;
-  border-radius: radius.$sm;
 }
 pop-list[size="sm"] > :is(pop-list-title, pop-item) {
+  border-radius: radius.$md;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  border-radius: radius.$md;
 }
 pop-list {
   &[size="md"],
   &:not([size]) {
     > :is(pop-list-title, pop-item) {
+      border-radius: radius.$md;
       font-size: 0.875rem;
       line-height: 1.25rem;
-      border-radius: radius.$md;
     }
   }
 }
 pop-list[size="lg"] > :is(pop-list-title, pop-item) {
+  border-radius: radius.$md;
   font-size: 1.125rem;
   line-height: 1.75rem;
-  border-radius: radius.$md;
 }
 
 // List - Sub List
@@ -85,20 +84,19 @@ pop-list[size="lg"] > :is(pop-list-title, pop-item) {
 
 pop-list.in-item {
   position: relative;
-  white-space: nowrap;
   margin-inline-start: 1rem;
   padding: 0;
   padding-inline-start: 0.5rem;
+  white-space: nowrap;
 
   &::before {
-    content: "";
-
     position: absolute;
     top: 0.75rem;
     bottom: 0.75rem;
-    inset-inline-start: 2px;
 
     width: 1px;
+    inset-inline-start: 2px;
+    content: "";
 
     --tw-bg-opacity: 1;
     background-color: oklch(theme.get-color("base.content"));

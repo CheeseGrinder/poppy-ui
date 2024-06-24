@@ -20,7 +20,7 @@ export class AccordionGroup implements ComponentInterface {
   /**
    * If `true`, the user cannot interact with the element.
    *
-   * @config 
+   * @config
    * @default false
    */
   @Prop({ reflect: true, mutable: true }) disabled?: boolean;

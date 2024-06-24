@@ -1,9 +1,9 @@
 :host {
   aspect-ratio: 1;
+  mask-position: center;
+  mask-repeat: no-repeat;
 
   mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
 }
 
 :host-context(pop-avatar[placeholder]) {

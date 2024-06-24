@@ -21,11 +21,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-width: 1px;
+    border-bottom-width: 2px;
 
     border-style: solid;
     border-radius: var(--border-radius, #{radius.$md});
-    border-width: 1px;
-    border-bottom-width: 2px;
     border-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
 
     background-color: var(--background, oklch(#{theme.get-color("base.200")}));
@@ -42,8 +42,8 @@
       Courier New,
       monospace
     );
-    font-feature-settings: normal;
     font-variation-settings: normal;
+    font-feature-settings: normal;
 
     user-select: none;
   }
@@ -53,21 +53,21 @@
 // ----------------------------------------------------------------
 
 :host([size="xs"]) > kbd {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+  min-width: 1.2em;
 
   min-height: 1.2em;
-  min-width: 1.2em;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
 
   font-size: 0.75rem;
   line-height: 1rem;
 }
 :host([size="sm"]) > kbd {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+  min-width: 1.6em;
 
   min-height: 1.6em;
-  min-width: 1.6em;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
 
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -75,22 +75,22 @@
 :host([size="md"]),
 :host(:not([size])) {
   > kbd {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    min-width: 2.2em;
 
     min-height: 2.2em;
-    min-width: 2.2em;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 
     font-size: 1rem;
     line-height: 1.5rem;
   }
 }
 :host([size="lg"]) > kbd {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  min-width: 2.5em;
 
   min-height: 2.5em;
-  min-width: 2.5em;
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   font-size: 1.125rem;
   line-height: 1.75rem;

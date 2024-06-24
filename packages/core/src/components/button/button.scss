@@ -28,24 +28,25 @@
   --animation: 0.25s ease-out;
   --focus-scale: 0.97;
 
-  width: max-content;
+  display: inline-block;
 
   button {
     box-sizing: border-box;
-
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
+    outline-color: var(--background);
 
     background-color: var(--background);
+
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     color: var(--color);
-    outline-color: var(--background);
 
     font-weight: 600;
     line-height: 1em;
@@ -53,12 +54,10 @@
     text-decoration-line: none;
     text-rendering: optimizeLegibility;
 
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-
     animation: button-pop var(--animation);
     transition-duration: 200ms;
-    transition-timing-function: ease-out;
     transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+    transition-timing-function: ease-out;
 
     user-select: none;
 
@@ -68,8 +67,8 @@
 
     &:active:hover,
     &:active:focus {
-      animation: button-pop 0s ease-out;
       transform: scale(var(--focus-scale));
+      animation: button-pop 0s ease-out;
     }
 
     &:focus-visible {
@@ -98,30 +97,30 @@
 :host([size="xs"]) button {
   height: 1.5rem;
   min-height: 1.5rem;
-  font-size: 0.75rem;
-  padding-left: 0.5rem;
   padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 0.75rem;
 }
 :host([size="sm"]) button {
   height: 2rem;
   min-height: 2rem;
-  font-size: 0.875rem;
-  padding-left: 0.75rem;
   padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  font-size: 0.875rem;
 }
 :host([size="md"]) button {
   height: 3rem;
   min-height: 3rem;
-  font-size: 0.875rem;
-  padding-left: 1rem;
   padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 0.875rem;
 }
 :host([size="lg"]) button {
   height: 4rem;
   min-height: 4rem;
-  font-size: 1.125rem;
-  padding-left: 1.5rem;
   padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  font-size: 1.125rem;
 }
 
 // Button Color
@@ -192,8 +191,8 @@
 
     &:not(:hover) {
       border-color: currentColor;
-      color: var(--background);
       background-color: transparent;
+      color: var(--background);
     }
   }
 }
@@ -210,7 +209,7 @@
 // ----------------------------------------------------------------
 
 :host([expand="block"]) {
-  width: 100%;
+  display: block;
 
   button {
     width: 100%;
