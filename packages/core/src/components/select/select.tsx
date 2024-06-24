@@ -77,7 +77,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) multiple?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) multiple?: boolean;
 
   /**
    * Only apply when `multiple` property is used.

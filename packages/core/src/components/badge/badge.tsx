@@ -45,7 +45,7 @@ export class Badge implements ComponentInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) outlined?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) outlined?: boolean;
 
   /**
    * Used HTML element for

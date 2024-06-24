@@ -42,7 +42,7 @@ export class Tooltip {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) open: boolean = false;
+  @Prop({ reflect: true, mutable: true }) open: boolean;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-tooltip', {

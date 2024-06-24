@@ -125,7 +125,7 @@ export class Range implements ComponentInterface {
    * @config
    * @default 0
    */
-  @Prop({ mutable: true }) debounce?: number = 0;
+  @Prop({ mutable: true }) debounce?: number;
 
   /**
    * The `popChange` event is fired when the user modifies the input's value.

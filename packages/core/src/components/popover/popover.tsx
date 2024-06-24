@@ -55,7 +55,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) animated = true;
+  @Prop({ reflect: true, mutable: true }) animated;
 
   /**
    * If `true`, a backdrop will be displayed behind the popover.
@@ -67,7 +67,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) showBackdrop: boolean = false;
+  @Prop({ reflect: true, mutable: true }) showBackdrop: boolean;
 
   /**
    * If `true`, the popover will be dismissed when the backdrop is clicked.
@@ -75,7 +75,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) backdropDismiss: boolean = false;
+  @Prop({ reflect: true, mutable: true }) backdropDismiss: boolean;
 
   /**
    * The event to pass to the popover animation.

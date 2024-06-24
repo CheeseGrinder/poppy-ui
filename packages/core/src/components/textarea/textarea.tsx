@@ -189,7 +189,7 @@ export class Textarea implements ComponentInterface {
    * @config
    * @default false
    */
-  @Prop({ reflect: true, mutable: true }) bordered?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) bordered?: boolean;
 
   /**
    * The color to use from your application's color palette.
@@ -287,6 +287,7 @@ export class Textarea implements ComponentInterface {
       spellcheck: false,
       bordered: false,
       size: config.get('defaultSize', 'md'),
+      counterFormatter: (length, max) => `${length} / ${max}`,
       debounce: 0,
     });
 
