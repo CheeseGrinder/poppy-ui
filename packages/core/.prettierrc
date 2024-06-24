@@ -15,6 +15,13 @@
 
   "overrides": [
     {
+      "files": "*.{ts,tsx}",
+      "excludeFiles": "*.d.ts",
+      "options": {
+        "plugins": ["prettier-plugin-organize-imports"]
+      }
+    },
+    {
       "files": "*.scss",
       "options": {
         "plugins": ["prettier-plugin-css-order"],
