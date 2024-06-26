@@ -21,7 +21,7 @@
 
 $minWidth: 12rem;
 :host {
-  --border-radius: get-radius(md);
+  --border-radius: #{get-radius-var(md)};
   --border-color: transparent;
   --outline-color: #{get-color("base.content", .2)};
   --background: #{get-color("base.100")};
@@ -134,6 +134,7 @@ $minWidth: 12rem;
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
+      --outline-color: #{$base};
     }
   }
 }
@@ -174,7 +175,9 @@ $minWidth: 12rem;
   --border-color: #{$base};
   --color: #{$text};
 
-  cursor: not-allowed;
+  .input-wrapper {
+    cursor: not-allowed;
+  }
 
   input::placeholder {
     color: #{$text};
