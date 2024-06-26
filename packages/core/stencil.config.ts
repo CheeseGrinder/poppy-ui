@@ -28,9 +28,12 @@ export const config: Config = {
   buildEs5: 'prod',
   plugins: [
     sass({
-      importer: [sassAlias({
-        path: 'src/themes',
-      })]
+      importer: [
+        sassAlias({
+          path: 'src/themes',
+          alias: '@poppy'
+        })
+      ]
     }),
   ],
   bundles: <Bundle[]>[

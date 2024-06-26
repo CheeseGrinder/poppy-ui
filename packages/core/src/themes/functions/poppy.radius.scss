@@ -1,0 +1,10 @@
+@import "../poppy.theme.default";
+
+@function get-radius($size: md) {
+  $value: map-get(
+    $map: $radius,
+    $key: $size,
+  );
+
+  @return var(--radius-#{$size}, #{$value});
+}

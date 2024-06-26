@@ -1,5 +1,5 @@
-@use "@scss/input";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/input";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -19,7 +19,7 @@ $base: get-color("base.100");
 
 :host {
   --border-radius: #{get-radius(full)};
-  --border-opacity: .2;
+  --border-opacity: 0.2;
   --border-color: #{get-color("base.content", var(--border-opacity))};
   --background: #{get-color("base.content")};
 

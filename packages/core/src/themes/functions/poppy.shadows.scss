@@ -1,0 +1,10 @@
+@import "../poppy.theme.default";
+
+@function get-shadow($size: md) {
+  $value: map-get(
+    $map: $shadows,
+    $key: $size,
+  );
+
+  @return var(--shadow-#{$size}, #{$value});
+}

@@ -16,28 +16,17 @@
 :root {
   /**
    * Loop through each color object from the
-   * `ionic.theme.default.scss` file
+   * `poppy.theme.default.scss` file
    * and generate CSS Variables for each color.
    */
-   @each $color-name, $value in $colors {
+  @each $color-name, $value in $colors {
     @each $variant-name, $variant in $value {
       @if $variant-name == base {
-        --#{$color-name}-oklch: #{$variant};
         --#{$color-name}: oklch(var(--#{$color-name}-oklch));
-      }
-      @else {
-        --#{$color-name}-#{$variant-name}-oklch: #{$variant};
+      } @else {
         --#{$color-name}-#{$variant-name}: oklch(var(--#{$color-name}-#{$variant-name}-oklch));
       }
     }
-  }
-
-  @each $name, $value in $radius {
-    --radius-#{$name}: #{$value};
-  }
-
-  @each $name, $value in $shadows {
-    --shadow-#{$name}: #{$value};
   }
 }
 

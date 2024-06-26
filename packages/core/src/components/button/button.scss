@@ -1,5 +1,5 @@
-@use "@scss/join-item";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/join-item";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius
@@ -36,8 +36,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
     width: 100%;
+    gap: 0.5rem;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -151,7 +151,7 @@
     outline-color: currentColor;
 
     &:hover {
-      --background: #{get-color("base.content", .2)};
+      --background: #{get-color("base.content", 0.2)};
     }
   }
 }
@@ -226,8 +226,8 @@
   cursor: not-allowed;
 
   > button:disabled {
-    --background: #{get-color("neutral.base", .2)};
-    --color: #{get-color("base.content", .2)};
+    --background: #{get-color("neutral.base", 0.2)};
+    --color: #{get-color("base.content", 0.2)};
 
     border-color: transparent;
     pointer-events: none;

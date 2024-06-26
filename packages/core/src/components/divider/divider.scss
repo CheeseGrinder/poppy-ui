@@ -1,5 +1,5 @@
-@use "@scss/input";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/input";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --background: Change background color
@@ -9,7 +9,7 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: #{get-color("base.content", .1)};
+  --background: #{get-color("base.content", 0.1)};
 
   display: flex;
   align-items: center;

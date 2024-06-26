@@ -1,7 +1,7 @@
-@import "@scss/poppy.globals";
+@import "@poppy/poppy.globals";
 
 :host {
-  --padding: .5rem;
+  --padding: 0.5rem;
   --background: #{get-color("base.100")};
 
   width: 100%;

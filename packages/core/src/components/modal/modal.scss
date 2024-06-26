@@ -1,4 +1,4 @@
-@import "@scss/poppy.globals";
+@import "@poppy/poppy.globals";
 
 :host {
   --border-radius: #{get-radius(md)};

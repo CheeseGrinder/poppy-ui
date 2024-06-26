@@ -2,6 +2,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    @include dark-palette();
+    @include dark-theme();
   }
 }

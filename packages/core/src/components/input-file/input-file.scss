@@ -1,6 +1,6 @@
-@use "@scss/input";
-@use "@scss/join-item";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/input";
+@use "@poppy/utils/join-item";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius.
@@ -26,13 +26,12 @@ $minWidth: 12rem;
 :host {
   --border-radius: #{get-radius(md)};
   --border-color: #{get-color("base.content", 0)};
-  --outline-color: #{get-color("base.content", .2)};
+  --outline-color: #{get-color("base.content", 0.2)};
   --background-opacity: 1;
   --background: #{get-color("base.100", var(--background-opacity))};
   --color: #{get-color("base.content")};
   --button-color: #{get-color("neutral.content")};
   --button-background: #{get-color("neutral.base")};
-
 
   @include input.label;
   @include input.helper;
@@ -92,7 +91,7 @@ $minWidth: 12rem;
 
 // Bordered
 :host([bordered]) {
-  --border-color: #{get-color("base.content", .2)};
+  --border-color: #{get-color("base.content", 0.2)};
 }
 
 // Input-File Size
@@ -191,8 +190,8 @@ $minWidth: 12rem;
 
 :host([disabled]) {
   $background: get-color("base.200");
-  $color: get-color("base.content", .2);
-  $btn-background: get-color("neutral.base", .2);
+  $color: get-color("base.content", 0.2);
+  $btn-background: get-color("neutral.base", 0.2);
 
   --background: #{$background};
   --border-color: #{$background};

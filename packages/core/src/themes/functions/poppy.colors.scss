@@ -1,7 +1,6 @@
-@use 'sass:string';
-@use 'sass:list';
-@use 'sass:map';
-
+@use "sass:string";
+@use "sass:list";
+@use "sass:map";
 
 // Gets the active color's css variable from a variation. Alpha is optional.
 // --------------------------------------------------------------------------------------------
@@ -48,7 +47,6 @@
   @return var(#{$css-var}, oklch($value));
 }
 
-
 // Mixes a color with black to create its shade.
 // --------------------------------------------------------------------------------------------
 @function get-color-shade($color) {
@@ -58,5 +56,5 @@
 // Mixes a color with white to create its tint.
 // --------------------------------------------------------------------------------------------
 @function get-color-tint($color) {
-  @return color-mix(in oklab, oklch(#{$color}), #FFF 10%);
+  @return color-mix(in oklab, oklch(#{$color}), #fff 10%);
 }

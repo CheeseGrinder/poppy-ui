@@ -1,4 +1,4 @@
-@import "@scss/poppy.globals";
+@import "@poppy/poppy.globals";
 
 :host {
   --color: #{get-color("base.content")};

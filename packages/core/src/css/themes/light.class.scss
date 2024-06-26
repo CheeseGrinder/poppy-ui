@@ -1,0 +1,5 @@
+@import "./light";
+
+.poppy-theme-light {
+  @include light-theme();
+}

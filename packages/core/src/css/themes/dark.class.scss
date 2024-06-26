@@ -1,0 +1,5 @@
+@import "./dark";
+
+.poppy-theme-dark {
+  @include dark-theme();
+}

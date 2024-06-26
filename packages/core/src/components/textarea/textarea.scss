@@ -1,6 +1,6 @@
-@use "@scss/input";
-@use "@scss/join-item";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/input";
+@use "@poppy/utils/join-item";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -55,7 +55,7 @@ $minWidth: 12rem;
     white-space: pre-wrap;
 
     &:focus-visible {
-      outline-color: var(--border-color, #{get-color("base.content", .2)});
+      outline-color: var(--border-color, #{get-color("base.content", 0.2)});
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
@@ -64,7 +64,7 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: #{get-color("base.content", .2)};
+  --border-color: #{get-color("base.content", 0.2)};
 }
 
 // Textarea Size
@@ -122,10 +122,10 @@ $minWidth: 12rem;
 :host([disabled]) > textarea {
   --background: #{get-color("base.200")};
   --border-color: #{get-color("base.200")};
-  --color: #{get-color("base.content", .2)};
+  --color: #{get-color("base.content", 0.2)};
   cursor: not-allowed;
 
   &::placeholder {
-    color: #{get-color("base.content", .2)};
+    color: #{get-color("base.content", 0.2)};
   }
 }

@@ -1,5 +1,5 @@
-@use "@scss/input";
-@import "@scss/poppy.globals";
+@use "@poppy/utils/input";
+@import "@poppy/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -47,7 +47,7 @@
       0 0 0 2px var(--background) inset,
       var(--togglehandleborder, 0 0);
 
-    color: var(--color, #{get-color("base.content", var(--opacity, .5))});
+    color: var(--color, #{get-color("base.content", var(--opacity, 0.5))});
 
     cursor: pointer;
     transition:
@@ -56,7 +56,7 @@
       box-shadow var(--animation-duration, 0.2s) ease-out;
 
     &:focus-visible {
-      outline-color: var(--color, #{get-color("base.content", var(--opacity, .2))});
+      outline-color: var(--color, #{get-color("base.content", var(--opacity, 0.2))});
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;

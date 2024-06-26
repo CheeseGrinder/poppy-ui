@@ -1,13 +1,13 @@
 @use "sass:map";
 
-$neutral:         31.38% 0.021108 254.139175;
-$primary:         65.69% 0.196 275.75;
-$secondary:       74.80% 0.26 342.55;
-$accent:          74.51% 0.167 183.61;
-$info:            72.06% 0.191 231.6;
-$success:         64.80% 0.15 160;
-$warning:         84.71% 0.199 83.87;
-$error:           71.76% 0.221 22.18;
+$neutral: 31.38% 0.021108 254.139175;
+$primary: 65.69% 0.196 275.75;
+$secondary: 74.8% 0.26 342.55;
+$accent: 74.51% 0.167 183.61;
+$info: 72.06% 0.191 231.6;
+$success: 64.8% 0.15 160;
+$warning: 84.71% 0.199 83.87;
+$error: 71.76% 0.221 22.18;
 
 $colors: (
   base: (
@@ -61,9 +61,15 @@ $radius: (
 );
 
 $shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-$shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-$shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-$shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+$shadow-sm:
+  0 4px 6px -1px rgb(0 0 0 / 0.1),
+  0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-md:
+  0 10px 15px -3px rgb(0 0 0 / 0.1),
+  0 4px 6px -4px rgb(0 0 0 / 0.1);
+$shadow-lg:
+  0 20px 25px -5px rgb(0 0 0 / 0.1),
+  0 8px 10px -6px rgb(0 0 0 / 0.1);
 
 $shadows: (
   xs: $shadow-xs,
@@ -72,26 +78,25 @@ $shadows: (
   lg: $shadow-lg,
 );
 
-
-@mixin dark-palette() {
+@mixin dark-theme() {
   & {
+    // Define theme oklch colors
     @each $color-name, $value in $colors {
       @each $variant-name, $variant in $value {
         @if $variant-name == base {
           --#{$color-name}-oklch: #{$variant};
-          --#{$color-name}: oklch(var(--#{$color-name}-oklch));
-        }
-        @else {
+        } @else {
           --#{$color-name}-#{$variant-name}-oklch: #{$variant};
-          --#{$color-name}-#{$variant-name}: oklch(var(--#{$color-name}-#{$variant-name}-oklch));
         }
       }
     }
 
+    // Define theme radius
     @each $name, $value in $radius {
       --radius-#{$name}: #{$value};
     }
 
+    // Define theme box-shadow
     @each $name, $value in $shadows {
       --shadow-#{$name}: #{$value};
     }

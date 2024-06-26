@@ -1,4 +1,4 @@
-@import "@scss/poppy.globals";
+@import "@poppy/poppy.globals";
 
 // Item
 // ----------------------------------------------------------------
@@ -40,7 +40,7 @@
 :host(:not(.has-list)) > {
   .item-inner:is(:hover, :focus),
   .item-inner:has(:focus) {
-    background-color: get-color("base.content", .1);
+    background-color: get-color("base.content", 0.1);
     color: inherit;
   }
 }

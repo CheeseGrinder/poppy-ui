@@ -1,0 +1,5 @@
+@import "./light";
+
+[data-theme="light"] {
+  @include light-theme();
+}

@@ -1,13 +1,13 @@
-@use 'sass:map';
+@use "sass:map";
 
 // Global Color Functions
-@import "./poppy.functions.color";
+@import "./functions/poppy.colors";
 
 // Global Radius Functions
-@import "./poppy.functions.radius";
+@import "./functions/poppy.radius";
 
 // Global Shadow Functions
-@import "./poppy.functions.shadow";
+@import "./functions/poppy.shadows";
 
 // Default Theme
 @import "./poppy.theme.default";
