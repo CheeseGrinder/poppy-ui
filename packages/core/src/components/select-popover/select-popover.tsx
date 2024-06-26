@@ -10,8 +10,6 @@ import type { SelectPopoverOption } from './select-popover.type';
  */
 @Component({
   tag: 'pop-select-popover',
-  styleUrl: 'select-popover.scss',
-  // shadow: true,
 })
 export class SelectPopover implements ComponentInterface {
   /**

@@ -13,14 +13,14 @@ Accordion is used for showing and hiding content.
 | Property            | Attribute  | Description                                                                                                                                                                                                  | Type      | Default     |
 | ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------- |
 | `disabled`          | `disabled` | If `true`, the user cannot interact with the element.                                                                                                                                                        | `boolean` | `false`     |
-| `isOpen`            | `is-open`  | If `true`, the accordion is open.<br> <br> The developer must not set this value to `true` if the accordion is used in `<accordion-group>` element and set the active property to the name of the accordion. | `boolean` | `false`     |
 | `name` _(required)_ | `name`     | name of the accordion                                                                                                                                                                                        | `string`  | `undefined` |
+| `open`              | `open`     | If `true`, the accordion is open.<br> <br> The developer must not set this value to `true` if the accordion is used in `<accordion-group>` element and set the active property to the name of the accordion. | `boolean` | `false`     |
 | `readonly`          | `readonly` | If `true`, the user cannot interact with the element.                                                                                                                                                        | `boolean` | `false`     |
 
 
 ## Methods
 
-### `close() => Promise<boolean>`
+### `hide() => Promise<boolean>`
 
 Close the accordion.
 If the method returns `false`, the accordion was already closed. otherwise it returns `true`
@@ -31,7 +31,7 @@ Type: `Promise<boolean>`
 
 
 
-### `open() => Promise<boolean>`
+### `show() => Promise<boolean>`
 
 Open the accordion.
 If the method returns `false`, the accordion was already open. otherwise it returns `true`

@@ -1,10 +1,13 @@
-@use "@scss/theme";
+@import "@scss/poppy.globals";
 
 :host {
+  --padding: .5rem;
+  --background: #{get-color("base.100")};
+
   width: 100%;
   min-height: 4rem;
-  padding: var(--padding, 0.5rem);
-  background: var(--background, oklch(#{theme.get-color("base.100")}));
+  padding: var(--padding);
+  background: var(--background);
 
   > header {
     display: flex;

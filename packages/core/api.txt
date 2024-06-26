@@ -1,11 +1,11 @@
 
 pop-accordion,shadow
 pop-accordion,prop,disabled,boolean,false,false,true
-pop-accordion,prop,isOpen,boolean,false,false,true
 pop-accordion,prop,name,string,undefined,true,true
+pop-accordion,prop,open,boolean,false,false,true
 pop-accordion,prop,readonly,boolean,false,false,true
-pop-accordion,method,close,close() => Promise<boolean>
-pop-accordion,method,open,open() => Promise<boolean>
+pop-accordion,method,hide,hide() => Promise<boolean>
+pop-accordion,method,show,show() => Promise<boolean>
 pop-accordion,method,toggle,toggle() => Promise<void>
 pop-accordion,css-prop,--animation
 pop-accordion,css-prop,--background
@@ -29,7 +29,7 @@ pop-avatar,css-prop,--color
 pop-badge,shadow
 pop-badge,prop,as,"div" | "span",undefined,false,false
 pop-badge,prop,color,"accent" | "error" | "info" | "neutral" | "primary" | "secondary" | "success" | "warning",undefined,false,true
-pop-badge,prop,outlined,boolean,false,false,true
+pop-badge,prop,outlined,boolean,undefined,false,true
 pop-badge,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-badge,css-prop,--background
 pop-badge,css-prop,--border-color
@@ -146,7 +146,7 @@ pop-input,prop,bordered,boolean,undefined,false,true
 pop-input,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-input,prop,counter,boolean,undefined,false,false
 pop-input,prop,counterFormatter,(inputLength: number, maxLength: number) => string,undefined,false,false
-pop-input,prop,debounce,number,0,false,false
+pop-input,prop,debounce,number,undefined,false,false
 pop-input,prop,disabled,boolean,undefined,false,true
 pop-input,prop,enterkeyhint,"done" | "enter" | "go" | "next" | "previous" | "search" | "send",undefined,false,false
 pop-input,prop,errorText,string,undefined,false,false
@@ -255,13 +255,13 @@ pop-navbar,shadow
 pop-navbar,part,header
 
 pop-popover,shadow
-pop-popover,prop,animated,boolean,true,false,true
-pop-popover,prop,backdropDismiss,boolean,false,false,true
+pop-popover,prop,animated,any,undefined,false,true
+pop-popover,prop,backdropDismiss,boolean,undefined,false,true
 pop-popover,prop,component,Function | HTMLElement | string,undefined,false,false
 pop-popover,prop,componentProps,{ [key: string]: any; },undefined,false,false
 pop-popover,prop,event,Event,undefined,false,false
 pop-popover,prop,open,boolean,undefined,false,true
-pop-popover,prop,showBackdrop,boolean,false,false,true
+pop-popover,prop,showBackdrop,boolean,undefined,false,true
 pop-popover,prop,trigger,string,undefined,false,false
 pop-popover,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false,false
 pop-popover,method,dismiss,dismiss(data?: any) => Promise<boolean>
@@ -316,7 +316,7 @@ pop-radio-group,event,popChange,RadioGroupChangeEventDetail<any>,true
 pop-range,shadow
 pop-range,prop,autoFocus,boolean,false,false,false
 pop-range,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
-pop-range,prop,debounce,number,0,false,false
+pop-range,prop,debounce,number,undefined,false,false
 pop-range,prop,disabled,boolean,undefined,false,true
 pop-range,prop,max,number,undefined,false,true
 pop-range,prop,min,number,undefined,false,true
@@ -346,7 +346,7 @@ pop-select,prop,disabled,boolean,undefined,false,true
 pop-select,prop,helperText,string,undefined,false,false
 pop-select,prop,max,number,undefined,false,true
 pop-select,prop,min,number,undefined,false,true
-pop-select,prop,multiple,boolean,false,false,true
+pop-select,prop,multiple,boolean,undefined,false,true
 pop-select,prop,name,string,this.inputId,false,false
 pop-select,prop,notEnoughErrorText,string,undefined,false,false
 pop-select,prop,placeholder,string,undefined,false,false
@@ -382,7 +382,7 @@ pop-swap,event,popSwap,SwapChangeEventDetail,true
 pop-textarea,shadow
 pop-textarea,prop,autoCapitalize,"characters" | "none" | "off" | "on" | "sentences" | "words",undefined,false,false
 pop-textarea,prop,autoFocus,boolean,false,false,true
-pop-textarea,prop,bordered,boolean,false,false,true
+pop-textarea,prop,bordered,boolean,undefined,false,true
 pop-textarea,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-textarea,prop,cols,number,undefined,false,false
 pop-textarea,prop,counter,boolean,undefined,false,false
@@ -446,7 +446,7 @@ pop-toggle,part,native
 
 pop-tooltip,none
 pop-tooltip,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
-pop-tooltip,prop,open,boolean,false,false,true
+pop-tooltip,prop,open,boolean,undefined,false,true
 pop-tooltip,prop,position,"bottom" | "left" | "right" | "top",undefined,false,true
 pop-tooltip,prop,value,string,undefined,true,false
 pop-tooltip,css-prop,--background

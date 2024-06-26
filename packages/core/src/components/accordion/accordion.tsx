@@ -42,16 +42,16 @@ export class Accordion implements ComponentInterface {
    *
    * The developer must not set this value to `true` if the accordion is used in `<accordion-group>` element and set the active property to the name of the accordion.
    */
-  @Prop({ reflect: true, mutable: true }) isOpen?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) open?: boolean = false;
 
   connectedCallback(): void {
     this.accordionGroup = this.host.closest('pop-accordion-group');
 
-    this.accordionGroup?.addEventListener('popActiveChange', this.#handleValueChanged);
+    this.accordionGroup?.addEventListener('popActiveChange', this.handleValueChanged);
   }
 
   disconnectedCallback(): void {
-    this.accordionGroup?.removeEventListener('popActiveChange', this.#handleValueChanged);
+    this.accordionGroup?.removeEventListener('popActiveChange', this.handleValueChanged);
   }
 
   /**
@@ -59,11 +59,11 @@ export class Accordion implements ComponentInterface {
    * If the method returns `false`, the accordion was already open. otherwise it returns `true`
    */
   @Method()
-  async open(): Promise<boolean> {
-    if (this.isOpen) {
+  async show(): Promise<boolean> {
+    if (this.open) {
       return false;
     }
-    this.isOpen = true;
+    this.open = true;
     return true;
   }
 
@@ -72,11 +72,11 @@ export class Accordion implements ComponentInterface {
    * If the method returns `false`, the accordion was already closed. otherwise it returns `true`
    */
   @Method()
-  async close(): Promise<boolean> {
-    if (!this.isOpen) {
+  async hide(): Promise<boolean> {
+    if (!this.open) {
       return false;
     }
-    this.isOpen = false;
+    this.open = false;
     return true;
   }
 
@@ -85,16 +85,16 @@ export class Accordion implements ComponentInterface {
    */
   @Method()
   async toggle(): Promise<void> {
-    this.isOpen = !this.isOpen;
+    this.open = !this.open;
   }
 
-  #handleValueChanged = (): void => {
+  private handleValueChanged = (): void => {
     if (!this.accordionGroup) return;
 
     const { active: newActive } = this.accordionGroup;
     const current = this.name;
 
-    this.isOpen = compareOptions(current, newActive);
+    this.open = compareOptions(current, newActive);
   };
 
   private onClick = () => {
@@ -102,7 +102,7 @@ export class Accordion implements ComponentInterface {
 
     const { readonly, disabled } = this;
     if (disabled || readonly) return;
-    this.isOpen = !this.isOpen;
+    this.open = !this.open;
   };
 
   render() {

@@ -1,7 +1,6 @@
-@use "@scss/radius";
-@use "@scss/theme";
 @use "@scss/input";
 @use "@scss/join-item";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -22,11 +21,11 @@
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{radius.$md};
+  --border-radius: get-radius(md);
   --border-color: transparent;
-  --outline-color: oklch(#{theme.get-color("base.content")} / 0.2);
-  --background: oklch(#{theme.get-color("base.100")});
-  --color: oklch(#{theme.get-color("base.content")});
+  --outline-color: #{get-color("base.content", .2)};
+  --background: #{get-color("base.100")};
+  --color: #{get-color("base.content")};
 
   @include input.label;
   @include input.helper(".input-wrapper", $counter: true);
@@ -68,7 +67,7 @@ $minWidth: 12rem;
 
       color: var(--color);
 
-      font-family: #{theme.$font};
+      font-family: $font;
       white-space: pre-wrap;
 
       cursor: inherit;
@@ -84,7 +83,7 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: oklch(#{theme.get-color("base.content")} / 0.2);
+  --border-color: #{get-color("base.content", .2)};
 }
 
 // Input Slot
@@ -131,10 +130,10 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
+    $base: get-color("#{$color}.base");
 
     :host([color="#{$color}"]) {
-      --border-color: oklch(#{$base});
+      --border-color: #{$base};
     }
   }
 }
@@ -152,32 +151,32 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([readonly]) {
-  $base: theme.get-color("base.200");
-  $neutral: theme.get-color("neutral.base");
-  $text: theme.get-color("base.content");
+  $base: get-color("base.200");
+  $neutral: get-color("neutral.base");
+  $text: get-color("base.content", .8);
 
-  --background: oklch(#{$base});
-  --border-color: oklch(#{$neutral});
-  --color: oklch(#{$text} / 0.8);
+  --background: #{$base};
+  --border-color: #{$neutral};
+  --color: #{$text};
 
   cursor: text;
 
   input::placeholder {
-    color: oklch(#{$text} / 0.2);
+    color: #{$text};
   }
 }
 
 :host([disabled]) {
-  $base: theme.get-color("base.200");
-  $text: theme.get-color("base.content");
+  $base: get-color("base.200");
+  $text: get-color("base.content");
 
-  --background: oklch(#{$base});
-  --border-color: oklch(#{$base});
-  --color: oklch(#{$text} / 0.2);
+  --background: #{$base};
+  --border-color: #{$base};
+  --color: #{$text};
 
   cursor: not-allowed;
 
   input::placeholder {
-    color: oklch(#{$text} / 0.2);
+    color: #{$text};
   }
 }

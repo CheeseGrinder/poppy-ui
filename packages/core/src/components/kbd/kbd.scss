@@ -1,5 +1,4 @@
-@use "@scss/theme";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -14,6 +13,10 @@
 // ----------------------------------------------------------------
 
 :host {
+  --border-radius: #{get-radius(md)};
+  --border-color: #{get-color("base.content", .2)};
+  --background: #{get-color("base.200")};
+
   width: min-content;
 
   > kbd {
@@ -25,10 +28,10 @@
     border-bottom-width: 2px;
 
     border-style: solid;
-    border-radius: var(--border-radius, #{radius.$md});
-    border-color: var(--border-color, oklch(#{theme.get-color("base.content")} / 0.2));
+    border-radius: var(--border-radius);
+    border-color: var(--border-color);
 
-    background-color: var(--background, oklch(#{theme.get-color("base.200")}));
+    background-color: var(--background);
 
     font-family: var(
       --font,

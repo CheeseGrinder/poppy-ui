@@ -44,7 +44,7 @@ export const PopAccordion = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop
   'readonly',
   'disabled',
   'name',
-  'isOpen'
+  'open'
 ]);
 
 

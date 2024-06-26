@@ -1,0 +1,74 @@
+@use "sass:list";
+@use "sass:map";
+
+$neutral:         32.1785% .02476 255.701624;
+$primary:         49.12% .3096 275.75;
+$secondary:       69.71% .329 342.55;
+$accent:          76.76% .184 183.61;
+$info:            72.06% .191 231.6;
+$success:         64.8% .15 160;
+$warning:         84.71% .199 83.87;
+$error:           71.76% .221 22.18;
+
+$colors: (
+  base: (
+    "100": 100% 0 0,
+    "200": 96.1151% 0 0,
+    "300": 92.4169% .00108 197.137559,
+    content: 27.8078% .029596 256.847952,
+  ),
+  neutral: (
+    base: $neutral,
+    content: 89.4994% .011585 252.096176,
+  ),
+  primary: (
+    base: $primary,
+    content: 89.824% .06192 275.75,
+  ),
+  secondary: (
+    base: $secondary,
+    content: 98.71% .0106 342.55,
+  ),
+  accent: (
+    base: $accent,
+    content: 15.352% .0368 183.61,
+  ),
+  info: (
+    base: $info,
+    content: 0% 0 0,
+  ),
+  success: (
+    base: $success,
+    content: 0% 0 0,
+  ),
+  warning: (
+    base: $warning,
+    content: 0% 0 0,
+  ),
+  error: (
+    base: $error,
+    content: 0% 0 0,
+  ),
+);
+
+$radius: (
+  xs: 2px,
+  sm: 4px,
+  md: 8px,
+  lg: 12px,
+  xl: 16px,
+  xxl: 24px,
+  full: 9999px,
+);
+
+$shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+$shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+$shadows: (
+  xs: $shadow-xs,
+  sm: $shadow-sm,
+  md: $shadow-md,
+  lg: $shadow-lg,
+);

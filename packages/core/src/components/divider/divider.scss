@@ -1,6 +1,5 @@
-@use "@scss/radius";
-@use "@scss/theme";
 @use "@scss/input";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --background: Change background color
@@ -10,7 +9,7 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: oklch(#{theme.get-color("base.content")} / 0.1);
+  --background: #{get-color("base.content", .1)};
 
   display: flex;
   align-items: center;
@@ -96,10 +95,10 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
+    $base: get-color("#{$color}.base");
 
     :host([color="#{$color}"]) {
-      --background: oklch(#{$base});
+      --background: #{$base};
     }
   }
 }

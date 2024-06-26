@@ -1,5 +1,4 @@
-@use "@scss/theme";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --background: Change sidebar background
@@ -13,8 +12,8 @@
 
 :host {
   --backdrop-background: #0006;
-  --background: oklch(#{theme.get-color("base.200")});
-  --color: oklch(#{theme.get-color("base.content")});
+  --background: #{get-color("base.200")};
+  --color: #{get-color("base.content")};
 
   display: grid;
 

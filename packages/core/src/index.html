@@ -22,19 +22,13 @@
     <link preload rel="stylesheet" href="/build/poppy.css" />
   </head>
   <body>
-    <form action="">
-      <pop-button type="submit">
-        <span slot="start">start</span>
-        <span>Button</span>
-        <span slot="end">end</span>
-      </pop-button>
-      <pop-button type="submit" dir="rtl">
-        <span slot="start">start</span>
-        <span>Button</span>
-        <span slot="end">end</span>
-      </pop-button>
-      <pop-button type="reset">reset</pop-button>
-      <pop-button type="button">button</pop-button>
-    </form>
+    <div>
+      <pop-drawer trigger="drawer" trigger-action="click">
+        <div slot="side">
+          side content
+        </div>
+        <pop-button id="drawer">button</pop-button>
+      </pop-drawer>
+    </div>
   </body>
 </html>

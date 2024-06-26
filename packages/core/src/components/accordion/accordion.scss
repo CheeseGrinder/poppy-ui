@@ -1,6 +1,5 @@
-@use "@scss/theme";
-@use "@scss/radius";
 @use "@scss/join-item";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius
@@ -17,9 +16,9 @@
 @include join-item.item_root;
 
 :host {
-  --border-radius: #{radius.$xl};
-  --border-color: oklch(#{theme.get-color("base.300")});
-  --background: oklch(#{theme.get-color("base.200")});
+  --border-radius: #{get-radius(xl)};
+  --border-color: #{get-color("base.300")};
+  --background: #{get-color("base.200")};
   --animation: 0.2s;
 
   box-sizing: border-box;
@@ -85,7 +84,7 @@
 // Accordion Open State
 // ----------------------------------------------------------------
 
-:host(:not([is-open])) {
+:host(:not([open])) {
   grid-template-rows: auto 0fr;
 
   > .accordion-content {
@@ -93,7 +92,7 @@
   }
 }
 
-:host([is-open]) {
+:host([open]) {
   grid-template-rows: auto 1fr;
 
   svg {

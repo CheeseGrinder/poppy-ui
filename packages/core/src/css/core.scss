@@ -1,0 +1,52 @@
+@use "sass:map";
+
+@import "../themes/poppy.globals";
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+:root {
+  /**
+   * Loop through each color object from the
+   * `ionic.theme.default.scss` file
+   * and generate CSS Variables for each color.
+   */
+   @each $color-name, $value in $colors {
+    @each $variant-name, $variant in $value {
+      @if $variant-name == base {
+        --#{$color-name}-oklch: #{$variant};
+        --#{$color-name}: oklch(var(--#{$color-name}-oklch));
+      }
+      @else {
+        --#{$color-name}-#{$variant-name}-oklch: #{$variant};
+        --#{$color-name}-#{$variant-name}: oklch(var(--#{$color-name}-#{$variant-name}-oklch));
+      }
+    }
+  }
+
+  @each $name, $value in $radius {
+    --radius-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $shadows {
+    --shadow-#{$name}: #{$value};
+  }
+}
+
+html {
+  --font-family: system-ui;
+}
+
+body {
+  background: var(--base-100);
+  color: var(--base-content);
+  font-family: var(--font-family);
+}

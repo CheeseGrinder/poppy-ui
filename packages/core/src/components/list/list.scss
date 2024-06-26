@@ -1,5 +1,4 @@
-@use "@scss/theme";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 // List
 // ----------------------------------------------------------------
@@ -29,23 +28,23 @@ pop-list[orientation="horizontal"] {
 // ----------------------------------------------------------------
 
 pop-list[size="xs"] {
-  border-radius: radius.$sm;
+  border-radius: get-radius(sm);
   font-size: 0.75rem;
   line-height: 1rem;
 }
 pop-list[size="sm"] {
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 pop-list[size="md"],
 pop-list:not([size]) {
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 pop-list[size="lg"] {
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
@@ -54,12 +53,12 @@ pop-list[size="lg"] {
 // ----------------------------------------------------------------
 
 pop-list[size="xs"] > :is(pop-list-title, pop-item) {
-  border-radius: radius.$sm;
+  border-radius: get-radius(sm);
   font-size: 0.75rem;
   line-height: 1rem;
 }
 pop-list[size="sm"] > :is(pop-list-title, pop-item) {
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -67,14 +66,14 @@ pop-list {
   &[size="md"],
   &:not([size]) {
     > :is(pop-list-title, pop-item) {
-      border-radius: radius.$md;
+      border-radius: get-radius(md);
       font-size: 0.875rem;
       line-height: 1.25rem;
     }
   }
 }
 pop-list[size="lg"] > :is(pop-list-title, pop-item) {
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
@@ -99,7 +98,7 @@ pop-list.in-item {
     content: "";
 
     --tw-bg-opacity: 1;
-    background-color: oklch(theme.get-color("base.content"));
+    background-color: get-color("base.content");
     opacity: 0.1;
   }
 }

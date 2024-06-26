@@ -1,6 +1,6 @@
 {
   "name": "@poppy-ui/core",
-  "version": "0.1.0-beta-5",
+  "version": "0.1.0-beta-6",
   "description": "Base component for Poppy based on Daisy-ui",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "license": "MIT",
@@ -26,6 +26,7 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "components/",
+    "css",
     "dist/",
     "hydrate/",
     "loader/"
@@ -34,10 +35,13 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf -rf ./.stencil ./components ./dist ./hydrate ./loader",
+    "clean": "rimraf -rf ./.stencil ./components ./css ./dist ./hydrate ./loader ./www",
     "prebuild": "npm run clean",
-    "build": "stencil build",
-    "style:sass": "sass --embed-sources --style compressed src/css:./css",
+    "build": "npm run build:css && npm run build:stencil",
+    "build:stencil": "stencil build",
+    "build:css": "npm run css:sass && npm run css:minify",
+    "css:sass": "sass --embed-sources --style compressed src/css:./css",
+    "css:minify": "cleancss -O2 -o ./css/poppy.bundle.css ./css/poppy.bundle.css",
     "prestart": "npm run clean",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
@@ -63,6 +67,7 @@
     "@typescript-eslint/eslint-plugin": "^7.12.0",
     "@typescript-eslint/parser": "^7.12.0",
     "audit-ci": "^7.0.1",
+    "clean-css-cli": "^5.6.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.2",

@@ -1,7 +1,9 @@
-@use "@scss/theme";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 :host {
+  --border-radius: #{get-radius(md)};
+  --background: #{get-color("base.100")};
+
   .modal {
     display: grid;
     position: fixed;
@@ -64,9 +66,9 @@
       overflow-y: auto;
       overscroll-behavior: contain;
 
-      border-radius: var(--border-radius, #{radius.$md});
+      border-radius: var(--border-radius);
 
-      background-color: var(--background, oklch(#{theme.get-color("base.100")}));
+      background-color: var(--background);
 
       box-shadow: #00000040 0 25px 50px -12px;
       transition-duration: 0.2s;
@@ -117,9 +119,9 @@
       & > .modal-content {
         width: 100%;
         max-width: none;
-        border-top-right-radius: var(--border-radius, #{radius.$md});
+        border-top-right-radius: var(--border-radius);
 
-        border-top-left-radius: var(--border-radius, #{radius.$md});
+        border-top-left-radius: var(--border-radius);
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
       }

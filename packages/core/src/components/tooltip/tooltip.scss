@@ -1,5 +1,4 @@
-@use "@scss/radius";
-@use "@scss/theme";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --tail: Tooltip arrow size
@@ -17,7 +16,8 @@
 
 pop-tooltip {
   --tail: 0.1875rem;
-  --bg: var(--background, oklch(#{theme.get-color("neutral.base")} / var(--background-opacity, 1)));
+  --background-opacity: 1;
+  --background: #{get-color("neutral.base", var(--background-opacity))};
   display: inline-flex;
 
   position: relative;
@@ -39,11 +39,11 @@ pop-tooltip {
     width: max-content;
     max-width: 20rem;
     padding: 0.5rem 0.25rem;
-    border-radius: radius.$sm;
-    background-color: var(--bg);
+    border-radius: get-radius(sm);
+    background-color: var(--background);
 
     content: attr(data-tip);
-    color: var(--color, oklch(#{theme.get-color("neutral.content")} / var(--text-opacity, 1)));
+    color: var(--color, oklch(#{get-color("neutral.content")} / var(--text-opacity, 1)));
     font-size: 0.875rem;
     line-height: 1.25rem;
     pointer-events: none;
@@ -89,7 +89,7 @@ pop-tooltip[position="top"] {
   }
   &:after {
     bottom: var(--tail-offset);
-    border-color: var(--bg) transparent transparent transparent;
+    border-color: var(--background) transparent transparent transparent;
   }
 }
 pop-tooltip[position="bottom"] {
@@ -105,7 +105,7 @@ pop-tooltip[position="bottom"] {
   }
   &:after {
     top: var(--tail-offset);
-    border-color: transparent transparent var(--bg) transparent;
+    border-color: transparent transparent var(--background) transparent;
   }
 }
 pop-tooltip[position="left"] {
@@ -121,7 +121,7 @@ pop-tooltip[position="left"] {
   }
   &:after {
     right: calc(var(--tail-offset) + 0.0625rem);
-    border-color: transparent transparent transparent var(--bg);
+    border-color: transparent transparent transparent var(--background);
   }
 }
 pop-tooltip[position="right"] {
@@ -137,7 +137,7 @@ pop-tooltip[position="right"] {
   }
   &:after {
     left: calc(var(--tail-offset) + 0.0625rem);
-    border-color: transparent var(--bg) transparent transparent;
+    border-color: transparent var(--background) transparent transparent;
   }
 }
 
@@ -146,12 +146,12 @@ pop-tooltip[position="right"] {
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
-    $text: theme.get-color("#{$color}.content");
+    $base: get-color("#{$color}.base", var(--background-opacity, 1));
+    $text: get-color("#{$color}.content", var(--text-opacity, 1));
 
     pop-tooltip[color="#{$color}"] {
-      --background: oklch(#{$base} / var(--background-opacity, 1));
-      --color: oklch(#{$text} / var(--text-opacity, 1));
+      --background: #{$base};
+      --color: #{$text};
     }
   }
 }

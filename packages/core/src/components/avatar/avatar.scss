@@ -1,4 +1,4 @@
-@use "@scss/theme";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --background: Change background color
@@ -9,8 +9,9 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: oklch(#{theme.get-color("neutral.base")});
-  --color: oklch(#{theme.get-color("neutral.content")});
+  --background: #{get-color("neutral.base")};
+  --color: #{get-color("neutral.content")};
+
   display: inline-flex;
 
   position: relative;

@@ -1,5 +1,4 @@
-@use "@scss/radius";
-@use "@scss/theme";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --track-size: Height of the range track
@@ -16,14 +15,14 @@
 @mixin track {
   width: 100%;
   height: var(--track-size);
-  border-radius: var(--border-radius, #{radius.$xl});
+  border-radius: var(--border-radius, #{get-radius(xl)});
   background-color: var(--track-color, oklch(var(--base-content) / var(--track-opacity, 0.2)));
 }
 @mixin thumb {
   width: var(--thumb-size);
   height: var(--thumb-size);
   border-style: none;
-  border-radius: var(--border-radius, #{radius.$xl});
+  border-radius: var(--border-radius, #{get-radius(xl)});
 
   --filler-size: 50rem;
   --active-track-size: calc(var(--filler-size) * -1 - var(--filler-offset));
@@ -39,7 +38,8 @@
 // ----------------------------------------------------------------
 
 :host {
-  --thumb-color: oklch(#{theme.get-color("base.100")});
+  --thumb-color: #{get-color("base.100")};
+  --border-radius: #{get-radius(xl)};
 
   width: 100%;
 
@@ -52,7 +52,7 @@
     margin: 0;
 
     overflow: hidden;
-    border-radius: var(--border-radius, #{radius.$xl});
+    border-radius: var(--border-radius);
     background-color: transparent;
 
     color: var(--active-track-color);
@@ -118,25 +118,30 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
+    $base: get-color("#{$color}.base", var(--active-track-opacity, 1));
 
     :host([color="#{$color}"]) {
-      --active-track-color: oklch(#{$base} / var(--active-track-opacity, 1));
+      --active-track-color: #{$base};
     }
   }
 }
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  --track-color: oklch(#{theme.get-color("base.content")} / var(--track-opacity, 0.2));
-  --active-track-color: oklch(#{theme.get-color("base.content")} / var(--active-track-opacity, 1));
+  $color: get-color("base.content", var(--track-opacity, 0.2));
+  $active: get-color("base.content", var(--active-track-opacity, 1));
+
+  --track-color: #{$color};
+  --active-track-color: #{$active};
 }
 
 // Range State
 // ----------------------------------------------------------------
 
 :host([disabled]) > input {
-  --active-track-color: oklch(#{theme.get-color("base.content")} / var(--active-track-opacity, 1));
+  $active: get-color("base.content", var(--active-track-opacity, 1));
+
+  --active-track-color: #{$active};
   cursor: not-allowed;
 
   opacity: var(--opacity, 0.2);

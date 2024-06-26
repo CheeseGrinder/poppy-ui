@@ -1,4 +1,4 @@
-@use "@scss/theme";
+@import "./poppy.globals";
 
 @mixin label {
   > .label {
@@ -38,7 +38,7 @@
   }
 
   .error-text {
-    color: var(--error-color, oklch(#{theme.get-color("error.base")}));
+    color: var(--error-color, #{get-color("error.base")});
   }
   @if ($counter) {
     .counter-text {

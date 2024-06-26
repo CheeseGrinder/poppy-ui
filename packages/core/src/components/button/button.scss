@@ -1,6 +1,5 @@
-@use "@scss/radius";
-@use "@scss/theme";
 @use "@scss/join-item";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius
@@ -20,10 +19,10 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{radius.$md};
+  --border-radius: #{get-radius(md)};
   --border-color: transparent;
-  --background: oklch(#{theme.get-color("base.200")});
-  --color: oklch(#{theme.get-color("base.content")});
+  --background: #{get-color("base.200")};
+  --color: #{get-color("base.content")};
 
   --animation: 0.25s ease-out;
   --focus-scale: 0.97;
@@ -128,25 +127,15 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
-    $text: theme.get-color("#{$color}.content");
+    $base: get-color("#{$color}.base");
+    $text: get-color("#{$color}.content");
 
     :host([color="#{$color}"]) {
-      --background: oklch(#{$base});
-      --color: oklch(#{$text});
+      --background: #{$base};
+      --color: #{$text};
 
       button:hover {
-        --background: color-mix(in oklab, oklch(#{$base}), black 10%);
-      }
-    }
-  }
-
-  @supports not (color: color-mix(in oklab, black, black)) {
-    @each $color in $colors {
-      $shade: theme.get-color("#{$color}.shade");
-
-      :host([color="#{$color}"]) button:hover {
-        --background: oklch(#{$shade});
+        --background: color-mix(in oklab, #{$base}, black 10%);
       }
     }
   }
@@ -161,19 +150,19 @@
     outline-color: currentColor;
 
     &:hover {
-      --background: oklch(#{theme.get-color("base.content")} / 0.2);
+      --background: #{get-color("base.content", .2)};
     }
   }
 }
 :host(:not([color], [outlined])) {
-  --background: oklch(#{theme.get-color("base.200")});
-  --color: oklch(#{theme.get-color("base.content")});
+  --background: #{get-color("base.200")};
+  --color: #{get-color("base.content")};
 
   button {
-    outline-color: oklch(#{theme.get-color("base.content")});
+    outline-color: #{get-color("base.content")};
 
     &:hover {
-      --background: oklch(#{theme.get-color("base.300")});
+      --background: #{get-color("base.300")};
     }
   }
 }
@@ -197,11 +186,11 @@
   }
 }
 :host(:not([color])[outlined]) {
-  --background: oklch(#{theme.get-color("base.content")});
+  --background: #{get-color("base.content")};
 
   button:hover {
-    --background: oklch(#{theme.get-color("base.content")});
-    --color: oklch(#{theme.get-color("base.200")});
+    --background: #{get-color("base.content")};
+    --color: #{get-color("base.200")};
   }
 }
 
@@ -230,7 +219,7 @@
   }
 }
 :host([shape="circle"]) {
-  --border-radius: #{radius.$full};
+  --border-radius: #{get-radius(full)};
 }
 
 // Button State
@@ -240,8 +229,8 @@
   cursor: not-allowed;
 
   > button:disabled {
-    --background: oklch(#{theme.get-color("neutral.base")} / 0.2);
-    --color: oklch(#{theme.get-color("neutral.content")} / 0.2);
+    --background: #{get-color("neutral.base", .2)};
+    --color: #{get-color("base.content", .2)};
 
     border-color: transparent;
     pointer-events: none;

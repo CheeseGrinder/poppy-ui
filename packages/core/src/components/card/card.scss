@@ -1,4 +1,4 @@
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius
@@ -8,7 +8,8 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{radius.$xl};
+  --border-radius: #{get-radius(xl)};
+
   display: flex;
 
   position: relative;

@@ -1,5 +1,4 @@
-@use "@scss/radius";
-@use "@scss/theme";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -26,8 +25,9 @@
 }
 
 :host {
-  --background: oklch(#{theme.get-color("base.content")} / 0.2);
-  --background-active: oklch(#{theme.get-color("base.content")});
+  --border-radius: #{get-radius(xl)};
+  --background: #{get-color("base.content", .2)};
+  --background-active: #{get-color("base.content")};
 
   > progress {
     appearance: none;
@@ -36,15 +36,15 @@
     height: 0.5rem;
 
     overflow: hidden;
-    border-radius: var(--border-radius, #{radius.$xl});
+    border-radius: var(--border-radius, );
     vertical-align: baseline;
 
     @include bar {
-      border-radius: var(--border-radius, #{radius.$xl});
+      border-radius: var(--border-radius);
       background-color: var(--background);
     }
     @include value {
-      border-radius: var(--border-radius, #{radius.$xl});
+      border-radius: var(--border-radius);
       background-color: var(--background-active);
     }
     &:indeterminate {
@@ -71,10 +71,10 @@
 // Color
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
+    $base: get-color("#{$color}.base");
 
     :host([color="#{$color}"]) {
-      --background-active: oklch(#{$base});
+      --background-active: #{$base};
     }
   }
 }

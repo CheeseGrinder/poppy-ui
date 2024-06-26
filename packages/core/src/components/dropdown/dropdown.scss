@@ -1,6 +1,4 @@
-@use "@scss/theme";
-@use "@scss/shadow";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Change border radius
@@ -16,11 +14,11 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{radius.$md};
-  --border-color: oklch(#{theme.get-color("base.200")});
-  --background: oklch(#{theme.get-color("base.100")});
-  --color: oklch(#{theme.get-color("base.content")});
-  --shadow: #{shadow.$md};
+  --border-radius: get-radius(md);
+  --border-color: #{get-color("base.200")};
+  --background: #{get-color("base.100")};
+  --color: #{get-color("base.content")};
+  --shadow: #{get-shadow(md)};
 
   .dropdown {
     display: grid;

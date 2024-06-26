@@ -1,5 +1,4 @@
-@use "@scss/theme";
-@use "@scss/radius";
+@import "@scss/poppy.globals";
 
 // Item
 // ----------------------------------------------------------------
@@ -41,14 +40,14 @@
 :host(:not(.has-list)) > {
   .item-inner:is(:hover, :focus),
   .item-inner:has(:focus) {
-    background-color: oklch(theme.get-color("base.content") / 0.1);
+    background-color: get-color("base.content", .1);
     color: inherit;
   }
 }
 
 :host > .item-inner:active {
-  background-color: oklch(theme.get-color("neutral.base"));
-  color: oklch(theme.get-color("neutral.content"));
+  background-color: get-color("neutral.base");
+  color: get-color("neutral.content");
 }
 
 // Item context
@@ -60,7 +59,7 @@
 :host(.in-list-md) > .item-inner {
   height: 36px;
   padding: 0.5rem 1rem;
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
 
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -68,7 +67,7 @@
 :host(.in-list-xs) > .item-inner {
   height: 24px;
   padding: 0.25rem 0.5rem;
-  border-radius: radius.$sm;
+  border-radius: get-radius(sm);
 
   font-size: 0.75rem;
   line-height: 1rem;
@@ -76,14 +75,14 @@
 :host(.in-list-sm) > .item-inner {
   height: 28px;
   padding: 0.25rem 0.75rem;
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
 
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 :host(.in-list-lg) > .item-inner {
   height: 52px;
-  border-radius: radius.$md;
+  border-radius: get-radius(md);
 
   font-size: 1.125rem;
   line-height: 1.75rem;

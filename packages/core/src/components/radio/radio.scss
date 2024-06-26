@@ -1,6 +1,5 @@
-@use "@scss/radius";
-@use "@scss/theme";
 @use "@scss/input";
+@import "@scss/poppy.globals";
 
 /**
  * @prop --border-radius: Border radius
@@ -16,7 +15,14 @@
 // Radio
 // ----------------------------------------------------------------
 
+$base: get-color("base.100");
+
 :host {
+  --border-radius: #{get-radius(full)};
+  --border-opacity: .2;
+  --border-color: #{get-color("base.content", var(--border-opacity))};
+  --background: #{get-color("base.content")};
+
   @include input.label;
 
   display: inline-flex;
@@ -34,26 +40,27 @@
     margin-inline-start: auto;
     border-width: 1px;
     border-style: solid;
-    border-radius: var(--border-radius, #{radius.$full});
-    border-color: var(--border-color, oklch(theme.get-color("base.content") / var(--border-opacity, 0.2)));
+    border-radius: var(--border-radius);
+    border-color: var(--border-color);
     cursor: pointer;
 
     &:focus {
       box-shadow: none;
     }
     &:focus-visible {
-      outline-color: var(--border-color, oklch(theme.get-color("base.content")));
+      --border-opacity: 1;
+      outline-color: var(--border-color);
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
     }
     &:checked {
       background-image: none;
-      background-color: var(--background, oklch(theme.get-color("base.content")));
+      background-color: var(--background);
 
       box-shadow:
-        0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset,
-        0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset;
+        0 0 0 4px var(--shadow, #{$base}) inset,
+        0 0 0 4px var(--shadow, #{$base}) inset;
       animation: radiomark var(--animation-duration, 0.2s) ease-out;
     }
   }
@@ -61,18 +68,18 @@
   @keyframes radiomark {
     0% {
       box-shadow:
-        0 0 0 12px var(--shadow, oklch(theme.get-color("base.100"))) inset,
-        0 0 0 12px var(--shadow, oklch(theme.get-color("base.100"))) inset;
+        0 0 0 12px var(--shadow, #{$base}) inset,
+        0 0 0 12px var(--shadow, #{$base}) inset;
     }
     50% {
       box-shadow:
-        0 0 0 3px var(--shadow, oklch(theme.get-color("base.100"))) inset,
-        0 0 0 3px var(--shadow, oklch(theme.get-color("base.100"))) inset;
+        0 0 0 3px var(--shadow, #{$base}) inset,
+        0 0 0 3px var(--shadow, #{$base}) inset;
     }
     100% {
       box-shadow:
-        0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset,
-        0 0 0 4px var(--shadow, oklch(theme.get-color("base.100"))) inset;
+        0 0 0 4px var(--shadow, #{$base}) inset,
+        0 0 0 4px var(--shadow, #{$base}) inset;
     }
   }
 }
@@ -114,27 +121,31 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.get-color("#{$color}.base");
+    $border: get-color("#{$color}.base", var(--border-opacity, 1));
+    $background: get-color("#{$color}.base", var(--opacity, 1));
 
     :host([color="#{$color}"]) {
-      --border-color: oklch(#{$base} / var(--border-opacity, 1));
-      --background: oklch(#{$base} / var(--opacity, 1));
+      --border-color: #{$base};
+      --background: #{$background};
     }
   }
 }
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  --border-color: oklch(#{theme.get-color("base.content")} / var(--border-opacity, 1));
-  --background: oklch(#{theme.get-color("base.content")} / var(--opacity, 1));
+  $border: get-color("base.content", var(--border-opacity, 1));
+  $background: get-color("base.content", var(--opacity, 1));
+
+  --border-color: #{$border};
+  --background: #{$background};
 }
 
 // Radio state
 // ----------------------------------------------------------------
 
 :host([disabled]) {
-  --border-color: oklch(#{theme.get-color("base.content")});
-  --background: oklch(#{theme.get-color("base.content")});
+  --border-color: #{get-color("base.content")};
+  --background: #{get-color("base.content")};
 
   > input {
     cursor: not-allowed;

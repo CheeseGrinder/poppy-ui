@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+// Global Color Functions
+@import "./poppy.functions.color";
+
+// Global Radius Functions
+@import "./poppy.functions.radius";
+
+// Global Shadow Functions
+@import "./poppy.functions.shadow";
+
+// Default Theme
+@import "./poppy.theme.default";
+
+// Default General
+// --------------------------------------------------
+$font: var(--font-family, system-ui);
