@@ -37,6 +37,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    width: 100%;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -198,11 +199,7 @@
 // ----------------------------------------------------------------
 
 :host([expand="block"]) {
-  display: block;
-
-  button {
-    width: 100%;
-  }
+  width: 100%;
 }
 :host([expand="wide"]) button {
   width: 16rem;
