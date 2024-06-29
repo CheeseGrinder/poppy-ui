@@ -1,75 +1,110 @@
-[![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
+# @poppy-ui/core
 
-# Stencil Component Starter
+[Poppy-ui](https://poppy-ui.com/) is an open source App Development UI that makes it easy to build top quality Progressive Web Apps with web technologies.
 
-This is a starter project for building a standalone Web Component using Stencil.
+The Poppy-ui Core package contains the Web Components that make up the reusable UI building blocks of Poppy-ui. These components are designed to be used in traditional frontend view libraries/frameworks (such as [Stencil](https://stenciljs.com/), React, Angular, or Vue), or on their own through traditional JavaScript in the browser.
 
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
 
-# Stencil
+## Features
 
-Stencil is a compiler for building fast web apps using Web Components.
+* Tiny, highly optimized components built with [Stencil](https://stenciljs.com/)
+* No build or compiling required
+* Simply add the static files to any project
+* Lazy-loaded components without configuration
+* Asynchronous rendering
+* Theming through CSS Variables
 
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in any browser supporting the Custom Elements v1 spec.
 
-Stencil components are just Web Components, so they work in any major framework or with no framework at all.
+## How to use
 
-## Getting Started
+### Vanilla HTML
 
-To start building a new web component using Stencil, clone this repo to a new directory:
+Easiest way to start using Poppy-ui Core is by adding a script tag to the CDN:
 
-```bash
-git clone https://github.com/ionic-team/stencil-component-starter.git my-component
-cd my-component
-git remote rm origin
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@poppy-ui/core/dist/poppy/poppy.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@poppy-ui/core/dist/poppy/poppy.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@poppy-ui/core/css/poppy.bundle.css" rel="stylesheet">
 ```
 
-and run:
+Any Poppy component added to the webpage will automatically load. This includes writing the component tag directly in HTML, or using JavaScript such as `document.createElement('pop-button')`.
 
-```bash
-npm install
-npm start
+Additionally, within this package is a `dist/poppy.js` file and accompanying `dist/poppy/` directory. These are the same files which are used by the CDN, and they're available in this package so they can be apart of an app's local development.
+
+
+## Framework Bindings
+
+The `@poppy-ui/core` package can be used in simple HTML, or by vanilla JavaScript without any framework at all. Poppy also has packages that make it easier to integrate Poppy into a framework's traditional ecosystem and patterns. (However, at the lowest-level framework bindings are still just using Poppy Core and Web Components).
+
+* [@poppy-ui/angular](https://www.npmjs.com/package/@poppy-ui/angular)
+
+
+## Custom Elements Build
+
+In addition to the default, self lazy-loading components built by Stencil, this package also comes with each component exported as a stand-alone custom element within `@poppy-ui/core/components`. Each component extends `HTMLElement`, and does not lazy-load itself. Instead, this package is useful for projects already using a bundler such as Webpack or Rollup. While all components are available to be imported, the custom elements build also ensures bundlers only import what's used, and tree-shakes any unused components.
+
+Below is an example of importing `pop-badge`. Additionally, the `initialize({...})` function can receive the Poppy config.
+
+```typescript
+import { defineCustomElement } from "@poppy-ui/core/components/pop-badge.js";
+import { initialize } from "@poppy-ui/core/components";
+
+// Initializes the Poppy config
+initialize();
+
+// Defines the `pop-badge` web component
+defineCustomElement();
 ```
 
-To build the component for production, run:
+Notice how we import from `@poppy-ui/core/components` as opposed to `@poppy-ui/core`. This helps bundlers pull in only the code that is needed.
 
-```bash
-npm run build
+The `defineCustomElement` function will automatically define the component as well as any child components that may be required.
+
+For example, if you wanted to use `pop-modal`, you would do the following:
+
+```typescript
+import { defineCustomElement } from "@poppy-ui/core/components/pop-modal.js";
+import { initialize } from "@poppy-ui/core/components";
+
+// Initializes the Poppy config
+initialize();
+
+// Defines the `pop-modal` and child `pop-backdrop` web components.
+defineCustomElement();
 ```
 
-To run the unit tests for the components, run:
+The `defineCustomElement` function will define `pop-modal`, but it will also define `pop-backdrop`, which is a component that `pop-modal` uses internally.
 
-```bash
-npm test
+### Using Overlay Controllers
+
+When using an overlay controller, developers will need to define the overlay component before it can be used. Below is an example of using `modalController`:
+
+```typescript
+import { defineCustomElement } from '@poppy-ui/core/components/pop-modal.js';
+import { initialize, modalController } from '@poppy-ui/core/components';
+
+initialize();
+defineCustomElement();
+
+const showModal = async () => {
+  const modal = await modalController.create({ ... });
+  
+  ...
+}
 ```
 
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
+## How to contribute
+
+[Check out the CONTRIBUTE guide](/docs/CONTRIBUTING.md)
+
+## Related
+
+<!-- * [Poppy Documentation](https://poppy.com/docs/) -->
+<!-- * [Poppy Discord](https://ionic.link/discord) -->
+<!-- * [Poppy Forum](https://forum.poppy.com/) -->
+* [Stencil](https://stenciljs.com/)
 
 
-## Naming Components
+## License
 
-When creating new component tags, we recommend _not_ using `stencil` in the component name (ex: `<stencil-datepicker>`). This is because the generated component has little to nothing to do with Stencil; it's just a web component!
-
-Instead, use a prefix that fits your company or any name for a group of related components. For example, all of the Ionic generated web components use the prefix `ion`.
-
-
-## Using this component
-
-There are three strategies we recommend for using web components built with Stencil.
-
-The first step for all three of these strategies is to [publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-### Script tag
-
-- Put a script tag similar to this `<script type='module' src='https://unpkg.com/my-component@0.0.1/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script type='module' src='node_modules/my-component/dist/my-component.esm.js'></script>` in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
-- Then you can use the element anywhere in your template, JSX, html etc
+* [MIT](https://raw.githubusercontent.com/CheeseGrinder/poppy-ui/master/LICENSE)

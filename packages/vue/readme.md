@@ -1,6 +1,6 @@
 # @poppy-ui/vue
 
-Poppy-ui integration for Vue 3 apps.
+Poppy UI integration for Vue 3 apps.
 
 ## Building
 
@@ -39,3 +39,7 @@ cd packages/vue-router && npm install
 ```shell
 npm run build
 ````
+
+## Contributing
+
+See our [Contributing Guide](https://github.com/CheeseGrinder/poppy-ui/blob/main/docs/CONTRIBUTING.md).
