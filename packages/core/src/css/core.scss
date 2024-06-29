@@ -2,16 +2,6 @@
 
 @import "../themes/poppy.globals";
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
-}
 
 :root {
   /**
@@ -22,9 +12,9 @@
   @each $color-name, $value in $colors {
     @each $variant-name, $variant in $value {
       @if $variant-name == base {
-        --#{$color-name}: oklch(var(--#{$color-name}-oklch));
+        --#{$color-name}: oklch(var(--#{$color-name}-oklch, #{$variant}));
       } @else {
-        --#{$color-name}-#{$variant-name}: oklch(var(--#{$color-name}-#{$variant-name}-oklch));
+        --#{$color-name}-#{$variant-name}: oklch(var(--#{$color-name}-#{$variant-name}-oklch, #{$variant}));
       }
     }
   }

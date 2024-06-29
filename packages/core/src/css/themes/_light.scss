@@ -80,6 +80,8 @@ $shadows: (
 
 @mixin light-theme() {
   & {
+    color-scheme: light;
+
     // Define theme oklch colors
     @each $color-name, $value in $colors {
       @each $variant-name, $variant in $value {

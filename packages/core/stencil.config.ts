@@ -21,6 +21,7 @@ const componentCorePackage = '@poppy-ui/core';
 
 export const config: Config = {
   namespace: 'Poppy',
+  globalStyle: './src/global/poppy.scss',
   globalScript: './src/global/poppy.ts',
   preamble: '(C) Cheese Grinder - MIT License',
   enableCache: true,
