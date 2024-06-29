@@ -11,7 +11,9 @@ import { defineCustomElement as definePopAvatar } from '@poppy-ui/core/component
 import { defineCustomElement as definePopBadge } from '@poppy-ui/core/components/pop-badge.js';
 import { defineCustomElement as definePopButton } from '@poppy-ui/core/components/pop-button.js';
 import { defineCustomElement as definePopCard } from '@poppy-ui/core/components/pop-card.js';
+import { defineCustomElement as definePopCardActions } from '@poppy-ui/core/components/pop-card-actions.js';
 import { defineCustomElement as definePopCardBody } from '@poppy-ui/core/components/pop-card-body.js';
+import { defineCustomElement as definePopCardTitle } from '@poppy-ui/core/components/pop-card-title.js';
 import { defineCustomElement as definePopCheckbox } from '@poppy-ui/core/components/pop-checkbox.js';
 import { defineCustomElement as definePopDivider } from '@poppy-ui/core/components/pop-divider.js';
 import { defineCustomElement as definePopDrawer } from '@poppy-ui/core/components/pop-drawer.js';
@@ -87,10 +89,18 @@ export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-butto
 ]);
 
 
-export const PopCard = /*@__PURE__*/ defineContainer<JSX.PopCard>('pop-card', definePopCard);
+export const PopCard = /*@__PURE__*/ defineContainer<JSX.PopCard>('pop-card', definePopCard, [
+  'compact'
+]);
+
+
+export const PopCardActions = /*@__PURE__*/ defineContainer<JSX.PopCardActions>('pop-card-actions', definePopCardActions);
 
 
 export const PopCardBody = /*@__PURE__*/ defineContainer<JSX.PopCardBody>('pop-card-body', definePopCardBody);
+
+
+export const PopCardTitle = /*@__PURE__*/ defineContainer<JSX.PopCardTitle>('pop-card-title', definePopCardTitle);
 
 
 export const PopCheckbox = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.PopCheckbox["checked"]>('pop-checkbox', definePopCheckbox, [

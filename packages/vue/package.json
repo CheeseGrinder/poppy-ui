@@ -36,12 +36,14 @@
     "prettier": "prettier --write src/",
     "prettier:check": "prettier --check src/",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "clean": "rimraf dist",
+    "clean": "rimraf ./css ./dist",
     "prebuild": "npm run clean",
     "build": "npm run build:bundle && npm run build:vetur && npm run build:web-types",
+    "postbuild": "npm run copy:css",
     "build:bundle": "rollup --config rollup.config.mjs",
     "build:vetur": "node --experimental-json-modules ./scripts/build-vetur.js",
     "build:web-types": "node --experimental-json-modules ./scripts/build-web-types.js",
+    "copy:css": "node ./scripts/copy-css.js",
     "release": "release-it"
   },
   "dependencies": {

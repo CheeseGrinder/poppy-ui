@@ -57,7 +57,18 @@ pop-button,css-prop,--focus-scale
 pop-button,part,native
 
 pop-card,shadow
+pop-card,prop,compact,boolean,undefined,false,false
 pop-card,css-prop,--border-radius
+
+pop-card-actions,none
+pop-card-actions,css-prop,--align
+pop-card-actions,css-prop,--gap
+
+pop-card-body,scoped
+pop-card-body,css-prop,--gap
+pop-card-body,css-prop,--padding
+
+pop-card-title,none
 
 pop-checkbox,shadow
 pop-checkbox,prop,checked,boolean,undefined,false,true

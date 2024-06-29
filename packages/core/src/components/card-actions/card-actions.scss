@@ -1,0 +1,15 @@
+/**
+ * @prop --align: Change how content is aligned in the card-actions
+ *
+ * @prop --gap: Change gap of the card-actions
+ */
+
+// Card actions
+// ----------------------------------------------------------------
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: var(--align, flex-start);
+  gap: var(--gap, 8px);
+}

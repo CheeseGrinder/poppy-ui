@@ -196,9 +196,31 @@ export namespace Components {
          */
         "type"?: ButtonType;
     }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface PopCard {
+        /**
+          * Applies smaller padding
+          * @config 
+          * @default false
+         */
+        "compact": boolean;
     }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface PopCardActions {
+    }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface PopCardBody {
+    }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface PopCardTitle {
     }
     /**
      * Toggles are switches that change the state of a single option.
@@ -1451,17 +1473,41 @@ declare global {
         prototype: HTMLPopButtonElement;
         new (): HTMLPopButtonElement;
     };
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface HTMLPopCardElement extends Components.PopCard, HTMLStencilElement {
     }
     var HTMLPopCardElement: {
         prototype: HTMLPopCardElement;
         new (): HTMLPopCardElement;
     };
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface HTMLPopCardActionsElement extends Components.PopCardActions, HTMLStencilElement {
+    }
+    var HTMLPopCardActionsElement: {
+        prototype: HTMLPopCardActionsElement;
+        new (): HTMLPopCardActionsElement;
+    };
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface HTMLPopCardBodyElement extends Components.PopCardBody, HTMLStencilElement {
     }
     var HTMLPopCardBodyElement: {
         prototype: HTMLPopCardBodyElement;
         new (): HTMLPopCardBodyElement;
+    };
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface HTMLPopCardTitleElement extends Components.PopCardTitle, HTMLStencilElement {
+    }
+    var HTMLPopCardTitleElement: {
+        prototype: HTMLPopCardTitleElement;
+        new (): HTMLPopCardTitleElement;
     };
     interface HTMLPopCheckboxElementEventMap {
         "popChange": CheckboxChangeEventDetail;
@@ -1881,7 +1927,9 @@ declare global {
         "pop-badge": HTMLPopBadgeElement;
         "pop-button": HTMLPopButtonElement;
         "pop-card": HTMLPopCardElement;
+        "pop-card-actions": HTMLPopCardActionsElement;
         "pop-card-body": HTMLPopCardBodyElement;
+        "pop-card-title": HTMLPopCardTitleElement;
         "pop-checkbox": HTMLPopCheckboxElement;
         "pop-divider": HTMLPopDividerElement;
         "pop-drawer": HTMLPopDrawerElement;
@@ -2059,9 +2107,31 @@ declare namespace LocalJSX {
          */
         "type"?: ButtonType;
     }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface PopCard {
+        /**
+          * Applies smaller padding
+          * @config 
+          * @default false
+         */
+        "compact"?: boolean;
     }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface PopCardActions {
+    }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
     interface PopCardBody {
+    }
+    /**
+     * Cards are used to group and display content in a way that is easily readable.
+     */
+    interface PopCardTitle {
     }
     /**
      * Toggles are switches that change the state of a single option.
@@ -3301,7 +3371,9 @@ declare namespace LocalJSX {
         "pop-badge": PopBadge;
         "pop-button": PopButton;
         "pop-card": PopCard;
+        "pop-card-actions": PopCardActions;
         "pop-card-body": PopCardBody;
+        "pop-card-title": PopCardTitle;
         "pop-checkbox": PopCheckbox;
         "pop-divider": PopDivider;
         "pop-drawer": PopDrawer;
@@ -3353,8 +3425,22 @@ declare module "@stencil/core" {
              * Buttons allow the user to take actions or make choices.
              */
             "pop-button": LocalJSX.PopButton & JSXBase.HTMLAttributes<HTMLPopButtonElement>;
+            /**
+             * Cards are used to group and display content in a way that is easily readable.
+             */
             "pop-card": LocalJSX.PopCard & JSXBase.HTMLAttributes<HTMLPopCardElement>;
+            /**
+             * Cards are used to group and display content in a way that is easily readable.
+             */
+            "pop-card-actions": LocalJSX.PopCardActions & JSXBase.HTMLAttributes<HTMLPopCardActionsElement>;
+            /**
+             * Cards are used to group and display content in a way that is easily readable.
+             */
             "pop-card-body": LocalJSX.PopCardBody & JSXBase.HTMLAttributes<HTMLPopCardBodyElement>;
+            /**
+             * Cards are used to group and display content in a way that is easily readable.
+             */
+            "pop-card-title": LocalJSX.PopCardTitle & JSXBase.HTMLAttributes<HTMLPopCardTitleElement>;
             /**
              * Toggles are switches that change the state of a single option.
              * They can be switched on or off by pressing.

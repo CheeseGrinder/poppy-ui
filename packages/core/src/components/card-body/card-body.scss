@@ -1,9 +1,21 @@
-:host {
-  --padding: 32px;
+/**
+ * @prop --padding: Change padding of the card-body
+ *
+ * @prop --gap: Change gap of the card-body
+ */
 
+// Card body
+// ----------------------------------------------------------------
+
+:host {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  padding: var(--padding);
-  gap: 8px;
+  padding: var(--padding, 32px);
+  gap: var(--gap, 8px);
+
+  & :where(p) {
+    flex-grow: 1;
+  }
 }
+

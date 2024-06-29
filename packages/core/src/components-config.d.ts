@@ -101,6 +101,12 @@ export namespace Configuration {
        */
       expand?: ButtonExpand;
     }
+    'pop-card'?: {
+      /**
+       * Applies smaller padding
+       */
+      compact?: boolean;
+    }
     'pop-checkbox'?: {
       /**
        * If `true`, the user must fill in a value before submitting a form.

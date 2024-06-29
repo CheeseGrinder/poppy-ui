@@ -42,7 +42,7 @@ export const config: Config = {
     { components: ['pop-avatar', 'pop-img'] },
     { components: ['pop-badge', 'pop-indicator'] },
     { components: ['pop-button'] },
-    { components: ['pop-card'] },
+    { components: ['pop-card', 'pop-card-body', 'pop-card-title', 'pop-card-actions'] },
     { components: ['pop-checkbox'] },
     { components: ['pop-divider'] },
     { components: ['pop-drawer'] },
