@@ -68,7 +68,7 @@ pop-card-body,scoped
 pop-card-body,css-prop,--gap
 pop-card-body,css-prop,--padding
 
-pop-card-title,none
+pop-card-title,scoped
 
 pop-checkbox,shadow
 pop-checkbox,prop,checked,boolean,undefined,false,true
