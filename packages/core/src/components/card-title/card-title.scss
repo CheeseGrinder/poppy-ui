@@ -1,0 +1,11 @@
+// Card title
+// ----------------------------------------------------------------
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}

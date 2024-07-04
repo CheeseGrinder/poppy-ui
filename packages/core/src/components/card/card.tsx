@@ -3,7 +3,7 @@ import { Component, Host, Prop, h } from '@stencil/core';
 
 /**
  * Cards are used to group and display content in a way that is easily readable.
- * 
+ *
  * @slot - Content for the `pop-card-body`
  */
 @Component({
@@ -12,10 +12,9 @@ import { Component, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class Card {
-
   /**
    * Applies smaller padding
-   * 
+   *
    * @config
    * @default false
    */
