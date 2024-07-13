@@ -1,4 +1,4 @@
-import { ComponentConfig, PoppyConfig } from './config';
+import { ComponentConfig, Config } from './config';
 
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';
@@ -55,9 +55,10 @@ export interface FrameworkDelegate {
   removeViewFromDom(container: any, component: any): Promise<void>;
 }
 
-export type Poppy = {
+interface Poppy {
   components?: ComponentConfig;
-} & PoppyConfig;
+  config?: Config;
+}
 
 declare global {
   interface Window {

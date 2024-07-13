@@ -1,32 +1,39 @@
-import type { Configuration } from 'src/components-config';
+import type { ComponentsConfig } from 'src/components-config';
 import type { Size } from 'src/interface';
 
 export class Config {
-  private config = new Map<keyof PoppyConfig, any>();
+  private config = new Map<keyof FrameworkConfig, any>();
 
-  reset(config: PoppyConfig): void {
+  reset(config: FrameworkConfig): void {
     this.config = new Map(Object.entries(config) as any);
   }
 
-  set<Conf extends keyof PoppyConfig>(key: Conf, value: PoppyConfig[Conf]): void {
+  set<Conf extends keyof FrameworkConfig>(key: Conf, value: FrameworkConfig[Conf]): void {
     this.config.set(key, value);
   }
 
-  get<Conf extends keyof PoppyConfig>(key: Conf, fallback?: PoppyConfig[Conf]): PoppyConfig[Conf] {
+  get<Conf extends keyof FrameworkConfig>(key: Conf, fallback?: FrameworkConfig[Conf]): FrameworkConfig[Conf] {
     return this.config.get(key) ?? fallback;
   }
 }
 
 export const config = new Config();
 
-export interface PoppyUserConfig {
-  components?: Configuration.ComponentsConfig;
-
+interface FrameworkConfig {
   defaultSize?: Size;
 }
 
+interface HelperConfig {
+  ael?: (el: any, name: string, cb: any, opts: any) => any;
+  rel?: (el: any, name: string, cb: any, opts: any) => any;
+  ce?: (eventName: string, opts: any) => any;
+}
+
+export interface PoppyUserConfig {
+  components?: ComponentsConfig;
+  config?: FrameworkConfig;
+}
+
 export type PoppyConfig = {
-  _ael?: (el: any, name: string, cb: any, opts: any) => any;
-  _rel?: (el: any, name: string, cb: any, opts: any) => any;
-  _ce?: (eventName: string, opts: any) => any;
+  helpers?: HelperConfig;
 } & PoppyUserConfig;
