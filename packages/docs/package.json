@@ -17,12 +17,5 @@
   },
   "bugs": {
     "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
-  },
-  "scripts": {
-    "audit-ci": "audit-ci --config ./audit-ci.json",
-    "release": "release-it"
-  },
-  "devDependencies": {
-    "audit-ci": "^7.0.1"
   }
 }

@@ -1,0 +1,24 @@
+name: CodeQL
+
+on:
+  push:
+    paths-ignore:
+      - ./.github/**/*
+      - ./.githooks/*
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+      - uses: github/codeql-action/analyze@v3

@@ -34,9 +34,6 @@
   },
   "scripts": {
     "audit-ci": "audit-ci --config ./audit-ci.json",
-    "prettier": "prettier --write src/",
-    "prettier:check": "prettier --check src/",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "clean": "rimraf ./css ./dist",
     "prebuild": "npm run clean",
     "build": "npm run build:bundle && npm run build:vetur && npm run build:web-types",
@@ -45,7 +42,10 @@
     "build:vetur": "node --experimental-json-modules ./scripts/build-vetur.js",
     "build:web-types": "node --experimental-json-modules ./scripts/build-web-types.js",
     "copy:css": "node ./scripts/copy-css.js",
-    "release": "release-it"
+    "format": "prettier --check src/",
+    "format:fix": "prettier --write src/",
+    "lint": "eslint . --ext .vue,.ts,.tsx --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.ts,.tsx --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@poppy-ui/core": "0.2.0-dev.1"

@@ -1,0 +1,43 @@
+name: Releasde
+description: Run release for specified package
+inputs:
+  package:
+    description: The package to audit. Must have a audit-ci.json.
+    type: string
+    required: true
+  version:
+    description: The incremental version type
+    type: string
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Update version
+      id: version
+      uses: KageKirin/bump-node-package-version@v1.0.0
+      with:
+        major: ${{ github.event.inputs.version == 'major' }}
+        minor: ${{ github.event.inputs.version == 'minor' }}
+        patch: ${{ github.event.inputs.version == 'patch' }}
+
+    - name: Commit & Tag
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: cheese_grinder_ci
+        author_email: contact@cheese-grinder.fr
+        committer_name: cheese_grinder_ci
+        committer_email: contact@cheese-grinder.fr
+        message: "ci(version): bump to ${{ steps.version.outputs.version }}"
+        tag: "v${{ steps.version.outputs.version }}"
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        registry-url: https://registry.npmjs.org/
+
+    - name: Publish
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

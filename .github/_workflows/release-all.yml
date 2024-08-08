@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release type
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        required: true
+
+jobs:
+  release-core:
+    uses: ./.github/workflows/release-core.yml
+    with:
+      version: ${{ github.event.inputs.version }}
+
+  release-docs:
+    needs: release-core
+    uses: ./.github/workflows/release-core.yml
+    with:
+      version: ${{ github.event.inputs.version }}
+
+  release-vue:
+    needs: release-docs
+    uses: ./.github/workflows/release-core.yml
+    with:
+      version: ${{ github.event.inputs.version }}
