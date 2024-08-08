@@ -1,0 +1,67 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: build - Vue
+
+on:
+  push:
+    paths:
+      - packages/vue/**
+      - packages/vue-*/**
+  pull_request:
+    branches:
+      - main
+
+# When pushing a new commit we should
+# cancel the previous test run to not
+# consume more runners than we need to.
+concurrency:
+  group: ${{ github.ref }}_build_vue
+  cancel-in-progress: true
+
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit
+        uses: ./.github/workflows/actions/audit
+        with:
+          package: vue
+
+  quality:
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/actions/quality
+        with:
+          package: vue
+
+  build:
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Core
+        uses: ./.github/workflows/actions/build
+        with:
+          package: core
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install core
+        working-directory: ./packages/vue
+        run: npm i ../core/poppy-ui-core.tgz
+
+      - name: Build Vue
+        uses: ./.github/workflows/actions/build
+        with:
+          package: vue
+          node-version: ${{ matrix.node-version }}

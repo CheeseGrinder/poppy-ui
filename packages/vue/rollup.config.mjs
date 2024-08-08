@@ -11,9 +11,9 @@ export default {
       entryFileNames: '[name].js',
       chunkFileNames: '[name]-[hash].js',
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
     },
   ],
   plugins: [typescript()],
-  external: id => external.includes(id) || id.startsWith(internal)
+  external: id => external.includes(id) || id.startsWith(internal),
 };

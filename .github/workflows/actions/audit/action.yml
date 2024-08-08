@@ -1,0 +1,24 @@
+name: Audit
+description: Audit provided package
+inputs:
+  package:
+    description: Audited package
+    type: string
+    required: true
+  node-version:
+    description: Node version
+    type: string
+    required: false
+    default: 20.x
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - run: npx audit-ci@latest --config ./audit-ci.json
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash

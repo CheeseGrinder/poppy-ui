@@ -1,4 +1,4 @@
-import type { ComponentsConfig } from 'src/components-config';
+import type { Configuration } from 'src/components-config';
 import type { Size } from 'src/interface';
 
 export class Config {
@@ -30,7 +30,7 @@ interface HelperConfig {
 }
 
 export interface PoppyUserConfig {
-  components?: ComponentsConfig;
+  components?: Configuration.ComponentsConfig;
   config?: FrameworkConfig;
 }
 

@@ -1,0 +1,15 @@
+{
+  
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "plugin:@stencil-community/recommended"
+  ],
+  "rules": {
+    "@stencil-community/element-type": "off", // Disabled for overlay element
+    "@stencil-community/strict-mutable": "off", // Disabled for make props configurable
+    "@stencil-community/reserved-member-names": "off", // Diabled for input/textarea purpose
+    "@stencil-community/strict-boolean-conditions": "off"
+  }
+}

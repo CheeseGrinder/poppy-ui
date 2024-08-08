@@ -134,22 +134,23 @@ export class Popover implements ComponentInterface, OverlayInterface {
   /**
    * Emitted before the popover has presented.
    */
-  @StencilEvent() willPresent: EventEmitter<void>;
+  @StencilEvent() private willPresent: EventEmitter<void>;
 
   /**
    * Emitted after the popover has presented.
    */
-  @StencilEvent() didPresent: EventEmitter<void>;
+  @StencilEvent() private didPresent: EventEmitter<void>;
 
   /**
    * Emitted before the popover has dismissed.
    */
-  @StencilEvent() willDismiss: EventEmitter<void>;
+  @StencilEvent() private willDismiss: EventEmitter<void>;
 
   /**
    * Emitted after the popover has dismissed.
    */
-  @StencilEvent() didDismiss: EventEmitter<void>;
+  // @ts-ignore
+  @StencilEvent() private didDismiss: EventEmitter<void>;
 
   /**
    * Use this function to emit `didDismiss` event instead of the StencilEvent because when this event is fired the element doesnt exist anymore in the DOM.

@@ -1,0 +1,43 @@
+name: Quality
+description: Run quality check for specified package
+inputs:
+  package:
+    description: The package to check code quality. Must have a .prettierrc and .eslintrc.
+    type: string
+    required: true
+  node-version:
+    description: The version of node to use.
+    type: string
+    default: 20.x
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install Dependencies
+      run: npx lerna exec --scope @poppy-ui/${{ inputs.package }} npm install
+      shell: bash
+
+    - name: Prettier
+      run: npm run format
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Lint
+      run: npm run lint
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Scan
+      uses: ajinabraham/njsscan-action@v7
+      with:
+        args: '. --sarif --output results.sarif || true'
+
+    - name: Upload report
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: results.sarif

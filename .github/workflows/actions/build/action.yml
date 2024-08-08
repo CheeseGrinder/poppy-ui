@@ -1,0 +1,45 @@
+name: Build
+description: Run build for specified package
+inputs:
+  package:
+    description: The package to build.
+    type: string
+    required: true
+  node-version:
+    description: The version of node to use.
+    type: string
+    default: 20.x
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install Dependencies
+      run: npx lerna exec --scope @poppy-ui/${{ inputs.package }} npm install
+      shell: bash
+
+    - name: Build
+      run: npm run build --if-present
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Pack
+      run: npm pack
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Rename tarball
+      run: |
+        PKG=$(ls poppy-ui-${{ inputs.package }}-*.tgz)
+        mv $PKG poppy-ui-${{ inputs.package }}.tgz
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.package }}-${{ inputs.node-version }}
+        path: ./packages/${{ inputs.package }}/poppy-ui-${{ inputs.package }}-${{ inputs.node-version }}.tgz

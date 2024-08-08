@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z "$(git log -1 --pretty=%B)" ]; then
+  echo "Erreur : Le message de commit ne peut pas être vide."
+  exit 1
+fi
+
+echo Validate commit message using "$(npx commitlint --version)"
+
+npx commitlint --edit --verbose

@@ -11,6 +11,7 @@ log.txt
 
 .idea/
 .vscode/
+!.vscode/extensions.json
 .sass-cache/
 .versions/
 coverage/

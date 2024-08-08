@@ -1,4 +1,6 @@
-import { ComponentsConfig as Config } from 'src/components-config';
+import { Configuration } from 'src/components-config';
+
+type Config = Configuration.ComponentsConfig;
 
 export class ComponentConfig {
   private config = new Map<keyof Config, any>();

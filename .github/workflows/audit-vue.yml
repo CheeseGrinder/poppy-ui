@@ -1,0 +1,32 @@
+name: Audit - Vue
+
+on:
+  push:
+    paths:
+      - packages/vue/**
+      - packages/vue-*/**
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Run every Monday-Friday
+    # at 6:00 UTC (6:00 am UTC)
+    - cron: '00 06 * * 1-5'
+
+# When pushing a new commit we should
+# cancel the previous test run to not
+# consume more runners than we need to.
+concurrency:
+  group: ${{ github.ref }}_audit_vue
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit
+        uses: ./.github/workflows/actions/audit
+        with:
+          package: vue
