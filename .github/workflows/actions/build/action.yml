@@ -26,3 +26,8 @@ runs:
       run: npm run build --if-present
       working-directory: ./packages/${{ inputs.package }}
       shell: bash
+
+    - name: Pack
+      run: npm pack
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash

@@ -1,7 +1,6 @@
 name: Vue - Audit
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - packages/vue/**
@@ -18,7 +17,7 @@ on:
 # cancel the previous test run to not
 # consume more runners than we need to.
 concurrency:
-  group: ${{ github.ref }}_vue_audit
+  group: ${{ github.ref }}_audit_vue
   cancel-in-progress: true
 
 jobs:

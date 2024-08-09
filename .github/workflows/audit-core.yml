@@ -1,7 +1,6 @@
 name: Core - Audit
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - packages/core/**
@@ -17,7 +16,7 @@ on:
 # cancel the previous test run to not
 # consume more runners than we need to.
 concurrency:
-  group: ${{ github.ref }}_core_audit
+  group: ${{ github.ref }}_audit_core
   cancel-in-progress: true
 
 jobs:

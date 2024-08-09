@@ -15,7 +15,7 @@ on:
 # cancel the previous test run to not
 # consume more runners than we need to.
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.ref }}_build_core
   cancel-in-progress: true
 
 jobs:
