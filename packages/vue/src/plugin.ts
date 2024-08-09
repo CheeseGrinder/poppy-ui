@@ -25,12 +25,9 @@ export const PoppyVue: Plugin<[PoppyUserConfig?]> = {
       document.documentElement.classList.add('pop-ce');
     }
 
-    const { ael, rel, ce } = getHelperFunctions();
     initialize({
       ...config,
-      _ael: ael,
-      _rel: rel,
-      _ce: ce,
+      helpers: getHelperFunctions(),
     });
   },
 };

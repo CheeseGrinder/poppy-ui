@@ -149,6 +149,7 @@ export class Popover implements ComponentInterface, OverlayInterface {
   /**
    * Emitted after the popover has dismissed.
    */
+  // @ts-ignore
   @StencilEvent() private didDismiss: EventEmitter<void>;
 
   /**

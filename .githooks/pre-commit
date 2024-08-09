@@ -6,3 +6,4 @@ npm run lint
 # Vue
 cd ../vue
 npm run format
+npm run lint
