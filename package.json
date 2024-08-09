@@ -9,7 +9,8 @@
   "scripts": {
     "build:core": "cd packages/core && npm run build",
     "build:vue": "cd packages/vue && npm run build",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
