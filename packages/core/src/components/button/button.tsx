@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Prop,
   h,

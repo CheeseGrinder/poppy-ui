@@ -1,4 +1,4 @@
-import { Color } from 'src/components';
+import type { Color } from 'src/components';
 
 export type ButtonType = HTMLButtonElement['type'];
 export type ButtonColor = Color | 'neutral' | 'ghost';

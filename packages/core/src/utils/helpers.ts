@@ -1,5 +1,5 @@
-import { JSX } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import type { JSX } from '@stencil/core';
+import type { JSXBase } from '@stencil/core/internal';
 import { APP_TAG } from 'src/framework.constant';
 
 export type Attributes = { [key: string]: any };

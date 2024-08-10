@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -14,9 +14,11 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
+import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
 import { Show } from '../Show';
-import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from './textarea.type';
+import type { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from './textarea.type';
+
+let textareaIds = 0;
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -383,7 +385,10 @@ export class Textarea implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
@@ -432,5 +437,3 @@ export class Textarea implements ComponentInterface {
     );
   }
 }
-
-let textareaIds = 0;

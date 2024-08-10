@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
-import { MaskType } from './mask.type';
+import type { MaskType } from './mask.type';
 
 /**
  * Mask crops the content of the element to common shapes.

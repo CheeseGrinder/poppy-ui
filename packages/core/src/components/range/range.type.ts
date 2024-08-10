@@ -1,4 +1,4 @@
-import { Color } from 'src/interface';
+import type { Color } from 'src/interface';
 
 export type RangeColor = Color | 'ghost';
 

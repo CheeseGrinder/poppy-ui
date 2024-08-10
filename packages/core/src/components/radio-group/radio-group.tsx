@@ -2,10 +2,10 @@ import { componentConfig, config } from '#config';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Prop,
   Watch,
@@ -151,12 +151,20 @@ export class RadioGroup implements ComponentInterface {
 
   private applyColor(): void {
     if (!this.color) return;
-    this.radios.filter(radio => !radio.color).forEach(radio => (radio.color = this.color));
+    this.radios
+      .filter(radio => !radio.color)
+      .forEach(radio => {
+        radio.color = this.color;
+      });
   }
 
   private applySize(): void {
     if (!this.size) return;
-    this.radios.filter(radio => !radio.size).forEach(radio => (radio.size = this.size));
+    this.radios
+      .filter(radio => !radio.size)
+      .forEach(radio => {
+        radio.size = this.size;
+      });
   }
 
   private applyCheck(): void {

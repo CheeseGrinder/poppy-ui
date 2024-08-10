@@ -1,5 +1,5 @@
 import { componentConfig } from '#config';
-import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
 import type { Color } from 'src/interface';
 
 /**
@@ -43,7 +43,11 @@ export class Progress implements ComponentInterface {
   render() {
     return (
       <Host>
-        <progress part="native" value={this.value} max={this.max}>
+        <progress
+          part="native"
+          value={this.value}
+          max={this.max}
+        >
           <slot />
         </progress>
       </Host>

@@ -1,9 +1,21 @@
 import { componentConfig, config } from '#config';
 import { compareOptions } from '#utils/forms';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
+import {
+  Component,
+  type ComponentInterface,
+  Element,
+  Event,
+  type EventEmitter,
+  Host,
+  Method,
+  Prop,
+  h,
+} from '@stencil/core';
 import type { Color, Size } from 'src/interface';
 import { Show } from '../Show';
+
+let radioIds = 0;
 
 /**
  * Radio buttons allow the user to select one option from a set.
@@ -168,7 +180,10 @@ export class Radio implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
@@ -191,5 +206,3 @@ export class Radio implements ComponentInterface {
     );
   }
 }
-
-let radioIds: number = 0;

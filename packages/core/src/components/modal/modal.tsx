@@ -1,19 +1,19 @@
 import { componentConfig } from '#config';
-import { OverlayInterface } from '#utils/overlay';
+import type { OverlayInterface } from '#utils/overlay';
 import { TriggerController } from '#utils/trigger';
 import {
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
   Watch,
   h,
 } from '@stencil/core';
-import { ComponentProps, ComponentRef } from 'src/interface';
+import type { ComponentProps, ComponentRef } from 'src/interface';
 import { Show } from '../Show';
 
 /**
@@ -173,7 +173,10 @@ export class Modal implements ComponentInterface, OverlayInterface {
   render() {
     return (
       <Host>
-        <dialog class="modal" ref={el => (this.dialog = el)}>
+        <dialog
+          class="modal"
+          ref={el => (this.dialog = el)}
+        >
           <div class="modal-content">
             <slot />
 
@@ -182,8 +185,11 @@ export class Modal implements ComponentInterface, OverlayInterface {
             </div>
           </div>
           <Show when={this.backdropDismiss}>
-            <form method="dialog" class="modal-backdrop">
-              <button>close</button>
+            <form
+              method="dialog"
+              class="modal-backdrop"
+            >
+              <button type="submit">close</button>
             </form>
           </Show>
         </dialog>

@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
 import { getHostContextProperty, hostContext } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
+import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'pop-item',
@@ -33,7 +33,7 @@ export class Item implements ComponentInterface {
 
     if (!ev.isTrusted || firstInteractive === undefined) return;
 
-    const clickedWithinShadowRoot = this.host.shadowRoot!.contains(target);
+    const clickedWithinShadowRoot = this.host.shadowRoot.contains(target);
     if (clickedWithinShadowRoot) {
       firstInteractive.click();
     }

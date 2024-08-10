@@ -1,9 +1,9 @@
 import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
-import { OverlayInterface } from '#utils/overlay';
-import { TriggerAction, TriggerController } from '#utils/trigger';
-import { Component, ComponentInterface, Element, Host, Method, Prop, Watch, h } from '@stencil/core';
-import { DrawerSide } from './drawer.type';
+import type { OverlayInterface } from '#utils/overlay';
+import { type TriggerAction, TriggerController } from '#utils/trigger';
+import { Component, type ComponentInterface, Element, Host, Method, Prop, Watch, h } from '@stencil/core';
+import type { DrawerSide } from './drawer.type';
 
 /**
  * Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page.
@@ -130,8 +130,15 @@ export class Drawer implements ComponentInterface, OverlayInterface {
         </div>
 
         <aside class="drawer-side">
-          <div part="backdrop" class="drawer-backdrop" onClick={this.onClick}></div>
-          <div part="side" class="drawer-side-inner">
+          <div
+            part="backdrop"
+            class="drawer-backdrop"
+            onClick={this.onClick}
+          />
+          <div
+            part="side"
+            class="drawer-side-inner"
+          >
             <slot name="side" />
           </div>
         </aside>

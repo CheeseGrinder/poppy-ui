@@ -1,8 +1,8 @@
 import { componentConfig, config } from '#config';
 import { hostContext } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
+import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
-import { ListOrientation } from './list.type';
+import type { ListOrientation } from './list.type';
 
 @Component({
   tag: 'pop-list',

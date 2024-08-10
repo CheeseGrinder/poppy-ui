@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
-import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import { IndicatorPosition, IndicatorSide } from './indicator.type';
+import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
+import type { IndicatorPosition, IndicatorSide } from './indicator.type';
 
 /**
  * Indicators are used to place an element on the corner of another element.

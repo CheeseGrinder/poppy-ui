@@ -52,13 +52,12 @@
     "@biomejs/biome": "^1.8.3",
     "@poppy-ui/docs": "0.2.0-dev.1",
     "@rollup/plugin-typescript": "^11.1.6",
-    "audit-ci": "^7.0.1",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",
     "rollup": "^4.20.0",
-    "typescript": "~5.4.5",
     "vite": "^5.4.0",
-    "vue": "~3.3.9"
+    "vue": "~3.3.9",
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "vue": ">=3.3.9"

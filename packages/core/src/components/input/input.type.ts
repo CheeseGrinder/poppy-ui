@@ -1,4 +1,4 @@
-import { Color } from 'src/components';
+import type { Color } from 'src/components';
 
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
 export type InputType =

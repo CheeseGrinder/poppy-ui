@@ -125,7 +125,7 @@ export const defineContainer = <Props, VModelType = string | number | boolean>(
          */
         ev.preventDefault();
 
-        const navigationPayload: any = { event: ev };
+        let navigationPayload: any = { event: ev };
         for (const key in props) {
           const value = props[key];
           if (props.hasOwnProperty(key) && key.startsWith(ROUTER_PROP_PREFIX) && value !== EMPTY_PROP) {

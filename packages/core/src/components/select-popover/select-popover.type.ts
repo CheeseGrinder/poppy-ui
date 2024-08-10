@@ -1,4 +1,4 @@
-import { Color, Size } from 'src/interface';
+import type { Color, Size } from 'src/interface';
 
 export interface SelectPopoverOption {
   text: string;

@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -14,7 +14,9 @@ import {
   h,
 } from '@stencil/core';
 import type { Size } from 'src/interface';
-import { RangeChangeEventDetail, RangeColor } from './range.type';
+import type { RangeChangeEventDetail, RangeColor } from './range.type';
+
+let rangeIds = 0;
 
 /**
  * Range slider is used to select a value by sliding a handle.
@@ -201,7 +203,10 @@ export class Range implements ComponentInterface {
     const { inputId } = this;
 
     return (
-      <Host aria-labelledby={inputId} aria-hidden={this.disabled ? 'true' : null}>
+      <Host
+        aria-labelledby={inputId}
+        aria-hidden={this.disabled ? 'true' : null}
+      >
         <input
           part="native"
           id={inputId}
@@ -224,5 +229,3 @@ export class Range implements ComponentInterface {
     );
   }
 }
-
-let rangeIds = 0;

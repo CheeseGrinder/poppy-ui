@@ -1,20 +1,9 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "extends": ["../../biome.json"],
   "files": {
     "include": ["src/*"],
     "ignore": ["src/vue-component-lib/*", "src/proxies.ts", "test/*"]
-  },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": false,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 120,
-    "attributePosition": "multiline"
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "linter": {
     "enabled": true,
@@ -88,19 +77,6 @@
         "useGetterReturn": "error",
         "useValidTypeof": "error"
       }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "all",
-      "semicolons": "always",
-      "arrowParentheses": "asNeeded",
-      "bracketSpacing": true,
-      "bracketSameLine": false,
-      "quoteStyle": "single",
-      "attributePosition": "multiline"
     }
   },
   "overrides": [

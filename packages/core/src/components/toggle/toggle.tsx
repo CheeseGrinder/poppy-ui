@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -15,7 +15,9 @@ import {
 } from '@stencil/core';
 import type { Size } from 'src/interface';
 import { Show } from '../Show';
-import { ToggleChangeEventDetail, ToggleColor } from './toggle.type';
+import type { ToggleChangeEventDetail, ToggleColor } from './toggle.type';
+
+let toggleIds = 0;
 
 /**
  * Toggle is a checkbox that is styled to look like a switch button.
@@ -201,7 +203,10 @@ export class Toggle implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
@@ -228,5 +233,3 @@ export class Toggle implements ComponentInterface {
     );
   }
 }
-
-let toggleIds = 0;

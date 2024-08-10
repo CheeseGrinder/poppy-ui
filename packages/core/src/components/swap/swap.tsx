@@ -1,6 +1,6 @@
 import { componentConfig } from '#config';
-import { Component, ComponentInterface, Event, EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
-import { SwapChangeEventDetail, SwapType } from './swap.type';
+import { Component, type ComponentInterface, Event, type EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import type { SwapChangeEventDetail, SwapType } from './swap.type';
 
 /**
  * Swap allows you to toggle the visibility of two elements.

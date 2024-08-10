@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -15,7 +15,9 @@ import {
 } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
 import { Show } from '../Show';
-import { CheckboxChangeEventDetail, CheckboxPlacement } from './checkbox.type';
+import type { CheckboxChangeEventDetail, CheckboxPlacement } from './checkbox.type';
+
+let checkboxIds = 0;
 
 /**
  * Toggles are switches that change the state of a single option.
@@ -223,7 +225,10 @@ export class Checkbox implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
@@ -249,5 +254,3 @@ export class Checkbox implements ComponentInterface {
     );
   }
 }
-
-let checkboxIds = 0;

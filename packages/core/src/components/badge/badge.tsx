@@ -1,6 +1,6 @@
 import { componentConfig, config } from '#config';
-import { Attributes, inheritAriaAttributes } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
 import type { BadgeAs, BadgeColor } from './badge.type';
 
@@ -74,8 +74,12 @@ export class Badge implements ComponentInterface {
 
     return (
       <Host>
-        <Tag class="badge" part="native" {...this.inheritedAttributes}>
-          <slot></slot>
+        <Tag
+          class="badge"
+          part="native"
+          {...this.inheritedAttributes}
+        >
+          <slot />
         </Tag>
       </Host>
     );

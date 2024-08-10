@@ -1,7 +1,7 @@
 import { componentConfig, config } from '#config';
-import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import { Size } from 'src/interface';
-import { LoadingType } from './loading.type';
+import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
+import type { Size } from 'src/interface';
+import type { LoadingType } from './loading.type';
 
 /**
  * Loading shows an animation to indicate that something is loading.

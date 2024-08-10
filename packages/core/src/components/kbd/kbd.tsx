@@ -1,6 +1,6 @@
 import { componentConfig, config } from '#config';
-import { Component, ComponentInterface, Host, Prop, h } from '@stencil/core';
-import { Size } from 'src/interface';
+import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
+import type { Size } from 'src/interface';
 
 /**
  * Kbd is used to display keyboard shortcuts.

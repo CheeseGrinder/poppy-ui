@@ -14,11 +14,11 @@ export const compareOptions = (
 ): boolean => {
   if (typeof compareWith === 'function') {
     return compareWith(currentValue, compareValue);
-  } else if (typeof compareWith === 'string') {
-    return currentValue[compareWith] === compareValue[compareWith];
-  } else {
-    return Array.isArray(compareValue) ? compareValue.includes(currentValue) : currentValue === compareValue;
   }
+  if (typeof compareWith === 'string') {
+    return currentValue[compareWith] === compareValue[compareWith];
+  }
+  return Array.isArray(compareValue) ? compareValue.includes(currentValue) : currentValue === compareValue;
 };
 
 /**
@@ -38,7 +38,6 @@ export const isOptionSelected = (
   }
   if (Array.isArray(currentValue)) {
     return currentValue.some(val => compareOptions(val, compareValue, compareWith));
-  } else {
-    return compareOptions(currentValue, compareValue, compareWith);
   }
+  return compareOptions(currentValue, compareValue, compareWith);
 };

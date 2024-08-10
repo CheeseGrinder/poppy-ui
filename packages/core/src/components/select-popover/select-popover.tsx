@@ -1,7 +1,7 @@
-import { Component, ComponentInterface, Fragment, Host, Prop, h } from '@stencil/core';
+import { Component, type ComponentInterface, Fragment, Host, Prop, h } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
-import { CheckboxCustomEvent } from '../checkbox/checkbox.type';
-import { RadioGroupCustomEvent } from '../radio-group/radio-group.type';
+import type { CheckboxCustomEvent } from '../checkbox/checkbox.type';
+import type { RadioGroupCustomEvent } from '../radio-group/radio-group.type';
 import type { SelectPopoverOption } from './select-popover.type';
 
 /**

@@ -1,4 +1,4 @@
-import { Color } from 'src/components';
+import type { Color } from 'src/components';
 
 export type InputFileColor = Color | 'ghost';
 

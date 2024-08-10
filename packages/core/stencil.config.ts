@@ -10,12 +10,11 @@ import type { JSX } from './src/components';
 type ComponentTag = keyof JSX.IntrinsicElements;
 type Bundle = { components: ComponentTag[] };
 
-
 type VueComponentModel = {
   elements: ComponentTag | ComponentTag[];
-  event: string
+  event: string;
   targetAttr: string;
-}
+};
 
 const componentCorePackage = '@poppy-ui/core';
 
@@ -32,9 +31,9 @@ export const config: Config = {
       importer: [
         sassAlias({
           path: 'src/themes',
-          alias: '@poppy'
-        })
-      ]
+          alias: '@poppy',
+        }),
+      ],
     }),
   ],
   bundles: <Bundle[]>[
@@ -71,7 +70,7 @@ export const config: Config = {
     componentConfigTarget(),
     {
       type: 'docs-json',
-      file: '../docs/core.json'
+      file: '../docs/core.json',
     },
     {
       type: 'docs-vscode',
@@ -90,17 +89,19 @@ export const config: Config = {
       esmLoaderPath: '../loader',
     },
     {
-      type: 'dist-hydrate-script'
+      type: 'dist-hydrate-script',
     },
     {
       type: 'dist-custom-elements',
       dir: 'components',
-      copy: [{
-        src: '../assets/custom-elements',
-        dest: 'components',
-        warn: true
-      }],
-      includeGlobalScripts: false
+      copy: [
+        {
+          src: '../assets/custom-elements',
+          dest: 'components',
+          warn: true,
+        },
+      ],
+      includeGlobalScripts: false,
     },
     vueOutputTarget({
       componentCorePackage: componentCorePackage,
@@ -112,12 +113,12 @@ export const config: Config = {
         {
           elements: ['pop-checkbox', 'pop-toggle'],
           targetAttr: 'checked',
-          event: 'pop-change'
+          event: 'pop-change',
         },
         {
           elements: ['pop-swap', 'pop-accordion-group'],
           targetAttr: 'active',
-          event: 'pop-change'
+          event: 'pop-change',
         },
         {
           elements: ['pop-radio', 'pop-radio-group', 'pop-select', 'pop-range'],
@@ -129,11 +130,11 @@ export const config: Config = {
           targetAttr: 'value',
           event: 'pop-input',
         },
-      ]
-    })
+      ],
+    }),
   ],
   testing: {
-    browserHeadless: "new",
+    browserHeadless: 'new',
   },
   extras: {
     /**
@@ -148,5 +149,5 @@ export const config: Config = {
      * the default behavior (slated for a future Stencil major version).
      */
     experimentalScopedSlotChanges: true,
-  }
+  },
 };

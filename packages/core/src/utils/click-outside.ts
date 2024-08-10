@@ -2,7 +2,7 @@
 // Since the maintenainer doesnt accept PR or push on this repo
 // I copy paste the code in case i need to make an evolution
 
-import { Build, ComponentInterface, getElement } from '@stencil/core';
+import { Build, type ComponentInterface, getElement } from '@stencil/core';
 
 declare type ClickOutsideDecorator = (target: ComponentInterface, propertyKey: string) => void;
 
@@ -121,7 +121,7 @@ function getExcludedNodes(opt: ClickOutsideOptions): Array<HTMLElement> {
 
 function isExcluded(target: HTMLElement, excudedNodes?: Array<HTMLElement>): boolean {
   if (target && excudedNodes) {
-    for (let excludedNode of excudedNodes) {
+    for (const excludedNode of excudedNodes) {
       if (excludedNode.contains(target)) {
         return true;
       }

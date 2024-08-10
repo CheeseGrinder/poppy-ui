@@ -1,10 +1,10 @@
-import { Attributes, inheritAttributes } from '#utils/helpers';
+import { type Attributes, inheritAttributes } from '#utils/helpers';
 import {
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Prop,
   State,

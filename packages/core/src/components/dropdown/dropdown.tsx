@@ -1,10 +1,20 @@
 import { componentConfig } from '#config';
 import { ClickOutside } from '#utils/click-outside';
-import { OverlayInterface } from '#utils/overlay';
-import { TriggerAction } from '#utils/trigger';
-import { Component, ComponentInterface, Element, Event, EventEmitter, Host, Method, Prop, h } from '@stencil/core';
+import type { OverlayInterface } from '#utils/overlay';
+import type { TriggerAction } from '#utils/trigger';
+import {
+  Component,
+  type ComponentInterface,
+  Element,
+  Event,
+  type EventEmitter,
+  Host,
+  Method,
+  Prop,
+  h,
+} from '@stencil/core';
 import { Show } from '../Show';
-import { DropdownAlign, DropdownSide } from './dropdown.type';
+import type { DropdownAlign, DropdownSide } from './dropdown.type';
 
 /**
  * Describe whats does the component
@@ -172,14 +182,26 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
           onMouseLeave={this.onBlur}
           ref={(el: HTMLDetailsElement) => (this.dropdown = el)}
         >
-          <summary part="trigger" class="dropdown-trigger" onClick={this.onClick} onContextMenu={this.onContext}>
+          <summary
+            part="trigger"
+            class="dropdown-trigger"
+            onClick={this.onClick}
+            onContextMenu={this.onContext}
+          >
             <slot name="trigger" />
           </summary>
-          <div part="content" class="dropdown-content">
+          <div
+            part="content"
+            class="dropdown-content"
+          >
             <slot />
           </div>
           <Show when={this.showBackdrop}>
-            <div part="backdrop" class="dropdown-backdrop" onClick={() => this.dismiss()}></div>
+            <div
+              part="backdrop"
+              class="dropdown-backdrop"
+              onClick={() => this.dismiss()}
+            />
           </Show>
         </details>
       </Host>

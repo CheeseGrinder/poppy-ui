@@ -1,4 +1,4 @@
-import { OverlayInterface } from './overlay';
+import type { OverlayInterface } from './overlay';
 
 export type TriggerAction = 'click' | 'hover' | 'context-menu';
 

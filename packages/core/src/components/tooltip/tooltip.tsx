@@ -56,7 +56,7 @@ export class Tooltip {
 
     return (
       <Host data-tip={value}>
-        <slot></slot>
+        <slot />
       </Host>
     );
   }

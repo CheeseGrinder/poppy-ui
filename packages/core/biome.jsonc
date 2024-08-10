@@ -1,0 +1,32 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "extends": ["../../biome.json"],
+  "formatter": {
+    "include": ["src/*", "plugins/*"]
+  },
+  "linter": {
+    "include": ["src/*", "plugins/*"],
+    "ignore": ["**/*.d.ts"],
+    "rules": {
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "noConfusingVoidType": "off"
+      },
+      "complexity": {
+        "noForEach": "warn" // Should be error before v1 for increase the performance
+      },
+      "correctness": {
+        "useJsxKeyInIterable": "off" // Stencil generate jsx key for us
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "warn", // Should be an error before release v1
+        "useValidAnchor": "off", // Anchor is used to trigger focus on element, for link purpose,
+        "noAutofocus": "off", // Auto focus is used for inputs components
+        "noSvgWithoutTitle": "off"
+      },
+      "style": {
+        "noParameterAssign": "off"
+      }
+    }
+  }
+}

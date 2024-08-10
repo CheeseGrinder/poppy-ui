@@ -1,12 +1,12 @@
 import { componentConfig } from '#config';
 import { componentOnReady, raf } from '#utils/helpers';
-import { OverlayInterface } from '#utils/overlay';
-import { TriggerAction, TriggerController } from '#utils/trigger';
+import type { OverlayInterface } from '#utils/overlay';
+import { type TriggerAction, TriggerController } from '#utils/trigger';
 import {
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -14,7 +14,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { ComponentProps, ComponentRef } from 'src/interface';
+import type { ComponentProps, ComponentRef } from 'src/interface';
 
 @Component({
   tag: 'pop-popover',
@@ -266,8 +266,15 @@ export class Popover implements ComponentInterface, OverlayInterface {
 
     return (
       <Host aria-modal="true">
-        <dialog popover={backdropDismiss ? '' : null} class="popover" ref={el => (this.dialogEl = el)}>
-          <div part="content" class="popover-content">
+        <dialog
+          popover={backdropDismiss ? '' : null}
+          class="popover"
+          ref={el => (this.dialogEl = el)}
+        >
+          <div
+            part="content"
+            class="popover-content"
+          >
             <slot />
           </div>
         </dialog>

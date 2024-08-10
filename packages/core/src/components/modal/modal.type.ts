@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentRef, FrameworkDelegate } from 'src/interface';
+import type { ComponentProps, ComponentRef, FrameworkDelegate } from 'src/interface';
 
 export interface ModalOptions<T extends ComponentRef = ComponentRef> {
   component: T;

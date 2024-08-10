@@ -1,6 +1,6 @@
 import { compareOptions } from '#utils/forms';
 import { hostContext } from '#utils/helpers';
-import { Component, ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
+import { Component, type ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
 import { ChevronDown } from '../ChevronDown';
 
 /**
@@ -114,13 +114,20 @@ export class Accordion implements ComponentInterface {
           'join-item': hostContext(host, 'pop-join'),
         }}
       >
-        <header part="header" class="accordion-title" onClick={this.onClick}>
+        <header
+          part="header"
+          class="accordion-title"
+          onClick={this.onClick}
+        >
           <div class="header-content">
             <slot name="header" />
           </div>
           <ChevronDown />
         </header>
-        <div part="content" class="accordion-content">
+        <div
+          part="content"
+          class="accordion-content"
+        >
           <slot />
         </div>
       </Host>

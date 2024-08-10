@@ -1,4 +1,4 @@
-import { FunctionalComponent } from '@stencil/core';
+import type { FunctionalComponent } from '@stencil/core';
 
 interface ShowProps {
   when: boolean;

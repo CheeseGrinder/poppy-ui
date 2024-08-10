@@ -1,21 +1,23 @@
 import { componentConfig, config } from '#config';
-import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
   Watch,
   h,
 } from '@stencil/core';
-import { Size } from 'src/interface';
+import type { Size } from 'src/interface';
 import { Show } from '../Show';
-import { InputFileChangeEventDetail, InputFileColor } from './input-file.type';
+import type { InputFileChangeEventDetail, InputFileColor } from './input-file.type';
+
+let inputIds = 0;
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -233,7 +235,10 @@ export class InputFile implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
@@ -268,5 +273,3 @@ export class InputFile implements ComponentInterface {
     );
   }
 }
-
-let inputIds = 0;

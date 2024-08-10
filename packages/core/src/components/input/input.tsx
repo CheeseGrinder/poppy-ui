@@ -1,12 +1,12 @@
 import { componentConfig, config } from '#config';
-import { Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -15,7 +15,9 @@ import {
 } from '@stencil/core';
 import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
 import { Show } from '../Show';
-import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
+import type { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
+
+let inputIds = 0;
 
 /**
  * Textarea allows users to enter text in multiple lines.
@@ -383,7 +385,7 @@ export class Input implements ComponentInterface {
   private onInput = (): void => {
     if (this.debounceTimer) {
       clearTimeout(this.debounceTimer);
-      delete this.debounceTimer;
+      this.debounceTimer = undefined;
     }
 
     this.debounceTimer = setTimeout(() => {
@@ -434,12 +436,19 @@ export class Input implements ComponentInterface {
       >
         <Show when={hasLabel}>
           <div class="label">
-            <label htmlFor={inputId} part="label">
+            <label
+              htmlFor={inputId}
+              part="label"
+            >
               <slot />
             </label>
           </div>
         </Show>
-        <label htmlFor={inputId} class="input-wrapper" part="wrapper">
+        <label
+          htmlFor={inputId}
+          class="input-wrapper"
+          part="wrapper"
+        >
           <slot name="start" />
           <input
             part="native"
@@ -492,5 +501,3 @@ export class Input implements ComponentInterface {
     );
   }
 }
-
-let inputIds = 0;

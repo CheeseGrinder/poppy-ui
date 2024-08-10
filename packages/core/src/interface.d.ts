@@ -1,4 +1,4 @@
-import { ComponentConfig, Config } from './config';
+import type { ComponentConfig, Config } from './config';
 
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';

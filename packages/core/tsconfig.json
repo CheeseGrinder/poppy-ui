@@ -4,10 +4,7 @@
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2023"
-    ],
+    "lib": ["dom", "es2023"],
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2021",
@@ -19,13 +16,9 @@
     "paths": {
       "#config": ["src/config"],
       "#global/*": ["src/global/*"],
-      "#utils/*": ["src/utils/*"],
+      "#utils/*": ["src/utils/*"]
     }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

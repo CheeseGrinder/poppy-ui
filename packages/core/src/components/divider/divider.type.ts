@@ -1,4 +1,4 @@
-import { Color } from 'src/components';
+import type { Color } from 'src/components';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
 export type DividerPlacement = 'left' | 'right' | 'start' | 'center' | 'end';

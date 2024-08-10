@@ -1,6 +1,8 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
 
+let selectOptionIds = 0;
+
 @Component({
   tag: 'pop-select-option',
   styleUrl: 'select-option.scss',
@@ -36,8 +38,11 @@ export class SelectOption {
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   render() {
-    return <Host role="option" id={this.inputId}></Host>;
+    return (
+      <Host
+        role="option"
+        id={this.inputId}
+      />
+    );
   }
 }
-
-let selectOptionIds = 0;

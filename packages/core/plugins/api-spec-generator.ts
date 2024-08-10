@@ -1,5 +1,5 @@
 import type { JsonDocsComponent, OutputTargetDocsCustom } from '@stencil/core/internal';
-import fs from 'fs';
+import fs from 'node:fs';
 
 interface ApiSpecOption {
   file: string;
@@ -7,7 +7,7 @@ interface ApiSpecOption {
 
 /**
  * Create a docs-custom output target
- * 
+ *
  * @param {object} opts opts
  * @param {string} opts.file Filename for the api spec
  * @returns {import('@stencil/core/internal').OutputTargetDocsCustom}
@@ -15,7 +15,7 @@ interface ApiSpecOption {
 export function apiSpecGenerator(opts: ApiSpecOption): OutputTargetDocsCustom {
   return {
     type: 'docs-custom',
-    generator: (docsData) => {
+    generator: docsData => {
       const content: string[] = [];
       docsData.components.forEach(cmp => generateComponent(cmp, content));
 
@@ -25,7 +25,7 @@ export function apiSpecGenerator(opts: ApiSpecOption): OutputTargetDocsCustom {
           resolve();
         });
       });
-    }
+    },
   };
 }
 
@@ -34,7 +34,9 @@ function generateComponent(component: JsonDocsComponent, content: string[]) {
   content.push(`${component.tag},${component.encapsulation}`);
 
   component.props.forEach(prop => {
-    content.push(`${component.tag},prop,${prop.name},${prop.type},${prop.default},${prop.required},${prop.reflectToAttr}`);
+    content.push(
+      `${component.tag},prop,${prop.name},${prop.type},${prop.default},${prop.required},${prop.reflectToAttr}`,
+    );
   });
   component.methods.forEach(prop => {
     content.push(`${component.tag},method,${prop.name},${prop.signature}`);

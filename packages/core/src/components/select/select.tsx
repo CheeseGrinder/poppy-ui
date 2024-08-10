@@ -1,14 +1,14 @@
 import { componentConfig, config } from '#config';
 import { compareOptions, isOptionSelected } from '#utils/forms';
-import { Attributes, hostContext, inheritAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
 import { popoverController } from '#utils/overlay';
 import {
   AttachInternals,
   Component,
-  ComponentInterface,
+  type ComponentInterface,
   Element,
   Event,
-  EventEmitter,
+  type EventEmitter,
   Host,
   Method,
   Prop,
@@ -19,8 +19,10 @@ import {
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
-import { SelectPopoverOption } from '../select-popover/select-popover.type';
+import type { SelectPopoverOption } from '../select-popover/select-popover.type';
 import type { SelectChangeEventDetail, SelectColor, SelectCompareFn } from './select.type';
+
+let selectIds = 0;
 
 @Component({
   tag: 'pop-select',
@@ -38,7 +40,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
-  @State() isExpanded: boolean = false;
+  @State() isExpanded = false;
 
   @State() errorText: string;
 
@@ -424,7 +426,11 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     const textPart = addPlaceholderClass ? 'placeholder' : 'text';
 
     return (
-      <div aria-hidden="true" class={{ 'select-placeholder': addPlaceholderClass }} part={textPart}>
+      <div
+        aria-hidden="true"
+        class={{ 'select-placeholder': addPlaceholderClass }}
+        part={textPart}
+      >
         {selectText}
       </div>
     );
@@ -435,6 +441,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     return (
       <button
+        type="button"
         disabled={disabled}
         id={inputId}
         aria-label={this.ariaLabel}
@@ -444,7 +451,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         ref={ref => (this.trigger = ref)}
-      ></button>
+      />
     );
   }
 
@@ -465,7 +472,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
         }}
       >
         <div class="label-text-wrapper">
-          <label htmlFor={inputId} part="label">
+          <label
+            htmlFor={inputId}
+            part="label"
+          >
             <slot name="label" />
           </label>
         </div>
@@ -502,7 +512,5 @@ const getOptionValue = (el: HTMLPopSelectOptionElement) => {
   const value = el.value;
   return value === undefined ? el.textContent || '' : value;
 };
-
-let selectIds = 0;
 
 const OPTION_CLASS = 'select-interface-option';

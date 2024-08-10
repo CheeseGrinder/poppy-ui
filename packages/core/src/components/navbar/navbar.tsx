@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h } from '@stencil/core';
+import { Component, type ComponentInterface, Host, h } from '@stencil/core';
 
 /**
  * Navbar is used to show a navigation bar on the top of the page.
