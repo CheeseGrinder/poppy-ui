@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@cheese-grinder/stencil-component-config": "^0.3.0-beta.2",
+    "@cheese-grinder/stencil-component-config": "^0.3.0",
     "@cheese-grinder/stencil-custom-readme": "^0.1.5",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
     "@stencil/sass": "^3.0.12",

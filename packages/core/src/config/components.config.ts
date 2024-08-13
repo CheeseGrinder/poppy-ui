@@ -1,4 +1,4 @@
-import { Configuration } from 'src/components-config';
+import type { Configuration } from 'src/components-config';
 
 type Options = Configuration.ComponentsConfig;
 
@@ -19,9 +19,9 @@ export class ComponentConfig {
 
   apply<Tag extends keyof Options>(ref: any, tag: Tag, defaultValue: Options[Tag] & Record<string, any>): void {
     const component = this.get(tag);
-    const uniqueKeys = new Set([...Object.keys(component!), ...Object.keys(defaultValue)]);
+    const uniqueKeys = new Set([...Object.keys(component), ...Object.keys(defaultValue)]);
 
-    [...uniqueKeys].forEach(key => (ref[key] ??= component![key] ?? defaultValue[key]));
+    [...uniqueKeys].forEach(key => (ref[key] ??= component[key] ?? defaultValue[key]));
   }
 
   setProp<Tag extends keyof Options, Prop extends keyof Options[Tag]>(
@@ -42,7 +42,7 @@ export class ComponentConfig {
     fallback?: Options[Tag][Prop],
   ): Options[Tag][Prop] {
     const config = this.get(component);
-    return config![prop] ?? (fallback as Options[Tag][Prop]);
+    return config[prop] ?? (fallback as Options[Tag][Prop]);
   }
 }
 
