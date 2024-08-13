@@ -1,34 +1,33 @@
-import type { Configuration } from 'src/components-config';
+import { Configuration } from 'src/components-config';
 
-type Config = Configuration.ComponentsConfig;
+type Options = Configuration.ComponentsConfig;
 
 export class ComponentConfig {
-  private config = new Map<keyof Config, any>();
+  private config = new Map<keyof Options, any>();
 
-  reset(Components: Config): void {
+  reset(Components: Options): void {
     this.config = new Map(Object.entries(Components) as any);
   }
 
-  set<Tag extends keyof Config>(component: Tag, config: Config[Tag]): void {
+  set<Tag extends keyof Options>(component: Tag, config: Options[Tag]): void {
     this.config.set(component, config);
   }
 
-  get<Tag extends keyof Config>(component: Tag, fallback: Config[Tag] = {} as Config[Tag]): Config[Tag] {
+  get<Tag extends keyof Options>(component: Tag, fallback: Options[Tag] = {} as Options[Tag]): Options[Tag] {
     return this.config.get(component) ?? fallback;
   }
 
-  apply(ref: any, tag: string, defaultValue: Record<string, any>): void;
-  apply<Tag extends keyof Config>(ref: any, tag: Tag, defaultValue: Config[Tag] & Record<string, any>): void {
+  apply<Tag extends keyof Options>(ref: any, tag: Tag, defaultValue: Options[Tag] & Record<string, any>): void {
     const component = this.get(tag);
-    const uniqueKeys = new Set([...Object.keys(component), ...Object.keys(defaultValue)]);
+    const uniqueKeys = new Set([...Object.keys(component!), ...Object.keys(defaultValue)]);
 
-    [...uniqueKeys].forEach(key => (ref[key] ??= component[key] ?? defaultValue[key]));
+    [...uniqueKeys].forEach(key => (ref[key] ??= component![key] ?? defaultValue[key]));
   }
 
-  setProp<Tag extends keyof Config, Prop extends keyof Config[Tag]>(
+  setProp<Tag extends keyof Options, Prop extends keyof Options[Tag]>(
     component: Tag,
     prop: Prop,
-    value: Config[Tag][Prop],
+    value: Options[Tag][Prop],
   ): void {
     const config = this.get(component);
     this.config.set(component, {
@@ -37,13 +36,13 @@ export class ComponentConfig {
     });
   }
 
-  getProp<Tag extends keyof Config, Prop extends keyof Config[Tag]>(
+  getProp<Tag extends keyof Options, Prop extends keyof Options[Tag]>(
     component: Tag,
     prop: Prop,
-    fallback?: Config[Tag][Prop],
-  ): Config[Tag][Prop] {
+    fallback?: Options[Tag][Prop],
+  ): Options[Tag][Prop] {
     const config = this.get(component);
-    return config[prop] ?? (fallback as Config[Tag][Prop]);
+    return config![prop] ?? (fallback as Options[Tag][Prop]);
   }
 }
 

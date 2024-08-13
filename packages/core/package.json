@@ -32,7 +32,13 @@
   "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/index.d.ts",
-  "files": ["components/", "css", "dist/", "hydrate/", "loader/"],
+  "files": [
+    "components/",
+    "css",
+    "dist/",
+    "hydrate/",
+    "loader/"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -60,15 +66,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@cheese-grinder/stencil-component-config": "^0.2.3-beta.1",
+    "@cheese-grinder/stencil-component-config": "^0.3.0-beta.2",
     "@cheese-grinder/stencil-custom-readme": "^0.1.5",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.8.9",
-    "@types/node": "~22.1.0",
+    "@types/node": "~22.2.0",
     "clean-css-cli": "^5.6.3",
     "rimraf": "^6.0.1",
     "sass": "^1.77.8",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.4"
   }
 }
