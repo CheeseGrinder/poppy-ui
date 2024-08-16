@@ -5,11 +5,15 @@ name: Build - Core
 
 on:
   push:
+    branches:
+      - main
     paths:
       - packages/core/**
   pull_request:
     branches:
       - main
+    paths:
+      - packages/core/**
 
 # When pushing a new commit we should
 # cancel the previous test run to not

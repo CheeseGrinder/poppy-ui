@@ -1,6 +1,8 @@
 name: 🐛 Bug Report
 description: Create a report to help us improve Poppy UI
-title: 'bug: '
+title: 'bug (package): '
+labels:
+ - bug
 
 body:
   - type: checkboxes

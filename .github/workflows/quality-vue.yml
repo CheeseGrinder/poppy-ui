@@ -5,12 +5,17 @@ name: Quality - Vue
 
 on:
   push:
+    branches:
+      - main
     paths:
       - packages/vue/**
       - packages/vue-*/**
   pull_request:
     branches:
       - main
+    paths:
+      - packages/vue/**
+      - packages/vue-*/**
 
 # When pushing a new commit we should
 # cancel the previous test run to not

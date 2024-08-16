@@ -66,7 +66,7 @@
         "useSingleVarDeclarator": "error"
       },
       "complexity": {
-        "noForEach": "off",
+        "noForEach": "error",
         "noUselessConstructor": "error",
         "noThisInStatic": "error",
         "noUselessEmptyExport": "error",

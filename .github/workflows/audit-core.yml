@@ -2,11 +2,15 @@ name: Audit - Core
 
 on:
   push:
+    branches:
+      - main
     paths:
       - packages/core/**
   pull_request:
     branches:
       - main
+    paths:
+      - packages/core/**
   schedule:
     # Run every Monday-Friday
     # at 6:00 UTC (6:00 am UTC)
