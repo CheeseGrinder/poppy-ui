@@ -90,7 +90,7 @@ function initClickOutside(
   component: ComponentInterface,
   element: HTMLElement,
   callback: () => void,
-  excludedNodes?: Array<HTMLElement>,
+  excludedNodes?: HTMLElement[],
 ) {
   const target = event.target as HTMLElement;
   if (!element.contains(target) && !isExcluded(target, excludedNodes)) {
@@ -98,14 +98,14 @@ function initClickOutside(
   }
 }
 
-function getTriggerEvents(opt: ClickOutsideOptions): Array<string> {
+function getTriggerEvents(opt: ClickOutsideOptions): string[] {
   if (opt.triggerEvents) {
     return opt.triggerEvents.split(',').map(e => e.trim());
   }
   return ['click'];
 }
 
-function getExcludedNodes(opt: ClickOutsideOptions): Array<HTMLElement> {
+function getExcludedNodes(opt: ClickOutsideOptions): HTMLElement[] {
   if (opt.exclude) {
     try {
       return Array.from(document.querySelectorAll(opt.exclude));
@@ -119,7 +119,7 @@ function getExcludedNodes(opt: ClickOutsideOptions): Array<HTMLElement> {
   return;
 }
 
-function isExcluded(target: HTMLElement, excudedNodes?: Array<HTMLElement>): boolean {
+function isExcluded(target: HTMLElement, excudedNodes?: HTMLElement[]): boolean {
   if (target && excudedNodes) {
     for (const excludedNode of excudedNodes) {
       if (excludedNode.contains(target)) {

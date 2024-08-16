@@ -24,10 +24,66 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noConfusingVoidType": "off",
+        "noDoubleEquals": "error",
+        "noFunctionAssign": "error",
+        "noSparseArray": "error",
+        "useIsArray": "error",
+        "useAwait": "off"
+      },
+      "correctness": {
+        "noUnusedPrivateClassMembers": "error",
+        "noUnnecessaryContinue": "error",
+        "noUnreachable": "error",
+        "noUnsafeOptionalChaining": "error",
+        "noVoidTypeReturn": "off",
+        "useIsNan": "error",
+        "useYield": "error"
+      },
+      "nursery": {
+        "noEmptyBlock": "error",
+        "noSubstr": "error",
+        "useDeprecatedReason": "error",
+        "useSemanticElements": "warn",
+        "useThrowOnlyError": "error"
+      },
+      "security": {
+        "noGlobalEval": "error"
+      },
+      "style": {
+        "useTemplate": "error",
+        "noImplicitBoolean": "warn",
+        "noUnusedTemplateLiteral": "error",
+        "noUselessElse": "error",
+        "noVar": "error",
+        "useConst": "error",
+        "useExportType": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "useSelfClosingElements": "error",
+        "useShorthandArrayType": "error",
+        "useSingleVarDeclarator": "error"
       },
       "complexity": {
-        "noForEach": "off"
+        "noForEach": "off",
+        "noUselessConstructor": "error",
+        "noThisInStatic": "error",
+        "noUselessEmptyExport": "error",
+        "noVoid": "off",
+        "useFlatMap": "error",
+        "useOptionalChain": "error",
+        "useRegexLiterals": "warn"
+      },
+      "a11y": {
+        "noRedundantRoles": "error",
+        "noRedundantAlt": "error",
+        "useAltText": "error",
+        "useButtonType": "error",
+        "useAriaPropsForRole": "error",
+        "useValidAriaProps": "error",
+        "useValidAriaRole": "error",
+        "useValidAriaValues": "error"
       }
     }
   },
@@ -42,6 +98,9 @@
       "bracketSameLine": false,
       "quoteStyle": "single",
       "attributePosition": "multiline"
+    },
+    "linter": {
+      "enabled": true
     }
   }
 }

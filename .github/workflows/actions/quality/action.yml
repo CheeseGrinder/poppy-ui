@@ -23,12 +23,12 @@ runs:
       shell: bash
 
     - name: Prettier
-      run: npm run format
+      run: npm run format -- --reporter=github
       working-directory: ./packages/${{ inputs.package }}
       shell: bash
 
     - name: Lint
-      run: npm run lint
+      run: npm run lint -- --reporter=github
       working-directory: ./packages/${{ inputs.package }}
       shell: bash
 

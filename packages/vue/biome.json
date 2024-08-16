@@ -41,9 +41,7 @@
         "noUnusedPrivateClassMembers": "error",
         "noUnusedVariables": "error",
         "useArrayLiterals": "off",
-        "useIsNan": "error",
-        "useValidForDirection": "error",
-        "useYield": "error"
+        "useValidForDirection": "error"
       },
       "style": {
         "noNamespace": "error",

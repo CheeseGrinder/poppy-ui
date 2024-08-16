@@ -10,7 +10,7 @@ log.txt
 *.tgz
 
 .idea/
-.vscode/
+.vscode/**
 !.vscode/extensions.json
 .sass-cache/
 .versions/
