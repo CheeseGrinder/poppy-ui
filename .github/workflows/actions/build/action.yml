@@ -18,8 +18,13 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Install Dependencies
-      run: npx lerna exec --scope @poppy-ui/${{ inputs.package }} npm install
+    - name: Install Package
+      run: npm install -w @poppy-ui/${{ inputs.package }}
+      shell: bash
+
+    - name: Install Core
+      if: inputs.package != 'core'
+      run: npm install -w @poppy-ui/${{ inputs.package }} @poppy-ui/core @poppy-ui/docs
       shell: bash
 
     - name: Build

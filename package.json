@@ -1,23 +1,25 @@
 {
   "name": "root",
   "private": true,
+  "version": "0.2.0-beta.2",
   "workspaces": [
     "packages/core",
     "packages/docs",
     "packages/vue"
   ],
   "scripts": {
+    "install:all": "npm run install:core && npm install:vue",
+    "install:core": "npm install -w @poppy-ui/core",
     "build:core": "cd packages/core && npm run build",
+    "install:vue": "npm install -w @poppy-ui/vue @poppy-ui/core ",
     "build:vue": "cd packages/vue && npm run build",
-    "lerna": "lerna",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "^20.14.2",
-    "audit-ci": "^7.1.0",
-    "lerna": "^8.1.3"
+    "audit-ci": "^7.1.0"
   },
   "engines": {
     "node": "20.x"
