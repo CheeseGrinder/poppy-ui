@@ -139,32 +139,24 @@ export class RadioGroup implements ComponentInterface {
   }
 
   componentDidLoad(): void {
-    this.radios.forEach(radio => {
+    for (const radio of this.radios) {
       radio.name = this.name;
-      if (this.required) radio.required = this.required;
-      if (this.disabled) radio.disabled = this.disabled;
-    });
-    this.applyColor();
-    this.applySize();
-    this.applyCheck();
-  }
 
-  private applyColor(): void {
-    if (!this.color) return;
-    this.radios
-      .filter(radio => !radio.color)
-      .forEach(radio => {
+      if (this.required) {
+        radio.required = this.required;
+      }
+      if (this.disabled) {
+        radio.disabled = this.disabled;
+      }
+      if (this.color) {
         radio.color = this.color;
-      });
-  }
-
-  private applySize(): void {
-    if (!this.size) return;
-    this.radios
-      .filter(radio => !radio.size)
-      .forEach(radio => {
+      }
+      if (this.size) {
         radio.size = this.size;
-      });
+      }
+    }
+
+    this.applyCheck();
   }
 
   private applyCheck(): void {

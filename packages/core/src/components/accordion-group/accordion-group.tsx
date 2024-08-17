@@ -66,10 +66,10 @@ export class AccordionGroup implements ComponentInterface {
   }
 
   componentDidLoad(): void {
-    this.accordions.forEach(accordion => {
+    for (const accordion of this.accordions) {
       if (this.readonly) accordion.readonly = this.readonly;
       if (this.disabled) accordion.disabled = this.disabled;
-    });
+    }
     this.applyOpen();
   }
 

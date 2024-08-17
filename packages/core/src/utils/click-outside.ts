@@ -54,7 +54,7 @@ export function registerClickOutside(
   opt: ClickOutsideOptions = ClickOutsideOptionsDefaults,
 ): void {
   const excludedNodes = getExcludedNodes(opt);
-  getTriggerEvents(opt).forEach(triggerEvent => {
+  for (const triggerEvent of getTriggerEvents(opt)) {
     window.addEventListener(
       triggerEvent,
       (e: Event) => {
@@ -62,7 +62,7 @@ export function registerClickOutside(
       },
       false,
     );
-  });
+  }
 }
 
 /**
@@ -74,7 +74,7 @@ export function removeClickOutside(
   callback: () => void,
   opt: ClickOutsideOptions = ClickOutsideOptionsDefaults,
 ): void {
-  getTriggerEvents(opt).forEach(triggerEvent => {
+  for (const triggerEvent of getTriggerEvents(opt)) {
     window.removeEventListener(
       triggerEvent,
       (e: Event) => {
@@ -82,7 +82,7 @@ export function removeClickOutside(
       },
       false,
     );
-  });
+  }
 }
 
 function initClickOutside(

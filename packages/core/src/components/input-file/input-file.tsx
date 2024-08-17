@@ -184,6 +184,7 @@ export class InputFile implements ComponentInterface {
   componentDidLoad(): void {
     const { value } = this;
     const files = Array.isArray(value) ? value : [value];
+
     files.forEach((file, idx) => (this.nativeInput.files[idx] = file));
   }
 

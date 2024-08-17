@@ -17,7 +17,9 @@ export function apiSpecGenerator(opts: ApiSpecOption): OutputTargetDocsCustom {
     type: 'docs-custom',
     generator: docsData => {
       const content: string[] = [];
-      docsData.components.forEach(cmp => generateComponent(cmp, content));
+      for (const component of docsData.components) {
+        generateComponent(component, content);
+      }
 
       const contentStr = content.join('\n');
       return new Promise(resolve => {
@@ -33,21 +35,21 @@ function generateComponent(component: JsonDocsComponent, content: string[]) {
   content.push('');
   content.push(`${component.tag},${component.encapsulation}`);
 
-  component.props.forEach(prop => {
+  for (const prop of component.props) {
     content.push(
       `${component.tag},prop,${prop.name},${prop.type},${prop.default},${prop.required},${prop.reflectToAttr}`,
     );
-  });
-  component.methods.forEach(prop => {
-    content.push(`${component.tag},method,${prop.name},${prop.signature}`);
-  });
-  component.events.forEach(prop => {
-    content.push(`${component.tag},event,${prop.event},${prop.detail},${prop.bubbles}`);
-  });
-  component.styles.forEach(prop => {
-    content.push(`${component.tag},css-prop,${prop.name}`);
-  });
-  component.parts.forEach(part => {
+  }
+  for (const method of component.methods) {
+    content.push(`${component.tag},method,${method.name},${method.signature}`);
+  }
+  for (const event of component.events) {
+    content.push(`${component.tag},event,${event.event},${event.detail},${event.bubbles}`);
+  }
+  for (const style of component.styles) {
+    content.push(`${component.tag},css-prop,${style.name}`);
+  }
+  for (const part of component.parts) {
     content.push(`${component.tag},part,${part.name}`);
-  });
+  }
 }
