@@ -17,15 +17,17 @@ export type Attributes = { [key: string]: any };
 export const inheritAttributes = (el: HTMLElement, attributes: string[] = []) => {
   const attributeObject: Attributes = {};
 
-  attributes.forEach(attr => {
-    if (el.hasAttribute(attr)) {
-      const value = el.getAttribute(attr);
-      if (value !== null) {
-        attributeObject[attr] = el.getAttribute(attr);
-      }
-      el.removeAttribute(attr);
+  for (const attr of attributes) {
+    if (!el.hasAttribute(attr)) {
+      continue;
     }
-  });
+
+    const value = el.getAttribute(attr);
+    if (value !== null) {
+      attributeObject[attr] = el.getAttribute(attr);
+    }
+    el.removeAttribute(attr);
+  }
 
   return attributeObject;
 };

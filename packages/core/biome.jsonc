@@ -12,9 +12,6 @@
         "noAssignInExpressions": "off",
         "noConfusingVoidType": "off"
       },
-      "complexity": {
-        "noForEach": "warn" // Should be error before v1 for increase the performance
-      },
       "correctness": {
         "useJsxKeyInIterable": "off" // Stencil generate jsx key for us
       },

@@ -21,7 +21,9 @@ export class ComponentConfig {
     const component = this.get(tag);
     const uniqueKeys = new Set([...Object.keys(component), ...Object.keys(defaultValue)]);
 
-    [...uniqueKeys].forEach(key => (ref[key] ??= component[key] ?? defaultValue[key]));
+    for (const key of uniqueKeys) {
+      ref[key] ??= component[key] ?? defaultValue[key];
+    }
   }
 
   setProp<Tag extends keyof Options, Prop extends keyof Options[Tag]>(
