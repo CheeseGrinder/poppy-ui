@@ -83,6 +83,7 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [{ src: '**/*.html' }, { src: '**/*.css' }]
     },
     {
       type: 'dist',
@@ -135,6 +136,10 @@ export const config: Config = {
   ],
   testing: {
     browserHeadless: 'new',
+    moduleNameMapper: {
+      "#config": ["<rootDir>/src/config"],
+    },
+    setupFilesAfterEnv: ['./jest.setup.js']
   },
   extras: {
     /**
