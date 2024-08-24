@@ -27,13 +27,23 @@ runs:
       run: npm install -w @poppy-ui/${{ inputs.package }} @poppy-ui/core @poppy-ui/docs
       shell: bash
 
-    - name: Prettier
-      run: npm run format -- --reporter=github
+      - name: Prettier
+      run: npm run format -- --reporter github
       working-directory: ./packages/${{ inputs.package }}
       shell: bash
 
     - name: Lint
-      run: npm run lint -- --reporter=github
+      run: npm run lint -- --reporter github
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Test
+      run: npm run test:spec --passWithNoTests --coverage
+      working-directory: ./packages/${{ inputs.package }}
+      shell: bash
+
+    - name: Test e2e
+      run: npm run test:e2e -- --pass-with-no-tests --reporter github
       working-directory: ./packages/${{ inputs.package }}
       shell: bash
 
