@@ -43,23 +43,27 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf -rf ./.stencil ./components ./css ./dist ./hydrate ./loader ./www",
+    "clean": "rimraf -rf ./.stencil ./components ./coverage ./css ./dist ./hydrate ./loader ./playwright-report ./www",
     "prebuild": "npm run clean",
     "build": "npm run build:css && npm run build:stencil",
     "build:stencil": "stencil build",
     "build:css": "npm run css:sass && npm run css:minify",
     "css:sass": "sass --embed-sources --style compressed src/css:./css",
     "css:minify": "cleancss -O2 -o ./css/poppy.bundle.css ./css/poppy.bundle.css",
-    "prestart": "npm run clean",
+    "prestart": "npm run clean && npm run build:css",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "npm run test:spec && npm run test:e2e",
+    "test:spec": "stencil test --spec --max-workers=2",
+    "test:watch": "stencil test --spec --e2e --watchAll",
+    "test:e2e": "npx playwright test",
+    "test:e2e:update-snapshots": "npm run test.e2e -- --update-snapshots",
     "generate": "stencil generate",
     "audit-ci": "audit-ci --config ./audit-ci.json",
     "format": "biome format",
     "format:fix": "biome format --write",
     "lint": "biome lint",
-    "lint:fix": "biome lint --write"
+    "lint:fix": "biome lint --write",
+    "stencil": "stencil"
   },
   "dependencies": {
     "@stencil/core": "^4.20.0"
@@ -67,12 +71,17 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@cheese-grinder/stencil-component-config": "^0.3.0",
-    "@cheese-grinder/stencil-custom-readme": "^0.1.5",
+    "@cheese-grinder/stencil-custom-readme": "^0.1.7",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
+    "@playwright/test": "^1.46.1",
+    "@stencil/playwright": "^0.2.0",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.8.9",
+    "@types/jest": "^29.5.12",
     "@types/node": "~22.2.0",
     "clean-css-cli": "^5.6.3",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
     "rimraf": "^6.0.1",
     "sass": "^1.77.8",
     "typescript": "^5.5.4"

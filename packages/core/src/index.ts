@@ -8,9 +8,9 @@
  * to consume components of this package as outlined in the `README.md`.
  */
 
-export * from './components';
-export { PoppyUserConfig } from './config';
-export * from './custom-type';
-export * from './interface';
+export type * from './components';
+export type { PoppyUserConfig } from './config';
+export type * from './custom-type';
+export type * from './interface';
 
 export { initialize } from './global/poppy';
