@@ -55,7 +55,10 @@ export class Range implements ComponentInterface {
   @Prop({ mutable: true }) value?: number | null;
   @Watch('value')
   onValueChange(value: number) {
-    this.internals.setFormValue(value.toString(), value.toString());
+    const data = new FormData();
+    data.set(this.name, value.toString());
+
+    this.internals.setFormValue(data, data);
   }
 
   /**

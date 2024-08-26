@@ -78,7 +78,9 @@ export class Input implements ComponentInterface {
   onValueChange() {
     const nativeInput = this.nativeInput;
     const value = this.getValue();
-    this.internals.setFormValue(value, value);
+    const data = new FormData();
+    data.set(this.name, value);
+    this.internals.setFormValue(data, data);
 
     if (nativeInput?.value !== value && !this.isComposing) {
       /**

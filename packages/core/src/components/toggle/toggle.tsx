@@ -82,8 +82,10 @@ export class Toggle implements ComponentInterface {
   @Watch('checked')
   onCheckedChange(checked: boolean): void {
     this.indeterminate = false;
+    const data = new FormData();
+    data.set(this.name, checked.toString());
 
-    this.internals.setFormValue(this.value, checked.toString());
+    this.internals.setFormValue(data, data);
     this.popChange.emit({
       checked,
       value: this.value || '',

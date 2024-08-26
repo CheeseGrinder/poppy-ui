@@ -41,9 +41,12 @@ export class RadioGroup implements ComponentInterface {
   @Prop({ mutable: true }) value?: any | null;
   @Watch('value')
   onValueChange(value: any) {
-    this.internals.setFormValue(value, value);
+    const data = new FormData();
+    data.set(this.name, value);
+
+    this.internals.setFormValue(data, data);
     this.popValueChange.emit({
-      value: value,
+      value,
     });
     this.popChange.emit({
       value,

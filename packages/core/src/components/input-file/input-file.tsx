@@ -59,7 +59,10 @@ export class InputFile implements ComponentInterface {
   @Prop({ mutable: true }) value?: File | File[] | null;
   @Watch('value')
   onValueChange(file: File): void {
-    this.internals.setFormValue(file, file);
+    const data = new FormData();
+    data.set(this.name, file);
+
+    this.internals.setFormValue(data, data);
   }
 
   /**

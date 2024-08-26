@@ -68,7 +68,10 @@ export class Textarea implements ComponentInterface {
   @Prop({ mutable: true }) value?: string | null = '';
   @Watch('value')
   onValueChange(value: string): void {
-    this.internals.setFormValue(value, value);
+    const data = new FormData();
+    data.set(this.name, value);
+
+    this.internals.setFormValue(data, data);
   }
 
   /**

@@ -69,7 +69,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       return;
     }
 
-    this.internals.setFormValue(value, value);
+    const data = new FormData();
+    data.set(this.name, value);
+
+    this.internals.setFormValue(data, data);
     this.popChange.emit({ value });
   }
 
