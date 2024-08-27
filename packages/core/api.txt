@@ -259,7 +259,10 @@ pop-modal,method,dismiss,dismiss(data: any) => Promise<boolean>
 pop-modal,method,present,present() => Promise<boolean>
 pop-modal,event,didDismiss,void,true
 pop-modal,event,didPresent,void,true
-pop-modal,part,{name}
+pop-modal,part,actions
+pop-modal,part,backdrop
+pop-modal,part,content
+pop-modal,part,modal
 
 pop-navbar,shadow
 pop-navbar,part,header
