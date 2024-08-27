@@ -1,9 +1,18 @@
+#!/bin/bash
+
+function check() {
+    npx -w @poppy-ui/$1 @biomejs/biome $2
+
+    if (( $? != 0 )); then
+        echo "Forgot to run $2 on $1 ?"
+        exit 1
+    fi
+}
+
 # Core
-cd packages/core
-npm run format
-npm run lint
+check "core" "format"
+check "core" "lint"
 
 # Vue
-cd ../vue
-npm run format
-npm run lint
+check "vue" "format"
+check "vue" "lint"
