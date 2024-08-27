@@ -17,11 +17,15 @@ import type { ComponentProps, ComponentRef } from 'src/interface';
 import { Show } from '../Show';
 
 /**
- * Describe whats does the component
+ * Modal is used to show a dialog or a box when you click on the trigger element.
  *
- * @part {name} - // Describe css part
+ * @part modal - Native `dialog` element
+ * @part content - The modal content
+ * @part actions - The modal actions
+ * @part backdrop - The modal backdrop
  *
- * @slot - // Describe slot content
+ * @slot - Modal content
+ * @slot actions - Modal actions
  */
 @Component({
   tag: 'pop-modal',
@@ -145,6 +149,11 @@ export class Modal implements ComponentInterface, OverlayInterface {
     this.dialogObserver.disconnect();
   }
 
+  /**
+   * Open the modal
+   *
+   * @returns `true` if the modal has been opened, otherwise `false`.
+   */
   @Method()
   async present(): Promise<boolean> {
     const { open } = this;
@@ -158,8 +167,9 @@ export class Modal implements ComponentInterface, OverlayInterface {
 
   /**
    * Close the modal
+   *
    * @param data Data to return on close
-   * @returns `true` if the modal has been closed, otherwise `false`
+   * @returns `true` if the modal has been closed, otherwise `false`.
    */
   @Method()
   async dismiss(data: any): Promise<boolean> {
@@ -175,12 +185,19 @@ export class Modal implements ComponentInterface, OverlayInterface {
       <Host>
         <dialog
           class="modal"
+          part="modal"
           ref={el => (this.dialog = el)}
         >
-          <div class="modal-content">
+          <div
+            class="modal-content"
+            part="content"
+          >
             <slot />
 
-            <div class="modal-actions">
+            <div
+              class="modal-actions"
+              part="actions"
+            >
               <slot name="actions" />
             </div>
           </div>
@@ -188,6 +205,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
             <form
               method="dialog"
               class="modal-backdrop"
+              part="backdrop"
             >
               <button type="submit">close</button>
             </form>

@@ -6,7 +6,7 @@
 
 ## Overview
 
-Describe whats does the component
+Modal is used to show a dialog or a box when you click on the trigger element.
 
 ## Properties
 
@@ -44,31 +44,35 @@ Close the modal
 
 Type: `Promise<boolean>`
 
-`true` if the modal has been closed, otherwise `false`
+`true` if the modal has been closed, otherwise `false`.
 
 ### `present() => Promise<boolean>`
 
-
+Open the modal
 
 #### Returns
 
 Type: `Promise<boolean>`
 
-
+`true` if the modal has been opened, otherwise `false`.
 
 
 ## Slots
 
-| Slot | Description              |
-| ---- | ------------------------ |
-|      | // Describe slot content |
+| Slot        | Description   |
+| ----------- | ------------- |
+|             | Modal content |
+| `"actions"` | Modal actions |
 
 
 ## Parts
 
-| Part       | Description          |
-| ---------- | -------------------- |
-| `"{name}"` | // Describe css part |
+| Part         | Description             |
+| ------------ | ----------------------- |
+| `"actions"`  | The modal actions       |
+| `"backdrop"` | The modal backdrop      |
+| `"content"`  | The modal content       |
+| `"modal"`    | Native `dialog` element |
 
 
 ----------------------------------------------

@@ -713,7 +713,7 @@ export namespace Components {
         "type": MaskType;
     }
     /**
-     * Describe whats does the component
+     * Modal is used to show a dialog or a box when you click on the trigger element.
      */
     interface PopModal {
         /**
@@ -733,7 +733,7 @@ export namespace Components {
         /**
           * Close the modal
           * @param data Data to return on close
-          * @returns `true` if the modal has been closed, otherwise `false`
+          * @returns `true` if the modal has been closed, otherwise `false`.
          */
         "dismiss": (data: any) => Promise<boolean>;
         /**
@@ -742,6 +742,10 @@ export namespace Components {
           * @default false
          */
         "open"?: boolean;
+        /**
+          * Open the modal
+          * @returns `true` if the modal has been opened, otherwise `false`.
+         */
         "present": () => Promise<boolean>;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
@@ -1708,7 +1712,7 @@ declare global {
         "didDismiss": void;
     }
     /**
-     * Describe whats does the component
+     * Modal is used to show a dialog or a box when you click on the trigger element.
      */
     interface HTMLPopModalElement extends Components.PopModal, HTMLStencilElement {
         addEventListener<K extends keyof HTMLPopModalElementEventMap>(type: K, listener: (this: HTMLPopModalElement, ev: PopModalCustomEvent<HTMLPopModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2668,7 +2672,7 @@ declare namespace LocalJSX {
         "type"?: MaskType;
     }
     /**
-     * Describe whats does the component
+     * Modal is used to show a dialog or a box when you click on the trigger element.
      */
     interface PopModal {
         /**
@@ -3502,7 +3506,7 @@ declare module "@stencil/core" {
              */
             "pop-mask": LocalJSX.PopMask & JSXBase.HTMLAttributes<HTMLPopMaskElement>;
             /**
-             * Describe whats does the component
+             * Modal is used to show a dialog or a box when you click on the trigger element.
              */
             "pop-modal": LocalJSX.PopModal & JSXBase.HTMLAttributes<HTMLPopModalElement>;
             /**
