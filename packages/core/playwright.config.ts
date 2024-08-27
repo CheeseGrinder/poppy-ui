@@ -86,8 +86,8 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects,
   webServer: {
-    command: 'serve -p 3333',
-    port: 3333,
+    command: 'npm start -- --config stencil.test.config.ts',
+    port: 2222,
     reuseExistingServer: !process.env.CI
   }
 };

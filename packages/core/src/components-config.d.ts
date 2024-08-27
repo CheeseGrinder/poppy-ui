@@ -190,11 +190,18 @@ export namespace Configuration {
       open?: boolean;
     };
     'pop-dropdown'?: {
+      /**
+       * Describe where the content is displayed relatively to the trigger element
+       * - `"left"`: Open on left
+       * - `"right"`: Open on right
+       * - `"top"`: Open on top
+       * - `"bottom"`: Open on bottom
+       */
       side?: DropdownSide;
       /**
        * Describes how the dropdown has to be alined
-       * - "start": Align to the left in LTR and to the right in RTL.
-       * - "end": Align to the right in LTR and to the left in RTL.
+       * - `"start"`: Align to the left in LTR and to the right in RTL.
+       * - `"end"`: Align to the right in LTR and to the left in RTL.
        */
       align?: DropdownAlign;
       /**

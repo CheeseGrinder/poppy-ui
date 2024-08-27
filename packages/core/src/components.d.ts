@@ -341,11 +341,11 @@ export namespace Components {
         "triggerAction"?: TriggerAction;
     }
     /**
-     * Describe whats does the component
+     * Dropdown can open a menu or any other element when the trigger element is clicked.
      */
     interface PopDropdown {
         /**
-          * Describes how the dropdown has to be alined - "start": Align to the left in LTR and to the right in RTL. - "end": Align to the right in LTR and to the left in RTL.
+          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
           * @config 
           * @default "start"
          */
@@ -356,6 +356,10 @@ export namespace Components {
           * @default 100
          */
         "debounce"?: number;
+        /**
+          * Close the dropdown.
+          * @returns return `true` if the dropdown has been closed, otherwise `false`.
+         */
         "dismiss": () => Promise<boolean>;
         /**
           * Force the dropdown to be shown
@@ -363,6 +367,10 @@ export namespace Components {
           * @default false
          */
         "open"?: boolean;
+        /**
+          * Open the dropdown.
+          * @returns return `true` if the dropdown has been opened, otherwise `false`.
+         */
         "present": () => Promise<boolean>;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
@@ -371,6 +379,7 @@ export namespace Components {
          */
         "showBackdrop"?: boolean;
         /**
+          * Describe where the content is displayed relatively to the trigger element - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
           * @config 
           * @default "bottom"
          */
@@ -1556,7 +1565,7 @@ declare global {
         "didDismiss": void;
     }
     /**
-     * Describe whats does the component
+     * Dropdown can open a menu or any other element when the trigger element is clicked.
      */
     interface HTMLPopDropdownElement extends Components.PopDropdown, HTMLStencilElement {
         addEventListener<K extends keyof HTMLPopDropdownElementEventMap>(type: K, listener: (this: HTMLPopDropdownElement, ev: PopDropdownCustomEvent<HTMLPopDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2257,11 +2266,11 @@ declare namespace LocalJSX {
         "triggerAction"?: TriggerAction;
     }
     /**
-     * Describe whats does the component
+     * Dropdown can open a menu or any other element when the trigger element is clicked.
      */
     interface PopDropdown {
         /**
-          * Describes how the dropdown has to be alined - "start": Align to the left in LTR and to the right in RTL. - "end": Align to the right in LTR and to the left in RTL.
+          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
           * @config 
           * @default "start"
          */
@@ -2293,6 +2302,7 @@ declare namespace LocalJSX {
          */
         "showBackdrop"?: boolean;
         /**
+          * Describe where the content is displayed relatively to the trigger element - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
           * @config 
           * @default "bottom"
          */
@@ -3456,7 +3466,7 @@ declare module "@stencil/core" {
              */
             "pop-drawer": LocalJSX.PopDrawer & JSXBase.HTMLAttributes<HTMLPopDrawerElement>;
             /**
-             * Describe whats does the component
+             * Dropdown can open a menu or any other element when the trigger element is clicked.
              */
             "pop-dropdown": LocalJSX.PopDropdown & JSXBase.HTMLAttributes<HTMLPopDropdownElement>;
             "pop-img": LocalJSX.PopImg & JSXBase.HTMLAttributes<HTMLPopImgElement>;
