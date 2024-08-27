@@ -133,7 +133,6 @@ pop-dropdown,part,backdrop
 pop-dropdown,part,content
 pop-dropdown,part,dropdown
 pop-dropdown,part,trigger
-pop-dropdown,part,{name}
 
 pop-img,shadow
 pop-img,prop,alt,string,undefined,false,false

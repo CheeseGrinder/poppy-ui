@@ -17,11 +17,14 @@ import { Show } from '../Show';
 import type { DropdownAlign, DropdownSide } from './dropdown.type';
 
 /**
- * Describe whats does the component
+ * Dropdown can open a menu or any other element when the trigger element is clicked.
  *
- * @part {name} - // Describe css part
+ * @part dropdown - Native `details` element
+ * @part trigger - Native `summary` element
+ * @part content - Dropdown content
+ * @part backdrop - Backdrop element
  *
- * @slot - // Describe slot content
+ * @slot trigger - Content that trigger the dropdown to open
  */
 @Component({
   tag: 'pop-dropdown',
@@ -35,7 +38,11 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   @Element() host: HTMLElement & OverlayInterface;
 
   /**
-   *
+   * Describe where the content is displayed relatively to the trigger element
+   * - `"left"`: Open on left
+   * - `"right"`: Open on right
+   * - `"top"`: Open on top
+   * - `"bottom"`: Open on bottom
    *
    * @config
    * @default "bottom"
@@ -44,8 +51,8 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
 
   /**
    * Describes how the dropdown has to be alined
-   * - "start": Align to the left in LTR and to the right in RTL.
-   * - "end": Align to the right in LTR and to the left in RTL.
+   * - `"start"`: Align to the left in LTR and to the right in RTL.
+   * - `"end"`: Align to the right in LTR and to the left in RTL.
    *
    * @config
    * @default "start"
@@ -118,6 +125,11 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     }
   }
 
+  /**
+   * Open the dropdown.
+   *
+   * @returns {Promise<boolean>} return `true` if the dropdown has been opened, otherwise `false`.
+   */
   @Method()
   async present(): Promise<boolean> {
     const { open } = this;
@@ -127,6 +139,11 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     return true;
   }
 
+  /**
+   * Close the dropdown.
+   *
+   * @returns {Promise<boolean>} return `true` if the dropdown has been closed, otherwise `false`.
+   */
   @Method()
   async dismiss(): Promise<boolean> {
     const { open } = this;
