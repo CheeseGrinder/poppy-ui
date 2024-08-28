@@ -19,32 +19,29 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Package
-      run: npm install -w @poppy-ui/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} install
       shell: bash
 
     - name: Install Core
       if: inputs.package != 'core'
-      run: npm install -w @poppy-ui/${{ inputs.package }} @poppy-ui/core @poppy-ui/docs
+      run: npm -w @poppy-ui/${{ inputs.package }} install @poppy-ui/core @poppy-ui/docs
       shell: bash
 
     - name: Build
-      run: npm run build --if-present
-      working-directory: ./packages/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} run build --if-present
       shell: bash
 
     - name: Pack
-      run: npm pack
-      working-directory: ./packages/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} pack
       shell: bash
 
     - name: Rename tarball
       run: |
         PKG=$(ls poppy-ui-${{ inputs.package }}-*.tgz)
         mv $PKG poppy-ui-${{ inputs.package }}.tgz
-      working-directory: ./packages/${{ inputs.package }}
       shell: bash
 
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.package }}-${{ inputs.node-version }}
-        path: ./packages/${{ inputs.package }}/poppy-ui-${{ inputs.package }}-${{ inputs.node-version }}.tgz
+        path: ./poppy-ui-${{ inputs.package }}-${{ inputs.node-version }}.tgz

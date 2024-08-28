@@ -19,6 +19,5 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - run: npx audit-ci@latest --config ./audit-ci.json
-      working-directory: ./packages/${{ inputs.package }}
+    - run: npx -w @poppy-ui/${{ inputs.package }} audit-ci@latest --config ./audit-ci.json
       shell: bash

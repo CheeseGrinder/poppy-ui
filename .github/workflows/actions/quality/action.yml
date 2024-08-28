@@ -19,32 +19,28 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Package
-      run: npm install -w @poppy-ui/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} install
       shell: bash
 
     - name: Install Core
       if: inputs.package != 'core'
-      run: npm install -w @poppy-ui/${{ inputs.package }} @poppy-ui/core @poppy-ui/docs
+      run: npm -w @poppy-ui/${{ inputs.package }} install @poppy-ui/core @poppy-ui/docs
       shell: bash
 
     - name: Format
-      run: npx @biomejs/biome format --reporter github
-      working-directory: ./packages/${{ inputs.package }}
+      run: npx -w @poppy-ui/${{ inputs.package }} @biomejs/biome format --reporter github
       shell: bash
 
     - name: Lint
-      run: npx @biomejs/biome lint --reporter github
-      working-directory: ./packages/${{ inputs.package }}
+      run: npx -w @poppy-ui/${{ inputs.package }} @biomejs/biome lint --reporter github
       shell: bash
 
     - name: Test
-      run: npm run test:spec -- --passWithNoTests --coverage
-      working-directory: ./packages/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} run test:spec --if-present -- --passWithNoTests --coverage
       shell: bash
 
     - name: Test e2e
-      run: npm run test:e2e -- --pass-with-no-tests --reporter github
-      working-directory: ./packages/${{ inputs.package }}
+      run: npm -w @poppy-ui/${{ inputs.package }} run test:e2e --if-present -- --pass-with-no-tests --reporter github
       shell: bash
 
     - name: Scan

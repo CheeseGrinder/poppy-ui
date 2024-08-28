@@ -62,8 +62,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install core
-        working-directory: ./packages/vue
-        run: npm i ../core/poppy-ui-core.tgz
+        run: npm -w @poppy-ui/vue install poppy-ui-core.tgz
 
       - name: Build Vue
         uses: ./.github/workflows/actions/build
