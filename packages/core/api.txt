@@ -107,6 +107,8 @@ pop-drawer,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false
 pop-drawer,method,dismiss,dismiss() => Promise<boolean>
 pop-drawer,method,present,present() => Promise<boolean>
 pop-drawer,method,toggle,toggle() => Promise<void>
+pop-drawer,event,popDidDismiss,void,true
+pop-drawer,event,popDidPresent,void,true
 pop-drawer,css-prop,--background
 pop-drawer,css-prop,--background-backdrop
 pop-drawer,css-prop,--color
