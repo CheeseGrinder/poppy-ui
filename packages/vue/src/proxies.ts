@@ -132,7 +132,9 @@ export const PopDrawer = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawe
   'trigger',
   'triggerAction',
   'side',
-  'open'
+  'open',
+  'popDidPresent',
+  'popDidDismiss'
 ]);
 
 

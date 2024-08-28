@@ -18,6 +18,14 @@ Drawer is a grid layout that can show/hide a sidebar on the left or right side o
 | `triggerAction` | `trigger-action` | Describes what kind of interaction with the trigger that should<br> cause the sidebar to open. Does not apply when the `trigger` property is `undefined`.<br> - `"click"`: the sidebar will be presented when the trigger is left clicked.<br> - `"hover"`: the sidebar will be presented when a pointer hovers over the trigger.<br> - `"context-menu"`: the sidebar will be presented when the trigger is right<br> clicked on desktop and long pressed on mobile. This will also prevent your<br> device's normal context menu from appearing. | `"click" \| "context-menu" \| "hover"` | `"click"`   |
 
 
+## Events
+
+| Event           | Description                              | Type                |
+| --------------- | ---------------------------------------- | ------------------- |
+| `popDidDismiss` | Emitted when the drawer has been opened. | `CustomEvent<void>` |
+| `popDidPresent` | Emitted when the drawer has been opened. | `CustomEvent<void>` |
+
+
 ## Methods
 
 ### `dismiss() => Promise<boolean>`

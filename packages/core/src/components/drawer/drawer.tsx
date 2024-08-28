@@ -2,7 +2,18 @@ import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
 import type { OverlayInterface } from '#utils/overlay';
 import { type TriggerAction, TriggerController } from '#utils/trigger';
-import { Component, type ComponentInterface, Element, Host, Method, Prop, Watch, h } from '@stencil/core';
+import {
+  Component,
+  type ComponentInterface,
+  Element,
+  Event,
+  type EventEmitter,
+  Host,
+  Method,
+  Prop,
+  Watch,
+  h,
+} from '@stencil/core';
 import type { DrawerSide } from './drawer.type';
 
 /**
@@ -73,6 +84,23 @@ export class Drawer implements ComponentInterface, OverlayInterface {
    * @default false
    */
   @Prop({ reflect: true, mutable: true }) open?: boolean;
+  @Watch('open') onOpenChange(isOpen: boolean): void {
+    if (isOpen) {
+      this.popDidPresent.emit();
+      return;
+    }
+    this.popDidDismiss.emit();
+  }
+
+  /**
+   * Emitted when the drawer has been opened.
+   */
+  @Event() popDidPresent: EventEmitter<void>;
+
+  /**
+   * Emitted when the drawer has been opened.
+   */
+  @Event() popDidDismiss: EventEmitter<void>;
 
   connectedCallback(): void {
     const { trigger } = this;

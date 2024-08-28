@@ -1367,6 +1367,10 @@ export interface PopCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLPopCheckboxElement;
 }
+export interface PopDrawerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLPopDrawerElement;
+}
 export interface PopDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLPopDropdownElement;
@@ -1555,10 +1559,22 @@ declare global {
         prototype: HTMLPopDividerElement;
         new (): HTMLPopDividerElement;
     };
+    interface HTMLPopDrawerElementEventMap {
+        "popDidPresent": void;
+        "popDidDismiss": void;
+    }
     /**
      * Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page.
      */
     interface HTMLPopDrawerElement extends Components.PopDrawer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLPopDrawerElementEventMap>(type: K, listener: (this: HTMLPopDrawerElement, ev: PopDrawerCustomEvent<HTMLPopDrawerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLPopDrawerElementEventMap>(type: K, listener: (this: HTMLPopDrawerElement, ev: PopDrawerCustomEvent<HTMLPopDrawerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLPopDrawerElement: {
         prototype: HTMLPopDrawerElement;
@@ -2246,6 +2262,14 @@ declare namespace LocalJSX {
      * Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page.
      */
     interface PopDrawer {
+        /**
+          * Emitted when the drawer has been opened.
+         */
+        "onPopDidDismiss"?: (event: PopDrawerCustomEvent<void>) => void;
+        /**
+          * Emitted when the drawer has been opened.
+         */
+        "onPopDidPresent"?: (event: PopDrawerCustomEvent<void>) => void;
         /**
           * Forces the drawer to be open
           * @config 
