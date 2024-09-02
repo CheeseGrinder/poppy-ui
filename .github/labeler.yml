@@ -8,30 +8,30 @@
 'package: core':
   - changed-files:
     - any-glob-to-any-file:
-      - 'packages/core/**/*'
+      - packages/core/**/*
 
 'package: angular':
   - changed-files:
     - any-glob-to-any-file: 
-      - 'packages/angular/**/*'
-      - 'packages/angular-*/**/*'
+      - packages/angular/**/*
+      - packages/angular-*/**/*
 
 'package: react':
   - changed-files:
     - any-glob-to-any-file: 
-      - 'packages/react/**/*'
-      - 'packages/react-*/**/*'
+      - packages/react/**/*
+      - packages/react-*/**/*
 
 'package: vue':
   - changed-files:
     - any-glob-to-any-file: 
-      - 'packages/vue/**/*'
-      - 'packages/vue-*/**/*'
+      - packages/vue/**/*
+      - packages/vue-*/**/*
 
 'dependencies':
   - changed-files:
     - any-glob-to-any-file:
-      - './**/package.json'
+      - ./**/package.json
 
 'performance':
   - head-branch:
