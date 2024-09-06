@@ -37,7 +37,7 @@ let textareaIds = 0;
 export class Textarea implements ComponentInterface {
   private inputId = `pop-textarea-${textareaIds++}`;
   private inheritedAttributes: Attributes;
-  private resizeObserver: MutationObserver;
+  private resizeObserver?: MutationObserver;
 
   private nativeInput!: HTMLTextAreaElement;
   private debounceTimer: NodeJS.Timeout;
@@ -59,11 +59,9 @@ export class Textarea implements ComponentInterface {
   @Prop() placeholder?: string;
 
   /**
-   * The value of the toggle does not mean if it's checked or not, use the `checked`
-   * property for that.
+   * The value of the textarea.
    *
-   * The value of a toggle is analogous to the value of a `<input type="checkbox">`,
-   * it's only used when the toggle participates in a native `<form>`.
+   * @default ""
    */
   @Prop({ mutable: true }) value?: string | null = '';
   @Watch('value')
@@ -134,7 +132,9 @@ export class Textarea implements ComponentInterface {
 
   /**
    * A hint to the browser for which virtual keyboard to display.
-   * Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+   *
+   * @config
+   * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
    */
   @Prop() keyboard?: KeyboardType;
 
@@ -142,13 +142,8 @@ export class Textarea implements ComponentInterface {
    * A hint to the browser for which keyboard to display.
    * That specifies what action label (or icon) to present for the enter key on virtual keyboards.
    *
-   * - `enter`: Typically Inserting a new line.
-   * - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed.
-   * - `go`: Typically meaning to take the user to the target of the text they typed.
-   * - `next`: Typically taking the user to the next field that will accept text.
-   * - `previous`: Typically taking the user to the previous field that will accept text.
-   * - `search`: Typically taking the user to the results of searching for the text they have typed.
-   * - `send`: Typically delivering the text to its target.
+   * @config
+   * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
    */
   @Prop() enterkeyhint?: EnterKeyHint;
 
@@ -165,26 +160,23 @@ export class Textarea implements ComponentInterface {
    * This features work only on mobile and tablet devices.
    * By default the User Agent and input make their own determination.
    *
-   * - `off` or `none`: No autocapitalization is applied (all letters default to lowercase)
-   * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
-   * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
-   * - `characters`: All letters should default to uppercase
-   *
    * @config
    * @default "off"
+   *
+   * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
    */
   @Prop({ mutable: true }) autoCapitalize?: AutoCapitalize;
 
   /**
    * Indicates how the control wraps text.
    *
-   * - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering).
-   * - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.
-   *
    * If wrap attribute is in the `hard` state, the `cols` property must be specified.
    *
    * @config
    * @default "soft"
+   *
+   * @see cols
+   * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
    */
   @Prop({ mutable: true }) wrap?: Wrap;
 
@@ -316,7 +308,7 @@ export class Textarea implements ComponentInterface {
 
   disconnectedCallback(): void {
     clearTimeout(this.debounceTimer);
-    this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
   }
 
   /**

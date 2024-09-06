@@ -20,7 +20,7 @@ import type { InputFileChangeEventDetail, InputFileColor } from './input-file.ty
 let inputIds = 0;
 
 /**
- * Textarea allows users to enter text in multiple lines.
+ * File Input is a an input field for uploading files.
  *
  * @slot - Slot for the content of the label
  *
@@ -133,18 +133,17 @@ export class InputFile implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
-   * Text that is placed under the textarea and displayed when no error is detected.
+   * Text that is placed under the input-file and displayed when no error is detected.
    */
   @Prop() helperText: string;
 
   /**
-   * Text that is placed under the textarea and displayed when an error is detected.
+   * Text that is placed under the input-file and displayed when an error is detected.
    */
   @Prop() errorText: string;
 
   /**
-   * The `popChange` event is fired when the user modifies the textarea's value.
-   * Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified.
+   * The `popChange` event is fired when the user modifies the input-file's value.
    */
   @Event() popChange: EventEmitter<InputFileChangeEventDetail>;
 
@@ -196,8 +195,8 @@ export class InputFile implements ComponentInterface {
   }
 
   /**
-   * Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global
-   * `textarea.focus()`.
+   * Sets focus on the native `input` in `pop-input-file`. Use this method instead of the global
+   * `input.focus()`.
    */
   @Method()
   async setFocus(): Promise<void> {

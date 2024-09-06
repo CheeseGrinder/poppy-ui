@@ -6,7 +6,7 @@
 
 ## Overview
 
-Textarea allows users to enter text in multiple lines.
+File Input is a an input field for uploading files.
 
 ## Properties
 
@@ -16,8 +16,8 @@ Textarea allows users to enter text in multiple lines.
 | `bordered`   | `bordered`    | if `true`, adds border to textarea when `color` property is not set.                                                                                                                                                                                                  | `boolean`                                                                                        | `false`        |
 | `color`      | `color`       | The color to use from your application's color palette.<br> Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`.<br> For more information on colors, see [theming](/docs/theming/basics).           | `"accent" \| "error" \| "ghost" \| "info" \| "primary" \| "secondary" \| "success" \| "warning"` | `undefined`    |
 | `disabled`   | `disabled`    | If `true`, the user cannot interact with the element.                                                                                                                                                                                                                 | `boolean`                                                                                        | `false`        |
-| `errorText`  | `error-text`  | Text that is placed under the textarea and displayed when an error is detected.                                                                                                                                                                                       | `string`                                                                                         | `undefined`    |
-| `helperText` | `helper-text` | Text that is placed under the textarea and displayed when no error is detected.                                                                                                                                                                                       | `string`                                                                                         | `undefined`    |
+| `errorText`  | `error-text`  | Text that is placed under the input-file and displayed when an error is detected.                                                                                                                                                                                     | `string`                                                                                         | `undefined`    |
+| `helperText` | `helper-text` | Text that is placed under the input-file and displayed when no error is detected.                                                                                                                                                                                     | `string`                                                                                         | `undefined`    |
 | `multiple`   | `multiple`    | If `true`, the user can enter more than one value.<br> This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.                                                                                                                   | `boolean`                                                                                        | `false`        |
 | `name`       | `name`        | The name of the control, which is submitted with the form data.                                                                                                                                                                                                       | `string`                                                                                         | `this.inputId` |
 | `readonly`   | `readonly`    | If `true`, the user cannot modify the value.                                                                                                                                                                                                                          | `boolean`                                                                                        | `false`        |
@@ -28,19 +28,19 @@ Textarea allows users to enter text in multiple lines.
 
 ## Events
 
-| Event       | Description                                                                                                                                                                                               | Type                                      |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `popBlur`   | Emitted when the input loses focus.                                                                                                                                                                       | `CustomEvent<void>`                       |
-| `popChange` | The `popChange` event is fired when the user modifies the textarea's value.<br> Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified. | `CustomEvent<InputFileChangeEventDetail>` |
-| `popFocus`  | Emitted when the input has focus.                                                                                                                                                                         | `CustomEvent<void>`                       |
+| Event       | Description                                                                   | Type                                      |
+| ----------- | ----------------------------------------------------------------------------- | ----------------------------------------- |
+| `popBlur`   | Emitted when the input loses focus.                                           | `CustomEvent<void>`                       |
+| `popChange` | The `popChange` event is fired when the user modifies the input-file's value. | `CustomEvent<InputFileChangeEventDetail>` |
+| `popFocus`  | Emitted when the input has focus.                                             | `CustomEvent<void>`                       |
 
 
 ## Methods
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global
-`textarea.focus()`.
+Sets focus on the native `input` in `pop-input-file`. Use this method instead of the global
+`input.focus()`.
 
 #### Returns
 

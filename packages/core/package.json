@@ -70,7 +70,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@cheese-grinder/stencil-component-config": "^0.3.0",
+    "@cheese-grinder/stencil-component-config": "^0.4.1",
     "@cheese-grinder/stencil-custom-readme": "^0.1.7",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
     "@playwright/test": "^1.46.1",

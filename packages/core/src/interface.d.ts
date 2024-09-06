@@ -6,13 +6,13 @@ export type Color = BrandColor | StateColor;
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
 
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
+/** https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize */
 export type AutoCapitalize = 'none' | 'off' | 'on' | 'characters' | 'sentences' | 'words' | 'characters';
 
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
+/** https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode */
 export type KeyboardType = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterKeyHint
+/** https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterKeyHint */
 export type EnterKeyHint = 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
 export interface FormAssociatedInterface {
