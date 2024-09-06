@@ -5,7 +5,7 @@
  * It contains typing information for all configurable components that exist in this project.
  */
 import type { BadgeAs, BadgeColor } from "./components/badge/badge.type";
-import type { AutoCapitalize, Color, EnterKeyHint, Size } from "./interface.d";
+import type { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size } from "./interface.d";
 import type { ButtonColor, ButtonExpand, ButtonShape } from "./components/button/button.type";
 import type { CheckboxPlacement } from "./components/checkbox/checkbox.type";
 import type { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
@@ -32,20 +32,24 @@ export namespace Configuration {
     'pop-accordion-group'?: {
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
        * If `true`, the user can open multiple accordion.
+       * @default false
        */
       multiple?: boolean;
     };
     'pop-avatar'?: {
       /**
        * To show some letters as avatar placeholder
+       * @default false
        */
       placeholder?: boolean;
     };
@@ -59,20 +63,24 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * Transparent Badge with colored border
+       * @default false
        */
       outlined?: boolean;
       /**
        * Used HTML element for
+       * @default "div"
        */
       as?: BadgeAs;
     };
     'pop-button'?: {
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
@@ -84,10 +92,12 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * Transparent Button with colored border
+       * @default false
        */
       outlined?: boolean;
       /**
@@ -104,28 +114,34 @@ export namespace Configuration {
     'pop-card'?: {
       /**
        * Applies smaller padding
+       * @default false
        */
       compact?: boolean;
     };
     'pop-checkbox'?: {
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot modify the value.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the toggle is selected.
+       * @default false
        */
       checked?: boolean;
       /**
        * If a developer want to use `indeterminate`, `checked` property should be set to `false`
+       * @default false
        */
       indeterminate?: boolean;
       /**
        * If true, the user cannot interact with the native element.
+       * @default false
        */
       disabled?: boolean;
       /**
@@ -137,18 +153,21 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * Where to place the label relative to the checkbox.
        * - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL.
        * - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
+       * @default "start"
        */
       placement?: CheckboxPlacement;
     };
     'pop-divider'?: {
       /**
        * Define content disposition orientation
+       * @default "horizontal"
        */
       orientation?: DividerOrientation;
       /**
@@ -158,6 +177,7 @@ export namespace Configuration {
        * - `"center"`: The content will appear to the center of the divider.
        * - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL.
        * - `"right"`: The content will appear to the right of the divider in LTR and RTL.
+       * @default "center"
        */
       placement?: DividerPlacement;
       /**
@@ -176,16 +196,19 @@ export namespace Configuration {
        * - `"context-menu"`: the sidebar will be presented when the trigger is right
        * clicked on desktop and long pressed on mobile. This will also prevent your
        * device's normal context menu from appearing.
+       * @default "click"
        */
       triggerAction?: TriggerAction;
       /**
        * Where to place the sidebar relative to the screen.
        * - `"start"`: The sidebar will appear to the left of the screen in LTR and to the right in RTL.
        * - `"end"`: The sidebar will appear to the right of the screen in LTR and to the left in RTL.
+       * @default "start"
        */
       side?: DrawerSide;
       /**
        * Forces the drawer to be open
+       * @default false
        */
       open?: boolean;
     };
@@ -196,16 +219,19 @@ export namespace Configuration {
        * - `"right"`: Open on right
        * - `"top"`: Open on top
        * - `"bottom"`: Open on bottom
+       * @default "bottom"
        */
       side?: DropdownSide;
       /**
        * Describes how the dropdown has to be alined
        * - `"start"`: Align to the left in LTR and to the right in RTL.
        * - `"end"`: Align to the right in LTR and to the left in RTL.
+       * @default "start"
        */
       align?: DropdownAlign;
       /**
        * Force the dropdown to be shown
+       * @default false
        */
       open?: boolean;
       /**
@@ -213,27 +239,32 @@ export namespace Configuration {
        * - `"click"`: the dropdown will be presented when the trigger is left clicked.
        * - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger.
        * - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
+       * @default "click"
        */
       triggerAction?: TriggerAction;
       /**
        * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss.
        * Only apply on `triggerAction=hover`
+       * @default 100
        */
       debounce?: number;
       /**
        * If `true`, a backdrop will be displayed behind the modal.
        * This property controls whether or not the backdrop
        * darkens the screen when the modal is presented.
+       * @default false
        */
       showBackdrop?: boolean;
     };
     'pop-indicator'?: {
       /**
        * Align horizontally the indicator.
+       * @default "left"
        */
       side?: IndicatorSide;
       /**
        * Align vertically the indicator.
+       * @default "top"
        */
       position?: IndicatorPosition;
     };
@@ -261,48 +292,46 @@ export namespace Configuration {
       maxLength?: number;
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot modify the value.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
        * If `true`, the element will be focused on page load.
+       * @default false
        */
       autoFocus?: boolean;
       /**
        * A hint to the browser for which keyboard to display.
        * That specifies what action label (or icon) to present for the enter key on virtual keyboards.
-       * - `enter`: Typically Inserting a new line.
-       * - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed.
-       * - `go`: Typically meaning to take the user to the target of the text they typed.
-       * - `next`: Typically taking the user to the next field that will accept text.
-       * - `previous`: Typically taking the user to the previous field that will accept text.
-       * - `search`: Typically taking the user to the results of searching for the text they have typed.
-       * - `send`: Typically delivering the text to its target.
+       * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
        */
       enterkeyhint?: EnterKeyHint;
       /**
        * If `true`, the element will have its spelling and grammar checked.
        * By default the User Agent make their own default behavior.
+       * @default false
        */
       spellcheck?: boolean;
       /**
        * This features work only on mobile and tablet devices.
        * By default the User Agent and input make their own determination.
-       * - `off` or `none`: No autocapitalization is applied (all letters default to lowercase)
-       * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
-       * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
-       * - `characters`: All letters should default to uppercase
+       * @default "off"
+       * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
        */
       autoCapitalize?: AutoCapitalize;
       /**
-       * if `true`, adds border to textarea when `color` property is not set.
+       * if `true`, adds border to input when `color` property is not set.
+       * @default false
        */
       bordered?: boolean;
       /**
@@ -314,11 +343,13 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * If `true`, a character counter will display the ratio of characters used and the total character limit.
        * Developers must also set the `maxlength` property for the counter to be calculated correctly.
+       * @default false
        */
       counter?: boolean;
       /**
@@ -328,6 +359,7 @@ export namespace Configuration {
       counterFormatter?: (inputLength: number, maxLength: number) => string;
       /**
        * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+       * @default 0
        */
       debounce?: number;
     };
@@ -335,26 +367,32 @@ export namespace Configuration {
       /**
        * If `true`, the user can enter more than one value.
        * This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
+       * @default false
        */
       multiple?: boolean;
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot modify the value.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
        * If `true`, the element will be focused on page load.
+       * @default false
        */
       autoFocus?: boolean;
       /**
        * if `true`, adds border to textarea when `color` property is not set.
+       * @default false
        */
       bordered?: boolean;
       /**
@@ -366,18 +404,21 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
     };
     'pop-item'?: {
       /**
        * If `true`, the user cannot interact with the item.
+       * @default false
        */
       disabled?: boolean;
     };
     'pop-join'?: {
       /**
        * Define content disposition orientation
+       * @default "horizontal"
        */
       orientation?: JoinOrientation;
     };
@@ -385,6 +426,7 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
     };
@@ -392,27 +434,32 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * Define content disposition orientation
+       * @default "vertical"
        */
       orientation?: ListOrientation;
     };
     'pop-loading'?: {
       /**
        * Apply different animation
+       * @default "spinner"
        */
       type?: LoadingType;
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
     };
     'pop-mask'?: {
       /**
        * Mask that should be applied
+       * @default "squircle"
        */
       type?: MaskType;
     };
@@ -421,10 +468,12 @@ export namespace Configuration {
        * If `true`, a backdrop will be displayed behind the modal.
        * This property controls whether or not the backdrop
        * darkens the screen when the modal is presented.
+       * @default false
        */
       showBackdrop?: boolean;
       /**
        * If `true`, the modal will be dismissed when the backdrop is clicked.
+       * @default false
        */
       backdropDismiss?: boolean;
       /**
@@ -433,6 +482,7 @@ export namespace Configuration {
        * just use the modalController or the `trigger` property.
        * Note: `open` will automatically be set back to `false` when
        * the modal dismisses.
+       * @default false
        */
       open?: boolean;
     };
@@ -443,10 +493,12 @@ export namespace Configuration {
        * just use the popoverController or the `trigger` property.
        * Note: `open` will not automatically be set back to `false` when
        * the popover dismisses. You will need to do that in your code.
+       * @default false
        */
       open?: boolean;
       /**
        * If `true`, the popover will animate.
+       * @default false
        */
       animated?: any;
       /**
@@ -455,10 +507,12 @@ export namespace Configuration {
        * darkens the screen when the popover is presented.
        * It does not control whether or not the backdrop
        * is active or present in the DOM.
+       * @default false
        */
       showBackdrop?: boolean;
       /**
        * If `true`, the popover will be dismissed when the backdrop is clicked.
+       * @default false
        */
       backdropDismiss?: boolean;
       /**
@@ -470,6 +524,7 @@ export namespace Configuration {
        * If `"context-menu"`, the popover will be presented when the trigger is right
        * clicked on desktop and long pressed on mobile. This will also prevent your
        * device's normal context menu from appearing.
+       * @default "click"
        */
       triggerAction?: TriggerAction;
     };
@@ -485,10 +540,12 @@ export namespace Configuration {
     'pop-radio'?: {
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
@@ -500,20 +557,24 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
     };
     'pop-radio-group'?: {
       /**
        * If `true`, apply the required property to all `pop-radio`.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, apply the disabled property to all `pop-radio`.
+       * @default false
        */
       disabled?: boolean;
       /**
        * If `true`, the radios can be deselected.
+       * @default false
        */
       allowEmpty?: boolean;
       /**
@@ -534,28 +595,34 @@ export namespace Configuration {
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
        * If the `pop-radio` as no size, it will apply to it
+       * @default "md"
        */
       size?: Size;
     };
     'pop-range'?: {
       /**
        * The minimum value, which must not be greater than its maximum (max attribute) value.
+       * @default 0
        */
       min?: number;
       /**
        * The maximum value, which must not be less than its minimum (min attribute) value.
+       * @default 100
        */
       max?: number;
       /**
        * Works with the min and max attributes to limit the increments at which a value can be set.
+       * @default 1
        */
       step?: number;
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
@@ -567,16 +634,19 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+       * @default 0
        */
       debounce?: number;
     };
     'pop-select'?: {
       /**
        * If `true`, the user can enter more than one value.
+       * @default false
        */
       multiple?: boolean;
       /**
@@ -591,14 +661,17 @@ export namespace Configuration {
       max?: number;
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
        * if `true`, adds border to textarea when `color` property is not set.
+       * @default false
        */
       bordered?: boolean;
       /**
@@ -610,6 +683,7 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
@@ -623,11 +697,13 @@ export namespace Configuration {
     'pop-swap'?: {
       /**
        * Choose what animation is used on click.
+       * @default "rotate"
        */
       type?: SwapType;
       /**
        * Activates the swap.
        * Show whats inside the slot `on`
+       * @default false
        */
       active?: boolean;
     };
@@ -651,39 +727,54 @@ export namespace Configuration {
       rows?: number;
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot modify the value.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the user cannot interact with the element.
+       * @default false
        */
       disabled?: boolean;
       /**
+       * A hint to the browser for which virtual keyboard to display.
+       * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
+       */
+      keyboard?: KeyboardType;
+      /**
+       * A hint to the browser for which keyboard to display.
+       * That specifies what action label (or icon) to present for the enter key on virtual keyboards.
+       * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
+       */
+      enterkeyhint?: EnterKeyHint;
+      /**
        * If `true`, the element will have its spelling and grammar checked.
        * By default the User Agent make their own default behavior.
+       * @default false
        */
       spellcheck?: boolean;
       /**
        * This features work only on mobile and tablet devices.
        * By default the User Agent and input make their own determination.
-       * - `off` or `none`: No autocapitalization is applied (all letters default to lowercase)
-       * - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase
-       * - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase
-       * - `characters`: All letters should default to uppercase
+       * @default "off"
+       * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
        */
       autoCapitalize?: AutoCapitalize;
       /**
        * Indicates how the control wraps text.
-       * - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering).
-       * - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.
        * If wrap attribute is in the `hard` state, the `cols` property must be specified.
+       * @default "soft"
+       * @see cols *
+       * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
        */
       wrap?: Wrap;
       /**
        * if `true`, adds border to textarea when `color` property is not set.
+       * @default false
        */
       bordered?: boolean;
       /**
@@ -695,11 +786,13 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
       /**
        * If `true`, a character counter will display the ratio of characters used and the total character limit.
        * Developers must also set the `maxlength` property for the counter to be calculated correctly.
+       * @default false
        */
       counter?: boolean;
       /**
@@ -709,28 +802,34 @@ export namespace Configuration {
       counterFormatter?: (inputLength: number, maxLength: number) => string;
       /**
        * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
+       * @default 0
        */
       debounce?: number;
     };
     'pop-toggle'?: {
       /**
        * If `true`, the user must fill in a value before submitting a form.
+       * @default false
        */
       required?: boolean;
       /**
        * If `true`, the user cannot modify the value.
+       * @default false
        */
       readonly?: boolean;
       /**
        * If `true`, the toggle is selected.
+       * @default false
        */
       checked?: boolean;
       /**
        * If a developer want to use `indeterminate`, `checked` property should be set to `false`
+       * @default false
        */
       indeterminate?: boolean;
       /**
        * If true, the user cannot interact with the native element.
+       * @default false
        */
       disabled?: boolean;
       /**
@@ -742,6 +841,7 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * @default "md"
        */
       size?: Size;
     };
@@ -755,10 +855,12 @@ export namespace Configuration {
       /**
        * Define the position of tooltip
        * By default the tootip appear on top
+       * @default "top"
        */
       position?: TooltipPosition;
       /**
        * Force open tooltip
+       * @default false
        */
       open?: boolean;
     };

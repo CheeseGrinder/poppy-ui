@@ -419,13 +419,14 @@ export namespace Components {
         "side"?: IndicatorSide;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * Text Input is a simple input field.
      */
     interface PopInput {
         /**
-          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
+          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
           * @config 
           * @default "off"
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -439,7 +440,7 @@ export namespace Components {
          */
         "autoFocus"?: boolean;
         /**
-          * if `true`, adds border to textarea when `color` property is not set.
+          * if `true`, adds border to input when `color` property is not set.
           * @config 
           * @default false
          */
@@ -473,20 +474,22 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.  - `enter`: Typically Inserting a new line. - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed. - `go`: Typically meaning to take the user to the target of the text they typed. - `next`: Typically taking the user to the next field that will accept text. - `previous`: Typically taking the user to the previous field that will accept text. - `search`: Typically taking the user to the results of searching for the text they have typed. - `send`: Typically delivering the text to its target.
-          * @config
+          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
         /**
-          * Text that is placed under the textarea and displayed when an error is detected.
+          * Text that is placed under the input and displayed when an error is detected.
          */
         "errorText": string;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Text that is placed under the input and displayed when no error is detected.
          */
         "helperText": string;
         /**
-          * A hint to the browser for which virtual keyboard to display. Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+          * A hint to the browser for which virtual keyboard to display.
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
         /**
@@ -538,7 +541,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global `textarea.focus()`.
+          * Sets focus on the native `input` in `pop-input`. Use this method instead of the global `input.focus()`.
          */
         "setFocus": () => Promise<void>;
         /**
@@ -568,7 +571,7 @@ export namespace Components {
         "value"?: string | number | null;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * File Input is a an input field for uploading files.
      */
     interface PopInputFile {
         /**
@@ -595,11 +598,11 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * Text that is placed under the textarea and displayed when an error is detected.
+          * Text that is placed under the input-file and displayed when an error is detected.
          */
         "errorText": string;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Text that is placed under the input-file and displayed when no error is detected.
          */
         "helperText": string;
         /**
@@ -625,7 +628,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Sets focus on the native `textarea` in `pop-textarea`. Use this method instead of the global `textarea.focus()`.
+          * Sets focus on the native `input` in `pop-input-file`. Use this method instead of the global `input.focus()`.
          */
         "setFocus": () => Promise<void>;
         /**
@@ -1144,9 +1147,10 @@ export namespace Components {
      */
     interface PopTextarea {
         /**
-          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
+          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
           * @config 
           * @default "off"
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -1193,7 +1197,9 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.  - `enter`: Typically Inserting a new line. - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed. - `go`: Typically meaning to take the user to the target of the text they typed. - `next`: Typically taking the user to the next field that will accept text. - `previous`: Typically taking the user to the previous field that will accept text. - `search`: Typically taking the user to the results of searching for the text they have typed. - `send`: Typically delivering the text to its target.
+          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
         /**
@@ -1205,7 +1211,9 @@ export namespace Components {
          */
         "helperText": string;
         /**
-          * A hint to the browser for which virtual keyboard to display. Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+          * A hint to the browser for which virtual keyboard to display.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
         /**
@@ -1260,13 +1268,16 @@ export namespace Components {
          */
         "spellcheck": boolean;
         /**
-          * The value of the toggle does not mean if it's checked or not, use the `checked` property for that.  The value of a toggle is analogous to the value of a `<input type="checkbox">`, it's only used when the toggle participates in a native `<form>`.
+          * The value of the textarea.
+          * @default ""
          */
         "value"?: string | null;
         /**
-          * Indicates how the control wraps text.  - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering). - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
+          * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 
           * @default "soft"
+          * @see cols *
+          * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
          */
         "wrap"?: Wrap;
     }
@@ -1636,7 +1647,7 @@ declare global {
         "popBlur": void;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * Text Input is a simple input field.
      */
     interface HTMLPopInputElement extends Components.PopInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLPopInputElementEventMap>(type: K, listener: (this: HTMLPopInputElement, ev: PopInputCustomEvent<HTMLPopInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1658,7 +1669,7 @@ declare global {
         "popBlur": void;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * File Input is a an input field for uploading files.
      */
     interface HTMLPopInputFileElement extends Components.PopInputFile, HTMLStencilElement {
         addEventListener<K extends keyof HTMLPopInputFileElementEventMap>(type: K, listener: (this: HTMLPopInputFileElement, ev: PopInputFileCustomEvent<HTMLPopInputFileElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2382,13 +2393,14 @@ declare namespace LocalJSX {
         "side"?: IndicatorSide;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * Text Input is a simple input field.
      */
     interface PopInput {
         /**
-          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
+          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
           * @config 
           * @default "off"
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -2402,7 +2414,7 @@ declare namespace LocalJSX {
          */
         "autoFocus"?: boolean;
         /**
-          * if `true`, adds border to textarea when `color` property is not set.
+          * if `true`, adds border to input when `color` property is not set.
           * @config 
           * @default false
          */
@@ -2436,20 +2448,22 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.  - `enter`: Typically Inserting a new line. - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed. - `go`: Typically meaning to take the user to the target of the text they typed. - `next`: Typically taking the user to the next field that will accept text. - `previous`: Typically taking the user to the previous field that will accept text. - `search`: Typically taking the user to the results of searching for the text they have typed. - `send`: Typically delivering the text to its target.
-          * @config
+          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
         /**
-          * Text that is placed under the textarea and displayed when an error is detected.
+          * Text that is placed under the input and displayed when an error is detected.
          */
         "errorText"?: string;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Text that is placed under the input and displayed when no error is detected.
          */
         "helperText"?: string;
         /**
-          * A hint to the browser for which virtual keyboard to display. Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+          * A hint to the browser for which virtual keyboard to display.
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
         /**
@@ -2543,7 +2557,7 @@ declare namespace LocalJSX {
         "value"?: string | number | null;
     }
     /**
-     * Textarea allows users to enter text in multiple lines.
+     * File Input is a an input field for uploading files.
      */
     interface PopInputFile {
         /**
@@ -2570,11 +2584,11 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Text that is placed under the textarea and displayed when an error is detected.
+          * Text that is placed under the input-file and displayed when an error is detected.
          */
         "errorText"?: string;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Text that is placed under the input-file and displayed when no error is detected.
          */
         "helperText"?: string;
         /**
@@ -2592,7 +2606,7 @@ declare namespace LocalJSX {
          */
         "onPopBlur"?: (event: PopInputFileCustomEvent<void>) => void;
         /**
-          * The `popChange` event is fired when the user modifies the textarea's value. Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified.
+          * The `popChange` event is fired when the user modifies the input-file's value.
          */
         "onPopChange"?: (event: PopInputFileCustomEvent<InputFileChangeEventDetail>) => void;
         /**
@@ -3172,9 +3186,10 @@ declare namespace LocalJSX {
      */
     interface PopTextarea {
         /**
-          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.  - `off` or `none`: No autocapitalization is applied (all letters default to lowercase) - `on` or `sentences`: The first letter of each sentence defaults to a capital letter; all other letters default to lowercase - `words`: The first letter of each word defaults to a capital letter; all other letters default to lowercase - `characters`: All letters should default to uppercase
+          * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
           * @config 
           * @default "off"
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
         "autoCapitalize"?: AutoCapitalize;
         /**
@@ -3221,7 +3236,9 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.  - `enter`: Typically Inserting a new line. - `done`: Typically meaning there is nothing more to input and the input method editor (IME) will be closed. - `go`: Typically meaning to take the user to the target of the text they typed. - `next`: Typically taking the user to the next field that will accept text. - `previous`: Typically taking the user to the previous field that will accept text. - `search`: Typically taking the user to the results of searching for the text they have typed. - `send`: Typically delivering the text to its target.
+          * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
         /**
@@ -3233,7 +3250,9 @@ declare namespace LocalJSX {
          */
         "helperText"?: string;
         /**
-          * A hint to the browser for which virtual keyboard to display. Possible values: `"none"`, `"text"`, `"tel"`, `"url"`, `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+          * A hint to the browser for which virtual keyboard to display.
+          * @config 
+          * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
         /**
@@ -3300,13 +3319,16 @@ declare namespace LocalJSX {
          */
         "spellcheck"?: boolean;
         /**
-          * The value of the toggle does not mean if it's checked or not, use the `checked` property for that.  The value of a toggle is analogous to the value of a `<input type="checkbox">`, it's only used when the toggle participates in a native `<form>`.
+          * The value of the textarea.
+          * @default ""
          */
         "value"?: string | null;
         /**
-          * Indicates how the control wraps text.  - `soft`: Text is not to be wrapped when submitted (though can still be wrapped in the rendering). - `hard`: Text is to have newlines added by the user agent so that the text is wrapped when it is submitted.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
+          * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 
           * @default "soft"
+          * @see cols *
+          * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
          */
         "wrap"?: Wrap;
     }
@@ -3503,11 +3525,11 @@ declare module "@stencil/core" {
              */
             "pop-indicator": LocalJSX.PopIndicator & JSXBase.HTMLAttributes<HTMLPopIndicatorElement>;
             /**
-             * Textarea allows users to enter text in multiple lines.
+             * Text Input is a simple input field.
              */
             "pop-input": LocalJSX.PopInput & JSXBase.HTMLAttributes<HTMLPopInputElement>;
             /**
-             * Textarea allows users to enter text in multiple lines.
+             * File Input is a an input field for uploading files.
              */
             "pop-input-file": LocalJSX.PopInputFile & JSXBase.HTMLAttributes<HTMLPopInputFileElement>;
             "pop-item": LocalJSX.PopItem & JSXBase.HTMLAttributes<HTMLPopItemElement>;

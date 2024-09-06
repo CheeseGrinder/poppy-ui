@@ -2,7 +2,7 @@ import type { Color } from 'src/components';
 
 export type TextareaColor = Color | 'ghost';
 
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap
+/** https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap */
 export type Wrap = 'hard' | 'soft';
 
 export interface TextareaChangeEventDetail {
