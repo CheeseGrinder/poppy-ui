@@ -121,7 +121,7 @@ jobs:
 
           npm -w @poppy-ui/core run build --if-present
 
-  pusblish:
+  publish:
     needs:
       - build
     runs-on: ubuntu-latest
