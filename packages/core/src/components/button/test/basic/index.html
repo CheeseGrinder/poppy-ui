@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Basic | Poppy-ui</title>
+    <link rel="stylesheet" href="/build/poppy.css">
+    <script type="module" src="/build/poppy.esm.js"></script>
+    <script nomodule src="/build/poppy.js"></script>
+    <style>
+        main {
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            background-color: var(--base-300);
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: .35rem;
+        }
+        div {
+            display: flex;
+            gap: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Button - basic</h2>
+            <div>
+                <pop-button>no color</pop-button>
+                <pop-button color="primary">primary</pop-button>
+                <pop-button color="secondary">secondary</pop-button>
+                <pop-button color="accent">accent</pop-button>
+                <pop-button color="info">info</pop-button>
+                <pop-button color="success">success</pop-button>
+                <pop-button color="warning">warning</pop-button>
+                <pop-button color="error">error</pop-button>
+                <pop-button color="ghost">ghost</pop-button>
+            </div>
+        </section>
+        <section>
+            <h2>Button - outlined</h2>
+            <div>
+                <pop-button outlined>no color</pop-button>
+                <pop-button outlined color="primary">primary</pop-button>
+                <pop-button outlined color="secondary">secondary</pop-button>
+                <pop-button outlined color="accent">accent</pop-button>
+                <pop-button outlined color="info">info</pop-button>
+                <pop-button outlined color="success">success</pop-button>
+                <pop-button outlined color="warning">warning</pop-button>
+                <pop-button outlined color="error">error</pop-button>
+            </div>
+        </section>
+        <section>
+            <h2>Button - disabled (basic)</h2>
+            <div>
+                <pop-button disabled>no color</pop-button>
+                <pop-button disabled color="primary">primary</pop-button>
+                <pop-button disabled color="secondary">secondary</pop-button>
+                <pop-button disabled color="accent">accent</pop-button>
+                <pop-button disabled color="info">info</pop-button>
+                <pop-button disabled color="success">success</pop-button>
+                <pop-button disabled color="warning">warning</pop-button>
+                <pop-button disabled color="error">error</pop-button>
+                <pop-button disabled color="ghost">error</pop-button>
+            </div>
+        </section>
+        <section>
+            <h2>Button - outlined disabled</h2>
+            <div>
+                <pop-button outlined disabled>no color</pop-button>
+                <pop-button outlined disabled color="primary">primary</pop-button>
+                <pop-button outlined disabled color="secondary">secondary</pop-button>
+                <pop-button outlined disabled color="accent">accent</pop-button>
+                <pop-button outlined disabled color="info">info</pop-button>
+                <pop-button outlined disabled color="success">success</pop-button>
+                <pop-button outlined disabled color="warning">warning</pop-button>
+                <pop-button outlined disabled color="error">error</pop-button>
+                <pop-button outlined disabled color="ghost">error</pop-button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
