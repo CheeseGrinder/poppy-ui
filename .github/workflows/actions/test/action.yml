@@ -1,0 +1,31 @@
+name: Quality
+description: Run quality check for specified package
+inputs:
+  package:
+    description: The package to check code quality. Must have a .prettierrc and .eslintrc.
+    type: string
+    required: true
+  node-version:
+    description: The version of node to use.
+    type: string
+    default: 20.x
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install
+      run: npm -w @poppy-ui/${{ inputs.package }} install
+      shell: bash
+
+    - name: Test
+      run: npm -w @poppy-ui/${{ inputs.package }} run test:spec --if-present -- --passWithNoTests --coverage
+      shell: bash
+
+    - name: Test e2e
+      run: npm -w @poppy-ui/${{ inputs.package }} run test:e2e --if-present -- --pass-with-no-tests --reporter github
+      shell: bash

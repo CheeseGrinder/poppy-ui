@@ -39,7 +39,12 @@ npm -w=@poppy-ui/docs link
 echo "+--------------------------------+"
 echo "|          Build - Vue           |"
 echo "+--------------------------------+"
-npm -w=@poppy-ui/vue install -S -E @poppy-ui/core@$version
-npm -w=@poppy-ui/vue install -S -E -D @poppy-ui/docs@$version
 
-npm -w=@poppy-ui/vue version
+# Have to uninstall, because install an unpublishde version does not work.
+# even if the package is part of the workspace
+npm -w=@poppy-ui/vue uni @poppy-ui/core
+npm -w=@poppy-ui/vue uni @poppy-ui/docs
+
+# Install the workspace version of the package
+npm -w=@poppy-ui/vue i @poppy-ui/core@$version
+npm -w=@poppy-ui/vue i -D @poppy-ui/docs@$version

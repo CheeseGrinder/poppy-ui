@@ -1,0 +1,41 @@
+name: Bump version
+description: Bump workspace version
+
+inputs:
+  version:
+    type: string
+    required: true
+  preid:
+    type: string
+    default: ''
+    required: false
+
+outputs:
+  version:
+    description: Outputed version
+    value: ${{ steps.bump-ver.outputs.version || steps.bump-pre.outputs.version }}
+    
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+
+    - name: Bump Version
+      id: bump-ver
+      if: inputs.preid == ''
+      run: |
+        npm -ws version ${{ inputs.version }} --include-workspace-root --no-git-tag-version -m"ci(version): bump to v%s")
+        version=${{ fromJson('npm version --json').root }}
+        echo "version=$version" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Bump Pre Version
+      id: bump-pre
+      if: inputs.preid != ''
+      run: |
+        npm -ws version ${{ inputs.version }} --preid=${{ inputs.preid }} --include-workspace-root --no-git-tag-version -m"ci(version): bump to v%s")
+        version=${{ fromJson('npm version --json').root }}
+        echo "version=$version" >> $GITHUB_OUTPUT
+      shell: bash
