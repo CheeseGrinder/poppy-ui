@@ -57,7 +57,7 @@ pop-button,css-prop,--focus-scale
 pop-button,part,native
 
 pop-card,shadow
-pop-card,prop,compact,boolean,undefined,false,false
+pop-card,prop,compact,boolean,undefined,false,true
 pop-card,css-prop,--border-radius
 
 pop-card-actions,none
