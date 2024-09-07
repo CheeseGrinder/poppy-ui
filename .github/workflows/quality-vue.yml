@@ -34,6 +34,22 @@ jobs:
         with:
           package: vue
 
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+      - name: Quality
+        uses: ./.github/workflows/actions/test
+        with:
+          package: vue
+          node-version: ${{ matrix.node-version }}
+        
   analyze:
     runs-on: ubuntu-latest
     permissions:

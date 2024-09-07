@@ -2,13 +2,18 @@ name: Quality
 description: Run quality check for specified package
 inputs:
   package:
-    description: The package to check code quality. Must have a .prettierrc and .eslintrc.
+    description: The package to check code quality. Must have a biome.json
     type: string
     required: true
   node-version:
     description: The version of node to use.
     type: string
     default: 20.x
+    required: false
+  upload:
+    description: Upload the report
+    type: boolean
+    default: true
     required: false
 
 runs:
@@ -35,20 +40,13 @@ runs:
       run: npx -w @poppy-ui/${{ inputs.package }} @biomejs/biome lint --reporter github
       shell: bash
 
-    - name: Test
-      run: npm -w @poppy-ui/${{ inputs.package }} run test:spec --if-present -- --passWithNoTests --coverage
-      shell: bash
-
-    - name: Test e2e
-      run: npm -w @poppy-ui/${{ inputs.package }} run test:e2e --if-present -- --pass-with-no-tests --reporter github
-      shell: bash
-
     - name: Scan
       uses: ajinabraham/njsscan-action@v7
       with:
         args: '. --sarif --output results.sarif || true'
 
     - name: Upload report
+      if: inputs.upload
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: results.sarif

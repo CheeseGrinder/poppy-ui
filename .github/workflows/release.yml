@@ -1,0 +1,182 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release type
+        required: false
+        type: choice
+        default: patch
+        options:
+          - major
+          - minor
+          - patch
+          - premajor
+          - preminor
+          - prepatch
+          - prerelease
+      preid:
+        description: Pre-id
+        required: false
+        type: choice
+        options:
+          - ''
+          - dev
+          - alpha
+          - beta
+          - rc
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit - Core
+        uses: ./.github/workflows/actions/audit
+        with:
+          package: core
+      - name: Audit - Vue
+        uses: ./.github/workflows/actions/audit
+        with:
+          package: vue
+
+  quality-core:
+    needs:
+      - audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Quality - Core
+        uses: ./.github/workflows/actions/quality
+        with:
+          package: core
+
+  quality-vue:
+    needs:
+      - audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Quality - Vue
+        uses: ./.github/workflows/actions/quality
+        with:
+          package: vue
+          upload: false
+
+  tests:
+    needs:
+      - audit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test - Core
+        uses: ./.github/workflows/actions/test
+        with:
+          package: core
+          node-version: ${{ matrix.node-version }}
+
+  build:
+    needs:
+      - quality-core
+      - quality-vue
+      - tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+  
+      - name: Bump version
+        id: bump
+        uses: ./.github/workflows/actions/bump
+        with:
+          version: ${{ inputs.version }}
+          preid: ${{ inputs.preid }}
+
+      - name: Build - Core
+        run: |
+          npm -w @poppy-ui/core install
+          npm -w @poppy-ui/core run build --if-present
+
+      - name: Build - Vue
+        run: |
+          npm -w=@poppy-ui/vue uninstall @poppy-ui/core
+          npm -w=@poppy-ui/vue uninstall @poppy-ui/docs
+          npm -w=@poppy-ui/vue install @poppy-ui/core@${{ steps.bump.outputs.version }}
+          npm -w=@poppy-ui/vue install -D @poppy-ui/docs@${{ steps.bump.outputs.version }}
+
+          npm -w @poppy-ui/core run build --if-present
+
+  pusblish:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Git
+        run: |
+          git config user.name "Cheese Grinder CI"
+          git config user.email "<>"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Bump version
+        id: bump
+        uses: ./.github/workflows/actions/bump
+        with:
+          version: ${{ inputs.version }}
+          preid: ${{ inputs.preid }}
+
+      - name: Publish Core
+        run: |
+          npm run build
+          npm publish
+        working-directory: packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Docs
+        run: |
+          npm publish
+        working-directory: packages/docs
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upgrade - Vue
+        run: |
+          npm -w=@poppy-ui/vue uninstall @poppy-ui/core
+          npm -w=@poppy-ui/vue uninstall @poppy-ui/docs
+          npm -w=@poppy-ui/vue install @poppy-ui/core@${{ steps.bump.outputs.version }}
+          npm -w=@poppy-ui/vue install -D @poppy-ui/docs@${{ steps.bump.outputs.version }}
+  
+      - name: Publish Vue
+        run: |
+          npm run build
+          npm publish
+        working-directory: packages/vue
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Push only if the package as been published on registry
+      - name: Commit & Tag
+        run: |
+          git push
+          git tag ${{ steps.bump.outputs.version }}
+          git push origin tag ${{ steps.bump.outputs.version }}

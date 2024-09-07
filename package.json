@@ -22,6 +22,6 @@
     "audit-ci": "^7.1.0"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=18.x"
   }
 }
