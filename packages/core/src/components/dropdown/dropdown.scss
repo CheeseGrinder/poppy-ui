@@ -29,6 +29,8 @@
       display: inline-block;
       grid-row-start: 1;
       grid-column-start: 1;
+
+      cursor: pointer;
     }
 
     &-content {
