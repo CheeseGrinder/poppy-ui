@@ -21,9 +21,3 @@
   background-color: var(--background);
   color: var(--color);
 }
-
-:host([compact]) {
-  :where(pop-card-body) {
-    --padding: 16px;
-  }
-}
