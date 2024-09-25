@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -24,6 +24,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
+        "noEmptyBlock": "error",
         "noExplicitAny": "off",
         "noConfusingVoidType": "off",
         "noDoubleEquals": "error",
@@ -42,11 +43,8 @@
         "useYield": "error"
       },
       "nursery": {
-        "noEmptyBlock": "error",
         "noSubstr": "error",
-        "useDeprecatedReason": "error",
-        "useSemanticElements": "warn",
-        "useThrowOnlyError": "error"
+        "useDeprecatedReason": "error"
       },
       "security": {
         "noGlobalEval": "error"
@@ -63,7 +61,8 @@
         "useNodejsImportProtocol": "error",
         "useSelfClosingElements": "error",
         "useShorthandArrayType": "error",
-        "useSingleVarDeclarator": "error"
+        "useSingleVarDeclarator": "error",
+        "useThrowOnlyError": "error"
       },
       "complexity": {
         "noForEach": "error",
@@ -83,7 +82,8 @@
         "useAriaPropsForRole": "error",
         "useValidAriaProps": "error",
         "useValidAriaRole": "error",
-        "useValidAriaValues": "error"
+        "useValidAriaValues": "error",
+        "useSemanticElements": "warn"
       }
     }
   },

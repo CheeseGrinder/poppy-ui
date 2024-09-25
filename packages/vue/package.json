@@ -1,24 +1,21 @@
 {
   "name": "@poppy-ui/vue",
   "type": "module",
-  "version": "0.2.0-beta.3",
+  "version": "0.2.0",
   "description": "Vue specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheese-gronder/poppy-ui.git"
+    "url": "git+https://github.com/cheese-grinder/poppy-ui.git"
   },
   "bugs": {
     "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
   },
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
-  "files": [
-    "dist/",
-    "css/"
-  ],
+  "files": ["dist/", "css/"],
   "keywords": [
     "daisy-ui",
     "framework",
@@ -49,25 +46,23 @@
     "biome": "biome"
   },
   "dependencies": {
-    "@poppy-ui/core": "0.2.0-beta.3"
+    "@poppy-ui/core": "0.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "@poppy-ui/docs": "0.2.0-beta.3",
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@biomejs/biome": "^1.9.2",
+    "@poppy-ui/docs": "0.2.0",
+    "@rollup/plugin-typescript": "^12.1.0",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",
-    "rollup": "^4.20.0",
-    "typescript": "^5.4.5",
-    "vite": "^5.4.0",
-    "vue": "~3.2.47"
+    "rollup": "^4.22.4",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vue": "3.2.47"
   },
   "vetur": {
     "tags": "dist/vetur/tags.json",
     "attributes": "dist/vetur/attributes.json"
   },
   "web-types": "dist/web-types.json",
-  "sideEffects": [
-    "css/*.css"
-  ]
+  "sideEffects": ["css/*.css"]
 }

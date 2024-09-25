@@ -1,21 +1,18 @@
 {
   "name": "@poppy-ui/docs",
-  "version": "0.2.0-beta.3",
+  "version": "0.2.0",
   "description": "Pre-packaged API documentation for the Poppy docs.",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheese-gronder/poppy-ui.git"
+    "url": "git+https://github.com/cheese-grinder/poppy-ui.git"
   },
   "bugs": {
     "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
   },
   "main": "core.json",
   "types": "core.d.ts",
-  "files": [
-    "core.json",
-    "core.d.ts"
-  ]
+  "files": ["core.json", "core.d.ts"]
 }
