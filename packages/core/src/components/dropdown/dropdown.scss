@@ -81,6 +81,14 @@
 // Dropdown Placement
 // ----------------------------------------------------------------
 
+:host(:is([side="bottom"], [side="top"])[align="center"]) .dropdown-content {
+  inset-inline-end: 50%;
+  transform: translateX(50%);
+}
+:host(:is([side="bottom"], [side="top"])[align="center"].dropdown-rtl) .dropdown-content {
+  transform: translateX(-50%);
+}
+
 :host([side="bottom"][align="end"]) .dropdown-content {
   inset-inline-end: 0;
 }
@@ -93,24 +101,37 @@
   inset-inline-end: 0;
 }
 
-:host([side="left"]) .dropdown-content {
+:host(:is([side="left"], [side="start"])) .dropdown-content {
   top: 0;
   bottom: auto;
+}
+:host([side="start"]) .dropdown-content {
   inset-inline-end: 100%;
 }
-:host([side="left"][align="end"]) .dropdown-content {
+:host([side="left"]) .dropdown-content {
+  right: 100%;
+}
+
+:host(:is([side="start"], [side="left"], [side="right"], [side="end"])[align="center"]) .dropdown-content {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+:host(:is([side="right"], [side="end"])) .dropdown-content {
+  top: 0;
+  bottom: auto;
+}
+:host(:is([side="left"], [side="start"], [side="right"], [side="end"])[align="end"]) .dropdown-content {
   top: auto;
   bottom: 0;
 }
 
 :host([side="right"]) .dropdown-content {
-  top: 0;
-  bottom: auto;
-  inset-inline-start: 100%;
+  left: 100%;
 }
-:host([side="right"][align="end"]) .dropdown-content {
-  top: auto;
-  bottom: 0;
+:host([side="end"]) .dropdown-content {
+  inset-inline-start: 100%;
 }
 
 @keyframes present {

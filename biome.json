@@ -24,6 +24,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
+        "noAssignInExpressions": "off",
         "noEmptyBlock": "error",
         "noExplicitAny": "off",
         "noConfusingVoidType": "off",

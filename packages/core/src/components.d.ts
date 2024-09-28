@@ -345,7 +345,7 @@ export namespace Components {
      */
     interface PopDropdown {
         /**
-          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
+          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"center"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
           * @config 
           * @default "start"
          */
@@ -379,7 +379,7 @@ export namespace Components {
          */
         "showBackdrop"?: boolean;
         /**
-          * Describe where the content is displayed relatively to the trigger element - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
+          * Describe where the content is displayed relatively to the trigger element - `"start"`: Open on the left in LTR and to the right in RTL. - `"end"`: Open on the right in LTR and to the left in RTL. - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
           * @config 
           * @default "bottom"
          */
@@ -2309,7 +2309,7 @@ declare namespace LocalJSX {
      */
     interface PopDropdown {
         /**
-          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
+          * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"center"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
           * @config 
           * @default "start"
          */
@@ -2341,7 +2341,7 @@ declare namespace LocalJSX {
          */
         "showBackdrop"?: boolean;
         /**
-          * Describe where the content is displayed relatively to the trigger element - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
+          * Describe where the content is displayed relatively to the trigger element - `"start"`: Open on the left in LTR and to the right in RTL. - `"end"`: Open on the right in LTR and to the left in RTL. - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
           * @config 
           * @default "bottom"
          */
