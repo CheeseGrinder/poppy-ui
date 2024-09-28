@@ -14,7 +14,7 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: get-radius(md);
+  --border-radius: #{get-radius(md)};
   --border-color: #{get-color("base.200")};
   --background: #{get-color("base.100")};
   --color: #{get-color("base.content")};
