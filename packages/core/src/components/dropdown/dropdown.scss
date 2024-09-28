@@ -49,6 +49,12 @@
 
       animation-name: present;
     }
+
+    &-backdrop {
+      position: fixed;
+      inset: 0;
+      background: get-color("neutral.base", 0.2);
+    }
   }
 }
 
@@ -56,13 +62,17 @@
 // ----------------------------------------------------------------
 
 :host(:not([open])) {
-  .dropdown-content {
+  .dropdown-content, .dropdown-backdrop {
     opacity: 0;
     pointer-events: none;
   }
 }
 :host([open]) {
   .dropdown-content {
+    z-index: 110;
+    opacity: 1;
+  }
+  .dropdown-backdrop {
     z-index: 100;
     opacity: 1;
   }

@@ -32,7 +32,13 @@
   "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/index.d.ts",
-  "files": ["components/", "css", "dist/", "hydrate/", "loader/"],
+  "files": [
+    "components/",
+    "css",
+    "dist/",
+    "hydrate/",
+    "loader/"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -76,6 +82,7 @@
     "clean-css-cli": "^5.6.3",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "key-definitions": "^2.0.3",
     "rimraf": "^6.0.1",
     "sass": "^1.77.8",
     "typescript": "^5.5.4"

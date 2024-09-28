@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Basic | Poppy-ui</title>
+    <link rel="stylesheet" href="/build/poppy.css">
+    <script type="module" src="/build/poppy.esm.js"></script>
+    <script nomodule src="/build/poppy.js"></script>
+    <style>
+        main {
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            background-color: var(--base-300);
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: .35rem;
+        }
+        div {
+            display: flex;
+            gap: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Dropdown - basic</h2>
+            <div>
+                <pop-dropdown>
+                    <pop-button slot="trigger">trigger default</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown trigger-action="click">
+                    <pop-button slot="trigger">trigger click</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown trigger-action="hover">
+                    <pop-button slot="trigger">trigger hover</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown trigger-action="context-menu">
+                    <pop-button slot="trigger">trigger context-menu</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>Dropdown - side</h2>
+            <div>
+                <pop-dropdown>
+                    <pop-button slot="trigger">side default</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="left">
+                    <pop-button slot="trigger">side left</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right">
+                    <pop-button slot="trigger">side right</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top">
+                    <pop-button slot="trigger">side top</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom">
+                    <pop-button slot="trigger">side bottom</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>Dropdown - align</h2>
+            <div>
+                <pop-dropdown>
+                    <pop-button slot="trigger">align default</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown align="start">
+                    <pop-button slot="trigger">side start</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown align="end">
+                    <pop-button slot="trigger">align end</pop-button>
+                    <pop-card>
+                        <pop-card-body>
+                            dropdown content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

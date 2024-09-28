@@ -18,7 +18,7 @@ export class Card {
    * @config
    * @default false
    */
-  @Prop({ reflect: true }) compact: boolean;
+  @Prop({ reflect: true, mutable: true }) compact: boolean;
 
   componentWillLoad() {
     componentConfig.apply(this, 'pop-card', {

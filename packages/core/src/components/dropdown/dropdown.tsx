@@ -15,6 +15,7 @@ import {
 } from '@stencil/core';
 import { Show } from '../Show';
 import type { DropdownAlign, DropdownSide } from './dropdown.type';
+import { SPACE, ENTER } from 'key-definitions';
 
 /**
  * Dropdown can open a menu or any other element when the trigger element is clicked.
@@ -29,10 +30,12 @@ import type { DropdownAlign, DropdownSide } from './dropdown.type';
 @Component({
   tag: 'pop-dropdown',
   styleUrl: 'dropdown.scss',
-  shadow: true,
+  shadow: {
+    delegatesFocus: false,
+  },
 })
 export class Dropdown implements ComponentInterface, OverlayInterface {
-  private dropdown: HTMLDetailsElement;
+  private dropdownRef: HTMLDetailsElement;
   private debounceTimer: NodeJS.Timeout;
 
   @Element() host: HTMLElement & OverlayInterface;
@@ -85,7 +88,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    * @config
    * @default 100
    */
-  @Prop({ mutable: true }) debounce?: number = 100;
+  @Prop({ mutable: true }) debounce?: number;
 
   /**
    * If `true`, a backdrop will be displayed behind the modal.
@@ -121,7 +124,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   componentDidRender(): void {
     const { open } = this;
     if (open) {
-      this.dropdown.open = true;
+      this.dropdownRef.open = true;
     }
   }
 
@@ -189,6 +192,20 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     }
   };
 
+  private onKeyPress = (...keys: string[]) => {
+    return async (ev: KeyboardEvent): Promise<void> => {
+      ev.preventDefault();
+      if (!keys.includes(ev.key)) {
+        return;
+      }
+      if (this.open) {
+        await this.dismiss();
+      } else {
+        await this.present();
+      }
+    };
+  };
+
   render() {
     return (
       <Host>
@@ -197,13 +214,14 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
           class="dropdown"
           onMouseEnter={this.onHover}
           onMouseLeave={this.onBlur}
-          ref={(el: HTMLDetailsElement) => (this.dropdown = el)}
+          ref={(el: HTMLDetailsElement) => (this.dropdownRef = el)}
         >
           <summary
             part="trigger"
             class="dropdown-trigger"
             onClick={this.onClick}
             onContextMenu={this.onContext}
+            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key)}
           >
             <slot name="trigger" />
           </summary>
@@ -214,6 +232,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
             <slot />
           </div>
           <Show when={this.showBackdrop}>
+            {/* biome-ignore lint/a11y/useKeyWithClickEvents: Element not focusable, handle by summary keyboard event */}
             <div
               part="backdrop"
               class="dropdown-backdrop"
