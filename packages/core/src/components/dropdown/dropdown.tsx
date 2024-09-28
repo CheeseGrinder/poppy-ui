@@ -16,6 +16,7 @@ import {
 import { Show } from '../Show';
 import type { DropdownAlign, DropdownSide } from './dropdown.type';
 import { SPACE, ENTER } from 'key-definitions';
+import { isRTL } from '#utils/dir';
 
 /**
  * Dropdown can open a menu or any other element when the trigger element is clicked.
@@ -42,6 +43,8 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
 
   /**
    * Describe where the content is displayed relatively to the trigger element
+   * - `"start"`: Open on the left in LTR and to the right in RTL.
+   * - `"end"`: Open on the right in LTR and to the left in RTL.
    * - `"left"`: Open on left
    * - `"right"`: Open on right
    * - `"top"`: Open on top
@@ -55,6 +58,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   /**
    * Describes how the dropdown has to be alined
    * - `"start"`: Align to the left in LTR and to the right in RTL.
+   * - `"center"`: Align to the left in LTR and to the right in RTL.
    * - `"end"`: Align to the right in LTR and to the left in RTL.
    *
    * @config
@@ -208,7 +212,11 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
 
   render() {
     return (
-      <Host>
+      <Host
+        class={{
+          'dropdown-rtl': isRTL(this),
+        }}
+      >
         <details
           part="dropdown"
           class="dropdown"

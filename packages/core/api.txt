@@ -116,11 +116,11 @@ pop-drawer,part,backdrop
 pop-drawer,part,side
 
 pop-dropdown,shadow
-pop-dropdown,prop,align,"end" | "start",undefined,false,true
-pop-dropdown,prop,debounce,number,100,false,false
+pop-dropdown,prop,align,"center" | "end" | "start",undefined,false,true
+pop-dropdown,prop,debounce,number,undefined,false,false
 pop-dropdown,prop,open,boolean,undefined,false,true
 pop-dropdown,prop,showBackdrop,boolean,undefined,false,true
-pop-dropdown,prop,side,"bottom" | "left" | "right" | "top",undefined,false,true
+pop-dropdown,prop,side,"bottom" | "end" | "left" | "right" | "start" | "top",undefined,false,true
 pop-dropdown,prop,triggerAction,"click" | "context-menu" | "hover",undefined,false,false
 pop-dropdown,method,dismiss,dismiss() => Promise<boolean>
 pop-dropdown,method,present,present() => Promise<boolean>

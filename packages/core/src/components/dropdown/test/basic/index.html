@@ -26,6 +26,7 @@
         }
         div {
             display: flex;
+            justify-content: center;
             gap: .5rem;
         }
     </style>
@@ -37,33 +38,33 @@
             <div>
                 <pop-dropdown>
                     <pop-button slot="trigger">trigger default</pop-button>
-                    <pop-card>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
                 <pop-dropdown trigger-action="click">
                     <pop-button slot="trigger">trigger click</pop-button>
-                    <pop-card>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
                 <pop-dropdown trigger-action="hover">
                     <pop-button slot="trigger">trigger hover</pop-button>
-                    <pop-card>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
                 <pop-dropdown trigger-action="context-menu">
                     <pop-button slot="trigger">trigger context-menu</pop-button>
-                    <pop-card>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
@@ -71,45 +72,53 @@
         </section>
 
         <section>
-            <h2>Dropdown - side</h2>
+            <h2>start / align</h2>
             <div>
-                <pop-dropdown>
-                    <pop-button slot="trigger">side default</pop-button>
-                    <pop-card>
+                <pop-dropdown side="start" align="start">
+                    <pop-button slot="trigger">start / start</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown side="left">
-                    <pop-button slot="trigger">side left</pop-button>
-                    <pop-card>
+                <pop-dropdown side="start" align="start" dir="rtl">
+                    <pop-button slot="trigger">start / start rtl</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown side="right">
-                    <pop-button slot="trigger">side right</pop-button>
-                    <pop-card>
+                <pop-dropdown side="start" align="center">
+                    <pop-button slot="trigger">start / center</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown side="top">
-                    <pop-button slot="trigger">side top</pop-button>
-                    <pop-card>
+                <pop-dropdown side="start" align="center" dir="rtl">
+                    <pop-button slot="trigger">start / center rlt</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown side="bottom">
-                    <pop-button slot="trigger">side bottom</pop-button>
-                    <pop-card>
+                <pop-dropdown side="start" align="end">
+                    <pop-button slot="trigger">start / end</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="start" align="end" dir="rtl">
+                    <pop-button slot="trigger">start / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
@@ -117,29 +126,269 @@
         </section>
 
         <section>
-            <h2>Dropdown - align</h2>
+            <h2>left / align</h2>
             <div>
-                <pop-dropdown>
-                    <pop-button slot="trigger">align default</pop-button>
-                    <pop-card>
+                <pop-dropdown side="left" align="start">
+                    <pop-button slot="trigger">left / start</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown align="start">
-                    <pop-button slot="trigger">side start</pop-button>
-                    <pop-card>
+                <pop-dropdown side="left" align="start" dir="rtl">
+                    <pop-button slot="trigger">left / start rtl</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>
-                <pop-dropdown align="end">
-                    <pop-button slot="trigger">align end</pop-button>
-                    <pop-card>
+                <pop-dropdown side="left" align="center">
+                    <pop-button slot="trigger">left / center</pop-button>
+                    <pop-card compact>
                         <pop-card-body>
-                            dropdown content
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="left" align="center" dir="rtl">
+                    <pop-button slot="trigger">left / center rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="left" align="end">
+                    <pop-button slot="trigger">left / end</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="left" align="end" dir="rtl">
+                    <pop-button slot="trigger">left / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>bottom / align</h2>
+            <div>
+                <pop-dropdown side="bottom" align="start">
+                    <pop-button slot="trigger">bottom / start</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom" align="start" dir="rtl">
+                    <pop-button slot="trigger">bottom / start rtl</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom" align="center">
+                    <pop-button slot="trigger">bottom / center</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom" align="center" dir="rtl">
+                    <pop-button slot="trigger">bottom / center rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom" align="end">
+                    <pop-button slot="trigger">bottom / end</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="bottom" align="end" dir="rtl">
+                    <pop-button slot="trigger">bottom / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>right / align</h2>
+            <div>
+                <pop-dropdown side="right" align="start">
+                    <pop-button slot="trigger">right / start</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right" align="start" dir="rtl">
+                    <pop-button slot="trigger">right / start rtl</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right" align="center">
+                    <pop-button slot="trigger">right / center</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right" align="center" dir="rtl">
+                    <pop-button slot="trigger">right / center rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right" align="end">
+                    <pop-button slot="trigger">right / end</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="right" align="end" dir="rtl">
+                    <pop-button slot="trigger">right / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>end / align</h2>
+            <div>
+                <pop-dropdown side="end" align="start">
+                    <pop-button slot="trigger">end / start</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="end" align="start" dir="rtl">
+                    <pop-button slot="trigger">end / start rtl</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="end" align="center">
+                    <pop-button slot="trigger">end / center</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="end" align="center" dir="rtl">
+                    <pop-button slot="trigger">end / center rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="end" align="end">
+                    <pop-button slot="trigger">end / end</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="end" align="end" dir="rtl">
+                    <pop-button slot="trigger">end / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+            </div>
+        </section>
+
+        <section>
+            <h2>top / align</h2>
+            <div>
+                <pop-dropdown side="top" align="start">
+                    <pop-button slot="trigger">top / start</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top" align="start" dir="rtl">
+                    <pop-button slot="trigger">top / start rtl</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top" align="center">
+                    <pop-button slot="trigger">top / center</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top" align="center" dir="rtl">
+                    <pop-button slot="trigger">top / center rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top" align="end">
+                    <pop-button slot="trigger">top / end</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
+                        </pop-card-body>
+                    </pop-card>
+                </pop-dropdown>
+                <pop-dropdown side="top" align="end" dir="rtl">
+                    <pop-button slot="trigger">top / end rlt</pop-button>
+                    <pop-card compact>
+                        <pop-card-body>
+                            content
                         </pop-card-body>
                     </pop-card>
                 </pop-dropdown>

@@ -1,2 +1,2 @@
-export type DropdownSide = 'left' | 'right' | 'top' | 'bottom';
-export type DropdownAlign = 'start' | 'end';
+export type DropdownSide = 'start' | 'left' | 'end' | 'right' | 'top' | 'bottom';
+export type DropdownAlign = 'start' | 'center' | 'end';
