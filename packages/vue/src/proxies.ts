@@ -84,6 +84,7 @@ export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-butto
   'outlined',
   'shape',
   'expand',
+  'active',
   'popFocus',
   'popBlur'
 ]);

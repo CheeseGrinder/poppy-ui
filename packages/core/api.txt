@@ -38,6 +38,7 @@ pop-badge,css-prop,--color
 pop-badge,part,native
 
 pop-button,shadow
+pop-button,prop,active,boolean,undefined,false,true
 pop-button,prop,color,"accent" | "error" | "ghost" | "info" | "neutral" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-button,prop,disabled,boolean,undefined,false,true
 pop-button,prop,expand,"block" | "wide",undefined,false,true

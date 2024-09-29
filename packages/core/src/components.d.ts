@@ -155,6 +155,12 @@ export namespace Components {
      */
     interface PopButton {
         /**
+          * Force the button to have `hover` style
+          * @config 
+          * @default false
+         */
+        "active"?: boolean;
+        /**
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
          */
@@ -2097,6 +2103,12 @@ declare namespace LocalJSX {
      * Buttons allow the user to take actions or make choices.
      */
     interface PopButton {
+        /**
+          * Force the button to have `hover` style
+          * @config 
+          * @default false
+         */
+        "active"?: boolean;
         /**
           * The color to use from your application's color palette. Default options are: `"neutral"`, `"ghost"`, `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config

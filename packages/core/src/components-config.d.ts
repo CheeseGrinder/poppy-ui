@@ -110,6 +110,11 @@ export namespace Configuration {
        * `block` make a full width button
        */
       expand?: ButtonExpand;
+      /**
+       * Force the button to have `hover` style
+       * @default false
+       */
+      active?: boolean;
     };
     'pop-card'?: {
       /**
