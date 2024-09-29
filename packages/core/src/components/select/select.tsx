@@ -34,8 +34,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-select-${selectIds++}`;
   private inheritedAttributes: Attributes;
 
-  private popover: HTMLPopPopoverElement;
-  private trigger: HTMLButtonElement;
+  private popoverRef: HTMLPopPopoverElement;
+  private triggerRef: HTMLButtonElement;
 
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
@@ -226,12 +226,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.trigger.focus();
+    this.triggerRef.focus();
   }
 
   @Method()
   async open(event?: any) {
-    if (this.disabled || this.isExpanded || this.popover) return;
+    if (this.disabled || this.isExpanded || this.popoverRef) return;
 
     this.isExpanded = true;
     const selectedValue = this.value;
@@ -275,10 +275,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       alignment: 'center',
       event: event,
     });
-    this.popover = popover;
+    this.popoverRef = popover;
 
     popover.addEventListener('didDismiss', () => {
-      this.popover = undefined;
+      this.popoverRef = undefined;
       this.isExpanded = false;
       this.popDismiss.emit();
       this.setFocus();
@@ -324,7 +324,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     if (this.disabled || !this.isExpanded) return;
 
     this.isExpanded = false;
-    this.popover.dismiss();
+    this.popoverRef.dismiss();
   }
 
   private onFocus = () => {
@@ -338,7 +338,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private onClick = async (ev: PointerEvent) => {
     await this.open({
       ...ev,
-      target: this.trigger,
+      target: this.triggerRef,
     });
   };
 
@@ -453,7 +453,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
         onClick={this.onClick}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        ref={ref => (this.trigger = ref)}
+        ref={ref => (this.triggerRef = ref)}
       />
     );
   }
@@ -474,7 +474,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           'join-item': hostContext(host, 'pop-join'),
         }}
       >
-        <div class="label-text-wrapper">
+        <div class="label">
           <label
             htmlFor={inputId}
             part="label"
