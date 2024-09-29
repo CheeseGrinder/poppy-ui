@@ -82,9 +82,11 @@
     0% {
       transform: scale(var(--focus-scale));
     }
+
     40% {
       transform: scale(1.02);
     }
+
     100% {
       transform: scale(1);
     }
@@ -101,6 +103,7 @@
   padding-left: 0.5rem;
   font-size: 0.75rem;
 }
+
 :host([size="sm"]) button {
   height: 2rem;
   min-height: 2rem;
@@ -108,6 +111,7 @@
   padding-left: 0.75rem;
   font-size: 0.875rem;
 }
+
 :host([size="md"]) button {
   height: 3rem;
   min-height: 3rem;
@@ -115,6 +119,7 @@
   padding-left: 1rem;
   font-size: 0.875rem;
 }
+
 :host([size="lg"]) button {
   height: 4rem;
   min-height: 4rem;
@@ -135,12 +140,17 @@
       --background: #{$base};
       --color: #{$text};
 
-      button:hover {
-        --background: color-mix(in oklab, #{$base}, black 10%);
+      button {
+
+        &:hover,
+        &.btn-active {
+          --background: color-mix(in oklab, #{$base}, black 10%);
+        }
       }
     }
   }
 }
+
 @include generate-color(neutral, primary, secondary, accent, info, success, warning, error);
 
 :host([color="ghost"]:not([outlined])) {
@@ -150,11 +160,13 @@
   button {
     outline-color: currentColor;
 
-    &:hover {
+    &:hover,
+    &.btn-active {
       --background: #{get-color("base.content", 0.2)};
     }
   }
 }
+
 :host(:not([color], [outlined])) {
   --background: #{get-color("base.200")};
   --color: #{get-color("base.content")};
@@ -162,7 +174,8 @@
   button {
     outline-color: #{get-color("base.content")};
 
-    &:hover {
+    &:hover,
+    &.btn-active {
       --background: #{get-color("base.300")};
     }
   }
@@ -175,23 +188,29 @@
   button {
     box-shadow: none;
 
-    &:hover {
-      border-color: transparent;
-    }
-
-    &:not(:hover) {
+    &:not(:hover, .btn-active) {
       border-color: currentColor;
       background-color: transparent;
       color: var(--background);
     }
+
+    &:hover,
+    &.btn-active {
+      border-color: transparent;
+    }
   }
 }
+
 :host(:not([color])[outlined]) {
   --background: #{get-color("base.content")};
 
-  button:hover {
-    --background: #{get-color("base.content")};
-    --color: #{get-color("base.200")};
+  button {
+
+    &:hover,
+    &.btn-active {
+      --background: #{get-color("base.content")};
+      --color: #{get-color("base.200")};
+    }
   }
 }
 
@@ -201,6 +220,7 @@
 :host([expand="block"]) {
   width: 100%;
 }
+
 :host([expand="wide"]) button {
   width: 16rem;
 }
@@ -215,6 +235,7 @@
     padding: 0;
   }
 }
+
 :host([shape="circle"]) {
   --border-radius: #{get-radius(full)};
 }

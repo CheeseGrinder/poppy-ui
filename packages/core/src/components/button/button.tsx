@@ -97,6 +97,14 @@ export class Button implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) expand?: ButtonExpand;
 
   /**
+   * Force the button to have `hover` style
+   *
+   * @config
+   * @default false
+   */
+  @Prop({ reflect: true, mutable: true }) active?: boolean;
+
+  /**
    * Emitted when the button has focus.
    */
   @Event() popFocus!: EventEmitter<void>;
@@ -111,6 +119,7 @@ export class Button implements ComponentInterface {
       disabled: false,
       size: config.get('defaultSize', 'md'),
       outlined: false,
+      active: false,
     });
   }
 
@@ -162,6 +171,9 @@ export class Button implements ComponentInterface {
           disabled={disabled}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          class={{
+            'btn-active': this.active,
+          }}
           {...this.inheritedAttributes}
         >
           <slot name="start" />
