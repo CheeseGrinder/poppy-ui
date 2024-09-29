@@ -246,7 +246,7 @@
 :host([disabled]) {
   cursor: not-allowed;
 
-  button {
+  button:disabled {
     --background: #{get-color("neutral.base", 0.2)};
     color: #{get-color("base.content", 0.2)};
 

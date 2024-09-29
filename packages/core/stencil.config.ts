@@ -81,11 +81,6 @@ export const config: Config = {
       file: 'api.txt',
     }),
     {
-      type: 'www',
-      serviceWorker: null, // disable service workers
-      copy: [{ src: '**/*.html' }, { src: '**/*.css' }]
-    },
-    {
       type: 'dist',
       esmLoaderPath: '../loader',
     },
