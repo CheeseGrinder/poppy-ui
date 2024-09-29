@@ -56,7 +56,7 @@ export class Input implements ComponentInterface {
   /**
    * The type of control to display. The default type is text.
    */
-  @Prop({ mutable: true }) type: InputType = 'text';
+  @Prop({ reflect: true, mutable: true }) type: InputType = 'text';
 
   /**
    * Instructional text that shows before the input has a value.
@@ -444,7 +444,7 @@ export class Input implements ComponentInterface {
         >
           <slot name="start" />
           <input
-            part="native"
+            part={`native ${this.type}`}
             id={inputId}
             name={this.name}
             type={this.type}

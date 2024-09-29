@@ -177,7 +177,7 @@ pop-input,prop,required,boolean,undefined,false,true
 pop-input,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-input,prop,spellcheck,boolean,undefined,false,false
 pop-input,prop,step,string,undefined,false,false
-pop-input,prop,type,"date" | "datetime-local" | "email" | "month" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "week",'text',false,false
+pop-input,prop,type,"date" | "datetime-local" | "email" | "month" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "week",'text',false,true
 pop-input,prop,value,number | string,'',false,false
 pop-input,method,setFocus,setFocus() => Promise<void>
 pop-input,event,popBlur,void,true
