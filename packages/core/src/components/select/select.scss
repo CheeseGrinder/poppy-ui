@@ -16,7 +16,7 @@
 $minWidth: 12rem;
 
 // @include join-item.item(".select-wrapper");
-@include join-item.item(".select-wrapper button");
+@include join-item.item(".select-wrapper", ".select-wrapper button");
 
 :host {
   --opacity: 1;
@@ -38,7 +38,7 @@ $minWidth: 12rem;
     align-items: center;
 
     overflow: hidden;
-    // border-radius: var(--border-radius, get-radius(md));
+    border-radius: var(--border-radius);
     background-color: var(--background);
 
     &:has(button:focus-visible) {

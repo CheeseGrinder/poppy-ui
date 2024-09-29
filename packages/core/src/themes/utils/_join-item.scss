@@ -1,15 +1,17 @@
 @import "@poppy/functions/poppy.radius";
 
-@mixin item($selector) {
+@mixin item($selectors...) {
   $radius-var: get-radius(md);
 
   // join-item
-  :host(.join-item) > #{$selector} {
-    border-start-start-radius: var(--border-radius-start-start, var(--border-radius, #{$radius-var}));
-
-    border-start-end-radius: var(--border-radius-start-end, var(--border-radius, #{$radius-var}));
-    border-end-start-radius: var(--border-radius-end-start, var(--border-radius, #{$radius-var}));
-    border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{$radius-var}));
+  @each $selector in $selectors {
+    :host(.join-item) > #{$selector} {
+      border-start-start-radius: var(--border-radius-start-start, var(--border-radius, #{$radius-var}));
+  
+      border-start-end-radius: var(--border-radius-start-end, var(--border-radius, #{$radius-var}));
+      border-end-start-radius: var(--border-radius-end-start, var(--border-radius, #{$radius-var}));
+      border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{$radius-var}));
+    }
   }
 }
 

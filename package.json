@@ -8,11 +8,12 @@
     "packages/vue"
   ],
   "scripts": {
-    "install:all": "npm run install:core && npm install:vue",
-    "install:core": "npm install -w @poppy-ui/core",
-    "build:core": "cd packages/core && npm run build",
-    "install:vue": "npm install -w @poppy-ui/vue @poppy-ui/core ",
-    "build:vue": "cd packages/vue && npm run build",
+    "install:all": "npm install -w @poppy-ui/core -w @poppy-ui/vue",
+    "core:install": "npm install -w @poppy-ui/core",
+    "core:start": "npm start -w @poppy-ui/core",
+    "core:build": "npm run build -w @poppy-ui/core",
+    "vue:install": "npm install -w @poppy-ui/vue",
+    "vue:build": "npm run build -w @poppy-ui/vue",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {

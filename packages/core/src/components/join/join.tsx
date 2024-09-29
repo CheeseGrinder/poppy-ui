@@ -19,7 +19,7 @@ export class Join implements ComponentInterface {
    * @config
    * @default "horizontal"
    */
-  @Prop({ reflect: true }) orientation: JoinOrientation;
+  @Prop({ reflect: true, mutable: true }) orientation: JoinOrientation;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-join', {
