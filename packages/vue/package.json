@@ -1,7 +1,7 @@
 {
   "name": "@poppy-ui/vue",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Vue specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
@@ -15,7 +15,10 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
-  "files": ["dist/", "css/"],
+  "files": [
+    "dist/",
+    "css/"
+  ],
   "keywords": [
     "daisy-ui",
     "framework",
@@ -46,11 +49,11 @@
     "biome": "biome"
   },
   "dependencies": {
-    "@poppy-ui/core": "0.2.0"
+    "@poppy-ui/core": "0.3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.2",
-    "@poppy-ui/docs": "0.2.0",
+    "@poppy-ui/docs": "0.3.0",
     "@rollup/plugin-typescript": "^12.1.0",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",
@@ -64,5 +67,7 @@
     "attributes": "dist/vetur/attributes.json"
   },
   "web-types": "dist/web-types.json",
-  "sideEffects": ["css/*.css"]
+  "sideEffects": [
+    "css/*.css"
+  ]
 }

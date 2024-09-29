@@ -109,17 +109,17 @@ jobs:
 
       - name: Build - Core
         run: |
-          npm -w @poppy-ui/core install
-          npm -w @poppy-ui/core run build --if-present
+          npm install -w @poppy-ui/core
+          npm run build --if-present -w @poppy-ui/core
 
       - name: Build - Vue
         run: |
-          npm -w=@poppy-ui/vue uninstall @poppy-ui/core
-          npm -w=@poppy-ui/vue uninstall @poppy-ui/docs
-          npm -w=@poppy-ui/vue install @poppy-ui/core@${{ steps.bump.outputs.version }}
-          npm -w=@poppy-ui/vue install -D @poppy-ui/docs@${{ steps.bump.outputs.version }}
+          npm uninstall @poppy-ui/core -w @poppy-ui/vue
+          npm uninstall @poppy-ui/docs -w @poppy-ui/vue
+          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
+          npm install @poppy-ui/docs@${{ steps.bump.outputs.version }} -D -w @poppy-ui/vue
 
-          npm -w @poppy-ui/core run build --if-present
+          npm run build --if-present -w @poppy-ui/vue
 
   publish:
     needs:
@@ -146,9 +146,8 @@ jobs:
 
       - name: Publish Core
         run: |
-          npm run build
-          npm publish
-        working-directory: packages/core
+          npm run build -w @poppy-ui/core
+          npm publish -w @poppy-ui/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -161,10 +160,10 @@ jobs:
 
       - name: Upgrade - Vue
         run: |
-          npm -w=@poppy-ui/vue uninstall @poppy-ui/core
-          npm -w=@poppy-ui/vue uninstall @poppy-ui/docs
-          npm -w=@poppy-ui/vue install @poppy-ui/core@${{ steps.bump.outputs.version }}
-          npm -w=@poppy-ui/vue install -D @poppy-ui/docs@${{ steps.bump.outputs.version }}
+          npm uninstall @poppy-ui/core -w @poppy-ui/vue
+          npm uninstall @poppy-ui/docs -w @poppy-ui/vue
+          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
+          npm install -D @poppy-ui/docs@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
   
       - name: Publish Vue
         run: |

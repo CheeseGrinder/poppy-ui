@@ -19,20 +19,20 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Package
-      run: npm -w @poppy-ui/${{ inputs.package }} install
+      run: npm install -w @poppy-ui/${{ inputs.package }}
       shell: bash
 
     - name: Install Core
       if: inputs.package != 'core'
-      run: npm -w @poppy-ui/${{ inputs.package }} install @poppy-ui/core @poppy-ui/docs
+      run: npm install @poppy-ui/core @poppy-ui/docs -w @poppy-ui/${{ inputs.package }}
       shell: bash
 
     - name: Build
-      run: npm -w @poppy-ui/${{ inputs.package }} run build --if-present
+      run: npm run build -w @poppy-ui/${{ inputs.package }} --if-present
       shell: bash
 
     - name: Pack
-      run: npm -w @poppy-ui/${{ inputs.package }} pack
+      run: npm pack -w @poppy-ui/${{ inputs.package }}
       shell: bash
 
     - name: Rename tarball

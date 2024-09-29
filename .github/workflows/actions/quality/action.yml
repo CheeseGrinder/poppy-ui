@@ -24,12 +24,12 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Package
-      run: npm -w @poppy-ui/${{ inputs.package }} install
+      run: npm install -w @poppy-ui/${{ inputs.package }}
       shell: bash
 
     - name: Install Core
       if: inputs.package != 'core'
-      run: npm -w @poppy-ui/${{ inputs.package }} install @poppy-ui/core @poppy-ui/docs
+      run: npm install @poppy-ui/core @poppy-ui/docs -w @poppy-ui/${{ inputs.package }}
       shell: bash
 
     - name: Format
