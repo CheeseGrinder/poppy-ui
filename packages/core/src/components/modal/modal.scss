@@ -129,10 +129,10 @@
   }
 }
 
-:host(:not([showBackdrop])) .modal::backdrop {
+:host(:not([show-backdrop])) .modal::backdrop {
   background-color: transparent;
 }
 
-:host([showBackdrop]) .modal::backdrop {
-  background-color: #0006;
+:host([show-backdrop]) .modal::backdrop {
+  background-color: #00000066;
 }
