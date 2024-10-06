@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { PopButton } from '@poppy-ui/vue';
 import HelloWorld from './components/HelloWorld.vue';
-import { IonButton } from '@ionic/vue';
 </script>
 
 <template>
@@ -38,9 +37,6 @@ import { IonButton } from '@ionic/vue';
     >
       button poppy
     </PopButton>
-    <IonButton type="submit">
-      button ionic
-    </IonButton>
   </form>
   <HelloWorld msg="Vite + Vue" />
 </template>

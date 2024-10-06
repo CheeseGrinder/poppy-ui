@@ -2,16 +2,12 @@
   "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["../../biome.json"],
   "files": {
-    "include": ["src/*"],
-    "ignore": ["src/vue-component-lib/*", "src/proxies.ts"]
+    "include": ["src/*"]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": "off"
-      }
+      "recommended": true
     }
   },
   "overrides": [

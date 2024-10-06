@@ -3,9 +3,8 @@
   "private": true,
   "version": "0.3.0",
   "workspaces": [
-    "packages/core",
-    "packages/docs",
-    "packages/vue"
+    "packages/*",
+    "tests/*"
   ],
   "scripts": {
     "install:all": "npm install -w @poppy-ui/core -w @poppy-ui/vue",
@@ -14,12 +13,13 @@
     "core:build": "npm run build -w @poppy-ui/core",
     "vue:install": "npm install -w @poppy-ui/vue",
     "vue:build": "npm run build -w @poppy-ui/vue",
+    "vue:test": "npm run dev -w test-vue",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@types/node": "^20.14.2",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@types/node": "^22.7.4",
     "audit-ci": "^7.1.0"
   },
   "engines": {

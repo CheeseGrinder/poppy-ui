@@ -1,0 +1,10 @@
+{
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.organizeImports.biome": "explicit",
+        "source.sortImports": "explicit",
+        "source.removeUnused.ts": "explicit",
+        "source.removeUnusedImports": "explicit",
+    }
+}

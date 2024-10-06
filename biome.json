@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -22,70 +22,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noAssignInExpressions": "off",
-        "noEmptyBlock": "error",
-        "noExplicitAny": "off",
-        "noConfusingVoidType": "off",
-        "noDoubleEquals": "error",
-        "noFunctionAssign": "error",
-        "noSparseArray": "error",
-        "useIsArray": "error",
-        "useAwait": "off"
-      },
-      "correctness": {
-        "noUnusedPrivateClassMembers": "error",
-        "noUnnecessaryContinue": "error",
-        "noUnreachable": "error",
-        "noUnsafeOptionalChaining": "error",
-        "noVoidTypeReturn": "off",
-        "useIsNan": "error",
-        "useYield": "error"
-      },
-      "nursery": {
-        "noSubstr": "error",
-        "useDeprecatedReason": "error"
-      },
-      "security": {
-        "noGlobalEval": "error"
-      },
-      "style": {
-        "useTemplate": "error",
-        "noImplicitBoolean": "warn",
-        "noUnusedTemplateLiteral": "error",
-        "noUselessElse": "error",
-        "noVar": "error",
-        "useConst": "error",
-        "useExportType": "error",
-        "useImportType": "error",
-        "useNodejsImportProtocol": "error",
-        "useSelfClosingElements": "error",
-        "useShorthandArrayType": "error",
-        "useSingleVarDeclarator": "error",
-        "useThrowOnlyError": "error"
-      },
-      "complexity": {
-        "noForEach": "error",
-        "noUselessConstructor": "error",
-        "noThisInStatic": "error",
-        "noUselessEmptyExport": "error",
-        "noVoid": "off",
-        "useFlatMap": "error",
-        "useOptionalChain": "error",
-        "useRegexLiterals": "warn"
-      },
-      "a11y": {
-        "noRedundantRoles": "error",
-        "noRedundantAlt": "error",
-        "useAltText": "error",
-        "useButtonType": "error",
-        "useAriaPropsForRole": "error",
-        "useValidAriaProps": "error",
-        "useValidAriaRole": "error",
-        "useValidAriaValues": "error",
-        "useSemanticElements": "warn"
-      }
+      "recommended": true
     }
   },
   "javascript": {
@@ -102,6 +39,29 @@
     },
     "linter": {
       "enabled": true
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "cssModules": true
+    },
+    "assists": {
+      "enabled": true
+    }
+  },
+  "assists": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "sortJsxProps": "on",
+        "useSortedKeys": "on"
+      }
     }
   }
 }

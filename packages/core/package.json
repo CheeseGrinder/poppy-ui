@@ -66,25 +66,25 @@
     "stencil": "stencil"
   },
   "dependencies": {
-    "@stencil/core": "^4.20.0"
+    "@stencil/core": "^4.22.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
+    "@biomejs/biome": "^1.9.3",
     "@cheese-grinder/stencil-component-config": "^0.4.1",
     "@cheese-grinder/stencil-custom-readme": "^0.1.7",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
-    "@playwright/test": "^1.46.1",
-    "@stencil/playwright": "^0.2.0",
+    "@playwright/test": "^1.47.2",
+    "@stencil/playwright": "^0.2.1",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.8.9",
-    "@types/jest": "^29.5.12",
-    "@types/node": "~22.2.0",
+    "@types/jest": "^29.5.13",
+    "@types/node": "~22.7.4",
     "clean-css-cli": "^5.6.3",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "key-definitions": "^2.0.3",
     "rimraf": "^6.0.1",
-    "sass": "^1.77.8",
-    "typescript": "^5.5.4"
+    "sass": "^1.79.4",
+    "typescript": "^5.6.2"
   }
 }
