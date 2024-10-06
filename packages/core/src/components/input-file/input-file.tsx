@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -14,6 +12,8 @@ import {
   h,
 } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 import type { InputFileChangeEventDetail, InputFileColor } from './input-file.type';
 
@@ -230,8 +230,8 @@ export class InputFile implements ComponentInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
         class={{
           'join-item': hostContext(host, 'pop-join'),
         }}
@@ -247,19 +247,19 @@ export class InputFile implements ComponentInterface {
           </div>
         </Show>
         <input
-          part="native"
-          type="file"
-          id={inputId}
-          name={this.name}
-          multiple={this.multiple}
-          required={this.required}
-          readonly={this.readonly}
-          disabled={this.disabled}
           autoFocus={this.autoFocus}
+          disabled={this.disabled}
+          id={inputId}
+          multiple={this.multiple}
+          name={this.name}
+          onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
-          onBlur={this.onBlur}
+          part="native"
+          readonly={this.readonly}
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          type="file"
           {...this.inheritedAttributes}
         />
         <Show when={hasBottomText}>

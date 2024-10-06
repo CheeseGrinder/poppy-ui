@@ -32,46 +32,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Audit - Core
-        uses: ./.github/workflows/actions/audit
-        with:
-          package: core
-      - name: Audit - Vue
-        uses: ./.github/workflows/actions/audit
-        with:
-          package: vue
+      - name: Audit
+        uses: ./.github/workflows/audit
 
-  quality-core:
-    needs:
-      - audit
+  biome:
+    name: Format, Lint & Organize Import
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Quality - Core
-        uses: ./.github/workflows/actions/quality
-        with:
-          package: core
+      - run: npx @biomejs/biome ci --reporter github
+        shell: bash
 
-  quality-vue:
-    needs:
-      - audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Quality - Vue
-        uses: ./.github/workflows/actions/quality
-        with:
-          package: vue
-          upload: false
-
-  tests:
-    needs:
-      - audit
+  test:
+    needs: biome
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
-          - 18.x
           - 20.x
           - 22.x
     steps:
@@ -82,48 +59,28 @@ jobs:
           package: core
           node-version: ${{ matrix.node-version }}
 
-  build:
+  build-core:
+    name: Build - Core
     needs:
-      - quality-core
-      - quality-vue
-      - tests
+      - test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 18.x
-          - 20.x
-          - 22.x
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-  
-      - name: Bump version
-        id: bump
-        uses: ./.github/workflows/actions/bump
-        with:
-          version: ${{ inputs.version }}
-          preid: ${{ inputs.preid }}
+      - uses: ./.github/workflows/build-core
 
-      - name: Build - Core
-        run: |
-          npm install -w @poppy-ui/core
-          npm run build --if-present -w @poppy-ui/core
-
-      - name: Build - Vue
-        run: |
-          npm uninstall @poppy-ui/core -w @poppy-ui/vue
-          npm uninstall @poppy-ui/docs -w @poppy-ui/vue
-          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
-          npm install @poppy-ui/docs@${{ steps.bump.outputs.version }} -D -w @poppy-ui/vue
-
-          npm run build --if-present -w @poppy-ui/vue
+  build-vue:
+    name: Build - Vue
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/build-vue
 
   publish:
     needs:
-      - build
+      - build-core
+      - build-vue
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -176,6 +133,8 @@ jobs:
       # Push only if the package as been published on registry
       - name: Commit & Tag
         run: |
+          git add .
+          git commit -m 'ci(version): bump to ${{ steps.bump.outputs.version }}'
           git push
           git tag ${{ steps.bump.outputs.version }}
           git push origin tag ${{ steps.bump.outputs.version }}

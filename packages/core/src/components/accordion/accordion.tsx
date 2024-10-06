@@ -1,6 +1,6 @@
+import { Component, type ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
 import { compareOptions } from '#utils/forms';
 import { hostContext } from '#utils/helpers';
-import { Component, type ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
 import { ChevronDown } from '../ChevronDown';
 
 /**
@@ -115,9 +115,9 @@ export class Accordion implements ComponentInterface {
         }}
       >
         <header
-          part="header"
           class="accordion-title"
           onClick={this.onClick}
+          part="header"
         >
           <div class="header-content">
             <slot name="header" />
@@ -125,8 +125,8 @@ export class Accordion implements ComponentInterface {
           <ChevronDown />
         </header>
         <div
-          part="content"
           class="accordion-content"
+          part="content"
         >
           <slot />
         </div>

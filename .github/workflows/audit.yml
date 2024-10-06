@@ -1,18 +1,17 @@
-name: Audit - Vue
+name: Audit
 
 on:
+  workflow_call:
   push:
     branches:
       - main
     paths:
-      - packages/vue/**
-      - packages/vue-*/**
+      - packages/**
   pull_request:
     branches:
       - main
     paths:
-      - packages/vue/**
-      - packages/vue-*/**
+      - packages/**
   schedule:
     # Run every Monday-Friday
     # at 6:00 UTC (6:00 am UTC)
@@ -22,16 +21,19 @@ on:
 # cancel the previous test run to not
 # consume more runners than we need to.
 concurrency:
-  group: ${{ github.ref }}_audit_vue
+  group: ${{ github.ref }}_audit
   cancel-in-progress: true
 
 jobs:
   audit:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - core
+          - vue
     steps:
       - uses: actions/checkout@v4
-
-      - name: Audit
-        uses: ./.github/workflows/actions/audit
-        with:
-          package: vue
+      - name: Audit ${{ matrix.package }}
+        run: npx -w @poppy-ui/${{ matrix.package }} audit-ci@latest --config ./audit-ci.json
+        shell: bash

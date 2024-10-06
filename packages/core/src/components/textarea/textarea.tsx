@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -15,6 +13,8 @@ import {
   h,
 } from '@stencil/core';
 import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 import type { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from './textarea.type';
 
@@ -369,13 +369,13 @@ export class Textarea implements ComponentInterface {
 
     return (
       <Host
-        style={{
-          maxWidth: this.textareaWidth,
-        }}
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
         class={{
           'join-item': hostContext(host, 'pop-join'),
+        }}
+        style={{
+          maxWidth: this.textareaWidth,
         }}
       >
         <Show when={hasLabel}>
@@ -389,28 +389,28 @@ export class Textarea implements ComponentInterface {
           </div>
         </Show>
         <textarea
-          part="native"
-          id={inputId}
-          name={this.name}
-          placeholder={this.placeholder || ''}
-          minLength={this.minLength}
-          maxLength={this.maxLength}
-          rows={this.rows}
-          cols={this.cols}
-          required={this.required}
-          readonly={this.readonly}
-          disabled={this.disabled}
-          autoFocus={this.autoFocus}
-          inputMode={this.keyboard}
-          enterKeyHint={this.enterkeyhint}
-          spellcheck={this.spellcheck}
           autoCapitalize={this.autoCapitalize}
-          wrap={this.wrap}
-          onChange={this.onChange}
-          onInput={this.onInput}
-          onFocus={this.onFocus}
+          autoFocus={this.autoFocus}
+          cols={this.cols}
+          disabled={this.disabled}
+          enterKeyHint={this.enterkeyhint}
+          id={inputId}
+          inputMode={this.keyboard}
+          maxLength={this.maxLength}
+          minLength={this.minLength}
+          name={this.name}
           onBlur={this.onBlur}
+          onChange={this.onChange}
+          onFocus={this.onFocus}
+          onInput={this.onInput}
+          part="native"
+          placeholder={this.placeholder || ''}
+          readonly={this.readonly}
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          rows={this.rows}
+          spellcheck={this.spellcheck}
+          wrap={this.wrap}
           {...this.inheritedAttributes}
         >
           {value}

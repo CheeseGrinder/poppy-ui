@@ -40,8 +40,8 @@ export class SelectOption {
   render() {
     return (
       <Host
-        role="option"
         id={this.inputId}
+        role="option"
       />
     );
   }

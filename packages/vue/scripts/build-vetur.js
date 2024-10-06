@@ -1,6 +1,6 @@
-import { kebabCase } from 'change-case';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { kebabCase } from 'change-case';
 const require = createRequire(import.meta.url);
 const JsonDocs = require('@poppy-ui/docs');
 

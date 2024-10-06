@@ -1,5 +1,5 @@
-import { type PoppyConfig, componentConfig, config } from '#config';
 import { setPlatformHelpers } from '@stencil/core';
+import { type PoppyConfig, componentConfig, config } from '#config';
 
 export const initialize = (frameworkConfig: PoppyConfig = {}): void => {
   window.Poppy ||= {};

@@ -1,7 +1,3 @@
-import { componentConfig } from '#config';
-import { isRTL } from '#utils/dir';
-import type { OverlayInterface } from '#utils/overlay';
-import { type TriggerAction, TriggerController } from '#utils/trigger';
 import {
   Component,
   type ComponentInterface,
@@ -14,6 +10,10 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { componentConfig } from '#config';
+import { isRTL } from '#utils/dir';
+import type { OverlayInterface } from '#utils/overlay';
+import { type TriggerAction, TriggerController } from '#utils/trigger';
 import type { DrawerSide } from './drawer.type';
 
 /**
@@ -159,13 +159,13 @@ export class Drawer implements ComponentInterface, OverlayInterface {
 
         <aside class="drawer-side">
           <div
-            part="backdrop"
             class="drawer-backdrop"
             onClick={this.onClick}
+            part="backdrop"
           />
           <div
-            part="side"
             class="drawer-side-inner"
+            part="side"
           >
             <slot name="side" />
           </div>

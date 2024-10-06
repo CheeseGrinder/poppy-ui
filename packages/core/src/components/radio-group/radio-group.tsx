@@ -1,4 +1,3 @@
-import { componentConfig, config } from '#config';
 import {
   AttachInternals,
   Component,
@@ -12,6 +11,7 @@ import {
   h,
 } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
 import type { RadioGroupChangeEventDetail, RadioGroupCompareFn } from './radio-group.type';
 
 let radioGroupIds = 0;

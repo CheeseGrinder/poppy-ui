@@ -1,5 +1,5 @@
-import { componentConfig } from '#config';
 import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { componentConfig } from '#config';
 import type { IndicatorPosition, IndicatorSide } from './indicator.type';
 
 /**

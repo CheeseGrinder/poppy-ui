@@ -2,17 +2,29 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "ignore": [
-      "packages/docs/*",
+      "**/package.json",
       "**/*.d.ts",
+      "packages/docs/*",
       "packages/vue/src/vue-component-lib/utils.ts",
       "packages/vue/src/proxies.ts"
     ]
+  },
+  "assists": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "sortJsxProps": "on"
+      }
+    }
   },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true,
     "defaultBranch": "main"
+  },
+  "organizeImports": {
+    "enabled": true
   },
   "formatter": {
     "enabled": true,
@@ -22,9 +34,6 @@
     "lineEnding": "lf",
     "lineWidth": 120,
     "attributePosition": "multiline"
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "linter": {
     "enabled": true,
@@ -52,6 +61,9 @@
     }
   },
   "css": {
+    "assists": {
+      "enabled": true
+    },
     "formatter": {
       "enabled": true
     },
@@ -60,18 +72,6 @@
     },
     "parser": {
       "cssModules": true
-    },
-    "assists": {
-      "enabled": true
-    }
-  },
-  "assists": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "sortJsxProps": "on",
-        "useSortedKeys": "on"
-      }
     }
   },
   "overrides": [
@@ -87,11 +87,11 @@
             "useJsxKeyInIterable": "off" // Stencil generate jsx key for us
           },
           "a11y": {
-            "useKeyWithClickEvents": "warn", // Should be an error before release v1
-            "useValidAnchor": "off", // Anchor is used to trigger focus on element, for link purpose,
             "noAutofocus": "off", // Auto focus is used for inputs components
             "noSvgWithoutTitle": "off",
-            "useSemanticElements": "off"
+            "useKeyWithClickEvents": "warn", // Should be an error before release v1
+            "useSemanticElements": "off",
+            "useValidAnchor": "off" // Anchor is used to trigger focus on element, for link purpose,
           },
           "style": {
             "noParameterAssign": "off" // Used to assing ref

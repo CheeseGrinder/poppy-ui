@@ -1,9 +1,7 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Quality
- 
+
 on:
+  workflow_call:
   push:
     branches:
       - main
@@ -23,40 +21,74 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  quality:
+  biome:
+    name: Format, Lint & Organize Import
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Quality
-        uses: ./.github/workflows/actions/quality
+      - run: npx @biomejs/biome ci --reporter github
+        shell: bash
 
-  test:
-    needs: quality
+  test-core:
+    name: Core
+    needs:
+      - biome
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package:
-          - core
-          - vue
         node-version:
-          - 18.x
           - 20.x
           - 22.x
     steps:
       - uses: actions/checkout@v4
-      - name: Test ${{ matrix.package }} on ${{ matrix.node-version }}
-        uses: ./.github/workflows/actions/test
+      - uses: ./.github/workflows/actions/test
         with:
-          package: ${{ matrix.package }}
+          package: core
           node-version: ${{ matrix.node-version }}
 
-  analyze:
+  test-vue:
+    name: Vue
+    needs:
+      - biome
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+          - 22.x
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+      - uses: actions/setup-node@v4
         with:
-          languages: javascript
-      - uses: github/codeql-action/analyze@v3
+          node-version: ${{ matrix.node-version }}
+
+      - name: Prepare
+        run: |
+          npm install -w @poppy-ui/core
+          npm run build -w @poppy-ui/core
+          npm pack -w @poppy-ui/core
+          PKG=$(ls poppy-ui-core-*.tgz)
+          mv $PKG poppy-ui-core-${{ matrix.node-version }}.tgz
+          npm pack -w @poppy-ui/docs
+          PKG=$(ls poppy-ui-docs-*.tgz)
+          mv $PKG poppy-ui-docs-${{ matrix.node-version }}.tgz
+        shell: bash
+
+      - name: Install
+        run: |
+          npm install ./poppy-ui-core-${{ matrix.node-version }}.tgz -w @poppy-ui/vue
+          npm install -D ./poppy-ui-docs-${{ matrix.node-version }}.tgz -w @poppy-ui/vue
+          npm install -w @poppy-ui/vue
+        shell: bash
+
+      - name: Test
+        run: npm run test:spec -w @poppy-ui/vue --if-present -- --passWithNoTests --coverage
+        shell: bash
+
+      - name: Test e2e
+        run: npm run test:e2e -w @poppy-ui/vue --if-present -- --pass-with-no-tests --reporter github
+        shell: bash
+      - uses: ./.github/workflows/actions/test
+        with:
+          package: vue
+          node-version: ${{ matrix.node-version }}

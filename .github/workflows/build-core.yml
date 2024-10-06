@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Build - Core
 
 on:
@@ -23,36 +20,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Audit
-        uses: ./.github/workflows/actions/audit
-        with:
-          package: core
-
-  quality:
-    needs: audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/actions/quality
-        with:
-          package: core
-
   build:
-    needs: quality
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
-          - 18.x
           - 20.x
           - 22.x
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/actions/build
+
+      - name: Setup Node v${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          package: core
           node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm install -w @poppy-ui/core
+        shell: bash
+
+      - name: Build
+        run: npm run build -w @poppy-ui/core --if-present
+        shell: bash

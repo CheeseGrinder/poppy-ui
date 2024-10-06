@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -14,6 +12,8 @@ import {
   h,
 } from '@stencil/core';
 import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 import type { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
 
@@ -421,8 +421,8 @@ export class Input implements ComponentInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
         class={{
           'join-item': hostContext(host, 'pop-join'),
         }}
@@ -438,41 +438,41 @@ export class Input implements ComponentInterface {
           </div>
         </Show>
         <label
-          htmlFor={inputId}
           class="input-wrapper"
+          htmlFor={inputId}
           part="wrapper"
         >
           <slot name="start" />
           <input
-            part={`native ${this.type}`}
-            id={inputId}
-            name={this.name}
-            type={this.type}
-            placeholder={this.placeholder || ''}
-            min={this.min}
-            max={this.max}
-            step={this.step}
-            value={this.value}
-            multiple={this.multiple}
-            pattern={this.pattern}
-            minLength={this.minLength}
-            maxLength={this.maxLength}
-            required={this.required}
-            readonly={this.readonly}
-            disabled={this.disabled}
-            autoFocus={this.autoFocus}
-            inputMode={this.keyboard}
-            enterKeyHint={this.enterkeyhint}
-            spellcheck={this.spellcheck}
-            autoComplete={this.autoComplete}
             autoCapitalize={this.autoCapitalize}
-            onChange={this.onChange}
-            onInput={this.onInput}
-            onFocus={this.onFocus}
+            autoComplete={this.autoComplete}
+            autoFocus={this.autoFocus}
+            disabled={this.disabled}
+            enterKeyHint={this.enterkeyhint}
+            id={inputId}
+            inputMode={this.keyboard}
+            max={this.max}
+            maxLength={this.maxLength}
+            min={this.min}
+            minLength={this.minLength}
+            multiple={this.multiple}
+            name={this.name}
             onBlur={this.onBlur}
-            onCompositionstart={this.onCompositionStart}
+            onChange={this.onChange}
             onCompositionend={this.onCompositionEnd}
+            onCompositionstart={this.onCompositionStart}
+            onFocus={this.onFocus}
+            onInput={this.onInput}
+            part={`native ${this.type}`}
+            pattern={this.pattern}
+            placeholder={this.placeholder || ''}
+            readonly={this.readonly}
             ref={el => (this.nativeInput = el)}
+            required={this.required}
+            spellcheck={this.spellcheck}
+            step={this.step}
+            type={this.type}
+            value={this.value}
             {...this.inheritedAttributes}
           />
           <slot name="end" />

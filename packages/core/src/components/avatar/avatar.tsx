@@ -1,5 +1,5 @@
-import { componentConfig } from '#config';
 import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
+import { componentConfig } from '#config';
 
 /**
  * Avatars are used to show a thumbnail representation of an individual or business in the interface.

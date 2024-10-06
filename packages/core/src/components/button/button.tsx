@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -12,6 +10,8 @@ import {
   h,
 } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './button.type';
 
 /**
@@ -166,14 +166,14 @@ export class Button implements ComponentInterface {
         onClick={this.onClick}
       >
         <button
-          part="native"
-          type={type}
-          disabled={disabled}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
           class={{
             'btn-active': this.active,
           }}
+          disabled={disabled}
+          onBlur={this.onBlur}
+          onFocus={this.onFocus}
+          part="native"
+          type={type}
           {...this.inheritedAttributes}
         >
           <slot name="start" />

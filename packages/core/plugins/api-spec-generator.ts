@@ -1,5 +1,5 @@
-import type { JsonDocsComponent, OutputTargetDocsCustom } from '@stencil/core/internal';
 import fs from 'node:fs';
+import type { JsonDocsComponent, OutputTargetDocsCustom } from '@stencil/core/internal';
 
 interface ApiSpecOption {
   file: string;

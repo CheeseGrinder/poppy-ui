@@ -1,6 +1,6 @@
-import { componentConfig, config } from '#config';
 import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
 import type { LoadingType } from './loading.type';
 
 /**

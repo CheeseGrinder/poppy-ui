@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -14,6 +12,8 @@ import {
   h,
 } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import type { RangeChangeEventDetail, RangeColor } from './range.type';
 
 let rangeIds = 0;
@@ -207,25 +207,25 @@ export class Range implements ComponentInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
       >
         <input
-          part="native"
-          id={inputId}
-          name={this.name}
-          type="range"
-          min={this.min}
-          max={this.max}
-          step={this.step}
-          value={this.value}
-          required={this.required}
-          disabled={this.disabled}
           autoFocus={this.autoFocus}
-          onInput={this.onChange}
-          onFocus={this.onFocus}
+          disabled={this.disabled}
+          id={inputId}
+          max={this.max}
+          min={this.min}
+          name={this.name}
           onBlur={this.onBlur}
+          onFocus={this.onFocus}
+          onInput={this.onChange}
+          part="native"
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          step={this.step}
+          type="range"
+          value={this.value}
           {...this.inheritedAttributes}
         />
       </Host>
