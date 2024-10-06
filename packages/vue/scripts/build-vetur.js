@@ -1,18 +1,18 @@
-import { createRequire } from 'module';
+import { kebabCase } from 'change-case';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const JsonDocs = require('@poppy-ui/docs');
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import { kebabCase } from 'change-case';
 
 const generateTags = () => {
   const tagsObject = {};
 
-  JsonDocs.components.forEach(component => {
+  for (const component of JsonDocs.components) {
     tagsObject[component.tag] = {
       description: component.docs,
       attributes: component.props.map(prop => kebabCase(prop.name)),
     };
-  });
+  }
 
   writeFileSync('./dist/vetur/tags.json', JSON.stringify(tagsObject, null, 2));
 };
@@ -20,15 +20,15 @@ const generateTags = () => {
 const generateAttributes = () => {
   const attributesObject = {};
 
-  JsonDocs.components.forEach(component => {
-    component.props.forEach(prop => {
+  for (const component of JsonDocs.components) {
+    for (const prop of component.props) {
       attributesObject[`${component.tag}/${kebabCase(prop.name)}`] = {
         type: prop.type,
         description: prop.docs,
         options: prop.values.filter(option => option.value !== undefined).map(option => option.value),
       };
-    });
-  });
+    }
+  }
 
   writeFileSync('./dist/vetur/attributes.json', JSON.stringify(attributesObject, null, 2));
 };

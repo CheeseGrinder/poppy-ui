@@ -15,10 +15,7 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
-  "files": [
-    "dist/",
-    "css/"
-  ],
+  "files": ["dist/", "css/"],
   "keywords": [
     "daisy-ui",
     "framework",
@@ -41,12 +38,7 @@
     "build:bundle": "rollup --config rollup.config.mjs",
     "build:vetur": "node --experimental-json-modules ./scripts/build-vetur.js",
     "build:web-types": "node --experimental-json-modules ./scripts/build-web-types.js",
-    "copy:css": "node ./scripts/copy-css.js",
-    "format": "biome format",
-    "format:fix": "biome format --write",
-    "lint": "biome lint",
-    "lint:fix": "biome lint --fix",
-    "biome": "biome"
+    "copy:css": "node ./scripts/copy-css.js"
   },
   "dependencies": {
     "@poppy-ui/core": "0.3.1"
@@ -67,7 +59,5 @@
     "attributes": "dist/vetur/attributes.json"
   },
   "web-types": "dist/web-types.json",
-  "sideEffects": [
-    "css/*.css"
-  ]
+  "sideEffects": ["css/*.css"]
 }

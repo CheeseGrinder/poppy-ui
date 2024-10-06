@@ -1,27 +1,25 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Quality - Vue
-
+name: Quality
+ 
 on:
   push:
     branches:
       - main
     paths:
-      - packages/vue/**
-      - packages/vue-*/**
+      - packages/**
   pull_request:
     branches:
       - main
     paths:
-      - packages/vue/**
-      - packages/vue-*/**
+      - packages/**
 
 # When pushing a new commit we should
 # cancel the previous test run to not
 # consume more runners than we need to.
 concurrency:
-  group: ${{ github.ref }}_quality_vue
+  group: ${{ github.ref }}_quality
   cancel-in-progress: true
 
 jobs:
@@ -31,25 +29,27 @@ jobs:
       - uses: actions/checkout@v4
       - name: Quality
         uses: ./.github/workflows/actions/quality
-        with:
-          package: vue
 
   test:
+    needs: quality
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        package:
+          - core
+          - vue
         node-version:
           - 18.x
           - 20.x
           - 22.x
     steps:
       - uses: actions/checkout@v4
-      - name: Quality
+      - name: Test ${{ matrix.package }} on ${{ matrix.node-version }}
         uses: ./.github/workflows/actions/test
         with:
-          package: vue
+          package: ${{ matrix.package }}
           node-version: ${{ matrix.node-version }}
-        
+
   analyze:
     runs-on: ubuntu-latest
     permissions:

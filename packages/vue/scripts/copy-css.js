@@ -1,7 +1,7 @@
-import { createRequire } from 'module';
+import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const fs = require('fs');
-const { join } = require('path');
+const fs = require('node:fs');
+const { join } = require('node:path');
 
 function main() {
   const src = join(process.cwd(), '..', 'core', 'css');

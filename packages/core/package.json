@@ -32,13 +32,7 @@
   "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/index.d.ts",
-  "files": [
-    "components/",
-    "css",
-    "dist/",
-    "hydrate/",
-    "loader/"
-  ],
+  "files": ["components/", "css", "dist/", "hydrate/", "loader/"],
   "publishConfig": {
     "access": "public"
   },
@@ -59,17 +53,12 @@
     "test:e2e:update-snapshots": "npm run test.e2e -- --update-snapshots",
     "generate": "stencil generate",
     "audit-ci": "audit-ci --config ./audit-ci.json",
-    "format": "biome format",
-    "format:fix": "biome format --write",
-    "lint": "biome lint",
-    "lint:fix": "biome lint --write",
     "stencil": "stencil"
   },
   "dependencies": {
     "@stencil/core": "^4.22.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
     "@cheese-grinder/stencil-component-config": "^0.4.1",
     "@cheese-grinder/stencil-custom-readme": "^0.1.7",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",

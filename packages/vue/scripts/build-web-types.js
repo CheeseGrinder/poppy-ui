@@ -1,8 +1,8 @@
-import { createRequire } from 'module';
+import { pascalCase } from 'change-case';
+import { writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const JsonDocs = require('@poppy-ui/docs');
-import { writeFileSync } from 'fs';
-import { pascalCase } from 'change-case';
 
 const components = [];
 
@@ -29,7 +29,7 @@ for (const component of filteredComponents) {
   const slots = [];
   const events = [];
   const componentName = pascalCase(component.tag);
-  const docUrl = 'https://poppy-ui.com/docs/api/' + component.tag.substr(4);
+  const docUrl = `https://poppy-ui.com/docs/api/${component.tag.substr(4)}`;
 
   for (const prop of component.props || []) {
     attributes.push({
@@ -47,7 +47,7 @@ for (const component of filteredComponents) {
   for (const event of component.events || []) {
     let eventName = event.event;
     if (eventName.toLowerCase().startsWith(componentName.toLowerCase())) {
-      eventName = 'on' + eventName.substr(componentName.length);
+      eventName = `on${eventName.substr(componentName.length)}`;
     }
     events.push({
       name: eventName,
@@ -73,7 +73,7 @@ for (const component of filteredComponents) {
     'doc-url': docUrl,
     description: component.docs,
     source: {
-      module: '@poppy-ui/core/' + component.filePath.replace('./src/', 'dist/types/').replace('.tsx', '.d.ts'),
+      module: `@poppy-ui/core/${component.filePath.replace('./src/', 'dist/types/').replace('.tsx', '.d.ts')}`,
       symbol: componentName.substr(3),
     },
     attributes,

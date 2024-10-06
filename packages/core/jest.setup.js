@@ -1,4 +1,4 @@
-console.log("extends expect")
+console.log('extends expect');
 
 expect.extend({
   toHaveShadowRoot(received) {

@@ -21,7 +21,7 @@ const projects: Project<PlaywrightTestOptions, PlaywrightWorkerOptions>[] = [
        */
       viewport: {
         width: 393,
-        height: 727
+        height: 727,
       },
     },
   },
@@ -29,16 +29,16 @@ const projects: Project<PlaywrightTestOptions, PlaywrightWorkerOptions>[] = [
     name: 'Mobile Chrome',
     use: {
       browserName: 'chromium',
-      ...devices['Pixel 5']
-    }
+      ...devices['Pixel 5'],
+    },
   },
   {
     name: 'Mobile Safari',
     use: {
       browserName: 'webkit',
-      ...devices['iPhone 12']
-    }
-  }
+      ...devices['iPhone 12'],
+    },
+  },
 ];
 
 /**
@@ -53,8 +53,8 @@ const config: PlaywrightTestConfig = {
      */
     timeout: 5000,
     toHaveScreenshot: {
-      threshold: 0.1
-    }
+      threshold: 0.1,
+    },
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -65,10 +65,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['html'],
-    ['github']
-  ],
+  reporter: [['html'], ['github']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -88,8 +85,8 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npm start -- --config stencil.test.config.ts',
     port: 2222,
-    reuseExistingServer: !process.env.CI
-  }
+    reuseExistingServer: !process.env.CI,
+  },
 };
 
 export default config;

@@ -132,9 +132,9 @@ export const config: Config = {
   testing: {
     browserHeadless: 'new',
     moduleNameMapper: {
-      "#config": ["<rootDir>/src/config"],
+      '#config': ['<rootDir>/src/config'],
     },
-    setupFilesAfterEnv: ['./jest.setup.js']
+    setupFilesAfterEnv: ['./jest.setup.js'],
   },
   extras: {
     /**

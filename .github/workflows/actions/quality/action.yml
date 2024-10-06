@@ -1,10 +1,6 @@
 name: Quality
 description: Run quality check for specified package
 inputs:
-  package:
-    description: The package to check code quality. Must have a biome.json
-    type: string
-    required: true
   node-version:
     description: The version of node to use.
     type: string
@@ -24,20 +20,15 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Package
-      run: npm install -w @poppy-ui/${{ inputs.package }}
-      shell: bash
-
-    - name: Install Core
-      if: inputs.package != 'core'
-      run: npm install @poppy-ui/core @poppy-ui/docs -w @poppy-ui/${{ inputs.package }}
+      run: npm install
       shell: bash
 
     - name: Format
-      run: npx -w @poppy-ui/${{ inputs.package }} @biomejs/biome format --reporter github
+      run: npx @biomejs/biome format --reporter github
       shell: bash
 
     - name: Lint
-      run: npx -w @poppy-ui/${{ inputs.package }} @biomejs/biome lint --reporter github
+      run: npx @biomejs/biome lint --reporter github
       shell: bash
 
     - name: Scan

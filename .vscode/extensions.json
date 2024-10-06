@@ -1,7 +1,3 @@
 {
-    "recommendations": [
-        "github.vscode-github-actions",
-        "biomejs.biome",
-        "vue.volar"
-    ]
+  "recommendations": ["github.vscode-github-actions", "biomejs.biome", "vue.volar"]
 }

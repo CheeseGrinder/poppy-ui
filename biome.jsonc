@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignore": [
+      "packages/docs/*",
+      "**/*.d.ts",
+      "packages/vue/src/vue-component-lib/utils.ts",
+      "packages/vue/src/proxies.ts"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "attributePosition": "multiline"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "asNeeded",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "multiline"
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "cssModules": true
+    },
+    "assists": {
+      "enabled": true
+    }
+  },
+  "assists": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "sortJsxProps": "on",
+        "useSortedKeys": "on"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "include": ["packages/core/src/**", "packages/core/plugins/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noAssignInExpressions": "off", // Used to assing ref
+            "noConfusingVoidType": "off"
+          },
+          "correctness": {
+            "useJsxKeyInIterable": "off" // Stencil generate jsx key for us
+          },
+          "a11y": {
+            "useKeyWithClickEvents": "warn", // Should be an error before release v1
+            "useValidAnchor": "off", // Anchor is used to trigger focus on element, for link purpose,
+            "noAutofocus": "off", // Auto focus is used for inputs components
+            "noSvgWithoutTitle": "off",
+            "useSemanticElements": "off"
+          },
+          "style": {
+            "noParameterAssign": "off" // Used to assing ref
+          }
+        }
+      }
+    },
+    {
+      "include": ["packages/vue/src/**", "tests/vue/src/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
+}
