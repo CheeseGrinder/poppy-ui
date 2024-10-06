@@ -1,6 +1,6 @@
-import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
 import type { Color } from 'src/interface';
+import { componentConfig } from '#config';
 import type { TooltipPosition } from './tooltip.type';
 
 /**

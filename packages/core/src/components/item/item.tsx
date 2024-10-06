@@ -1,6 +1,6 @@
+import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import { componentConfig } from '#config';
 import { getHostContextProperty, hostContext } from '#utils/helpers';
-import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'pop-item',
@@ -54,14 +54,14 @@ export class Item implements ComponentInterface {
 
     return (
       <Host
-        role={inList ? 'listitem' : null}
         aria-disabled={disabled ? 'true' : null}
-        onClick={this.onClick}
         class={{
           'in-list': inList,
           [`in-list-${listSize}`]: inList,
           'has-list': hasList,
         }}
+        onClick={this.onClick}
+        role={inList ? 'listitem' : null}
       >
         <a class="item-inner">
           <slot />

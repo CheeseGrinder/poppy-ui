@@ -75,10 +75,8 @@ export class SelectPopover implements ComponentInterface {
 
     return (
       <pop-radio-group
-        value={selected}
-        color={color}
-        size={size}
         allowEmpty={!required}
+        color={color}
         onPopChange={ev => {
           if (!required && ev.detail.value === undefined) {
             options[0].handler(undefined);
@@ -88,6 +86,8 @@ export class SelectPopover implements ComponentInterface {
           const option = this.findOptionFromEvent(ev);
           option?.handler(this.getValues(ev));
         }}
+        size={size}
+        value={selected}
       >
         {options.map(option => {
           const clazz =
@@ -98,11 +98,11 @@ export class SelectPopover implements ComponentInterface {
           return (
             <pop-item>
               <pop-radio
-                value={option.value}
-                disabled={option.disabled}
-                color={option.color}
-                size={option.size}
                 class={clazz}
+                color={option.color}
+                disabled={option.disabled}
+                size={option.size}
+                value={option.value}
               >
                 {option.text}
               </pop-radio>
@@ -127,16 +127,16 @@ export class SelectPopover implements ComponentInterface {
           return (
             <pop-item>
               <pop-checkbox
-                value={option.value}
-                color={this.color}
-                size={this.size}
                 checked={option.checked}
-                disabled={option.disabled}
                 class={clazz}
+                color={this.color}
+                disabled={option.disabled}
                 onPopChange={ev => {
                   this.setChecked(ev);
                   option.handler(this.getValues(ev));
                 }}
+                size={this.size}
+                value={option.value}
               >
                 {option.text}
               </pop-checkbox>

@@ -1,6 +1,3 @@
-import { componentConfig } from '#config';
-import type { OverlayInterface } from '#utils/overlay';
-import { TriggerController } from '#utils/trigger';
 import {
   Component,
   type ComponentInterface,
@@ -14,6 +11,9 @@ import {
   h,
 } from '@stencil/core';
 import type { ComponentProps, ComponentRef } from 'src/interface';
+import { componentConfig } from '#config';
+import type { OverlayInterface } from '#utils/overlay';
+import { TriggerController } from '#utils/trigger';
 import { Show } from '../Show';
 
 /**
@@ -203,8 +203,8 @@ export class Modal implements ComponentInterface, OverlayInterface {
           </div>
           <Show when={this.backdropDismiss}>
             <form
-              method="dialog"
               class="modal-backdrop"
+              method="dialog"
               part="backdrop"
             >
               <button type="submit">close</button>

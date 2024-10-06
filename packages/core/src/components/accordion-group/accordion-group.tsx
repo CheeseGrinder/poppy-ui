@@ -1,4 +1,3 @@
-import { componentConfig } from '#config';
 import {
   Component,
   type ComponentInterface,
@@ -10,6 +9,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { componentConfig } from '#config';
 import type { AccordionGroupChangeEventDetail } from './accordion-group.type';
 
 @Component({

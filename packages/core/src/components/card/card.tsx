@@ -1,5 +1,5 @@
-import { componentConfig } from '#config';
 import { Component, Host, Prop, h } from '@stencil/core';
+import { componentConfig } from '#config';
 
 /**
  * Cards are used to group and display content in a way that is easily readable.

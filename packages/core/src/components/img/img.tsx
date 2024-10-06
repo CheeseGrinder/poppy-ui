@@ -1,4 +1,3 @@
-import { type Attributes, inheritAttributes } from '#utils/helpers';
 import {
   Component,
   type ComponentInterface,
@@ -11,6 +10,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { type Attributes, inheritAttributes } from '#utils/helpers';
 
 /**
  * @part image - The inner `img` element.
@@ -113,15 +113,15 @@ export class Img implements ComponentInterface {
     return (
       <Host>
         <img
-          part="image"
-          loading="eager"
-          // decoding="sync"
-          src={this.loadSrc}
           alt={this.alt || ''}
-          onLoad={this.onLoad}
-          onError={this.onError}
           draggable={isDraggable(draggable)}
+          // decoding="sync"
+          loading="eager"
+          onError={this.onError}
+          onLoad={this.onLoad}
+          part="image"
           ref={el => (this.nativeImg = el)}
+          src={this.loadSrc}
         />
       </Host>
     );

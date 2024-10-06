@@ -1,7 +1,3 @@
-import { componentConfig, config } from '#config';
-import { compareOptions, isOptionSelected } from '#utils/forms';
-import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
-import { popoverController } from '#utils/overlay';
 import {
   AttachInternals,
   Component,
@@ -17,6 +13,10 @@ import {
   h,
 } from '@stencil/core';
 import type { FormAssociatedInterface, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { compareOptions, isOptionSelected } from '#utils/forms';
+import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
+import { popoverController } from '#utils/overlay';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
 import type { SelectPopoverOption } from '../select-popover/select-popover.type';
@@ -444,16 +444,16 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     return (
       <button
-        type="button"
+        aria-expanded={`${isExpanded}`}
+        aria-haspopup="dialog"
+        aria-label={this.ariaLabel}
         disabled={disabled}
         id={inputId}
-        aria-label={this.ariaLabel}
-        aria-haspopup="dialog"
-        aria-expanded={`${isExpanded}`}
+        onBlur={this.onBlur}
         onClick={this.onClick}
         onFocus={this.onFocus}
-        onBlur={this.onBlur}
         ref={ref => (this.triggerRef = ref)}
+        type="button"
       />
     );
   }
@@ -467,8 +467,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
         class={{
           'select-expanded': this.isExpanded,
           'join-item': hostContext(host, 'pop-join'),

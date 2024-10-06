@@ -1,6 +1,6 @@
-import { pascalCase } from 'change-case';
 import { writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { pascalCase } from 'change-case';
 const require = createRequire(import.meta.url);
 const JsonDocs = require('@poppy-ui/docs');
 

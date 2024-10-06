@@ -1,6 +1,3 @@
-import { componentConfig, config } from '#config';
-import { compareOptions } from '#utils/forms';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   Component,
   type ComponentInterface,
@@ -13,6 +10,9 @@ import {
   h,
 } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { compareOptions } from '#utils/forms';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 
 let radioIds = 0;
@@ -172,11 +172,11 @@ export class Radio implements ComponentInterface {
 
     return (
       <Host
-        role="radio"
         aria-checked={`${checked}`}
-        aria-labelledby={inputId}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-labelledby={inputId}
         onClick={this.onClick}
+        role="radio"
       >
         <Show when={hasLabel}>
           <div class="label">
@@ -189,17 +189,17 @@ export class Radio implements ComponentInterface {
           </div>
         </Show>
         <input
-          part="native"
-          type="radio"
+          autoFocus={this.autoFocus}
+          checked={this.checked}
+          disabled={this.disabled}
           id={inputId}
           name={this.name}
-          checked={this.checked}
-          required={this.required}
-          disabled={this.disabled}
-          autoFocus={this.autoFocus}
-          onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onFocus={this.onFocus}
+          part="native"
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          type="radio"
           {...this.inheritedAttributes}
         />
       </Host>

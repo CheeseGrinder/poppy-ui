@@ -1,5 +1,5 @@
-import { componentConfig } from '#config';
 import { Component, type ComponentInterface, Event, type EventEmitter, Host, Prop, Watch, h } from '@stencil/core';
+import { componentConfig } from '#config';
 import type { SwapChangeEventDetail, SwapType } from './swap.type';
 
 /**

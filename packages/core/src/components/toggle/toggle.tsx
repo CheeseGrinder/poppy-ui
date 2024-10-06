@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -14,6 +12,8 @@ import {
   h,
 } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 import type { ToggleChangeEventDetail, ToggleColor } from './toggle.type';
 
@@ -198,9 +198,9 @@ export class Toggle implements ComponentInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-checked={`${checked}`}
         aria-hidden={disabled ? 'true' : null}
+        aria-labelledby={inputId}
         onClick={this.onClick}
       >
         <Show when={hasLabel}>
@@ -214,21 +214,21 @@ export class Toggle implements ComponentInterface {
           </div>
         </Show>
         <input
-          type="checkbox"
-          role="switch"
-          part="native"
-          id={inputId}
-          name={name}
           aria-checked={`${checked}`}
-          indeterminate={this.indeterminate}
-          required={this.required}
-          readOnly={this.readonly}
           checked={checked}
           disabled={disabled}
+          id={inputId}
+          indeterminate={this.indeterminate}
+          name={name}
+          onBlur={this.onBlur}
           onChange={this.onChecked}
           onFocus={this.onFocus}
-          onBlur={this.onBlur}
+          part="native"
+          readOnly={this.readonly}
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          role="switch"
+          type="checkbox"
           {...this.inheritedAttributes}
         />
       </Host>

@@ -1,7 +1,7 @@
-import { componentConfig, config } from '#config';
-import { hostContext } from '#utils/helpers';
 import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import type { Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { hostContext } from '#utils/helpers';
 import type { ListOrientation } from './list.type';
 
 @Component({
@@ -14,7 +14,7 @@ export class List implements ComponentInterface {
   /**
    * Change size of the component
    * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   *
+   *$
    * @config
    * @default "md"
    */
@@ -39,10 +39,10 @@ export class List implements ComponentInterface {
     const { host } = this;
     return (
       <Host
-        role="list"
         class={{
           'in-item': hostContext(host, 'pop-item'),
         }}
+        role="list"
       >
         <slot />
       </Host>

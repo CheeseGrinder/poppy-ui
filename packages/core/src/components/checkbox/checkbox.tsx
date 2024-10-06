@@ -1,5 +1,3 @@
-import { componentConfig, config } from '#config';
-import { type Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import {
   AttachInternals,
   Component,
@@ -14,6 +12,8 @@ import {
   h,
 } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
+import { componentConfig, config } from '#config';
+import { type Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
 import type { CheckboxChangeEventDetail, CheckboxPlacement } from './checkbox.type';
 
@@ -213,15 +213,15 @@ export class Checkbox implements ComponentInterface {
 
     return (
       <Host
-        aria-labelledby={inputId}
         aria-checked={ariaChecked}
         aria-hidden={disabled ? 'true' : null}
-        onClick={this.onClick}
+        aria-labelledby={inputId}
         class={{
           'in-list': hostContext(host, 'pop-list'),
           [`in-list-${listSize}`]: listSize !== null,
           'in-item': hostContext(host, 'pop-item'),
         }}
+        onClick={this.onClick}
       >
         <Show when={hasLabel}>
           <div class="label">
@@ -234,20 +234,20 @@ export class Checkbox implements ComponentInterface {
           </div>
         </Show>
         <input
-          type="checkbox"
-          part="native"
-          id={inputId}
-          name={name}
           aria-checked={ariaChecked}
-          indeterminate={this.indeterminate}
-          required={this.required}
-          readOnly={this.readonly}
           checked={checked}
           disabled={disabled}
+          id={inputId}
+          indeterminate={this.indeterminate}
+          name={name}
+          onBlur={this.onBlur}
           onChange={this.onChecked}
           onFocus={this.onFocus}
-          onBlur={this.onBlur}
+          part="native"
+          readOnly={this.readonly}
           ref={el => (this.nativeInput = el)}
+          required={this.required}
+          type="checkbox"
           {...this.inheritedAttributes}
         />
       </Host>

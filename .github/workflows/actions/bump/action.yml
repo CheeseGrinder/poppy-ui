@@ -25,7 +25,7 @@ runs:
       id: bump-ver
       if: inputs.preid == ''
       run: |
-        npm version ${{ inputs.version }} -ws --include-workspace-root --no-git-tag-version -m"ci(version): bump to v%s"
+        npm version ${{ inputs.version }} -ws --include-workspace-root --no-git-tag-version
         version=v$(npm version --json | jq -r '.root')
         git add .
         echo "version=$version" >> $GITHUB_OUTPUT
@@ -35,7 +35,7 @@ runs:
       id: bump-pre
       if: inputs.preid != ''
       run: |
-        npm version ${{ inputs.version }} --preid=${{ inputs.preid }} -ws --include-workspace-root --no-git-tag-version -m"ci(version): bump to v%s"
+        npm version ${{ inputs.version }} --preid=${{ inputs.preid }} -ws --include-workspace-root --no-git-tag-version
         version=v$(npm version --json | jq -r '.root')
         git add .
         echo "version=$version" >> $GITHUB_OUTPUT

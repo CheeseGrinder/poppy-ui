@@ -1,21 +1,17 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: build - Vue
+name: Build - Vue
 
 on:
+  workflow_call:
   push:
     branches:
       - main
     paths:
       - packages/vue/**
-      - packages/vue-*/**
   pull_request:
     branches:
       - main
     paths:
       - packages/vue/**
-      - packages/vue-*/**
 
 # When pushing a new commit we should
 # cancel the previous test run to not
@@ -24,49 +20,39 @@ concurrency:
   group: ${{ github.ref }}_build_vue
   cancel-in-progress: true
 
-
 jobs:
-  audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Audit
-        uses: ./.github/workflows/actions/audit
-        with:
-          package: vue
-
-  quality:
-    needs: audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/actions/quality
-        with:
-          package: vue
-
   build:
-    needs: quality
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
-          - 18.x
           - 20.x
           - 22.x
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node v${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Core
+        run: npm install -w @poppy-ui/core
+        shell: bash
+
       - name: Build Core
-        uses: ./.github/workflows/actions/build
-        with:
-          package: core
-          node-version: ${{ matrix.node-version }}
+        run: |
+          npm run build -w @poppy-ui/core --if-present
+          npm pack -w @poppy-ui/core
+          PKG=$(ls poppy-ui-core-*.tgz)
+          mv $PKG poppy-ui-core-${{ matrix.node-version }}.tgz
+        shell: bash
 
-      - name: Install core
-        run: npm -w @poppy-ui/vue install poppy-ui-core.tgz
+      - name: Install Vue
+        run: |
+          npm install ./poppy-ui-core-${{ matrix.node-version }}.tgz -w @poppy-ui/vue
+          npm install -w @poppy-ui/vue
+        shell: bash
 
-      - name: Build Vue
-        uses: ./.github/workflows/actions/build
-        with:
-          package: vue
-          node-version: ${{ matrix.node-version }}
+      - name: Build
+        run: npm run build -w @poppy-ui/vue --if-present

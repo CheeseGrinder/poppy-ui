@@ -1,7 +1,3 @@
-import { componentConfig } from '#config';
-import { ClickOutside } from '#utils/click-outside';
-import type { OverlayInterface } from '#utils/overlay';
-import type { TriggerAction } from '#utils/trigger';
 import {
   Component,
   type ComponentInterface,
@@ -13,10 +9,14 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import { ENTER, SPACE } from 'key-definitions';
+import { componentConfig } from '#config';
+import { ClickOutside } from '#utils/click-outside';
+import { isRTL } from '#utils/dir';
+import type { OverlayInterface } from '#utils/overlay';
+import type { TriggerAction } from '#utils/trigger';
 import { Show } from '../Show';
 import type { DropdownAlign, DropdownSide } from './dropdown.type';
-import { SPACE, ENTER } from 'key-definitions';
-import { isRTL } from '#utils/dir';
 
 /**
  * Dropdown can open a menu or any other element when the trigger element is clicked.
@@ -218,33 +218,33 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
         }}
       >
         <details
-          part="dropdown"
           class="dropdown"
           onMouseEnter={this.onHover}
           onMouseLeave={this.onBlur}
+          part="dropdown"
           ref={(el: HTMLDetailsElement) => (this.dropdownRef = el)}
         >
           <summary
-            part="trigger"
             class="dropdown-trigger"
             onClick={this.onClick}
             onContextMenu={this.onContext}
             onKeyUp={this.onKeyPress(SPACE.key, ENTER.key)}
+            part="trigger"
           >
             <slot name="trigger" />
           </summary>
           <div
-            part="content"
             class="dropdown-content"
+            part="content"
           >
             <slot />
           </div>
           <Show when={this.showBackdrop}>
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: Element not focusable, handle by summary keyboard event */}
             <div
-              part="backdrop"
               class="dropdown-backdrop"
               onClick={() => this.dismiss()}
+              part="backdrop"
             />
           </Show>
         </details>
