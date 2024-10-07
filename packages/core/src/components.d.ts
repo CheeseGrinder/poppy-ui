@@ -687,7 +687,7 @@ export namespace Components {
          */
         "orientation"?: ListOrientation;
         /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. $
           * @config 
           * @default "md"
          */
@@ -2687,7 +2687,7 @@ declare namespace LocalJSX {
          */
         "orientation"?: ListOrientation;
         /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. $
           * @config 
           * @default "md"
          */

@@ -442,6 +442,7 @@ export namespace Configuration {
       /**
        * Change size of the component
        * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
+       * $
        * @default "md"
        */
       size?: Size;

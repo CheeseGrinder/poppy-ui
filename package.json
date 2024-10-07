@@ -1,8 +1,11 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.3.0",
-  "workspaces": ["packages/*", "tests/*"],
+  "version": "0.3.1",
+  "workspaces": [
+    "packages/*",
+    "tests/*"
+  ],
   "scripts": {
     "install:all": "npm install -w @poppy-ui/core -w @poppy-ui/vue",
     "core:install": "npm install -w @poppy-ui/core",

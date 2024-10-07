@@ -1,6 +1,6 @@
 {
   "name": "@poppy-ui/core",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Base component for Poppy based on Daisy-ui",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
@@ -32,7 +32,13 @@
   "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/index.d.ts",
-  "files": ["components/", "css", "dist/", "hydrate/", "loader/"],
+  "files": [
+    "components/",
+    "css",
+    "dist/",
+    "hydrate/",
+    "loader/"
+  ],
   "publishConfig": {
     "access": "public"
   },
