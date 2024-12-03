@@ -1,8 +1,8 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 :host {
   --padding: 0.5rem;
-  --background: #{get-color("base.100")};
+  --background: #{theme.use_color("base.100")};
 
   width: 100%;
   min-height: 4rem;

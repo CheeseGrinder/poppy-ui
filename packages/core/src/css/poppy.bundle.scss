@@ -1,5 +1,5 @@
 // Core CSS, always required
-@import "./core";
+@forward "./core";
 
 // Global CSS: blocks scrolling, sets box-sizing
-@import "./global.bundle";
+@forward "./global.bundle";

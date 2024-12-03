@@ -1,106 +1,26 @@
-@use "sass:map";
+@forward "../../themes/generator" with (
+  $scheme: dark,
 
-$neutral: 31.38% 0.021108 254.139175;
-$primary: 65.69% 0.196 275.75;
-$secondary: 74.8% 0.26 342.55;
-$accent: 74.51% 0.167 183.61;
-$info: 72.06% 0.191 231.6;
-$success: 64.8% 0.15 160;
-$warning: 84.71% 0.199 83.87;
-$error: 71.76% 0.221 22.18;
+  // colors
+  $base_100: 25.32% 0.015896 252.417568,
+  $base_200: 23.26% 0.013807 253.100675,
+  $base_300: 21.14% 0.01165 254.087939,
+  $base_content: 74.64% 0.0216 264.435964,
 
-$colors: (
-  base: (
-    "100": 25.32% 0.015896 252.417568,
-    "200": 23.26% 0.013807 253.100675,
-    "300": 21.14% 0.01165 254.087939,
-    content: 74.64% 0.0216 264.435964,
-  ),
-  neutral: (
-    base: $neutral,
-    content: 74.64% 0.0216 264.435964,
-  ),
-  primary: (
-    base: $primary,
-    content: 13.13% 0.0392 275.75,
-  ),
-  secondary: (
-    base: $secondary,
-    content: 14.96% 0.052 342.55,
-  ),
-  accent: (
-    base: $accent,
-    content: 14.9% 0.0334 183.61,
-  ),
-  info: (
-    base: $info,
-    content: 0 0 0,
-  ),
-  success: (
-    base: $success,
-    content: 0 0 0,
-  ),
-  warning: (
-    base: $warning,
-    content: 0 0 0,
-  ),
-  error: (
-    base: $error,
-    content: 0 0 0,
-  ),
+  $neutral: 31.38% 0.021108 254.139175,
+  $neutral_content: 74.64% 0.0216 264.435964,
+  $primary: 65.69% 0.196 275.75,
+  $primary_content: 13.13% 0.0392 275.75,
+  $secondary: 74.8% 0.26 342.55,
+  $secondary_content: 14.96% 0.052 342.55,
+  $accent: 74.51% 0.167 183.61,
+  $accent_content: 14.9% 0.0334 183.61,
+  $info: 72.06% 0.191 231.6,
+  $info_content: 0 0 0,
+  $success: 64.8% 0.15 160,
+  $success_content: 0 0 0,
+  $warning: 84.71% 0.199 83.87,
+  $warning_content: 0 0 0,
+  $error: 71.76% 0.221 22.18,
+  $error_content: 0 0 0,
 );
-
-$radius: (
-  xs: 2px,
-  sm: 4px,
-  md: 8px,
-  lg: 12px,
-  xl: 16px,
-  xxl: 24px,
-  full: 9999px,
-);
-
-$shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-$shadow-sm:
-  0 4px 6px -1px rgb(0 0 0 / 0.1),
-  0 2px 4px -2px rgb(0 0 0 / 0.1);
-$shadow-md:
-  0 10px 15px -3px rgb(0 0 0 / 0.1),
-  0 4px 6px -4px rgb(0 0 0 / 0.1);
-$shadow-lg:
-  0 20px 25px -5px rgb(0 0 0 / 0.1),
-  0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-$shadows: (
-  xs: $shadow-xs,
-  sm: $shadow-sm,
-  md: $shadow-md,
-  lg: $shadow-lg,
-);
-
-@mixin dark-theme() {
-  & {
-    color-scheme: dark;
-
-    // Define theme oklch colors
-    @each $color-name, $value in $colors {
-      @each $variant-name, $variant in $value {
-        @if $variant-name == base {
-          --#{$color-name}-oklch: #{$variant};
-        } @else {
-          --#{$color-name}-#{$variant-name}-oklch: #{$variant};
-        }
-      }
-    }
-
-    // Define theme radius
-    @each $name, $value in $radius {
-      --radius-#{$name}: #{$value};
-    }
-
-    // Define theme box-shadow
-    @each $name, $value in $shadows {
-      --shadow-#{$name}: #{$value};
-    }
-  }
-}

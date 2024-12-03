@@ -1,5 +1,5 @@
-@import "./light";
+@use "./light";
 
 .poppy-theme-light {
-  @include light-theme();
+  @include light.generate();
 }

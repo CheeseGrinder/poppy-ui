@@ -1,5 +1,5 @@
 @use "@poppy/utils/input";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -19,9 +19,9 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: #{get-color("base.100")};
+  --background: #{theme.use_color("base.100")};
   --handleoffsetcalculator: calc(var(--handleoffset) * -1);
-  --border-radius: #{get-radius(xxl)};
+  --border-radius: #{theme.use_radius(xxl)};
 
   @include input.label;
 
@@ -47,7 +47,7 @@
       0 0 0 2px var(--background) inset,
       var(--togglehandleborder, 0 0);
 
-    color: var(--color, #{get-color("base.content", var(--opacity, 0.5))});
+    color: var(--color, #{theme.use_color("base.content", var(--opacity, 0.5))});
 
     cursor: pointer;
     transition:
@@ -56,7 +56,7 @@
       box-shadow var(--animation-duration, 0.2s) ease-out;
 
     &:focus-visible {
-      outline-color: var(--color, #{get-color("base.content", var(--opacity, 0.2))});
+      outline-color: var(--color, #{theme.use_color("base.content", var(--opacity, 0.2))});
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
@@ -114,7 +114,7 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base", var(--opacity, 1));
+    $base: theme.use_color("#{$color}.base", var(--opacity, 1));
 
     :host([color="#{$color}"]) > input:checked {
       --color: #{$base};
@@ -125,7 +125,7 @@
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) > input:checked {
-  --checked-color: #{get-color("base.content", var(--opacity, 1))};
+  --checked-color: #{theme.use_color("base.content", var(--opacity, 1))};
 }
 
 // Toogle State
@@ -138,12 +138,12 @@
     0 0 0 2px var(--background) inset,
     calc(1.5rem / 2) 0 0 3px currentColor inset,
     calc(1.5rem / -2) 0 0 3px currentColor inset;
-  color: var(--checked-color, #{get-color("base.content")});
+  color: var(--checked-color, #{theme.use_color("base.content")});
 }
 
 :host([disabled]) > input {
-  $base: get-color("base.content");
-  $base-oklch: get-color("base.content", $oklch: true);
+  $base: theme.use_color("base.content");
+  $base-oklch: theme.use_color("base.content", $oklch: true);
 
   --color: oklch(#{$base-oklch} / var(--opacity, 1));
   --togglehandleborder: 0 0 0 3px #{$base} inset, var(--handleoffsetcalculator) 0 0 3px #{$base} inset;

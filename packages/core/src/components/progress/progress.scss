@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -25,9 +25,9 @@
 }
 
 :host {
-  --border-radius: #{get-radius(xl)};
-  --background: #{get-color("base.content", 0.2)};
-  --background-active: #{get-color("base.content")};
+  --border-radius: #{theme.use_radius(xl)};
+  --background: #{theme.use_color("base.content", 0.2)};
+  --background-active: #{theme.use_color("base.content")};
 
   > progress {
     appearance: none;
@@ -71,7 +71,7 @@
 // Color
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
+    $base: use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --background-active: #{$base};

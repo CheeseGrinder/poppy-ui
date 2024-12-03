@@ -1,7 +1,7 @@
-@import "./light";
+@use "./light";
 
 @media (prefers-color-scheme: light) {
   :root {
-    @include light-theme();
+    @include light.generate();
   }
 }

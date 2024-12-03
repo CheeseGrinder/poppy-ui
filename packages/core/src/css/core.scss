@@ -1,6 +1,5 @@
 @use "sass:map";
-
-@import "../themes/poppy.globals";
+@use "../themes/generator" as theme;
 
 :root {
   /**
@@ -8,7 +7,7 @@
    * `poppy.theme.default.scss` file
    * and generate CSS Variables for each color.
    */
-  @each $color-name, $value in $colors {
+  @each $color-name, $value in theme.$colors {
     @each $variant-name, $variant in $value {
       @if $variant-name == base {
         --#{$color-name}: oklch(var(--#{$color-name}-oklch, #{$variant}));
@@ -19,12 +18,8 @@
   }
 }
 
-html {
-  --font-family: system-ui;
-}
-
 body {
   background: var(--base-100);
   color: var(--base-content);
-  font-family: var(--font-family);
+  font-family: var(--font);
 }

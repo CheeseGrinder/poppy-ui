@@ -1,6 +1,6 @@
 @use "@poppy/utils/input";
 @use "@poppy/utils/join-item";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -20,10 +20,10 @@ $minWidth: 12rem;
 
 :host {
   --opacity: 1;
-  --background: #{get-color("base.100", var(--opacity))};
-  --border-color: #{get-color("base.content", 0.2)};
-  --border-radius: #{get-radius(md)};
-  --color: #{get-color("base.content")};
+  --background: #{theme.use_color("base.100", var(--opacity))};
+  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-radius: #{theme.use_radius(md)};
+  --color: #{theme.use_color("base.content")};
 
   @include input.label;
   @include input.helper;
@@ -84,7 +84,7 @@ $minWidth: 12rem;
 
 :host(.select-expanded) {
   .select-wrapper {
-    box-shadow: get-shadow(md);
+    box-shadow: use_shadow(md);
 
     svg {
       transform: rotateX(180deg);
@@ -93,13 +93,13 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: #{get-color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 0.2)};
 }
 
 // Color
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
+    $base: use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -156,8 +156,8 @@ $minWidth: 12rem;
 }
 
 :host([disabled]) button {
-  $base: get-color("base.200");
-  $text: get-color("base.content", 0.2);
+  $base: use_color("base.200");
+  $text: use_color("base.content", 0.2);
 
   --background: #{$base};
   --border-color: #{$base};

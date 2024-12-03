@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --track-size: Height of the range track
@@ -15,14 +15,14 @@
 @mixin track {
   width: 100%;
   height: var(--track-size);
-  border-radius: var(--border-radius, #{get-radius(xl)});
+  border-radius: var(--border-radius, #{theme.use_radius(xl)});
   background-color: var(--track-color, oklch(var(--base-content) / var(--track-opacity, 0.2)));
 }
 @mixin thumb {
   width: var(--thumb-size);
   height: var(--thumb-size);
   border-style: none;
-  border-radius: var(--border-radius, #{get-radius(xl)});
+  border-radius: var(--border-radius, #{theme.use_radius(xl)});
 
   --filler-size: 50rem;
   --active-track-size: calc(var(--filler-size) * -1 - var(--filler-offset));
@@ -38,8 +38,8 @@
 // ----------------------------------------------------------------
 
 :host {
-  --thumb-color: #{get-color("base.100")};
-  --border-radius: #{get-radius(xl)};
+  --thumb-color: #{theme.use_color("base.100")};
+  --border-radius: #{theme.use_radius(xl)};
 
   width: 100%;
 
@@ -118,7 +118,7 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base", var(--active-track-opacity, 1));
+    $base: use_color("#{$color}.base", var(--active-track-opacity, 1));
 
     :host([color="#{$color}"]) {
       --active-track-color: #{$base};
@@ -128,8 +128,8 @@
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  $color: get-color("base.content", var(--track-opacity, 0.2));
-  $active: get-color("base.content", var(--active-track-opacity, 1));
+  $color: use_color("base.content", var(--track-opacity, 0.2));
+  $active: use_color("base.content", var(--active-track-opacity, 1));
 
   --track-color: #{$color};
   --active-track-color: #{$active};
@@ -139,7 +139,7 @@
 // ----------------------------------------------------------------
 
 :host([disabled]) > input {
-  $active: get-color("base.content", var(--active-track-opacity, 1));
+  $active: use_color("base.content", var(--active-track-opacity, 1));
 
   --active-track-color: #{$active};
   cursor: not-allowed;

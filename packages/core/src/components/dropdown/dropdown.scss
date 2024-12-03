@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Change border radius
@@ -14,11 +14,11 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{get-radius(md)};
-  --border-color: #{get-color("base.200")};
-  --background: #{get-color("base.100")};
-  --color: #{get-color("base.content")};
-  --shadow: #{get-shadow(md)};
+  --border-radius: #{theme.use_radius(md)};
+  --border-color: #{theme.use_color("base.200")};
+  --background: #{theme.use_color("base.100")};
+  --color: #{theme.use_color("base.content")};
+  --shadow: #{theme.use_shadow(md)};
 
   .dropdown {
     display: grid;
@@ -53,7 +53,7 @@
     &-backdrop {
       position: fixed;
       inset: 0;
-      background: get-color("neutral.base", 0.2);
+      background: use_color("neutral.base", 0.2);
     }
   }
 }

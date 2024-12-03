@@ -1,8 +1,8 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 :host {
-  --border-radius: #{get-radius(md)};
-  --background: #{get-color("base.100")};
+  --border-radius: #{theme.use_radius(md)};
+  --background: #{theme.use_color("base.100")};
 
   .modal {
     display: grid;

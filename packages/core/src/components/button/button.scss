@@ -1,5 +1,5 @@
 @use "@poppy/utils/join-item";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Change border radius
@@ -19,10 +19,10 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{get-radius(md)};
+  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
-  --background: #{get-color("base.200")};
-  --color: #{get-color("base.content")};
+  --background: #{theme.use_color("base.200")};
+  --color: #{theme.use_color("base.content")};
 
   --animation: 0.25s ease-out;
   --focus-scale: 0.97;
@@ -133,8 +133,8 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
-    $text: get-color("#{$color}.content");
+    $base: theme.use_color("#{$color}.base");
+    $text: theme.use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
       --background: #{$base};
@@ -162,21 +162,21 @@
 
     &:hover,
     &.btn-active {
-      --background: #{get-color("base.content", 0.2)};
+      --background: #{theme.use_color("base.content", 0.2)};
     }
   }
 }
 
 :host(:not([color], [outlined])) {
-  --background: #{get-color("base.200")};
-  --color: #{get-color("base.content")};
+  --background: #{theme.use_color("base.200")};
+  --color: #{theme.use_color("base.content")};
 
   button {
-    outline-color: #{get-color("base.content")};
+    outline-color: #{theme.use_color("base.content")};
 
     &:hover,
     &.btn-active {
-      --background: #{get-color("base.300")};
+      --background: #{theme.use_color("base.300")};
     }
   }
 }
@@ -202,14 +202,14 @@
 }
 
 :host(:not([color])[outlined]) {
-  --background: #{get-color("base.content")};
+  --background: #{theme.use_color("base.content")};
 
   button {
 
     &:hover,
     &.btn-active {
-      --background: #{get-color("base.content")};
-      --color: #{get-color("base.200")};
+      --background: #{theme.use_color("base.content")};
+      --color: #{theme.use_color("base.200")};
     }
   }
 }
@@ -237,7 +237,7 @@
 }
 
 :host([shape="circle"]) {
-  --border-radius: #{get-radius(full)};
+  --border-radius: #{theme.use_radius(full)};
 }
 
 // Button State
@@ -247,8 +247,8 @@
   cursor: not-allowed;
 
   button:disabled {
-    --background: #{get-color("neutral.base", 0.2)};
-    color: #{get-color("base.content", 0.2)};
+    --background: #{theme.use_color("neutral.base", 0.2)};
+    color: #{theme.use_color("base.content", 0.2)};
 
     pointer-events: none;
   }
