@@ -1,4 +1,3 @@
-Issue number: resolves #
 
 ---------
 

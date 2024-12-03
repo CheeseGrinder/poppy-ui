@@ -48,7 +48,7 @@ an [issue](https://github.com/CheeseGrinder/poppy-ui/issues/new) on this reposit
 ### Contributing
 
 Thanks for your interest in contributing! Read up on our guidelines for
-[contributing](https://github.com/CheeseGrinder/poppy-ui/blob/main/docs/CONTRIBUTING.md)
+[contributing](https://github.com/CheeseGrinder/poppy-ui/blob/main/CONTRIBUTING.md)
 and then look through our issues with a [help wanted](https://github.com/CheeseGrinder/poppy-ui/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
 label.
 

@@ -98,13 +98,9 @@ const showModal = async () => {
 [Check out the CONTRIBUTE guide](/docs/CONTRIBUTING.md)
 
 ## Related
-
-<!-- * [Poppy Documentation](https://poppy.com/docs/) -->
-<!-- * [Poppy Discord](https://ionic.link/discord) -->
-<!-- * [Poppy Forum](https://forum.poppy.com/) -->
 * [Stencil](https://stenciljs.com/)
 
 
 ## License
 
-* [MIT](https://raw.githubusercontent.com/CheeseGrinder/poppy-ui/master/LICENSE)
+* [MIT](https://raw.githubusercontent.com/CheeseGrinder/poppy-ui/main/LICENSE)
