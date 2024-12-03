@@ -1,10 +1,13 @@
-@import "../poppy.theme.default";
+@use "../generator" as theme;
 
-@function get-radius($size: md) {
-  $value: map-get(
-    $map: $radius,
-    $key: $size,
-  );
+/// Check if the radius size exist
+/// - If true: return a css var and it's value
+/// - Otherwise its throw an error
+@function use_radius($size: md) {
+  $value: map-get(theme.$radius, $size);
+  @if $value == null {
+    @error $size "does not exist in the radius map.";
+  }
 
   @return var(--radius-#{$size}, #{$value});
 }

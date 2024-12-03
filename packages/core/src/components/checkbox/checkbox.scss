@@ -1,5 +1,5 @@
 @use "@poppy/utils/input";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Change border radius
@@ -15,11 +15,11 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{get-radius(md)};
-  --border-color: #{get-color("base.content", 0.2)};
+  --border-radius: #{theme.use_radius(md)};
+  --border-color: #{theme.use_color("base.content", 0.2)};
 
-  --background: #{get-color("base.content")};
-  --checkmark-color: #{get-color("base.100")};
+  --background: #{theme.use_color("base.content")};
+  --checkmark-color: #{theme.use_color("base.100")};
 
   --animation: 0.2s ease-out;
 
@@ -129,9 +129,9 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
-    $border: get-color("#{$color}.base", 0.2);
-    $text: get-color("#{$color}.content");
+    $base: use_color("#{$color}.base");
+    $border: use_color("#{$color}.base", 0.2);
+    $text: use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
       --background: #{$base};
@@ -143,9 +143,9 @@
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) > input {
-  --background: #{get-color("base.content")};
-  --border-color: #{get-color("base.content", 0.2)};
-  --checkmark-color: #{get-color("base.100")};
+  --background: #{theme.use_color("base.content")};
+  --border-color: #{theme.use_color("base.content", 0.2)};
+  --checkmark-color: #{theme.use_color("base.100")};
 }
 
 // Checkbox status
@@ -153,7 +153,7 @@
 
 :host([disabled]) > input {
   --border-color: transparent;
-  --background: #{get-color("base.content")};
+  --background: #{theme.use_color("base.content")};
   background-image: linear-gradient(-45deg, transparent 65%, var(--background) 65.99%),
     linear-gradient(45deg, transparent 75%, var(--background) 75.99%),
     linear-gradient(-45deg, var(--background) 40%, transparent 40.99%),
@@ -181,7 +181,7 @@
       var(--background) 57%
     );
   background-repeat: no-repeat;
-  background-color: var(--background, get-color("base.content"));
+  background-color: var(--background, use_color("base.content"));
   animation: checkmark var(--animation-duration, 0.2s) ease-out;
 }
 

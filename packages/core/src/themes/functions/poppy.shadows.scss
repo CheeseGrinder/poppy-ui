@@ -1,6 +1,6 @@
-@import "../poppy.theme.default";
+@use "../generator" as theme;
 
-@function get-shadow($size: md) {
+@function use_shadow($size: md) {
   $value: map-get(
     $map: $shadows,
     $key: $size,

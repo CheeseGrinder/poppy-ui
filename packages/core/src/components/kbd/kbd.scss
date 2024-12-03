@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -13,9 +13,9 @@
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{get-radius(md)};
-  --border-color: #{get-color("base.content", 0.2)};
-  --background: #{get-color("base.200")};
+  --border-radius: #{theme.use_radius(md)};
+  --border-color: #{theme.use_color("base.content", 0.2)};
+  --background: #{theme.use_color("base.200")};
 
   width: min-content;
 

@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --background: Change background color
@@ -9,8 +9,8 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: #{get-color("neutral.base")};
-  --color: #{get-color("neutral.content")};
+  --background: #{theme.use_color("neutral.base")};
+  --color: #{theme.use_color("neutral.content")};
 
   display: inline-flex;
 

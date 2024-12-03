@@ -1,6 +1,6 @@
 @use "@poppy/utils/input";
 @use "@poppy/utils/join-item";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -22,11 +22,11 @@
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{get-radius(md)};
+  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
   --opacity: 1;
-  --background: #{get-color("base.100", var(--opacity))};
-  --color: #{get-color("base.content", var(--opacity))};
+  --background: #{theme.use_color("base.100", var(--opacity))};
+  --color: #{theme.use_color("base.content", var(--opacity))};
 
   @include input.label;
   @include input.helper(textarea, $counter: true);
@@ -51,11 +51,11 @@ $minWidth: 12rem;
     background-color: var(--background);
     color: var(--color);
 
-    font-family: $font;
+    font-family: theme.use_font();
     white-space: pre-wrap;
 
     &:focus-visible {
-      outline-color: var(--border-color, #{get-color("base.content", 0.2)});
+      outline-color: var(--border-color, #{theme.use_color("base.content", 0.2)});
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
@@ -64,7 +64,7 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: #{get-color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 0.2)};
 }
 
 // Textarea Size
@@ -99,7 +99,7 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
+    $base: use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -120,12 +120,12 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([disabled]) > textarea {
-  --background: #{get-color("base.200")};
-  --border-color: #{get-color("base.200")};
-  --color: #{get-color("base.content", 0.2)};
+  --background: #{theme.use_color("base.200")};
+  --border-color: #{theme.use_color("base.200")};
+  --color: #{theme.use_color("base.content", 0.2)};
   cursor: not-allowed;
 
   &::placeholder {
-    color: #{get-color("base.content", 0.2)};
+    color: #{theme.use_color("base.content", 0.2)};
   }
 }

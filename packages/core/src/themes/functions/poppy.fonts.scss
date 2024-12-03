@@ -1,0 +1,5 @@
+@use "../generator" as theme;
+
+@function use_font() {
+  @return theme.$font;
+}

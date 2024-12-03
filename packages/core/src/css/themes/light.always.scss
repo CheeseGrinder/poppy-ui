@@ -1,5 +1,5 @@
-@import "./light";
+@use "./light";
 
 :root {
-  @include light-theme();
+  @include light.generate();
 }

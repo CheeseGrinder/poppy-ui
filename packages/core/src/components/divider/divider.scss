@@ -1,5 +1,5 @@
 @use "@poppy/utils/input";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --background: Change background color
@@ -9,7 +9,7 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: #{get-color("base.content", 0.1)};
+  --background: #{theme.use_color("base.content", 0.1)};
 
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
+    $base: use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --background: #{$base};

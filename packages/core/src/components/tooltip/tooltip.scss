@@ -1,4 +1,4 @@
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --tail: Tooltip arrow size
@@ -17,7 +17,7 @@
 pop-tooltip {
   --tail: 0.1875rem;
   --background-opacity: 1;
-  --background: #{get-color("neutral.base", var(--background-opacity))};
+  --background: #{theme.use_color("neutral.base", var(--background-opacity))};
   display: inline-flex;
 
   position: relative;
@@ -39,11 +39,11 @@ pop-tooltip {
     width: max-content;
     max-width: 20rem;
     padding: 0.5rem 0.25rem;
-    border-radius: get-radius(sm);
+    border-radius: use_radius(sm);
     background-color: var(--background);
 
     content: attr(data-tip);
-    color: var(--color, oklch(#{get-color("neutral.content")} / var(--text-opacity, 1)));
+    color: var(--color, oklch(#{theme.use_color("neutral.content")} / var(--text-opacity, 1)));
     font-size: 0.875rem;
     line-height: 1.25rem;
     pointer-events: none;
@@ -146,8 +146,8 @@ pop-tooltip[position="right"] {
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base", var(--background-opacity, 1));
-    $text: get-color("#{$color}.content", var(--text-opacity, 1));
+    $base: use_color("#{$color}.base", var(--background-opacity, 1));
+    $text: use_color("#{$color}.content", var(--text-opacity, 1));
 
     pop-tooltip[color="#{$color}"] {
       --background: #{$base};

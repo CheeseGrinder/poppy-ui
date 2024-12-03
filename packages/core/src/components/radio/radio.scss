@@ -1,5 +1,5 @@
 @use "@poppy/utils/input";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -15,13 +15,13 @@
 // Radio
 // ----------------------------------------------------------------
 
-$base: get-color("base.100");
+$base: use_color("base.100");
 
 :host {
-  --border-radius: #{get-radius(full)};
+  --border-radius: #{theme.use_radius(full)};
   --border-opacity: 0.2;
-  --border-color: #{get-color("base.content", var(--border-opacity))};
-  --background: #{get-color("base.content")};
+  --border-color: #{theme.use_color("base.content", var(--border-opacity))};
+  --background: #{theme.use_color("base.content")};
 
   @include input.label;
 
@@ -121,8 +121,8 @@ $base: get-color("base.100");
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $border: get-color("#{$color}.base", var(--border-opacity, 1));
-    $background: get-color("#{$color}.base", var(--opacity, 1));
+    $border: use_color("#{$color}.base", var(--border-opacity, 1));
+    $background: use_color("#{$color}.base", var(--opacity, 1));
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -133,8 +133,8 @@ $base: get-color("base.100");
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  $border: get-color("base.content", var(--border-opacity, 1));
-  $background: get-color("base.content", var(--opacity, 1));
+  $border: use_color("base.content", var(--border-opacity, 1));
+  $background: use_color("base.content", var(--opacity, 1));
 
   --border-color: #{$border};
   --background: #{$background};
@@ -144,8 +144,8 @@ $base: get-color("base.100");
 // ----------------------------------------------------------------
 
 :host([disabled]) {
-  --border-color: #{get-color("base.content")};
-  --background: #{get-color("base.content")};
+  --border-color: #{theme.use_color("base.content")};
+  --background: #{theme.use_color("base.content")};
 
   > input {
     cursor: not-allowed;

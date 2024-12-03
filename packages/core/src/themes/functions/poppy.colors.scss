@@ -1,14 +1,15 @@
 @use "sass:string";
 @use "sass:list";
 @use "sass:map";
+@use "@poppy/generator" as theme;
 
 // Gets the active color's css variable from a variation. Alpha is optional.
 // --------------------------------------------------------------------------------------------
 // Example usage:
-// current-color(base.100) => var(--base)
-// current-color(base.content, 0.1) => oklch(var(--base-content-oklch), 0.1)
+// current_color(base.100) => var(--base)
+// current_color(base.content, 0.1) => oklch(var(--base-content-oklch), 0.1)
 // --------------------------------------------------------------------------------------------
-@function current-color($variation, $alpha: null) {
+@function current_color($variation, $alpha: null) {
   @if $alpha == null {
     @return var(--#{$variation});
   } @else {
@@ -19,17 +20,25 @@
 // Gets the specific color's css variable from the name and variation. Alpha/rgb are optional.
 // --------------------------------------------------------------------------------------------
 // Example usage:
-// pop-color(primary, base) => var(--primary, oklch(0.6569 0.196 275.75))
-// pop-color(secondary, content) => var(--secondary-content, oklch(0.1496 0.052 342.55))
-// pop-color(primary, base, 0.5) => oklch(var(--primary-oklch, 0.6569 0.196 275.75) / 0.5)
+// use_color(primary, base) => var(--primary, oklch(0.6569 0.196 275.75))
+// use_color(secondary, content) => var(--secondary-content, oklch(0.1496 0.052 342.55))
+// use_color(primary, base, 0.5) => oklch(var(--primary-oklch, 0.6569 0.196 275.75) / 0.5)
 // --------------------------------------------------------------------------------------------
-@function get-color($color, $alpha: null, $oklch: false) {
+@function use_color($color, $alpha: null, $oklch: false) {
   $colorArr: string.split($color, ".");
   $name: list.nth($colorArr, 1);
   $variant: list.nth($colorArr, 2);
 
-  $values: map-get($colors, $name);
+  $values: map-get(theme.$colors, $name);
+  @if $values == null {
+    @error $name "does not exist in theme colors";
+  }
+
   $value: map-get($values, $variant);
+  @if $value == null {
+    @error $variant "does not exist in theme colors " $name;
+  }
+
   $css-var: --#{$name};
 
   @if ($variant != base) {
@@ -49,12 +58,12 @@
 
 // Mixes a color with black to create its shade.
 // --------------------------------------------------------------------------------------------
-@function get-color-shade($color) {
+@function use_color_shade($color) {
   @return color-mix(in oklab, oklch(#{$color}), #000 10%);
 }
 
 // Mixes a color with white to create its tint.
 // --------------------------------------------------------------------------------------------
-@function get-color-tint($color) {
+@function use_color_tint($color) {
   @return color-mix(in oklab, oklch(#{$color}), #fff 10%);
 }

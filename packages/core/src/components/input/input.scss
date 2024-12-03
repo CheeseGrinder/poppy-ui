@@ -1,6 +1,6 @@
 @use "@poppy/utils/input";
 @use "@poppy/utils/join-item";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Border radius
@@ -21,11 +21,11 @@
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{get-radius(md)};
+  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
-  --outline-color: #{get-color("base.content", 0.2)};
-  --background: #{get-color("base.100")};
-  --color: #{get-color("base.content")};
+  --outline-color: #{theme.use_color("base.content", 0.2)};
+  --background: #{theme.use_color("base.100")};
+  --color: #{theme.use_color("base.content")};
 
   @include input.label;
   @include input.helper(".input-wrapper", $counter: true);
@@ -67,7 +67,7 @@ $minWidth: 12rem;
 
       color: var(--color);
 
-      font-family: $font;
+      font-family: theme.use_font();
       white-space: pre-wrap;
 
       cursor: inherit;
@@ -83,7 +83,7 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: #{get-color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 0.2)};
 }
 
 // Input Slot
@@ -130,7 +130,7 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: get-color("#{$color}.base");
+    $base: use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -152,9 +152,9 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([readonly]) {
-  $base: get-color("base.200");
-  $neutral: get-color("neutral.base");
-  $text: get-color("base.content", 0.8);
+  $base: use_color("base.200");
+  $neutral: use_color("neutral.base");
+  $text: use_color("base.content", 0.8);
 
   --background: #{$base};
   --border-color: #{$neutral};
@@ -168,8 +168,8 @@ $minWidth: 12rem;
 }
 
 :host([disabled]) {
-  $base: get-color("base.200");
-  $text: get-color("base.content");
+  $base: use_color("base.200");
+  $text: use_color("base.content");
 
   --background: #{$base};
   --border-color: #{$base};

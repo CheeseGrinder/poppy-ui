@@ -1,5 +1,5 @@
 @use "@poppy/utils/join-item";
-@import "@poppy/poppy.globals";
+@use "@poppy/global" as theme;
 
 /**
  * @prop --border-radius: Change border radius
@@ -16,9 +16,9 @@
 @include join-item.item_root;
 
 :host {
-  --border-radius: #{get-radius(xl)};
-  --border-color: #{get-color("base.300")};
-  --background: #{get-color("base.200")};
+  --border-radius: #{theme.use_radius(xl)};
+  --border-color: #{theme.use_color("base.300")};
+  --background: #{theme.use_color("base.200")};
   --animation: 0.2s;
 
   box-sizing: border-box;

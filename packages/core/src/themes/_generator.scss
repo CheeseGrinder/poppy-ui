@@ -1,0 +1,130 @@
+$scheme: light !default;
+$font: system-ui !default;
+
+$base_100: 100% 0 0 !default;
+$base_200: 96.1151% 0 0 !default;
+$base_300: 92.4169% 0.00108 197.137559 !default;
+$base_content: 27.8078% 0.029596 256.847952 !default;
+
+$neutral: 32.1785% 0.02476 255.701624 !default;
+$neutral_content: 89.4994% 0.011585 252.096176 !default;
+$primary: 49.12% 0.3096 275.75 !default;
+$primary_content: 89.824% 0.06192 275.75 !default;
+$secondary: 69.71% 0.329 342.55 !default;
+$secondary_content: 98.71% 0.0106 342.55 !default;
+$accent: 76.76% 0.184 183.61 !default;
+$accent_content: 15.352% 0.0368 183.61 !default;
+$info: 72.06% 0.191 231.6 !default;
+$info_content: 0% 0 0 !default;
+$success: 64.8% 0.15 160 !default;
+$success_content: 0% 0 0 !default;
+$warning: 84.71% 0.199 83.87 !default;
+$warning_content: 0% 0 0 !default;
+$error: 71.76% 0.221 22.18 !default;
+$error_content: 0% 0 0 !default;
+
+$colors: (
+  base: (
+    "100": $base_100,
+    "200": $base_200,
+    "300": $base_300,
+    content: $base_content,
+  ),
+  neutral: (
+    base: $neutral,
+    content: $neutral_content,
+  ),
+  primary: (
+    base: $primary,
+    content: $primary_content,
+  ),
+  secondary: (
+    base: $secondary,
+    content: $secondary_content,
+  ),
+  accent: (
+    base: $accent,
+    content: $accent_content,
+  ),
+  info: (
+    base: $info,
+    content: $info_content,
+  ),
+  success: (
+    base: $success,
+    content: $success_content,
+  ),
+  warning: (
+    base: $warning,
+    content: $warning_content,
+  ),
+  error: (
+    base: $error,
+    content: $error_content,
+  ),
+);
+
+$radius_xs: 2px !default;
+$radius_sm: 4px !default;
+$radius_md: 8px !default;
+$radius_lg: 12px !default;
+$radius_xl: 16px !default;
+$radius_xxl: 24px !default;
+$radius_full: 9999px !default;
+
+$radius: (
+  xs: $radius_xs,
+  sm: $radius_sm,
+  md: $radius_md,
+  lg: $radius_lg,
+  xl: $radius_xl,
+  xxl: $radius_xxl,
+  full: $radius_full,
+);
+
+$shadow_xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow_sm:
+  0 4px 6px -1px rgb(0 0 0 / 0.1),
+  0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow_md:
+  0 10px 15px -3px rgb(0 0 0 / 0.1),
+  0 4px 6px -4px rgb(0 0 0 / 0.1);
+$shadow_lg:
+  0 20px 25px -5px rgb(0 0 0 / 0.1),
+  0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+$shadows: (
+  xs: $shadow_xs,
+  sm: $shadow_sm,
+  md: $shadow_md,
+  lg: $shadow_lg,
+);
+
+@mixin generate() {
+  & {
+    color-scheme: $scheme;
+
+    --font: #{$font};
+
+    // Define theme oklch colors
+    @each $color-name, $value in $colors {
+      @each $variant-name, $variant in $value {
+        @if $variant-name == base {
+          --#{$color-name}-oklch: #{$variant};
+        } @else {
+          --#{$color-name}-#{$variant-name}-oklch: #{$variant};
+        }
+      }
+    }
+
+    // Define theme radius
+    @each $name, $value in $radius {
+      --radius-#{$name}: #{$value};
+    }
+
+    // Define theme radius
+    @each $name, $value in $shadows {
+      --shadow-#{$name}: #{$value};
+    }
+  }
+}

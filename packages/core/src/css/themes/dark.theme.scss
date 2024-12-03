@@ -1,5 +1,5 @@
-@import "./dark";
+@use "./dark";
 
 [data-theme="dark"] {
-  @include dark-theme();
+  @include dark.generate();
 }
