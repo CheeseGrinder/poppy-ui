@@ -95,7 +95,7 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
+    $base: theme.use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --background: #{$base};

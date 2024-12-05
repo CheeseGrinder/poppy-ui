@@ -19,10 +19,10 @@
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 0.5rem 0.25rem;
+    padding: 0.25rem 0.25rem 0.5rem;
     gap: 4px;
 
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     line-height: 1rem;
 
     &:empty {
@@ -30,10 +30,7 @@
     }
   }
 
-  > #{$selector}:not(:user-invalid) + .text-wrapper > .error-text {
-    display: none;
-  }
-  > #{$selector}:user-invalid + .text-wrapper > .helper-text {
+  > #{$selector} + .text-wrapper:has(.error-text) > .helper-text {
     display: none;
   }
 

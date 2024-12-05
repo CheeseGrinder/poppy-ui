@@ -99,7 +99,7 @@ $minWidth: 12rem;
 // Color
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
+    $base: theme.use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -156,8 +156,8 @@ $minWidth: 12rem;
 }
 
 :host([disabled]) button {
-  $base: use_color("base.200");
-  $text: use_color("base.content", 0.2);
+  $base: theme.use_color("base.200");
+  $text: theme.use_color("base.content", 0.2);
 
   --background: #{$base};
   --border-color: #{$base};

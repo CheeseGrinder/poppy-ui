@@ -150,8 +150,8 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
-    $text: use_color("#{$color}.content");
+    $base: theme.use_color("#{$color}.base");
+    $text: theme.use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
       --button-background: #{$base};
@@ -167,7 +167,7 @@ $minWidth: 12rem;
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color], [disabled])) {
-  $color: use_color("neutral.base");
+  $color: theme.use_color("neutral.base");
 
   > input:hover {
     --button-background: color-mix(in oklab, #{$color} 90%, black);
@@ -189,9 +189,9 @@ $minWidth: 12rem;
 // ----------------------------------------------------------------
 
 :host([disabled]) {
-  $background: use_color("base.200");
-  $color: use_color("base.content", 0.2);
-  $btn-background: use_color("neutral.base", 0.2);
+  $background: theme.use_color("base.200");
+  $color: theme.use_color("base.content", 0.2);
+  $btn-background: theme.use_color("neutral.base", 0.2);
 
   --background: #{$background};
   --border-color: #{$background};
