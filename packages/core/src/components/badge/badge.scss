@@ -106,8 +106,8 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
-    $text: use_color("#{$color}.content");
+    $base: theme.use_color("#{$color}.base");
+    $text: theme.use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};

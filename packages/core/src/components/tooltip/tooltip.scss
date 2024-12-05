@@ -39,7 +39,7 @@ pop-tooltip {
     width: max-content;
     max-width: 20rem;
     padding: 0.5rem 0.25rem;
-    border-radius: use_radius(sm);
+    border-radius: theme.use_radius(sm);
     background-color: var(--background);
 
     content: attr(data-tip);
@@ -146,8 +146,8 @@ pop-tooltip[position="right"] {
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base", var(--background-opacity, 1));
-    $text: use_color("#{$color}.content", var(--text-opacity, 1));
+    $base: theme.use_color("#{$color}.base", var(--background-opacity, 1));
+    $text: theme.use_color("#{$color}.content", var(--text-opacity, 1));
 
     pop-tooltip[color="#{$color}"] {
       --background: #{$base};
