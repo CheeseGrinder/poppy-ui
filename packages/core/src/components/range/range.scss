@@ -118,7 +118,7 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base", var(--active-track-opacity, 1));
+    $base: theme.use_color("#{$color}.base", var(--active-track-opacity, 1));
 
     :host([color="#{$color}"]) {
       --active-track-color: #{$base};
@@ -128,8 +128,8 @@
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  $color: use_color("base.content", var(--track-opacity, 0.2));
-  $active: use_color("base.content", var(--active-track-opacity, 1));
+  $color: theme.use_color("base.content", var(--track-opacity, 0.2));
+  $active: theme.use_color("base.content", var(--active-track-opacity, 1));
 
   --track-color: #{$color};
   --active-track-color: #{$active};
@@ -139,7 +139,7 @@
 // ----------------------------------------------------------------
 
 :host([disabled]) > input {
-  $active: use_color("base.content", var(--active-track-opacity, 1));
+  $active: theme.use_color("base.content", var(--active-track-opacity, 1));
 
   --active-track-color: #{$active};
   cursor: not-allowed;

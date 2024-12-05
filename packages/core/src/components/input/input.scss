@@ -24,7 +24,7 @@ $minWidth: 12rem;
   --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
   --outline-color: #{theme.use_color("base.content", 0.2)};
-  --background: #{theme.use_color("base.100")};
+  --background: #{theme.use_color("base.100", var(--opacity, 1))};
   --color: #{theme.use_color("base.content")};
 
   @include input.label;
@@ -69,6 +69,8 @@ $minWidth: 12rem;
 
       font-family: theme.use_font();
       white-space: pre-wrap;
+      text-overflow: ellipsis;
+      text-wrap: auto;
 
       cursor: inherit;
 
@@ -130,7 +132,7 @@ $minWidth: 12rem;
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
+    $base: theme.use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
       --border-color: #{$base};
@@ -142,19 +144,18 @@ $minWidth: 12rem;
 
 :host([color="ghost"]) {
   --opacity: 0.05;
-
-  > .input-wrapper:has(input:focus) {
-    --opacity: 1;
-  }
+}
+:host([color="ghost"]:focus) {
+  --opacity: 1;
 }
 
 // Input State
 // ----------------------------------------------------------------
 
 :host([readonly]) {
-  $base: use_color("base.200");
-  $neutral: use_color("neutral.base");
-  $text: use_color("base.content", 0.8);
+  $base: theme.use_color("base.200");
+  $neutral: theme.use_color("neutral.base");
+  $text: theme.use_color("base.content", 0.8);
 
   --background: #{$base};
   --border-color: #{$neutral};
@@ -168,8 +169,8 @@ $minWidth: 12rem;
 }
 
 :host([disabled]) {
-  $base: use_color("base.200");
-  $text: use_color("base.content");
+  $base: theme.use_color("base.200");
+  $text: theme.use_color("base.content");
 
   --background: #{$base};
   --border-color: #{$base};

@@ -33,7 +33,9 @@ let inputIds = 0;
 @Component({
   tag: 'pop-input',
   styleUrl: 'input.scss',
-  shadow: true,
+  shadow: {
+    delegatesFocus: true,
+  },
   formAssociated: true,
 })
 export class Input implements ComponentInterface {

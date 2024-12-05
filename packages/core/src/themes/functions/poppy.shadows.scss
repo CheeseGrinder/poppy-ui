@@ -2,7 +2,7 @@
 
 @function use_shadow($size: md) {
   $value: map-get(
-    $map: $shadows,
+    $map: theme.$shadows,
     $key: $size,
   );
 

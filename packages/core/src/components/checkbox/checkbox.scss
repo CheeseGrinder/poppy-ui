@@ -129,9 +129,9 @@
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: use_color("#{$color}.base");
-    $border: use_color("#{$color}.base", 0.2);
-    $text: use_color("#{$color}.content");
+    $base: theme.use_color("#{$color}.base");
+    $border: theme.use_color("#{$color}.base", 0.2);
+    $text: theme.use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
       --background: #{$base};
@@ -181,7 +181,7 @@
       var(--background) 57%
     );
   background-repeat: no-repeat;
-  background-color: var(--background, use_color("base.content"));
+  background-color: var(--background, #{theme.use_color("base.content")});
   animation: checkmark var(--animation-duration, 0.2s) ease-out;
 }
 
