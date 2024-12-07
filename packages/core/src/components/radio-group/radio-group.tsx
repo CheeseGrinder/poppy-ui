@@ -24,7 +24,8 @@ let radioGroupIds = 0;
   formAssociated: true,
 })
 export class RadioGroup implements ComponentInterface {
-  private inputId = `ion-rg-${radioGroupIds++}`;
+  private inputId = `pop-rg-${radioGroupIds++}`;
+  private initialValue: any;
 
   @Element() host!: HTMLElement;
 
@@ -33,7 +34,7 @@ export class RadioGroup implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * the value of the radio group.
@@ -54,7 +55,7 @@ export class RadioGroup implements ComponentInterface {
   }
 
   /**
-   * If `true`, apply the required property to all `pop-radio`.
+   * If `true`, apply the required property to every `pop-radio`.
    *
    * @config
    * @default false
@@ -62,7 +63,7 @@ export class RadioGroup implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
-   * If `true`, apply the disabled property to all `pop-radio`.
+   * If `true`, apply the disabled property to every `pop-radio`.
    *
    * @config
    * @default false
@@ -125,11 +126,20 @@ export class RadioGroup implements ComponentInterface {
   @Event() popValueChange!: EventEmitter<RadioGroupChangeEventDetail>;
 
   formResetCallback(): void {
-    this.value = undefined;
+    this.value = this.initialValue;
   }
 
   formStateRestoreCallback(state: string): void {
     this.value = state;
+  }
+
+  connectedCallback(): void {
+    if (!this.value) {
+      return;
+    }
+    const data = new FormData();
+    data.set(this.name, this.value.toString());
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -139,6 +149,8 @@ export class RadioGroup implements ComponentInterface {
       allowEmpty: false,
       size: config.get('defaultSize', 'md'),
     });
+
+    this.initialValue = this.value;
   }
 
   componentDidLoad(): void {
@@ -176,6 +188,7 @@ export class RadioGroup implements ComponentInterface {
 
     if (!radio) return;
     radio.checked = true;
+    this.value = radio.value;
   }
 
   private get radios() {

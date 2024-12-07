@@ -11,7 +11,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Size } from 'src/interface';
+import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Show } from '../Show';
@@ -33,12 +33,11 @@ let inputIds = 0;
   shadow: true,
   formAssociated: true,
 })
-export class InputFile implements ComponentInterface {
+export class InputFile implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-input-file-${inputIds++}`;
   private inheritedAttributes: Attributes;
 
   private nativeInput!: HTMLInputElement;
-  private debounceTimer: NodeJS.Timeout;
 
   @Element() host!: HTMLElement;
 
@@ -47,7 +46,7 @@ export class InputFile implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -55,13 +54,17 @@ export class InputFile implements ComponentInterface {
    *
    * The value of a toggle is analogous to the value of a `<input type="checkbox">`,
    * it's only used when the toggle participates in a native `<form>`.
+   *
+   * @default null
    */
-  @Prop({ mutable: true }) value?: File | File[] | null;
+  @Prop({ mutable: true }) value?: File | File[] | null = new File([], '');
   @Watch('value')
-  onValueChange(file: File): void {
+  onValueChange(value: File | File[]): void {
     const data = new FormData();
-    data.set(this.name, file);
-
+    const files = Array.isArray(value) ? value : [value];
+    for (const file of files) {
+      data.set(this.name, file);
+    }
     this.internals.setFormValue(data, data);
   }
 
@@ -72,7 +75,7 @@ export class InputFile implements ComponentInterface {
    * @config
    * @default false
    */
-  @Prop({ mutable: true }) multiple?: boolean;
+  @Prop({ reflect: true, mutable: true }) multiple?: boolean;
 
   /**
    * If `true`, the user must fill in a value before submitting a form.
@@ -158,12 +161,20 @@ export class InputFile implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.value = null;
-    this.nativeInput.value = null;
+    this.value = new File([], '');
+    this.nativeInput.value = '';
   }
 
   formStateRestoreCallback(state: File): void {
     this.value = state;
+  }
+
+  connectedCallback(): void {
+    if (this.value === null) {
+      return;
+    }
+    const files = Array.isArray(this.value) ? this.value : [this.value];
+    this.onValueChange(files);
   }
 
   componentWillLoad(): void {
@@ -171,6 +182,7 @@ export class InputFile implements ComponentInterface {
       ...inheritAriaAttributes(this.host),
       ...inheritAttributes(this.host, ['tabindex', 'title', 'data-form-type']),
     };
+
     componentConfig.apply(this, 'pop-input-file', {
       multiple: false,
       required: false,
@@ -180,18 +192,6 @@ export class InputFile implements ComponentInterface {
       bordered: false,
       size: config.get('defaultSize', 'md'),
     });
-  }
-
-  // TODO: Tester si ça fonctionne
-  componentDidLoad(): void {
-    const { value } = this;
-    const files = Array.isArray(value) ? value : [value];
-
-    files.forEach((file, idx) => (this.nativeInput.files[idx] = file));
-  }
-
-  disconnectedCallback(): void {
-    clearTimeout(this.debounceTimer);
   }
 
   /**
@@ -208,8 +208,11 @@ export class InputFile implements ComponentInterface {
   }
 
   private onChange = (): void => {
+    const files = this.getValue();
+    this.value = files;
+
     this.popChange.emit({
-      value: this.getValue(),
+      value: files,
     });
   };
 

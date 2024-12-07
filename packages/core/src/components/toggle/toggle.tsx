@@ -11,7 +11,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Size } from 'src/interface';
+import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
@@ -33,9 +33,11 @@ let toggleIds = 0;
   shadow: true,
   formAssociated: true,
 })
-export class Toggle implements ComponentInterface {
+export class Toggle implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-tg-${toggleIds++}`;
   private inheritedAttributes: Attributes;
+
+  private initialState: boolean | 'indeterminate';
   private nativeInput!: HTMLInputElement;
 
   @Element() host!: HTMLElement;
@@ -45,7 +47,7 @@ export class Toggle implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -83,12 +85,16 @@ export class Toggle implements ComponentInterface {
   onCheckedChange(checked: boolean): void {
     this.indeterminate = false;
     const data = new FormData();
-    data.set(this.name, checked.toString());
+    if (this.checked) {
+      data.set(this.name, this.value);
+    } else {
+      data.delete(this.name);
+    }
 
     this.internals.setFormValue(data, data);
     this.popChange.emit({
       checked,
-      value: this.value || '',
+      value: checked ? this.value : null,
     });
   }
 
@@ -142,11 +148,25 @@ export class Toggle implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.checked = false;
+    if (this.initialState === 'indeterminate') {
+      this.indeterminate = true;
+      return;
+    }
+    this.checked = this.initialState;
   }
 
   formStateRestoreCallback(state: string): void {
     this.checked = state === 'true';
+  }
+
+  connectedCallback(): void {
+    if (!this.checked) {
+      return;
+    }
+
+    const data = new FormData();
+    data.set(this.name, this.value);
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -160,6 +180,8 @@ export class Toggle implements ComponentInterface {
       disabled: false,
       size: config.get('defaultSize', 'md'),
     });
+
+    this.initialState = this.indeterminate ? 'indeterminate' : this.checked;
   }
 
   /**
