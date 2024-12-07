@@ -34,6 +34,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-select-${selectIds++}`;
   private inheritedAttributes: Attributes;
 
+  private initialValues: any | any[] | null;
   private popoverRef: HTMLPopPopoverElement;
   private triggerRef: HTMLButtonElement;
 
@@ -47,7 +48,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * Instructional text that shows before the input has a value.
@@ -60,7 +61,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
    * The value of a select is analogous to the value of a `<select>`,
    * it's only used when the toggle participates in a native `<form>`.
    */
-  @Prop({ mutable: true }) value?: any | null;
+  @Prop({ mutable: true }) value?: any | null = null;
   @Watch('value')
   onValueChange(value: any) {
     this.errorText = this.errorTextValue;
@@ -70,7 +71,11 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     }
 
     const data = new FormData();
-    data.set(this.name, value);
+    if (this.value === null) {
+      data.delete(this.name);
+    } else {
+      data.set(this.name, this.value);
+    }
 
     this.internals.setFormValue(data, data);
     this.popChange.emit({ value });
@@ -201,11 +206,20 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.value = null;
+    this.value = this.initialValues;
   }
 
   formStateRestoreCallback(state: any) {
     this.value = state;
+  }
+
+  connectedCallback(): void {
+    const data = new FormData();
+    for (const item of this.values) {
+      data.set(this.name, item);
+    }
+
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -218,6 +232,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       bordered: false,
       size: config.get('defaultSize', 'md'),
     });
+
+    this.initialValues = this.value;
   }
 
   /**

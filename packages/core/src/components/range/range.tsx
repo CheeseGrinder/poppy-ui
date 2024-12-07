@@ -33,6 +33,7 @@ export class Range implements ComponentInterface {
   private inputId = `pop-range-${rangeIds++}`;
   private inheritedAttributes: Attributes;
 
+  private initialValue: number;
   private nativeInput!: HTMLInputElement;
   private debounceTimer: NodeJS.Timeout;
 
@@ -43,7 +44,7 @@ export class Range implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * The value of the toggle does not mean if it's checked or not, use the `checked`
@@ -52,7 +53,7 @@ export class Range implements ComponentInterface {
    * The value of a toggle is analogous to the value of a `<input type="checkbox">`,
    * it's only used when the toggle participates in a native `<form>`.
    */
-  @Prop({ mutable: true }) value?: number | null;
+  @Prop({ reflect: true, mutable: true }) value?: number | null = null;
   @Watch('value')
   onValueChange(value: number) {
     const data = new FormData();
@@ -149,11 +150,17 @@ export class Range implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.value = 0;
+    this.value = this.initialValue;
   }
 
   formStateRestoreCallback(state: string) {
     this.value = +state;
+  }
+
+  connectedCallback(): void {
+    const data = new FormData();
+    data.set(this.name, this.value?.toString());
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -168,6 +175,8 @@ export class Range implements ComponentInterface {
       size: config.get('defaultSize', 'md'),
       debounce: 0,
     });
+    this.value ??= this.max / 2;
+    this.initialValue = this.value;
   }
 
   disconnectedCallback(): void {
@@ -225,7 +234,7 @@ export class Range implements ComponentInterface {
           required={this.required}
           step={this.step}
           type="range"
-          value={this.value}
+          value={this.value === null ? this.max / 2 : this.value}
           {...this.inheritedAttributes}
         />
       </Host>
