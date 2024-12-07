@@ -11,7 +11,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
+import type { AutoCapitalize, EnterKeyHint, FormAssociatedInterface, KeyboardType, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
 import { Show } from '../Show';
@@ -38,10 +38,11 @@ let inputIds = 0;
   },
   formAssociated: true,
 })
-export class Input implements ComponentInterface {
+export class Input implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-input-${inputIds++}`;
   private inheritedAttributes: Attributes;
 
+  private initialValue: string | number | null;
   private nativeInput!: HTMLInputElement;
   private isComposing = false;
   private debounceTimer: NodeJS.Timeout;
@@ -53,7 +54,7 @@ export class Input implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * The type of control to display. The default type is text.
@@ -309,11 +310,18 @@ export class Input implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.value = '';
+    this.value = this.initialValue;
   }
 
   formStateRestoreCallback(state: string): void {
     this.value = state;
+  }
+
+  connectedCallback(): void {
+    const value = this.getValue();
+    const data = new FormData();
+    data.set(this.name, value);
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -342,6 +350,8 @@ export class Input implements ComponentInterface {
     if (this.counter && this.maxLength === undefined) {
       console.warn(`The 'maxLength' attribut must be specified.`);
     }
+
+    this.initialValue = this.value;
   }
 
   disconnectedCallback(): void {

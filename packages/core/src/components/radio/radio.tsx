@@ -42,7 +42,7 @@ export class Radio implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * The value of the radio does not mean if it's checked or not, use the `checked`

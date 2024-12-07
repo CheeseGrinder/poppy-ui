@@ -16,7 +16,7 @@
   width: 100%;
   height: var(--track-size);
   border-radius: var(--border-radius, #{theme.use_radius(xl)});
-  background-color: var(--track-color, oklch(var(--base-content) / var(--track-opacity, 0.2)));
+  background-color: var(--track-color, oklch(var(--base-content-oklck) / var(--track-opacity, 0.2)));
 }
 @mixin thumb {
   width: var(--thumb-size);

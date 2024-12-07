@@ -4,7 +4,7 @@
 :root {
   /**
    * Loop through each color object from the
-   * `poppy.theme.default.scss` file
+   * `theme/_generator.scss` file
    * and generate CSS Variables for each color.
    */
   @each $color-name, $value in theme.$colors {
@@ -21,5 +21,5 @@
 body {
   background: var(--base-100);
   color: var(--base-content);
-  font-family: var(--font);
+  font-family: var(--font, #{theme.$font});
 }

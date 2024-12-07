@@ -38,6 +38,8 @@ let checkboxIds = 0;
 export class Checkbox implements ComponentInterface {
   private inputId = `pop-cb-${checkboxIds++}`;
   private inheritedAttributes: Attributes;
+
+  private initialState: boolean | 'indeterminate';
   private nativeInput!: HTMLInputElement;
 
   @Element() host!: HTMLElement;
@@ -83,13 +85,13 @@ export class Checkbox implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) checked?: boolean;
   @Watch('checked')
   onCheckedChange(newChecked: boolean): void {
-    this.indeterminate = false;
+    this.indeterminate = undefined;
 
     this.popChange.emit({
       checked: newChecked,
-      value: this.value || '',
+      value: newChecked ? this.value : null,
     });
-    this.internals.setFormValue(newChecked ? this.value : '', newChecked.toString());
+    this.internals.setFormValue(newChecked ? this.value : null, newChecked.toString());
     this.internals.ariaChecked = newChecked.toString();
   }
 
@@ -153,11 +155,25 @@ export class Checkbox implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.checked = false;
+    if (this.initialState === 'indeterminate') {
+      this.indeterminate = true;
+      return;
+    }
+    this.checked = this.initialState;
   }
 
   formStateRestoreCallback(state: string): void {
     this.checked = state === 'true';
+  }
+
+  connectedCallback(): void {
+    if (!this.checked) {
+      return;
+    }
+
+    const data = new FormData();
+    data.set(this.name, this.value);
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -172,6 +188,8 @@ export class Checkbox implements ComponentInterface {
       size: config.get('defaultSize', 'md'),
       placement: 'start',
     });
+
+    this.initialState = this.indeterminate ? 'indeterminate' : this.checked;
   }
 
   /**
@@ -238,7 +256,7 @@ export class Checkbox implements ComponentInterface {
           checked={checked}
           disabled={disabled}
           id={inputId}
-          indeterminate={this.indeterminate}
+          indeterminate={indeterminate}
           name={name}
           onBlur={this.onBlur}
           onChange={this.onChecked}
