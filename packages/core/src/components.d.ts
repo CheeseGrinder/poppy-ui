@@ -645,6 +645,7 @@ export namespace Components {
         "size"?: Size;
         /**
           * The value of the toggle does not mean if it's checked or not, use the `checked` property for that.  The value of a toggle is analogous to the value of a `<input type="checkbox">`, it's only used when the toggle participates in a native `<form>`.
+          * @default null
          */
         "value"?: File | File[] | null;
     }
@@ -907,7 +908,7 @@ export namespace Components {
          */
         "compare"?: RadioGroupCompareFn | string | null;
         /**
-          * If `true`, apply the disabled property to all `pop-radio`.
+          * If `true`, apply the disabled property to every `pop-radio`.
           * @config 
           * @default false
          */
@@ -917,7 +918,7 @@ export namespace Components {
          */
         "name": string;
         /**
-          * If `true`, apply the required property to all `pop-radio`.
+          * If `true`, apply the required property to every `pop-radio`.
           * @config 
           * @default false
          */
@@ -1277,7 +1278,7 @@ export namespace Components {
           * The value of the textarea.
           * @default ""
          */
-        "value"?: string | null;
+        "value"?: string;
         /**
           * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 
@@ -2645,6 +2646,7 @@ declare namespace LocalJSX {
         "size"?: Size;
         /**
           * The value of the toggle does not mean if it's checked or not, use the `checked` property for that.  The value of a toggle is analogous to the value of a `<input type="checkbox">`, it's only used when the toggle participates in a native `<form>`.
+          * @default null
          */
         "value"?: File | File[] | null;
     }
@@ -2922,7 +2924,7 @@ declare namespace LocalJSX {
          */
         "compare"?: RadioGroupCompareFn | string | null;
         /**
-          * If `true`, apply the disabled property to all `pop-radio`.
+          * If `true`, apply the disabled property to every `pop-radio`.
           * @config 
           * @default false
          */
@@ -2940,7 +2942,7 @@ declare namespace LocalJSX {
          */
         "onPopValueChange"?: (event: PopRadioGroupCustomEvent<RadioGroupChangeEventDetail>) => void;
         /**
-          * If `true`, apply the required property to all `pop-radio`.
+          * If `true`, apply the required property to every `pop-radio`.
           * @config 
           * @default false
          */
@@ -3334,7 +3336,7 @@ declare namespace LocalJSX {
           * The value of the textarea.
           * @default ""
          */
-        "value"?: string | null;
+        "value"?: string;
         /**
           * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
           * @config 

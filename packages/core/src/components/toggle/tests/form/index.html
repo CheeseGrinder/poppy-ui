@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Basic | Poppy-ui</title>
+  <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+  <style>
+    main {
+      width: 100vw;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+
+      background-color: var(--base-300);
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .35rem;
+    }
+
+    div, form {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Toggle - form</h2>
+      <div>
+        <form>
+          <pop-toggle name="custom" error-text="test error">input label</pop-toggle>
+          <pop-toggle value="default" checked name="custom-value" error-text="test error">input label</pop-toggle>
+          <pop-toggle value="indeterminate" indeterminate="true" name="custom-indeterminate" error-text="test error">input label</pop-toggle>
+          <input type="checkbox" name="native">
+          <pop-button type="submit" color="primary">submit</pop-button>
+          <pop-button type="reset" color="ghost">reset</pop-button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('load', getData());
+    })
+    document.querySelector('form').addEventListener('submit', ev => {
+      ev.preventDefault();
+      console.log('submit', getData());
+    });
+
+    function getData() {
+      const data = new FormData(document.querySelector('form'))
+      const obj = {};
+
+      for (const key of data.keys()) {
+        const values = data.getAll(key);
+        obj[key] = values.length > 1 ? values : values[0];
+      }
+      return obj;
+    }
+  </script>
+</body>
+
+</html>

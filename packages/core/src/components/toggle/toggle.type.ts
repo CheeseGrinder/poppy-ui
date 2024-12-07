@@ -4,7 +4,7 @@ export type ToggleColor = Color | 'ghost';
 
 export interface ToggleChangeEventDetail<T = any> {
   checked: boolean;
-  value: T;
+  value: T | null;
 }
 
 export interface ToggleCustomEvent<T = any> extends CustomEvent {

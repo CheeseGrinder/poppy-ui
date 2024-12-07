@@ -572,12 +572,12 @@ export namespace Configuration {
     };
     'pop-radio-group'?: {
       /**
-       * If `true`, apply the required property to all `pop-radio`.
+       * If `true`, apply the required property to every `pop-radio`.
        * @default false
        */
       required?: boolean;
       /**
-       * If `true`, apply the disabled property to all `pop-radio`.
+       * If `true`, apply the disabled property to every `pop-radio`.
        * @default false
        */
       disabled?: boolean;

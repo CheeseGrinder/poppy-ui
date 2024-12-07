@@ -12,7 +12,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { AutoCapitalize, EnterKeyHint, KeyboardType, Size } from 'src/interface';
+import type { AutoCapitalize, EnterKeyHint, FormAssociatedInterface, KeyboardType, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
 import { Show } from '../Show';
@@ -34,11 +34,12 @@ let textareaIds = 0;
   shadow: true,
   formAssociated: true,
 })
-export class Textarea implements ComponentInterface {
+export class Textarea implements ComponentInterface, FormAssociatedInterface {
   private inputId = `pop-textarea-${textareaIds++}`;
   private inheritedAttributes: Attributes;
   private resizeObserver?: MutationObserver;
 
+  private initialValue: string;
   private nativeInput!: HTMLTextAreaElement;
   private debounceTimer: NodeJS.Timeout;
 
@@ -51,7 +52,7 @@ export class Textarea implements ComponentInterface {
   /**
    * The name of the control, which is submitted with the form data.
    */
-  @Prop() name: string = this.inputId;
+  @Prop({ reflect: true }) name: string = this.inputId;
 
   /**
    * Instructional text that shows before the input has a value.
@@ -63,7 +64,7 @@ export class Textarea implements ComponentInterface {
    *
    * @default ""
    */
-  @Prop({ mutable: true }) value?: string | null = '';
+  @Prop({ mutable: true }) value?: string = '';
   @Watch('value')
   onValueChange(value: string): void {
     const data = new FormData();
@@ -267,11 +268,18 @@ export class Textarea implements ComponentInterface {
   @Event() popBlur: EventEmitter<void>;
 
   formResetCallback(): void {
-    this.value = '';
+    this.value = this.initialValue;
   }
 
   formStateRestoreCallback(state: string): void {
     this.value = state;
+  }
+
+  connectedCallback(): void {
+    const value = this.getValue();
+    const data = new FormData();
+    data.set(this.name, value);
+    this.internals.setFormValue(data, data);
   }
 
   componentWillLoad(): void {
@@ -294,6 +302,8 @@ export class Textarea implements ComponentInterface {
     if (this.wrap === 'hard' && this.cols === undefined) {
       console.warn(`The 'cols' attribut must be specified.`);
     }
+
+    this.initialValue = this.value;
   }
 
   componentDidLoad(): void {
@@ -410,11 +420,10 @@ export class Textarea implements ComponentInterface {
           required={this.required}
           rows={this.rows}
           spellcheck={this.spellcheck}
+          value={value}
           wrap={this.wrap}
           {...this.inheritedAttributes}
-        >
-          {value}
-        </textarea>
+        />
         <Show when={hasBottomText}>
           <div class="text-wrapper">
             <Show when={hasError}>
