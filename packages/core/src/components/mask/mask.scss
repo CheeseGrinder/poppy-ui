@@ -1,14 +1,9 @@
 :host {
+  display: grid;
   aspect-ratio: 1;
   mask-position: center;
   mask-repeat: no-repeat;
-
   mask-size: contain;
-}
-
-:host-context(pop-avatar[placeholder]) {
-  display: grid;
-  place-items: center;
 }
 
 @mixin mask($type, $url) {

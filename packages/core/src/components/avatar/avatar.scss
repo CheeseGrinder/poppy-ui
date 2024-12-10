@@ -12,7 +12,7 @@
   --background: #{theme.use_color("neutral.base")};
   --color: #{theme.use_color("neutral.content")};
 
-  display: inline-flex;
+  display: grid;
 
   position: relative;
   aspect-ratio: 1;
