@@ -100,11 +100,12 @@ export const config: Config = {
       includeGlobalScripts: false,
     },
     vueOutputTarget({
-      componentCorePackage: componentCorePackage,
-      proxiesFile: '../vue/src/proxies.ts',
       includeImportCustomElements: true,
-      includeDefineCustomElements: false,
       includePolyfills: false,
+      includeDefineCustomElements: false,
+      componentCorePackage: componentCorePackage,
+      hydrateModule: `${componentCorePackage}/hydrate`,
+      proxiesFile: '../vue/src/proxies.ts',
       componentModels: <VueComponentModel[]>[
         {
           elements: ['pop-checkbox', 'pop-toggle'],
