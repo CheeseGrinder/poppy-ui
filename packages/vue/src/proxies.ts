@@ -494,8 +494,8 @@ export const PopModal = /*@__PURE__*/ globalThis.window ? defineContainer<JSX.Po
   'showBackdrop',
   'backdropDismiss',
   'open',
-  'didPresent',
-  'didDismiss'
+  'present',
+  'dismiss'
 ]) : defineStencilSSRComponent({
   tagName: 'pop-modal',
   hydrateModule: import('@poppy-ui/core/hydrate'),
@@ -505,8 +505,8 @@ export const PopModal = /*@__PURE__*/ globalThis.window ? defineContainer<JSX.Po
     'showBackdrop': [Boolean, "show-backdrop"],
     'backdropDismiss': [Boolean, "backdrop-dismiss"],
     'open': [Boolean, "open"],
-    'onDidPresent': [Function],
-    'onDidDismiss': [Function]
+    'onPresent': [Function],
+    'onDismiss': [Function]
   }
 });
 

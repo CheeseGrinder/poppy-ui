@@ -22,10 +22,10 @@ Modal is used to show a dialog or a box when you click on the trigger element.
 
 ## Events
 
-| Event        | Description                            | Type                |
-| ------------ | -------------------------------------- | ------------------- |
-| `didDismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
-| `didPresent` | Emitted after the modal has presented. | `CustomEvent<void>` |
+| Event     | Description                            | Type                |
+| --------- | -------------------------------------- | ------------------- |
+| `dismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
+| `present` | Emitted after the modal has presented. | `CustomEvent<void>` |
 
 
 ## Methods

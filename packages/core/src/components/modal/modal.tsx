@@ -102,19 +102,19 @@ export class Modal implements ComponentInterface, OverlayInterface {
     if (isOpen) {
       this.present();
     } else {
-      this.dismiss(null);
+      this.dismiss('close');
     }
   }
 
   /**
    * Emitted after the modal has presented.
    */
-  @Event() didPresent: EventEmitter<void>;
+  @Event({ eventName: 'present' }) didPresent: EventEmitter<void>;
 
   /**
    * Emitted after the modal has dismissed.
    */
-  @Event() didDismiss: EventEmitter<void>;
+  @Event({ eventName: 'dismiss' }) didDismiss: EventEmitter<void>;
 
   connectedCallback(): void {
     const { trigger } = this;
@@ -162,6 +162,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
     }
 
     this.dialog.showModal();
+    this.didPresent.emit();
     return true;
   }
 
@@ -177,6 +178,7 @@ export class Modal implements ComponentInterface, OverlayInterface {
     if (!open) return false;
 
     this.dialog.close(data);
+    this.didDismiss.emit();
     return true;
   }
 
