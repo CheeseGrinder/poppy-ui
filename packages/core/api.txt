@@ -260,8 +260,8 @@ pop-modal,prop,showBackdrop,boolean,undefined,false,true
 pop-modal,prop,trigger,string,undefined,false,false
 pop-modal,method,dismiss,dismiss(data: any) => Promise<boolean>
 pop-modal,method,present,present() => Promise<boolean>
-pop-modal,event,didDismiss,void,true
-pop-modal,event,didPresent,void,true
+pop-modal,event,dismiss,void,true
+pop-modal,event,present,void,true
 pop-modal,part,actions
 pop-modal,part,backdrop
 pop-modal,part,content

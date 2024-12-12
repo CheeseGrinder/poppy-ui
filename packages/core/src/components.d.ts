@@ -1742,8 +1742,8 @@ declare global {
         new (): HTMLPopMaskElement;
     };
     interface HTMLPopModalElementEventMap {
-        "didPresent": void;
-        "didDismiss": void;
+        "present": void;
+        "dismiss": void;
     }
     /**
      * Modal is used to show a dialog or a box when you click on the trigger element.
@@ -2744,11 +2744,11 @@ declare namespace LocalJSX {
         /**
           * Emitted after the modal has dismissed.
          */
-        "onDidDismiss"?: (event: PopModalCustomEvent<void>) => void;
+        "onDismiss"?: (event: PopModalCustomEvent<void>) => void;
         /**
           * Emitted after the modal has presented.
          */
-        "onDidPresent"?: (event: PopModalCustomEvent<void>) => void;
+        "onPresent"?: (event: PopModalCustomEvent<void>) => void;
         /**
           * If `true`, the modal will open. If `false`, the modal will close. Use this if you need finer grained control over presentation, otherwise just use the modalController or the `trigger` property. Note: `open` will automatically be set back to `false` when the modal dismisses.
           * @config 

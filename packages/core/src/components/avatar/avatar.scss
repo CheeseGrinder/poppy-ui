@@ -13,6 +13,7 @@
   --color: #{theme.use_color("neutral.content")};
 
   display: grid;
+  place-content: center;
 
   position: relative;
   aspect-ratio: 1;
