@@ -3,19 +3,12 @@ import { docsReadme } from '@cheese-grinder/stencil-custom-readme';
 import { sassAlias } from '@cheese-grinder/stencil-sass-alias';
 import type { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
-import { vueOutputTarget } from '@stencil/vue-output-target';
+import { vueOutput } from './output/vue';
 import { apiSpecGenerator } from './plugins/api-spec-generator';
 import type { JSX } from './src/components';
 
 type ComponentTag = keyof JSX.IntrinsicElements;
 type Bundle = { components: ComponentTag[] };
-
-type VueComponentModel = {
-  elements: ComponentTag | ComponentTag[];
-  event: string;
-  targetAttr: string;
-};
-
 const componentCorePackage = '@poppy-ui/core';
 
 export const config: Config = {
@@ -25,7 +18,6 @@ export const config: Config = {
   preamble: '(C) Cheese Grinder - MIT License',
   enableCache: true,
   transformAliasedImportPaths: true,
-  buildEs5: 'prod',
   plugins: [
     sass({
       importer: [
@@ -59,7 +51,7 @@ export const config: Config = {
     { components: ['pop-progress'] },
     { components: ['pop-radio', 'pop-radio-group'] },
     { components: ['pop-range'] },
-    { components: ['pop-select', 'pop-select-option', 'pop-select-popover'] },
+    { components: ['pop-select', 'pop-select-option'] },
     { components: ['pop-swap'] },
     { components: ['pop-textarea'] },
     { components: ['pop-toggle'] },
@@ -99,36 +91,7 @@ export const config: Config = {
       ],
       includeGlobalScripts: false,
     },
-    vueOutputTarget({
-      includeImportCustomElements: true,
-      includePolyfills: false,
-      includeDefineCustomElements: false,
-      componentCorePackage: componentCorePackage,
-      hydrateModule: `${componentCorePackage}/hydrate`,
-      proxiesFile: '../vue/src/proxies.ts',
-      componentModels: <VueComponentModel[]>[
-        {
-          elements: ['pop-checkbox', 'pop-toggle'],
-          targetAttr: 'checked',
-          event: 'pop-change',
-        },
-        {
-          elements: ['pop-swap', 'pop-accordion-group'],
-          targetAttr: 'active',
-          event: 'pop-change',
-        },
-        {
-          elements: ['pop-radio', 'pop-radio-group', 'pop-select', 'pop-range'],
-          targetAttr: 'value',
-          event: 'pop-change',
-        },
-        {
-          elements: ['pop-input', 'pop-textarea'],
-          targetAttr: 'value',
-          event: 'pop-input',
-        },
-      ],
-    }),
+    vueOutput(componentCorePackage),
   ],
   testing: {
     browserHeadless: 'new',

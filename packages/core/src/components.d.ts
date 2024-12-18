@@ -24,7 +24,6 @@ import { MaskType } from "./components/mask/mask.type";
 import { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 import { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
 import { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
-import { SelectPopoverOption } from "./components/select-popover/select-popover.type";
 import { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 import { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
@@ -48,7 +47,6 @@ export { MaskType } from "./components/mask/mask.type";
 export { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 export { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
 export { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
-export { SelectPopoverOption } from "./components/select-popover/select-popover.type";
 export { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 export { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 export { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
@@ -366,7 +364,7 @@ export namespace Components {
           * Close the dropdown.
           * @returns return `true` if the dropdown has been closed, otherwise `false`.
          */
-        "dismiss": () => Promise<boolean>;
+        "dismiss": (data?: any) => Promise<boolean>;
         /**
           * Force the dropdown to be shown
           * @config 
@@ -390,6 +388,10 @@ export namespace Components {
           * @default "bottom"
          */
         "side"?: DropdownSide;
+        /**
+          * Toggle the select dropdown
+         */
+        "toggle": () => Promise<boolean>;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
           * @config 
@@ -1002,18 +1004,20 @@ export namespace Components {
          */
         "value"?: number | null;
     }
+    /**
+     * Select is used to pick a value from a list of options.
+     */
     interface PopSelect {
         /**
           * If `true`, the element will be focused on page load.
          */
         "autoFocus"?: boolean;
         /**
-          * if `true`, adds border to textarea when `color` property is not set.
+          * if `true`, adds border to select when `color` property is not set.
           * @config 
           * @default false
          */
         "bordered"?: boolean;
-        "close": () => Promise<void>;
         /**
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"ghost"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
           * @config
@@ -1031,7 +1035,12 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Close the select dropdown
+          * @returns `true` if the select dropdown has been closed, otherwise `false`.
+         */
+        "dismiss": () => Promise<boolean>;
+        /**
+          * Text that is placed under the select and displayed when no error is detected.
          */
         "helperText"?: string;
         /**
@@ -1045,7 +1054,7 @@ export namespace Components {
          */
         "min"?: number;
         /**
-          * If `true`, the user can enter more than one value.
+          * If `true`, the user can select more than one value.
           * @config 
           * @default false
          */
@@ -1058,11 +1067,21 @@ export namespace Components {
           * Only apply when `multiple` property is used. Text that is placed under the select and displayed when the amount of selected option is below of the `min` property.
          */
         "notEnoughErrorText"?: string;
-        "open": (event?: any) => Promise<HTMLPopPopoverElement>;
         /**
           * Instructional text that shows before the input has a value.  This property replace the `<option disabled selected>`
          */
         "placeholder"?: string;
+        /**
+          * Open the select dropdown
+          * @returns `true` if the select dropdown has been opened, otherwise `false`.
+         */
+        "present": () => Promise<boolean>;
+        /**
+          * If `true`, the user cannot modify the value.
+          * @config 
+          * @default false
+         */
+        "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
           * @config 
@@ -1083,6 +1102,10 @@ export namespace Components {
           * @default "md"
          */
         "size"?: Size;
+        /**
+          * Toggle the select dropdown
+         */
+        "toggle": () => Promise<boolean>;
         /**
           * Only apply when `multiple` property is used. Text that is placed under the select and displayed when the amount of selected option is greater of the `max` property.
          */
@@ -1109,28 +1132,6 @@ export namespace Components {
           * The text value of the option.
          */
         "value"?: any | null;
-    }
-    interface PopSelectPopover {
-        /**
-          * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
-         */
-        "color"?: Color;
-        /**
-          * If `true`, the select accepts multiple values
-         */
-        "multiple"?: boolean;
-        /**
-          * An array of options for the popover
-         */
-        "options": SelectPopoverOption[];
-        /**
-          * If `true`, allow empty on radio options
-         */
-        "required"?: boolean;
-        /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-         */
-        "size"?: Size;
     }
     /**
      * Swap allows you to toggle the visibility of two elements.
@@ -1599,8 +1600,8 @@ declare global {
         new (): HTMLPopDrawerElement;
     };
     interface HTMLPopDropdownElementEventMap {
-        "didPresent": void;
-        "didDismiss": void;
+        "present": void;
+        "dismiss": void;
     }
     /**
      * Dropdown can open a menu or any other element when the trigger element is clicked.
@@ -1862,11 +1863,15 @@ declare global {
         new (): HTMLPopRangeElement;
     };
     interface HTMLPopSelectElementEventMap {
-        "popDismiss": void;
+        "present": void;
+        "dismiss": void;
         "popChange": SelectChangeEventDetail;
         "popFocus": void;
         "popBlur": void;
     }
+    /**
+     * Select is used to pick a value from a list of options.
+     */
     interface HTMLPopSelectElement extends Components.PopSelect, HTMLStencilElement {
         addEventListener<K extends keyof HTMLPopSelectElementEventMap>(type: K, listener: (this: HTMLPopSelectElement, ev: PopSelectCustomEvent<HTMLPopSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1886,12 +1891,6 @@ declare global {
     var HTMLPopSelectOptionElement: {
         prototype: HTMLPopSelectOptionElement;
         new (): HTMLPopSelectOptionElement;
-    };
-    interface HTMLPopSelectPopoverElement extends Components.PopSelectPopover, HTMLStencilElement {
-    }
-    var HTMLPopSelectPopoverElement: {
-        prototype: HTMLPopSelectPopoverElement;
-        new (): HTMLPopSelectPopoverElement;
     };
     interface HTMLPopSwapElementEventMap {
         "popSwap": SwapChangeEventDetail;
@@ -2000,7 +1999,6 @@ declare global {
         "pop-range": HTMLPopRangeElement;
         "pop-select": HTMLPopSelectElement;
         "pop-select-option": HTMLPopSelectOptionElement;
-        "pop-select-popover": HTMLPopSelectPopoverElement;
         "pop-swap": HTMLPopSwapElement;
         "pop-textarea": HTMLPopTextareaElement;
         "pop-toggle": HTMLPopToggleElement;
@@ -2336,11 +2334,11 @@ declare namespace LocalJSX {
         /**
           * Emitted after the modal has dismissed.
          */
-        "onDidDismiss"?: (event: PopDropdownCustomEvent<void>) => void;
+        "onDismiss"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
           * Emitted after the modal has presented.
          */
-        "onDidPresent"?: (event: PopDropdownCustomEvent<void>) => void;
+        "onPresent"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
           * Force the dropdown to be shown
           * @config 
@@ -3034,13 +3032,16 @@ declare namespace LocalJSX {
          */
         "value"?: number | null;
     }
+    /**
+     * Select is used to pick a value from a list of options.
+     */
     interface PopSelect {
         /**
           * If `true`, the element will be focused on page load.
          */
         "autoFocus"?: boolean;
         /**
-          * if `true`, adds border to textarea when `color` property is not set.
+          * if `true`, adds border to select when `color` property is not set.
           * @config 
           * @default false
          */
@@ -3062,7 +3063,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Text that is placed under the textarea and displayed when no error is detected.
+          * Text that is placed under the select and displayed when no error is detected.
          */
         "helperText"?: string;
         /**
@@ -3076,7 +3077,7 @@ declare namespace LocalJSX {
          */
         "min"?: number;
         /**
-          * If `true`, the user can enter more than one value.
+          * If `true`, the user can select more than one value.
           * @config 
           * @default false
          */
@@ -3090,6 +3091,10 @@ declare namespace LocalJSX {
          */
         "notEnoughErrorText"?: string;
         /**
+          * Emitted when the overlay is dismissed.
+         */
+        "onDismiss"?: (event: PopSelectCustomEvent<void>) => void;
+        /**
           * Emitted when the input loses focus.
          */
         "onPopBlur"?: (event: PopSelectCustomEvent<void>) => void;
@@ -3098,17 +3103,23 @@ declare namespace LocalJSX {
          */
         "onPopChange"?: (event: PopSelectCustomEvent<SelectChangeEventDetail>) => void;
         /**
-          * Emitted when the overlay is dismissed.
-         */
-        "onPopDismiss"?: (event: PopSelectCustomEvent<void>) => void;
-        /**
           * Emitted when the input has focus.
          */
         "onPopFocus"?: (event: PopSelectCustomEvent<void>) => void;
         /**
+          * Emitted when the overlay is presented.
+         */
+        "onPresent"?: (event: PopSelectCustomEvent<void>) => void;
+        /**
           * Instructional text that shows before the input has a value.  This property replace the `<option disabled selected>`
          */
         "placeholder"?: string;
+        /**
+          * If `true`, the user cannot modify the value.
+          * @config 
+          * @default false
+         */
+        "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
           * @config 
@@ -3151,28 +3162,6 @@ declare namespace LocalJSX {
           * The text value of the option.
          */
         "value"?: any | null;
-    }
-    interface PopSelectPopover {
-        /**
-          * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
-         */
-        "color"?: Color;
-        /**
-          * If `true`, the select accepts multiple values
-         */
-        "multiple"?: boolean;
-        /**
-          * An array of options for the popover
-         */
-        "options"?: SelectPopoverOption[];
-        /**
-          * If `true`, allow empty on radio options
-         */
-        "required"?: boolean;
-        /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-         */
-        "size"?: Size;
     }
     /**
      * Swap allows you to toggle the visibility of two elements.
@@ -3471,7 +3460,6 @@ declare namespace LocalJSX {
         "pop-range": PopRange;
         "pop-select": PopSelect;
         "pop-select-option": PopSelectOption;
-        "pop-select-popover": PopSelectPopover;
         "pop-swap": PopSwap;
         "pop-textarea": PopTextarea;
         "pop-toggle": PopToggle;
@@ -3587,9 +3575,11 @@ declare module "@stencil/core" {
              * Range slider is used to select a value by sliding a handle.
              */
             "pop-range": LocalJSX.PopRange & JSXBase.HTMLAttributes<HTMLPopRangeElement>;
+            /**
+             * Select is used to pick a value from a list of options.
+             */
             "pop-select": LocalJSX.PopSelect & JSXBase.HTMLAttributes<HTMLPopSelectElement>;
             "pop-select-option": LocalJSX.PopSelectOption & JSXBase.HTMLAttributes<HTMLPopSelectOptionElement>;
-            "pop-select-popover": LocalJSX.PopSelectPopover & JSXBase.HTMLAttributes<HTMLPopSelectPopoverElement>;
             /**
              * Swap allows you to toggle the visibility of two elements.
              */

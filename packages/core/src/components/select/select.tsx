@@ -5,6 +5,7 @@ import {
   Element,
   Event,
   type EventEmitter,
+  Fragment,
   Host,
   Method,
   Prop,
@@ -12,18 +13,26 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { ENTER, SPACE } from 'key-definitions';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
+import { ClickOutside } from '#utils/click-outside';
 import { compareOptions, isOptionSelected } from '#utils/forms';
 import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
-import { popoverController } from '#utils/overlay';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
-import type { SelectPopoverOption } from '../select-popover/select-popover.type';
 import type { SelectChangeEventDetail, SelectColor, SelectCompareFn } from './select.type';
 
 let selectIds = 0;
 
+/**
+ * Select is used to pick a value from a list of options.
+ *
+ * @slot - Slot for the `pop-select-option`
+ * @slot label - Slot for the content of the label
+ *
+ * @part label - The native HTML label element that wrap the text
+ */
 @Component({
   tag: 'pop-select',
   styleUrl: 'select.scss',
@@ -35,13 +44,13 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private inheritedAttributes: Attributes;
 
   private initialValues: any | any[] | null;
-  private popoverRef: HTMLPopPopoverElement;
-  private triggerRef: HTMLButtonElement;
+  private dropdownRef?: HTMLDetailsElement;
+  private dropdownObserver: MutationObserver;
 
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
-  @State() isExpanded = false;
+  @State() open = false;
 
   @State() errorText: string;
 
@@ -82,7 +91,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   }
 
   /**
-   * If `true`, the user can enter more than one value.
+   * If `true`, the user can select more than one value.
    *
    * @config
    * @default false
@@ -114,6 +123,14 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
+   * If `true`, the user cannot modify the value.
+   *
+   * @config
+   * @default false
+   */
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
+
+  /**
    * If `true`, the user cannot interact with the element.
    *
    * @config
@@ -127,7 +144,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop({ reflect: true, mutable: true }) autoFocus?: boolean = false;
 
   /**
-   * if `true`, adds border to textarea when `color` property is not set.
+   * if `true`, adds border to select when `color` property is not set.
    *
    * @config
    * @default false
@@ -158,7 +175,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop() selectedText?: string;
 
   /**
-   * Text that is placed under the textarea and displayed when no error is detected.
+   * Text that is placed under the select and displayed when no error is detected.
    */
   @Prop() helperText?: string;
 
@@ -185,9 +202,14 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop({ mutable: true }) compare?: SelectCompareFn | string | null;
 
   /**
+   * Emitted when the overlay is presented.
+   */
+  @Event({ eventName: 'present' }) presentEvent: EventEmitter<void>;
+
+  /**
    * Emitted when the overlay is dismissed.
    */
-  @Event() popDismiss: EventEmitter<void>;
+  @Event({ eventName: 'dismiss' }) dismissEvent: EventEmitter<void>;
 
   /**
    * The `popChange` event is fired when the user modifies the select's value.
@@ -220,6 +242,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     }
 
     this.internals.setFormValue(data, data);
+
+    this.dropdownObserver = new MutationObserver(() => {
+      this.open = this.dropdownRef.open;
+    });
   }
 
   componentWillLoad(): void {
@@ -228,6 +254,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     componentConfig.apply(this, 'pop-select', {
       multiple: false,
       required: false,
+      readonly: false,
       disabled: false,
       bordered: false,
       size: config.get('defaultSize', 'md'),
@@ -236,126 +263,108 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     this.initialValues = this.value;
   }
 
+  componentDidLoad(): void {
+    if (this.dropdownRef) {
+      this.dropdownObserver.observe(this.dropdownRef, {
+        attributes: true,
+        attributeFilter: ['open'],
+      });
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.dropdownObserver.disconnect();
+  }
+
   /**
    * Sets focus on the native `select` in `pop-select`. Use this method instead of the global
    * `select.focus()`.
    */
   @Method()
   async setFocus(): Promise<void> {
-    this.triggerRef.focus();
+    this.dropdownRef.querySelector('summary').focus();
   }
 
+  /**
+   * Open the select dropdown
+   *
+   * @returns `true` if the select dropdown has been opened, otherwise `false`.
+   */
   @Method()
-  async open(event?: any) {
-    if (this.disabled || this.isExpanded || this.popoverRef) return;
-
-    this.isExpanded = true;
-    const selectedValue = this.value;
-
-    const popover = await popoverController.create({
-      component: 'pop-select-popover',
-      componentProps: {
-        value: this.values,
-        required: this.required,
-        multiple: this.multiple,
-        color: this.color,
-        size: this.size,
-        options: this.options.map(option => {
-          const value = getOptionValue(option);
-          const clazz = Array.from(option.classList).filter(cls => cls !== 'hydrated');
-
-          return {
-            text: option.textContent || '',
-            value: value,
-            checked: isOptionSelected(selectedValue, value, this.compare),
-            disabled: option.disabled,
-            color: option.color,
-            size: option.size,
-            cssClass: [OPTION_CLASS, ...clazz],
-            handler: value => {
-              this.value = value;
-              if (!this.multiple) {
-                this.close();
-              }
-            },
-          } as SelectPopoverOption;
-        }),
-      },
-      size: this.size,
-      dismissOnSelect: !this.multiple,
-      animated: true,
-      backdropDismiss: true,
-      showBackdrop: false,
-      keyboardClose: true,
-      reference: event ? 'event' : 'trigger',
-      alignment: 'center',
-      event: event,
-    });
-    this.popoverRef = popover;
-
-    popover.addEventListener('didDismiss', () => {
-      this.popoverRef = undefined;
-      this.isExpanded = false;
-      this.popDismiss.emit();
-      this.setFocus();
-    });
-
-    await popover.present();
-
-    const indexOfSelected = this.options.map(o => o.value).indexOf(this.value);
-    if (indexOfSelected === -1) {
-      /**
-       * If no value is set then focus the first enabled option.
-       */
-      const firstEnabledOption = popover.querySelector<HTMLElement>(
-        'pop-radio:not([disabled]), pop-checkbox:not([disabled])',
-      );
-      if (firstEnabledOption) {
-        firstEnabledOption.closest('pop-item')?.focus();
-
-        /**
-         * Focus the option for the same reason as we do above.
-         */
-        firstEnabledOption.focus();
-      }
-    } else {
-      const selectedItem = popover.querySelector<HTMLElement>(
-        `.select-interface-option:nth-child(${indexOfSelected + 1})`,
-      );
-      if (selectedItem) {
-        selectedItem.focus();
-
-        const interactiveEl = selectedItem.querySelector<HTMLElement>('pop-radio, pop-checkbox');
-        if (interactiveEl) {
-          interactiveEl.focus();
-        }
-      }
+  async present(): Promise<boolean> {
+    if (this.disabled || this.open) {
+      return false;
     }
 
-    return popover;
+    this.open = true;
+    this.presentEvent.emit();
+    return true;
   }
 
+  /**
+   * Toggle the select dropdown
+   */
   @Method()
-  async close(): Promise<void> {
-    if (this.disabled || !this.isExpanded) return;
-
-    this.isExpanded = false;
-    this.popoverRef.dismiss();
+  toggle(): Promise<boolean> {
+    if (this.open) {
+      return this.dismiss();
+    }
+    return this.present();
   }
 
-  private onFocus = () => {
+  /**
+   * Close the select dropdown
+   *
+   * @returns `true` if the select dropdown has been closed, otherwise `false`.
+   */
+  @Method()
+  async dismiss(): Promise<boolean> {
+    if (this.disabled || !this.open) {
+      return false;
+    }
+
+    this.open = false;
+    await this.setFocus();
+    this.dismissEvent.emit();
+
+    return true;
+  }
+
+  @ClickOutside()
+  onClickOutside(): void {
+    if (!this.open) return;
+
+    this.dismiss();
+  }
+
+  private onClick = (ev: MouseEvent): void => {
+    ev.preventDefault();
+    if (this.disabled || this.readonly) {
+      return;
+    }
+    this.toggle();
+  };
+
+  private onHover = (): void => {
     this.popFocus.emit();
   };
 
-  private onBlur = () => {
+  private onBlur = (): void => {
     this.popBlur.emit();
   };
 
-  private onClick = async (ev: PointerEvent) => {
-    await this.open({
-      ...ev,
-      target: this.triggerRef,
-    });
+  private onKeyPress = (...keys: string[]) => {
+    return async (ev: KeyboardEvent): Promise<void> => {
+      ev.preventDefault();
+      if (!keys.includes(ev.key)) {
+        return;
+      }
+      if (this.open) {
+        await this.dismiss();
+      } else {
+        await this.present();
+      }
+    };
   };
 
   private get values(): any[] {
@@ -363,10 +372,6 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     if (!value) return [];
 
     return Array.isArray(value) ? value : [value];
-  }
-
-  private get options() {
-    return Array.from(this.host.querySelectorAll('pop-select-option'));
   }
 
   private get text(): string {
@@ -455,22 +460,71 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     );
   }
 
-  private renderListbox() {
-    const { disabled, isExpanded, inputId } = this;
+  private get options() {
+    return Array.from(this.host.querySelectorAll('pop-select-option'));
+  }
+
+  private renderRadioOptions() {
+    const { required, color, size } = this;
 
     return (
-      <button
-        aria-expanded={`${isExpanded}`}
-        aria-haspopup="dialog"
-        aria-label={this.ariaLabel}
-        disabled={disabled}
-        id={inputId}
-        onBlur={this.onBlur}
-        onClick={this.onClick}
-        onFocus={this.onFocus}
-        ref={ref => (this.triggerRef = ref)}
-        type="button"
-      />
+      <pop-radio-group
+        allowEmpty={!required}
+        color={color === 'ghost' ? undefined : color}
+        disabled={this.disabled}
+        onPopChange={async ev => {
+          this.value = ev.detail.value;
+          await this.dismiss();
+        }}
+        size={size}
+        value={this.value}
+      >
+        {this.options.map(option => (
+          <pop-item>
+            <pop-radio
+              checked={isOptionSelected(this.value, getOptionValue(option), this.compare)}
+              disabled={option.disabled}
+              size={size}
+              value={getOptionValue(option)}
+            >
+              {option.textContent}
+            </pop-radio>
+          </pop-item>
+        ))}
+      </pop-radio-group>
+    );
+  }
+
+  private renderCheckboxOptions() {
+    const { color, size } = this;
+
+    return (
+      <Fragment>
+        {this.options.map(option => (
+          <pop-item>
+            <pop-checkbox
+              checked={isOptionSelected(this.value, getOptionValue(option), this.compare)}
+              color={color === 'ghost' ? undefined : color}
+              disabled={option.disabled ?? this.disabled}
+              onPopChange={async () => {
+                this.errorText = this.errorTextValue;
+                if (this.errorText) {
+                  // No emit if the select has error.
+                  return;
+                }
+
+                this.value = Array.from(this.dropdownRef.querySelectorAll('pop-checkbox'))
+                  .filter(cb => cb.checked)
+                  .map(cb => cb.value);
+              }}
+              size={size}
+              value={getOptionValue(option)}
+            >
+              {option.textContent}
+            </pop-checkbox>
+          </pop-item>
+        ))}
+      </Fragment>
     );
   }
 
@@ -483,12 +537,16 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     return (
       <Host
+        aria-disabled={this.disabled ? 'true' : 'false'}
+        aria-expanded={this.open ? 'true' : 'false'}
         aria-hidden={this.disabled ? 'true' : null}
+        aria-label={this.ariaLabel}
         aria-labelledby={inputId}
         class={{
-          'select-expanded': this.isExpanded,
+          'select-expanded': this.open,
           'join-item': hostContext(host, 'pop-join'),
         }}
+        role={this.multiple ? 'listbox' : 'radiogroup'}
       >
         <div class="label">
           <label
@@ -499,18 +557,28 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           </label>
         </div>
 
-        <div class="select-wrapper">
-          <slot name="start" />
-
-          <div class="select-wrapper-inner">
+        <details
+          class="dropdown"
+          onMouseEnter={this.onHover}
+          onMouseLeave={this.onBlur}
+          open={this.open}
+          ref={(el: HTMLDetailsElement) => (this.dropdownRef = el)}
+        >
+          <summary
+            class="dropdown-trigger"
+            onClick={this.onClick}
+            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key)}
+            tabindex={this.disabled ? '-1' : null}
+          >
+            <slot name="start" />
             {this.renderSelectText()}
-            {this.renderListbox()}
+            <slot name="end" />
+            <ChevronDown />
+          </summary>
+          <div class="dropdown-content">
+            <pop-list>{this.multiple ? this.renderCheckboxOptions() : this.renderRadioOptions()}</pop-list>
           </div>
-
-          <slot name="end" />
-
-          <ChevronDown />
-        </div>
+        </details>
 
         <Show when={hasBottomText}>
           <div class="text-wrapper">
@@ -531,5 +599,3 @@ const getOptionValue = (el: HTMLPopSelectOptionElement) => {
   const value = el.value;
   return value === undefined ? el.textContent || '' : value;
 };
-
-const OPTION_CLASS = 'select-interface-option';
