@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select | Poppy-ui</title>
+  <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <link rel="stylesheet" href="/css/themes/light.always.css">
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+  <style>
+    main {
+      width: 100vw;
+      max-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      overflow: auto;
+
+
+      background-color: var(--base-300);
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .35rem;
+    }
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Select - Basic</h2>
+      <div>
+        <pop-select placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+    <section>
+      <h2>Select - Outlined</h2>
+      <div>
+        <pop-select bordered placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select bordered color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+    <section>
+      <h2>Select - Readonly</h2>
+      <div>
+        <pop-select readonly placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+    <section>
+      <h2>Select - Readonly Outlined</h2>
+      <div>
+        <pop-select readonly bordered placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select readonly bordered color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+    <section>
+      <h2>Select - Disabled</h2>
+      <div>
+        <pop-select disabled placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+    <section>
+      <h2>Select - Disabled Outlined</h2>
+      <div>
+        <pop-select disabled bordered placeholder="placeholder">
+          <span slot="label">Default</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="primary" placeholder="placeholder">
+          <span slot="label">Primary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="secondary" placeholder="placeholder">
+          <span slot="label">Secondary</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="accent" placeholder="placeholder">
+          <span slot="label">Accent</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="info" placeholder="placeholder">
+          <span slot="label">Info</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="success" placeholder="placeholder">
+          <span slot="label">Success</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="warning" placeholder="placeholder">
+          <span slot="label">Warning</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="error" placeholder="placeholder">
+          <span slot="label">Error</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select disabled bordered color="ghost" placeholder="placeholder">
+          <span slot="label">Ghost</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+
+    <section>
+      <h2>Select - Size</h2>
+      <div>
+        <pop-select placeholder="placeholder">
+          <span slot="label">No Size</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select size="xs" placeholder="placeholder">
+          <span slot="label">XS</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select size="sm" placeholder="placeholder">
+          <span slot="label">SM</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select size="md" placeholder="placeholder">
+          <span slot="label">MD</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+        <pop-select size="lg" placeholder="placeholder">
+          <span slot="label">LG</span>
+          <pop-select-option>Option 1</pop-select-option>
+        </pop-select>
+      </div>
+    </section>
+
+    <section>
+      <h2>Select - Join</h2>
+      <div>
+        <pop-join>
+          <pop-select placeholder="placeholder">
+            <span slot="label">No Size</span>
+            <pop-select-option>Option 1</pop-select-option>
+          </pop-select>
+          <pop-select placeholder="placeholder">
+            <span slot="label">No Size</span>
+            <pop-select-option>Option 1</pop-select-option>
+          </pop-select>
+          <pop-select placeholder="placeholder">
+            <span slot="label">No Size</span>
+            <pop-select-option>Option 1</pop-select-option>
+          </pop-select>
+        </pop-join>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

@@ -31,12 +31,12 @@ import type { DropdownAlign, DropdownSide } from './dropdown.type';
 @Component({
   tag: 'pop-dropdown',
   styleUrl: 'dropdown.scss',
-  shadow: {
-    delegatesFocus: false,
-  },
+  shadow: true,
 })
 export class Dropdown implements ComponentInterface, OverlayInterface {
   private dropdownRef: HTMLDetailsElement;
+  private dropdownObserver: MutationObserver;
+
   private debounceTimer: NodeJS.Timeout;
 
   @Element() host: HTMLElement & OverlayInterface;
@@ -107,12 +107,12 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   /**
    * Emitted after the modal has presented.
    */
-  @Event() didPresent: EventEmitter<void>;
+  @Event({ eventName: 'present' }) presentEvent: EventEmitter<void>;
 
   /**
    * Emitted after the modal has dismissed.
    */
-  @Event() didDismiss: EventEmitter<void>;
+  @Event({ eventName: 'dismiss' }) dismissEvent: EventEmitter<void>;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-dropdown', {
@@ -126,10 +126,17 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   }
 
   componentDidRender(): void {
-    const { open } = this;
-    if (open) {
-      this.dropdownRef.open = true;
-    }
+    this.dropdownObserver = new MutationObserver(() => {
+      this.open = this.dropdownRef.open;
+    });
+    this.dropdownObserver.observe(this.dropdownRef, {
+      attributes: true,
+      attributeFilter: ['open'],
+    });
+  }
+
+  disconnectedCallback(): void {
+    this.dropdownObserver.disconnect();
   }
 
   /**
@@ -143,7 +150,19 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     if (open) return false;
 
     this.open = true;
+    this.presentEvent.emit();
     return true;
+  }
+
+  /**
+   * Toggle the select dropdown
+   */
+  @Method()
+  toggle(): Promise<boolean> {
+    if (this.open) {
+      return this.dismiss();
+    }
+    return this.present();
   }
 
   /**
@@ -152,11 +171,12 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    * @returns {Promise<boolean>} return `true` if the dropdown has been closed, otherwise `false`.
    */
   @Method()
-  async dismiss(): Promise<boolean> {
+  async dismiss(data?: any): Promise<boolean> {
     const { open } = this;
     if (!open) return false;
 
     this.open = false;
+    this.dismissEvent.emit(data);
     return true;
   }
 
@@ -221,6 +241,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
           class="dropdown"
           onMouseEnter={this.onHover}
           onMouseLeave={this.onBlur}
+          open={this.open}
           part="dropdown"
           ref={(el: HTMLDetailsElement) => (this.dropdownRef = el)}
         >

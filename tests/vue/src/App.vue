@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PopButton } from '@poppy-ui/vue';
+import { PopButton, PopSelect, PopSelectOption } from '@poppy-ui/vue';
 import HelloWorld from './components/HelloWorld.vue';
 </script>
 
@@ -37,6 +37,13 @@ import HelloWorld from './components/HelloWorld.vue';
     >
       button poppy
     </PopButton>
+    <PopSelect placeholder="placeholder">
+      <span slot="label">label</span>
+      <PopSelectOption>option 1</PopSelectOption>
+      <PopSelectOption>option 2</PopSelectOption>
+      <PopSelectOption>option 3</PopSelectOption>
+      <PopSelectOption>option 4</PopSelectOption>
+    </PopSelect>
   </form>
   <HelloWorld msg="Vite + Vue" />
 </template>
