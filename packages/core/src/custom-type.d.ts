@@ -22,7 +22,6 @@ export type * from './components/modal/modal.type';
 export type * from './components/popover/popover.type';
 export type * from './components/radio-group/radio-group.type';
 export type * from './components/range/range.type';
-export type * from './components/select-popover/select-popover.type';
 export type * from './components/select/select.type';
 export type * from './components/swap/swap.type';
 export type * from './components/textarea/textarea.type';

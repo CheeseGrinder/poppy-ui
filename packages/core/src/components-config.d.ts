@@ -654,7 +654,7 @@ export namespace Configuration {
     };
     'pop-select'?: {
       /**
-       * If `true`, the user can enter more than one value.
+       * If `true`, the user can select more than one value.
        * @default false
        */
       multiple?: boolean;
@@ -679,7 +679,7 @@ export namespace Configuration {
        */
       disabled?: boolean;
       /**
-       * if `true`, adds border to textarea when `color` property is not set.
+       * if `true`, adds border to select when `color` property is not set.
        * @default false
        */
       bordered?: boolean;

@@ -22,17 +22,23 @@ Dropdown can open a menu or any other element when the trigger element is clicke
 
 ## Events
 
-| Event        | Description                            | Type                |
-| ------------ | -------------------------------------- | ------------------- |
-| `didDismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
-| `didPresent` | Emitted after the modal has presented. | `CustomEvent<void>` |
+| Event     | Description                            | Type                |
+| --------- | -------------------------------------- | ------------------- |
+| `dismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
+| `present` | Emitted after the modal has presented. | `CustomEvent<void>` |
 
 
 ## Methods
 
-### `dismiss() => Promise<boolean>`
+### `dismiss(data?: any) => Promise<boolean>`
 
 Close the dropdown.
+
+#### Parameters
+
+| Name   | Type  | Description |
+| ------ | ----- | ----------- |
+| `data` | `any` |             |
 
 #### Returns
 
@@ -49,6 +55,16 @@ Open the dropdown.
 Type: `Promise<boolean>`
 
 return `true` if the dropdown has been opened, otherwise `false`.
+
+### `toggle() => Promise<boolean>`
+
+Toggle the select dropdown
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+
 
 
 ## Slots

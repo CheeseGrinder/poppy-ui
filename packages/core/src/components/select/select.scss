@@ -15,12 +15,8 @@
 
 $minWidth: 12rem;
 
-// @include join-item.item(".select-wrapper");
-@include join-item.item(".select-wrapper", ".select-wrapper button");
-
 :host {
-  --opacity: 1;
-  --background: #{theme.use_color("base.100", var(--opacity))};
+  --background: #{theme.use_color("base.100", var(--opacity, 1))};
   --border-color: #{theme.use_color("base.content", 0.2)};
   --border-radius: #{theme.use_radius(md)};
   --color: #{theme.use_color("base.content")};
@@ -31,66 +27,75 @@ $minWidth: 12rem;
   display: inline-flex;
   flex-direction: column;
   min-width: $minWidth;
-
-  .select-wrapper {
-    display: flex;
+  .dropdown {
+    display: grid;
     position: relative;
-    align-items: center;
+    width: 100%;
 
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    background-color: var(--background);
+    &-trigger {
+      display: flex;
+      position: relative;
+      align-items: center;
+      overflow: hidden;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: var(--border-radius);
+      border-color: var(--border-color, #{theme.use_color("base.content", 0.2)});
+      background-color: var(--background);
 
-    &:has(button:focus-visible) {
-      outline-color: var(--border-color);
-      outline-style: solid;
-      outline-width: 2px;
-      outline-offset: 2px;
+      cursor: pointer;
+
+      &:focus-visible {
+        outline-color: var(--outline-color, var(--border-color));
+        outline-style: solid;
+        outline-width: 2px;
+        outline-offset: 2px;
+      }
+
+      > div {
+        user-select: none;
+      }
+    }
+
+    &-content {
+      position: absolute;
+
+      min-height: 2rem;
+      width: 100%;
+
+      border: 1px solid theme.use_color("base.content", 0.2);
+      border-radius: var(--border-radius);
+      background-color: theme.use_color('base.100');
+      box-shadow: theme.use_shadow(md);
+
+      color: var(--color);
+      animation-duration: 200ms;
+
+      animation-name: present;
     }
   }
 
   .select-placeholder {
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   .text-wrapper {
     transition: opacity 150ms ease 0ms;
   }
 
-  button {
-    z-index: 1;
-    position: absolute;
-
-    width: 100%;
-    inset: 0;
-    border-width: 1px;
-
-    border-style: solid;
-    border-radius: var(--border-radius);
-    border-color: var(--border-color, transparent);
-    outline: none;
-
-    background-color: transparent;
-    color: var(--color);
-
-    font-family: var(--font);
-
-    user-select: none;
-  }
-
   svg {
     margin-inline-start: auto;
     transition: transform 150ms ease 0ms;
   }
+
+  pop-list {
+    width: auto;
+  }
 }
 
 :host(.select-expanded) {
-  .select-wrapper {
-    box-shadow: use_shadow(md);
-
-    svg {
-      transform: rotateX(180deg);
-    }
+  svg {
+    transform: rotateX(180deg);
   }
 }
 
@@ -111,28 +116,34 @@ $minWidth: 12rem;
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host([color="ghost"]) {
-  --opacity: 0.05;
+  // --opacity: 0.05;
+  --border-color: transparent;
+  --outline-color: #{theme.use_color("base.content", 0.2)};
+  --background: #{theme.use_color("base.100", var(--opacity))};
 
-  .select-wrapper:has(button:focus-visible) {
+  .dropdown-trigger:not(:focus-visible) {
+    // --background: #{theme.use_color("base.100")};
+    --opacity: 0.05;
+  }
+  .dropdown:focus-visible {
+    // --background: #{theme.use_color("base.100")};
     --opacity: 1;
   }
 }
 
 :host(.select-expanded[color="ghost"]) {
-  .select-wrapper {
-    --opacity: 1;
-  }
+  --opacity: 1;
 }
 
 // Size
-:host([size="xs"]) .select-wrapper {
+:host([size="xs"]) .dropdown-trigger {
   height: 1.5rem;
   padding-inline-start: 0.65rem;
   padding-inline-end: 0.5rem;
   font-size: 0.75rem;
   line-height: 1.625;
 }
-:host([size="sm"]) .select-wrapper {
+:host([size="sm"]) .dropdown-trigger {
   height: 2rem;
   padding-inline-start: 0.75rem;
   padding-inline-end: 0.85rem;
@@ -141,7 +152,7 @@ $minWidth: 12rem;
 }
 :host([size="md"]),
 :host(:not([size])) {
-  .select-wrapper {
+  .dropdown-trigger {
     height: 3rem;
     padding-inline-start: 1rem;
     padding-inline-end: 1.15rem;
@@ -149,7 +160,7 @@ $minWidth: 12rem;
     line-height: 2;
   }
 }
-:host([size="lg"]) .select-wrapper {
+:host([size="lg"]) .dropdown-trigger {
   height: 4rem;
   padding-inline-start: 1.15rem;
   padding-inline-end: 1.35rem;
@@ -157,7 +168,7 @@ $minWidth: 12rem;
   line-height: 2;
 }
 
-:host([disabled]) button {
+:host([disabled]) .dropdown-trigger {
   $base: theme.use_color("base.200");
   $text: theme.use_color("base.content", 0.2);
 
