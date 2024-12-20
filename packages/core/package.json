@@ -71,7 +71,7 @@
     "@playwright/test": "^1.49.1",
     "@stencil/playwright": "^0.2.1",
     "@stencil/sass": "^3.0.12",
-    "@stencil/vue-output-target": "^0.9.1",
+    "@stencil/vue-output-target": "0.8.9",
     "@types/jest": "^29.5.14",
     "@types/node": "~22.10.2",
     "clean-css-cli": "^5.6.3",

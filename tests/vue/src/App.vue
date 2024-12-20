@@ -1,6 +1,16 @@
 <script setup lang="ts">
-import { PopButton, PopSelect, PopSelectOption } from '@poppy-ui/vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { PopButton, PopInput, PopSelect, PopSelectOption } from '@poppy-ui/vue';
+import { reactive } from 'vue';
+
+const fields = reactive({
+  name: '',
+  choice: 'option 1',
+});
+
+function submit(ev: Event) {
+  const data = new FormData(ev.target as HTMLFormElement);
+  console.log('submit', Object.fromEntries(data));
+}
 </script>
 
 <template>
@@ -26,9 +36,10 @@ import HelloWorld from './components/HelloWorld.vue';
       >
     </a>
   </div>
+
   <form
     id="test"
-    @submit.prevent="() => console.log('submit')"
+    @submit.prevent="submit"
   >
     <PopButton
       type="submit"
@@ -37,15 +48,18 @@ import HelloWorld from './components/HelloWorld.vue';
     >
       button poppy
     </PopButton>
-    <PopSelect placeholder="placeholder">
+    <PopSelect v-model="fields.choice" name="choice" placeholder="placeholder">
       <span slot="label">label</span>
       <PopSelectOption>option 1</PopSelectOption>
       <PopSelectOption>option 2</PopSelectOption>
       <PopSelectOption>option 3</PopSelectOption>
       <PopSelectOption>option 4</PopSelectOption>
     </PopSelect>
+
+    <PopInput v-model="fields.name" name="name" placeholder="placeholder">
+      label
+    </PopInput>
   </form>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>

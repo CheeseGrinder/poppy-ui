@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@poppy-ui/vue": "0.3.7",
-    "vue": "~3.5.11",
+    "@poppy-ui/vue": "0.3.8",
+    "vue": "3.5.11",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
@@ -18,5 +18,8 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vue-tsc": "^2.1.6"
+  },
+  "overrides": {
+    "@poppy-ui/core": "0.3.8"
   }
 }

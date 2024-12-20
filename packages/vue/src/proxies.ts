@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* tslint:disable */
 /* auto-generated vue proxies */
-import { defineContainer } from '@stencil/vue-output-target/runtime';
+import { defineContainer } from './vue-component-lib/utils';
 
 import type { JSX } from '@poppy-ui/core/components';
 
@@ -58,9 +58,6 @@ export const PopAccordionGroup = /*@__PURE__*/ defineContainer<JSX.PopAccordionG
   'active',
   'popChange',
   'popActiveChange'
-], [
-  'popChange',
-  'popActiveChange'
 ],
 'active', 'pop-change');
 
@@ -88,9 +85,6 @@ export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-butto
   'shape',
   'expand',
   'active',
-  'popFocus',
-  'popBlur'
-], [
   'popFocus',
   'popBlur'
 ]);
@@ -124,10 +118,6 @@ export const PopCheckbox = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.Po
   'popChange',
   'popFocus',
   'popBlur'
-], [
-  'popChange',
-  'popFocus',
-  'popBlur'
 ],
 'checked', 'pop-change');
 
@@ -146,9 +136,6 @@ export const PopDrawer = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawe
   'open',
   'popDidPresent',
   'popDidDismiss'
-], [
-  'popDidPresent',
-  'popDidDismiss'
 ]);
 
 
@@ -161,19 +148,12 @@ export const PopDropdown = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-d
   'showBackdrop',
   'present',
   'dismiss'
-], [
-  'present',
-  'dismiss'
 ]);
 
 
 export const PopImg = /*@__PURE__*/ defineContainer<JSX.PopImg>('pop-img', definePopImg, [
   'src',
   'alt',
-  'popWillLoad',
-  'popDidLoad',
-  'popError'
-], [
   'popWillLoad',
   'popDidLoad',
   'popError'
@@ -219,11 +199,6 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput
   'popInput',
   'popFocus',
   'popBlur'
-], [
-  'popChange',
-  'popInput',
-  'popFocus',
-  'popBlur'
 ],
 'value', 'pop-input');
 
@@ -241,10 +216,6 @@ export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop
   'size',
   'helperText',
   'errorText',
-  'popChange',
-  'popFocus',
-  'popBlur'
-], [
   'popChange',
   'popFocus',
   'popBlur'
@@ -292,9 +263,6 @@ export const PopModal = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal',
   'open',
   'present',
   'dismiss'
-], [
-  'present',
-  'dismiss'
 ]);
 
 
@@ -311,11 +279,6 @@ export const PopPopover = /*@__PURE__*/ defineContainer<JSX.PopPopover>('pop-pop
   'triggerAction',
   'component',
   'componentProps',
-  'willPresent',
-  'didPresent',
-  'willDismiss',
-  'didDismiss'
-], [
   'willPresent',
   'didPresent',
   'willDismiss',
@@ -341,9 +304,6 @@ export const PopRadio = /*@__PURE__*/ defineContainer<JSX.PopRadio, JSX.PopRadio
   'size',
   'popFocus',
   'popBlur'
-], [
-  'popFocus',
-  'popBlur'
 ],
 'value', 'pop-change');
 
@@ -357,9 +317,6 @@ export const PopRadioGroup = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JS
   'compare',
   'color',
   'size',
-  'popChange',
-  'popValueChange'
-], [
   'popChange',
   'popValueChange'
 ],
@@ -378,10 +335,6 @@ export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange, JSX.PopRange
   'color',
   'size',
   'debounce',
-  'popChange',
-  'popFocus',
-  'popBlur'
-], [
   'popChange',
   'popFocus',
   'popBlur'
@@ -413,12 +366,6 @@ export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSel
   'popChange',
   'popFocus',
   'popBlur'
-], [
-  'present',
-  'dismiss',
-  'popChange',
-  'popFocus',
-  'popBlur'
 ],
 'value', 'pop-change');
 
@@ -434,8 +381,6 @@ export const PopSelectOption = /*@__PURE__*/ defineContainer<JSX.PopSelectOption
 export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["active"]>('pop-swap', definePopSwap, [
   'type',
   'active',
-  'popSwap'
-], [
   'popSwap'
 ],
 'active', 'pop-change');
@@ -470,11 +415,6 @@ export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea, JSX.Po
   'popInput',
   'popFocus',
   'popBlur'
-], [
-  'popChange',
-  'popInput',
-  'popFocus',
-  'popBlur'
 ],
 'value', 'pop-input');
 
@@ -489,10 +429,6 @@ export const PopToggle = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopTog
   'disabled',
   'color',
   'size',
-  'popChange',
-  'popFocus',
-  'popBlur'
-], [
   'popChange',
   'popFocus',
   'popBlur'
