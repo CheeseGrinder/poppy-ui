@@ -356,7 +356,6 @@ export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSel
   'bordered',
   'color',
   'size',
-  'selectedText',
   'helperText',
   'notEnoughErrorText',
   'tooManyErrorText',

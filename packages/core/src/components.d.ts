@@ -1089,10 +1089,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * The text to display instead of the selected option's value.
-         */
-        "selectedText"?: string;
-        /**
           * Sets focus on the native `select` in `pop-select`. Use this method instead of the global `select.focus()`.
          */
         "setFocus": () => Promise<void>;
@@ -3126,10 +3122,6 @@ declare namespace LocalJSX {
           * @default false
          */
         "required"?: boolean;
-        /**
-          * The text to display instead of the selected option's value.
-         */
-        "selectedText"?: string;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
           * @config 

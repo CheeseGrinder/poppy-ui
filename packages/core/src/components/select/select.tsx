@@ -13,7 +13,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { ENTER, SPACE } from 'key-definitions';
+import { ENTER, ESC, SPACE } from 'key-definitions';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { ClickOutside } from '#utils/click-outside';
@@ -170,26 +170,21 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
-   * The text to display instead of the selected option's value.
-   */
-  @Prop() selectedText?: string;
-
-  /**
    * Text that is placed under the select and displayed when no error is detected.
    */
-  @Prop() helperText?: string;
+  @Prop() helperText?: string = '';
 
   /**
    * Only apply when `multiple` property is used.
    * Text that is placed under the select and displayed when the amount of selected option is below of the `min` property.
    */
-  @Prop() notEnoughErrorText?: string;
+  @Prop() notEnoughErrorText?: string = '';
 
   /**
    * Only apply when `multiple` property is used.
    * Text that is placed under the select and displayed when the amount of selected option is greater of the `max` property.
    */
-  @Prop() tooManyErrorText?: string;
+  @Prop() tooManyErrorText?: string = '';
 
   /**
    * This property allows developers to specify a custom function
@@ -353,43 +348,51 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     this.popBlur.emit();
   };
 
+  private onFocusOut = (ev: FocusEvent): void => {
+    if (ev.relatedTarget === null) {
+      return;
+    }
+
+    const relatedTarget = ev.relatedTarget as HTMLPopRadioElement | HTMLPopCheckboxElement;
+    const dropdown = relatedTarget.closest('details');
+    if (dropdown?.id === this.inputId) {
+      return;
+    }
+
+    // we dont use this.dismiss() because it will focus the summary
+    this.open = false;
+    this.dismissEvent.emit();
+  };
+
   private onKeyPress = (...keys: string[]) => {
-    return async (ev: KeyboardEvent): Promise<void> => {
+    return async (ev: KeyboardEvent) => {
       ev.preventDefault();
       if (!keys.includes(ev.key)) {
         return;
       }
-      if (this.open) {
-        await this.dismiss();
-      } else {
-        await this.present();
+      if (ev.key === ESC.key) {
+        return this.dismiss();
       }
+      return this.toggle();
     };
   };
 
   private get values(): any[] {
     const { value } = this;
-    if (!value) return [];
+    if (value == null) return [];
 
     return Array.isArray(value) ? value : [value];
   }
 
   private get text(): string {
-    const selectedText = this.selectedText;
-    if (selectedText) {
-      return selectedText;
-    }
-
     const values = this.values;
-
     if (values.length === 0) {
       return '';
     }
     return values
       .map(value => {
         const selected = this.options.find(option => {
-          const optionValue = option.value ?? (option.textContent || '');
-          return compareOptions(value, optionValue, this.compare);
+          return compareOptions(value, getOptionValue(option), this.compare);
         });
         return selected ? selected.textContent : null;
       })
@@ -397,9 +400,23 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       .join(', ');
   }
 
-  private get ariaLabel(): string {
+  private get errorTextValue(): string {
+    if (!this.multiple) return '';
+
+    const { length } = this.values;
+    if (length === 0 && !this.required) return '';
+    if (length < this.min) return this.notEnoughErrorText ?? '';
+    if (length > this.max) return this.tooManyErrorText ?? '';
+    return '';
+  }
+
+  private get options() {
+    return Array.from(this.host.querySelectorAll('pop-select-option'));
+  }
+
+  private getAriaLabel(text: string): string {
     const { placeholder } = this;
-    const displayValue = this.text;
+    const displayValue = text;
     const definedLabel = this.inheritedAttributes['aria-label'];
 
     /**
@@ -426,19 +443,9 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     return renderedLabel;
   }
 
-  private get errorTextValue(): string {
-    if (!this.multiple) return '';
-
-    const { length } = this.values;
-    if (length === 0 && !this.required) return '';
-    if (length < this.min) return this.notEnoughErrorText ?? '';
-    if (length > this.max) return this.tooManyErrorText ?? '';
-    return '';
-  }
-
-  private renderSelectText() {
+  private renderSelected(text: string) {
     const { placeholder } = this;
-    const displayValue = this.text;
+    const displayValue = text;
 
     let addPlaceholderClass = false;
     let selectText = displayValue;
@@ -451,17 +458,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     return (
       <div
-        aria-hidden="true"
         class={{ 'select-placeholder': addPlaceholderClass }}
         part={textPart}
       >
         {selectText}
       </div>
     );
-  }
-
-  private get options() {
-    return Array.from(this.host.querySelectorAll('pop-select-option'));
   }
 
   private renderRadioOptions() {
@@ -529,7 +531,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   }
 
   render() {
-    const { host, helperText, errorText, inputId } = this;
+    const { host, helperText, errorText, inputId, text } = this;
+
+    const ariaLabel = this.getAriaLabel(text);
+    const selected = this.renderSelected(text);
 
     const hasError = !!errorText;
     const hasHelper = !!helperText;
@@ -540,7 +545,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
         aria-disabled={this.disabled ? 'true' : 'false'}
         aria-expanded={this.open ? 'true' : 'false'}
         aria-hidden={this.disabled ? 'true' : null}
-        aria-label={this.ariaLabel}
+        aria-label={ariaLabel}
         aria-labelledby={inputId}
         class={{
           'select-expanded': this.open,
@@ -548,7 +553,11 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
         }}
         role={this.multiple ? 'listbox' : 'radiogroup'}
       >
-        <div class="label">
+        {/* biome-ignore lint/a11y/useKeyWithClickEvents: Element not focusable, handle by summary keyboard event */}
+        <div
+          class="label"
+          onClick={this.onClick}
+        >
           <label
             htmlFor={inputId}
             part="label"
@@ -559,6 +568,8 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
         <details
           class="dropdown"
+          id={inputId}
+          onFocusout={this.onFocusOut}
           onMouseEnter={this.onHover}
           onMouseLeave={this.onBlur}
           open={this.open}
@@ -567,17 +578,26 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           <summary
             class="dropdown-trigger"
             onClick={this.onClick}
-            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key)}
+            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key)}
             tabindex={this.disabled ? '-1' : null}
           >
             <slot name="start" />
-            {this.renderSelectText()}
+            {selected}
             <slot name="end" />
             <ChevronDown />
           </summary>
-          <div class="dropdown-content">
+          <div
+            class="dropdown-content"
+            part="content"
+          >
             <pop-list>{this.multiple ? this.renderCheckboxOptions() : this.renderRadioOptions()}</pop-list>
           </div>
+          {/* biome-ignore lint/a11y/useKeyWithClickEvents: Element not focusable, handle by summary keyboard event */}
+          <div
+            class="dropdown-backdrop"
+            onClick={() => this.dismiss()}
+            part="backdrop"
+          />
         </details>
 
         <Show when={hasBottomText}>

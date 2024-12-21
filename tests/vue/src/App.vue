@@ -48,12 +48,13 @@ function submit(ev: Event) {
     >
       button poppy
     </PopButton>
-    <PopSelect v-model="fields.choice" name="choice" placeholder="placeholder">
+    <PopSelect v-model="fields.choice" name="choice" placeholder="placeholder" bordered required>
       <span slot="label">label</span>
-      <PopSelectOption>option 1</PopSelectOption>
-      <PopSelectOption>option 2</PopSelectOption>
-      <PopSelectOption>option 3</PopSelectOption>
-      <PopSelectOption>option 4</PopSelectOption>
+      <PopSelectOption :value="''">Select option</PopSelectOption>
+      <PopSelectOption :value="1">option 1</PopSelectOption>
+      <PopSelectOption :value="2">option 2</PopSelectOption>
+      <PopSelectOption :value="3">option 3</PopSelectOption>
+      <PopSelectOption :value="4">option 4</PopSelectOption>
     </PopSelect>
 
     <PopInput v-model="fields.name" name="name" placeholder="placeholder">

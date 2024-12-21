@@ -9,7 +9,7 @@ import {
   Prop,
   h,
 } from '@stencil/core';
-import { ENTER, SPACE } from 'key-definitions';
+import { ENTER, ESC, SPACE } from 'key-definitions';
 import { componentConfig } from '#config';
 import { ClickOutside } from '#utils/click-outside';
 import { isRTL } from '#utils/dir';
@@ -249,7 +249,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
             class="dropdown-trigger"
             onClick={this.onClick}
             onContextMenu={this.onContext}
-            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key)}
+            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key)}
             part="trigger"
           >
             <slot name="trigger" />

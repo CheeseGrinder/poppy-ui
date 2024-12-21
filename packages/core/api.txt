@@ -360,18 +360,17 @@ pop-select,prop,bordered,boolean,undefined,false,true
 pop-select,prop,color,"accent" | "error" | "ghost" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-select,prop,compare,((currentValue: any, newValue: any) => boolean) | string,undefined,false,false
 pop-select,prop,disabled,boolean,undefined,false,true
-pop-select,prop,helperText,string,undefined,false,false
+pop-select,prop,helperText,string,'',false,false
 pop-select,prop,max,number,undefined,false,true
 pop-select,prop,min,number,undefined,false,true
 pop-select,prop,multiple,boolean,undefined,false,true
 pop-select,prop,name,string,this.inputId,false,true
-pop-select,prop,notEnoughErrorText,string,undefined,false,false
+pop-select,prop,notEnoughErrorText,string,'',false,false
 pop-select,prop,placeholder,string,undefined,false,false
 pop-select,prop,readonly,boolean,undefined,false,true
 pop-select,prop,required,boolean,undefined,false,true
-pop-select,prop,selectedText,string,undefined,false,false
 pop-select,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
-pop-select,prop,tooManyErrorText,string,undefined,false,false
+pop-select,prop,tooManyErrorText,string,'',false,false
 pop-select,prop,value,any,null,false,false
 pop-select,method,dismiss,dismiss() => Promise<boolean>
 pop-select,method,present,present() => Promise<boolean>
@@ -386,8 +385,11 @@ pop-select,css-prop,--background
 pop-select,css-prop,--border-color
 pop-select,css-prop,--border-radius
 pop-select,css-prop,--color
-pop-select,css-prop,--error-color
+pop-select,css-prop,--max-height
 pop-select,css-prop,--opacity
+pop-select,css-prop,--outline-color
+pop-select,part,backdrop
+pop-select,part,content
 pop-select,part,label
 
 pop-select-option,none
