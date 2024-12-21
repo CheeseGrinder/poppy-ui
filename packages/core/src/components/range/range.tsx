@@ -153,8 +153,9 @@ export class Range implements ComponentInterface {
     this.value = this.initialValue;
   }
 
-  formStateRestoreCallback(state: string) {
-    this.value = +state;
+  formStateRestoreCallback(state: FormData): void {
+    const value = Number(state.get(this.name));
+    this.value = Number.isNaN(value) ? this.max / 2 : value;
   }
 
   connectedCallback(): void {

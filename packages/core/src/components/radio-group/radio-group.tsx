@@ -129,8 +129,8 @@ export class RadioGroup implements ComponentInterface {
     this.value = this.initialValue;
   }
 
-  formStateRestoreCallback(state: string): void {
-    this.value = state;
+  formStateRestoreCallback(state: FormData): void {
+    this.value = state.get(this.name) as any;
   }
 
   connectedCallback(): void {

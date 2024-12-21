@@ -313,8 +313,8 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
     this.value = this.initialValue;
   }
 
-  formStateRestoreCallback(state: string): void {
-    this.value = state;
+  formStateRestoreCallback(state: FormData): void {
+    this.value = state.get(this.name)?.toString() || '';
   }
 
   connectedCallback(): void {

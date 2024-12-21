@@ -162,8 +162,15 @@ export class Checkbox implements ComponentInterface {
     this.checked = this.initialState;
   }
 
-  formStateRestoreCallback(state: string): void {
-    this.checked = state === 'true';
+  formStateRestoreCallback(state: FormData | string): void {
+    if (typeof state === 'string') {
+      this.checked = state === 'true';
+      return;
+    }
+
+    const value = state.get(this.name);
+    this.value = value?.toString() || 'on';
+    this.checked = true;
   }
 
   connectedCallback(): void {

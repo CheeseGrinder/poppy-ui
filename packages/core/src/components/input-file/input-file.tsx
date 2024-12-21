@@ -165,8 +165,8 @@ export class InputFile implements ComponentInterface, FormAssociatedInterface {
     this.nativeInput.value = '';
   }
 
-  formStateRestoreCallback(state: File): void {
-    this.value = state;
+  formStateRestoreCallback(state: FormData): void {
+    this.value = (state.get(this.name) as File) || new File([], '');
   }
 
   connectedCallback(): void {

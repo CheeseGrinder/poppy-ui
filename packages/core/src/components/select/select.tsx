@@ -226,8 +226,13 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     this.value = this.initialValues;
   }
 
-  formStateRestoreCallback(state: any) {
-    this.value = state;
+  formStateRestoreCallback(state: FormData): void {
+    const value = state.get(this.name);
+    if (value?.toString().includes(',') && this.multiple) {
+      this.value = value.toString().split(',');
+      return;
+    }
+    this.value = value;
   }
 
   connectedCallback(): void {
