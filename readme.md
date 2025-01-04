@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img alt="Poppy" src="https://github.com/CheeseGrinder/poppy-ui/blob/main/.github/assets/logo.svg?raw=true" width="60" />
+    <img alt="Poppy" src="https://github.com/CheeseGrinder/poppy-ui/blob/main/.github/assets/logo.png?raw=true" width="60" />
   </a>
 </p>
 
