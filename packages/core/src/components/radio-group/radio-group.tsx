@@ -10,7 +10,6 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import type { Color, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import type { RadioGroupChangeEventDetail, RadioGroupCompareFn } from './radio-group.type';
 
@@ -63,6 +62,14 @@ export class RadioGroup implements ComponentInterface {
   @Prop({ reflect: true, mutable: true }) required?: boolean;
 
   /**
+   * If `true`, apply the readonly property to every `pop-radio`.
+   *
+   * @config
+   * @default false
+   */
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
+
+  /**
    * If `true`, apply the disabled property to every `pop-radio`.
    *
    * @config
@@ -87,28 +94,6 @@ export class RadioGroup implements ComponentInterface {
    * @config
    */
   @Prop({ mutable: true }) compare?: RadioGroupCompareFn | string | null;
-
-  /**
-   * The color to use from your application's color palette.
-   * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
-   * For more information on colors, see [theming](/docs/theming/basics).
-   *
-   * If the `pop-radio` as no color, it will apply to it
-   *
-   * @config
-   */
-  @Prop({ reflect: true, mutable: true }) color?: Color;
-
-  /**
-   * Change size of the component
-   * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-   *
-   * If the `pop-radio` as no size, it will apply to it
-   *
-   * @config
-   * @default "md"
-   */
-  @Prop({ reflect: true, mutable: true }) size?: Size;
 
   /**
    * The `popChange` event is fired when the user select an option.
@@ -154,24 +139,21 @@ export class RadioGroup implements ComponentInterface {
   }
 
   componentDidLoad(): void {
+    this.applyProps();
+    this.applyCheck();
+  }
+
+  @Watch('readonly')
+  @Watch('required')
+  @Watch('disabled')
+  applyProps(): void {
     for (const radio of this.radios) {
       radio.name = this.name;
 
-      if (this.required) {
-        radio.required = this.required;
-      }
-      if (this.disabled) {
-        radio.disabled = this.disabled;
-      }
-      if (this.color) {
-        radio.color = this.color;
-      }
-      if (this.size) {
-        radio.size = this.size;
-      }
+      radio.required = this.required;
+      radio.readonly = this.readonly;
+      radio.disabled = this.disabled;
     }
-
-    this.applyCheck();
   }
 
   private applyCheck(): void {
@@ -201,7 +183,7 @@ export class RadioGroup implements ComponentInterface {
     const target = ev.target as HTMLElement;
     const radio = target.closest('pop-radio');
 
-    if (!radio || radio.disabled) return;
+    if (!radio || radio.disabled || radio.readonly) return;
 
     const currentValue = this.value;
     const newValue = radio.value;

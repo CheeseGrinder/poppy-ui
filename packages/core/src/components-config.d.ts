@@ -548,11 +548,6 @@ export namespace Configuration {
     };
     'pop-radio'?: {
       /**
-       * If `true`, the user must fill in a value before submitting a form.
-       * @default false
-       */
-      required?: boolean;
-      /**
        * If `true`, the user cannot interact with the element.
        * @default false
        */
@@ -577,6 +572,11 @@ export namespace Configuration {
        */
       required?: boolean;
       /**
+       * If `true`, apply the readonly property to every `pop-radio`.
+       * @default false
+       */
+      readonly?: boolean;
+      /**
        * If `true`, apply the disabled property to every `pop-radio`.
        * @default false
        */
@@ -593,20 +593,6 @@ export namespace Configuration {
        * equality (===) for comparison.
        */
       compare?: RadioGroupCompareFn | string | null;
-      /**
-       * The color to use from your application's color palette.
-       * Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`.
-       * For more information on colors, see [theming](/docs/theming/basics).
-       * If the `pop-radio` as no color, it will apply to it
-       */
-      color?: Color;
-      /**
-       * Change size of the component
-       * Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-       * If the `pop-radio` as no size, it will apply to it
-       * @default "md"
-       */
-      size?: Size;
     };
     'pop-range'?: {
       /**

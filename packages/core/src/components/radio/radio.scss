@@ -15,7 +15,7 @@
 // Radio
 // ----------------------------------------------------------------
 
-$base: get-color("base.100");
+$base: theme.use_color("base.100");
 
 :host {
   --border-radius: #{theme.use_radius(full)};
@@ -125,7 +125,7 @@ $base: get-color("base.100");
     $background: theme.use_color("#{$color}.base", var(--opacity, 1));
 
     :host([color="#{$color}"]) {
-      --border-color: #{$base};
+      --border-color: #{$border};
       --background: #{$background};
     }
   }

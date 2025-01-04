@@ -303,8 +303,6 @@ pop-radio,prop,autoFocus,boolean,false,false,true
 pop-radio,prop,checked,boolean,false,false,true
 pop-radio,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-radio,prop,disabled,boolean,undefined,false,true
-pop-radio,prop,name,string,this.inputId,false,true
-pop-radio,prop,required,boolean,undefined,false,true
 pop-radio,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-radio,prop,value,any,'',false,false
 pop-radio,method,setFocus,setFocus() => Promise<void>
@@ -321,12 +319,11 @@ pop-radio,part,native
 
 pop-radio-group,none
 pop-radio-group,prop,allowEmpty,boolean,undefined,false,false
-pop-radio-group,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "success" | "warning",undefined,false,true
 pop-radio-group,prop,compare,((currentValue: any, newValue: any) => boolean) | string,undefined,false,false
 pop-radio-group,prop,disabled,boolean,undefined,false,true
 pop-radio-group,prop,name,string,this.inputId,false,true
+pop-radio-group,prop,readonly,boolean,undefined,false,true
 pop-radio-group,prop,required,boolean,undefined,false,true
-pop-radio-group,prop,size,"lg" | "md" | "sm" | "xs",undefined,false,true
 pop-radio-group,prop,value,any,undefined,false,false
 pop-radio-group,event,popChange,RadioGroupChangeEventDetail<any>,true
 

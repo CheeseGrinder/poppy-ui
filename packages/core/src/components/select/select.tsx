@@ -477,19 +477,18 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     return (
       <pop-radio-group
         allowEmpty={!required}
-        color={color === 'ghost' ? undefined : color}
         disabled={this.disabled}
         onPopChange={async ev => {
           this.value = ev.detail.value;
           await this.dismiss();
         }}
-        size={size}
         value={this.value}
       >
         {this.options.map(option => (
           <pop-item>
             <pop-radio
               checked={isOptionSelected(this.value, getOptionValue(option), this.compare)}
+              color={color === 'ghost' ? undefined : color}
               disabled={option.disabled}
               size={size}
               value={getOptionValue(option)}

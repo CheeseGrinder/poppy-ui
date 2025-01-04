@@ -41,8 +41,10 @@ export class Radio implements ComponentInterface {
 
   /**
    * The name of the control, which is submitted with the form data.
+   *
+   * @internal (controlled by `pop-radio-group`)
    */
-  @Prop({ reflect: true }) name: string = this.inputId;
+  @Prop({ reflect: true }) name = '';
 
   /**
    * The value of the radio does not mean if it's checked or not, use the `checked`
@@ -61,10 +63,16 @@ export class Radio implements ComponentInterface {
   /**
    * If `true`, the user must fill in a value before submitting a form.
    *
-   * @config
-   * @default false
+   * @internal (controlled by `pop-radio-group`)
    */
   @Prop({ reflect: true, mutable: true }) required?: boolean;
+
+  /**
+   * If `true`, the user cannot interact with the element.
+   *
+   * @internal (controlled by `pop-radio-group`)
+   */
+  @Prop({ reflect: true, mutable: true }) readonly?: boolean;
 
   /**
    * If `true`, the user cannot interact with the element.
@@ -111,7 +119,6 @@ export class Radio implements ComponentInterface {
     this.inheritedAttributes = inheritAriaAttributes(this.host);
 
     componentConfig.apply(this, 'pop-radio', {
-      required: false,
       disabled: false,
       size: config.get('defaultSize', 'md'),
     });
@@ -146,8 +153,8 @@ export class Radio implements ComponentInterface {
   }
 
   private onClick = () => {
-    const { checked, disabled } = this;
-    if (disabled) return;
+    const { checked, disabled, readonly } = this;
+    if (disabled || readonly) return;
 
     if (checked && this.radioGroup?.allowEmpty) {
       this.checked = false;
@@ -165,7 +172,7 @@ export class Radio implements ComponentInterface {
   };
 
   render() {
-    const { host, checked } = this;
+    const { host, checked, disabled } = this;
     const inputId = this.inputId;
 
     const hasLabel = host.textContent !== '';
@@ -173,7 +180,8 @@ export class Radio implements ComponentInterface {
     return (
       <Host
         aria-checked={`${checked}`}
-        aria-hidden={this.disabled ? 'true' : null}
+        aria-disabled={`${disabled}`}
+        aria-hidden={disabled ? 'true' : null}
         aria-labelledby={inputId}
         onClick={this.onClick}
         role="radio"
@@ -197,6 +205,7 @@ export class Radio implements ComponentInterface {
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           part="native"
+          readonly={this.readonly}
           ref={el => (this.nativeInput = el)}
           required={this.required}
           type="radio"

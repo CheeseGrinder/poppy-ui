@@ -872,9 +872,11 @@ export namespace Components {
          */
         "name": string;
         /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "readonly"?: boolean;
+        /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config 
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -900,11 +902,6 @@ export namespace Components {
          */
         "allowEmpty"?: boolean;
         /**
-          * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).  If the `pop-radio` as no color, it will apply to it
-          * @config
-         */
-        "color"?: Color;
-        /**
           * This property allows developers to specify a custom function for comparing objects when determining the selected option in the ion-radio-group. When not specified, the default behavior will use strict equality (===) for comparison.
           * @config
          */
@@ -920,17 +917,17 @@ export namespace Components {
          */
         "name": string;
         /**
+          * If `true`, apply the readonly property to every `pop-radio`.
+          * @config 
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
           * If `true`, apply the required property to every `pop-radio`.
           * @config 
           * @default false
          */
         "required"?: boolean;
-        /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.  If the `pop-radio` as no size, it will apply to it
-          * @config 
-          * @default "md"
-         */
-        "size"?: Size;
         /**
           * the value of the radio group.
          */
@@ -2884,9 +2881,11 @@ declare namespace LocalJSX {
          */
         "onPopFocus"?: (event: PopRadioCustomEvent<void>) => void;
         /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "readonly"?: boolean;
+        /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config 
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -2907,11 +2906,6 @@ declare namespace LocalJSX {
           * @default false
          */
         "allowEmpty"?: boolean;
-        /**
-          * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).  If the `pop-radio` as no color, it will apply to it
-          * @config
-         */
-        "color"?: Color;
         /**
           * This property allows developers to specify a custom function for comparing objects when determining the selected option in the ion-radio-group. When not specified, the default behavior will use strict equality (===) for comparison.
           * @config
@@ -2936,17 +2930,17 @@ declare namespace LocalJSX {
          */
         "onPopValueChange"?: (event: PopRadioGroupCustomEvent<RadioGroupChangeEventDetail>) => void;
         /**
+          * If `true`, apply the readonly property to every `pop-radio`.
+          * @config 
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
           * If `true`, apply the required property to every `pop-radio`.
           * @config 
           * @default false
          */
         "required"?: boolean;
-        /**
-          * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.  If the `pop-radio` as no size, it will apply to it
-          * @config 
-          * @default "md"
-         */
-        "size"?: Size;
         /**
           * the value of the radio group.
          */

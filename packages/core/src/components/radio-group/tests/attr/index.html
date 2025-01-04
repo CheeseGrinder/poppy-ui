@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio | Poppy-ui</title>
+  <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+  <style>
+    main {
+      width: 100vw;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+
+      background-color: var(--base-200);
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .35rem;
+    }
+
+    div, form {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Radio Group - form</h2>
+      <div>
+          <pop-toggle name="disabled">Toggle disabled</pop-toggle>
+          <pop-toggle name="readonly">Toggle readonly</pop-toggle>
+          <pop-radio-group>
+            <span slot="label">Custom</span>
+            <pop-radio value="1">Option 1</pop-radio>
+            <pop-radio value="2">Option 2</pop-radio>
+            <pop-radio value="3">Option 3</pop-radio>
+            <pop-radio value="4">Option 4</pop-radio>
+          </pop-radio-group>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const group = document.querySelector('pop-radio-group');
+    group.addEventListener('popChange', ev => {
+      console.log(ev)
+    })
+
+    document.querySelector('pop-toggle[name="disabled"]').addEventListener('popChange', ({ detail }) => {
+      group.disabled = detail.checked;
+    });
+    document.querySelector('pop-toggle[name="readonly"]').addEventListener('popChange', ({ detail }) => {
+      group.readonly = detail.checked;
+    });
+  </script>
+</body>
+
+</html>
