@@ -10,6 +10,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { ESC } from 'key-definitions';
 import { componentConfig } from '#config';
 import { isRTL } from '#utils/dir';
 import type { OverlayInterface } from '#utils/overlay';
@@ -143,6 +144,17 @@ export class Drawer implements ComponentInterface, OverlayInterface {
     this.dismiss();
   };
 
+  private onKeyPress = (...keys: string[]) => {
+    return async (ev: KeyboardEvent) => {
+      ev.preventDefault();
+      if (!keys.includes(ev.key)) {
+        return;
+      }
+
+      return this.dismiss();
+    };
+  };
+
   render() {
     const { host } = this;
 
@@ -161,6 +173,7 @@ export class Drawer implements ComponentInterface, OverlayInterface {
           <div
             class="drawer-backdrop"
             onClick={this.onClick}
+            onKeyUp={this.onKeyPress(ESC.key)}
             part="backdrop"
           />
           <div

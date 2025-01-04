@@ -1,4 +1,5 @@
 import { Component, type ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
+import { ENTER, ESC, SPACE } from 'key-definitions';
 import { compareOptions } from '#utils/forms';
 import { hostContext } from '#utils/helpers';
 import { ChevronDown } from '../ChevronDown';
@@ -105,6 +106,19 @@ export class Accordion implements ComponentInterface {
     this.open = !this.open;
   };
 
+  private onKeyPress = (...keys: string[]) => {
+    return async (ev: KeyboardEvent) => {
+      ev.preventDefault();
+      if (!keys.includes(ev.key)) {
+        return;
+      }
+      if (ev.key === ESC.key) {
+        return this.hide();
+      }
+      return this.toggle();
+    };
+  };
+
   render() {
     const { host } = this;
 
@@ -117,6 +131,7 @@ export class Accordion implements ComponentInterface {
         <header
           class="accordion-title"
           onClick={this.onClick}
+          onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key)}
           part="header"
         >
           <div class="header-content">
