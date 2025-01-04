@@ -103,7 +103,7 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
    *
    * @config
    */
-  @Prop({ mutable: true }) min?: number;
+  @Prop({ mutable: true }) min?: number | string;
 
   /**
    * The maximum value, which must not be less than its minimum (min attribute) value.
