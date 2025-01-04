@@ -514,7 +514,7 @@ export namespace Components {
           * The minimum value, which must not be greater than its maximum (max attribute) value.
           * @config
          */
-        "min"?: number;
+        "min"?: number | string;
         /**
           * This attribute specifies the minimum number of characters that the user can enter.
           * @config
@@ -2487,7 +2487,7 @@ declare namespace LocalJSX {
           * The minimum value, which must not be greater than its maximum (max attribute) value.
           * @config
          */
-        "min"?: number;
+        "min"?: number | string;
         /**
           * This attribute specifies the minimum number of characters that the user can enter.
           * @config

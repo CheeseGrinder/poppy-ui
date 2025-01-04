@@ -168,7 +168,7 @@ pop-input,prop,helperText,string,undefined,false,false
 pop-input,prop,keyboard,"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url",undefined,false,false
 pop-input,prop,max,number | string,undefined,false,false
 pop-input,prop,maxLength,number,undefined,false,false
-pop-input,prop,min,number,undefined,false,false
+pop-input,prop,min,number | string,undefined,false,false
 pop-input,prop,minLength,number,undefined,false,false
 pop-input,prop,multiple,boolean,undefined,false,false
 pop-input,prop,name,string,this.inputId,false,true

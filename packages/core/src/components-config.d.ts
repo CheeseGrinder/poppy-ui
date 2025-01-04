@@ -280,7 +280,7 @@ export namespace Configuration {
       /**
        * The minimum value, which must not be greater than its maximum (max attribute) value.
        */
-      min?: number;
+      min?: number | string;
       /**
        * The maximum value, which must not be less than its minimum (min attribute) value.
        */
