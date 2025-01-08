@@ -1,4 +1,12 @@
-# @poppy-ui/core
+<p align="center">
+  <a href="#">
+    <img alt="Poppy" src="https://github.com/CheeseGrinder/poppy-ui/blob/main/.github/assets/logo.png?raw=true" width="60" />
+  </a>
+</p>
+
+<h1 align="center">
+  Poppy UI - Core
+</h1>
 
 [Poppy-ui](https://poppy-ui.com/) is an open source App Development UI that makes it easy to build top quality Progressive Web Apps with web technologies.
 
@@ -36,6 +44,8 @@ Additionally, within this package is a `dist/poppy.js` file and accompanying `di
 
 The `@poppy-ui/core` package can be used in simple HTML, or by vanilla JavaScript without any framework at all. Poppy also has packages that make it easier to integrate Poppy into a framework's traditional ecosystem and patterns. (However, at the lowest-level framework bindings are still just using Poppy Core and Web Components).
 
+* [@poppy-ui/vue](https://www.npmjs.com/package/@poppy-ui/vue)
+* [@poppy-ui/react](https://www.npmjs.com/package/@poppy-ui/react)
 * [@poppy-ui/angular](https://www.npmjs.com/package/@poppy-ui/angular)
 
 

@@ -35,6 +35,7 @@ $minWidth: 12rem;
   flex-direction: column;
   min-width: $minWidth;
   height: auto;
+  resize: both;
 
   > textarea {
     box-sizing: border-box;
@@ -53,6 +54,8 @@ $minWidth: 12rem;
 
     font-family: theme.use_font();
     white-space: pre-wrap;
+
+    resize: inherit;
 
     &:focus-visible {
       outline-color: var(--border-color, #{theme.use_color("base.content", 0.2)});

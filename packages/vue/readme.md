@@ -1,4 +1,12 @@
-# @poppy-ui/vue
+<p align="center">
+  <a href="#">
+    <img alt="Poppy" src="https://github.com/CheeseGrinder/poppy-ui/blob/main/.github/assets/logo.png?raw=true" width="60" />
+  </a>
+</p>
+
+<h1 align="center">
+  Poppy UI - Vue
+</h1>
 
 Poppy UI integration for Vue 3 apps.
 
