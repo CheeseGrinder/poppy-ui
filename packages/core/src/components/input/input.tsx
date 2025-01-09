@@ -11,6 +11,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
+import { ENTER } from 'key-definitions';
 import type { AutoCapitalize, EnterKeyHint, FormAssociatedInterface, KeyboardType, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
@@ -404,6 +405,12 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
     }, this.debounce || 0);
   };
 
+  private onKeyUp = (ev: KeyboardEvent): void => {
+    if (ev.key === ENTER.key) {
+      this.internals.form?.requestSubmit();
+    }
+  };
+
   private onCompositionStart = () => {
     this.isComposing = true;
   };
@@ -456,17 +463,17 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
         >
           <slot name="start" />
           <input
-            autoCapitalize={this.autoCapitalize}
-            autoComplete={this.autoComplete}
-            autoFocus={this.autoFocus}
+            autocapitalize={this.autoCapitalize}
+            autocomplete={this.autoComplete}
+            autofocus={this.autoFocus}
             disabled={this.disabled}
-            enterKeyHint={this.enterkeyhint}
+            enterkeyhint={this.enterkeyhint}
             id={inputId}
-            inputMode={this.keyboard}
+            inputmode={this.keyboard}
             max={this.max}
-            maxLength={this.maxLength}
+            maxlength={this.maxLength}
             min={this.min}
-            minLength={this.minLength}
+            minlength={this.minLength}
             multiple={this.multiple}
             name={this.name}
             onBlur={this.onBlur}
@@ -475,6 +482,7 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
             onCompositionstart={this.onCompositionStart}
             onFocus={this.onFocus}
             onInput={this.onInput}
+            onKeyUp={this.onKeyUp}
             part={`native ${this.type}`}
             pattern={this.pattern}
             placeholder={this.placeholder || ''}
