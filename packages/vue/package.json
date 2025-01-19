@@ -1,7 +1,7 @@
 {
   "name": "@poppy-ui/vue",
   "type": "module",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "description": "Vue specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@poppy-ui/docs": "^0.3.12",
+    "@poppy-ui/docs": "^0.4.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",
@@ -62,6 +62,6 @@
     "css/*.css"
   ],
   "dependencies": {
-    "@poppy-ui/core": "^0.3.12"
+    "@poppy-ui/core": "^0.4.0"
   }
 }

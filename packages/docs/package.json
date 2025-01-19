@@ -1,6 +1,6 @@
 {
   "name": "@poppy-ui/docs",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "description": "Pre-packaged API documentation for the Poppy docs.",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
