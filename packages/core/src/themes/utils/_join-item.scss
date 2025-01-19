@@ -6,11 +6,10 @@
   // join-item
   @each $selector in $selectors {
     :host(.join-item) > #{$selector} {
-      border-start-start-radius: var(--border-radius-start-start, var(--border-radius, #{$radius-var}));
-
-      border-start-end-radius: var(--border-radius-start-end, var(--border-radius, #{$radius-var}));
-      border-end-start-radius: var(--border-radius-end-start, var(--border-radius, #{$radius-var}));
-      border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{$radius-var}));
+      border-start-start-radius: var(--border-radius-start-start, #{$radius-var});
+      border-start-end-radius: var(--border-radius-start-end, #{$radius-var});
+      border-end-start-radius: var(--border-radius-end-start, #{$radius-var});
+      border-end-end-radius: var(--border-radius-end-end, #{$radius-var});
     }
   }
 }
@@ -19,10 +18,9 @@
   $radius-var: use_radius(md);
 
   :host(.join-item) {
-    border-start-start-radius: var(--border-radius-start-start, var(--border-radius, #{$radius-var}));
-
-    border-start-end-radius: var(--border-radius-start-end, var(--border-radius, #{$radius-var}));
-    border-end-start-radius: var(--border-radius-end-start, var(--border-radius, #{$radius-var}));
-    border-end-end-radius: var(--border-radius-end-end, var(--border-radius, #{$radius-var}));
+    border-start-start-radius: $radius-var;
+    border-start-end-radius: $radius-var;
+    border-end-start-radius: $radius-var;
+    border-end-end-radius: $radius-var;
   }
 }

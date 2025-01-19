@@ -1,9 +1,7 @@
 @use "@poppy/utils/input";
-@use "@poppy/utils/join-item";
 @use "@poppy/global" as theme;
 
 /**
- * @prop --border-radius: Border radius
  * @prop --border-color: Border color & outline color
  *
  * @prop --background: Background color
@@ -14,14 +12,11 @@
  * @prop --font: Change text font
  */
 
-@include join-item.item(".input-wrapper");
-
 // Input
 // ----------------------------------------------------------------
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
   --outline-color: #{theme.use_color("base.content", 0.2)};
   --background: #{theme.use_color("base.100", var(--opacity, 1))};
@@ -32,6 +27,7 @@ $minWidth: 12rem;
 
   display: inline-flex;
   flex-direction: column;
+  border-radius: theme.use_radius(md);
 
   > .input-wrapper {
     box-sizing: border-box;
@@ -46,7 +42,7 @@ $minWidth: 12rem;
     border-width: 1px;
 
     border-style: solid;
-    border-radius: var(--border-radius);
+    border-radius: inherit;
     border-color: var(--border-color, transparent);
 
     background-color: var(--background);

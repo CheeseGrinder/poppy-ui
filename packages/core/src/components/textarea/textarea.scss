@@ -1,5 +1,4 @@
 @use "@poppy/utils/input";
-@use "@poppy/utils/join-item";
 @use "@poppy/global" as theme;
 
 /**
@@ -15,14 +14,11 @@
  * @prop --font: Change text font
  */
 
-@include join-item.item(textarea);
-
 // Textarea
 // ----------------------------------------------------------------
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
   --opacity: 1;
   --background: #{theme.use_color("base.100", var(--opacity))};
@@ -36,6 +32,7 @@ $minWidth: 12rem;
   min-width: $minWidth;
   height: auto;
   resize: both;
+  border-radius: theme.use_radius(md);
 
   > textarea {
     box-sizing: border-box;
@@ -46,7 +43,7 @@ $minWidth: 12rem;
     min-height: 3rem;
     border-width: 1px;
     border-style: solid;
-    border-radius: var(--border-radius);
+    border-radius: inherit;
     border-color: var(--border-color, transparent);
 
     background-color: var(--background);

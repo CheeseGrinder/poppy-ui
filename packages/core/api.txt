@@ -52,7 +52,6 @@ pop-button,event,popFocus,void,true
 pop-button,css-prop,--animation
 pop-button,css-prop,--background
 pop-button,css-prop,--border-color
-pop-button,css-prop,--border-radius
 pop-button,css-prop,--color
 pop-button,css-prop,--focus-scale
 pop-button,part,native
@@ -188,7 +187,6 @@ pop-input,event,popFocus,void,true
 pop-input,event,popInput,InputInputEventDetail,true
 pop-input,css-prop,--background
 pop-input,css-prop,--border-color
-pop-input,css-prop,--border-radius
 pop-input,css-prop,--color
 pop-input,css-prop,--error-color
 pop-input,css-prop,--font
@@ -217,7 +215,6 @@ pop-input-file,event,popFocus,void,true
 pop-input-file,css-prop,--background
 pop-input-file,css-prop,--background-opacity
 pop-input-file,css-prop,--border-color
-pop-input-file,css-prop,--border-radius
 pop-input-file,css-prop,--button-animation
 pop-input-file,css-prop,--button-background
 pop-input-file,css-prop,--button-color

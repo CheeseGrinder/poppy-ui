@@ -1,8 +1,6 @@
-@use "@poppy/utils/join-item";
 @use "@poppy/global" as theme;
 
 /**
- * @prop --border-radius: Change border radius
  * @prop --border-color: Change border color
  *
  * @prop --background: Change background color
@@ -13,13 +11,10 @@
  *
  */
 
-@include join-item.item(button);
-
 // Button
 // ----------------------------------------------------------------
 
 :host {
-  --border-radius: #{theme.use_radius(md)};
   --border-color: transparent;
   --background: #{theme.use_color("base.200")};
   --color: #{theme.use_color("base.content")};
@@ -28,6 +23,7 @@
   --focus-scale: 0.97;
 
   display: inline-block;
+  border-radius: theme.use_radius(md);
 
   button {
     box-sizing: border-box;
@@ -40,9 +36,8 @@
     gap: 0.5rem;
 
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
     outline-color: var(--background);
-
+    border-radius: inherit;
     background-color: var(--background);
 
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);

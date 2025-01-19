@@ -71,7 +71,6 @@ Type: `Promise<void>`
 | `--background`         | Change background color.                 |
 | `--background-opacity` | CHange background opacity.               |
 | `--border-color`       | Change border and outline color.         |
-| `--border-radius`      | Change border radius.                    |
 | `--button-animation`   | Change animation duration of the button. |
 | `--button-background`  | Change button background.                |
 | `--button-color`       | Change button text color.                |
