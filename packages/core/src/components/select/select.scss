@@ -15,7 +15,7 @@
  * @prop --max-height: Change max-height for dropdown content (apply only when screen width is more than 640px)
  */
 
-@include join-item.item("details > summary");
+@include join-item.item(".dropdown > .dropdown-trigger");
 
 // Select
 // ----------------------------------------------------------------
@@ -39,6 +39,18 @@ $minWidth: 12rem;
     display: grid;
     position: relative;
     width: 100%;
+
+    &[open] {
+      svg {
+        transform: rotateX(180deg);
+      }
+
+      .dropdown-content {
+        pointer-events: all;
+        opacity: 1;
+        transform: rotateX(0);
+      }
+    }
 
     &-trigger {
       display: flex;
@@ -66,8 +78,12 @@ $minWidth: 12rem;
     }
 
     &-content {
+      pointer-events: none;
       position: absolute;
       z-index: 20;
+      opacity: 0;
+
+      display: block;
 
       min-height: 2rem;
       max-height: var(--max-height, 20rem);
@@ -82,9 +98,10 @@ $minWidth: 12rem;
       background-color: var(--background);
 
       color: var(--color);
-      animation-duration: 200ms;
-
-      animation-name: present;
+      perspective: 200px;
+      transform: rotateX(28deg);
+      transform-style: preserve-3d;
+      transition: 150ms ease-in 0s;
     }
 
     &-backdrop {
@@ -103,7 +120,7 @@ $minWidth: 12rem;
   svg {
     min-width: 24px;
     margin-inline-start: auto;
-    transition: transform 150ms ease 0ms;
+    transition: transform 200ms ease 0ms;
   }
 
   pop-list {
@@ -139,13 +156,6 @@ $minWidth: 12rem;
 
 }
 
-
-:host(.select-expanded) {
-  svg {
-    transform: rotateX(180deg);
-  }
-}
-
 :host([bordered]) {
   --border-color: #{theme.use_color("base.content", 0.2)};
 }
@@ -161,7 +171,7 @@ $minWidth: 12rem;
   gap: 0.5rem;
 }
 
-// Input Size
+// Select Size
 // ----------------------------------------------------------------
 
 :host([size="xs"]) .dropdown-trigger {
