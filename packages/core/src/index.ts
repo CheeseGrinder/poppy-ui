@@ -10,7 +10,7 @@
 
 export type * from './components';
 export type { PoppyUserConfig } from './config';
-export type * from './custom-type';
+export type * from './component-types';
 export type * from './interface';
 
 export { initialize } from './global/poppy';

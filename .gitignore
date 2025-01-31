@@ -10,9 +10,8 @@ log.txt
 *.tgz
 
 .idea/
-.vscode/**
+.vscode/
 !.vscode/extensions.json
-!.vscode/settings.json
 .sass-cache/
 .versions/
 coverage/
@@ -22,9 +21,6 @@ dist-transpiled/
 node_modules/
 tmp/
 temp/
-core/theme-builder/
-core/test-components/
-core/css/
 $RECYCLE.BIN/
 
 .DS_Store
@@ -58,12 +54,17 @@ prerender-hydrated.html
 prerender-static.html
 
 # stencil
+packages/angular/css/
 packages/react/css/
+packages/react/src/components.ts
 packages/vue/css/
+packages/vue/src/components.ts
 packages/core/components/
 packages/core/css/
 packages/core/hydrate/
 packages/core/loader/
+packages/core/src/components.d.ts
+packages/core/src/components-config.d.ts
 packages/core/www/
 packages/.stencil/
 
@@ -73,17 +74,13 @@ packages/core/playwright-report/
 packages/core/**/*-snapshots
 
 # angular
-packages/angular/css/
-packages/angular/test/build/
+tests/angular/build/
 .angular/
 
 # vue
-packages/vue/test/build/
+tests/vue/build/
 
 # react
-packages/react/test/build/
-
-# react router
-packages/react-router/test/build/
+tests/react/build/
 
 .npmrc
