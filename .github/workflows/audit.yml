@@ -31,6 +31,7 @@ jobs:
       matrix:
         package:
           - core
+          - react
           - vue
     steps:
       - uses: actions/checkout@v4

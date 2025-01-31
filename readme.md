@@ -67,9 +67,9 @@ Here, We chose to use [npm workspace][npm-workspace-link] to avoid having too ma
 ## How to use
 If you want to use **Poppy-UI** on a framework, checkout the dedicated readme documentation below:
 
-- [vue][poppy-ui-vue-readme] 🏗️ WIP 🏗️
+- [vue 3][poppy-ui-vue-readme]
 - [angular][poppy-ui-angular-readme] 🏗️ WIP 🏗️
-- [react][poppy-ui-react-readme] 🏗️ WIP 🏗️
+- [react][poppy-ui-react-readme]
 
 
 ## Getting Started for development

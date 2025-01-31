@@ -5,31 +5,38 @@
 </p>
 
 <h1 align="center">
-  Poppy UI - Vue
+  Poppy UI - React
 </h1>
 
-Poppy UI integration for Vue 3 apps.
+Poppy UI integration for React apps.
 
 ## Install
 ```sh
-npm install @poppy-ui/vue
+npm install @poppy-ui/react
 ```
 *if the command fails, check the section [how to use](../../readme.md#how-to-use) in the root readme*
 
 ## Configuration
 The configuration is minimal and easy
-```ts
+The configuration is minimal and easy
+```tsx
 // main.ts
-import { PoppyVue } from '@poppy-ui/vue';
-import { createApp } from 'vue';
-import App from './App.vue';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.tsx';
 
-import '@poppy-ui/vue/css/core.css';
-import '@poppy-ui/vue/css/themes/light.always.css';
+import { setupPoppyReact } from '@poppy-ui/react';
+import '@poppy-ui/react/css/core.css';
+import '@poppy-ui/react/css/themes/light.always.css';
 
-createApp(App)
-  .use(PoppyVue)
-  .mount('#app');
+setupPoppyReact();
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
 ```
 
 And your done, happy coding 🎉

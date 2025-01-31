@@ -46,6 +46,49 @@ jobs:
           package: core
           node-version: ${{ matrix.node-version }}
 
+  test-react:
+    name: React
+    needs:
+      - biome
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Prepare
+        run: |
+          npm install -w @poppy-ui/core
+          npm run build -w @poppy-ui/core
+          npm pack -w @poppy-ui/core
+          PKG=$(ls poppy-ui-core-*.tgz)
+          mv $PKG poppy-ui-core-${{ matrix.node-version }}.tgz
+        shell: bash
+
+      - name: Install
+        run: |
+          npm install ./poppy-ui-core-${{ matrix.node-version }}.tgz -w @poppy-ui/react
+          npm install -w @poppy-ui/react
+        shell: bash
+
+      - name: Test
+        run: npm run test:spec -w @poppy-ui/react --if-present -- --passWithNoTests --coverage
+        shell: bash
+
+      - name: Test e2e
+        run: npm run test:e2e -w @poppy-ui/react --if-present -- --pass-with-no-tests --reporter github
+        shell: bash
+      - uses: ./.github/workflows/actions/test
+        with:
+          package: react
+          node-version: ${{ matrix.node-version }}
+
   test-vue:
     name: Vue
     needs:

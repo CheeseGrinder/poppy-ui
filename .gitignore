@@ -56,15 +56,11 @@ prerender-static.html
 # stencil
 packages/angular/css/
 packages/react/css/
-packages/react/src/components.ts
 packages/vue/css/
-packages/vue/src/components.ts
 packages/core/components/
 packages/core/css/
 packages/core/hydrate/
 packages/core/loader/
-packages/core/src/components.d.ts
-packages/core/src/components-config.d.ts
 packages/core/www/
 packages/.stencil/
 
