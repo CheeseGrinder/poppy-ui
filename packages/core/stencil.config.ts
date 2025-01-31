@@ -3,6 +3,7 @@ import { docsReadme } from '@cheese-grinder/stencil-custom-readme';
 import { sassAlias } from '@cheese-grinder/stencil-sass-alias';
 import type { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { reactOutput } from './output/react';
 import { vueOutput } from './output/vue';
 import { apiSpecGenerator } from './plugins/api-spec-generator';
 import type { JSX } from './src/components';
@@ -91,10 +92,11 @@ export const config: Config = {
       ],
       includeGlobalScripts: false,
     },
+    reactOutput(componentCorePackage),
     vueOutput(componentCorePackage),
   ],
   testing: {
-    browserHeadless: 'new',
+    browserHeadless: 'shell',
     moduleNameMapper: {
       '#config': ['<rootDir>/src/config'],
     },

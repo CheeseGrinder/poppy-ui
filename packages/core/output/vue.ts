@@ -11,7 +11,7 @@ type VueComponentModel = {
 export function vueOutput(core: string, ssr = false) {
   const ssrOptions: Parameters<typeof vueOutputTarget>[0] = {
     hydrateModule: `${core}/hydrate`,
-    proxiesFile: '../nuxt/src/proxies.ts',
+    proxiesFile: '../nuxt/src/components.ts',
   };
 
   return vueOutputTarget({
@@ -19,7 +19,7 @@ export function vueOutput(core: string, ssr = false) {
     includePolyfills: false,
     includeDefineCustomElements: false,
     componentCorePackage: core,
-    proxiesFile: '../vue/src/proxies.ts',
+    proxiesFile: '../vue/src/components.ts',
     componentModels: <VueComponentModel[]>[
       {
         elements: ['pop-checkbox', 'pop-toggle'],

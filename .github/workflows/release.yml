@@ -70,9 +70,16 @@ jobs:
       - test
     uses: ./.github/workflows/build-vue.yml
 
+  build-react:
+    name: Build - React
+    needs:
+      - test
+    uses: ./.github/workflows/build-react.yml
+
   publish:
     needs:
       - build-core
+      - build-react
       - build-vue
     runs-on: ubuntu-latest
     steps:
@@ -114,12 +121,25 @@ jobs:
           npm uninstall @poppy-ui/docs -w @poppy-ui/vue
           npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
           npm install -D @poppy-ui/docs@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
-  
+
       - name: Publish Vue
         run: |
           npm run build
           npm publish
         working-directory: packages/vue
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upgrade - React
+        run: |
+          npm uninstall @poppy-ui/core -w @poppy-ui/react
+          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/react
+
+      - name: Publish React
+        run: |
+          npm run build
+          npm publish
+        working-directory: packages/react
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

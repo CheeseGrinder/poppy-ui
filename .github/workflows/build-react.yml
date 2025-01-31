@@ -1,0 +1,58 @@
+name: Build - React
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/react/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - packages/react/**
+
+# When pushing a new commit we should
+# cancel the previous test run to not
+# consume more runners than we need to.
+concurrency:
+  group: ${{ github.ref }}_build_react
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+          - 22.x
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node v${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Core
+        run: npm install -w @poppy-ui/core
+        shell: bash
+
+      - name: Build Core
+        run: |
+          npm run build -w @poppy-ui/core --if-present
+          npm pack -w @poppy-ui/core
+          PKG=$(ls poppy-ui-core-*.tgz)
+          mv $PKG poppy-ui-core-${{ matrix.node-version }}.tgz
+        shell: bash
+
+      - name: Install React
+        run: |
+          npm install ./poppy-ui-core-${{ matrix.node-version }}.tgz -w @poppy-ui/react
+          npm install -w @poppy-ui/react
+        shell: bash
+
+      - name: Build
+        run: npm run build -w @poppy-ui/react --if-present

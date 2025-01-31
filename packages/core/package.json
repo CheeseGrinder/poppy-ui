@@ -70,6 +70,7 @@
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
     "@playwright/test": "^1.50.1",
     "@stencil/playwright": "^0.2.1",
+    "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "0.9.4",
     "@types/jest": "^29.5.14",
