@@ -107,12 +107,12 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   /**
    * Emitted after the modal has presented.
    */
-  @Event({ eventName: 'present' }) presentEvent: EventEmitter<void>;
+  @Event() didPresent: EventEmitter<void>;
 
   /**
    * Emitted after the modal has dismissed.
    */
-  @Event({ eventName: 'dismiss' }) dismissEvent: EventEmitter<void>;
+  @Event() didDismiss: EventEmitter<void>;
 
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-dropdown', {
@@ -150,7 +150,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     if (open) return false;
 
     this.open = true;
-    this.presentEvent.emit();
+    this.didPresent.emit();
     return true;
   }
 
@@ -176,7 +176,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     if (!open) return false;
 
     this.open = false;
-    this.dismissEvent.emit(data);
+    this.didDismiss.emit(data);
     return true;
   }
 

@@ -22,10 +22,10 @@ Dropdown can open a menu or any other element when the trigger element is clicke
 
 ## Events
 
-| Event     | Description                            | Type                |
-| --------- | -------------------------------------- | ------------------- |
-| `dismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
-| `present` | Emitted after the modal has presented. | `CustomEvent<void>` |
+| Event        | Description                            | Type                |
+| ------------ | -------------------------------------- | ------------------- |
+| `didDismiss` | Emitted after the modal has dismissed. | `CustomEvent<void>` |
+| `didPresent` | Emitted after the modal has presented. | `CustomEvent<void>` |
 
 
 ## Methods

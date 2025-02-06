@@ -125,8 +125,8 @@ pop-dropdown,prop,triggerAction,"click" | "context-menu" | "hover",undefined,fal
 pop-dropdown,method,dismiss,dismiss(data?: any) => Promise<boolean>
 pop-dropdown,method,present,present() => Promise<boolean>
 pop-dropdown,method,toggle,toggle() => Promise<boolean>
-pop-dropdown,event,dismiss,void,true
-pop-dropdown,event,present,void,true
+pop-dropdown,event,didDismiss,void,true
+pop-dropdown,event,didPresent,void,true
 pop-dropdown,css-prop,--background
 pop-dropdown,css-prop,--border-color
 pop-dropdown,css-prop,--border-radius
@@ -258,8 +258,8 @@ pop-modal,prop,showBackdrop,boolean,undefined,false,true
 pop-modal,prop,trigger,string,undefined,false,false
 pop-modal,method,dismiss,dismiss(data: any) => Promise<boolean>
 pop-modal,method,present,present() => Promise<boolean>
-pop-modal,event,dismiss,void,true
-pop-modal,event,present,void,true
+pop-modal,event,didDismiss,void,true
+pop-modal,event,didPresent,void,true
 pop-modal,part,actions
 pop-modal,part,backdrop
 pop-modal,part,content
@@ -370,11 +370,11 @@ pop-select,method,dismiss,dismiss() => Promise<boolean>
 pop-select,method,present,present() => Promise<boolean>
 pop-select,method,setFocus,setFocus() => Promise<void>
 pop-select,method,toggle,toggle() => Promise<boolean>
-pop-select,event,dismiss,void,true
+pop-select,event,didDismiss,void,true
+pop-select,event,didPresent,void,true
 pop-select,event,popBlur,void,true
 pop-select,event,popChange,SelectChangeEventDetail<any>,true
 pop-select,event,popFocus,void,true
-pop-select,event,present,void,true
 pop-select,css-prop,--background
 pop-select,css-prop,--border-color
 pop-select,css-prop,--border-radius

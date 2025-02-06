@@ -200,12 +200,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   /**
    * Emitted when the overlay is presented.
    */
-  @Event({ eventName: 'present' }) presentEvent: EventEmitter<void>;
+  @Event() didPresent: EventEmitter<void>;
 
   /**
    * Emitted when the overlay is dismissed.
    */
-  @Event({ eventName: 'dismiss' }) dismissEvent: EventEmitter<void>;
+  @Event() didDismiss: EventEmitter<void>;
 
   /**
    * The `popChange` event is fired when the user modifies the select's value.
@@ -298,7 +298,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     }
 
     this.open = true;
-    this.presentEvent.emit();
+    this.didPresent.emit();
     return true;
   }
 
@@ -326,7 +326,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     this.open = false;
     await this.setFocus();
-    this.dismissEvent.emit();
+    this.didDismiss.emit();
 
     return true;
   }
@@ -367,7 +367,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     // we dont use this.dismiss() because it will focus the summary
     this.open = false;
-    this.dismissEvent.emit();
+    this.didDismiss.emit();
   };
 
   private onKeyPress = (...keys: string[]) => {

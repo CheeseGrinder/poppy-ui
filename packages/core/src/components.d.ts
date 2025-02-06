@@ -1593,8 +1593,8 @@ declare global {
         new (): HTMLPopDrawerElement;
     };
     interface HTMLPopDropdownElementEventMap {
-        "present": void;
-        "dismiss": void;
+        "didPresent": void;
+        "didDismiss": void;
     }
     /**
      * Dropdown can open a menu or any other element when the trigger element is clicked.
@@ -1736,8 +1736,8 @@ declare global {
         new (): HTMLPopMaskElement;
     };
     interface HTMLPopModalElementEventMap {
-        "present": void;
-        "dismiss": void;
+        "didPresent": void;
+        "didDismiss": void;
     }
     /**
      * Modal is used to show a dialog or a box when you click on the trigger element.
@@ -1856,8 +1856,8 @@ declare global {
         new (): HTMLPopRangeElement;
     };
     interface HTMLPopSelectElementEventMap {
-        "present": void;
-        "dismiss": void;
+        "didPresent": void;
+        "didDismiss": void;
         "popChange": SelectChangeEventDetail;
         "popFocus": void;
         "popBlur": void;
@@ -2327,11 +2327,11 @@ declare namespace LocalJSX {
         /**
           * Emitted after the modal has dismissed.
          */
-        "onDismiss"?: (event: PopDropdownCustomEvent<void>) => void;
+        "onDidDismiss"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
           * Emitted after the modal has presented.
          */
-        "onPresent"?: (event: PopDropdownCustomEvent<void>) => void;
+        "onDidPresent"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
           * Force the dropdown to be shown
           * @config 
@@ -2735,11 +2735,11 @@ declare namespace LocalJSX {
         /**
           * Emitted after the modal has dismissed.
          */
-        "onDismiss"?: (event: PopModalCustomEvent<void>) => void;
+        "onDidDismiss"?: (event: PopModalCustomEvent<void>) => void;
         /**
           * Emitted after the modal has presented.
          */
-        "onPresent"?: (event: PopModalCustomEvent<void>) => void;
+        "onDidPresent"?: (event: PopModalCustomEvent<void>) => void;
         /**
           * If `true`, the modal will open. If `false`, the modal will close. Use this if you need finer grained control over presentation, otherwise just use the modalController or the `trigger` property. Note: `open` will automatically be set back to `false` when the modal dismisses.
           * @config 
@@ -3083,7 +3083,11 @@ declare namespace LocalJSX {
         /**
           * Emitted when the overlay is dismissed.
          */
-        "onDismiss"?: (event: PopSelectCustomEvent<void>) => void;
+        "onDidDismiss"?: (event: PopSelectCustomEvent<void>) => void;
+        /**
+          * Emitted when the overlay is presented.
+         */
+        "onDidPresent"?: (event: PopSelectCustomEvent<void>) => void;
         /**
           * Emitted when the input loses focus.
          */
@@ -3096,10 +3100,6 @@ declare namespace LocalJSX {
           * Emitted when the input has focus.
          */
         "onPopFocus"?: (event: PopSelectCustomEvent<void>) => void;
-        /**
-          * Emitted when the overlay is presented.
-         */
-        "onPresent"?: (event: PopSelectCustomEvent<void>) => void;
         /**
           * Instructional text that shows before the input has a value.  This property replace the `<option disabled selected>`
          */

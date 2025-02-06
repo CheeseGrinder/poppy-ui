@@ -159,11 +159,11 @@ export const PopDropdown = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-d
   'triggerAction',
   'debounce',
   'showBackdrop',
-  'present',
-  'dismiss'
+  'didPresent',
+  'didDismiss'
 ], [
-  'present',
-  'dismiss'
+  'didPresent',
+  'didDismiss'
 ]);
 
 
@@ -290,11 +290,11 @@ export const PopModal = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal',
   'showBackdrop',
   'backdropDismiss',
   'open',
-  'present',
-  'dismiss'
+  'didPresent',
+  'didDismiss'
 ], [
-  'present',
-  'dismiss'
+  'didPresent',
+  'didDismiss'
 ]);
 
 
@@ -407,14 +407,14 @@ export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSel
   'notEnoughErrorText',
   'tooManyErrorText',
   'compare',
-  'present',
-  'dismiss',
+  'didPresent',
+  'didDismiss',
   'popChange',
   'popFocus',
   'popBlur'
 ], [
-  'present',
-  'dismiss',
+  'didPresent',
+  'didDismiss',
   'popChange',
   'popFocus',
   'popBlur'

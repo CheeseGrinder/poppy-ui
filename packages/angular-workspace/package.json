@@ -1,0 +1,34 @@
+{
+  "name": "angular-workspace",
+  "version": "0.4.0",
+  "type": "module",
+  "scripts": {
+    "ng": "ng",
+    "clean": "rimraf .angular ./projects/**/css ./projects/**/dist",
+    "postclean": "node ./scripts/copy-css.js",
+    "prebuild": "npm run clean",
+    "build": "ng build component-library"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^16.2.0",
+    "@angular/common": "^16.2.0",
+    "@angular/compiler": "^16.2.0",
+    "@angular/core": "^16.2.0",
+    "@angular/forms": "^16.2.0",
+    "@angular/platform-browser": "^16.2.0",
+    "@angular/platform-browser-dynamic": "^16.2.0",
+    "@angular/router": "^16.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.2.0",
+    "@angular/cli": "^16.2.0",
+    "@angular/compiler-cli": "^16.2.0",
+    "ng-packagr": "^16.2.0",
+    "rimraf": "^6.0.1",
+    "typescript": "~5.1.3"
+  }
+}

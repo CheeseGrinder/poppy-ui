@@ -69,6 +69,7 @@
     "@cheese-grinder/stencil-custom-readme": "^0.1.7",
     "@cheese-grinder/stencil-sass-alias": "~0.2.4",
     "@playwright/test": "^1.50.1",
+    "@stencil/angular-output-target": "^0.10.2",
     "@stencil/playwright": "^0.2.1",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",

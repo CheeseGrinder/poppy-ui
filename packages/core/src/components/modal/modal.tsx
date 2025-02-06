@@ -109,12 +109,12 @@ export class Modal implements ComponentInterface, OverlayInterface {
   /**
    * Emitted after the modal has presented.
    */
-  @Event({ eventName: 'present' }) didPresent: EventEmitter<void>;
+  @Event() didPresent: EventEmitter<void>;
 
   /**
    * Emitted after the modal has dismissed.
    */
-  @Event({ eventName: 'dismiss' }) didDismiss: EventEmitter<void>;
+  @Event() didDismiss: EventEmitter<void>;
 
   connectedCallback(): void {
     const { trigger } = this;

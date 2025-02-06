@@ -1,5 +1,5 @@
-import { type PoppyUserConfig, initialize } from '@poppy-ui/core';
-export * from './components';
+export * from './generated/components';
+export * from './generated/setup';
 
 export {
   AccordionGroupCustomEvent,
@@ -30,18 +30,3 @@ export {
 
 export type * from '@poppy-ui/core/dist/types/component-types';
 export type * from '@poppy-ui/core/dist/types/interface';
-
-export const setupPoppyReact = (config: PoppyUserConfig = {}) => {
-  /**
-   * By default Stencil hides elements that
-   * are not hydrated, but in the CE build there is no
-   * hydration.
-   */
-  if (typeof document !== 'undefined') {
-    document.documentElement.classList.add('pop-ce');
-  }
-
-  initialize({
-    ...config,
-  });
-};

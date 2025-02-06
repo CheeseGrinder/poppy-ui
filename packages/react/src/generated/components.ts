@@ -201,8 +201,8 @@ export const PopDrawer: StencilReactComponent<PopDrawerElement, PopDrawerEvents>
 });
 
 type PopDropdownEvents = {
-    onPresent: EventName<CustomEvent<void>>,
-    onDismiss: EventName<CustomEvent<void>>
+    onDidPresent: EventName<CustomEvent<void>>,
+    onDidDismiss: EventName<CustomEvent<void>>
 };
 
 export const PopDropdown: StencilReactComponent<PopDropdownElement, PopDropdownEvents> = /*@__PURE__*/ createComponent<PopDropdownElement, PopDropdownEvents>({
@@ -211,8 +211,8 @@ export const PopDropdown: StencilReactComponent<PopDropdownElement, PopDropdownE
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
     events: {
-        onPresent: 'present',
-        onDismiss: 'dismiss'
+        onDidPresent: 'didPresent',
+        onDidDismiss: 'didDismiss'
     } as PopDropdownEvents,
     defineCustomElement: definePopDropdown
 });
@@ -354,8 +354,8 @@ export const PopMask: StencilReactComponent<PopMaskElement, PopMaskEvents> = /*@
 });
 
 type PopModalEvents = {
-    onPresent: EventName<CustomEvent<void>>,
-    onDismiss: EventName<CustomEvent<void>>
+    onDidPresent: EventName<CustomEvent<void>>,
+    onDidDismiss: EventName<CustomEvent<void>>
 };
 
 export const PopModal: StencilReactComponent<PopModalElement, PopModalEvents> = /*@__PURE__*/ createComponent<PopModalElement, PopModalEvents>({
@@ -364,8 +364,8 @@ export const PopModal: StencilReactComponent<PopModalElement, PopModalEvents> = 
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
     events: {
-        onPresent: 'present',
-        onDismiss: 'dismiss'
+        onDidPresent: 'didPresent',
+        onDidDismiss: 'didDismiss'
     } as PopModalEvents,
     defineCustomElement: definePopModal
 });
@@ -461,8 +461,8 @@ export const PopRange: StencilReactComponent<PopRangeElement, PopRangeEvents> = 
 });
 
 type PopSelectEvents = {
-    onPresent: EventName<CustomEvent<void>>,
-    onDismiss: EventName<CustomEvent<void>>,
+    onDidPresent: EventName<CustomEvent<void>>,
+    onDidDismiss: EventName<CustomEvent<void>>,
     onPopChange: EventName<PopSelectCustomEvent<SelectChangeEventDetail>>,
     onPopFocus: EventName<CustomEvent<void>>,
     onPopBlur: EventName<CustomEvent<void>>
@@ -474,8 +474,8 @@ export const PopSelect: StencilReactComponent<PopSelectElement, PopSelectEvents>
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
     events: {
-        onPresent: 'present',
-        onDismiss: 'dismiss',
+        onDidPresent: 'didPresent',
+        onDidDismiss: 'didDismiss',
         onPopChange: 'popChange',
         onPopFocus: 'popFocus',
         onPopBlur: 'popBlur'
