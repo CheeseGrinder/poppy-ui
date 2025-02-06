@@ -1,13 +1,13 @@
 {
   "name": "angular-workspace",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "clean": "rimraf .angular ./projects/**/css ./projects/**/dist",
-    "postclean": "node ./scripts/copy-css.js",
-    "prebuild": "npm run clean",
-    "build": "ng build component-library"
+    "clean": "rimraf .angular dist/ ./projects/**/css",
+    "prebuild": "npm run clean && npm run copy:css",
+    "build": "ng build component-library",
+    "copy:css": "node ./scripts/copy-css.js"
   },
   "private": true,
   "dependencies": {

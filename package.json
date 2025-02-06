@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "workspaces": [
     "packages/*",
     "packages/angular-workspace/projects/*",
@@ -13,6 +13,7 @@
     "angular:build": "npm -w angular-workspace run build",
     "vue:build": "npm -w @poppy-ui/vue run build",
     "react:build": "npm -w @poppy-ui/react run build",
+    "clean": "npm -w @poppy-ui/core run clean && npm -w @poppy-ui/vue run clean && npm -w @poppy-ui/react run clean && npm -w angular-workspace run clean",
     "format": "biome format",
     "format:fix": "biome format --write",
     "lint": "biome lint",
