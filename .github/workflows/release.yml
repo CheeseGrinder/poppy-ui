@@ -64,6 +64,12 @@ jobs:
       - test
     uses: ./.github/workflows/build-core.yml
 
+  build-angular:
+    name: Build - Angular
+    needs:
+      - test
+    uses: ./.github/workflows/build-angular.yml
+
   build-vue:
     name: Build - Vue
     needs:
@@ -79,6 +85,7 @@ jobs:
   publish:
     needs:
       - build-core
+      - build-angular
       - build-react
       - build-vue
     runs-on: ubuntu-latest
@@ -112,6 +119,20 @@ jobs:
         run: |
           npm publish
         working-directory: packages/docs
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upgrade - Angular
+        run: |
+          npm -w @poppy-ui/angular uninstall @poppy-ui/core
+          npm -w @poppy-ui/angular install @poppy-ui/core@${{ steps.bump.outputs.version }}
+
+      - name: Publish Angular
+        run: |
+          npm run build
+          cd dist/component-library
+          npm publish
+        working-directory: packages/angular-workspace
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

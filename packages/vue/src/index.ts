@@ -1,4 +1,4 @@
-export * from './components';
+export * from './generated/components';
 export * from './plugin';
 
 export {

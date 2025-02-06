@@ -33,13 +33,13 @@ Select is used to pick a value from a list of options.
 
 ## Events
 
-| Event       | Description                                                                                                                                                                                             | Type                                        |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `dismiss`   | Emitted when the overlay is dismissed.                                                                                                                                                                  | `CustomEvent<void>`                         |
-| `popBlur`   | Emitted when the input loses focus.                                                                                                                                                                     | `CustomEvent<void>`                         |
-| `popChange` | The `popChange` event is fired when the user modifies the select's value.<br> Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified. | `CustomEvent<SelectChangeEventDetail<any>>` |
-| `popFocus`  | Emitted when the input has focus.                                                                                                                                                                       | `CustomEvent<void>`                         |
-| `present`   | Emitted when the overlay is presented.                                                                                                                                                                  | `CustomEvent<void>`                         |
+| Event        | Description                                                                                                                                                                                             | Type                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `didDismiss` | Emitted when the overlay is dismissed.                                                                                                                                                                  | `CustomEvent<void>`                         |
+| `didPresent` | Emitted when the overlay is presented.                                                                                                                                                                  | `CustomEvent<void>`                         |
+| `popBlur`    | Emitted when the input loses focus.                                                                                                                                                                     | `CustomEvent<void>`                         |
+| `popChange`  | The `popChange` event is fired when the user modifies the select's value.<br> Unlike the ionInput event, the `popChange` event is fired when the element loses focus after its value has been modified. | `CustomEvent<SelectChangeEventDetail<any>>` |
+| `popFocus`   | Emitted when the input has focus.                                                                                                                                                                       | `CustomEvent<void>`                         |
 
 
 ## Methods

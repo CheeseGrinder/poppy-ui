@@ -1,0 +1,13 @@
+{
+  "name": "@poppy-ui/angular",
+  "version": "0.4.0",
+  "dependencies": {
+    "@poppy-ui/core": "0.4.0",
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "^16.2.0",
+    "@angular/core": "^16.2.0"
+  },
+  "sideEffects": false
+}

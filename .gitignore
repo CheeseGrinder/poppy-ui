@@ -54,15 +54,14 @@ prerender-hydrated.html
 prerender-static.html
 
 # stencil
-packages/angular/css/
-packages/react/css/
-packages/vue/css/
 packages/core/components/
 packages/core/css/
 packages/core/hydrate/
 packages/core/loader/
 packages/core/www/
 packages/.stencil/
+packages/**/css/
+packages/angular*/**/css/
 
 # playwright
 packages/core/test-results/

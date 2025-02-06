@@ -3,12 +3,11 @@
   "files": {
     "ignore": [
       "**/package.json",
+      "**/tsconfig*.json",
       "**/*.d.ts",
-      "packages/core/src/components.ts",
-      "packages/core/src/components-config.ts",
       "packages/docs/*",
+      "packages/**/generated/*",
       "packages/react/src/components.ts",
-      "packages/vue/src/vue-component-lib/utils.ts",
       "packages/vue/src/components.ts",
       "tests/**"
     ]
