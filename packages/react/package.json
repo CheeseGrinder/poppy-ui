@@ -2,7 +2,7 @@
   "name": "@poppy-ui/react",
   "type": "module",
   "version": "0.4.0",
-  "description": "React specific wrapper for @kds/core",
+  "description": "React specific wrapper for @poppy-ui/core",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
@@ -10,6 +10,9 @@
     "dist/",
     "css/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "audit-ci": "audit-ci --config ./audit-ci.json",
     "clean": "rimraf ./css ./dist",

@@ -1,6 +1,32 @@
 {
   "name": "@poppy-ui/angular",
   "version": "0.4.0",
+  "description": "Angular specific wrapper for @poppy-ui/core",
+  "author": "Sukaato <sukaato.dev@proton.me>",
+  "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheeseGrinder/poppy-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CheeseGrinder/poppy-ui/issues"
+  },
+  "keywords": [
+    "daisy-ui",
+    "framework",
+    "stencil",
+    "mobile",
+    "app",
+    "webapp",
+    "electron",
+    "tauri",
+    "progressive web app",
+    "pwa"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@poppy-ui/core": "0.4.0",
     "tslib": "^2.3.0"
@@ -9,5 +35,7 @@
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "css/*.css"
+  ]
 }

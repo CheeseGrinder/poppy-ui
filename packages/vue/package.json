@@ -32,6 +32,9 @@
     "progressive web app",
     "pwa"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "audit-ci": "audit-ci --config ./audit-ci.json",
     "clean": "rimraf ./css ./dist",
