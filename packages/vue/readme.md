@@ -20,7 +20,7 @@ npm install @poppy-ui/vue
 The configuration is minimal and easy
 ```ts
 // main.ts
-import { PoppyVue } from '@poppy-ui/vue';
+import poppyVue from '@poppy-ui/vue';
 import { createApp } from 'vue';
 import App from './App.vue';
 
@@ -28,7 +28,7 @@ import '@poppy-ui/vue/css/core.css';
 import '@poppy-ui/vue/css/themes/light.always.css';
 
 createApp(App)
-  .use(PoppyVue)
+  .use(poppyVue)
   .mount('#app');
 ```
 

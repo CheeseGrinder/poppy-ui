@@ -1,5 +1,7 @@
+import { PoppyVue } from './plugin';
+export default PoppyVue;
+
 export * from './generated/components';
-export * from './plugin';
 
 export {
   AccordionGroupCustomEvent,
