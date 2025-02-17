@@ -26,11 +26,11 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 
-import { setupPoppyReact } from '@poppy-ui/react';
+import poppyReact from '@poppy-ui/react';
 import '@poppy-ui/react/css/core.css';
 import '@poppy-ui/react/css/themes/light.always.css';
 
-setupPoppyReact();
+poppyReact();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

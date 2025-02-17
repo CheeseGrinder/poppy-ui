@@ -1,5 +1,7 @@
+import { setupPoppyReact } from './generated/setup';
+export default setupPoppyReact;
+
 export * from './generated/components';
-export * from './generated/setup';
 
 export {
   AccordionGroupCustomEvent,
