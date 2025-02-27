@@ -8,6 +8,7 @@
     "tests/*"
   ],
   "scripts": {
+    "dev": "npm run core:start",
     "core:start": "npm -w @poppy-ui/core start",
     "core:build": "npm -w @poppy-ui/core run build",
     "angular:build": "npm -w angular-workspace run build",

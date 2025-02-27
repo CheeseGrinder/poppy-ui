@@ -46,13 +46,17 @@
     "build:web-types": "node --experimental-json-modules ./scripts/build-web-types.js",
     "copy:css": "node ./scripts/copy-css.js"
   },
+  "dependencies": {
+    "@poppy-ui/core": "^0.5.0",
+    "@stencil/vue-output-target": "^0.9.5"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@poppy-ui/docs": "^0.5.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",
-    "rollup": "^4.32.1",
+    "rollup": "^4.34.8",
     "typescript": "^5.7.3",
     "vue": "3.5.13"
   },
@@ -63,8 +67,5 @@
   "web-types": "dist/web-types.json",
   "sideEffects": [
     "css/*.css"
-  ],
-  "dependencies": {
-    "@poppy-ui/core": "^0.5.0"
-  }
+  ]
 }

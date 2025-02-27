@@ -1,3 +1,4 @@
 #!/bin/bash
 
 npx @biomejs/biome ci
+npm run core:build

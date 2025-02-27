@@ -43,7 +43,7 @@ pop-tooltip {
     background-color: var(--background);
 
     content: attr(data-tip);
-    color: var(--color, oklch(#{theme.use_color("neutral.content")} / var(--text-opacity, 1)));
+    color: var(--color, #{theme.use_color("neutral.content")});
     font-size: 0.875rem;
     line-height: 1.25rem;
     pointer-events: none;

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select | Poppy-ui</title>
+  <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <link rel="stylesheet" href="/css/themes/light.always.css">
+  <link rel="stylesheet" href="/tests/style.css">
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Tooltip - color</h2>
+      <small>hover a button to see the tooltip</small>
+      <div>
+        <pop-tooltip value="no color">
+          <pop-button>no color</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="primary" color="primary">
+          <pop-button>primary</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="secondary" color="secondary">
+          <pop-button>secondary</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="accent" color="accent">
+          <pop-button>accent</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="info" color="info">
+          <pop-button>info</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="success" color="success">
+          <pop-button>success</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="warning" color="warning">
+          <pop-button>warning</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="error" color="error">
+          <pop-button>error</pop-button>
+        </pop-tooltip>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tooltip - position</h2>
+      <small>hover a button to see the tooltip</small>
+      <div>
+        <pop-tooltip value="top" position="top">
+          <pop-button>top</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="bottom" position="bottom">
+          <pop-button>bottom</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="left" position="left">
+          <pop-button>left</pop-button>
+        </pop-tooltip>
+        <pop-tooltip value="right" position="right">
+          <pop-button>right</pop-button>
+        </pop-tooltip>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tooltip - position</h2>
+      <div>
+        <pop-tooltip value="open" open>
+          <pop-button>open</pop-button>
+        </pop-tooltip>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
