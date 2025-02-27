@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swap | Poppy-ui</title>
+  <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <link rel="stylesheet" href="/css/themes/light.always.css">
+  <link rel="stylesheet" href="/tests/style.css">
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+  <style>
+    pop-tooltip {
+      font-size: xx-large;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Swap - Basic</h2>
+      <small>By default "off" slot is displayed</small>
+      <div>
+        <p>No type specified</p>
+        <pop-swap>
+          <pop-tooltip value="off" slot="off">😊</pop-tooltip>
+          <pop-tooltip value="on" slot="on">😎</pop-tooltip>
+        </pop-swap>
+      </div>
+      <div>
+        <p>Rotate</p>
+        <pop-swap type="rotate">
+          <pop-tooltip value="off" slot="off">😊</pop-tooltip>
+          <pop-tooltip value="on" slot="on">😎</pop-tooltip>
+        </pop-swap>
+      </div>
+      <div>
+        <p>Flip</p>
+        <pop-swap type="flip">
+          <pop-tooltip value="off" slot="off">😊</pop-tooltip>
+          <pop-tooltip value="on" slot="on">😎</pop-tooltip>
+        </pop-swap>
+      </div>
+    </section>
+    <section>
+      <h2>Swap - Active</h2>
+      <small>With "active" property, the "on" slot will be displayed by default</small>
+      <div>
+        <pop-swap active>
+          <pop-tooltip value="off" slot="off">😊</pop-tooltip>
+          <pop-tooltip value="on" slot="on">😎</pop-tooltip>
+        </pop-swap>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
