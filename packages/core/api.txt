@@ -346,6 +346,7 @@ pop-range,css-prop,--thumb-color
 pop-range,css-prop,--thumb-size
 pop-range,css-prop,--track-color
 pop-range,css-prop,--track-size
+pop-range,css-prop,--track-transparency
 pop-range,part,native
 
 pop-select,shadow

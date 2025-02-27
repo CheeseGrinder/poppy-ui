@@ -3,6 +3,7 @@
 /**
  * @prop --track-size: Height of the range track
  * @prop --track-color: Color of the unselected part
+ * @prop --track-transparency: Transparency of the track color
  * @prop --active-track-color: Color of active part
  *
  * @prop --thumb-size: Height of the active range track
@@ -16,7 +17,7 @@
   width: 100%;
   height: var(--track-size);
   border-radius: var(--border-radius, #{theme.use_radius(xl)});
-  background-color: var(--track-color, oklch(var(--base-content-oklck) / var(--track-opacity, 0.2)));
+  background-color: color-mix(in oklab, var(--track-color, #{theme.use_color("base.content")}), transparent var(--track-transparency, 80%));
 }
 @mixin thumb {
   width: var(--thumb-size);
@@ -128,10 +129,7 @@
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  $color: theme.use_color("base.content", var(--track-opacity, 0.2));
   $active: theme.use_color("base.content", var(--active-track-opacity, 1));
-
-  --track-color: #{$color};
   --active-track-color: #{$active};
 }
 

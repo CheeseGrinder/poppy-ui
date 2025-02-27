@@ -65,6 +65,7 @@ Type: `Promise<void>`
 | `--thumb-size`         | Height of the active range track |
 | `--track-color`        | Color of the unselected part     |
 | `--track-size`         | Height of the range track        |
+| `--track-transparency` | Transparency of the track color  |
 
 
 ----------------------------------------------
