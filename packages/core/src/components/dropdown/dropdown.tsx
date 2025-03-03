@@ -36,6 +36,7 @@ import type { DropdownAlign, DropdownSide } from './dropdown.type';
 export class Dropdown implements ComponentInterface, OverlayInterface {
   private dropdownRef: HTMLDetailsElement;
   private dropdownObserver: MutationObserver;
+  private triggeredWith?: TriggerAction;
 
   private debounceTimer: NodeJS.Timeout;
 
@@ -180,40 +181,83 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     return true;
   }
 
-  @ClickOutside()
+  @ClickOutside({ triggerEvents: 'click,contextmenu' })
   onClickOutside(): void {
     if (!this.open) return;
 
     this.dismiss();
   }
 
-  private onClick = (): void => {
-    if (this.triggerAction === 'click') {
-      this.present();
+  private onClick = (ev: Event): void => {
+    ev.preventDefault();
+
+    // Early return if the "triggerAction" is not click or hover
+    if (this.triggerAction !== 'click' && this.triggerAction !== 'hover') {
+      return;
     }
+
+    // Special case:
+    // The dropdown has been triggered by a click to stay open in "hover" mode
+    // Since the dropdown is open we need to close it if the user click on the dropdown "trigger"
+    if (this.triggeredWith === 'click' && this.triggerAction === 'hover') {
+      this.dismiss();
+      return;
+    }
+
+    // Special case:
+    // If the dropdown is trigger action is hover
+    // We want to indicate that the dropdown has been triggered with "click" too
+    // it prevent to close the dropdown from the "debounce" timer
+    if (this.triggerAction === 'hover') {
+      this.triggeredWith = 'click';
+      return;
+    }
+
+    // Handle the default case
+    this.triggeredWith = 'click';
+    this.toggle();
   };
 
   private onHover = (): void => {
-    if (this.triggerAction === 'hover') {
-      clearTimeout(this.debounceTimer);
-      this.present();
+    // Early return if the "triggerAction" is not hover
+    if (this.triggerAction !== 'hover') {
+      return;
     }
+
+    this.triggeredWith = 'hover';
+    clearTimeout(this.debounceTimer);
+    this.present();
   };
 
   private onBlur = (): void => {
-    if (this.triggerAction === 'hover') {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(() => {
-        this.dismiss();
-      }, this.debounce || 500);
+    if (this.triggerAction !== 'hover') {
+      return;
     }
+
+    // Special case:
+    // We need to check if the dropdown has been triggered from the "hover" event
+    // Since the "hover" dropdown can be triggered by a "click" event to prevent the dismiss
+    if (this.triggeredWith !== 'hover') {
+      return;
+    }
+
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      if (this.triggeredWith === 'hover') {
+        this.dismiss();
+      }
+    }, this.debounce || 500);
   };
 
   private onContext = (ev: PointerEvent): void => {
-    if (this.triggerAction === 'context-menu') {
-      ev.preventDefault();
-      this.present();
+    // Early return if the "triggerAction" is not context-menu
+    if (this.triggerAction !== 'context-menu') {
+      return;
     }
+
+    ev.preventDefault();
+    this.triggeredWith = 'context-menu';
+    this.toggle();
   };
 
   private onKeyPress = (...keys: string[]) => {
