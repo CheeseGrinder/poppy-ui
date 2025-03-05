@@ -32,7 +32,7 @@ export function vueOutput(core: string, ssr = false) {
         event: 'pop-change',
       },
       {
-        elements: ['pop-radio', 'pop-radio-group', 'pop-select', 'pop-range'],
+        elements: ['pop-radio', 'pop-radio-group', 'pop-select', 'pop-range', 'pop-input-file'],
         targetAttr: 'value',
         event: 'pop-change',
       },

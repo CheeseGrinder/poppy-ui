@@ -228,7 +228,7 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput
 'value', 'pop-input');
 
 
-export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop-input-file', definePopInputFile, [
+export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile, JSX.PopInputFile["value"]>('pop-input-file', definePopInputFile, [
   'name',
   'value',
   'multiple',
@@ -248,7 +248,8 @@ export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile>('pop
   'popChange',
   'popFocus',
   'popBlur'
-]);
+],
+'value', 'pop-change');
 
 
 export const PopItem = /*@__PURE__*/ defineContainer<JSX.PopItem>('pop-item', definePopItem, [
