@@ -65,14 +65,44 @@
     </section>
 
     <section>
-      <h2>Tooltip - position</h2>
-      <div>
+      <h2>Tooltip - open</h2>
+      <div style="padding: 3rem; padding-bottom: 0;">
         <pop-tooltip value="open" open>
           <pop-button>open</pop-button>
         </pop-tooltip>
       </div>
     </section>
+
+    <section>
+      <h2>Tooltip - Custom</h2>
+      <div style="padding: 3rem; padding-bottom: 0;">
+        <pop-tooltip id="custom" value="open" open>
+          <pop-button>open</pop-button>
+        </pop-tooltip>
+        <pop-textarea bordered rows="5" style="width: 100%">
+          <label for="">custom CSS</label>
+        </pop-textarea>
+      </div>
+    </section>
   </main>
+
+  <script>
+    document.querySelector('pop-textarea').addEventListener('popInput', () => {
+      document.querySelector('pop-tooltip#custom').style = document.querySelector('pop-textarea').value
+    });
+
+    const style = `
+--pop-tooltip-background: red;
+--pop-tooltip-background-transparency: 80%;
+--pop-tooltip-color: black;
+--pop-tooltip-color-transparency: 30%;
+--pop-tooltip-tail: 10px;`;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('pop-textarea').value = style.trim();
+      document.querySelector('pop-tooltip#custom').style = style.trim();
+    });
+  </script>
 </body>
 
 </html>

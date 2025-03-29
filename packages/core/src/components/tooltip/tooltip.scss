@@ -1,13 +1,13 @@
 @use "@poppy/global" as theme;
 
 /**
- * @prop --tail: Tooltip arrow size
+ * @prop --pop-tooltip-tail: Tooltip arrow size
  *
- * @prop --background: Background color
- * @prop --background-opacity: Background opacity
+ * @prop --pop-tooltip-background: Background color
+ * @prop --pop-tooltip-background-transparency: Background opacity
  *
- * @prop --color: Text color
- * @prop --text-opacity: Text opacity
+ * @prop --pop-tooltip-color: Text color
+ * @prop --pop-tooltip-color-transparency: Text opacity
  *
  */
 
@@ -15,9 +15,7 @@
 // ----------------------------------------------------------------
 
 pop-tooltip {
-  --tail: 0.1875rem;
-  --background-opacity: 1;
-  --background: #{theme.use_color("neutral.base", var(--background-opacity))};
+  --pop-tooltip-tail: 0.1875rem;
   display: inline-flex;
 
   position: relative;
@@ -35,25 +33,26 @@ pop-tooltip {
     transition-timing-function: ease-in-out;
   }
   &:before {
-    --offset: calc(100% + 1px + var(--tail, 0px));
+    --offset: calc(100% + var(--pop-tooltip-tail, 0px));
     width: max-content;
     max-width: 20rem;
     padding: 0.5rem 0.25rem;
     border-radius: theme.use_radius(sm);
-    background-color: var(--background);
+    background-color: color-mix(in oklab, var(--pop-tooltip-background), transparent var(--pop-tooltip-background-transparency, 0%));
 
     content: attr(data-tip);
-    color: var(--color, #{theme.use_color("neutral.content")});
+    color: color-mix(in oklab, var(--pop-tooltip-color), transparent var(--pop-tooltip-color-transparency, 0%));
     font-size: 0.875rem;
     line-height: 1.25rem;
     pointer-events: none;
   }
   &:after {
-    --tail-offset: calc(100% + 0.0625rem - var(--tail));
+    --tail-offset: calc(100% + 0.0625rem - var(--pop-tooltip-tail));
     width: 0;
     height: 0;
-    border-width: var(--tail, 0);
+    border-width: var(--pop-tooltip-tail, 0);
     border-style: solid;
+    border-color: transparent;
 
     content: "";
   }
@@ -89,7 +88,7 @@ pop-tooltip[position="top"] {
   }
   &:after {
     bottom: var(--tail-offset);
-    border-color: var(--background) transparent transparent transparent;
+    border-block-start-color: color-mix(in oklab, var(--pop-tooltip-background), transparent var(--pop-tooltip-background-transparency, 0%));
   }
 }
 pop-tooltip[position="bottom"] {
@@ -105,7 +104,7 @@ pop-tooltip[position="bottom"] {
   }
   &:after {
     top: var(--tail-offset);
-    border-color: transparent transparent var(--background) transparent;
+    border-block-end-color: color-mix(in oklab, var(--pop-tooltip-background), transparent var(--pop-tooltip-background-transparency, 0%));
   }
 }
 pop-tooltip[position="left"] {
@@ -121,7 +120,7 @@ pop-tooltip[position="left"] {
   }
   &:after {
     right: calc(var(--tail-offset) + 0.0625rem);
-    border-color: transparent transparent transparent var(--background);
+    border-inline-start-color: color-mix(in oklab, var(--pop-tooltip-background), transparent var(--pop-tooltip-background-transparency, 0%));
   }
 }
 pop-tooltip[position="right"] {
@@ -137,7 +136,7 @@ pop-tooltip[position="right"] {
   }
   &:after {
     left: calc(var(--tail-offset) + 0.0625rem);
-    border-color: transparent var(--background) transparent transparent;
+    border-inline-end-color: color-mix(in oklab, var(--pop-tooltip-background), transparent var(--pop-tooltip-background-transparency, 0%));
   }
 }
 
@@ -146,13 +145,18 @@ pop-tooltip[position="right"] {
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $base: theme.use_color("#{$color}.base", var(--background-opacity, 1));
-    $text: theme.use_color("#{$color}.content", var(--text-opacity, 1));
+    $base: theme.use_color("#{$color}.base");
+    $text: theme.use_color("#{$color}.content");
 
     pop-tooltip[color="#{$color}"] {
-      --background: #{$base};
-      --color: #{$text};
+      --pop-tooltip-background: #{$base};
+      --pop-tooltip-color: #{$text};
     }
   }
+}
+
+pop-tooltip:not([color]) {
+  --pop-tooltip-background: #{theme.use_color("neutral.base")};
+  --pop-tooltip-color: #{theme.use_color("neutral.content")};
 }
 @include generate-color(primary, secondary, accent, info, success, warning, error);

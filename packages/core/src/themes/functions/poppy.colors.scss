@@ -46,7 +46,7 @@
   }
 
   @if ($alpha) {
-    @return oklch(var(#{$css-var}-oklch, $value) / $alpha);
+    @return color-mix(var(#{$css-var}, $value), transparent $alpha);
   }
 
   @if ($oklch) {
