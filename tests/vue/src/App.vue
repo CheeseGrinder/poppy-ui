@@ -41,25 +41,22 @@ function submit(ev: Event) {
     id="test"
     @submit.prevent="submit"
   >
-    <PopButton
-      type="submit"
-      form="test"
-      outlined
-    >
-      button poppy
-    </PopButton>
-    <PopSelect v-model="fields.choice" name="choice" placeholder="placeholder" bordered required>
-      <span slot="label">label</span>
-      <PopSelectOption :value="''">Select option</PopSelectOption>
-      <PopSelectOption :value="1">option 1</PopSelectOption>
-      <PopSelectOption :value="2">option 2</PopSelectOption>
-      <PopSelectOption :value="3">option 3</PopSelectOption>
-      <PopSelectOption :value="4">option 4</PopSelectOption>
-    </PopSelect>
+    <div>
+      <PopSelect v-model="fields.choice" name="choice" placeholder="placeholder" bordered required>
+        <span slot="label">label</span>
+        <PopSelectOption :value="1">option 1</PopSelectOption>
+        <PopSelectOption :value="2">option 2</PopSelectOption>
+        <PopSelectOption :value="3">option 3</PopSelectOption>
+        <PopSelectOption :value="4">option 4</PopSelectOption>
+      </PopSelect>
 
-    <PopInput v-model="fields.name" name="name" placeholder="placeholder">
-      label
-    </PopInput>
+      <PopInput v-model="fields.name" name="name" placeholder="placeholder">
+        label
+      </PopInput>
+    </div>
+    <PopButton type="submit" form="test" outlined>
+      submit
+    </PopButton>
   </form>
 </template>
 
@@ -75,5 +72,9 @@ function submit(ev: Event) {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+div {
+  padding: 10px
 }
 </style>

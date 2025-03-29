@@ -27,13 +27,13 @@ Tooltip can be used to show a message when hovering over an element.
 
 ## CSS Custom Properties
 
-| Name                   | Description        |
-| ---------------------- | ------------------ |
-| `--background`         | Background color   |
-| `--background-opacity` | Background opacity |
-| `--color`              | Text color         |
-| `--tail`               | Tooltip arrow size |
-| `--text-opacity`       | Text opacity       |
+| Name                                    | Description        |
+| --------------------------------------- | ------------------ |
+| `--pop-tooltip-background`              | Background color   |
+| `--pop-tooltip-background-transparency` | Background opacity |
+| `--pop-tooltip-color`                   | Text color         |
+| `--pop-tooltip-color-transparency`      | Text opacity       |
+| `--pop-tooltip-tail`                    | Tooltip arrow size |
 
 
 ----------------------------------------------

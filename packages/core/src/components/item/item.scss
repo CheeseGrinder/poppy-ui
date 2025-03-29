@@ -40,7 +40,7 @@
 :host(:not(.has-list)) > {
   .item-inner:is(:hover, :focus),
   .item-inner:has(:focus) {
-    background-color: theme.use_color("base.content", 0.1);
+    background-color: theme.use_color("base.content", 90%);
     color: inherit;
   }
 }

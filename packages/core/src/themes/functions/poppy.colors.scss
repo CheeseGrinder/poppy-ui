@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------------------
 // Example usage:
 // current_color(base.100) => var(--base)
-// current_color(base.content, 0.1) => oklch(var(--base-content-oklch), 0.1)
+// current_color(base.content, 90%) => oklch(var(--base-content-oklch) calc(100% - 90%), transparent)
 // --------------------------------------------------------------------------------------------
 @function current_color($variation, $alpha: null) {
   @if $alpha == null {
@@ -24,7 +24,7 @@
 // use_color(secondary, content) => var(--secondary-content, oklch(0.1496 0.052 342.55))
 // use_color(primary, base, 0.5) => oklch(var(--primary-oklch, 0.6569 0.196 275.75) / 0.5)
 // --------------------------------------------------------------------------------------------
-@function use_color($color, $alpha: null, $oklch: false) {
+@function use_color($color, $alpha: 0%, $oklch: false) {
   $colorArr: string.split($color, ".");
   $name: list.nth($colorArr, 1);
   $variant: list.nth($colorArr, 2);
@@ -46,7 +46,7 @@
   }
 
   @if ($alpha) {
-    @return color-mix(var(#{$css-var}, $value), transparent $alpha);
+    @return color-mix(in oklab, var(#{$css-var}, $value) calc(100% - $alpha), transparent);
   }
 
   @if ($oklch) {

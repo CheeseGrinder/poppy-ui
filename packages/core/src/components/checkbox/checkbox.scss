@@ -16,7 +16,7 @@
 
 :host {
   --border-radius: #{theme.use_radius(md)};
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 80%)};
 
   --background: #{theme.use_color("base.content")};
   --checkmark-color: #{theme.use_color("base.100")};
@@ -80,13 +80,13 @@
 
 // start is the default in flex so no css needed here.
 :host([placement="start"]) {
-  input {
+  flex-direction: row-reverse;
+
+  .label {
     margin-inline-end: auto;
   }
 }
 :host([placement="end"]) {
-  flex-direction: row-reverse;
-
   input {
     margin-inline-start: auto;
   }
@@ -130,7 +130,7 @@
 @mixin generate-color($colors...) {
   @each $color in $colors {
     $base: theme.use_color("#{$color}.base");
-    $border: theme.use_color("#{$color}.base", 0.2);
+    $border: theme.use_color("#{$color}.base", 80%);
     $text: theme.use_color("#{$color}.content");
 
     :host([color="#{$color}"]) {
@@ -144,7 +144,7 @@
 
 :host(:not([color])) > input {
   --background: #{theme.use_color("base.content")};
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 80%)};
   --checkmark-color: #{theme.use_color("base.100")};
 }
 

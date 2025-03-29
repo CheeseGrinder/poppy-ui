@@ -157,7 +157,7 @@
 
     &:hover,
     &.btn-active {
-      --background: #{theme.use_color("base.content", 0.2)};
+      --background: #{theme.use_color("base.content", 80%)};
     }
   }
 }
@@ -242,8 +242,8 @@
   cursor: not-allowed;
 
   button:disabled {
-    --background: #{theme.use_color("neutral.base", 0.2)};
-    color: #{theme.use_color("base.content", 0.2)};
+    --background: #{theme.use_color("neutral.base", 80%)};
+    color: #{theme.use_color("base.content", 80%)};
 
     pointer-events: none;
   }

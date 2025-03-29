@@ -14,7 +14,7 @@
 
 :host {
   --border-radius: #{theme.use_radius(md)};
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 80%)};
   --background: #{theme.use_color("base.200")};
 
   width: min-content;

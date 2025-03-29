@@ -9,7 +9,7 @@
 // ----------------------------------------------------------------
 
 :host {
-  --background: #{theme.use_color("base.content", 0.1)};
+  --background: #{theme.use_color("base.content", 90%)};
 
   display: flex;
   align-items: center;

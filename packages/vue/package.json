@@ -47,12 +47,12 @@
     "copy:css": "node ./scripts/copy-css.js"
   },
   "dependencies": {
-    "@poppy-ui/core": "^0.5.1",
+    "@poppy-ui/core": "file:../core",
     "@stencil/vue-output-target": "^0.10.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@poppy-ui/docs": "^0.5.1",
+    "@poppy-ui/docs": "file:../docs",
     "@rollup/plugin-typescript": "^12.1.2",
     "change-case": "^5.4.4",
     "rimraf": "^6.0.1",

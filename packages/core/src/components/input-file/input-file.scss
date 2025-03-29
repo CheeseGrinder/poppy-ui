@@ -20,8 +20,8 @@
 
 $minWidth: 12rem;
 :host {
-  --border-color: #{theme.use_color("base.content", 0)};
-  --outline-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 100%)};
+  --outline-color: #{theme.use_color("base.content", 80%)};
   --background-opacity: 1;
   --background: #{theme.use_color("base.100", var(--background-opacity))};
   --color: #{theme.use_color("base.content")};
@@ -87,7 +87,7 @@ $minWidth: 12rem;
 
 // Bordered
 :host([bordered]) {
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 80%)};
 }
 
 // Input-File Size
@@ -186,8 +186,8 @@ $minWidth: 12rem;
 
 :host([disabled]) {
   $background: theme.use_color("base.200");
-  $color: theme.use_color("base.content", 0.2);
-  $btn-background: theme.use_color("neutral.base", 0.2);
+  $color: theme.use_color("base.content", 80%);
+  $btn-background: theme.use_color("neutral.base", 80%);
 
   --background: #{$background};
   --border-color: #{$background};

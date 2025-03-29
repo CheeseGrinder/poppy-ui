@@ -1,6 +1,6 @@
 import typescript from '@rollup/plugin-typescript';
 
-const external = ['vue', 'vue-router'];
+const external = ['vue', 'vue-router', '@stencil/vue-output-target/runtime'];
 const internal = '@poppy-ui/core';
 
 export default {

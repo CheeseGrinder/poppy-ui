@@ -121,8 +121,8 @@ $base: theme.use_color("base.100");
 
 @mixin generate-color($colors...) {
   @each $color in $colors {
-    $border: theme.use_color("#{$color}.base", var(--border-opacity, 1));
-    $background: theme.use_color("#{$color}.base", var(--opacity, 1));
+    $border: theme.use_color("#{$color}.base", var(--border-opacity, 0%));
+    $background: theme.use_color("#{$color}.base", var(--opacity, 0%));
 
     :host([color="#{$color}"]) {
       --border-color: #{$border};
@@ -133,8 +133,8 @@ $base: theme.use_color("base.100");
 @include generate-color(primary, secondary, accent, info, success, warning, error);
 
 :host(:not([color])) {
-  $border: theme.use_color("base.content", var(--border-opacity, 1));
-  $background: theme.use_color("base.content", var(--opacity, 1));
+  $border: theme.use_color("base.content", var(--border-opacity, 0%));
+  $background: theme.use_color("base.content", var(--opacity, 0%));
 
   --border-color: #{$border};
   --background: #{$background};

@@ -16,10 +16,11 @@ import { ARROW_DOWN, ARROW_UP, ENTER, ESC, SPACE } from 'key-definitions';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { ClickOutside } from '#utils/click-outside';
-import { compareOptions, isOptionSelected } from '#utils/forms';
+import { compareOptions } from '#utils/forms';
 import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
+import type { SelectContentOption } from '../select-content/select-content.type';
 import type { SelectChangeEventDetail, SelectColor, SelectCompareFn } from './select.type';
 
 let selectIds = 0;
@@ -43,13 +44,14 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private inheritedAttributes: Attributes;
 
   private initialValues: any | any[] | null;
+  private content?: HTMLPopSelectContentElement;
   private dropdownRef?: HTMLDetailsElement;
   private dropdownObserver: MutationObserver;
 
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
-  @State() options: HTMLPopSelectOptionElement[] = [];
+  @State() options: SelectContentOption[] = [];
 
   @State() open = false;
 
@@ -376,6 +378,10 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
       if (!keys.includes(ev.key)) {
         return;
       }
+      if (ev.key === ARROW_DOWN.key || ev.key === ARROW_UP.key) {
+        return this.content?.select(ev.key === ARROW_UP.key ? 'up' : 'down');
+      }
+
       if (ev.key === ESC.key) {
         return this.dismiss();
       }
@@ -385,7 +391,13 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   private onSlotChange = () => {
     const options = this.host.querySelectorAll('pop-select-option');
-    this.options = [...Array.from(options)];
+    this.options = Array.from(options).map(option => {
+      return {
+        label: option.innerHTML,
+        value: getOptionValue(option),
+        disabled: option.disabled,
+      };
+    });
   };
 
   private get values(): any[] {
@@ -403,9 +415,9 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     return values
       .map(value => {
         const selected = this.options.find(option => {
-          return compareOptions(value, getOptionValue(option), this.compare);
+          return compareOptions(value, option.value, this.compare);
         });
-        return selected ? selected.textContent : null;
+        return selected ? selected.label : null;
       })
       .filter(Boolean)
       .join(', ');
@@ -473,101 +485,6 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     );
   }
 
-  private renderRadioOptions() {
-    const { required, color, size } = this;
-
-    return (
-      <pop-radio-group
-        allowEmpty={!required}
-        disabled={this.disabled}
-        onPopChange={async ev => {
-          this.value = ev.detail.value;
-          await this.dismiss();
-        }}
-        value={this.value}
-      >
-        <pop-list>
-          {this.options.map((option, idx) => (
-            <pop-item>
-              <pop-radio
-                checked={isOptionSelected(this.value, getOptionValue(option), this.compare)}
-                color={color === 'ghost' ? undefined : color}
-                disabled={option.disabled}
-                onKeyUp={async ev => {
-                  if (ev.key !== ARROW_DOWN.key && ev.key !== ARROW_UP.key) {
-                    return;
-                  }
-                  ev.preventDefault();
-                  const radios = this.dropdownRef?.querySelectorAll('pop-radio') ?? [];
-                  if (radios.length === 0) {
-                    return;
-                  }
-
-                  const previous = idx === 0 ? this.options.length - 1 : idx - 1;
-                  const next = idx === this.options.length - 1 ? 0 : idx + 1;
-                  const index = ev.key === ARROW_UP.key ? previous : next;
-                  return Array.from(radios).at(index).setFocus();
-                }}
-                size={size}
-                value={getOptionValue(option)}
-              >
-                {option.textContent}
-              </pop-radio>
-            </pop-item>
-          ))}
-        </pop-list>
-      </pop-radio-group>
-    );
-  }
-
-  private renderCheckboxOptions() {
-    const { color, size } = this;
-
-    return (
-      <pop-list>
-        {this.options.map((option, idx) => (
-          <pop-item>
-            <pop-checkbox
-              checked={isOptionSelected(this.value, getOptionValue(option), this.compare)}
-              color={color === 'ghost' ? undefined : color}
-              disabled={option.disabled ?? this.disabled}
-              onKeyUp={async ev => {
-                if (ev.key !== ARROW_DOWN.key && ev.key !== ARROW_UP.key) {
-                  return;
-                }
-                ev.preventDefault();
-                const checkboxes = this.dropdownRef?.querySelectorAll('pop-checkbox') ?? [];
-                if (checkboxes.length === 0) {
-                  return;
-                }
-
-                const previous = idx === 0 ? this.options.length - 1 : idx - 1;
-                const next = idx === this.options.length - 1 ? 0 : idx + 1;
-                const index = ev.key === ARROW_UP.key ? previous : next;
-                return Array.from(checkboxes).at(index).setFocus();
-              }}
-              onPopChange={async () => {
-                this.errorText = this.errorTextValue;
-                if (this.errorText) {
-                  // No emit if the select has error.
-                  return;
-                }
-
-                this.value = Array.from(this.dropdownRef.querySelectorAll('pop-checkbox'))
-                  .filter(cb => cb.checked)
-                  .map(cb => cb.value);
-              }}
-              size={size}
-              value={getOptionValue(option)}
-            >
-              {option.textContent}
-            </pop-checkbox>
-          </pop-item>
-        ))}
-      </pop-list>
-    );
-  }
-
   render() {
     const { host, helperText, errorText, inputId, text } = this;
 
@@ -616,19 +533,37 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           <summary
             class="dropdown-trigger"
             onClick={this.onClick}
-            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key)}
+            onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key, ARROW_DOWN.key, ARROW_UP.key)}
             tabindex={this.disabled ? '-1' : null}
           >
             <slot name="start" />
             {selected}
             <slot name="end" />
-            <ChevronDown />
+            <div class="icon">
+              <slot name="icon">
+                <ChevronDown />
+              </slot>
+            </div>
           </summary>
           <div
             class="dropdown-content"
             part="content"
           >
-            {this.multiple ? this.renderCheckboxOptions() : this.renderRadioOptions()}
+            <pop-select-content
+              color={this.color === 'ghost' ? undefined : this.color}
+              multiple={this.multiple}
+              onPopSelected={() => {
+                this.value = this.content?.value;
+                if (!this.multiple) {
+                  this.dismiss();
+                }
+              }}
+              options={this.options}
+              ref={el => (this.content = el)}
+              required={this.required}
+              size={this.size}
+              value={this.value}
+            />
           </div>
           {/* biome-ignore lint/a11y/useKeyWithClickEvents: Element not focusable, handle by summary keyboard event */}
           <div

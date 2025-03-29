@@ -55,7 +55,7 @@ $minWidth: 12rem;
     resize: inherit;
 
     &:focus-visible {
-      outline-color: var(--border-color, #{theme.use_color("base.content", 0.2)});
+      outline-color: var(--border-color, #{theme.use_color("base.content", 80%)});
       outline-style: solid;
       outline-width: 2px;
       outline-offset: 2px;
@@ -64,7 +64,7 @@ $minWidth: 12rem;
 }
 
 :host([bordered]) {
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --border-color: #{theme.use_color("base.content", 80%)};
 }
 
 // Textarea Size
@@ -122,10 +122,10 @@ $minWidth: 12rem;
 :host([disabled]) > textarea {
   --background: #{theme.use_color("base.200")};
   --border-color: #{theme.use_color("base.200")};
-  --color: #{theme.use_color("base.content", 0.2)};
+  --color: #{theme.use_color("base.content", 80%)};
   cursor: not-allowed;
 
   &::placeholder {
-    color: #{theme.use_color("base.content", 0.2)};
+    color: #{theme.use_color("base.content", 80%)};
   }
 }

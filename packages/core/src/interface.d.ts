@@ -2,6 +2,7 @@ import type { ComponentConfig, Config } from './config';
 
 export type BrandColor = 'primary' | 'secondary' | 'accent';
 export type StateColor = 'info' | 'success' | 'warning' | 'error';
+
 export type Color = BrandColor | StateColor;
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';

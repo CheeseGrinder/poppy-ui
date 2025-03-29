@@ -24,6 +24,7 @@ import { MaskType } from "./components/mask/mask.type";
 import { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 import { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
 import { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
+import { SelectContentOption } from "./components/select-content/select-content.type";
 import { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 import { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
@@ -47,6 +48,7 @@ export { MaskType } from "./components/mask/mask.type";
 export { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 export { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
 export { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
+export { SelectContentOption } from "./components/select-content/select-content.type";
 export { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 export { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 export { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
@@ -1108,6 +1110,15 @@ export namespace Components {
          */
         "value"?: any | null;
     }
+    interface PopSelectContent {
+        "color": Color;
+        "multiple": boolean;
+        "options": SelectContentOption[];
+        "required": boolean;
+        "select": (direction: "up" | "down") => Promise<void>;
+        "size": Size;
+        "value"?: any | any[] | null;
+    }
     interface PopSelectOption {
         /**
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
@@ -1422,6 +1433,10 @@ export interface PopRangeCustomEvent<T> extends CustomEvent<T> {
 export interface PopSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLPopSelectElement;
+}
+export interface PopSelectContentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLPopSelectContentElement;
 }
 export interface PopSwapCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1879,6 +1894,23 @@ declare global {
         prototype: HTMLPopSelectElement;
         new (): HTMLPopSelectElement;
     };
+    interface HTMLPopSelectContentElementEventMap {
+        "popSelected": void;
+    }
+    interface HTMLPopSelectContentElement extends Components.PopSelectContent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLPopSelectContentElementEventMap>(type: K, listener: (this: HTMLPopSelectContentElement, ev: PopSelectContentCustomEvent<HTMLPopSelectContentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLPopSelectContentElementEventMap>(type: K, listener: (this: HTMLPopSelectContentElement, ev: PopSelectContentCustomEvent<HTMLPopSelectContentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLPopSelectContentElement: {
+        prototype: HTMLPopSelectContentElement;
+        new (): HTMLPopSelectContentElement;
+    };
     interface HTMLPopSelectOptionElement extends Components.PopSelectOption, HTMLStencilElement {
     }
     var HTMLPopSelectOptionElement: {
@@ -1991,6 +2023,7 @@ declare global {
         "pop-radio-group": HTMLPopRadioGroupElement;
         "pop-range": HTMLPopRangeElement;
         "pop-select": HTMLPopSelectElement;
+        "pop-select-content": HTMLPopSelectContentElement;
         "pop-select-option": HTMLPopSelectOptionElement;
         "pop-swap": HTMLPopSwapElement;
         "pop-textarea": HTMLPopTextareaElement;
@@ -3131,6 +3164,15 @@ declare namespace LocalJSX {
          */
         "value"?: any | null;
     }
+    interface PopSelectContent {
+        "color"?: Color;
+        "multiple"?: boolean;
+        "onPopSelected"?: (event: PopSelectContentCustomEvent<void>) => void;
+        "options"?: SelectContentOption[];
+        "required"?: boolean;
+        "size"?: Size;
+        "value"?: any | any[] | null;
+    }
     interface PopSelectOption {
         /**
           * The color to use from your application's color palette. Default options are: `"primary"`, `"secondary"`, `"accent"`, `"info"`, `"success"`, `"warning"`, `"error"`. For more information on colors, see [theming](/docs/theming/basics).
@@ -3445,6 +3487,7 @@ declare namespace LocalJSX {
         "pop-radio-group": PopRadioGroup;
         "pop-range": PopRange;
         "pop-select": PopSelect;
+        "pop-select-content": PopSelectContent;
         "pop-select-option": PopSelectOption;
         "pop-swap": PopSwap;
         "pop-textarea": PopTextarea;
@@ -3565,6 +3608,7 @@ declare module "@stencil/core" {
              * Select is used to pick a value from a list of options.
              */
             "pop-select": LocalJSX.PopSelect & JSXBase.HTMLAttributes<HTMLPopSelectElement>;
+            "pop-select-content": LocalJSX.PopSelectContent & JSXBase.HTMLAttributes<HTMLPopSelectContentElement>;
             "pop-select-option": LocalJSX.PopSelectOption & JSXBase.HTMLAttributes<HTMLPopSelectOptionElement>;
             /**
              * Swap allows you to toggle the visibility of two elements.

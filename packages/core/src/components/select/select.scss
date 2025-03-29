@@ -22,11 +22,11 @@
 
 $minWidth: 12rem;
 :host {
-  --border-radius: #{theme.use_radius(md)};
-  --border-color: transparent;
-  --outline-color: #{theme.use_color("base.content", 0.2)};
-  --background: #{theme.use_color("base.100", var(--opacity, 1))};
-  --color: #{theme.use_color("base.content")};
+  --pop-select-border-radius: #{theme.use_radius(md)};
+  --pop-select-border-color: transparent;
+  --pop-select-outline-color: #{theme.use_color("base.content", 80%)};
+  --pop-select-background: #{theme.use_color("base.100", var(--pop-select-background-transparency, 0%))};
+  --pop-select-color: #{theme.use_color("base.content")};
 
   @include input.label;
   @include input.helper;
@@ -41,7 +41,7 @@ $minWidth: 12rem;
     width: 100%;
 
     &[open] {
-      svg {
+      .icon {
         transform: rotateX(180deg);
       }
 
@@ -59,14 +59,14 @@ $minWidth: 12rem;
       overflow: hidden;
       border-width: 1px;
       border-style: solid;
-      border-radius: var(--border-radius);
-      border-color: var(--border-color, #{theme.use_color("base.content", 0.2)});
-      background-color: var(--background);
+      border-radius: var(--pop-select-border-radius);
+      border-color: var(--pop-select-border-color, #{theme.use_color("base.content", 80%)});
+      background-color: var(--pop-select-background);
 
       cursor: pointer;
 
       &:focus-visible {
-        outline-color: var(--outline-color, var(--border-color));
+        outline-color: var(--pop-select-outline-color, var(--pop-select-border-color));
         outline-style: solid;
         outline-width: 2px;
         outline-offset: 2px;
@@ -91,13 +91,13 @@ $minWidth: 12rem;
       width: 100%;
 
       margin-block: 2px;
-      border: 1px solid theme.use_color("base.content", 0.2);
-      border-radius: var(--border-radius);
-      border-color: var(--border-color, transparent);
+      border: 1px solid theme.use_color("base.content", 80%);
+      border-radius: var(--pop-select-border-radius);
+      border-color: var(--pop-select-border-color, transparent);
       box-shadow: theme.use_shadow(md);
-      background-color: var(--background);
+      background-color: var(--pop-select-background);
 
-      color: var(--color);
+      color: var(--pop-select-color);
       perspective: 200px;
       transform: rotateX(28deg);
       transform-style: preserve-3d;
@@ -117,14 +117,12 @@ $minWidth: 12rem;
     transition: opacity 150ms ease 0ms;
   }
 
-  svg {
+  .icon {
+    display: inline-grid;
+    place-content: center;
     min-width: 24px;
     margin-inline-start: auto;
     transition: transform 200ms ease 0ms;
-  }
-
-  pop-list {
-    width: auto;
   }
 }
 
@@ -150,14 +148,14 @@ $minWidth: 12rem;
 
       inset: 0;
 
-      background: theme.use_color("neutral.base", 0.2);
+      background: theme.use_color("neutral.base", 80%);
     }
   }
 
 }
 
 :host([bordered]) {
-  --border-color: #{theme.use_color("base.content", 0.2)};
+  --pop-select-border-color: #{theme.use_color("base.content", 80%)};
 }
 
 // Select Slot
@@ -214,8 +212,8 @@ $minWidth: 12rem;
     $base: theme.use_color("#{$color}.base");
 
     :host([color="#{$color}"]) {
-      --border-color: #{$base};
-      --outline-color: #{$base};
+      --pop-select-border-color: #{$base};
+      --pop-select-outline-color: #{$base};
     }
   }
 }
@@ -237,21 +235,21 @@ $minWidth: 12rem;
 :host([readonly]) .dropdown-trigger {
   $base: theme.use_color("base.200");
   $neutral: theme.use_color("neutral.base");
-  $text: theme.use_color("base.content", 0.8);
+  $text: theme.use_color("base.content", 20%);
 
-  --background: #{$base};
-  --border-color: #{$neutral};
-  --color: #{$text};
+  --pop-select-background: #{$base};
+  --pop-select-border-color: #{$neutral};
+  --pop-select-color: #{$text};
 
   cursor: unset;
 }
 :host([disabled]) .dropdown-trigger {
   $base: theme.use_color("base.200");
-  $text: theme.use_color("base.content", 0.2);
+  $text: theme.use_color("base.content", 80%);
 
-  --background: #{$base};
-  --border-color: #{$base};
-  --color: #{$text};
+  --pop-select-background: #{$base};
+  --pop-select-border-color: #{$base};
+  --pop-select-color: #{$text};
 
   cursor: not-allowed;
 }

@@ -466,8 +466,8 @@ pop-tooltip,prop,color,"accent" | "error" | "info" | "primary" | "secondary" | "
 pop-tooltip,prop,open,boolean,undefined,false,true
 pop-tooltip,prop,position,"bottom" | "left" | "right" | "top",undefined,false,true
 pop-tooltip,prop,value,string,undefined,true,false
-pop-tooltip,css-prop,--background
-pop-tooltip,css-prop,--background-opacity
-pop-tooltip,css-prop,--color
-pop-tooltip,css-prop,--tail
-pop-tooltip,css-prop,--text-opacity
+pop-tooltip,css-prop,--pop-tooltip-background
+pop-tooltip,css-prop,--pop-tooltip-background-transparency
+pop-tooltip,css-prop,--pop-tooltip-color
+pop-tooltip,css-prop,--pop-tooltip-color-transparency
+pop-tooltip,css-prop,--pop-tooltip-tail
