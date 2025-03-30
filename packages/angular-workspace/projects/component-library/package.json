@@ -1,6 +1,6 @@
 {
   "name": "@poppy-ui/angular",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Angular specific wrapper for @poppy-ui/core",
   "author": "Sukaato <sukaato.dev@proton.me>",
   "homepage": "https://github.com/CheeseGrinder/poppy-ui#readme",
@@ -28,7 +28,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@poppy-ui/core": "^0.5.2",
+    "@poppy-ui/core": "^0.5.3",
     "tslib": "^2.8.1"
   },
   "peerDependencies": {

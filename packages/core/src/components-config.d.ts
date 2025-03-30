@@ -5,14 +5,16 @@
  * It contains typing information for all configurable components that exist in this project.
  */
 import type { BadgeAs, BadgeColor } from "./components/badge/badge.type";
+import type { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size } from "./interface.d";
 import type { ButtonColor, ButtonExpand, ButtonShape } from "./components/button/button.type";
 import type { CheckboxPlacement } from "./components/checkbox/checkbox.type";
 import type { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
+import type { TriggerAction } from "./utils/trigger.util";
 import type { DrawerSide } from "./components/drawer/drawer.type";
 import type { DropdownAlign, DropdownSide } from "./components/dropdown/dropdown.type";
 import type { IndicatorPosition, IndicatorSide } from "./components/indicator/indicator.type";
-import type { InputFileColor } from "./components/input-file/input-file.type";
 import type { InputColor } from "./components/input/input.type";
+import type { InputFileColor } from "./components/input-file/input-file.type";
 import type { JoinOrientation } from "./components/join/join.type";
 import type { ListOrientation } from "./components/list/list.type";
 import type { LoadingType } from "./components/loading/loading.type";
@@ -24,8 +26,6 @@ import type { SwapType } from "./components/swap/swap.type";
 import type { TextareaColor, Wrap } from "./components/textarea/textarea.type";
 import type { ToggleColor } from "./components/toggle/toggle.type";
 import type { TooltipPosition } from "./components/tooltip/tooltip.type";
-import type { AutoCapitalize, Color, EnterKeyHint, KeyboardType, Size } from "./interface.d";
-import type { TriggerAction } from "./utils/trigger.util";
 
 export namespace Configuration {
   interface ComponentsConfig {

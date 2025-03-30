@@ -7,53 +7,52 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AccordionGroupChangeEventDetail } from "./components/accordion-group/accordion-group.type";
 import { BadgeAs, BadgeColor } from "./components/badge/badge.type";
+import { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
 import { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.type";
 import { CheckboxChangeEventDetail, CheckboxPlacement } from "./components/checkbox/checkbox.type";
 import { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
+import { TriggerAction } from "./utils/trigger.util";
 import { DrawerSide } from "./components/drawer/drawer.type";
 import { DropdownAlign, DropdownSide } from "./components/dropdown/dropdown.type";
 import { IndicatorPosition, IndicatorSide } from "./components/indicator/indicator.type";
-import { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
 import { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from "./components/input/input.type";
+import { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
 import { JoinOrientation } from "./components/join/join.type";
 import { ListOrientation } from "./components/list/list.type";
 import { LoadingType } from "./components/loading/loading.type";
 import { MaskType } from "./components/mask/mask.type";
 import { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 import { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
-import { SelectContentOption } from "./components/select-content/select-content.type";
 import { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
+import { SelectContentOption } from "./components/select-content/select-content.type";
 import { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 import { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 import { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
 import { TooltipPosition } from "./components/tooltip/tooltip.type";
-import { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
-import { TriggerAction } from "./utils/trigger.util";
 export { AccordionGroupChangeEventDetail } from "./components/accordion-group/accordion-group.type";
 export { BadgeAs, BadgeColor } from "./components/badge/badge.type";
+export { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
 export { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from "./components/button/button.type";
 export { CheckboxChangeEventDetail, CheckboxPlacement } from "./components/checkbox/checkbox.type";
 export { DividerColor, DividerOrientation, DividerPlacement } from "./components/divider/divider.type";
+export { TriggerAction } from "./utils/trigger.util";
 export { DrawerSide } from "./components/drawer/drawer.type";
 export { DropdownAlign, DropdownSide } from "./components/dropdown/dropdown.type";
 export { IndicatorPosition, IndicatorSide } from "./components/indicator/indicator.type";
-export { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
 export { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from "./components/input/input.type";
+export { InputFileChangeEventDetail, InputFileColor } from "./components/input-file/input-file.type";
 export { JoinOrientation } from "./components/join/join.type";
 export { ListOrientation } from "./components/list/list.type";
 export { LoadingType } from "./components/loading/loading.type";
 export { MaskType } from "./components/mask/mask.type";
 export { RadioGroupChangeEventDetail, RadioGroupCompareFn } from "./components/radio-group/radio-group.type";
 export { RangeChangeEventDetail, RangeColor } from "./components/range/range.type";
-export { SelectContentOption } from "./components/select-content/select-content.type";
 export { SelectChangeEventDetail, SelectColor, SelectCompareFn } from "./components/select/select.type";
+export { SelectContentOption } from "./components/select-content/select-content.type";
 export { SwapChangeEventDetail, SwapType } from "./components/swap/swap.type";
 export { TextareaChangeEventDetail, TextareaColor, TextareaInputEventDetail, Wrap } from "./components/textarea/textarea.type";
 export { ToggleChangeEventDetail, ToggleColor } from "./components/toggle/toggle.type";
 export { TooltipPosition } from "./components/tooltip/tooltip.type";
-export { AutoCapitalize, Color, ComponentProps, ComponentRef, EnterKeyHint, KeyboardType, Size } from "./interface.d";
-export { TriggerAction } from "./utils/trigger.util";
-export { LocalJSX as JSX };
 export namespace Components {
     /**
      * Accordion is used for showing and hiding content.
@@ -95,19 +94,19 @@ export namespace Components {
         "active"?: string | string[];
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the user can open multiple accordion.
-          * @config
+          * @config 
           * @default false
          */
         "multiple": boolean;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
@@ -118,7 +117,7 @@ export namespace Components {
     interface PopAvatar {
         /**
           * To show some letters as avatar placeholder
-          * @config
+          * @config 
           * @default false
          */
         "placeholder": boolean;
@@ -129,7 +128,7 @@ export namespace Components {
     interface PopBadge {
         /**
           * Used HTML element for
-          * @config
+          * @config 
           * @default "div"
          */
         "as"?: BadgeAs;
@@ -140,13 +139,13 @@ export namespace Components {
         "color"?: BadgeColor;
         /**
           * Transparent Badge with colored border
-          * @config
+          * @config 
           * @default false
          */
         "outlined"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -157,7 +156,7 @@ export namespace Components {
     interface PopButton {
         /**
           * Force the button to have `hover` style
-          * @config
+          * @config 
           * @default false
          */
         "active"?: boolean;
@@ -168,7 +167,7 @@ export namespace Components {
         "color"?: ButtonColor;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -183,7 +182,7 @@ export namespace Components {
         "form"?: string | HTMLFormElement;
         /**
           * Transparent Button with colored border
-          * @config
+          * @config 
           * @default false
          */
         "outlined"?: boolean;
@@ -194,7 +193,7 @@ export namespace Components {
         "shape"?: ButtonShape;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -209,7 +208,7 @@ export namespace Components {
     interface PopCard {
         /**
           * Applies smaller padding
-          * @config
+          * @config 
           * @default false
          */
         "compact": boolean;
@@ -237,7 +236,7 @@ export namespace Components {
     interface PopCheckbox {
         /**
           * If `true`, the toggle is selected.
-          * @config
+          * @config 
           * @default false
          */
         "checked"?: boolean;
@@ -248,13 +247,13 @@ export namespace Components {
         "color"?: Color;
         /**
           * If true, the user cannot interact with the native element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled": boolean;
         /**
           * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-          * @config
+          * @config 
           * @default false
          */
         "indeterminate"?: boolean;
@@ -264,19 +263,19 @@ export namespace Components {
         "name": string;
         /**
           * Where to place the label relative to the checkbox. - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "placement"?: CheckboxPlacement;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -286,7 +285,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -306,13 +305,13 @@ export namespace Components {
         "color": DividerColor;
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "horizontal"
          */
         "orientation": DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
-          * @config
+          * @config 
           * @default "center"
          */
         "placement": DividerPlacement;
@@ -324,14 +323,14 @@ export namespace Components {
         "dismiss": () => Promise<boolean>;
         /**
           * Forces the drawer to be open
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         "present": () => Promise<boolean>;
         /**
           * Where to place the sidebar relative to the screen. - `"start"`: The sidebar will appear to the left of the screen in LTR and to the right in RTL. - `"end"`: The sidebar will appear to the right of the screen in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "side"?: DrawerSide;
@@ -342,7 +341,7 @@ export namespace Components {
         "trigger"?: string;
         /**
           * Describes what kind of interaction with the trigger that should cause the sidebar to open. Does not apply when the `trigger` property is `undefined`. - `"click"`: the sidebar will be presented when the trigger is left clicked. - `"hover"`: the sidebar will be presented when a pointer hovers over the trigger. - `"context-menu"`: the sidebar will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction"?: TriggerAction;
@@ -353,13 +352,13 @@ export namespace Components {
     interface PopDropdown {
         /**
           * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"center"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "align"?: DropdownAlign;
         /**
           * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss. Only apply on `triggerAction=hover`
-          * @config
+          * @config 
           * @default 100
          */
         "debounce"?: number;
@@ -370,7 +369,7 @@ export namespace Components {
         "dismiss": (data?: any) => Promise<boolean>;
         /**
           * Force the dropdown to be shown
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
@@ -381,13 +380,13 @@ export namespace Components {
         "present": () => Promise<boolean>;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop"?: boolean;
         /**
           * Describe where the content is displayed relatively to the trigger element - `"start"`: Open on the left in LTR and to the right in RTL. - `"end"`: Open on the right in LTR and to the left in RTL. - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
-          * @config
+          * @config 
           * @default "bottom"
          */
         "side"?: DropdownSide;
@@ -397,7 +396,7 @@ export namespace Components {
         "toggle": () => Promise<boolean>;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction": TriggerAction;
@@ -418,13 +417,13 @@ export namespace Components {
     interface PopIndicator {
         /**
           * Align vertically the indicator.
-          * @config
+          * @config 
           * @default "top"
          */
         "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
-          * @config
+          * @config 
           * @default "left"
          */
         "side"?: IndicatorSide;
@@ -435,7 +434,7 @@ export namespace Components {
     interface PopInput {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
-          * @config
+          * @config 
           * @default "off"
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
@@ -446,13 +445,13 @@ export namespace Components {
         "autoComplete"?: Autocomplete;
         /**
           * If `true`, the element will be focused on page load.
-          * @config
+          * @config 
           * @default false
          */
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to input when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -463,7 +462,7 @@ export namespace Components {
         "color"?: InputColor;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
-          * @config
+          * @config 
           * @default false
          */
         "counter"?: boolean;
@@ -474,19 +473,19 @@ export namespace Components {
         "counterFormatter"?: (inputLength: number, maxLength: number) => string;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
@@ -541,13 +540,13 @@ export namespace Components {
         "placeholder"?: string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -557,13 +556,13 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * If `true`, the element will have its spelling and grammar checked. By default the User Agent make their own default behavior.
-          * @config
+          * @config 
           * @default false
          */
         "spellcheck": boolean;
@@ -587,13 +586,13 @@ export namespace Components {
     interface PopInputFile {
         /**
           * If `true`, the element will be focused on page load.
-          * @config
+          * @config 
           * @default false
          */
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to textarea when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -604,7 +603,7 @@ export namespace Components {
         "color"?: InputFileColor;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -618,7 +617,7 @@ export namespace Components {
         "helperText": string;
         /**
           * If `true`, the user can enter more than one value. This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
-          * @config
+          * @config 
           * @default false
          */
         "multiple"?: boolean;
@@ -628,13 +627,13 @@ export namespace Components {
         "name": string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -644,7 +643,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -657,7 +656,7 @@ export namespace Components {
     interface PopItem {
         /**
           * If `true`, the user cannot interact with the item.
-          * @config
+          * @config 
           * @default false
          */
         "disabled": boolean;
@@ -669,7 +668,7 @@ export namespace Components {
     interface PopJoin {
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "horizontal"
          */
         "orientation": JoinOrientation;
@@ -680,7 +679,7 @@ export namespace Components {
     interface PopKbd {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -688,13 +687,13 @@ export namespace Components {
     interface PopList {
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "vertical"
          */
         "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. $
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -705,13 +704,13 @@ export namespace Components {
     interface PopLoading {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * Apply different animation
-          * @config
+          * @config 
           * @default "spinner"
          */
         "type"?: LoadingType;
@@ -722,7 +721,7 @@ export namespace Components {
     interface PopMask {
         /**
           * Mask that should be applied
-          * @config
+          * @config 
           * @default "squircle"
          */
         "type": MaskType;
@@ -733,7 +732,7 @@ export namespace Components {
     interface PopModal {
         /**
           * If `true`, the modal will be dismissed when the backdrop is clicked.
-          * @config
+          * @config 
           * @default false
          */
         "backdropDismiss"?: boolean;
@@ -753,7 +752,7 @@ export namespace Components {
         "dismiss": (data: any) => Promise<boolean>;
         /**
           * If `true`, the modal will open. If `false`, the modal will close. Use this if you need finer grained control over presentation, otherwise just use the modalController or the `trigger` property. Note: `open` will automatically be set back to `false` when the modal dismisses.
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
@@ -764,7 +763,7 @@ export namespace Components {
         "present": () => Promise<boolean>;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop"?: boolean;
@@ -781,13 +780,13 @@ export namespace Components {
     interface PopPopover {
         /**
           * If `true`, the popover will animate.
-          * @config
+          * @config 
           * @default false
          */
         "animated": any;
         /**
           * If `true`, the popover will be dismissed when the backdrop is clicked.
-          * @config
+          * @config 
           * @default false
          */
         "backdropDismiss": boolean;
@@ -806,14 +805,14 @@ export namespace Components {
         "event": Event;
         /**
           * If `true`, the popover will open. If `false`, the popover will close. Use this if you need finer grained control over presentation, otherwise just use the popoverController or the `trigger` property. Note: `open` will not automatically be set back to `false` when the popover dismisses. You will need to do that in your code.
-          * @config
+          * @config 
           * @default false
          */
         "open": boolean;
         "present": () => Promise<boolean>;
         /**
           * If `true`, a backdrop will be displayed behind the popover. This property controls whether or not the backdrop darkens the screen when the popover is presented. It does not control whether or not the backdrop is active or present in the DOM.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop": boolean;
@@ -823,7 +822,7 @@ export namespace Components {
         "trigger"?: string;
         /**
           * Describes what kind of interaction with the trigger that should cause the popover to open. Does not apply when the `trigger` property is `undefined`. If `"click"`, the popover will be presented when the trigger is left clicked. If `"hover"`, the popover will be presented when a pointer hovers over the trigger. If `"context-menu"`, the popover will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction": TriggerAction;
@@ -838,7 +837,7 @@ export namespace Components {
          */
         "color"?: Color;
         /**
-          * @config
+          * @config 
           * @default 100
          */
         "max"?: number;
@@ -866,7 +865,7 @@ export namespace Components {
         "color"?: Color;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -888,7 +887,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -900,7 +899,7 @@ export namespace Components {
     interface PopRadioGroup {
         /**
           * If `true`, the radios can be deselected.
-          * @config
+          * @config 
           * @default false
          */
         "allowEmpty"?: boolean;
@@ -911,7 +910,7 @@ export namespace Components {
         "compare"?: RadioGroupCompareFn | string | null;
         /**
           * If `true`, apply the disabled property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -921,13 +920,13 @@ export namespace Components {
         "name": string;
         /**
           * If `true`, apply the readonly property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, apply the required property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -951,25 +950,25 @@ export namespace Components {
         "color"?: RangeColor;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * The maximum value, which must not be less than its minimum (min attribute) value.
-          * @config
+          * @config 
           * @default 100
          */
         "max"?: number;
         /**
           * The minimum value, which must not be greater than its maximum (max attribute) value.
-          * @config
+          * @config 
           * @default 0
          */
         "min"?: number;
@@ -979,7 +978,7 @@ export namespace Components {
         "name": string;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -989,13 +988,13 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * Works with the min and max attributes to limit the increments at which a value can be set.
-          * @config
+          * @config 
           * @default 1
          */
         "step"?: number;
@@ -1014,7 +1013,7 @@ export namespace Components {
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to select when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -1030,7 +1029,7 @@ export namespace Components {
         "compare"?: SelectCompareFn | string | null;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -1055,7 +1054,7 @@ export namespace Components {
         "min"?: number;
         /**
           * If `true`, the user can select more than one value.
-          * @config
+          * @config 
           * @default false
          */
         "multiple"?: boolean;
@@ -1078,13 +1077,13 @@ export namespace Components {
         "present": () => Promise<boolean>;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -1094,7 +1093,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -1144,13 +1143,13 @@ export namespace Components {
     interface PopSwap {
         /**
           * Activates the swap. Show whats inside the slot `on`
-          * @config
+          * @config 
           * @default false
          */
         "active"?: boolean;
         /**
           * Choose what animation is used on click.
-          * @config
+          * @config 
           * @default "rotate"
          */
         "type"?: SwapType;
@@ -1161,7 +1160,7 @@ export namespace Components {
     interface PopTextarea {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
-          * @config
+          * @config 
           * @default "off"
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
@@ -1172,7 +1171,7 @@ export namespace Components {
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to textarea when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -1188,7 +1187,7 @@ export namespace Components {
         "cols"?: number;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
-          * @config
+          * @config 
           * @default false
          */
         "counter"?: boolean;
@@ -1199,19 +1198,19 @@ export namespace Components {
         "counterFormatter"?: (inputLength: number, maxLength: number) => string;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
@@ -1225,7 +1224,7 @@ export namespace Components {
         "helperText": string;
         /**
           * A hint to the browser for which virtual keyboard to display.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
@@ -1249,13 +1248,13 @@ export namespace Components {
         "placeholder"?: string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -1270,13 +1269,13 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * If `true`, the element will have its spelling and grammar checked. By default the User Agent make their own default behavior.
-          * @config
+          * @config 
           * @default false
          */
         "spellcheck": boolean;
@@ -1287,7 +1286,7 @@ export namespace Components {
         "value"?: string;
         /**
           * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
-          * @config
+          * @config 
           * @default "soft"
           * @see cols *
           * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
@@ -1300,7 +1299,7 @@ export namespace Components {
     interface PopToggle {
         /**
           * If `true`, the toggle is selected.
-          * @config
+          * @config 
           * @default false
          */
         "checked"?: boolean;
@@ -1311,13 +1310,13 @@ export namespace Components {
         "color"?: ToggleColor;
         /**
           * If true, the user cannot interact with the native element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled": boolean;
         /**
           * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-          * @config
+          * @config 
           * @default false
          */
         "indeterminate"?: boolean;
@@ -1327,13 +1326,13 @@ export namespace Components {
         "name": string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -1343,7 +1342,7 @@ export namespace Components {
         "setFocus": () => Promise<void>;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -1363,13 +1362,13 @@ export namespace Components {
         "color"?: Color;
         /**
           * Force open tooltip
-          * @config
+          * @config 
           * @default false
          */
         "open": boolean;
         /**
           * Define the position of tooltip By default the tootip appear on top
-          * @config
+          * @config 
           * @default "top"
          */
         "position"?: TooltipPosition;
@@ -2061,13 +2060,13 @@ declare namespace LocalJSX {
         "active"?: string | string[];
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the user can open multiple accordion.
-          * @config
+          * @config 
           * @default false
          */
         "multiple"?: boolean;
@@ -2081,7 +2080,7 @@ declare namespace LocalJSX {
         "onPopChange"?: (event: PopAccordionGroupCustomEvent<AccordionGroupChangeEventDetail>) => void;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
@@ -2092,7 +2091,7 @@ declare namespace LocalJSX {
     interface PopAvatar {
         /**
           * To show some letters as avatar placeholder
-          * @config
+          * @config 
           * @default false
          */
         "placeholder"?: boolean;
@@ -2103,7 +2102,7 @@ declare namespace LocalJSX {
     interface PopBadge {
         /**
           * Used HTML element for
-          * @config
+          * @config 
           * @default "div"
          */
         "as"?: BadgeAs;
@@ -2114,13 +2113,13 @@ declare namespace LocalJSX {
         "color"?: BadgeColor;
         /**
           * Transparent Badge with colored border
-          * @config
+          * @config 
           * @default false
          */
         "outlined"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2131,7 +2130,7 @@ declare namespace LocalJSX {
     interface PopButton {
         /**
           * Force the button to have `hover` style
-          * @config
+          * @config 
           * @default false
          */
         "active"?: boolean;
@@ -2142,7 +2141,7 @@ declare namespace LocalJSX {
         "color"?: ButtonColor;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -2165,7 +2164,7 @@ declare namespace LocalJSX {
         "onPopFocus"?: (event: PopButtonCustomEvent<void>) => void;
         /**
           * Transparent Button with colored border
-          * @config
+          * @config 
           * @default false
          */
         "outlined"?: boolean;
@@ -2176,7 +2175,7 @@ declare namespace LocalJSX {
         "shape"?: ButtonShape;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2191,7 +2190,7 @@ declare namespace LocalJSX {
     interface PopCard {
         /**
           * Applies smaller padding
-          * @config
+          * @config 
           * @default false
          */
         "compact"?: boolean;
@@ -2219,7 +2218,7 @@ declare namespace LocalJSX {
     interface PopCheckbox {
         /**
           * If `true`, the toggle is selected.
-          * @config
+          * @config 
           * @default false
          */
         "checked"?: boolean;
@@ -2230,13 +2229,13 @@ declare namespace LocalJSX {
         "color"?: Color;
         /**
           * If true, the user cannot interact with the native element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-          * @config
+          * @config 
           * @default false
          */
         "indeterminate"?: boolean;
@@ -2258,25 +2257,25 @@ declare namespace LocalJSX {
         "onPopFocus"?: (event: PopCheckboxCustomEvent<void>) => void;
         /**
           * Where to place the label relative to the checkbox. - `"start"`: The label will appear to the left of the checkbox in LTR and to the right in RTL. - `"end"`: The label will appear to the right of the checkbox in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "placement"?: CheckboxPlacement;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2296,13 +2295,13 @@ declare namespace LocalJSX {
         "color"?: DividerColor;
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "horizontal"
          */
         "orientation"?: DividerOrientation;
         /**
           * Where to place the content. - `"left"`: The content will appear to the left of the divider in LTR and RTL. - `"start"`: The content will appear to the left of the divider in LTR and to the right in RTL. - `"center"`: The content will appear to the center of the divider. - `"end"`: The content will appear to the right of the divider in LTR and to the left in RTL. - `"right"`: The content will appear to the right of the divider in LTR and RTL.
-          * @config
+          * @config 
           * @default "center"
          */
         "placement"?: DividerPlacement;
@@ -2321,13 +2320,13 @@ declare namespace LocalJSX {
         "onPopDidPresent"?: (event: PopDrawerCustomEvent<void>) => void;
         /**
           * Forces the drawer to be open
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         /**
           * Where to place the sidebar relative to the screen. - `"start"`: The sidebar will appear to the left of the screen in LTR and to the right in RTL. - `"end"`: The sidebar will appear to the right of the screen in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "side"?: DrawerSide;
@@ -2337,7 +2336,7 @@ declare namespace LocalJSX {
         "trigger"?: string;
         /**
           * Describes what kind of interaction with the trigger that should cause the sidebar to open. Does not apply when the `trigger` property is `undefined`. - `"click"`: the sidebar will be presented when the trigger is left clicked. - `"hover"`: the sidebar will be presented when a pointer hovers over the trigger. - `"context-menu"`: the sidebar will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction"?: TriggerAction;
@@ -2348,13 +2347,13 @@ declare namespace LocalJSX {
     interface PopDropdown {
         /**
           * Describes how the dropdown has to be alined - `"start"`: Align to the left in LTR and to the right in RTL. - `"center"`: Align to the left in LTR and to the right in RTL. - `"end"`: Align to the right in LTR and to the left in RTL.
-          * @config
+          * @config 
           * @default "start"
          */
         "align"?: DropdownAlign;
         /**
           * Set the amount of time, in milliseconds after the user no longer hover the trigger or dropdown, will dismiss. Only apply on `triggerAction=hover`
-          * @config
+          * @config 
           * @default 100
          */
         "debounce"?: number;
@@ -2368,25 +2367,25 @@ declare namespace LocalJSX {
         "onDidPresent"?: (event: PopDropdownCustomEvent<void>) => void;
         /**
           * Force the dropdown to be shown
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop"?: boolean;
         /**
           * Describe where the content is displayed relatively to the trigger element - `"start"`: Open on the left in LTR and to the right in RTL. - `"end"`: Open on the right in LTR and to the left in RTL. - `"left"`: Open on left - `"right"`: Open on right - `"top"`: Open on top - `"bottom"`: Open on bottom
-          * @config
+          * @config 
           * @default "bottom"
          */
         "side"?: DropdownSide;
         /**
           * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open. - `"click"`: the dropdown will be presented when the trigger is left clicked. - `"hover"`: the dropdown will be presented when a pointer hovers over the trigger. - `"context-menu"`: the dropdown will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction"?: TriggerAction;
@@ -2419,13 +2418,13 @@ declare namespace LocalJSX {
     interface PopIndicator {
         /**
           * Align vertically the indicator.
-          * @config
+          * @config 
           * @default "top"
          */
         "position"?: IndicatorPosition;
         /**
           * Align horizontally the indicator.
-          * @config
+          * @config 
           * @default "left"
          */
         "side"?: IndicatorSide;
@@ -2436,7 +2435,7 @@ declare namespace LocalJSX {
     interface PopInput {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
-          * @config
+          * @config 
           * @default "off"
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
@@ -2447,13 +2446,13 @@ declare namespace LocalJSX {
         "autoComplete"?: Autocomplete;
         /**
           * If `true`, the element will be focused on page load.
-          * @config
+          * @config 
           * @default false
          */
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to input when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -2464,7 +2463,7 @@ declare namespace LocalJSX {
         "color"?: InputColor;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
-          * @config
+          * @config 
           * @default false
          */
         "counter"?: boolean;
@@ -2475,19 +2474,19 @@ declare namespace LocalJSX {
         "counterFormatter"?: (inputLength: number, maxLength: number) => string;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
@@ -2558,25 +2557,25 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * If `true`, the element will have its spelling and grammar checked. By default the User Agent make their own default behavior.
-          * @config
+          * @config 
           * @default false
          */
         "spellcheck"?: boolean;
@@ -2600,13 +2599,13 @@ declare namespace LocalJSX {
     interface PopInputFile {
         /**
           * If `true`, the element will be focused on page load.
-          * @config
+          * @config 
           * @default false
          */
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to textarea when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -2617,7 +2616,7 @@ declare namespace LocalJSX {
         "color"?: InputFileColor;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -2631,7 +2630,7 @@ declare namespace LocalJSX {
         "helperText"?: string;
         /**
           * If `true`, the user can enter more than one value. This attribute applies when the type attribute is set to `"email"`, otherwise it is ignored.
-          * @config
+          * @config 
           * @default false
          */
         "multiple"?: boolean;
@@ -2653,19 +2652,19 @@ declare namespace LocalJSX {
         "onPopFocus"?: (event: PopInputFileCustomEvent<void>) => void;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2678,7 +2677,7 @@ declare namespace LocalJSX {
     interface PopItem {
         /**
           * If `true`, the user cannot interact with the item.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -2690,7 +2689,7 @@ declare namespace LocalJSX {
     interface PopJoin {
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "horizontal"
          */
         "orientation"?: JoinOrientation;
@@ -2701,7 +2700,7 @@ declare namespace LocalJSX {
     interface PopKbd {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2709,13 +2708,13 @@ declare namespace LocalJSX {
     interface PopList {
         /**
           * Define content disposition orientation
-          * @config
+          * @config 
           * @default "vertical"
          */
         "orientation"?: ListOrientation;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`. $
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2726,13 +2725,13 @@ declare namespace LocalJSX {
     interface PopLoading {
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * Apply different animation
-          * @config
+          * @config 
           * @default "spinner"
          */
         "type"?: LoadingType;
@@ -2743,7 +2742,7 @@ declare namespace LocalJSX {
     interface PopMask {
         /**
           * Mask that should be applied
-          * @config
+          * @config 
           * @default "squircle"
          */
         "type"?: MaskType;
@@ -2754,7 +2753,7 @@ declare namespace LocalJSX {
     interface PopModal {
         /**
           * If `true`, the modal will be dismissed when the backdrop is clicked.
-          * @config
+          * @config 
           * @default false
          */
         "backdropDismiss"?: boolean;
@@ -2776,13 +2775,13 @@ declare namespace LocalJSX {
         "onDidPresent"?: (event: PopModalCustomEvent<void>) => void;
         /**
           * If `true`, the modal will open. If `false`, the modal will close. Use this if you need finer grained control over presentation, otherwise just use the modalController or the `trigger` property. Note: `open` will automatically be set back to `false` when the modal dismisses.
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         /**
           * If `true`, a backdrop will be displayed behind the modal. This property controls whether or not the backdrop darkens the screen when the modal is presented.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop"?: boolean;
@@ -2799,13 +2798,13 @@ declare namespace LocalJSX {
     interface PopPopover {
         /**
           * If `true`, the popover will animate.
-          * @config
+          * @config 
           * @default false
          */
         "animated"?: any;
         /**
           * If `true`, the popover will be dismissed when the backdrop is clicked.
-          * @config
+          * @config 
           * @default false
          */
         "backdropDismiss"?: boolean;
@@ -2839,13 +2838,13 @@ declare namespace LocalJSX {
         "onWillPresent"?: (event: PopPopoverCustomEvent<void>) => void;
         /**
           * If `true`, the popover will open. If `false`, the popover will close. Use this if you need finer grained control over presentation, otherwise just use the popoverController or the `trigger` property. Note: `open` will not automatically be set back to `false` when the popover dismisses. You will need to do that in your code.
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         /**
           * If `true`, a backdrop will be displayed behind the popover. This property controls whether or not the backdrop darkens the screen when the popover is presented. It does not control whether or not the backdrop is active or present in the DOM.
-          * @config
+          * @config 
           * @default false
          */
         "showBackdrop"?: boolean;
@@ -2855,7 +2854,7 @@ declare namespace LocalJSX {
         "trigger"?: string;
         /**
           * Describes what kind of interaction with the trigger that should cause the popover to open. Does not apply when the `trigger` property is `undefined`. If `"click"`, the popover will be presented when the trigger is left clicked. If `"hover"`, the popover will be presented when a pointer hovers over the trigger. If `"context-menu"`, the popover will be presented when the trigger is right clicked on desktop and long pressed on mobile. This will also prevent your device's normal context menu from appearing.
-          * @config
+          * @config 
           * @default "click"
          */
         "triggerAction"?: TriggerAction;
@@ -2870,7 +2869,7 @@ declare namespace LocalJSX {
          */
         "color"?: Color;
         /**
-          * @config
+          * @config 
           * @default 100
          */
         "max"?: number;
@@ -2898,7 +2897,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -2924,7 +2923,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -2936,7 +2935,7 @@ declare namespace LocalJSX {
     interface PopRadioGroup {
         /**
           * If `true`, the radios can be deselected.
-          * @config
+          * @config 
           * @default false
          */
         "allowEmpty"?: boolean;
@@ -2947,7 +2946,7 @@ declare namespace LocalJSX {
         "compare"?: RadioGroupCompareFn | string | null;
         /**
           * If `true`, apply the disabled property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -2965,13 +2964,13 @@ declare namespace LocalJSX {
         "onPopValueChange"?: (event: PopRadioGroupCustomEvent<RadioGroupChangeEventDetail>) => void;
         /**
           * If `true`, apply the readonly property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, apply the required property to every `pop-radio`.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -2995,25 +2994,25 @@ declare namespace LocalJSX {
         "color"?: RangeColor;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * The maximum value, which must not be less than its minimum (min attribute) value.
-          * @config
+          * @config 
           * @default 100
          */
         "max"?: number;
         /**
           * The minimum value, which must not be greater than its maximum (max attribute) value.
-          * @config
+          * @config 
           * @default 0
          */
         "min"?: number;
@@ -3035,19 +3034,19 @@ declare namespace LocalJSX {
         "onPopFocus"?: (event: PopRangeCustomEvent<void>) => void;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * Works with the min and max attributes to limit the increments at which a value can be set.
-          * @config
+          * @config 
           * @default 1
          */
         "step"?: number;
@@ -3066,7 +3065,7 @@ declare namespace LocalJSX {
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to select when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -3082,7 +3081,7 @@ declare namespace LocalJSX {
         "compare"?: SelectCompareFn | string | null;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
@@ -3102,7 +3101,7 @@ declare namespace LocalJSX {
         "min"?: number;
         /**
           * If `true`, the user can select more than one value.
-          * @config
+          * @config 
           * @default false
          */
         "multiple"?: boolean;
@@ -3140,19 +3139,19 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -3198,7 +3197,7 @@ declare namespace LocalJSX {
     interface PopSwap {
         /**
           * Activates the swap. Show whats inside the slot `on`
-          * @config
+          * @config 
           * @default false
          */
         "active"?: boolean;
@@ -3208,7 +3207,7 @@ declare namespace LocalJSX {
         "onPopSwap"?: (event: PopSwapCustomEvent<SwapChangeEventDetail>) => void;
         /**
           * Choose what animation is used on click.
-          * @config
+          * @config 
           * @default "rotate"
          */
         "type"?: SwapType;
@@ -3219,7 +3218,7 @@ declare namespace LocalJSX {
     interface PopTextarea {
         /**
           * This features work only on mobile and tablet devices. By default the User Agent and input make their own determination.
-          * @config
+          * @config 
           * @default "off"
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#autocapitalization}
          */
@@ -3230,7 +3229,7 @@ declare namespace LocalJSX {
         "autoFocus"?: boolean;
         /**
           * if `true`, adds border to textarea when `color` property is not set.
-          * @config
+          * @config 
           * @default false
          */
         "bordered"?: boolean;
@@ -3246,7 +3245,7 @@ declare namespace LocalJSX {
         "cols"?: number;
         /**
           * If `true`, a character counter will display the ratio of characters used and the total character limit. Developers must also set the `maxlength` property for the counter to be calculated correctly.
-          * @config
+          * @config 
           * @default false
          */
         "counter"?: boolean;
@@ -3257,19 +3256,19 @@ declare namespace LocalJSX {
         "counterFormatter"?: (inputLength: number, maxLength: number) => string;
         /**
           * Set the amount of time, in milliseconds, to wait to trigger the ionInput event after each keystroke.
-          * @config
+          * @config 
           * @default 0
          */
         "debounce"?: number;
         /**
           * If `true`, the user cannot interact with the element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * A hint to the browser for which keyboard to display. That specifies what action label (or icon) to present for the enter key on virtual keyboards.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-enterkeyhint-attribute}
          */
         "enterkeyhint"?: EnterKeyHint;
@@ -3283,7 +3282,7 @@ declare namespace LocalJSX {
         "helperText"?: string;
         /**
           * A hint to the browser for which virtual keyboard to display.
-          * @config
+          * @config 
           * @see {@link https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode}
          */
         "keyboard"?: KeyboardType;
@@ -3323,13 +3322,13 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
@@ -3340,13 +3339,13 @@ declare namespace LocalJSX {
         "rows"?: number;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
         /**
           * If `true`, the element will have its spelling and grammar checked. By default the User Agent make their own default behavior.
-          * @config
+          * @config 
           * @default false
          */
         "spellcheck"?: boolean;
@@ -3357,7 +3356,7 @@ declare namespace LocalJSX {
         "value"?: string;
         /**
           * Indicates how the control wraps text.  If wrap attribute is in the `hard` state, the `cols` property must be specified.
-          * @config
+          * @config 
           * @default "soft"
           * @see cols *
           * @see {@link https://html.spec.whatwg.org/multipage/form-elements.html#attr-textarea-wrap}
@@ -3370,7 +3369,7 @@ declare namespace LocalJSX {
     interface PopToggle {
         /**
           * If `true`, the toggle is selected.
-          * @config
+          * @config 
           * @default false
          */
         "checked"?: boolean;
@@ -3381,13 +3380,13 @@ declare namespace LocalJSX {
         "color"?: ToggleColor;
         /**
           * If true, the user cannot interact with the native element.
-          * @config
+          * @config 
           * @default false
          */
         "disabled"?: boolean;
         /**
           * If a developer want to use `indeterminate`, `checked` property should be set to `false`
-          * @config
+          * @config 
           * @default false
          */
         "indeterminate"?: boolean;
@@ -3409,19 +3408,19 @@ declare namespace LocalJSX {
         "onPopFocus"?: (event: PopToggleCustomEvent<void>) => void;
         /**
           * If `true`, the user cannot modify the value.
-          * @config
+          * @config 
           * @default false
          */
         "readonly"?: boolean;
         /**
           * If `true`, the user must fill in a value before submitting a form.
-          * @config
+          * @config 
           * @default false
          */
         "required"?: boolean;
         /**
           * Change size of the component Options are: `"xs"`, `"sm"`, `"md"`, `"lg"`.
-          * @config
+          * @config 
           * @default "md"
          */
         "size"?: Size;
@@ -3441,13 +3440,13 @@ declare namespace LocalJSX {
         "color"?: Color;
         /**
           * Force open tooltip
-          * @config
+          * @config 
           * @default false
          */
         "open"?: boolean;
         /**
           * Define the position of tooltip By default the tootip appear on top
-          * @config
+          * @config 
           * @default "top"
          */
         "position"?: TooltipPosition;
@@ -3496,6 +3495,7 @@ declare namespace LocalJSX {
         "pop-tooltip": PopTooltip;
     }
 }
+export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
