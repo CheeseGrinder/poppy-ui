@@ -28,4 +28,4 @@ export type * from './components/textarea/textarea.type';
 export type * from './components/toggle/toggle.type';
 export type * from './components/tooltip/tooltip.type';
 
-export type { TriggerAction } from './utils/trigger';
+export type { TriggerAction } from './utils/trigger.util';

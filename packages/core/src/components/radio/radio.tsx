@@ -12,7 +12,7 @@ import {
 import type { Color, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { compareOptions } from '#utils/forms';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers.util';
 import { Show } from '../Show';
 
 let radioIds = 0;

@@ -1,1 +1,1 @@
-export * from './compare-with-utils';
+export * from './compare-with.utils';

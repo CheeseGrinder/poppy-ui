@@ -12,9 +12,9 @@ import {
 } from '@stencil/core';
 import { ESC } from 'key-definitions';
 import { componentConfig } from '#config';
-import { isRTL } from '#utils/dir';
-import type { OverlayInterface } from '#utils/overlay';
-import { type TriggerAction, TriggerController } from '#utils/trigger';
+import { isRTL } from '#utils/dir.util';
+import type { OverlayInterface } from '#utils/overlay.util';
+import { type TriggerAction, TriggerController } from '#utils/trigger.util';
 import type { DrawerSide } from './drawer.type';
 
 /**

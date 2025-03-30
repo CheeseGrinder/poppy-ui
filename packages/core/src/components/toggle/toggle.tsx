@@ -13,7 +13,7 @@ import {
 } from '@stencil/core';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers.util';
 import { Show } from '../Show';
 import type { ToggleChangeEventDetail, ToggleColor } from './toggle.type';
 

@@ -1,6 +1,6 @@
 import { Component, type ComponentInterface, Element, Host, Prop, h } from '@stencil/core';
 import { componentConfig } from '#config';
-import { getHostContextProperty, hostContext } from '#utils/helpers';
+import { getHostContextProperty, hostContext } from '#utils/helpers.util';
 
 @Component({
   tag: 'pop-item',

@@ -13,7 +13,7 @@ import {
 } from '@stencil/core';
 import type { Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { type Attributes, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, inheritAriaAttributes } from '#utils/helpers.util';
 import type { RangeChangeEventDetail, RangeColor } from './range.type';
 
 let rangeIds = 0;

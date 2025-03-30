@@ -15,9 +15,9 @@ import {
 import { ARROW_DOWN, ARROW_UP, ENTER, ESC, SPACE } from 'key-definitions';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { ClickOutside } from '#utils/click-outside';
+import { ClickOutsideController } from '#utils/click-outside.util';
 import { compareOptions } from '#utils/forms';
-import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers.util';
 import { ChevronDown } from '../ChevronDown';
 import { Show } from '../Show';
 import type { SelectContentOption } from '../select-content/select-content.type';
@@ -47,6 +47,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   private content?: HTMLPopSelectContentElement;
   private dropdownRef?: HTMLDetailsElement;
   private dropdownObserver: MutationObserver;
+  private clickOutsideController = ClickOutsideController.new();
 
   @Element() host!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
@@ -249,6 +250,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     this.dropdownObserver = new MutationObserver(() => {
       this.open = this.dropdownRef.open;
     });
+    this.clickOutsideController.register(this, this.host, this.onClickOutside);
   }
 
   componentWillLoad(): void {
@@ -277,6 +279,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
   disconnectedCallback(): void {
     this.dropdownObserver.disconnect();
+    this.clickOutsideController.remove();
   }
 
   /**
@@ -333,12 +336,11 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     return true;
   }
 
-  @ClickOutside()
-  onClickOutside(): void {
+  private onClickOutside = (): void => {
     if (!this.open) return;
 
     this.dismiss();
-  }
+  };
 
   private onClick = (ev: MouseEvent): void => {
     ev.preventDefault();

@@ -11,10 +11,10 @@ import {
 } from '@stencil/core';
 import { ENTER, ESC, SPACE } from 'key-definitions';
 import { componentConfig } from '#config';
-import { ClickOutside } from '#utils/click-outside';
-import { isRTL } from '#utils/dir';
-import type { OverlayInterface } from '#utils/overlay';
-import type { TriggerAction } from '#utils/trigger';
+import { ClickOutsideController } from '#utils/click-outside.util';
+import { isRTL } from '#utils/dir.util';
+import type { OverlayInterface } from '#utils/overlay.util';
+import type { TriggerAction } from '#utils/trigger.util';
 import { Show } from '../Show';
 import type { DropdownAlign, DropdownSide } from './dropdown.type';
 
@@ -37,6 +37,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   private dropdownRef: HTMLDetailsElement;
   private dropdownObserver: MutationObserver;
   private triggeredWith?: TriggerAction;
+  private clickOutsideController = ClickOutsideController.new();
 
   private debounceTimer: NodeJS.Timeout;
 
@@ -115,6 +116,12 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
    */
   @Event() didDismiss: EventEmitter<void>;
 
+  connectedCallback(): void {
+    this.clickOutsideController.register(this, this.host, this.onClickOutside, {
+      triggerEvents: ['click', 'contextmenu'],
+    });
+  }
+
   componentWillLoad(): void {
     componentConfig.apply(this, 'pop-dropdown', {
       side: 'bottom',
@@ -138,6 +145,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
 
   disconnectedCallback(): void {
     this.dropdownObserver.disconnect();
+    this.clickOutsideController.remove();
   }
 
   /**
@@ -181,12 +189,11 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
     return true;
   }
 
-  @ClickOutside({ triggerEvents: 'click,contextmenu' })
-  onClickOutside(): void {
+  private onClickOutside = (): void => {
     if (!this.open) return;
 
     this.dismiss();
-  }
+  };
 
   private onClick = (ev: Event): void => {
     ev.preventDefault();

@@ -11,7 +11,7 @@ import {
 } from '@stencil/core';
 import type { Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes } from '#utils/helpers.util';
 import type { ButtonColor, ButtonExpand, ButtonShape, ButtonType } from './button.type';
 
 /**

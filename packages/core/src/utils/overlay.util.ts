@@ -1,6 +1,6 @@
 import type { ModalOptions } from 'src/components/modal/modal.type';
 import type { PopoverOptions } from 'src/components/popover/popover.type';
-import { componentOnReady, getAppRoot } from './helpers';
+import { componentOnReady, getAppRoot } from './helpers.util';
 
 export interface OverlayInterface {
   open?: boolean;

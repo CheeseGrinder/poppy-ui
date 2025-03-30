@@ -10,7 +10,7 @@ import {
   Watch,
   h,
 } from '@stencil/core';
-import { type Attributes, inheritAttributes } from '#utils/helpers';
+import { type Attributes, inheritAttributes } from '#utils/helpers.util';
 
 /**
  * @part image - The inner `img` element.

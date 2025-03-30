@@ -14,7 +14,7 @@ import {
 import { ENTER } from 'key-definitions';
 import type { AutoCapitalize, EnterKeyHint, FormAssociatedInterface, KeyboardType, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers';
+import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers.util';
 import { Show } from '../Show';
 import type { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
 

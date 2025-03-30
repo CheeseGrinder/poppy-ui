@@ -12,8 +12,8 @@ import {
 } from '@stencil/core';
 import type { ComponentProps, ComponentRef } from 'src/interface';
 import { componentConfig } from '#config';
-import type { OverlayInterface } from '#utils/overlay';
-import { TriggerController } from '#utils/trigger';
+import type { OverlayInterface } from '#utils/overlay.util';
+import { TriggerController } from '#utils/trigger.util';
 import { Show } from '../Show';
 
 /**

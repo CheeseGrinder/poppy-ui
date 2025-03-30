@@ -1,6 +1,6 @@
 import { Component, type ComponentInterface, Host, Prop, h } from '@stencil/core';
 import { componentConfig } from '#config';
-import { isRTL } from '#utils/dir';
+import { isRTL } from '#utils/dir.util';
 import type { DividerColor, DividerOrientation, DividerPlacement } from './divider.type';
 
 /**

@@ -12,9 +12,9 @@ import {
 } from '@stencil/core';
 import type { ComponentProps, ComponentRef } from 'src/interface';
 import { componentConfig } from '#config';
-import { componentOnReady, raf } from '#utils/helpers';
-import type { OverlayInterface } from '#utils/overlay';
-import { type TriggerAction, TriggerController } from '#utils/trigger';
+import { componentOnReady, raf } from '#utils/helpers.util';
+import type { OverlayInterface } from '#utils/overlay.util';
+import { type TriggerAction, TriggerController } from '#utils/trigger.util';
 
 @Component({
   tag: 'pop-popover',

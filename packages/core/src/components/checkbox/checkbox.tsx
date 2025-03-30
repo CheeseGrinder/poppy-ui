@@ -13,7 +13,7 @@ import {
 } from '@stencil/core';
 import type { Color, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
-import { type Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers';
+import { type Attributes, getHostContextProperty, hostContext, inheritAriaAttributes } from '#utils/helpers.util';
 import { Show } from '../Show';
 import type { CheckboxChangeEventDetail, CheckboxPlacement } from './checkbox.type';
 

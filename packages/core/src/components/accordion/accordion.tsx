@@ -1,7 +1,7 @@
 import { Component, type ComponentInterface, Element, Host, Method, Prop, h } from '@stencil/core';
 import { ENTER, ESC, SPACE } from 'key-definitions';
 import { compareOptions } from '#utils/forms';
-import { hostContext } from '#utils/helpers';
+import { hostContext } from '#utils/helpers.util';
 import { ChevronDown } from '../ChevronDown';
 
 /**
