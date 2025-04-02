@@ -12,6 +12,8 @@ import {
 } from '@stencil/core';
 import { ARROW_DOWN, ARROW_UP } from 'key-definitions';
 import type { Color, Size } from 'src/interface';
+import { isOptionSelected } from '#utils/forms';
+import type { SelectCompareFn } from '../select/select.type';
 import type { SelectContentConfig, SelectContentOption } from './select-content.type';
 
 /**
@@ -25,43 +27,24 @@ import type { SelectContentConfig, SelectContentOption } from './select-content.
 export class SelectContent implements SelectContentConfig, ComponentInterface {
   @Element() host: HTMLElement;
 
-  /**
-   * @internal
-   */
   @Prop({ mutable: true }) value?: any | any[] | null = null;
   @Watch('value')
   onValueChange() {
     this.popSelected.emit();
   }
 
-  /**
-   * @internal
-   */
   @Prop() multiple: boolean;
 
-  /**
-   * @internal
-   */
   @Prop() required: boolean;
 
-  /**
-   * @internal
-   */
   @Prop() color: Color;
 
-  /**
-   * @internal
-   */
   @Prop() size: Size;
 
-  /**
-   * @internal
-   */
   @Prop() options: SelectContentOption[] = [];
 
-  /**
-   * @internal
-   */
+  @Prop() compareWith: SelectCompareFn | string | null;
+
   @Event() popSelected: EventEmitter<void>;
 
   componentWillLoad(): void {
@@ -89,6 +72,7 @@ export class SelectContent implements SelectContentConfig, ComponentInterface {
         {this.options.map((option, idx) => (
           <pop-item>
             <pop-checkbox
+              checked={isOptionSelected(this.value, option.value ?? option.label ?? '', this.compareWith)}
               color={this.color}
               disabled={option.disabled}
               onKeyUp={async ev => {
@@ -135,10 +119,10 @@ export class SelectContent implements SelectContentConfig, ComponentInterface {
           {this.options.map((option, idx) => (
             <pop-item>
               <pop-radio
+                checked={isOptionSelected(this.value, option.value ?? option.label ?? '', this.compareWith)}
                 color={this.color}
                 disabled={option.disabled}
                 onKeyUp={ev => {
-                  console.log(ev);
                   if (ev.key !== ARROW_DOWN.key && ev.key !== ARROW_UP.key) {
                     return;
                   }

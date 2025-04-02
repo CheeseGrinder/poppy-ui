@@ -19,7 +19,7 @@ $base: theme.use_color("base.100");
 
 :host {
   --border-radius: #{theme.use_radius(full)};
-  --border-opacity: 0.2;
+  --border-opacity: 80%;
   --border-color: #{theme.use_color("base.content", var(--border-opacity))};
   --background: #{theme.use_color("base.content")};
 

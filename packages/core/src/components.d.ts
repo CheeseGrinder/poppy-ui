@@ -1112,6 +1112,7 @@ export namespace Components {
     }
     interface PopSelectContent {
         "color": Color;
+        "compareWith": SelectCompareFn | string | null;
         "multiple": boolean;
         "options": SelectContentOption[];
         "required": boolean;
@@ -3166,6 +3167,7 @@ declare namespace LocalJSX {
     }
     interface PopSelectContent {
         "color"?: Color;
+        "compareWith"?: SelectCompareFn | string | null;
         "multiple"?: boolean;
         "onPopSelected"?: (event: PopSelectContentCustomEvent<void>) => void;
         "options"?: SelectContentOption[];

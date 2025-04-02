@@ -6,5 +6,10 @@ import PoppyVue from '@poppy-ui/vue';
 import './style.css';
 
 createApp(App)
-  .use(PoppyVue)
+  .use(PoppyVue, {
+    legacy: false,
+    config: {
+      debug: true,
+    }
+  })
   .mount('#app');

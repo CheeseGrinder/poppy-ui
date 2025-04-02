@@ -124,8 +124,8 @@ jobs:
 
       - name: Upgrade - Angular
         run: |
-          npm -w @poppy-ui/angular uninstall @poppy-ui/core
-          npm -w @poppy-ui/angular install @poppy-ui/core@${{ steps.bump.outputs.version }}
+          npm uninstall -w @poppy-ui/angular @poppy-ui/core
+          npm install -w @poppy-ui/angular --save-exact @poppy-ui/core@${{ steps.bump.outputs.version }}
 
       - name: Publish Angular
         run: |
@@ -138,10 +138,10 @@ jobs:
 
       - name: Upgrade - Vue
         run: |
-          npm uninstall @poppy-ui/core -w @poppy-ui/vue
-          npm uninstall @poppy-ui/docs -w @poppy-ui/vue
-          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
-          npm install -D @poppy-ui/docs@${{ steps.bump.outputs.version }} -w @poppy-ui/vue
+          npm uninstall -w @poppy-ui/vue @poppy-ui/core
+          npm uninstall -w @poppy-ui/vue @poppy-ui/docs
+          npm install -w @poppy-ui/vue --save-exact @poppy-ui/core@${{ steps.bump.outputs.version }}
+          npm install -w @poppy-ui/vue --save-exact --save-dev @poppy-ui/docs@${{ steps.bump.outputs.version }}
 
       - name: Publish Vue
         run: |
@@ -153,8 +153,8 @@ jobs:
 
       - name: Upgrade - React
         run: |
-          npm uninstall @poppy-ui/core -w @poppy-ui/react
-          npm install @poppy-ui/core@${{ steps.bump.outputs.version }} -w @poppy-ui/react
+          npm uninstall -w @poppy-ui/react @poppy-ui/core
+          npm install -w @poppy-ui/react --save-exact @poppy-ui/core@${{ steps.bump.outputs.version }}
 
       - name: Publish React
         run: |

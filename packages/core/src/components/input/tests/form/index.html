@@ -6,33 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Input Form | Poppy-ui</title>
   <link rel="stylesheet" href="/dist/poppy/poppy.css">
+  <link rel="stylesheet" href="/css/themes/light.always.css">
+  <link rel="stylesheet" href="/tests/style.css">
   <script type="module" src="/dist/poppy/poppy.esm.js"></script>
   <script nomodule src="/dist/poppy/poppy.js"></script>
-  <style>
-    main {
-      width: 100vw;
-      height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-
-      background-color: var(--base-300);
-    }
-
-    section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: .35rem;
-    }
-
-    div, form {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-    }
-  </style>
 </head>
 
 <body>
@@ -41,9 +18,9 @@
       <h2>Input - form</h2>
       <div>
         <form>
-          <pop-input type="text" value="test" name="custom" error-text="test error">input label</pop-input>
-          <pop-input type="text" value="default" name="custom-value" error-text="test error">input label</pop-input>
-          <pop-input type="text" name="custom-autocomplete" auto-complete="email">input label</pop-input>
+          <pop-input type="text" value="test" name="custom" bordered error-text="test error">input label</pop-input>
+          <pop-input type="text" value="default" name="custom-value" bordered error-text="test error">input label</pop-input>
+          <pop-input type="text" name="custom-autocomplete" bordered auto-complete="email">input label</pop-input>
           <input type="number" name="native">
           <pop-button type="submit" color="primary">submit</pop-button>
           <pop-button type="reset" color="ghost">reset</pop-button>
@@ -71,6 +48,9 @@
       }
       return obj;
     }
+
+    document.querySelector('[name="custom"]').addEventListener('popInput', ev => console.log('input', ev))
+    document.querySelector('[name="custom"]').addEventListener('popChange', ev => console.log('change', ev))
   </script>
 </body>
 

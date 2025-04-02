@@ -16,6 +16,7 @@ import { ARROW_DOWN, ARROW_UP, ENTER, ESC, SPACE } from 'key-definitions';
 import type { FormAssociatedInterface, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
 import { ClickOutsideController } from '#utils/click-outside.util';
+import { debug } from '#utils/debug.util';
 import { compareOptions } from '#utils/forms';
 import { type Attributes, hostContext, inheritAttributes } from '#utils/helpers.util';
 import { ChevronDown } from '../ChevronDown';
@@ -91,6 +92,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     }
 
     this.internals.setFormValue(data, data);
+    debug(`pop-select: "${this.name}" will emit "popChange" event with values:`, value);
     this.popChange.emit({ value });
   }
 
@@ -303,6 +305,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
     }
 
     this.open = true;
+    debug(`pop-select: "${this.name}" will emit "didPresent" event`);
     this.didPresent.emit();
     return true;
   }
@@ -331,6 +334,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     this.open = false;
     await this.setFocus();
+    debug(`pop-select: "${this.name}" will emit "didDismiss" event`);
     this.didDismiss.emit();
 
     return true;
@@ -351,10 +355,12 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
   };
 
   private onHover = (): void => {
+    debug(`pop-select: "${this.name}" will emit "popFocus" event`);
     this.popFocus.emit();
   };
 
   private onBlur = (): void => {
+    debug(`pop-select: "${this.name}" will emit "popBlur" event`);
     this.popBlur.emit();
   };
 
@@ -371,6 +377,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
 
     // we dont use this.dismiss() because it will focus the summary
     this.open = false;
+    debug(`pop-select: "${this.name}" will emit "didDismiss" event`);
     this.didDismiss.emit();
   };
 
@@ -553,6 +560,7 @@ export class Select implements ComponentInterface, FormAssociatedInterface {
           >
             <pop-select-content
               color={this.color === 'ghost' ? undefined : this.color}
+              compareWith={this.compare}
               multiple={this.multiple}
               onPopSelected={() => {
                 this.value = this.content?.value;

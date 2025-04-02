@@ -53,7 +53,7 @@ export const config: Config = {
     { components: ['pop-progress'] },
     { components: ['pop-radio', 'pop-radio-group'] },
     { components: ['pop-range'] },
-    { components: ['pop-select', 'pop-select-option'] },
+    { components: ['pop-select', 'pop-select-content', 'pop-select-option'] },
     { components: ['pop-swap'] },
     { components: ['pop-textarea'] },
     { components: ['pop-toggle'] },

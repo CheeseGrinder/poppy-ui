@@ -1,7 +1,7 @@
-@import "@poppy/functions/poppy.radius";
+@use "@poppy/functions/poppy.radius" as radius;
 
 @mixin item($selectors...) {
-  $radius-var: use_radius(md);
+  $radius-var: radius.use_radius(md);
 
   // join-item
   @each $selector in $selectors {
@@ -15,7 +15,7 @@
 }
 
 @mixin item_root {
-  $radius-var: use_radius(md);
+  $radius-var: radius.use_radius(md);
 
   :host(.join-item) {
     border-start-start-radius: $radius-var;

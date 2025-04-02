@@ -1,3 +1,10 @@
+rm -fr **/**/poppy-ui-*.tgz
+rm -fr **/**/node_modules
+rm -fr node_modules
+
+npm i
+
+# Build CORE
 cd packages/core
 npm run build
 npm pack
@@ -5,6 +12,7 @@ npm pack
 cd ../docs
 npm pack
 
+# Build Vue
 cd ../vue
 $core = $(ls ../core/poppy-ui-core*.tgz)
 npm i ../core/$core

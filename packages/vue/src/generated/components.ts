@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* tslint:disable */
 /* auto-generated vue proxies */
-import { defineContainer } from '@stencil/vue-output-target/runtime';
+import { defineContainer, type StencilVueComponent } from '@stencil/vue-output-target/runtime';
 
 import type { JSX } from '@poppy-ui/core';
 
@@ -43,7 +43,7 @@ import { defineCustomElement as definePopToggle } from '@poppy-ui/core/component
 import { defineCustomElement as definePopTooltip } from '@poppy-ui/core/components/pop-tooltip.js';
 
 
-export const PopAccordion = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop-accordion', definePopAccordion, [
+export const PopAccordion: StencilVueComponent<JSX.PopAccordion> = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop-accordion', definePopAccordion, [
   'readonly',
   'disabled',
   'name',
@@ -51,7 +51,7 @@ export const PopAccordion = /*@__PURE__*/ defineContainer<JSX.PopAccordion>('pop
 ]);
 
 
-export const PopAccordionGroup = /*@__PURE__*/ defineContainer<JSX.PopAccordionGroup, JSX.PopAccordionGroup["active"]>('pop-accordion-group', definePopAccordionGroup, [
+export const PopAccordionGroup: StencilVueComponent<JSX.PopAccordionGroup, JSX.PopAccordionGroup["active"]> = /*@__PURE__*/ defineContainer<JSX.PopAccordionGroup, JSX.PopAccordionGroup["active"]>('pop-accordion-group', definePopAccordionGroup, [
   'readonly',
   'disabled',
   'multiple',
@@ -65,12 +65,12 @@ export const PopAccordionGroup = /*@__PURE__*/ defineContainer<JSX.PopAccordionG
 'active', 'pop-change');
 
 
-export const PopAvatar = /*@__PURE__*/ defineContainer<JSX.PopAvatar>('pop-avatar', definePopAvatar, [
+export const PopAvatar: StencilVueComponent<JSX.PopAvatar> = /*@__PURE__*/ defineContainer<JSX.PopAvatar>('pop-avatar', definePopAvatar, [
   'placeholder'
 ]);
 
 
-export const PopBadge = /*@__PURE__*/ defineContainer<JSX.PopBadge>('pop-badge', definePopBadge, [
+export const PopBadge: StencilVueComponent<JSX.PopBadge> = /*@__PURE__*/ defineContainer<JSX.PopBadge>('pop-badge', definePopBadge, [
   'color',
   'size',
   'outlined',
@@ -78,7 +78,7 @@ export const PopBadge = /*@__PURE__*/ defineContainer<JSX.PopBadge>('pop-badge',
 ]);
 
 
-export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-button', definePopButton, [
+export const PopButton: StencilVueComponent<JSX.PopButton> = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-button', definePopButton, [
   'type',
   'form',
   'disabled',
@@ -96,21 +96,21 @@ export const PopButton = /*@__PURE__*/ defineContainer<JSX.PopButton>('pop-butto
 ]);
 
 
-export const PopCard = /*@__PURE__*/ defineContainer<JSX.PopCard>('pop-card', definePopCard, [
+export const PopCard: StencilVueComponent<JSX.PopCard> = /*@__PURE__*/ defineContainer<JSX.PopCard>('pop-card', definePopCard, [
   'compact'
 ]);
 
 
-export const PopCardActions = /*@__PURE__*/ defineContainer<JSX.PopCardActions>('pop-card-actions', definePopCardActions);
+export const PopCardActions: StencilVueComponent<JSX.PopCardActions> = /*@__PURE__*/ defineContainer<JSX.PopCardActions>('pop-card-actions', definePopCardActions);
 
 
-export const PopCardBody = /*@__PURE__*/ defineContainer<JSX.PopCardBody>('pop-card-body', definePopCardBody);
+export const PopCardBody: StencilVueComponent<JSX.PopCardBody> = /*@__PURE__*/ defineContainer<JSX.PopCardBody>('pop-card-body', definePopCardBody);
 
 
-export const PopCardTitle = /*@__PURE__*/ defineContainer<JSX.PopCardTitle>('pop-card-title', definePopCardTitle);
+export const PopCardTitle: StencilVueComponent<JSX.PopCardTitle> = /*@__PURE__*/ defineContainer<JSX.PopCardTitle>('pop-card-title', definePopCardTitle);
 
 
-export const PopCheckbox = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.PopCheckbox["checked"]>('pop-checkbox', definePopCheckbox, [
+export const PopCheckbox: StencilVueComponent<JSX.PopCheckbox, JSX.PopCheckbox["checked"]> = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.PopCheckbox["checked"]>('pop-checkbox', definePopCheckbox, [
   'name',
   'value',
   'required',
@@ -132,14 +132,14 @@ export const PopCheckbox = /*@__PURE__*/ defineContainer<JSX.PopCheckbox, JSX.Po
 'checked', 'pop-change');
 
 
-export const PopDivider = /*@__PURE__*/ defineContainer<JSX.PopDivider>('pop-divider', definePopDivider, [
+export const PopDivider: StencilVueComponent<JSX.PopDivider> = /*@__PURE__*/ defineContainer<JSX.PopDivider>('pop-divider', definePopDivider, [
   'orientation',
   'placement',
   'color'
 ]);
 
 
-export const PopDrawer = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawer', definePopDrawer, [
+export const PopDrawer: StencilVueComponent<JSX.PopDrawer> = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawer', definePopDrawer, [
   'trigger',
   'triggerAction',
   'side',
@@ -152,7 +152,7 @@ export const PopDrawer = /*@__PURE__*/ defineContainer<JSX.PopDrawer>('pop-drawe
 ]);
 
 
-export const PopDropdown = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-dropdown', definePopDropdown, [
+export const PopDropdown: StencilVueComponent<JSX.PopDropdown> = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-dropdown', definePopDropdown, [
   'side',
   'align',
   'open',
@@ -167,7 +167,7 @@ export const PopDropdown = /*@__PURE__*/ defineContainer<JSX.PopDropdown>('pop-d
 ]);
 
 
-export const PopImg = /*@__PURE__*/ defineContainer<JSX.PopImg>('pop-img', definePopImg, [
+export const PopImg: StencilVueComponent<JSX.PopImg> = /*@__PURE__*/ defineContainer<JSX.PopImg>('pop-img', definePopImg, [
   'src',
   'alt',
   'popWillLoad',
@@ -180,13 +180,13 @@ export const PopImg = /*@__PURE__*/ defineContainer<JSX.PopImg>('pop-img', defin
 ]);
 
 
-export const PopIndicator = /*@__PURE__*/ defineContainer<JSX.PopIndicator>('pop-indicator', definePopIndicator, [
+export const PopIndicator: StencilVueComponent<JSX.PopIndicator> = /*@__PURE__*/ defineContainer<JSX.PopIndicator>('pop-indicator', definePopIndicator, [
   'side',
   'position'
 ]);
 
 
-export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput["value"]>('pop-input', definePopInput, [
+export const PopInput: StencilVueComponent<JSX.PopInput, JSX.PopInput["value"]> = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput["value"]>('pop-input', definePopInput, [
   'name',
   'type',
   'placeholder',
@@ -228,7 +228,7 @@ export const PopInput = /*@__PURE__*/ defineContainer<JSX.PopInput, JSX.PopInput
 'value', 'pop-input');
 
 
-export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile, JSX.PopInputFile["value"]>('pop-input-file', definePopInputFile, [
+export const PopInputFile: StencilVueComponent<JSX.PopInputFile, JSX.PopInputFile["value"]> = /*@__PURE__*/ defineContainer<JSX.PopInputFile, JSX.PopInputFile["value"]>('pop-input-file', definePopInputFile, [
   'name',
   'value',
   'multiple',
@@ -252,39 +252,39 @@ export const PopInputFile = /*@__PURE__*/ defineContainer<JSX.PopInputFile, JSX.
 'value', 'pop-change');
 
 
-export const PopItem = /*@__PURE__*/ defineContainer<JSX.PopItem>('pop-item', definePopItem, [
+export const PopItem: StencilVueComponent<JSX.PopItem> = /*@__PURE__*/ defineContainer<JSX.PopItem>('pop-item', definePopItem, [
   'disabled'
 ]);
 
 
-export const PopJoin = /*@__PURE__*/ defineContainer<JSX.PopJoin>('pop-join', definePopJoin, [
+export const PopJoin: StencilVueComponent<JSX.PopJoin> = /*@__PURE__*/ defineContainer<JSX.PopJoin>('pop-join', definePopJoin, [
   'orientation'
 ]);
 
 
-export const PopKbd = /*@__PURE__*/ defineContainer<JSX.PopKbd>('pop-kbd', definePopKbd, [
+export const PopKbd: StencilVueComponent<JSX.PopKbd> = /*@__PURE__*/ defineContainer<JSX.PopKbd>('pop-kbd', definePopKbd, [
   'size'
 ]);
 
 
-export const PopList = /*@__PURE__*/ defineContainer<JSX.PopList>('pop-list', definePopList, [
+export const PopList: StencilVueComponent<JSX.PopList> = /*@__PURE__*/ defineContainer<JSX.PopList>('pop-list', definePopList, [
   'size',
   'orientation'
 ]);
 
 
-export const PopLoading = /*@__PURE__*/ defineContainer<JSX.PopLoading>('pop-loading', definePopLoading, [
+export const PopLoading: StencilVueComponent<JSX.PopLoading> = /*@__PURE__*/ defineContainer<JSX.PopLoading>('pop-loading', definePopLoading, [
   'type',
   'size'
 ]);
 
 
-export const PopMask = /*@__PURE__*/ defineContainer<JSX.PopMask>('pop-mask', definePopMask, [
+export const PopMask: StencilVueComponent<JSX.PopMask> = /*@__PURE__*/ defineContainer<JSX.PopMask>('pop-mask', definePopMask, [
   'type'
 ]);
 
 
-export const PopModal = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal', definePopModal, [
+export const PopModal: StencilVueComponent<JSX.PopModal> = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal', definePopModal, [
   'trigger',
   'component',
   'componentProps',
@@ -299,10 +299,10 @@ export const PopModal = /*@__PURE__*/ defineContainer<JSX.PopModal>('pop-modal',
 ]);
 
 
-export const PopNavbar = /*@__PURE__*/ defineContainer<JSX.PopNavbar>('pop-navbar', definePopNavbar);
+export const PopNavbar: StencilVueComponent<JSX.PopNavbar> = /*@__PURE__*/ defineContainer<JSX.PopNavbar>('pop-navbar', definePopNavbar);
 
 
-export const PopPopover = /*@__PURE__*/ defineContainer<JSX.PopPopover>('pop-popover', definePopPopover, [
+export const PopPopover: StencilVueComponent<JSX.PopPopover> = /*@__PURE__*/ defineContainer<JSX.PopPopover>('pop-popover', definePopPopover, [
   'open',
   'animated',
   'showBackdrop',
@@ -324,14 +324,14 @@ export const PopPopover = /*@__PURE__*/ defineContainer<JSX.PopPopover>('pop-pop
 ]);
 
 
-export const PopProgress = /*@__PURE__*/ defineContainer<JSX.PopProgress>('pop-progress', definePopProgress, [
+export const PopProgress: StencilVueComponent<JSX.PopProgress> = /*@__PURE__*/ defineContainer<JSX.PopProgress>('pop-progress', definePopProgress, [
   'value',
   'max',
   'color'
 ]);
 
 
-export const PopRadio = /*@__PURE__*/ defineContainer<JSX.PopRadio, JSX.PopRadio["value"]>('pop-radio', definePopRadio, [
+export const PopRadio: StencilVueComponent<JSX.PopRadio, JSX.PopRadio["value"]> = /*@__PURE__*/ defineContainer<JSX.PopRadio, JSX.PopRadio["value"]>('pop-radio', definePopRadio, [
   'name',
   'value',
   'checked',
@@ -350,7 +350,7 @@ export const PopRadio = /*@__PURE__*/ defineContainer<JSX.PopRadio, JSX.PopRadio
 'value', 'pop-change');
 
 
-export const PopRadioGroup = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JSX.PopRadioGroup["value"]>('pop-radio-group', definePopRadioGroup, [
+export const PopRadioGroup: StencilVueComponent<JSX.PopRadioGroup, JSX.PopRadioGroup["value"]> = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JSX.PopRadioGroup["value"]>('pop-radio-group', definePopRadioGroup, [
   'name',
   'value',
   'required',
@@ -367,7 +367,7 @@ export const PopRadioGroup = /*@__PURE__*/ defineContainer<JSX.PopRadioGroup, JS
 'value', 'pop-change');
 
 
-export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange, JSX.PopRange["value"]>('pop-range', definePopRange, [
+export const PopRange: StencilVueComponent<JSX.PopRange, JSX.PopRange["value"]> = /*@__PURE__*/ defineContainer<JSX.PopRange, JSX.PopRange["value"]>('pop-range', definePopRange, [
   'name',
   'value',
   'min',
@@ -390,7 +390,7 @@ export const PopRange = /*@__PURE__*/ defineContainer<JSX.PopRange, JSX.PopRange
 'value', 'pop-change');
 
 
-export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSelect["value"]>('pop-select', definePopSelect, [
+export const PopSelect: StencilVueComponent<JSX.PopSelect, JSX.PopSelect["value"]> = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSelect["value"]>('pop-select', definePopSelect, [
   'name',
   'placeholder',
   'value',
@@ -423,7 +423,7 @@ export const PopSelect = /*@__PURE__*/ defineContainer<JSX.PopSelect, JSX.PopSel
 'value', 'pop-change');
 
 
-export const PopSelectOption = /*@__PURE__*/ defineContainer<JSX.PopSelectOption>('pop-select-option', definePopSelectOption, [
+export const PopSelectOption: StencilVueComponent<JSX.PopSelectOption> = /*@__PURE__*/ defineContainer<JSX.PopSelectOption>('pop-select-option', definePopSelectOption, [
   'value',
   'disabled',
   'color',
@@ -431,7 +431,7 @@ export const PopSelectOption = /*@__PURE__*/ defineContainer<JSX.PopSelectOption
 ]);
 
 
-export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["active"]>('pop-swap', definePopSwap, [
+export const PopSwap: StencilVueComponent<JSX.PopSwap, JSX.PopSwap["active"]> = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["active"]>('pop-swap', definePopSwap, [
   'type',
   'active',
   'popSwap'
@@ -441,7 +441,7 @@ export const PopSwap = /*@__PURE__*/ defineContainer<JSX.PopSwap, JSX.PopSwap["a
 'active', 'pop-change');
 
 
-export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea, JSX.PopTextarea["value"]>('pop-textarea', definePopTextarea, [
+export const PopTextarea: StencilVueComponent<JSX.PopTextarea, JSX.PopTextarea["value"]> = /*@__PURE__*/ defineContainer<JSX.PopTextarea, JSX.PopTextarea["value"]>('pop-textarea', definePopTextarea, [
   'name',
   'placeholder',
   'value',
@@ -479,7 +479,7 @@ export const PopTextarea = /*@__PURE__*/ defineContainer<JSX.PopTextarea, JSX.Po
 'value', 'pop-input');
 
 
-export const PopToggle = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopToggle["checked"]>('pop-toggle', definePopToggle, [
+export const PopToggle: StencilVueComponent<JSX.PopToggle, JSX.PopToggle["checked"]> = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopToggle["checked"]>('pop-toggle', definePopToggle, [
   'name',
   'value',
   'required',
@@ -500,7 +500,7 @@ export const PopToggle = /*@__PURE__*/ defineContainer<JSX.PopToggle, JSX.PopTog
 'checked', 'pop-change');
 
 
-export const PopTooltip = /*@__PURE__*/ defineContainer<JSX.PopTooltip>('pop-tooltip', definePopTooltip, [
+export const PopTooltip: StencilVueComponent<JSX.PopTooltip> = /*@__PURE__*/ defineContainer<JSX.PopTooltip>('pop-tooltip', definePopTooltip, [
   'value',
   'color',
   'position',

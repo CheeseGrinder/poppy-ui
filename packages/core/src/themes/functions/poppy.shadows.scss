@@ -1,7 +1,8 @@
+@use "sass:map";
 @use "../generator" as theme;
 
 @function use_shadow($size: md) {
-  $value: map-get(
+  $value: map.get(
     $map: theme.$shadows,
     $key: $size,
   );

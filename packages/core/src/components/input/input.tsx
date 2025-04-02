@@ -14,6 +14,7 @@ import {
 import { ENTER } from 'key-definitions';
 import type { AutoCapitalize, EnterKeyHint, FormAssociatedInterface, KeyboardType, Size } from 'src/interface';
 import { componentConfig, config } from '#config';
+import { debug } from '#utils/debug.util';
 import { type Attributes, hostContext, inheritAriaAttributes, inheritAttributes } from '#utils/helpers.util';
 import { Show } from '../Show';
 import type { Autocomplete, InputChangeEventDetail, InputColor, InputInputEventDetail, InputType } from './input.type';
@@ -383,6 +384,7 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
   }
 
   private onChange = (): void => {
+    debug(`pop-input: "${this.name}" will emit "popChange" with value: "${this.getValue()}"`);
     this.popChange.emit({
       value: this.getValue(),
     });
@@ -399,6 +401,7 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
       if (input) {
         this.value = input.value || '';
       }
+      debug(`pop-input: "${this.name}" will emit "popInput" with value: "${this.getValue()}"`);
       this.popInput.emit({
         value: this.getValue(),
       });
@@ -420,10 +423,12 @@ export class Input implements ComponentInterface, FormAssociatedInterface {
   };
 
   private onFocus = (): void => {
+    debug(`pop-input: "${this.name}" will emit "popFocus" event`);
     this.popFocus.emit();
   };
 
   private onBlur = (): void => {
+    debug(`pop-input: "${this.name}" will emit "popBlur" event`);
     this.popBlur.emit();
   };
 

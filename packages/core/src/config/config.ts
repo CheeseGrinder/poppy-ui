@@ -21,6 +21,7 @@ export const config = new Config();
 
 interface FrameworkConfig {
   defaultSize?: Size;
+  debug?: boolean;
 }
 
 interface HelperConfig {

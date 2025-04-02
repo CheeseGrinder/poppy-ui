@@ -1,12 +1,10 @@
-import { vueOutputTarget } from '@stencil/vue-output-target';
+import { type ComponentModelConfig, vueOutputTarget } from '@stencil/vue-output-target';
 import type { JSX } from '../src/components';
 
 type ComponentTag = keyof JSX.IntrinsicElements;
 type VueComponentModel = {
   elements: ComponentTag | ComponentTag[];
-  event: string;
-  targetAttr: string;
-};
+} & ComponentModelConfig;
 
 export function vueOutput(core: string, ssr = false) {
   const ssrOptions: Parameters<typeof vueOutputTarget>[0] = {

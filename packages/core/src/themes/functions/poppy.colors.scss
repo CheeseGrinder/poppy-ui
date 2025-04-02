@@ -29,12 +29,12 @@
   $name: list.nth($colorArr, 1);
   $variant: list.nth($colorArr, 2);
 
-  $values: map-get(theme.$colors, $name);
+  $values: map.get(theme.$colors, $name);
   @if $values == null {
     @error $name "does not exist in theme colors";
   }
 
-  $value: map-get($values, $variant);
+  $value: map.get($values, $variant);
   @if $value == null {
     @error $variant "does not exist in theme colors " $name;
   }
