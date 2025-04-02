@@ -1,7 +1,7 @@
 {
   "name": "@poppy-ui/react",
   "type": "module",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "React specific wrapper for @poppy-ui/core",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -22,7 +22,7 @@
     "copy:css": "node ./scripts/copy-css.js"
   },
   "dependencies": {
-    "@poppy-ui/core": "^0.5.3",
+    "@poppy-ui/core": "0.5.4",
     "@stencil/react-output-target": "^0.8.2"
   },
   "devDependencies": {
