@@ -131,12 +131,12 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
       debounce: 100,
       showBackdrop: false,
     });
-  }
-
-  componentDidRender(): void {
     this.dropdownObserver = new MutationObserver(() => {
       this.open = this.dropdownRef.open;
     });
+  }
+
+  componentDidLoad(): void {
     this.dropdownObserver.observe(this.dropdownRef, {
       attributes: true,
       attributeFilter: ['open'],
@@ -144,7 +144,7 @@ export class Dropdown implements ComponentInterface, OverlayInterface {
   }
 
   disconnectedCallback(): void {
-    this.dropdownObserver.disconnect();
+    this.dropdownObserver?.disconnect();
     this.clickOutsideController.remove();
   }
 
