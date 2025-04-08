@@ -1,4 +1,8 @@
 /* This file is used by all html files located in src/components/<components>/tests/<test>/index.html */
+body {
+  display: initial;
+}
+
 main {
   width: 100vw;
   height: 100dvh;

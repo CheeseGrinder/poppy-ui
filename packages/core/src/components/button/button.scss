@@ -24,6 +24,7 @@
 
   display: inline-block;
   border-radius: theme.use_radius(md);
+  width: fit-content;
 
   button {
     box-sizing: border-box;
@@ -216,7 +217,7 @@
   width: 100%;
 }
 
-:host([expand="wide"]) button {
+:host([expand="wide"]) {
   width: 16rem;
 }
 

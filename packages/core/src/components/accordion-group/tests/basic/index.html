@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accordion Group | Poppy-ui</title>
+  <style>
+    @layer framework, theme, test;
+    @import "/dist/poppy/poppy.css" layer(framework);
+    @import "/css/themes/light.always.css" layer(theme);
+    @import "/tests/style.css" layer(test);
+  </style>
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Accordion - Basic</h2>
+      <div>
+        <pop-accordion-group>
+          <pop-accordion name="basic-1">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+          <pop-accordion name="basic-2">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+        </pop-accordion-group>
+      </div>
+    </section>
+    <section>
+      <h2>Accordion - Multiple</h2>
+      <div>
+        <pop-accordion-group multiple>
+          <pop-accordion name="multiple-1">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+          <pop-accordion name="multiple-2">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+        </pop-accordion-group>
+      </div>
+    </section>
+    <section>
+      <h2>Accordion - Readonly</h2>
+      <div>
+        <pop-accordion-group readonly>
+          <pop-accordion name="readonly-1">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+          <pop-accordion name="readonly-2">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+        </pop-accordion-group>
+      </div>
+    </section>
+    <section>
+      <h2>Accordion - Disabled</h2>
+      <div>
+        <pop-accordion-group disabled>
+          <pop-accordion name="disabled-1">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+          <pop-accordion name="disabled-2">
+            <div slot="header">header</div>
+            <div>content</div>
+          </pop-accordion>
+        </pop-accordion-group>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

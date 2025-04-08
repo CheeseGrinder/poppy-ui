@@ -14,6 +14,7 @@ import type { AccordionGroupChangeEventDetail } from './accordion-group.type';
 
 @Component({
   tag: 'pop-accordion-group',
+  styleUrl: 'accordion-group.scss',
   shadow: true,
 })
 export class AccordionGroup implements ComponentInterface {

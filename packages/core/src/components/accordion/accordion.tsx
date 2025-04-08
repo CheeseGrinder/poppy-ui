@@ -133,6 +133,7 @@ export class Accordion implements ComponentInterface {
           onClick={this.onClick}
           onKeyUp={this.onKeyPress(SPACE.key, ENTER.key, ESC.key)}
           part="header"
+          tabindex={0}
         >
           <div class="header-content">
             <slot name="header" />

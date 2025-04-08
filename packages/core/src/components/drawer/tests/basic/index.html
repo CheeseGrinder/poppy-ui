@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawer | Poppy-ui</title>
+  <style>
+    @layer framework, theme, test;
+    @import "/dist/poppy/poppy.css" layer(framework);
+    @import "/css/themes/light.always.css" layer(theme);
+    @import "/tests/style.css" layer(test);
+  </style>
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+</head>
+
+<body>
+  <main>
+    <pop-drawer trigger="drawer">
+      <pop-drawer trigger="drawer-end" side="end">
+        <section>
+          <h2>Drawer - Basic</h2>
+          <div>
+            <pop-button id="drawer">open</pop-button>
+            <pop-button id="drawer-end">open on end</pop-button>
+          </div>
+        </section>
+        <div slot="side">
+          Drawer side slot
+        </div>
+      </pop-drawer>
+      <div slot="side">
+        Drawer side slot
+      </div>
+    </pop-drawer>
+  </main>
+</body>
+
+</html>

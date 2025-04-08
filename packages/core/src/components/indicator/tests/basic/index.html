@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indicator | Poppy-ui</title>
+  <style>
+    @layer framework, theme, test;
+    @import "/dist/poppy/poppy.css" layer(framework);
+    @import "/css/themes/light.always.css" layer(theme);
+    @import "/tests/style.css" layer(test);
+  </style>
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+
+  <style>
+    .demo {
+      width: 200px;
+      height: 200px;
+      background-color: var(--base-300);
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Indicator - basic</h2>
+      <div>
+        <pop-indicator>
+          <pop-badge slot="indicator" color="error"></pop-badge>
+          <span class="demo"></span>
+        </pop-indicator>
+      </div>
+      <div>
+        <pop-select id="side" placeholder="Select a side" bordered value="right">
+          <label slot="label" for="side">Side</label>
+          <pop-select-option>left</pop-select-option>
+          <pop-select-option>start</pop-select-option>
+          <pop-select-option>center</pop-select-option>
+          <pop-select-option>right</pop-select-option>
+          <pop-select-option>end</pop-select-option>
+        </pop-select>
+        <pop-select id="position" placeholder="Select a position" bordered value="top">
+          <label slot="label" for="position">Position</label>
+          <pop-select-option>top</pop-select-option>
+          <pop-select-option>middle</pop-select-option>
+          <pop-select-option>bottom</pop-select-option>
+        </pop-select>
+        <pop-toggle id="rtl">
+          <label for="rtl">RTL</label>
+        </pop-toggle>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const indicator = document.querySelector('pop-indicator');
+    const side = document.querySelector('pop-select[id="side"]');
+    const position = document.querySelector('pop-select[id="position"]');
+    const rtl = document.querySelector('pop-toggle[id="rtl"]');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      indicator.side = side.value;
+      indicator.position = position.value;
+    });
+    side.addEventListener('popChange', (ev) => {
+      indicator.side = ev.detail.value;
+    });
+    position.addEventListener('popChange', (ev) => {
+      indicator.position = ev.detail.value;
+    });
+    rtl.addEventListener('popChange', (ev) => {
+      indicator.dir = ev.detail.checked ? 'rtl' : 'lrt';
+    });
+  </script>
+</body>
+
+</html>

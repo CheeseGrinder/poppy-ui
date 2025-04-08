@@ -154,17 +154,20 @@
 :host([disabled]) > input {
   --border-color: transparent;
   --background: #{theme.use_color("base.content")};
-  background-image: linear-gradient(-45deg, transparent 65%, var(--background) 65.99%),
-    linear-gradient(45deg, transparent 75%, var(--background) 75.99%),
-    linear-gradient(-45deg, var(--background) 40%, transparent 40.99%),
-    linear-gradient(
-      45deg,
-      var(--background) 30%,
-      var(--checkmark-color) 30.99%,
-      var(--checkmark-color) 40%,
-      transparent 40.99%
-    ),
-    linear-gradient(-45deg, var(--checkmark-color) 50%, var(--background) 50.99%);
+
+  &:checked {
+    background-image: linear-gradient(-45deg, transparent 65%, var(--background) 65.99%),
+      linear-gradient(45deg, transparent 75%, var(--background) 75.99%),
+      linear-gradient(-45deg, var(--background) 40%, transparent 40.99%),
+      linear-gradient(
+        45deg,
+        var(--background) 30%,
+        var(--checkmark-color) 30.99%,
+        var(--checkmark-color) 40%,
+        transparent 40.99%
+      ),
+      linear-gradient(-45deg, var(--checkmark-color) 50%, var(--background) 50.99%);
+  }
 
   background-color: var(--background);
   cursor: not-allowed;

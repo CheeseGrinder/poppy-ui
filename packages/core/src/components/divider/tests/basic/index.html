@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divider | Poppy-ui</title>
+  <style>
+    @layer framework, theme, test;
+    @import "/dist/poppy/poppy.css" layer(framework);
+    @import "/css/themes/light.always.css" layer(theme);
+    @import "/tests/style.css" layer(test);
+  </style>
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Divider - Basic</h2>
+      <div>
+        <pop-divider>No Color</pop-divider>
+        <pop-divider color="primary">Primary</pop-divider>
+        <pop-divider color="secondary">Secondary</pop-divider>
+        <pop-divider color="accent">Accent</pop-divider>
+        <pop-divider color="info">Info</pop-divider>
+        <pop-divider color="success">Success</pop-divider>
+        <pop-divider color="warning">Warning</pop-divider>
+        <pop-divider color="error">Error</pop-divider>
+      </div>
+    </section>
+    <section>
+      <h2>Divider - Placement</h2>
+      <div>
+        <pop-divider placement="start">start (ltr)</pop-divider>
+        <pop-divider placement="start" dir="rtl">start (rtl)</pop-divider>
+        <pop-divider placement="left">left</pop-divider>
+        <pop-divider placement="center">center</pop-divider>
+        <pop-divider placement="right">right</pop-divider>
+        <pop-divider placement="end">end (ltr)</pop-divider>
+        <pop-divider placement="end" dir="rtl">end (rtl)</pop-divider>
+      </div>
+    </section>
+    <section>
+      <h2>Divider - Orientation</h2>
+      <div>
+        <pop-divider orientation="horizontal">horizontal</pop-divider>
+        <pop-divider orientation="vertical" style="height: 100px;">vertical</pop-divider>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

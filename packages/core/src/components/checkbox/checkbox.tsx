@@ -208,9 +208,12 @@ export class Checkbox implements ComponentInterface {
     this.nativeInput?.focus();
   }
 
-  private onClick = (): void => {
+  private onClick = (ev: Event): void => {
     const { disabled, readonly } = this;
-    if (disabled || readonly) return;
+    if (disabled || readonly) {
+      ev.preventDefault();
+      return;
+    }
 
     this.checked = !this.checked;
   };
@@ -269,7 +272,7 @@ export class Checkbox implements ComponentInterface {
           onChange={this.onChecked}
           onFocus={this.onFocus}
           part="native"
-          readOnly={this.readonly}
+          readonly={this.readonly}
           ref={el => (this.nativeInput = el)}
           required={this.required}
           type="checkbox"

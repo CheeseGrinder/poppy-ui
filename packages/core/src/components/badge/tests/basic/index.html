@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badge | Poppy-ui</title>
+  <style>
+    @layer framework, theme, test;
+    @import "/dist/poppy/poppy.css" layer(framework);
+    @import "/css/themes/light.always.css" layer(theme);
+    @import "/tests/style.css" layer(test);
+  </style>
+  <script type="module" src="/dist/poppy/poppy.esm.js"></script>
+  <script nomodule src="/dist/poppy/poppy.js"></script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Badge - Basic</h2>
+      <div>
+        <pop-badge>No Color</pop-badge>
+        <pop-badge color="primary">Primary</pop-badge>
+        <pop-badge color="secondary">Secondary</pop-badge>
+        <pop-badge color="accent">Accent</pop-badge>
+        <pop-badge color="info">Info</pop-badge>
+        <pop-badge color="success">Success</pop-badge>
+        <pop-badge color="warning">Warning</pop-badge>
+        <pop-badge color="error">Error</pop-badge>
+      </div>
+    </section>
+    <section>
+      <h2>Badge - Outlined</h2>
+      <div>
+        <pop-badge outlined>Label</pop-badge>
+        <pop-badge outlined color="primary">Label</pop-badge>
+        <pop-badge outlined color="secondary">Label</pop-badge>
+        <pop-badge outlined color="accent">Label</pop-badge>
+        <pop-badge outlined color="info">Label</pop-badge>
+        <pop-badge outlined color="success">Label</pop-badge>
+        <pop-badge outlined color="warning">Label</pop-badge>
+        <pop-badge outlined color="error">Label</pop-badge>
+      </div>
+    </section>
+    <section>
+      <h2>Badge - Size</h2>
+      <div>
+        <pop-badge outlined size="xs">XS</pop-badge>
+        <pop-badge outlined size="sm">SM</pop-badge>
+        <pop-badge outlined size="md">MD</pop-badge>
+        <pop-badge outlined size="lg">LG</pop-badge>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
