@@ -1,5 +1,0 @@
-@use "./light";
-
-[data-theme="light"] {
-  @include light.generate();
-}

@@ -1,7 +1,0 @@
-@use "./dark";
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    @include dark.generate();
-  }
-}

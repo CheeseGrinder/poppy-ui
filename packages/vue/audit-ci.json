@@ -1,9 +1,0 @@
-{
-  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
-  "package-manager": "npm",
-  "output-format": "text",
-  "high": true,
-  "critical": true,
-  "moderate": false,
-  "low": false
-}
