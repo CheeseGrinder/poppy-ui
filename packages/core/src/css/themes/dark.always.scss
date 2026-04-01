@@ -1,5 +1,0 @@
-@use "./dark";
-
-:root {
-  @include dark.generate();
-}

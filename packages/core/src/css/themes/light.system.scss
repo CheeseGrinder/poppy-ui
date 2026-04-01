@@ -1,7 +1,0 @@
-@use "./light";
-
-@media (prefers-color-scheme: light) {
-  :root {
-    @include light.generate();
-  }
-}

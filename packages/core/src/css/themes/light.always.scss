@@ -1,5 +1,0 @@
-@use "./light";
-
-:root {
-  @include light.generate();
-}

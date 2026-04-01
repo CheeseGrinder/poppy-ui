@@ -1,34 +1,38 @@
 {
-  "name": "root",
+  "name": "@poppy-ui/vue",
   "private": true,
-  "version": "0.5.6",
-  "workspaces": [
-    "packages/*",
-    "packages/angular-workspace/projects/*",
-    "tests/*"
-  ],
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "npm run core:start",
-    "core:start": "npm -w @poppy-ui/core start",
-    "core:build": "npm -w @poppy-ui/core run build",
-    "angular:build": "npm -w angular-workspace run build",
-    "vue:build": "npm -w @poppy-ui/vue run build",
-    "react:build": "npm -w @poppy-ui/react run build",
-    "clean": "npm -w @poppy-ui/core run clean && npm -w @poppy-ui/vue run clean && npm -w @poppy-ui/react run clean && npm -w angular-workspace run clean",
-    "format": "biome format",
-    "format:fix": "biome format --write",
-    "lint": "biome lint",
-    "lint:fix": "biome lint --write",
-    "prepare": "git config core.hooksPath .githooks"
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2",
+    "vue": "^3.5.30"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
-    "@types/node": "^22.12.0",
-    "audit-ci": "^7.1.0"
-  },
-  "engines": {
-    "node": ">=20.x"
+    "@types/node": "^24.12.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/tsconfig": "^0.9.0",
+    "daisyui": "^5.5.19",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1",
+    "vue-tsc": "^3.2.5",
+    "storybook": "^10.3.3",
+    "@storybook/vue3-vite": "^10.3.3",
+    "@chromatic-com/storybook": "^5.1.1",
+    "@storybook/addon-vitest": "^10.3.3",
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/addon-onboarding": "^10.3.3",
+    "vitest": "^4.1.2",
+    "playwright": "^1.59.1",
+    "@vitest/browser-playwright": "^4.1.2",
+    "@vitest/coverage-v8": "^4.1.2"
   }
 }
