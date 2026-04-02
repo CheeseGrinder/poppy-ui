@@ -1,38 +1,86 @@
 {
-  "name": "@poppy-ui/vue",
-  "private": true,
+  "name": "poppy-vue",
   "version": "0.0.0",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/public.umd.js",
+  "module": "./dist/public.es.js",
+  "types": "./dist/public.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/public.d.ts",
+      "import": "./dist/public.es.js",
+      "require": "./dist/public.umd.js"
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind.d.ts",
+      "import": "./dist/tailwind.es.js",
+      "require": "./dist/tailwind.umd.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/actions/*",
+      "import": "./dist/components/actions/*",
+      "require": "./dist/components/actions/*"
+    },
+    "./components/actions": {
+      "types": "./dist/components/actions/public.d.ts",
+      "import": "./dist/components/actions/public.es.js",
+      "require": "./dist/components/actions/public.umd.js"
+    },
+    "./composables": {
+      "types": "./dist/composables/public.d.ts",
+      "import": "./dist/composables/public.es.js",
+      "require": "./dist/composables/public.umd.js"
+    },
+    "./types": {
+      "types": "./dist/types/public.d.ts",
+      "import": "./dist/types/public.es.js",
+      "require": "./dist/types/public.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "biome format --fix",
+    "format:check": "biome format",
+    "lint": "biome lint --fix",
+    "lint:check": "biome lint",
+    "typecheck": "vue-tsc --build --force"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
     "vue": "^3.5.30"
   },
   "devDependencies": {
-    "@types/node": "^24.12.0",
-    "@vitejs/plugin-vue": "^6.0.5",
-    "@vue/tsconfig": "^0.9.0",
-    "daisyui": "^5.5.19",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.1",
-    "vue-tsc": "^3.2.5",
-    "storybook": "^10.3.3",
-    "@storybook/vue3-vite": "^10.3.3",
+    "@biomejs/biome": "^2.4.10",
     "@chromatic-com/storybook": "^5.1.1",
-    "@storybook/addon-vitest": "^10.3.3",
+    "@microsoft/api-extractor": "^7.58.7",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-onboarding": "^10.3.3",
-    "vitest": "^4.1.2",
-    "playwright": "^1.59.1",
+    "@storybook/addon-vitest": "^10.3.3",
+    "@storybook/vue3-vite": "^10.3.3",
+    "@types/node": "24",
+    "@vitejs/plugin-vue": "^6.0.5",
     "@vitest/browser-playwright": "^4.1.2",
-    "@vitest/coverage-v8": "^4.1.2"
+    "@vitest/coverage-v8": "^4.1.2",
+    "@vue/tsconfig": "^0.9.0",
+    "daisyui": "^5.5.19",
+    "playwright": "^1.59.1",
+    "storybook": "^10.3.3",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1",
+    "vite-plugin-dts": "^5.0.0",
+    "vite-plugin-vue-devtools": "^8.1.1",
+    "vitest": "^4.1.2",
+    "vue-router": "^5.0.6",
+    "vue-tsc": "^3.2.5"
   }
 }
