@@ -1,0 +1,36 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+
+pre-push:
+  jobs:
+    - name: packages audit
+      tags:
+        - frontend
+        - security
+      run: bun audit
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: Biome - Format
+      run: bun format:check
+      glob:
+        - "*.ts"
+        - "*.vue"
+        - "*.json"
+
+    - name: Biome - Lint
+      run: bun lint:check
+      glob:
+        - "*.ts"
+        - "*.vue"
+        - "*.json"
+
+    - name: vue-tsc
+      run: vue-tsc --noEmit
+      glob:
+        - "*.ts"
+        - "*.vue"
