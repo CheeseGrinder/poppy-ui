@@ -1,0 +1,12 @@
+{
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Tailwind theme directive"
+    },
+    {
+      "name": "@plugin",
+      "description": "Tailwind plugin directive"
+    }
+  ]
+}
