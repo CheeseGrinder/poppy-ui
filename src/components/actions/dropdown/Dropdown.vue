@@ -1,23 +1,23 @@
 <script lang="ts">
-import { useComponentConfig } from '@/composables/use-component-config';
-import type { ComponentClass } from '@/types/utils.type';
-import { clsx, getClass } from '@/utils/build-class.util';
-import { useAttrs, useId, useTemplateRef } from 'vue';
-import { DROPDOWN_CONFIG } from './dropdown.context';
-import type { DropdownProps } from './dropdown.props';
-import type { DropdownAlign, DropdownSide, DropdownTriggerAction } from './dropdown.types';
+import { useComponentConfig } from '@/composables/use-component-config'
+import type { ComponentClass } from '@/types/utils.type'
+import { clsx, getClass } from '@/utils/build-class.util'
+import { useAttrs, useId, useTemplateRef } from 'vue'
+import { DROPDOWN_CONFIG } from './dropdown.context'
+import type { DropdownProps } from './dropdown.props'
+import type { DropdownAlign, DropdownSide, DropdownTriggerAction } from './dropdown.types'
 
 const dropdownAlign: ComponentClass<'dropdown', DropdownAlign> = {
   center: 'dropdown-center',
-  end:    'dropdown-end',
-  start:  'dropdown-start',
-};
+  end: 'dropdown-end',
+  start: 'dropdown-start',
+}
 const dropdownSide: ComponentClass<'dropdown', DropdownSide> = {
   bottom: 'dropdown-bottom',
-  top:    'dropdown-top',
-  left:   'dropdown-left',
-  right:  'dropdown-right',
-};
+  top: 'dropdown-top',
+  left: 'dropdown-left',
+  right: 'dropdown-right',
+}
 </script>
 
 <script setup lang="ts">

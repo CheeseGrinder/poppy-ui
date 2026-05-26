@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { reactive, useTemplateRef } from 'vue'
-import Dropdown from './Dropdown.vue'
 import Button from '@/components/actions/button/Button.vue'
 import { logEvent } from 'histoire/client'
+import { reactive, useTemplateRef } from 'vue'
+import Dropdown from './Dropdown.vue'
 import type { DropdownProps } from './dropdown.props'
 
 const state = reactive<DropdownProps>({

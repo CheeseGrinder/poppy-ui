@@ -7,7 +7,6 @@ export type InferOverrides<K extends string> = {
   [P in K]: true
 }
 
-export type * from '@/components/actions/button/button.types'
 export interface PoppyComponentConfig {
   // Actions
   button: ButtonConfigurableProps

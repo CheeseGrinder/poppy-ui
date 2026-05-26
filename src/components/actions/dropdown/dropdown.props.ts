@@ -1,6 +1,6 @@
-import type { Booleanish } from '@/types/utils.type';
-import type { ClassValue } from 'vue';
-import type { DropdownAlign, DropdownSide, DropdownTriggerAction } from './dropdown.types';
+import type { Booleanish } from '@/types/utils.type'
+import type { ClassValue } from 'vue'
+import type { DropdownAlign, DropdownSide, DropdownTriggerAction } from './dropdown.types'
 
 export interface DropdownConfigurableProps {
   /**
@@ -32,7 +32,7 @@ export interface DropdownConfigurableProps {
    *
    * @default "click"
    */
-  triggerAction?: DropdownTriggerAction;
+  triggerAction?: DropdownTriggerAction
 
   /**
    * Set the amount of time, in **milliseconds** after the user no longer hover the trigger or dropdown, will dismiss.
@@ -40,9 +40,8 @@ export interface DropdownConfigurableProps {
    *
    * @default 500
    */
-  debounce?: number;
+  debounce?: number
 }
-
 
 export interface DropdownProps extends DropdownConfigurableProps {
   /**
@@ -52,6 +51,6 @@ export interface DropdownProps extends DropdownConfigurableProps {
    */
   open?: Booleanish
 
-  triggerClass?: ClassValue;
-  contentClass?: ClassValue;
+  triggerClass?: ClassValue
+  contentClass?: ClassValue
 }

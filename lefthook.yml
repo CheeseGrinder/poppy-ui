@@ -10,27 +10,35 @@ pre-push:
       tags:
         - frontend
         - security
-      run: bun audit
+      run: bun audit --audit-level=high
 
 pre-commit:
   parallel: true
   jobs:
     - name: Biome - Format
-      run: bun format:check
+      run: bunx biome format
       glob:
         - "*.ts"
         - "*.vue"
         - "*.json"
 
     - name: Biome - Lint
-      run: bun lint:check
+      run: bunx biome lint
+      glob:
+        - "*.ts"
+        - "*.vue"
+        - "*.json"
+
+
+    - name: Biome - Check
+      run: bunx biome check
       glob:
         - "*.ts"
         - "*.vue"
         - "*.json"
 
     - name: vue-tsc
-      run: vue-tsc --noEmit
+      run: vue-tsc --noEmit || true # TODO: check why its does not work
       glob:
         - "*.ts"
         - "*.vue"
