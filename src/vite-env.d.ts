@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="@histoire/plugin-vue/components" />
 /** biome-ignore-all lint/suspicious/noExplicitAny: Define Vue component */
 /** biome-ignore-all lint/complexity/noBannedTypes: Define Vue component */
 

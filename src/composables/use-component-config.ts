@@ -1,16 +1,15 @@
 import { COMPONENT_SIZE } from '@/symbol'
-import { type ComputedRef, computed, type InjectionKey, inject } from 'vue'
+import { type ComputedRef, type InjectionKey, computed, inject } from 'vue'
 
 export function useComponentConfig<T extends Record<string, any>, P extends Record<string, any>>(
   key: InjectionKey<T>,
   props: P,
+  defaults?: Partial<P & T>,
 ): ComputedRef<P & T> {
   const componentConfig = inject(key, {} as T)
   const globalSize = inject(COMPONENT_SIZE, 'md')
 
-  return computed(() => {
-    return mergeProps({ size: globalSize }, componentConfig, props) as P & T
-  })
+  return computed(() => mergeProps({ size: globalSize }, defaults ?? {}, componentConfig, props))
 }
 
 /**

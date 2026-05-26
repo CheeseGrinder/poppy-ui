@@ -51,10 +51,10 @@ defineEmits<{
   click: [event: MouseEvent]
 }>()
 
-const props = withDefaults(defineProps<ButtonProps>(), {
+const props = defineProps<ButtonProps>()
+const config = useComponentConfig(BUTTON_CONFIG, props, {
   type: 'button'
 })
-const config = useComponentConfig(BUTTON_CONFIG, props)
 
 const { class: classAttr, ...attrs } = useAttrs()
 
@@ -80,7 +80,7 @@ const disabledAttrs = computed(() =>
 <template>
   <component
     :is="tag"
-    :type
+    :type="config.type"
     class="btn"
     :class="clsx([
       getClass(colors, config.color),
@@ -92,10 +92,10 @@ const disabledAttrs = computed(() =>
       classAttr,
     ])"
     v-bind="{...attrs, ...disabledAttrs}"
-    :to="to"
+    :to="config.to"
     @click="$emit('click', $event)"
   >
-    <slot v-if="loading" name="loading">
+    <slot v-if="isTrue(config.loading)" name="loading">
       <span class="loading loading-spinner"></span>
     </slot>
     <slot></slot>
