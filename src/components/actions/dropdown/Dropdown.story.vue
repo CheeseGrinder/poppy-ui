@@ -22,11 +22,11 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
 
       <Variant title="Default">
         <template #controls>
-          <HstSelect title="Align" v-model="state.align" :options="['start', 'center', 'end']" />
-          <HstSelect title="Side" v-model="state.side" :options="['bottom', 'top', 'left', 'right']" />
-          <HstSelect title="Trigger action" v-model="state.triggerAction" :options="['click', 'hover', 'context-menu']" />
+          <HstSelect title="Align" v-model="state.align" :options="[{ label: '-- default --', value: undefined }, 'start', 'center', 'end']" />
+          <HstSelect title="Side" v-model="state.side" :options="[{ label: '-- default --', value: undefined }, 'bottom', 'top', 'left', 'right']" />
+          <HstSelect title="Trigger action" v-model="state.triggerAction" :options="[{ label: '-- default --', value: undefined }, 'click', 'hover', 'context-menu']" />
           <HstNumber title="Debounce (ms)" v-model="state.debounce" />
-          <HstRadio title="Open" v-model="(state.open as string)" :options="[{ label: 'true', value: true}, { label: 'false', value: false }]" />
+          <HstCheckbox title="Open" v-model="state.open" />
         </template>
 
         <template #source>

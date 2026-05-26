@@ -25,12 +25,13 @@ const state = reactive<ButtonProps>({
       <Variant title="Default">
         <template #controls>
           <HstText title="Content" v-model="slots.content" />
-          <HstSelect title="Color" v-model="state.color" :options="['default', 'neutral', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error']" />
-          <HstSelect title="Variant" v-model="state.variant" :options="['default', 'solid', 'outline', 'dash', 'soft', 'ghost', 'link']" />
-          <HstSelect title="Behavior" v-model="state.behavior" :options="['default', 'active', 'disabled']" />
-          <HstSelect title="Size" v-model="state.size" :options="['default', 'xs', 'sm', 'md', 'lg', 'xl']" />
-          <HstSelect title="Shape" v-model="state.shape" :options="['default', 'wide', 'block', 'square', 'circle']" />
-          <HstRadio title="Loading" v-model="(state.loading as string)" :options="[{ label: 'true', value: true}, { label: 'false', value: false }]" />
+          <HstSelect title="Color" v-model="state.color" :options="[{ label: '-- default --', value: undefined }, 'neutral', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error']" />
+          <HstSelect title="Variant" v-model="state.variant" :options="[{ label: '-- default --', value: undefined }, 'solid', 'outline', 'dash', 'soft', 'ghost', 'link']" />
+          <HstSelect title="Behavior" v-model="state.behavior" :options="[{ label: '-- default --', value: undefined }, 'active', 'disabled']" />
+          <HstSelect title="Size" v-model="state.size" :options="[{ label: '-- default --', value: undefined }, 'xs', 'sm', 'md', 'lg', 'xl']" />
+          <HstSelect title="Shape" v-model="state.shape" :options="[{ label: '-- default --', value: undefined }, 'wide', 'block', 'square', 'circle']" />
+          <HstCheckbox title="Loading" v-model="state.loading" />
+          <HstCheckbox title="Disabled" v-model="state.disabled" />
         </template>
 
         <Button v-bind="state" @click="logEvent('click', $event)">{{ slots.content }}</Button>
