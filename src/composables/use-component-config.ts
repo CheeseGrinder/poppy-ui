@@ -1,5 +1,5 @@
 import { COMPONENT_SIZE } from '@/symbol'
-import { type ComputedRef, type InjectionKey, computed, inject } from 'vue'
+import { type ComputedRef, computed, type InjectionKey, inject } from 'vue'
 
 export function useComponentConfig<T extends Record<string, any>, P extends Record<string, any>>(
   key: InjectionKey<T>,

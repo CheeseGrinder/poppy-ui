@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { reactive, useTemplateRef, shallowRef } from 'vue'
-import Modal from './Modal.vue'
 import Button from '@/components/actions/button/Button.vue'
 import { logEvent } from 'histoire/client'
+import { reactive, shallowRef, useTemplateRef } from 'vue'
+import Modal from './Modal.vue'
 import type { ModalProps } from './modal.props'
 import type { ModalPlacement } from './modal.types'
 

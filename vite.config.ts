@@ -61,5 +61,5 @@ export default defineConfig({
   histoire: {
     plugins: [HstVue()],
     setupFile: 'histoire.setup.ts',
-  }
+  },
 })

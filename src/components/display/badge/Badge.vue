@@ -1,10 +1,10 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
-import { getClass } from '@/utils/build-class.util'
 import type { ComponentClass } from '@/types/utils.type'
-import type { BadgeColor, BadgeSize, BadgeVariant } from './badge.types'
-import type { BadgeProps } from './badge.props'
+import { getClass } from '@/utils/build-class.util'
 import { BADGE_CONFIG } from './badge.context'
+import type { BadgeProps } from './badge.props'
+import type { BadgeColor, BadgeSize, BadgeVariant } from './badge.types'
 
 const badgeColors: ComponentClass<'badge', BadgeColor> = {
   neutral: 'badge-neutral',

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
-import type { ButtonProps } from './button.props';
-import Button from './Button.vue'
 import { logEvent } from 'histoire/client'
+import { reactive } from 'vue'
+import Button from './Button.vue'
+import type { ButtonProps } from './button.props'
 
 const slots = reactive({
   content: 'Click Me !',
@@ -15,7 +15,7 @@ const state = reactive<ButtonProps>({
   loading: false,
   size: 'md',
   variant: 'solid',
-  behavior: undefined
+  behavior: undefined,
 })
 </script>
 
