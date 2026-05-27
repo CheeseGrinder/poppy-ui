@@ -5,6 +5,7 @@ import type { AccordionItemConfigurableProps } from '@/components/display/accord
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
 import type { CardConfigurableProps } from '@/components/display/card/card.props'
+import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
 
 export type InferOverrides<K extends string> = {
   [P in K]: true
@@ -21,4 +22,7 @@ export interface PoppyComponentConfig {
   badge: BadgeConfigurableProps
   card: CardConfigurableProps
   cardActions: CardActionsConfigurableProps
+
+  // Feedback
+  alert: AlertConfigurableProps
 }
