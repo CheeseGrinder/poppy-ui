@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import Button from '@/components/actions/button/Button.vue';
-import { HeartIcon, PlayIcon } from '@lucide/vue';
-import List from './List.vue';
-import ListItem from './ListItem.vue';
+import Button from '@/components/actions/button/Button.vue'
+import { HeartIcon, PlayIcon } from '@lucide/vue'
+import List from './List.vue'
+import ListItem from './ListItem.vue'
 </script>
 
 <template>

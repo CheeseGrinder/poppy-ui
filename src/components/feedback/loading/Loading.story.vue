@@ -6,6 +6,7 @@ import type { LoadingProps } from './loading.props'
 const state = reactive<LoadingProps>({
   variant: 'spinner',
   size: 'md',
+  color: undefined,
 })
 </script>
 
@@ -17,6 +18,7 @@ const state = reactive<LoadingProps>({
         <template #controls>
           <HstSelect title="Variant" v-model="state.variant" :options="['spinner', 'dots', 'ring', 'ball', 'bars', 'infinity']" />
           <HstSelect title="Size" v-model="state.size" :options="['xs', 'sm', 'md', 'lg', 'xl']" />
+          <HstSelect title="Color" v-model="state.color" :options="[{ label: '-- default --', value: undefined }, 'primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error']" />
         </template>
 
         <Loading v-bind="state" />
@@ -36,6 +38,15 @@ const state = reactive<LoadingProps>({
           <div v-for="size in (['xs', 'sm', 'md', 'lg', 'xl'])" :key="size" class="loading-story--item">
             <Loading variant="spinner" :size="size" />
             <span class="loading-story--label">{{ size }}</span>
+          </div>
+        </div>
+      </Variant>
+
+      <Variant title="Colors">
+        <div class="loading-story loading-story--row">
+          <div v-for="color in (['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error'])" :key="color" class="loading-story--item">
+            <Loading variant="spinner" size="md" :color="color" />
+            <span class="loading-story--label">{{ color }}</span>
           </div>
         </div>
       </Variant>
@@ -110,14 +121,15 @@ const state = reactive<LoadingProps>({
 ## Description
 
 An animated loading indicator built on DaisyUI's `loading` class system.
-Supports multiple visual styles and sizes. Use it inline, inside buttons, or as a full-page overlay.
+Supports multiple visual styles, sizes, and colors. Use it inline, inside buttons, or as a full-page overlay.
 
 ## Props
 
-| Prop      | Type             | Default      | Required | Configurable | Description                                                               |
-|-----------|------------------|--------------|----------|--------------|---------------------------------------------------------------------------|
-| `variant` | `LoadingVariant` | `'spinner'`  | ❌       | ✅          | Visual style. `spinner` / `dots` / `ring` / `ball` / `bars` / `infinity`. |
-| `size`    | `LoadingSize`    | `undefined`  | ❌       | ✅          | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                  |
+| Prop      | Type             | Default     | Required | Configurable | Description                                                                                                                                                |
+|-----------|------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `variant` | `LoadingVariant` | `'spinner'` | ❌       | ✅          | Visual style. `spinner` / `dots` / `ring` / `ball` / `bars` / `infinity`.                                                                                  |
+| `size`    | `LoadingSize`    | `'md'`      | ❌       | ✅          | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                                                                                                   |
+| `color`   | `LoadingColor`   | `undefined` | ❌       | ✅          | Color of the indicator. Applied as a Tailwind `text-*` utility. `primary` / `secondary` / `accent` / `neutral` / `info` / `success` / `warning` / `error`. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.loading` option). See [Plugin Configuration](#) for more information.
 
@@ -129,6 +141,9 @@ Supports multiple visual styles and sizes. Use it inline, inside buttons, or as 
 
 <!-- With variant and size -->
 <Loading variant="dots" size="lg" />
+
+<!-- With color -->
+<Loading variant="spinner" color="primary" />
 
 <!-- Inside a button -->
 <Button :loading="true">

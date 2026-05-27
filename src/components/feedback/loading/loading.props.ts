@@ -1,4 +1,4 @@
-import type { LoadingSize, LoadingVariant } from './loading.types'
+import type { LoadingColor, LoadingSize, LoadingVariant } from './loading.types'
 
 export interface LoadingConfigurableProps {
   /**
@@ -10,10 +10,16 @@ export interface LoadingConfigurableProps {
 
   /**
    * Size of the loading indicator.
-   * 
+   *
    * @default 'md'
    */
   size?: LoadingSize
+
+  /**
+   * Color of the loading indicator based on the DaisyUI palette.
+   * Applied as a Tailwind `text-*` utility class.
+   */
+  color?: LoadingColor
 }
 
 export interface LoadingProps extends LoadingConfigurableProps {}

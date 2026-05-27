@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ref, reactive, useTemplateRef } from 'vue'
+import { logEvent } from 'histoire/client'
+import { reactive, ref, useTemplateRef } from 'vue'
 import Accordion from './Accordion.vue'
 import AccordionItem from './AccordionItem.vue'
-import { logEvent } from 'histoire/client'
 import type { AccordionItemProps } from './accordion-item.props'
 
 const state = reactive<AccordionItemProps>({

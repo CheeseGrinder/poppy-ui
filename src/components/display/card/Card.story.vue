@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import Button from '@/components/actions/button/Button.vue'
 import { reactive } from 'vue'
 import Card from './Card.vue'
+import CardActions from './CardActions.vue'
 import CardBody from './CardBody.vue'
 import CardTitle from './CardTitle.vue'
-import CardActions from './CardActions.vue'
-import Button from '@/components/actions/button/Button.vue'
 import type { CardProps } from './card.props'
 
 const state = reactive<CardProps>({
@@ -21,10 +21,10 @@ const state = reactive<CardProps>({
 
       <Variant title="Default">
         <template #controls>
-          <HstSelect title="Variant" v-model="state.variant" :options="[undefined, 'border', 'dash']" />
-          <HstSelect title="Size" v-model="state.size" :options="[undefined, 'xs', 'sm', 'md', 'lg', 'xl']" />
-          <HstCheckbox title="Side" v-model="(state.side as boolean)" />
-          <HstCheckbox title="Image full" v-model="(state.imageFull as boolean)" />
+          <HstSelect title="Variant" v-model="state.variant" :options="[{ label: '-- default --', value: undefined }, 'border', 'dash']" />
+          <HstSelect title="Size" v-model="state.size" :options="[{ label: '-- default --', value: undefined }, 'xs', 'sm', 'md', 'lg', 'xl']" />
+          <HstCheckbox title="Side" v-model="state.side" />
+          <HstCheckbox title="Image full" v-model="state.imageFull" />
         </template>
 
         <Card v-bind="state" class="w-80">

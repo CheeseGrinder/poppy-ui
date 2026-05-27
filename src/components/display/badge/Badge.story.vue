@@ -16,8 +16,8 @@ const state = reactive<BadgeProps>({
 
       <Variant title="Default">
         <template #controls>
-          <HstSelect title="Color" v-model="state.color" :options="[undefined, 'neutral', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error']" />
-          <HstSelect title="Variant" v-model="state.variant" :options="[undefined, 'outline', 'soft', 'dash']" />
+          <HstSelect title="Color" v-model="state.color" :options="[{ label: '-- default --', value: undefined }, 'neutral', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error']" />
+          <HstSelect title="Variant" v-model="state.variant" :options="[{ label: '-- default --', value: undefined }, 'outline', 'soft', 'dash']" />
           <HstSelect title="Size" v-model="state.size" :options="['xs', 'sm', 'md', 'lg', 'xl']" />
         </template>
 
