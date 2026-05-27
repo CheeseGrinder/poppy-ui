@@ -4,8 +4,7 @@ import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
 import { LOADING_CONFIG } from './loading.context'
 import type { LoadingProps } from './loading.props'
-import type { LoadingSize, LoadingVariant } from './loading.types'
-
+import type { LoadingColor, LoadingSize, LoadingVariant } from './loading.types'
 
 const loadingVariants: ComponentClass<'loading', LoadingVariant> = {
   spinner: 'loading-spinner',
@@ -23,6 +22,17 @@ const loadingSizes: ComponentClass<'loading', LoadingSize> = {
   lg: 'loading-lg',
   xl: 'loading-xl',
 }
+
+const loadingColors: ComponentClass<'text', LoadingColor> = {
+  primary: 'text-primary',
+  secondary: 'text-secondary',
+  accent: 'text-accent',
+  neutral: 'text-neutral',
+  info: 'text-info',
+  success: 'text-success',
+  warning: 'text-warning',
+  error: 'text-error',
+}
 </script>
 
 <script setup lang="ts">
@@ -39,6 +49,7 @@ const config = useComponentConfig(LOADING_CONFIG, props, {
     :class="[
       getClass(loadingVariants, config.variant),
       getClass(loadingSizes, config.size),
+      getClass(loadingColors, config.color),
     ]"
   />
 </template>

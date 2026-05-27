@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { CheckCircleIcon, InfoIcon, TriangleAlertIcon, XCircleIcon } from '@lucide/vue'
 import { reactive } from 'vue'
 import Alert from './Alert.vue'
-import { InfoIcon, CheckCircleIcon, TriangleAlertIcon, XCircleIcon } from '@lucide/vue'
 import type { AlertProps } from './alert.props'
 
 const state = reactive<AlertProps>({
