@@ -51,6 +51,17 @@ export interface DropdownProps extends DropdownConfigurableProps {
    */
   open?: Booleanish
 
+  /**
+   * CSS class to apply to the trigger element.
+   *
+   * @default ''
+   */
   triggerClass?: ClassValue
+
+  /**
+   * CSS class to apply to the content element.
+   *
+   * @default ''
+   */
   contentClass?: ClassValue
 }
