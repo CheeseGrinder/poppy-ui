@@ -7,6 +7,7 @@ import type { CardConfigurableProps } from '@/components/display/card/card.props
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
+import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -23,4 +24,5 @@ export interface PoppyComponentConfig {
   // Feedback
   alert: AlertConfigurableProps
   loading: LoadingConfigurableProps
+  toast: ToastConfigurableProps
 }
