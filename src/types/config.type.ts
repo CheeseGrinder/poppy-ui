@@ -6,10 +6,7 @@ import type { BadgeConfigurableProps } from '@/components/display/badge/badge.pr
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
 import type { CardConfigurableProps } from '@/components/display/card/card.props'
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
-
-export type InferOverrides<K extends string> = {
-  [P in K]: true
-}
+import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -25,4 +22,5 @@ export interface PoppyComponentConfig {
 
   // Feedback
   alert: AlertConfigurableProps
+  loading: LoadingConfigurableProps
 }
