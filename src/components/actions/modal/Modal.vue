@@ -18,6 +18,12 @@ const modalPlacements: Record<ModalPlacement, `modal-${ModalPlacement}`> = {
 <script setup lang="ts">
 const dialogEl = useTemplateRef('dialog-el')
 
+/**
+ * Controls the open state of the modal.
+ * Use `v-model` to bind reactively.
+ *
+ * @default false
+ */
 const open = defineModel<boolean>({ default: false })
 
 const props = defineProps<ModalProps>()

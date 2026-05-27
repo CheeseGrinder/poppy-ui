@@ -31,12 +31,4 @@ export interface ModalConfigurableProps {
   loadContentWhenClose?: Booleanish
 }
 
-export interface ModalProps extends ModalConfigurableProps {
-  /**
-   * Controls the open state of the modal.
-   * Use `v-model` to bind reactively.
-   *
-   * @default false
-   */
-  modelValue?: boolean
-}
+export interface ModalProps extends ModalConfigurableProps {}

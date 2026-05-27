@@ -1,6 +1,7 @@
 import type { ButtonConfigurableProps } from '@/components/actions/button/button.props'
 import type { DropdownConfigurableProps } from '@/components/actions/dropdown/dropdown.props'
 import type { ModalConfigurableProps } from '@/components/actions/modal/modal.props'
+import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
 
 export type InferOverrides<K extends string> = {
@@ -14,5 +15,6 @@ export interface PoppyComponentConfig {
   modal: ModalConfigurableProps
 
   // Display
+  accordionItem: AccordionItemConfigurableProps
   badge: BadgeConfigurableProps
 }
