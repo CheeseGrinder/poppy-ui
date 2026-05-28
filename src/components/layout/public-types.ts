@@ -1,3 +1,6 @@
+// Drawer
+export type { DrawerProps } from './drawer/drawer.props'
+export * from './drawer/drawer.types'
 // Indicator
 export type { IndicatorProps } from './indicator/indicator.props'
 export * from './indicator/indicator.types'
