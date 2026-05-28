@@ -10,3 +10,6 @@ export * from './fab/fab.types'
 // Modal
 export type { ModalProps } from './modal/modal.props'
 export * from './modal/modal.types'
+// Swap
+export type { SwapProps } from './swap/swap.props'
+export * from './swap/swap.types'
