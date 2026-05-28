@@ -2,6 +2,9 @@
 export type { AccordionProps } from './accordion/accordion.props'
 export type { AccordionItemProps } from './accordion/accordion-item.props'
 export * from './accordion/accordion-item.types'
+// Avatar
+export type { AvatarProps } from './avatar/avatar.props'
+export * from './avatar/avatar.types'
 // Badge
 export type { BadgeProps } from './badge/badge.props'
 export * from './badge/badge.types'

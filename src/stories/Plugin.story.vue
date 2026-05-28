@@ -1,5 +1,5 @@
 <template>
-  <Story title="Poppy UI/Plugin Configuration" docs-only />
+  <Story title="# Configuration" docs-only />
 </template>
 
 <docs lang="md">
