@@ -1,1 +1,2 @@
-export { default as Mask } from './Mask.vue'
+export { default as Join } from './join/Join.vue'
+export { default as Mask } from './mask/Mask.vue'

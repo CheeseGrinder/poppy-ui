@@ -12,6 +12,7 @@ import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.p
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
 import type { TooltipConfigurableProps } from '@/components/feedback/tooltip/tooltip.props'
+import type { JoinConfigurableProps } from '@/components/layout/join/join.props'
 import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
 
 export interface PoppyComponentConfig {
@@ -36,5 +37,6 @@ export interface PoppyComponentConfig {
   tooltip: TooltipConfigurableProps
 
   // Layout
+  join: JoinConfigurableProps
   mask: MaskConfigurableProps
 }
