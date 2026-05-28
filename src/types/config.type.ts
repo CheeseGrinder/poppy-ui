@@ -12,6 +12,7 @@ import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.p
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
 import type { TooltipConfigurableProps } from '@/components/feedback/tooltip/tooltip.props'
+import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -33,4 +34,7 @@ export interface PoppyComponentConfig {
   loading: LoadingConfigurableProps
   toast: ToastConfigurableProps
   tooltip: TooltipConfigurableProps
+
+  // Layout
+  mask: MaskConfigurableProps
 }
