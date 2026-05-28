@@ -8,6 +8,7 @@ import type { CardActionsConfigurableProps } from '@/components/display/card/car
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
+import type { TooltipConfigurableProps } from '@/components/feedback/tooltip/tooltip.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -25,4 +26,5 @@ export interface PoppyComponentConfig {
   alert: AlertConfigurableProps
   loading: LoadingConfigurableProps
   toast: ToastConfigurableProps
+  tooltip: TooltipConfigurableProps
 }
