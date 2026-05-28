@@ -1,11 +1,10 @@
 <script lang="ts">
+import { reactive } from 'vue'
 import Status from './Status.vue'
 import type { StatusProps } from './status.props'
 </script>
 
-<script lang="ts" setup>
-import { reactive } from 'vue'
-
+<script setup lang="ts">
 const state = reactive<StatusProps>({
   color: undefined,
   size: 'md',
@@ -166,12 +165,12 @@ Built on DaisyUI's `status` class system. Supports colors, sizes, and animations
 
 ## Props
 
-| Prop        | Type              | Default     | Required | Configurable | Description                                                                      |
-|-------------|-------------------|-------------|----------|--------------|----------------------------------------------------------------------------------|
-| `color`     | `StatusColor`     | `undefined` | ❌       | ✅           | Color theme based on the DaisyUI palette.                                        |
-| `size`      | `StatusSize`      | `'md'`      | ❌       | ✅           | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                        |
-| `animation` | `StatusAnimation` | `undefined` | ❌       | ✅           | `'ping'` renders two overlapping elements for urgency. `'bounce'` draws attention. |
-| `label`     | `string`          | `undefined` | ❌       | ❌           | Accessible label set as `aria-label` on the root element.                        |
+| Prop        | Type              | Default     | Required | Configurable | Description                                                                        |
+|-------------|-------------------|-------------|----------|--------------|------------------------------------------------------------------------------------|
+| `color`     | `StatusColor`     | `undefined` | ❌       | ✅          | Color theme based on the DaisyUI palette.                                          |
+| `size`      | `StatusSize`      | `'md'`      | ❌       | ✅          | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                           |
+| `animation` | `StatusAnimation` | `undefined` | ❌       | ✅          | `'ping'` renders two overlapping elements for urgency. `'bounce'` draws attention. |
+| `label`     | `string`          | `undefined` | ❌       | ❌          | Accessible label set as `aria-label` on the root element.                          |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.status` option). See [Plugin Configuration](#) for more information.
 

@@ -1,9 +1,11 @@
-<script lang="ts" setup>
+<script lang="ts">
 import { logEvent } from 'histoire/client'
 import { reactive } from 'vue'
 import Button from './Button.vue'
 import type { ButtonProps } from './button.props'
+</script>
 
+<script setup lang="ts">
 const slots = reactive({
   content: 'Click Me !',
 })

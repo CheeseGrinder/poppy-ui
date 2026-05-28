@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts">
 import Button from '@/components/actions/button/Button.vue'
 import { reactive } from 'vue'
 import Card from './Card.vue'
@@ -6,7 +6,9 @@ import CardActions from './CardActions.vue'
 import CardBody from './CardBody.vue'
 import CardTitle from './CardTitle.vue'
 import type { CardProps } from './card.props'
+</script>
 
+<script setup lang="ts">
 const state = reactive<CardProps>({
   variant: undefined,
   size: undefined,

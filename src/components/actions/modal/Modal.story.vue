@@ -1,11 +1,13 @@
-<script lang="ts" setup>
+<script lang="ts">
 import Button from '@/components/actions/button/Button.vue'
 import { logEvent } from 'histoire/client'
 import { reactive, shallowRef, useTemplateRef } from 'vue'
 import Modal from './Modal.vue'
 import type { ModalProps } from './modal.props'
 import type { ModalPlacement } from './modal.types'
+</script>
 
+<script setup lang="ts">
 const state = reactive<ModalProps>({
   placement: undefined,
   closeOnBackdrop: false,

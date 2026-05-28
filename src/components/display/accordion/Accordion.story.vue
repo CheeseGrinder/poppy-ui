@@ -1,23 +1,25 @@
-<script lang="ts" setup>
+<script lang="ts">
 import { logEvent } from 'histoire/client'
-import { reactive, ref, useTemplateRef } from 'vue'
+import { reactive, shallowRef, useTemplateRef } from 'vue'
 import Accordion from './Accordion.vue'
 import AccordionItem from './AccordionItem.vue'
 import type { AccordionItemProps } from './accordion-item.props'
+</script>
 
+<script setup lang="ts">
 const state = reactive<AccordionItemProps>({
   name: 'item-1',
   icon: 'arrow',
 })
 
 // Default
-const defaultValue = ref<string | null>(null)
+const defaultValue = shallowRef<string | null>(null)
 
 // Multiple
-const multipleValue = ref<string[]>([])
+const multipleValue = shallowRef<string[]>([])
 
 // Controlled
-const controlledValue = ref<string | null>('item-1')
+const controlledValue = shallowRef<string | null>('item-1')
 
 // Expose — Accordion
 const accordionRef = useTemplateRef('accordion-expose')
