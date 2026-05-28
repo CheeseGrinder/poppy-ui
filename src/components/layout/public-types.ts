@@ -1,3 +1,6 @@
+// Indicator
+export type { IndicatorProps } from './indicator/indicator.props'
+export * from './indicator/indicator.types'
 // Join
 export type { JoinProps } from './join/join.props'
 export * from './join/join.types'
