@@ -34,6 +34,11 @@
       "import": "./dist/components/feedback/public.es.js",
       "require": "./dist/components/feedback/public.umd.js"
     },
+    "./components/layout": {
+      "types": "./dist/components/layout/public.d.ts",
+      "import": "./dist/components/layout/public.es.js",
+      "require": "./dist/components/layout/public.umd.js"
+    },
     "./composables": {
       "types": "./dist/composables/public.d.ts",
       "import": "./dist/composables/public.es.js",
