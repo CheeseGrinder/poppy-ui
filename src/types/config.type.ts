@@ -17,6 +17,7 @@ import type { DrawerConfigurableProps } from '@/components/layout/drawer/drawer.
 import type { IndicatorConfigurableProps } from '@/components/layout/indicator/indicator.props'
 import type { JoinConfigurableProps } from '@/components/layout/join/join.props'
 import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
+import type { StackConfigurableProps } from '@/components/layout/stack/stack.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -45,4 +46,5 @@ export interface PoppyComponentConfig {
   indicator: IndicatorConfigurableProps
   join: JoinConfigurableProps
   mask: MaskConfigurableProps
+  stack: StackConfigurableProps
 }
