@@ -13,3 +13,6 @@ export * from './join/join.types'
 // Mask
 export type { MaskProps } from './mask/mask.props'
 export * from './mask/mask.types'
+// Stack
+export type { StackProps } from './stack/stack.props'
+export * from './stack/stack.types'
