@@ -10,6 +10,11 @@ export type { CardProps } from './card/card.props'
 export * from './card/card.types'
 export type { CardActionsProps } from './card/card-actions.props'
 export * from './card/card-actions.types'
+// Kbd
+export type { KbdProps } from './kbd/kbd.props'
+export * from './kbd/kbd.types'
+// List
+export type { ListItemProps } from './list/list-item.props'
 // Status
 export type { StatusProps } from './status/status.props'
 export * from './status/status.types'
