@@ -1,3 +1,6 @@
+// Divider
+export type { DividerProps } from './divider/divider.props'
+export * from './divider/divider.types'
 // Drawer
 export type { DrawerProps } from './drawer/drawer.props'
 export * from './drawer/drawer.types'
