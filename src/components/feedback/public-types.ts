@@ -7,3 +7,6 @@ export * from './loading/loading.types'
 // Toast
 export type { ToastProps } from './toast/toast.props'
 export * from './toast/toast.types'
+// Tooltip
+export type { TooltipProps } from './tooltip/tooltip.props'
+export * from './tooltip/tooltip.types'

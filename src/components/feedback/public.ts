@@ -1,2 +1,4 @@
 export { default as Alert } from './alert/Alert.vue'
 export { default as Loading } from './loading/Loading.vue'
+export { default as Toast } from './toast/Toast.vue'
+export { default as Tooltip } from './tooltip/Tooltip.vue'
