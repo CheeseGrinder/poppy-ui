@@ -12,6 +12,7 @@ import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.p
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
 import type { TooltipConfigurableProps } from '@/components/feedback/tooltip/tooltip.props'
+import type { DividerConfigurableProps } from '@/components/layout/divider/divider.props'
 import type { DrawerConfigurableProps } from '@/components/layout/drawer/drawer.props'
 import type { IndicatorConfigurableProps } from '@/components/layout/indicator/indicator.props'
 import type { JoinConfigurableProps } from '@/components/layout/join/join.props'
@@ -39,6 +40,7 @@ export interface PoppyComponentConfig {
   tooltip: TooltipConfigurableProps
 
   // Layout
+  divider: DividerConfigurableProps
   drawer: DrawerConfigurableProps
   indicator: IndicatorConfigurableProps
   join: JoinConfigurableProps

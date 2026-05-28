@@ -1,3 +1,4 @@
+export { default as Divider } from './divider/Divider.vue'
 export { default as Drawer } from './drawer/Drawer.vue'
 export { default as Indicator } from './indicator/Indicator.vue'
 export { default as Join } from './join/Join.vue'
