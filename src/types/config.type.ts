@@ -1,5 +1,6 @@
 import type { ButtonConfigurableProps } from '@/components/actions/button/button.props'
 import type { DropdownConfigurableProps } from '@/components/actions/dropdown/dropdown.props'
+import type { FabConfigurableProps } from '@/components/actions/fab/fab.props'
 import type { ModalConfigurableProps } from '@/components/actions/modal/modal.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
 import type { AvatarConfigurableProps } from '@/components/display/avatar/avatar.props'
@@ -23,6 +24,7 @@ export interface PoppyComponentConfig {
   // Actions
   button: ButtonConfigurableProps
   dropdown: DropdownConfigurableProps
+  fab: FabConfigurableProps
   modal: ModalConfigurableProps
 
   // Display
