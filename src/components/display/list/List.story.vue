@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import Button from '@/components/actions/button/Button.vue'
 import { HeartIcon, PlayIcon } from '@lucide/vue'
 import List from './List.vue'

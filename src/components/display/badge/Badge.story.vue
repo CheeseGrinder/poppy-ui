@@ -1,8 +1,10 @@
-<script lang="ts" setup>
+<script lang="ts">
 import { reactive } from 'vue'
 import Badge from './Badge.vue'
 import type { BadgeProps } from './badge.props'
+</script>
 
+<script setup lang="ts">
 const state = reactive<BadgeProps>({
   color: undefined,
   variant: undefined,

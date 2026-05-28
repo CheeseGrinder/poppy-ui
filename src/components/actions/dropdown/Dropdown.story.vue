@@ -1,10 +1,12 @@
-<script lang="ts" setup>
+<script lang="ts">
 import Button from '@/components/actions/button/Button.vue'
 import { logEvent } from 'histoire/client'
 import { reactive, useTemplateRef } from 'vue'
 import Dropdown from './Dropdown.vue'
 import type { DropdownProps } from './dropdown.props'
+</script>
 
+<script setup lang="ts">
 const state = reactive<DropdownProps>({
   align: 'start' as const,
   side: 'bottom' as const,
