@@ -14,11 +14,6 @@
       "import": "./dist/public.es.js",
       "require": "./dist/public.umd.js"
     },
-    "./tailwind": {
-      "types": "./dist/tailwind.d.ts",
-      "import": "./dist/tailwind.es.js",
-      "require": "./dist/tailwind.umd.js"
-    },
     "./components/*": {
       "types": "./dist/components/actions/*",
       "import": "./dist/components/actions/*",
@@ -28,6 +23,16 @@
       "types": "./dist/components/actions/public.d.ts",
       "import": "./dist/components/actions/public.es.js",
       "require": "./dist/components/actions/public.umd.js"
+    },
+    "./components/display": {
+      "types": "./dist/components/display/public.d.ts",
+      "import": "./dist/components/display/public.es.js",
+      "require": "./dist/components/display/public.umd.js"
+    },
+    "./components/feedback": {
+      "types": "./dist/components/feedback/public.d.ts",
+      "import": "./dist/components/feedback/public.es.js",
+      "require": "./dist/components/feedback/public.umd.js"
     },
     "./composables": {
       "types": "./dist/composables/public.d.ts",

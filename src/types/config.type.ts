@@ -2,6 +2,7 @@ import type { ButtonConfigurableProps } from '@/components/actions/button/button
 import type { DropdownConfigurableProps } from '@/components/actions/dropdown/dropdown.props'
 import type { ModalConfigurableProps } from '@/components/actions/modal/modal.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
+import type { AvatarConfigurableProps } from '@/components/display/avatar/avatar.props'
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
 import type { CardConfigurableProps } from '@/components/display/card/card.props'
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
@@ -20,6 +21,7 @@ export interface PoppyComponentConfig {
 
   // Display
   accordionItem: AccordionItemConfigurableProps
+  avatar: AvatarConfigurableProps
   badge: BadgeConfigurableProps
   card: CardConfigurableProps
   cardActions: CardActionsConfigurableProps
