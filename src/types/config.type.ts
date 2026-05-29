@@ -21,6 +21,7 @@ import type { IndicatorConfigurableProps } from '@/components/layout/indicator/i
 import type { JoinConfigurableProps } from '@/components/layout/join/join.props'
 import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
 import type { StackConfigurableProps } from '@/components/layout/stack/stack.props'
+import type { BreadcrumbsConfigurableProps } from '@/components/navigation/breadcrumbs/breadcrumbs.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -53,4 +54,7 @@ export interface PoppyComponentConfig {
   join: JoinConfigurableProps
   mask: MaskConfigurableProps
   stack: StackConfigurableProps
+
+  // Navigation
+  breadcrumbs: BreadcrumbsConfigurableProps
 }
