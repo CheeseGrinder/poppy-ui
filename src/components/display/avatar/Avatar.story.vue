@@ -21,7 +21,7 @@ const state = reactive<AvatarProps>({
 </script>
 
 <template>
-  <Story title="Display/Avatar" auto-props-disabled>
+  <Story group="components" title="Display/Avatar" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

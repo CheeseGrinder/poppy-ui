@@ -7,7 +7,7 @@ import ListItem from './ListItem.vue'
 </script>
 
 <template>
-  <Story title="Display/List" auto-props-disabled>
+  <Story group="components" title="Display/List" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

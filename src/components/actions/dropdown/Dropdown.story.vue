@@ -19,7 +19,7 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
 </script>
 
 <template>
-  <Story title="Actions/Dropdown" auto-props-disabled>
+  <Story group="components" title="Actions/Dropdown" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

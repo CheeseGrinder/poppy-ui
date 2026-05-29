@@ -12,7 +12,7 @@ const state = reactive<JoinProps>({
 </script>
 
 <template>
-  <Story title="Layout/Join" auto-props-disabled>
+  <Story group="components" title="Layout/Join" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

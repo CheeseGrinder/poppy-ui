@@ -70,7 +70,7 @@ const positionGroups = computed(() => {
 </script>
 
 <template>
-  <Story title="Feedback/Toast" auto-props-disabled>
+  <Story group="components" title="Feedback/Toast" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

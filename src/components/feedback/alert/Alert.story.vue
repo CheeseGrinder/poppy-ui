@@ -12,7 +12,7 @@ const state = reactive<AlertProps>({
 </script>
 
 <template>
-  <Story title="Feedback/Alert" auto-props-disabled>
+  <Story group="components" title="Feedback/Alert" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

@@ -18,7 +18,7 @@ const isOpen = shallowRef(false)
 </script>
 
 <template>
-  <Story title="Layout/Drawer" auto-props-disabled>
+  <Story group="components" title="Layout/Drawer" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

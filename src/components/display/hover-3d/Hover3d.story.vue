@@ -12,7 +12,7 @@ const IMG_3      = 'https://img.daisyui.com/images/stock/card-3.webp'
 </script>
 
 <template>
-  <Story title="Display/Hover3d" auto-props-disabled>
+  <Story group="components" title="Display/Hover3d" auto-props-disabled>
     <template #default>
 
       <Variant title="Image">

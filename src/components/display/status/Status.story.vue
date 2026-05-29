@@ -14,7 +14,7 @@ const state = reactive<StatusProps>({
 </script>
 
 <template>
-  <Story title="Display/Status" auto-props-disabled>
+  <Story group="components" title="Display/Status" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">
