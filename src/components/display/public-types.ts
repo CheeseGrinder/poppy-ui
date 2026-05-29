@@ -22,6 +22,8 @@ export * from './chat/chat.types'
 // Countdown
 export type { CountdownProps } from './countdown/countdown.props'
 export * from './countdown/countdown.types'
+// Hover3d
+export type { Hover3dProps } from './hover-3d/hover-3d.props'
 // Kbd
 export type { KbdProps } from './kbd/kbd.props'
 export * from './kbd/kbd.types'
