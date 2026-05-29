@@ -39,6 +39,11 @@
       "import": "./dist/components/layout/public.es.js",
       "require": "./dist/components/layout/public.umd.js"
     },
+    "./components/navigation": {
+      "types": "./dist/components/navigation/public.d.ts",
+      "import": "./dist/components/navigation/public.es.js",
+      "require": "./dist/components/navigation/public.umd.js"
+    },
     "./composables": {
       "types": "./dist/composables/public.d.ts",
       "import": "./dist/composables/public.es.js",
