@@ -13,6 +13,9 @@ export type { CardProps } from './card/card.props'
 export * from './card/card.types'
 export type { CardActionsProps } from './card/card-actions.props'
 export * from './card/card-actions.types'
+// Carousel
+export type { CarouselProps } from './carousel/carousel.props'
+export * from './carousel/carousel.types'
 // Kbd
 export type { KbdProps } from './kbd/kbd.props'
 export * from './kbd/kbd.types'
