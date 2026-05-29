@@ -1,8 +1,8 @@
 <script lang="ts">
+import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import JoinItem from './JoinItem.vue'
 import { JOIN_CONFIG } from './join.context'
 import type { JoinProps } from './join.props'
 import type { JoinDirection } from './join.types'
@@ -25,8 +25,8 @@ const config = useComponentConfig(JOIN_CONFIG, props, {
     class="join"
     :class="getClass(joinDirections, config.direction)"
   >
-    <JoinItem>
-      <slot />
-    </JoinItem>
+    <ClassWrapper class="join-item">
+      <slot></slot>
+    </ClassWrapper>
   </div>
 </template>

@@ -2,15 +2,15 @@
 import { defineComponent, h, type VNode } from 'vue'
 
 export default defineComponent({
-  name: 'SwapItem',
+  name: 'ClassWrapper',
   props: {
-    /**
-     * DaisyUI swap class injected on the wrapper element.
-     * Typically `'swap-on'`, `'swap-off'`, or `'swap-indeterminate'`.
-     */
-    name: {
+    class: {
       type: String,
       default: undefined,
+    },
+    as: {
+      type: String,
+      defauilt: undefined,
     },
   },
   setup(props, { slots }) {
@@ -21,16 +21,15 @@ export default defineComponent({
           return formatChildren(node.children as VNode[])
         }
 
-        // HTML elements (div, span, etc.) — inject class directly
-        if (typeof node.type === 'string') {
-          return h(node, {
-            class: [props.name, node.props?.class].filter(Boolean),
-          })
+        // Render for plain text and function component
+        if (typeof node.type === 'function' || node.type === Symbol.for('v-txt')) {
+          return h(props.as || 'div', { class: props.class }, [node])
         }
 
-        // Everything else (text nodes, Vue components, SVG components like Lucide)
-        // wrap in a div so the class is always applied reliably
-        return h('div', { class: props.name }, [node])
+        // Render everythings else
+        return h(node, {
+          class: [props.class, node.props?.class].filter(Boolean),
+        })
       })
     }
 
