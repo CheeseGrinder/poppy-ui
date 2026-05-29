@@ -23,6 +23,7 @@ import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
 import type { StackConfigurableProps } from '@/components/layout/stack/stack.props'
 import type { BreadcrumbsConfigurableProps } from '@/components/navigation/breadcrumbs/breadcrumbs.props'
 import type { DockConfigurableProps, DockItemConfigurableProps } from '@/components/navigation/dock/dock.props'
+import type { LinkConfigurableProps } from '@/components/navigation/link/link.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -60,4 +61,5 @@ export interface PoppyComponentConfig {
   breadcrumbs: BreadcrumbsConfigurableProps
   dock: DockConfigurableProps
   dockItem: DockItemConfigurableProps
+  link: LinkConfigurableProps
 }
