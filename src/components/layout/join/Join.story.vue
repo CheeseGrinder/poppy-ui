@@ -2,8 +2,7 @@
 import Button from '@/components/actions/button/Button.vue'
 import { reactive } from 'vue'
 import Join from './Join.vue'
-import JoinItem from './JoinItem.vue'
-import type { JoinProps } from './join/join.props'
+import type { JoinProps } from './join.props'
 </script>
 
 <script setup lang="ts">
@@ -101,37 +100,6 @@ const state = reactive<JoinProps>({
           </Join>
         </div>
       </Variant>
-
-      <Variant title="With JoinItem">
-        <template #source>
-          <textarea v-pre>
-            <Join>
-              <JoinItem>
-                <Button>Save</Button>
-              </JoinItem>
-              <JoinItem>
-                <Button>Edit</Button>
-              </JoinItem>
-              <JoinItem>
-                <Button>Delete</Button>
-              </JoinItem>
-            </Join>
-          </textarea>
-        </template>
-
-        <Join>
-          <JoinItem>
-            <Button>Save</Button>
-          </JoinItem>
-          <JoinItem>
-            <Button>Edit</Button>
-          </JoinItem>
-          <JoinItem>
-            <Button>Delete</Button>
-          </JoinItem>
-        </Join>
-      </Variant>
-
     </template>
   </Story>
 </template>

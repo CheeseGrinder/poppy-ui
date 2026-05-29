@@ -1,9 +1,9 @@
 <script lang="ts">
+import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
 import { isTrue } from '@/utils/is-true'
-import SwapItem from './SwapItem.vue'
 import { SWAP_CONFIG } from './swap.context'
 import type { SwapProps } from './swap.props'
 import type { SwapVariant } from './swap.types'
@@ -46,15 +46,15 @@ function toggle() {
     @keydown.enter.space.prevent="toggle"
   >
     <template v-if="isTrue(indeterminate) && $slots.indeterminate">
-      <slot name="indeterminate" />
+      <slot name="indeterminate"></slot>
     </template>
     <template v-else>
-      <SwapItem name="swap-on">
-        <slot name="on" />
-      </SwapItem>
-      <SwapItem name="swap-off">
-        <slot name="off" />
-      </SwapItem>
+      <ClassWrapper class="swap-on">
+        <slot name="on"></slot>
+      </ClassWrapper>
+      <ClassWrapper class="swap-off">
+        <slot name="off"></slot>
+      </ClassWrapper>
     </template>
   </div>
 </template>

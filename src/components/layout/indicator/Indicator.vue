@@ -1,9 +1,9 @@
 <script lang="ts">
+import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
 import { isTrue } from '@/utils/is-true'
-import IndicatorItem from './IndicatorItem.vue'
 import { INDICATOR_CONFIG } from './indicator.context'
 import type { IndicatorProps } from './indicator.props'
 import type { IndicatorAlign, IndicatorSide } from './indicator.types'
@@ -36,9 +36,9 @@ const config = useComponentConfig(INDICATOR_CONFIG, props)
       getClass(indicatorAligns, config.align),
     ]"
   >
-    <IndicatorItem v-if="$slots.indicator && !isTrue(config.hide)">
+    <ClassWrapper v-if="$slots.indicator && !isTrue(config.hide)" class="indicator-item">
       <slot name="indicator" />
-    </IndicatorItem>
+    </ClassWrapper>
     <slot />
   </div>
 </template>

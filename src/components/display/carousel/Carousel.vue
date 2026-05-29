@@ -1,9 +1,9 @@
 <script lang="ts">
+import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import { getClass } from '@/utils/build-class.util'
 import { isTrue } from '@/utils/is-true'
 import { computed, onMounted, onUnmounted, shallowRef, useTemplateRef } from 'vue'
-import CarouselItem from './CarouselItem.vue'
 import { CAROUSEL_CONFIG } from './carousel.context'
 import type { CarouselProps } from './carousel.props'
 import type { CarouselDirection, CarouselSnap } from './carousel.types'
@@ -125,9 +125,9 @@ onUnmounted(() => {
     @mouseenter="stopAutoplay"
     @mouseleave="startAutoplay"
   >
-    <CarouselItem>
+    <ClassWrapper class="carousel-item w-full">
       <slot />
-    </CarouselItem>
+    </ClassWrapper>
 
     <template v-if="isTrue(config.indicators) && count > 1">
       <div class="carousel-indicators absolute bottom-4 left-4 flex gap-2">
