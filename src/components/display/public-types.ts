@@ -16,6 +16,9 @@ export * from './card/card-actions.types'
 // Carousel
 export type { CarouselProps } from './carousel/carousel.props'
 export * from './carousel/carousel.types'
+// Chat
+export type { ChatProps } from './chat/chat.props'
+export * from './chat/chat.types'
 // Kbd
 export type { KbdProps } from './kbd/kbd.props'
 export * from './kbd/kbd.types'
