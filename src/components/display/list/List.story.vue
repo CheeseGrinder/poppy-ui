@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/actions/button/Button.vue'
 import { HeartIcon, PlayIcon } from '@lucide/vue'
+import Status from '../status/Status.vue'
 import List from './List.vue'
 import ListItem from './ListItem.vue'
 </script>
@@ -10,155 +11,186 @@ import ListItem from './ListItem.vue'
     <template #default>
 
       <Variant title="Default">
-        <List class="w-96 shadow-md">
-          <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Most played songs this week</li>
-          <ListItem>
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
-            <div>
-              <div>Dio Lupa</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-            </div>
-            <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-            <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+        <List class="w-96 shadow-md" title="Most played songs this week">
+          <ListItem title="Dio Lupa">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Remaining Reason</span>
+            </template>
+            <template #actions>
+              <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
           </ListItem>
-          <ListItem>
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
-            <div>
-              <div>Ellie Beilish</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Bears of a Fever</div>
-            </div>
-            <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-            <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+          <ListItem title="Ellie Beilish">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Bears of a Fever</span>
+            </template>
+            <template #actions>
+              <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
           </ListItem>
-          <ListItem>
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s3/94/94" alt="Avatar" />
-            <div>
-              <div>Sabrino Gardener</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Cappuccino</div>
-            </div>
-            <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-            <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+          <ListItem title="Sabrino Gardener">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s3/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Cappuccino</span>
+            </template>
+            <template #actions>
+              <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
           </ListItem>
         </List>
       </Variant>
 
       <Variant title="list-col-grow">
         <div class="list-story--hint">
-          By default the <strong>second</strong> child of <code>list-row</code> grows to fill remaining space.
-          Add <code>list-col-grow</code> to any other child to make it grow instead.
+          With the new slot API, the title and description automatically grow to fill the remaining space.
+          You don't need to manually use <code>list-col-grow</code> anymore!
         </div>
         <div class="list-story list-story--col">
           <div class="list-story--item">
-            <span class="list-story--label">default — second child grows</span>
             <List class="w-96 shadow-md">
-              <ListItem>
-                <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
-                <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
-                <div>
-                  <div>Dio Lupa</div>
-                  <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-                </div>
-                <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <ListItem title="Dio Lupa">
+                <template #prefix>
+                  <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
+                  <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
+                </template>
+                <template #description>
+                  <span class="uppercase font-semibold">Remaining Reason</span>
+                </template>
+                <template #actions>
+                  <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+                </template>
               </ListItem>
-              <ListItem>
-                <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
-                <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
-                <div>
-                  <div>Ellie Beilish</div>
-                  <div class="text-xs uppercase font-semibold opacity-60">Bears of a Fever</div>
-                </div>
-                <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-              </ListItem>
-            </List>
-          </div>
-          <div class="list-story--item">
-            <span class="list-story--label">list-col-grow on third child</span>
-            <List class="w-96 shadow-md">
-              <ListItem>
-                <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
-                <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
-                <div class="list-col-grow">
-                  <div>Dio Lupa</div>
-                  <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-                </div>
-                <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-              </ListItem>
-              <ListItem>
-                <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
-                <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
-                <div class="list-col-grow">
-                  <div>Ellie Beilish</div>
-                  <div class="text-xs uppercase font-semibold opacity-60">Bears of a Fever</div>
-                </div>
-                <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <ListItem title="Ellie Beilish">
+                <template #prefix>
+                  <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
+                  <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
+                </template>
+                <template #description>
+                  <span class="uppercase font-semibold">Bears of a Fever</span>
+                </template>
+                <template #actions>
+                  <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+                </template>
               </ListItem>
             </List>
           </div>
         </div>
       </Variant>
 
-      <Variant title="list-col-wrap">
+      <Variant title="list-col-wrap (details)">
         <div class="list-story--hint">
-          Add <code>list-col-wrap</code> to a child to push it to the next line,
+          Use the <code>#details</code> slot to push extra content to the next line,
           spanning the full row width.
         </div>
-        <List class="w-96 shadow-md">
-          <ListItem>
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
-            <div>
-              <div>Dio Lupa</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-            </div>
-            <p class="list-col-wrap text-xs opacity-60">
+        <List class="w-96 shadow-md" title="Most played songs this week">
+          <ListItem title="Dio Lupa">
+            <template #prefix>
+              <div>
+                <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
+              </div>
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Remaining Reason</span>
+            </template>
+            <template #actions>
+              <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
+            <template #details>
               An instant hit praised for its haunting sound and emotional depth.
               A viral performance brought it widespread recognition.
-            </p>
-            <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-            <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
           </ListItem>
-          <ListItem>
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
-            <div>
-              <div>Ellie Beilish</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Bears of a Fever</div>
-            </div>
-            <p class="list-col-wrap text-xs opacity-60">
+          <ListItem title="Ellie Beilish">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Bears of a Fever</span>
+            </template>
+            <template #actions>
+              <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
+              <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
+            <template #details>
               Captivated audiences with its intense energy and mysterious lyrics.
               Popularity skyrocketed after fans shared it widely online.
-            </p>
-            <Button variant="ghost" shape="square" size="sm"><PlayIcon class="size-4" /></Button>
-            <Button variant="ghost" shape="square" size="sm"><HeartIcon class="size-4" /></Button>
+            </template>
           </ListItem>
         </List>
       </Variant>
 
       <Variant title="RouterLink (to)">
+        <template #source>
+          <textarea v-pre>
+            <List class="w-96 shadow-md" title="Browse albums">
+              <ListItem to="#" title="Dio Lupa">
+                <template #prefix>
+                  <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
+                </template>
+                <template #description>
+                  <span class="uppercase font-semibold">Remaining Reason</span>
+                </template>
+              </ListItem>
+              <ListItem to="#" title="Ellie Beilish">
+                <template #prefix>
+                  <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
+                </template>
+                <template #description>
+                  <span class="uppercase font-semibold">Bears of a Fever</span>
+                </template>
+              </ListItem>
+              <ListItem to="#" title="Sabrino Gardener">
+                <template #prefix>
+                  <img class="size-10 rounded-box" src="https://picsum.photos/seed/s3/94/94" alt="Avatar" />
+                </template>
+                <template #description>
+                  <span class="uppercase font-semibold">Cappuccino</span>
+                </template>
+              </ListItem>
+            </List>
+          </textarea>
+        </template>
+
         <div class="list-story--hint">
           When <code>to</code> is provided, <code>ListItem</code> renders as a <code>RouterLink</code>.
           The row becomes a navigable element.
         </div>
-        <List class="w-96 shadow-md">
-          <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Browse albums</li>
-          <ListItem :to="{ name: 'home' }">
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
-            <div>
-              <div>Dio Lupa</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-            </div>
+        <List class="w-96 shadow-md" title="Browse albums">
+          <ListItem to="#" title="Dio Lupa">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s1/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Remaining Reason</span>
+            </template>
           </ListItem>
-          <ListItem :to="{ name: 'home' }">
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
-            <div>
-              <div>Ellie Beilish</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Bears of a Fever</div>
-            </div>
+          <ListItem to="#" title="Ellie Beilish">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s2/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Bears of a Fever</span>
+            </template>
           </ListItem>
-          <ListItem :to="{ name: 'home' }">
-            <img class="size-10 rounded-box" src="https://picsum.photos/seed/s3/94/94" alt="Avatar" />
-            <div>
-              <div>Sabrino Gardener</div>
-              <div class="text-xs uppercase font-semibold opacity-60">Cappuccino</div>
-            </div>
+          <ListItem to="#" title="Sabrino Gardener">
+            <template #prefix>
+              <img class="size-10 rounded-box" src="https://picsum.photos/seed/s3/94/94" alt="Avatar" />
+            </template>
+            <template #description>
+              <span class="uppercase font-semibold">Cappuccino</span>
+            </template>
           </ListItem>
         </List>
       </Variant>
@@ -166,54 +198,40 @@ import ListItem from './ListItem.vue'
       <Variant title="Composition">
         <div class="list-story list-story--row">
           <!-- Settings-style list -->
-          <List class="w-80 shadow-md">
-            <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Account settings</li>
-            <ListItem>
-              <div class="list-col-grow">
-                <div>Profile</div>
-                <div class="text-xs opacity-60">Update your name and avatar</div>
-              </div>
-              <Button variant="ghost" size="sm">Edit</Button>
+          <List class="w-80 shadow-md" title="Account settings">
+            <ListItem title="Profile" description="Update your name and avatar">
+              <template #actions>
+                <Button variant="ghost" size="sm">Edit</Button>
+              </template>
             </ListItem>
-            <ListItem>
-              <div class="list-col-grow">
-                <div>Password</div>
-                <div class="text-xs opacity-60">Change your password</div>
-              </div>
-              <Button variant="ghost" size="sm">Edit</Button>
+            <ListItem title="Password" description="Change your password">
+              <template #actions>
+                <Button variant="ghost" size="sm">Edit</Button>
+              </template>
             </ListItem>
-            <ListItem>
-              <div class="list-col-grow">
-                <div>Notifications</div>
-                <div class="text-xs opacity-60">Manage your preferences</div>
-              </div>
-              <Button variant="ghost" size="sm">Edit</Button>
+            <ListItem title="Notifications" description="Manage your preferences">
+              <template #actions>
+                <Button variant="ghost" size="sm">Edit</Button>
+              </template>
             </ListItem>
           </List>
 
           <!-- Badge-style list -->
-          <List class="w-80 shadow-md">
-            <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Recent activity</li>
-            <ListItem>
-              <div class="size-2 rounded-full bg-success mt-1 shrink-0"></div>
-              <div class="list-col-grow">
-                <div>Deployment succeeded</div>
-                <div class="text-xs opacity-60">2 minutes ago</div>
-              </div>
+          <List class="w-80 shadow-md" title="Recent activity">
+            <ListItem title="Deployment succeeded" description="2 minutes ago">
+              <template #prefix>
+                <Status color="success" class="mt-1"  />
+              </template>
             </ListItem>
-            <ListItem>
-              <div class="size-2 rounded-full bg-warning mt-1 shrink-0"></div>
-              <div class="list-col-grow">
-                <div>Build warning</div>
-                <div class="text-xs opacity-60">14 minutes ago</div>
-              </div>
+            <ListItem title="Build warning" description="14 minutes ago">
+              <template #prefix>
+                <Status color="warning" class="mt-1" />
+              </template>
             </ListItem>
-            <ListItem>
-              <div class="size-2 rounded-full bg-error mt-1 shrink-0"></div>
-              <div class="list-col-grow">
-                <div>Test failed</div>
-                <div class="text-xs opacity-60">1 hour ago</div>
-              </div>
+            <ListItem title="Test failed" description="1 hour ago">
+              <template #prefix>
+                <Status color="error" class="mt-1" />
+              </template>
             </ListItem>
           </List>
         </div>
@@ -277,78 +295,70 @@ import ListItem from './ListItem.vue'
 A vertical layout component to display information in rows.
 Built on DaisyUI's `list` / `list-row` class system. `ListItem` renders as a `<li />` by default
 and switches to a `RouterLink` automatically when `to` is provided.
+It provides a great DX by supporting multiple named slots for easy composition.
 
-## List
+## List props
 
-No props. Renders a `<ul class="list bg-base-100 rounded-box" />` wrapper.
+| Prop    | Type     | Default     | Required | Description                                       |
+|---------|----------|-------------|----------|---------------------------------------------------|
+| `title` | `string` | `undefined` | ❌       | Optional title to display at the top of the list. |
 
 ## ListItem props
 
-| Prop | Type              | Default     | Required | Configurable | Description                                                                                        |
-|------|-------------------|-------------|----------|--------------|----------------------------------------------------------------------------------------------------|
-| `to` | `RouteLocationRaw`| `undefined` | ❌       | ❌          | If provided, the item renders as a `RouterLink`. Accepts a string path or a route location object. |
-
-## DaisyUI layout modifiers
-
-These are plain CSS classes applied directly to children of `ListItem`, not props.
-
-| Class           | Applied to                 | Description                                                                              |
-|-----------------|----------------------------|------------------------------------------------------------------------------------------|
-| `list-col-grow` | Direct child of `ListItem` | Makes this child fill the remaining horizontal space. By default the second child grows. |
-| `list-col-wrap` | Direct child of `ListItem` | Pushes this child to the next line, spanning the full row width.                         |
+| Prop          | Type              | Default     | Required | Description                                                                                        |
+|---------------|-------------------|-------------|----------|----------------------------------------------------------------------------------------------------|
+| `to`          | `RouteLocationRaw`| `undefined` | ❌       | If provided, the item renders as a `RouterLink`. Accepts a string path or a route location object. |
+| `title`       | `string`          | `undefined` | ❌       | Title text for the list item.                                                                      |
+| `description` | `string`          | `undefined` | ❌       | Description text for the list item.                                                                |
 
 ## Slots
 
-Both `List` and `ListItem` expose a single `default` slot.
+`List` provides:
+- `#title`: Custom title element for the list.
+- `#default`: The items.
 
-Note: Use a plain `<li />` for non-row content like section headers (e.g. `<li class="p-4 pb-2 text-xs opacity-60">Title</li>`).
+`ListItem` provides:
+- `#prefix`: Content to display before the title (e.g. icon, avatar).
+- `#title`: Custom title content (if prop isn't enough).
+- `#description`: Custom description content (if prop isn't enough).
+- `#default`: If you don't use title/description slots or props, you can pass custom content here.
+- `#actions`: Content to display at the end of the row (e.g. buttons).
+- `#details`: Extra content that wraps to a new line below the item (`list-col-wrap`).
 
 ## Usage
 
 ```vue
-<!-- Basic -->
-<List>
-  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Section title</li>
-  <ListItem>
-    <img class="size-10 rounded-box" src="..." alt="..." />
-    <div>
-      <div>Name</div>
-      <div class="text-xs opacity-60">Subtitle</div>
-    </div>
-    <Button variant="ghost" shape="square" size="sm"><PlayIcon /></Button>
+<!-- Basic Composition -->
+<List title="Settings">
+  <ListItem title="Profile" description="Update your info">
+    <template #actions>
+      <Button>Edit</Button>
+    </template>
   </ListItem>
 </List>
 
-<!-- list-col-grow on a specific child -->
-<ListItem>
-  <div class="text-4xl font-thin opacity-30">01</div>
-  <img class="size-10 rounded-box" src="..." alt="..." />
-  <div class="list-col-grow">
-    <div>Title</div>
-    <div class="text-xs opacity-60">Subtitle</div>
-  </div>
-  <Button variant="ghost" shape="square" size="sm"><PlayIcon /></Button>
-</ListItem>
-
-<!-- list-col-wrap to push a child to the next line -->
-<ListItem>
-  <img class="size-10 rounded-box" src="..." alt="..." />
-  <div>
-    <div>Title</div>
-    <div class="text-xs opacity-60">Subtitle</div>
-  </div>
-  <p class="list-col-wrap text-xs opacity-60">Long description that wraps to the next line...</p>
-  <Button variant="ghost" shape="square" size="sm"><PlayIcon /></Button>
-</ListItem>
-
-<!-- RouterLink item -->
+<!-- Advanced with slots -->
 <List>
-  <ListItem :to="{ name: 'album', params: { id: 1 } }">
-    <img class="size-10 rounded-box" src="..." alt="..." />
-    <div class="list-col-grow">
-      <div>Album name</div>
-      <div class="text-xs opacity-60">Artist</div>
-    </div>
+  <template #title>
+    <div class="text-primary font-bold">Latest activity</div>
+  </template>
+  
+  <ListItem>
+    <template #prefix>
+      <img src="..." class="size-10 rounded-box" />
+    </template>
+    <template #title>
+      <strong>New User</strong>
+    </template>
+    <template #description>
+      <span class="text-success">Online now</span>
+    </template>
+    <template #actions>
+      <Button>View</Button>
+    </template>
+    <template #details>
+      User signed up 2 minutes ago via Google.
+    </template>
   </ListItem>
 </List>
 ```
