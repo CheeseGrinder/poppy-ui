@@ -1,8 +1,9 @@
-<template>
-  <Story title="# Configuration" docs-only />
-</template>
+---
+group: 'top'
+title: 'Configuration'
+icon: 'lucide:settings'
+---
 
-<docs lang="md">
 # Plugin Configuration
 
 ## Overview
@@ -18,16 +19,16 @@ import { PoppyUi } from '@poppy-ui/vue'
 import App from './App.vue'
 
 createApp(App)
-.use(PoppyUi, {
-  size: 'md',
-  components: {
-    button: {
-      color: 'primary',
-      variant: 'solid',
+  .use(PoppyUi, {
+    size: 'md',
+    components: {
+      button: {
+        color: 'primary',
+        variant: 'solid',
+      },
     },
-  },
-})
-.mount('#app')
+  })
+  .mount('#app')
 ```
 
 ## Options
@@ -52,4 +53,3 @@ When resolving a prop value, the following priority applies (highest to lowest):
 Only props marked **Configurable ✅** in each component's documentation can be set
 via the plugin. Non-configurable props (e.g. `disabled`, `loading`, `type`) must always
 be passed directly to the component instance.
-</docs>

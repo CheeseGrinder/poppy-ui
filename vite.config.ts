@@ -61,5 +61,12 @@ export default defineConfig({
   histoire: {
     plugins: [HstVue()],
     setupFile: 'histoire.setup.ts',
+    tree: {
+      groups: [
+        { id: 'top', title: '' },
+        { id: 'components', title: 'Components' },
+        { title: 'Other', include: () => true },
+      ],
+    },
   },
 })

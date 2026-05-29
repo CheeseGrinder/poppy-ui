@@ -24,7 +24,7 @@ function addDays(n: number): Date {
 </script>
 
 <template>
-  <Story title="Display/Countdown" auto-props-disabled>
+  <Story group="components" title="Display/Countdown" auto-props-disabled>
     <template #default>
 
       <Variant title="Default (hh:mm:ss)">

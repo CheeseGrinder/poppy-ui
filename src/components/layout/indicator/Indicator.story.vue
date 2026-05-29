@@ -14,7 +14,7 @@ const state = reactive<IndicatorProps>({
 </script>
 
 <template>
-  <Story title="Layout/Indicator" auto-props-disabled>
+  <Story group="components" title="Layout/Indicator" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

@@ -13,7 +13,7 @@ const directions = ['start', 'end', 'top', 'bottom']
 </script>
 
 <template>
-  <Story title="Layout/Stack" auto-props-disabled>
+  <Story group="components" title="Layout/Stack" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

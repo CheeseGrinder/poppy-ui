@@ -23,7 +23,7 @@ const controlledModel = ref(false)
 </script>
 
 <template>
-  <Story title="Actions/Swap" auto-props-disabled>
+  <Story group="components" title="Actions/Swap" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

@@ -16,7 +16,7 @@ const state = reactive<CarouselProps>({
 </script>
 
 <template>
-  <Story title="Display/Carousel" auto-props-disabled>
+  <Story group="components" title="Display/Carousel" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

@@ -22,7 +22,7 @@ const state = reactive<ButtonProps>({
 </script>
 
 <template>
-  <Story title="Actions/Button" auto-props-disabled>
+  <Story group="components" title="Actions/Button" auto-props-disabled>
     <template #default>
       <Variant title="Default">
         <template #controls>

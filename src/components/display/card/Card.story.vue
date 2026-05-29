@@ -18,7 +18,7 @@ const state = reactive<CardProps>({
 </script>
 
 <template>
-  <Story title="Display/Card" auto-props-disabled>
+  <Story group="components" title="Display/Card" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

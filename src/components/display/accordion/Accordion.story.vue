@@ -30,7 +30,7 @@ const item2Ref = useTemplateRef('accordion-item-2')
 </script>
 
 <template>
-  <Story title="Display/Accordion" auto-props-disabled>
+  <Story group="components" title="Display/Accordion" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

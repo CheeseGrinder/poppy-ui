@@ -16,7 +16,7 @@ const state = reactive<ChatProps>({
 </script>
 
 <template>
-  <Story title="Display/Chat" auto-props-disabled>
+  <Story group="components" title="Display/Chat" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

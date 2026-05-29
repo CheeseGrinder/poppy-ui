@@ -38,7 +38,7 @@ const exposeOpen = shallowRef(false)
 </script>
 
 <template>
-  <Story title="Actions/Modal" auto-props-disabled>
+  <Story group="components" title="Actions/Modal" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

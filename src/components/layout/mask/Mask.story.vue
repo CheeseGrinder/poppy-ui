@@ -15,7 +15,7 @@ const state = reactive<MaskProps>({
 </script>
 
 <template>
-  <Story title="Layout/Mask" auto-props-disabled>
+  <Story group="components" title="Layout/Mask" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

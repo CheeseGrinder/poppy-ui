@@ -13,7 +13,7 @@ const IMG_HAT_4 = 'https://img.daisyui.com/images/stock/daisyui-hat-4.webp'
 </script>
 
 <template>
-  <Story title="Display/HoverGallery" auto-props-disabled>
+  <Story group="components" title="Display/HoverGallery" auto-props-disabled>
     <template #default>
 
       <Variant title="Basic">

@@ -18,7 +18,7 @@ const state = reactive<TooltipProps>({
 </script>
 
 <template>
-  <Story title="Feedback/Tooltip" auto-props-disabled>
+  <Story group="components" title="Feedback/Tooltip" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

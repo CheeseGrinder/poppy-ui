@@ -13,7 +13,7 @@ const state = reactive<BadgeProps>({
 </script>
 
 <template>
-  <Story title="Display/Badge" auto-props-disabled>
+  <Story group="components" title="Display/Badge" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

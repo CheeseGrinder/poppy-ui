@@ -8,7 +8,7 @@ const IMG_B = 'https://img.daisyui.com/images/stock/photo-1560717789-0ac7c58ac90
 </script>
 
 <template>
-  <Story title="Display/Diff" auto-props-disabled>
+  <Story group="components" title="Display/Diff" auto-props-disabled>
     <template #default>
 
       <Variant title="Images">

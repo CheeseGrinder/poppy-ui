@@ -17,7 +17,7 @@ const placements = ['start', 'end'] satisfies DividerPlacement[]
 </script>
 
 <template>
-  <Story title="Layout/Divider" auto-props-disabled>
+  <Story group="components" title="Layout/Divider" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

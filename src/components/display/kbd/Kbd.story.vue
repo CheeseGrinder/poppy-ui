@@ -11,7 +11,7 @@ const state = reactive<KbdProps>({
 </script>
 
 <template>
-  <Story title="Display/Kbd" auto-props-disabled>
+  <Story group="components" title="Display/Kbd" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

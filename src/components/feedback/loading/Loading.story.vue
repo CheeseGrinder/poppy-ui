@@ -11,7 +11,7 @@ const state = reactive<LoadingProps>({
 </script>
 
 <template>
-  <Story title="Feedback/Loading" auto-props-disabled>
+  <Story group="components" title="Feedback/Loading" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">

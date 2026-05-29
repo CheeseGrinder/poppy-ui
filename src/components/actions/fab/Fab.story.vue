@@ -11,7 +11,7 @@ const state = reactive<FabProps>({
 </script>
 
 <template>
-  <Story title="Actions/Fab" auto-props-disabled>
+  <Story group="components" title="Actions/Fab" auto-props-disabled>
     <template #default>
 
       <Variant title="Default">
