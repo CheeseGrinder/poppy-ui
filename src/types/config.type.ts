@@ -7,6 +7,7 @@ import type { AvatarConfigurableProps } from '@/components/display/avatar/avatar
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
 import type { CardConfigurableProps } from '@/components/display/card/card.props'
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
+import type { CarouselConfigurableProps } from '@/components/display/carousel/carousel.props'
 import type { KbdConfigurableProps } from '@/components/display/kbd/kbd.props'
 import type { StatusConfigurableProps } from '@/components/display/status/status.props'
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
@@ -33,6 +34,7 @@ export interface PoppyComponentConfig {
   badge: BadgeConfigurableProps
   card: CardConfigurableProps
   cardActions: CardActionsConfigurableProps
+  carousel: CarouselConfigurableProps
   kbd: KbdConfigurableProps
   status: StatusConfigurableProps
 
