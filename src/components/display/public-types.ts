@@ -19,6 +19,9 @@ export * from './carousel/carousel.types'
 // Chat
 export type { ChatProps } from './chat/chat.props'
 export * from './chat/chat.types'
+// Countdown
+export type { CountdownProps } from './countdown/countdown.props'
+export * from './countdown/countdown.types'
 // Kbd
 export type { KbdProps } from './kbd/kbd.props'
 export * from './kbd/kbd.types'
