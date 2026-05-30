@@ -7,6 +7,9 @@ export * from './loading/loading.types'
 // Progress
 export type { ProgressProps } from './progress/progress.props'
 export * from './progress/progress.types'
+// Radial Progress
+export type { RadialProgressProps } from './radial-progress/radial-progress.props'
+export * from './radial-progress/radial-progress.types'
 // Toast
 export type { ToastProps } from './toast/toast.props'
 export * from './toast/toast.types'
