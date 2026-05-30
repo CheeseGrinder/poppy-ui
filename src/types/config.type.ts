@@ -24,6 +24,7 @@ import type { StackConfigurableProps } from '@/components/layout/stack/stack.pro
 import type { BreadcrumbsConfigurableProps } from '@/components/navigation/breadcrumbs/breadcrumbs.props'
 import type { DockConfigurableProps, DockItemConfigurableProps } from '@/components/navigation/dock/dock.props'
 import type { LinkConfigurableProps } from '@/components/navigation/link/link.props'
+import type { MenuConfigurableProps, MenuItemConfigurableProps } from '@/components/navigation/menu/menu.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -62,4 +63,6 @@ export interface PoppyComponentConfig {
   dock: DockConfigurableProps
   dockItem: DockItemConfigurableProps
   link: LinkConfigurableProps
+  menu: MenuConfigurableProps
+  menuItem: MenuItemConfigurableProps
 }

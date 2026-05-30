@@ -41,8 +41,6 @@ const attr = computed(() => {
     to: props.to,
   }
 })
-
-onMounted(() => console.log({...config.value}))
 </script>
 
 <template>

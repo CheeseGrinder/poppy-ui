@@ -59,15 +59,16 @@ const state = reactive<LinkProps>({
     </Variant>
 
     <Variant title="Hover only">
-      <template #default>
-        <Link to="#" :hover="true">Underline on hover only</Link>
-      </template>
       <template #source>
         <textarea v-pre>
           <Link to="/home" hover>
             Underline on hover only
           </Link>
         </textarea>
+      </template>
+
+      <template #default>
+        <Link to="#" :hover="true">Underline on hover only</Link>
       </template>
     </Variant>
 
