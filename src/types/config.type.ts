@@ -13,6 +13,7 @@ import type { KbdConfigurableProps } from '@/components/display/kbd/kbd.props'
 import type { StatusConfigurableProps } from '@/components/display/status/status.props'
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
+import type { ProgressConfigurableProps } from '@/components/feedback/progress/progress.props'
 import type { ToastConfigurableProps } from '@/components/feedback/toast/toast.props'
 import type { TooltipConfigurableProps } from '@/components/feedback/tooltip/tooltip.props'
 import type { DividerConfigurableProps } from '@/components/layout/divider/divider.props'
@@ -47,6 +48,7 @@ export interface PoppyComponentConfig {
   // Feedback
   alert: AlertConfigurableProps
   loading: LoadingConfigurableProps
+  progress: ProgressConfigurableProps
   toast: ToastConfigurableProps
   tooltip: TooltipConfigurableProps
 
