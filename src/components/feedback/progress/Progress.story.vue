@@ -75,12 +75,12 @@ Progress bar used to show the completion of a task or the passing of time.
 Omitting `value` or setting `indeterminate` renders an animated indeterminate state.
 
 ## Props
-| Prop            | Type            | Default     | Required | Configurable | Description                                                          |
-|-----------------|-----------------|-------------|----------|--------------|----------------------------------------------------------------------|
-| `color`         | `ProgressColor` | `undefined` | ❌       | ✅          | Color of the progress bar                                            |
-| `value`         | `number`        | `undefined` | ❌       | ❌          | Current value. Omit for indeterminate state                          |
-| `max`           | `number`        | `100`       | ❌       | ✅          | Maximum value                                                        |
-| `indeterminate` | `Booleanish`    | `false`     | ❌       | ❌          | Forces indeterminate (animated) state, takes precedence over `value` |
+| Prop            | Type            | Default     | Required | Configurable       | Description                                                          |
+|-----------------|-----------------|-------------|----------|--------------------|----------------------------------------------------------------------|
+| `color`         | `ProgressColor` | `undefined` | :x:      | :white_check_mark: | Color of the progress bar                                            |
+| `value`         | `number`        | `undefined` | :x:      | :x:                | Current value. Omit for indeterminate state                          |
+| `max`           | `number`        | `100`       | :x:      | :white_check_mark: | Maximum value                                                        |
+| `indeterminate` | `Booleanish`    | `false`     | :x:      | :x:                | Forces indeterminate (animated) state, takes precedence over `value` |
 
 ## Usage
 ```vue

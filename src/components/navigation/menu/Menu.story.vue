@@ -216,20 +216,20 @@ Displays a list of navigation links vertically or horizontally.
 Supports icons, badges, titles, static submenus, and collapsible submenus.
 
 ## Menu Props
-| Prop        | Type            | Default      | Required | Configurable | Description               |
-|-------------|-----------------|--------------|----------|--------------|---------------------------|
-| `size`      | `MenuSize`      | `'md'`       | ❌       | ✅           | Size of the menu          |
-| `direction` | `MenuDirection` | `'vertical'` | ❌       | ✅           | Direction of the menu     |
+| Prop        | Type            | Default      | Required | Configurable       | Description           |
+|-------------|-----------------|--------------|----------|--------------------|-----------------------|
+| `size`      | `MenuSize`      | `'md'`       | :x:      | :white_check_mark: | Size of the menu      |
+| `direction` | `MenuDirection` | `'vertical'` | :x:      | :white_check_mark: | Direction of the menu |
 
 ## MenuItem Props
-| Prop          | Type               | Default     | Required | Configurable | Description                                                              |
-|---------------|--------------------|-------------|----------|--------------|--------------------------------------------------------------------------|
-| `icon`        | `Component`        | `undefined` | ❌       | ❌           | Icon component (e.g. Lucide icon)                                        |
-| `to`          | `RouteLocationRaw` | `undefined` | ❌       | ❌           | Vue Router location. Absent = renders as `<a />`                           |
-| `title`       | `Booleanish`       | `false`     | ❌       | ❌           | Renders the item as a non-interactive section title                      |
-| `active`      | `Booleanish`       | `false`     | ❌       | ❌           | Forces the active state (auto-detected via `useLink` when `to` is set)   |
-| `disabled`    | `Booleanish`       | `false`     | ❌       | ❌           | Disables the item                                                        |
-| `collapsible` | `Booleanish`       | `false`     | ❌       | ❌           | Wraps `submenu` slot in `<details />` when true                            |
+| Prop          | Type               | Default     | Required | Configurable | Description                                                            |
+|---------------|--------------------|-------------|----------|--------------|------------------------------------------------------------------------|
+| `icon`        | `Component`        | `undefined` | :x:      | :x:          | Icon component (e.g. Lucide icon)                                      |
+| `to`          | `RouteLocationRaw` | `undefined` | :x:      | :x:          | Vue Router location. Absent = renders as `<a />`                       |
+| `title`       | `Booleanish`       | `false`     | :x:      | :x:          | Renders the item as a non-interactive section title                    |
+| `active`      | `Booleanish`       | `false`     | :x:      | :x:          | Forces the active state (auto-detected via `useLink` when `to` is set) |
+| `disabled`    | `Booleanish`       | `false`     | :x:      | :x:          | Disables the item                                                      |
+| `collapsible` | `Booleanish`       | `false`     | :x:      | :x:          | Wraps `submenu` slot in `<details />` when true                        |
 
 ## MenuItem Slots
 | Slot      | Description                              |

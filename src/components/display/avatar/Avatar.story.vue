@@ -279,15 +279,15 @@ is fully controlled via the `default` slot, making it compatible with any future
 
 ## Props
 
-| Prop          | Type            | Default         | Required | Configurable | Description                                                                                                |
-|---------------|-----------------|-----------------|----------|--------------|------------------------------------------------------------------------------------------------------------|
-| `size`        | `AvatarSize`    | `undefined`     | ❌       | ✅          | Size of the inner container. `xs` → `w-8` / `sm` → `w-16` / `md` → `w-20` / `lg` → `w-24` / `xl` → `w-32`. |
-| `shape`       | `AvatarShape`   | `'rounded-full'`| ❌       | ✅          | Shape of the inner container. `rounded` / `rounded-xl` / `rounded-full` / `rounded-none`.                  |
-| `presence`    | `AvatarPresence`| `undefined`     | ❌       | ✅          | Shows a presence dot. `'online'` (green) / `'offline'` (gray).                                             |
-| `placeholder` | `Booleanish`    | `false`         | ❌       | ❌          | Adds `avatar-placeholder`. Use with text initials instead of an image.                                     |
-| `group`       | `Booleanish`    | `false`         | ❌       | ❌          | Renders as `avatar-group` to stack multiple avatars with overlap.                                          |
+| Prop          | Type            | Default         | Required | Configurable       | Description                                                                                                |
+|---------------|-----------------|-----------------|----------|--------------------|------------------------------------------------------------------------------------------------------------|
+| `size`        | `AvatarSize`    | `undefined`     | :x:      | :white_check_mark: | Size of the inner container. `xs` → `w-8` / `sm` → `w-16` / `md` → `w-20` / `lg` → `w-24` / `xl` → `w-32`. |
+| `shape`       | `AvatarShape`   | `'rounded-full'`| :x:      | :white_check_mark: | Shape of the inner container. `rounded` / `rounded-xl` / `rounded-full` / `rounded-none`.                  |
+| `presence`    | `AvatarPresence`| `undefined`     | :x:      | :white_check_mark: | Shows a presence dot. `'online'` (green) / `'offline'` (gray).                                             |
+| `placeholder` | `Booleanish`    | `false`         | :x:      | :x:                | Adds `avatar-placeholder`. Use with text initials instead of an image.                                     |
+| `group`       | `Booleanish`    | `false`         | :x:      | :x:                | Renders as `avatar-group` to stack multiple avatars with overlap.                                          |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.avatar` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.avatar` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 

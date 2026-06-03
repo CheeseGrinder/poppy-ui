@@ -26,7 +26,7 @@ const state = reactive<LinkProps>({
             'info', 'success', 'warning', 'error',
           ]"
         />
-        <HstCheckbox v-model="state.hover" title="Hover only" />
+        <HstCheckbox v-model="(state.hover as boolean)" title="Hover only" />
       </template>
       <template #default>
         <Link v-bind="state">Click me</Link>
@@ -104,11 +104,11 @@ Adds the missing underline style to links.
 Supports Vue Router navigation, or native anchors (`#`, `#section`) for in-page links.
 
 ## Props
-| Prop    | Type               | Default     | Required | Configurable | Description                                                        |
-|---------|--------------------|-------------|----------|--------------|--------------------------------------------------------------------|
-| `color` | `LinkColor`        | `undefined` | ❌       | ✅          | Color theme of the link                                            |
-| `hover` | `Booleanish`       | `false`     | ❌       | ✅          | Only shows underline on hover                                      |
-| `to`    | `RouteLocationRaw` | `undefined` | ❌       | ❌          | Vue Router location or anchor (`#`). Renders as `<a />` when `'#'` |
+| Prop    | Type               | Default     | Required | Configurable       | Description                                                        |
+|---------|--------------------|-------------|----------|--------------------|--------------------------------------------------------------------|
+| `color` | `LinkColor`        | `undefined` | :x:      | :white_check_mark: | Color theme of the link                                            |
+| `hover` | `Booleanish`       | `false`     | :x:      | :white_check_mark: | Only shows underline on hover                                      |
+| `to`    | `RouteLocationRaw` | `undefined` | :x:      | :x:                | Vue Router location or anchor (`#`). Renders as `<a />` when `'#'` |
 
 ## Slots
 | Slot      | Description  |

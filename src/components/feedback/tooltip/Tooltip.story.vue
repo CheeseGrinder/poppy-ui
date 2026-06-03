@@ -199,16 +199,16 @@ to avoid overflow/clipping issues regardless of the trigger's position in the DO
 
 ## Props
 
-| Prop        | Type               | Default     | Required | Configurable | Description                                                                  |
-|-------------|--------------------|-------------|----------|--------------|------------------------------------------------------------------------------|
-| `tip`       | `string`           | `undefined` | ❌       | ❌          | Text content of the tooltip. Can be overridden by the `content` slot.        |
-| `placement` | `TooltipPlacement` | `'top'`     | ❌       | ✅          | Placement relative to the anchor. `top` / `bottom` / `left` / `right`.       |
-| `color`     | `TooltipColor`     | `undefined` | ❌       | ✅          | Color theme based on the DaisyUI palette.                                    |
-| `as`        | `string`           | `'div'`     | ❌       | ✅          | HTML tag used to render the anchor wrapper. Use `'span'` for inline content. |
-| `open`      | `boolean`          | `false`     | ❌       | ❌          | When `true`, the tooltip is always visible regardless of hover state.        |
-| `disabled`  | `boolean`          | `false`     | ❌       | ❌          | When `true`, the tooltip is never shown.                                     |
+| Prop        | Type               | Default     | Required | Configurable       | Description                                                                  |
+|-------------|--------------------|-------------|----------|--------------------|------------------------------------------------------------------------------|
+| `tip`       | `string`           | `undefined` | :x:      | :x:                | Text content of the tooltip. Can be overridden by the `content` slot.        |
+| `placement` | `TooltipPlacement` | `'top'`     | :x:      | :white_check_mark: | Placement relative to the anchor. `top` / `bottom` / `left` / `right`.       |
+| `color`     | `TooltipColor`     | `undefined` | :x:      | :white_check_mark: | Color theme based on the DaisyUI palette.                                    |
+| `as`        | `string`           | `'div'`     | :x:      | :white_check_mark: | HTML tag used to render the anchor wrapper. Use `'span'` for inline content. |
+| `open`      | `boolean`          | `false`     | :x:      | :x:                | When `true`, the tooltip is always visible regardless of hover state.        |
+| `disabled`  | `boolean`          | `false`     | :x:      | :x:                | When `true`, the tooltip is never shown.                                     |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.tooltip` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.tooltip` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 

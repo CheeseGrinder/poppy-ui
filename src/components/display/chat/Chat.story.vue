@@ -206,12 +206,12 @@ Built on DaisyUI's `chat` class system. Supports avatars, headers, footers, and 
 
 ## Props
 
-| Prop    | Type        | Default     | Required | Configurable | Description                                             |
-|---------|-------------|-------------|----------|--------------|---------------------------------------------------------|
-| `side`  | `ChatSide`  | `'start'`   | ❌       | ❌          | Side of the bubble. `'start'` (left) / `'end'` (right). |
-| `color` | `ChatColor` | `undefined` | ❌       | ✅          | Color theme applied to the chat bubble.                 |
+| Prop    | Type        | Default     | Required | Configurable       | Description                                             |
+|---------|-------------|-------------|----------|--------------------|---------------------------------------------------------|
+| `side`  | `ChatSide`  | `'start'`   | :x:      | :x:                | Side of the bubble. `'start'` (left) / `'end'` (right). |
+| `color` | `ChatColor` | `undefined` | :x:      | :white_check_mark: | Color theme applied to the chat bubble.                 |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.chat` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.chat` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 

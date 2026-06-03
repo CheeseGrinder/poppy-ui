@@ -25,8 +25,8 @@ const state = reactive<CardProps>({
         <template #controls>
           <HstSelect title="Variant" v-model="state.variant" :options="[{ label: '-- default --', value: undefined }, 'border', 'dash']" />
           <HstSelect title="Size" v-model="state.size" :options="[{ label: '-- default --', value: undefined }, 'xs', 'sm', 'md', 'lg', 'xl']" />
-          <HstCheckbox title="Side" v-model="state.side" />
-          <HstCheckbox title="Image full" v-model="state.imageFull" />
+          <HstCheckbox title="Side" v-model="(state.side as boolean)" />
+          <HstCheckbox title="Image full" v-model="(state.imageFull as boolean)" />
         </template>
 
         <Card v-bind="state" class="w-80">
@@ -215,22 +215,22 @@ that can be combined freely to build any card layout.
 
 ## Card props
 
-| Prop        | Type          | Default     | Required | Configurable | Description                                                |
-|-------------|---------------|-------------|----------|--------------|------------------------------------------------------------|
-| `variant`   | `CardVariant` | `undefined` | ❌       | ✅          | Visual style of the card. `border` / `dash`.               |
-| `size`      | `CardSize`    | `undefined` | ❌       | ✅          | Size of the card. `xs` / `sm` / `md` / `lg` / `xl`.        |
-| `side`      | `Booleanish`  | `false`     | ❌       | ❌          | When `true`, switches to a horizontal side-by-side layout. |
-| `imageFull` | `Booleanish`  | `false`     | ❌       | ❌          | When `true`, the image covers the full card background.    |
+| Prop        | Type          | Default     | Required | Configurable       | Description                                                |
+|-------------|---------------|-------------|----------|--------------------|------------------------------------------------------------|
+| `variant`   | `CardVariant` | `undefined` | :x:      | :white_check_mark: | Visual style of the card. `border` / `dash`.               |
+| `size`      | `CardSize`    | `undefined` | :x:      | :white_check_mark: | Size of the card. `xs` / `sm` / `md` / `lg` / `xl`.        |
+| `side`      | `Booleanish`  | `false`     | :x:      | :x:                | When `true`, switches to a horizontal side-by-side layout. |
+| `imageFull` | `Booleanish`  | `false`     | :x:      | :x:                | When `true`, the image covers the full card background.    |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.card` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.card` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## CardActions props
 
-| Prop    | Type               | Default   | Required | Configurable | Description                                                  |
-|---------|--------------------|-----------|----------|--------------|--------------------------------------------------------------|
-| `align` | `CardActionsAlign` | `'start'` | ❌       | ✅          | Horizontal alignment of actions. `start` / `center` / `end`. |
+| Prop    | Type               | Default   | Required | Configurable       | Description                                                  |
+|---------|--------------------|-----------|----------|--------------------|--------------------------------------------------------------|
+| `align` | `CardActionsAlign` | `'start'` | :x:      | :white_check_mark: | Horizontal alignment of actions. `start` / `center` / `end`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.cardActions` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.cardActions` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## CardBody
 

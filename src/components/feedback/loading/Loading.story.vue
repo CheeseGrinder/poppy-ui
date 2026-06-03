@@ -125,13 +125,13 @@ Supports multiple visual styles, sizes, and colors. Use it inline, inside button
 
 ## Props
 
-| Prop      | Type             | Default     | Required | Configurable | Description                                                                                                                                                |
-|-----------|------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `variant` | `LoadingVariant` | `'spinner'` | ❌       | ✅          | Visual style. `spinner` / `dots` / `ring` / `ball` / `bars` / `infinity`.                                                                                  |
-| `size`    | `LoadingSize`    | `'md'`      | ❌       | ✅          | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                                                                                                   |
-| `color`   | `LoadingColor`   | `undefined` | ❌       | ✅          | Color of the indicator. Applied as a Tailwind `text-*` utility. `primary` / `secondary` / `accent` / `neutral` / `info` / `success` / `warning` / `error`. |
+| Prop      | Type             | Default     | Required | Configurable       | Description                                                                                                                                                |
+|-----------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `variant` | `LoadingVariant` | `'spinner'` | :x:      | :white_check_mark: | Visual style. `spinner` / `dots` / `ring` / `ball` / `bars` / `infinity`.                                                                                  |
+| `size`    | `LoadingSize`    | `'md'`      | :x:      | :white_check_mark: | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                                                                                                   |
+| `color`   | `LoadingColor`   | `undefined` | :x:      | :white_check_mark: | Color of the indicator. Applied as a Tailwind `text-*` utility. `primary` / `secondary` / `accent` / `neutral` / `info` / `success` / `warning` / `error`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.loading` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.loading` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 

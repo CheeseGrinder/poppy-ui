@@ -188,13 +188,13 @@ Supports an optional icon via the `icon` slot.
 
 ## Props
 
-| Prop        | Type             | Default     | Required | Configurable | Description                                                           |
-|-------------|------------------|-------------|----------|--------------|-----------------------------------------------------------------------|
-| `color`     | `AlertColor`     | `undefined` | ❌       | ✅          | Color theme of the alert. `info` / `success` / `warning` / `error`.   |
-| `variant`   | `AlertVariant`   | `undefined` | ❌       | ✅          | Visual style. `outline` / `dash` / `soft`.                            |
-| `direction` | `AlertDirection` | `undefined` | ❌       | ✅          | Layout direction. `horizontal` (side by side) / `vertical` (stacked). |
+| Prop        | Type             | Default     | Required | Configurable       | Description                                                           |
+|-------------|------------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
+| `color`     | `AlertColor`     | `undefined` | :x:      | :white_check_mark: | Color theme of the alert. `info` / `success` / `warning` / `error`.   |
+| `variant`   | `AlertVariant`   | `undefined` | :x:      | :white_check_mark: | Visual style. `outline` / `dash` / `soft`.                            |
+| `direction` | `AlertDirection` | `undefined` | :x:      | :white_check_mark: | Layout direction. `horizontal` (side by side) / `vertical` (stacked). |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.alert` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.alert` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 

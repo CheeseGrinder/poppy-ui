@@ -248,12 +248,12 @@ Supports rotate and flip transition effects.
 
 ## Props
 
-| Prop            | Type          | Default     | Required | Configurable | Description                                                           |
-|-----------------|---------------|-------------|----------|--------------|-----------------------------------------------------------------------|
-| `variant`       | `SwapVariant` | `undefined` | ❌       | ✅          | Transition effect. `'rotate'` / `'flip'`.                             |
-| `indeterminate` | `Booleanish`  | `false`     | ❌       | ❌          | When `true`, shows the `#indeterminate` slot regardless of `v-model`. |
+| Prop            | Type          | Default     | Required | Configurable       | Description                                                           |
+|-----------------|---------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
+| `variant`       | `SwapVariant` | `undefined` | :x:      | :white_check_mark: | Transition effect. `'rotate'` / `'flip'`.                             |
+| `indeterminate` | `Booleanish`  | `false`     | :x:      | :x:                | When `true`, shows the `#indeterminate` slot regardless of `v-model`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.swap` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.swap` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Events
 

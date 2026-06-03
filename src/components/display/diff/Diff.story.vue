@@ -81,10 +81,10 @@ Built on DaisyUI's `diff` class system. Works with any content — images, text,
 
 ## Slots
 
-| Slot       | Description                         |
-|------------|-------------------------------------|
-| `item-1`   | Left/front content (`diff-item-1`). |
-| `item-2`   | Right/back content (`diff-item-2`). |
+| Slot     | Description                         |
+|----------|-------------------------------------|
+| `item-1` | Left/front content (`diff-item-1`). |
+| `item-2` | Right/back content (`diff-item-2`). |
 
 The resizer handle is rendered automatically.
 

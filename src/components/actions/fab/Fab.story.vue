@@ -174,9 +174,9 @@ with the first one being the main trigger button.
 
 ## Props
 
-| Prop   | Type      | Default     | Required | Configurable | Description                                         |
-|--------|-----------|-------------|----------|--------------|-----------------------------------------------------|
-| `mode` | `FabMode` | `undefined` | ❌       | ✅          | Visual mode: `'flower'` for radial opening pattern. |
+| Prop   | Type      | Default     | Required | Configurable       | Description                                         |
+|--------|-----------|-------------|----------|--------------------|-----------------------------------------------------|
+| `mode` | `FabMode` | `undefined` | :x:      | :white_check_mark: | Visual mode: `'flower'` for radial opening pattern. |
 
 ## Slots
 

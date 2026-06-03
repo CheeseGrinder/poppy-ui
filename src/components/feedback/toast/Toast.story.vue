@@ -296,13 +296,13 @@ The `Toast` component itself remains available as a low-level primitive for cust
 
 ## Toast props
 
-| Prop       | Type         | Default    | Required | Configurable | Description                                                           |
-|------------|--------------|------------|----------|--------------|-----------------------------------------------------------------------|
-| `align`    | `ToastAlign` | `'end'`    | ❌       | ✅          | Horizontal position. `start` / `center` / `end`.                      |
-| `side`     | `ToastSide`  | `'bottom'` | ❌       | ✅          | Vertical position. `top` / `middle` / `bottom`.                       |
-| `duration` | `number`     | `3000`     | ❌       | ✅          | Default auto-dismiss delay in ms. Set to `0` to disable auto-dismiss. |
+| Prop       | Type         | Default    | Required | Configurable       | Description                                                           |
+|------------|--------------|------------|----------|--------------------|-----------------------------------------------------------------------|
+| `align`    | `ToastAlign` | `'end'`    | :x:      | :white_check_mark: | Horizontal position. `start` / `center` / `end`.                      |
+| `side`     | `ToastSide`  | `'bottom'` | :x:      | :white_check_mark: | Vertical position. `top` / `middle` / `bottom`.                       |
+| `duration` | `number`     | `3000`     | :x:      | :white_check_mark: | Default auto-dismiss delay in ms. Set to `0` to disable auto-dismiss. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.toast` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.toast` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## ToastItem
 

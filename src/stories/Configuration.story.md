@@ -50,6 +50,6 @@ When resolving a prop value, the following priority applies (highest to lowest):
 
 ## Configurable props
 
-Only props marked **Configurable ✅** in each component's documentation can be set
+Only props marked **Configurable :white_check_mark:** in each component's documentation can be set
 via the plugin. Non-configurable props (e.g. `disabled`, `loading`, `type`) must always
 be passed directly to the component instance.

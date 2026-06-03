@@ -178,13 +178,13 @@ Supports horizontal and vertical orientations, multiple colors, and text placeme
 
 ## Props
 
-| Prop         | Type                 | Default       | Required | Configurable | Description                                  |
-|--------------|----------------------|---------------|----------|--------------|----------------------------------------------|
-| `orientation`| `DividerOrientation` | `'horizontal'`| ❌       | ✅            | Orientation: `'horizontal'` or `'vertical'`. |
-| `color`      | `DividerColor`       | `undefined`   | ❌       | ✅            | Color: `'neutral'`, `'primary'`, `'secondary'`, `'accent'`, `'info'`, `'success'`, `'warning'`, `'error'`. |
-| `placement`  | `DividerPlacement`   | `undefined`   | ❌       | ✅            | Text placement: `'start'`, `'end'`, `'middle'`, `'none'`. |
+| Prop         | Type                 | Default       | Required | Configurable       | Description                                  |
+|--------------|----------------------|---------------|----------|--------------------|----------------------------------------------|
+| `orientation`| `DividerOrientation` | `'horizontal'`| :x:      | :white_check_mark: | Orientation: `'horizontal'` or `'vertical'`. |
+| `color`      | `DividerColor`       | `undefined`   | :x:      | :white_check_mark: | Color: `'neutral'`, `'primary'`, `'secondary'`, `'accent'`, `'info'`, `'success'`, `'warning'`, `'error'`. |
+| `placement`  | `DividerPlacement`   | `undefined`   | :x:      | :white_check_mark: | Text placement: `'start'`, `'end'`, `'middle'`, `'none'`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.divider` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.divider` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 

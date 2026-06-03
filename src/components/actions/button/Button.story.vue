@@ -32,7 +32,7 @@ const state = reactive<ButtonProps>({
           <HstSelect title="Behavior" v-model="state.behavior" :options="[{ label: '-- default --', value: undefined }, 'active', 'disabled']" />
           <HstSelect title="Size" v-model="state.size" :options="[{ label: '-- default --', value: undefined }, 'xs', 'sm', 'md', 'lg', 'xl']" />
           <HstSelect title="Shape" v-model="state.shape" :options="[{ label: '-- default --', value: undefined }, 'wide', 'block', 'square', 'circle']" />
-          <HstCheckbox title="Loading" v-model="state.loading" />
+          <HstCheckbox title="Loading" v-model="(state.loading as boolean)" />
           <HstCheckbox title="Disabled" v-model="state.disabled" />
         </template>
 
@@ -113,23 +113,23 @@ When `to` is provided, the component renders as a `RouterLink` automatically.
 
 ## Props
 
-| Prop       | Type                              | Default     | Required | Configurable  | Description                                                                                                       |
-|------------|-----------------------------------|-------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------|
-| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | ❌       | ❌           | HTML type attribute for the button element.                                                                       |
-| `color`    | `ButtonColor`                     | `undefined` | ❌       | ✅           | Color theme of the button based on the DaisyUI palette.                                                           |
-| `variant`  | `ButtonVariant`                   | `'solid'`   | ❌       | ✅           | Visual style of the button.                                                                                       |
-| `size`     | `ButtonSize`                      | `'md'`      | ❌       | ✅           | Size of the button.                                                                                               |
-| `shape`    | `ButtonShape`                     | `undefined` | ❌       | ✅           | Shape or width constraint of the button.                                                                          |
-| `behavior` | `ButtonBehavior`                  | `undefined` | ❌       | ❌           | Forces a specific visual state. Use `'disabled'` to apply disabled styling without the HTML `disabled` attribute. |
-| `disabled` | `boolean`                         | `false`     | ❌       | ❌           | Disables interactions. Also sets `aria-disabled="true"` and `tabIndex="-1"` automatically.                        |
-| `loading`  | `Booleanish`                      | `false`     | ❌       | ❌           | Displays a loading spinner and disables the button. Accepts `boolean` or `'true'` / `'false'` strings.            |
-| `to`       | `RouteLocationRaw`                | `undefined` | ❌       | ❌           | If provided, the component renders as a `RouterLink`. Accepts a string path or a route location object.           |
-| `form`     | `string`                          | `undefined` | ❌       | ❌           | ID of the form the button is associated with (native HTML attribute).                                             |
+| Prop       | Type                              | Default     | Required | Configurable       | Description                                                                                                       |
+|------------|-----------------------------------|-------------|----------|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | :x:      | :x:                | HTML type attribute for the button element.                                                                       |
+| `color`    | `ButtonColor`                     | `undefined` | :x:      | :white_check_mark: | Color theme of the button based on the DaisyUI palette.                                                           |
+| `variant`  | `ButtonVariant`                   | `'solid'`   | :x:      | :white_check_mark: | Visual style of the button.                                                                                       |
+| `size`     | `ButtonSize`                      | `'md'`      | :x:      | :white_check_mark: | Size of the button.                                                                                               |
+| `shape`    | `ButtonShape`                     | `undefined` | :x:      | :white_check_mark: | Shape or width constraint of the button.                                                                          |
+| `behavior` | `ButtonBehavior`                  | `undefined` | :x:      | :x:                | Forces a specific visual state. Use `'disabled'` to apply disabled styling without the HTML `disabled` attribute. |
+| `disabled` | `boolean`                         | `false`     | :x:      | :x:                | Disables interactions. Also sets `aria-disabled="true"` and `tabIndex="-1"` automatically.                        |
+| `loading`  | `Booleanish`                      | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button. Accepts `boolean` or `'true'` / `'false'` strings.            |
+| `to`       | `RouteLocationRaw`                | `undefined` | :x:      | :x:                | If provided, the component renders as a `RouterLink`. Accepts a string path or a route location object.           |
+| `form`     | `string`                          | `undefined` | :x:      | :x:                | ID of the form the button is associated with (native HTML attribute).                                             |
 
 > **Configurable** props can be overridden at the application level via `BUTTON_CONFIG` using the `useComponentConfig` composable, enabling default theming without prop drilling.
 
 > **Configurable**
-> Props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Poppy Plugin Documentation](https://github.com/Cheese-Grinder/poppy-ui/blob/main/docs/poppy-plugin.md) for more information.
+> Props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 
 ## Events
