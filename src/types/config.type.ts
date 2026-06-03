@@ -2,6 +2,9 @@ import type { ButtonConfigurableProps } from '@/components/actions/button/button
 import type { DropdownConfigurableProps } from '@/components/actions/dropdown/dropdown.props'
 import type { FabConfigurableProps } from '@/components/actions/fab/fab.props'
 import type { ModalConfigurableProps } from '@/components/actions/modal/modal.props'
+import type { FormConfigurableProps } from '@/components/data/form/form.props'
+import type { FormFieldConfigurableProps } from '@/components/data/form-field/form-field.props'
+import type { InputConfigurableProps } from '@/components/data/input/input.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
 import type { AvatarConfigurableProps } from '@/components/display/avatar/avatar.props'
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
@@ -34,6 +37,11 @@ export interface PoppyComponentConfig {
   dropdown: DropdownConfigurableProps
   fab: FabConfigurableProps
   modal: ModalConfigurableProps
+
+  // Data
+  form: FormConfigurableProps
+  formField: FormFieldConfigurableProps
+  input: InputConfigurableProps
 
   // Display
   accordionItem: AccordionItemConfigurableProps
