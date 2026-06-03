@@ -123,18 +123,18 @@ Built on DaisyUI's `badge` class system with support for colors, variants, and s
 
 ## Props
 
-| Prop      | Type           | Default     | Required | Configurable | Description                                              |
-|-----------|----------------|-------------|----------|--------------|----------------------------------------------------------|
-| `color`   | `BadgeColor`   | `undefined` | ❌       | ✅          | Color theme of the badge based on the DaisyUI palette.   |
-| `variant` | `BadgeVariant` | `undefined` | ❌       | ✅          | Visual style of the badge. `outline` / `soft` / `dash`.  |
-| `size`    | `BadgeSize`    | `'md'`      | ❌       | ✅          | Size of the badge. `xs` / `sm` / `md` / `lg` / `xl`.     |
+| Prop      | Type           | Default     | Required | Configurable       | Description                                             |
+|-----------|----------------|-------------|----------|--------------------|-------------------------------------------------------- |
+| `color`   | `BadgeColor`   | `undefined` | :x:      | :white_check_mark: | Color theme of the badge based on the DaisyUI palette.  |
+| `variant` | `BadgeVariant` | `undefined` | :x:      | :white_check_mark: | Visual style of the badge. `outline` / `soft` / `dash`. |
+| `size`    | `BadgeSize`    | `'md'`      | :x:      | :white_check_mark: | Size of the badge. `xs` / `sm` / `md` / `lg` / `xl`.    |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.badge` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.badge` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 
-| Slot      | Description                      |
-|-----------|----------------------------------|
+| Slot      | Description                       |
+|-----------|-----------------------------------|
 | `default` | Text or content inside the badge. |
 
 ## Usage

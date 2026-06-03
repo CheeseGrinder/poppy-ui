@@ -115,11 +115,11 @@ or any set of elements that should visually appear connected.
 
 ## Props
 
-| Prop       | Type            | Default       | Required | Configurable | Description                                      |
-|------------|-----------------|---------------|----------|--------------|--------------------------------------------------|
-| `direction`| `JoinDirection` | `'horizontal'`| ❌       | ✅            | Layout direction: `'horizontal'` or `'vertical'`. |
+| Prop       | Type            | Default       | Required | Configurable       | Description                                       |
+|------------|-----------------|---------------|----------|--------------------|---------------------------------------------------|
+| `direction`| `JoinDirection` | `'horizontal'`| :x:      | :white_check_mark: | Layout direction: `'horizontal'` or `'vertical'`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.join` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.join` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 

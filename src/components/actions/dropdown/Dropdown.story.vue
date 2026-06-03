@@ -28,7 +28,7 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
           <HstSelect title="Side" v-model="state.side" :options="[{ label: '-- default --', value: undefined }, 'bottom', 'top', 'left', 'right']" />
           <HstSelect title="Trigger action" v-model="state.triggerAction" :options="[{ label: '-- default --', value: undefined }, 'click', 'hover', 'context-menu']" />
           <HstNumber title="Debounce (ms)" v-model="state.debounce" />
-          <HstCheckbox title="Open" v-model="state.open" />
+          <HstCheckbox title="Open" v-model="(state.open as boolean)" />
         </template>
 
         <template #source>
@@ -257,17 +257,17 @@ Supports `click`, `hover`, and `context-menu` trigger actions, configurable plac
 
 ## Props
 
-| Prop            | Type                    | Default     | Required | Configurable  | Description                                                                                      |
-|-----------------|------------------------ |-------------|----------|---------------|--------------------------------------------------------------------------------------------------|
-| `align`         | `DropdownAlign`         | `'start'`   | ❌       | ✅           | Alignment of the content relative to the trigger. `start` / `center` / `end` (respects LTR/RTL). |
-| `side`          | `DropdownSide`          | `'bottom'`  | ❌       | ✅           | Which side of the trigger the content appears on. `bottom` / `top` / `left` / `right`.           |
-| `triggerAction` | `DropdownTriggerAction` | `'click'`   | ❌       | ✅           | Interaction that opens the dropdown. `click` / `hover` / `context-menu`.                         |
-| `debounce`      | `number`                | `500`       | ❌       | ✅           | Delay in ms before closing on `triggerAction="hover"` after the pointer leaves.                  |
-| `open`          | `Booleanish`            | `false`     | ❌       | ❌           | Forces the dropdown open. Accepts `boolean` or `'true'` / `'false'` strings.                     |
-| `triggerClass`  | `ClassValue`            | `undefined` | ❌       | ❌           | CSS class(es) applied to the internal trigger `<button />` wrapper.                              |
-| `contentClass`  | `ClassValue`            | `undefined` | ❌       | ❌           | CSS class(es) applied to the popover content element.                                            |
+| Prop            | Type                    | Default     | Required | Configurable       | Description                                                                                      |
+|-----------------|------------------------ |-------------|----------|--------------------|--------------------------------------------------------------------------------------------------|
+| `align`         | `DropdownAlign`         | `'start'`   | :x:      | :white_check_mark: | Alignment of the content relative to the trigger. `start` / `center` / `end` (respects LTR/RTL). |
+| `side`          | `DropdownSide`          | `'bottom'`  | :x:      | :white_check_mark: | Which side of the trigger the content appears on. `bottom` / `top` / `left` / `right`.           |
+| `triggerAction` | `DropdownTriggerAction` | `'click'`   | :x:      | :white_check_mark: | Interaction that opens the dropdown. `click` / `hover` / `context-menu`.                         |
+| `debounce`      | `number`                | `500`       | :x:      | :white_check_mark: | Delay in ms before closing on `triggerAction="hover"` after the pointer leaves.                  |
+| `open`          | `Booleanish`            | `false`     | :x:      | :x:                | Forces the dropdown open. Accepts `boolean` or `'true'` / `'false'` strings.                     |
+| `triggerClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the internal trigger `<button />` wrapper.                              |
+| `contentClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the popover content element.                                            |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.dropdown` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.dropdown` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Events
 

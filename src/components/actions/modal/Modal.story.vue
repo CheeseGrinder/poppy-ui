@@ -48,8 +48,8 @@ const exposeOpen = shallowRef(false)
             v-model="state.placement"
             :options="[{ label: '-- default --', value: undefined }, 'top', 'middle', 'bottom', 'start', 'end']"
           />
-          <HstCheckbox title="Close on backdrop" v-model="state.closeOnBackdrop" />
-          <HstCheckbox title="Load content when close" v-model="state.loadContentWhenClose" />
+          <HstCheckbox title="Close on backdrop" v-model="(state.closeOnBackdrop as boolean)" />
+          <HstCheckbox title="Load content when close" v-model="(state.loadContentWhenClose as boolean)" />
         </template>
 
         <Button @click="defaultOpen = true">Open modal</Button>
@@ -195,14 +195,14 @@ Controlled via `v-model` or programmatically through exposed methods.
 
 ## Props
 
-| Prop                   | Type             | Default     | Required | Configurable | Description                                                                                                      |
-|------------------------|------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------------------------|
-| `modelValue`           | `boolean`        | `false`     | ❌       | ❌          | Open state of the modal. Use `v-model` to bind reactively.                                                       |
-| `placement`            | `ModalPlacement` | `undefined` | ❌       | ✅          | Position of the modal box on screen. `top` / `middle` / `bottom` / `start` / `end`.                              |
-| `closeOnBackdrop`      | `Booleanish`     | `false`     | ❌       | ✅          | When `true`, clicking the backdrop closes the modal.                                                             |
-| `loadContentWhenClose` | `Booleanish`     | `false`     | ❌       | ✅          | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
+| Prop                   | Type             | Default     | Required | Configurable       | Description                                                                                                      |
+|------------------------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------|
+| `modelValue`           | `boolean`        | `false`     | :x:      | :x:                | Open state of the modal. Use `v-model` to bind reactively.                                                       |
+| `placement`            | `ModalPlacement` | `undefined` | :x:      | :white_check_mark: | Position of the modal box on screen. `top` / `middle` / `bottom` / `start` / `end`.                              |
+| `closeOnBackdrop`      | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, clicking the backdrop closes the modal.                                                             |
+| `loadContentWhenClose` | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.modal` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.modal` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Events
 

@@ -301,15 +301,15 @@ It provides a great DX by supporting multiple named slots for easy composition.
 
 | Prop    | Type     | Default     | Required | Description                                       |
 |---------|----------|-------------|----------|---------------------------------------------------|
-| `title` | `string` | `undefined` | ❌       | Optional title to display at the top of the list. |
+| `title` | `string` | `undefined` | :x:      | Optional title to display at the top of the list. |
 
 ## ListItem props
 
 | Prop          | Type              | Default     | Required | Description                                                                                        |
 |---------------|-------------------|-------------|----------|----------------------------------------------------------------------------------------------------|
-| `to`          | `RouteLocationRaw`| `undefined` | ❌       | If provided, the item renders as a `RouterLink`. Accepts a string path or a route location object. |
-| `title`       | `string`          | `undefined` | ❌       | Title text for the list item.                                                                      |
-| `description` | `string`          | `undefined` | ❌       | Description text for the list item.                                                                |
+| `to`          | `RouteLocationRaw`| `undefined` | :x:      | If provided, the item renders as a `RouterLink`. Accepts a string path or a route location object. |
+| `title`       | `string`          | `undefined` | :x:      | Title text for the list item.                                                                      |
+| `description` | `string`          | `undefined` | :x:      | Description text for the list item.                                                                |
 
 ## Slots
 

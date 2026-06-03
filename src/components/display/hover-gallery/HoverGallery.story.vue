@@ -89,9 +89,9 @@ A container that creates a hover gallery effect. The first image is visible by d
 
 ## Slots
 
-| Slot      | Description                              |
-|-----------|------------------------------------------|
-| `default` | Images to display in the hover gallery.   |
+| Slot      | Description                             |
+|-----------|-----------------------------------------|
+| `default` | Images to display in the hover gallery. |
 
 ## Usage
 

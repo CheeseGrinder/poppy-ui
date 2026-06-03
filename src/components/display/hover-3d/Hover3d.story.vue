@@ -5,10 +5,10 @@ import Hover3d from './Hover3d.vue'
 </script>
 
 <script setup lang="ts">
-const IMG_CARD   = 'https://img.daisyui.com/images/stock/creditcard.webp'
-const IMG_1      = 'https://img.daisyui.com/images/stock/card-1.webp'
-const IMG_2      = 'https://img.daisyui.com/images/stock/card-2.webp'
-const IMG_3      = 'https://img.daisyui.com/images/stock/card-3.webp'
+const IMG_CARD = 'https://img.daisyui.com/images/stock/creditcard.webp'
+const IMG_1 = 'https://img.daisyui.com/images/stock/card-1.webp'
+const IMG_2 = 'https://img.daisyui.com/images/stock/card-2.webp'
+const IMG_3 = 'https://img.daisyui.com/images/stock/card-3.webp'
 </script>
 
 <template>
@@ -126,7 +126,7 @@ The effect works by placing 8 invisible hover zones over the content — these a
 
 | Prop | Type               | Default     | Required | Configurable | Description                                                                               |
 |------|--------------------|-------------|----------|--------------|-------------------------------------------------------------------------------------------|
-| `to` | `RouteLocationRaw` | `undefined` | ❌       | ❌          | If provided, renders as a `RouterLink`. Accepts a string path or a route location object. |
+| `to` | `RouteLocationRaw` | `undefined` | :x:      | :x:          | If provided, renders as a `RouterLink`. Accepts a string path or a route location object. |
 
 ## Slots
 

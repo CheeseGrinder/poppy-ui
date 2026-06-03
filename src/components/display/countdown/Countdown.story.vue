@@ -5,7 +5,6 @@ import Countdown from './Countdown.vue'
 </script>
 
 <script setup lang="ts">
-const inOneMinute   = computed(() => addSeconds(60))
 const inTenMinutes  = computed(() => addSeconds(600))
 const eventDate     = computed(() => addDays(15))
 const customTarget  = ref(addSeconds(30))
@@ -232,27 +231,27 @@ Fully customisable via the `default` slot — the default render shows `hh:mm:ss
 
 ## Props
 
-| Prop | Type                          | Default | Required | Configurable | Description                                                                |
-|------|-------------------------------|---------|----------|--------------|----------------------------------------------------------------------------|
-| `to` | `Date \| string \| number`    | —       | ✅       | ❌           | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms).    |
+| Prop | Type                          | Default | Required           | Configurable | Description                                                             |
+|------|-------------------------------|---------|--------------------|--------------|-------------------------------------------------------------------------|
+| `to` | `Date \| string \| number`    | —       | :white_check_mark: | :x:          | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
 
 ## Events
 
-| Event  | Payload | Description                              |
-|--------|---------|------------------------------------------|
+| Event  | Payload | Description                                   |
+|--------|---------|-----------------------------------------------|
 | `@end` | —       | Emitted once when the countdown reaches zero. |
 
 ## Slot
 
-| Slot      | Bindings                                             | Description                                  |
-|-----------|------------------------------------------------------|----------------------------------------------|
+| Slot      | Bindings                                                                        | Description                              |
+|-----------|---------------------------------------------------------------------------------|------------------------------------------|
 | `default` | `{ days, hours, minutes, seconds, done }` — all `number` except `done: boolean` | Custom render. Falls back to `hh:mm:ss`. |
 
 ## Exposed
 
-| Member  | Type                                                    | Description                    |
-|---------|---------------------------------------------------------|--------------------------------|
-| `delta` | `Ref<{ days, hours, minutes, seconds, done }>`          | Reactive current delta values. |
+| Member  | Type                                           | Description                    |
+|---------|------------------------------------------------|--------------------------------|
+| `delta` | `Ref<{ days, hours, minutes, seconds, done }>` | Reactive current delta values. |
 
 ## Usage
 

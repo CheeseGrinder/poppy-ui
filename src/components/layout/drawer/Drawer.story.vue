@@ -24,7 +24,7 @@ const isOpen = shallowRef(false)
       <Variant title="Default">
         <template #controls>
           <HstSelect title="Side" v-model="state.side" :options="['start', 'end']" />
-          <HstCheckbox title="Overlay" v-model="state.overlay" />
+          <HstCheckbox title="Overlay" v-model="(state.overlay as boolean)" />
         </template>
 
         <template #source>
@@ -228,12 +228,12 @@ Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-
 
 ## Props
 
-| Prop      | Type         | Default   | Required | Configurable | Description                                     |
-|-----------|--------------|-----------|----------|--------------|-------------------------------------------------|
-| `side`    | `DrawerSide` | `'start'` | ❌       | ✅          | Side where drawer opens: `'start'` or `'end'`.  |
-| `overlay` | `Booleanish` | `true`    | ❌       | ✅          | When `true`, shows overlay to close the drawer. |
-| `contentClass` | `ClassValue` | `undefined` | ❌       | ✅          | Additional classes for the drawer content.     |
-| `sidebarClass` | `ClassValue` | `undefined` | ❌       | ✅          | Additional classes for the drawer sidebar.     |
+| Prop           | Type         | Default     | Required | Configurable       | Description                                     |
+|----------------|--------------|-------------|----------|--------------------|-------------------------------------------------|
+| `side`         | `DrawerSide` | `'start'`   | :x:      | :white_check_mark: | Side where drawer opens: `'start'` or `'end'`.  |
+| `overlay`      | `Booleanish` | `true`      | :x:      | :white_check_mark: | When `true`, shows overlay to close the drawer. |
+| `contentClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer content.      |
+| `sidebarClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer sidebar.      |
 
 ## Events
 

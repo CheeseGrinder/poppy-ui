@@ -21,7 +21,7 @@ const state = reactive<IndicatorProps>({
         <template #controls>
           <HstSelect title="Side" v-model="state.side" :options="['start', 'end', 'top', 'bottom']" />
           <HstSelect title="Align" v-model="state.align" :options="[{ label: '-- default --', value: undefined }, 'start', 'end', 'center', 'middle']" />
-          <HstCheckbox title="Hide" v-model="state.hide" />
+          <HstCheckbox title="Hide" v-model="(state.hide as boolean)" />
         </template>
 
         <template #source>
@@ -226,13 +226,13 @@ The indicator content is automatically wrapped in a `span` with the `indicator-i
 
 ## Props
 
-| Prop   | Type              | Default     | Required | Configurable | Description                                                                                     |
-|--------|-------------------|-------------|----------|--------------|-------------------------------------------------------------------------------------------------|
-| `side` | `IndicatorSide`   | `undefined` | ❌       | ✅            | Side where indicator is placed: `'start'`, `'end'`, `'top'`, `'bottom'`.                          |
-| `align`| `IndicatorAlign`  | `undefined` | ❌       | ✅            | Alignment along the side: `'start'`, `'end'`, `'center'`, `'middle'`.                              |
-| `hide` | `Booleanish`      | `false`     | ❌       | ❌            | When `true`, hides the indicator content.                                                     |
+| Prop   | Type              | Default     | Required | Configurable       | Description                                                              |
+|--------|-------------------|-------------|----------|--------------------|--------------------------------------------------------------------------|
+| `side` | `IndicatorSide`   | `undefined` | :x:      | :white_check_mark: | Side where indicator is placed: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+| `align`| `IndicatorAlign`  | `undefined` | :x:      | :white_check_mark: | Alignment along the side: `'start'`, `'end'`, `'center'`, `'middle'`.    |
+| `hide` | `Booleanish`      | `false`     | :x:      | :x:                | When `true`, hides the indicator content.                                |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.indicator` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.indicator` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 

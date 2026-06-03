@@ -69,10 +69,10 @@ Affiche un fil d'Ariane pour aider les utilisateurs à naviguer dans le site.
 Le dernier item est automatiquement traité comme la page courante (non cliquable).
 
 ## Props
-| Prop       | Type               | Default     | Required | Configurable | Description                                     |
-|------------|--------------------|-------------|----------|--------------|-------------------------------------------------|
-| `items`    | `BreadcrumbItem[]` | —           | ✅       | ❌          | Liste des items du fil d'Ariane                 |
-| `maxWidth` | `string`           | `undefined` | ❌       | ✅          | Classe Tailwind de largeur max (ex: `max-w-xs`) |
+| Prop       | Type               | Default     | Required           | Configurable       | Description                                     |
+|------------|--------------------|-------------|--------------------|--------------------|-------------------------------------------------|
+| `items`    | `BreadcrumbItem[]` | —           | :white_check_mark: | :x:                | Liste des items du fil d'Ariane                 |
+| `maxWidth` | `string`           | `undefined` | :x:                | :white_check_mark: | Classe Tailwind de largeur max (ex: `max-w-xs`) |
 
 ## Type `BreadcrumbItem`
 | Prop    | Type               | Description                                   |

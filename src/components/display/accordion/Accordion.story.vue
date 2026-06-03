@@ -365,8 +365,8 @@ animated transitions, and a customisable icon.
 
 | Prop          | Type                   | Default     | Required | Configurable | Description                                                                                    |
 |---------------|------------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------|
-| `multiple`    | `boolean`              | `false`     | ❌       | ❌          | When `true`, multiple items can be open at the same time.                                      |
-| `defaultOpen` | `string` \| `string[]` | `undefined` | ❌       | ❌          | Item name(s) open on first render. Accepts a string in single mode, an array in multiple mode. |
+| `multiple`    | `boolean`              | `false`     | :x:      | :x:          | When `true`, multiple items can be open at the same time.                                      |
+| `defaultOpen` | `string` \| `string[]` | `undefined` | :x:      | :x:          | Item name(s) open on first render. Accepts a string in single mode, an array in multiple mode. |
 
 ## Accordion events
 
@@ -390,12 +390,12 @@ animated transitions, and a customisable icon.
 
 ## AccordionItem props
 
-| Prop   | Type                | Default   | Required | Configurable | Description                                                                    |
-|--------|---------------------|-----------|----------|--------------|--------------------------------------------------------------------------------|
-| `name` | `string`            | —         | ✅       | ❌          | Unique identifier within the parent `Accordion`. Used to track open state.     |
-| `icon` | `AccordionItemIcon` | `'arrow'` | ❌       | ✅          | Icon shown in the header. `'arrow'` rotates on open, `'plus'` becomes a cross. |
+| Prop   | Type                | Default   | Required           | Configurable       | Description                                                                    |
+|--------|---------------------|-----------|--------------------|--------------------|--------------------------------------------------------------------------------|
+| `name` | `string`            | —         | :white_check_mark: | :x:                | Unique identifier within the parent `Accordion`. Used to track open state.     |
+| `icon` | `AccordionItemIcon` | `'arrow'` | :x:                | :white_check_mark: | Icon shown in the header. `'arrow'` rotates on open, `'plus'` becomes a cross. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.accordionItem` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.accordionItem` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## AccordionItem events
 

@@ -83,16 +83,16 @@ Use `DockItem` for each navigation element.
 > Add `<meta name="viewport" content="viewport-fit=cover" />` for iOS support.
 
 ## Dock Props
-| Prop   | Type       | Default | Required | Configurable | Description      |
-|--------|------------|---------|----------|--------------|------------------|
-| `size` | `DockSize` | `'md'`  | ❌       | ✅          | Size of the dock |
+| Prop   | Type       | Default | Required | Configurable       | Description      |
+|--------|------------|---------|----------|--------------------|------------------|
+| `size` | `DockSize` | `'md'`  | :x:      | :white_check_mark: | Size of the dock |
 
 ## DockItem Props
-| Prop    | Type               | Default     | Required | Configurable | Description                                           |
-|---------|--------------------|-------------|----------|--------------|-------------------------------------------------------|
-| `icon`  | `Component`        | —           | ✅       | ❌          | Icon component (e.g. Lucide icon)                     |
-| `label` | `string`           | `undefined` | ❌       | ❌          | Text label displayed below the icon                   |
-| `to`    | `RouteLocationRaw` | `undefined` | ❌       | ❌          | Vue Router location. Absent = renders as `<button />` |
+| Prop    | Type               | Default     | Required           | Configurable | Description                                           |
+|---------|--------------------|-------------|--------------------|--------------|-------------------------------------------------------|
+| `icon`  | `Component`        | —           | :white_check_mark: | :x:          | Icon component (e.g. Lucide icon)                     |
+| `label` | `string`           | `undefined` | :x:                | :x:          | Text label displayed below the icon                   |
+| `to`    | `RouteLocationRaw` | `undefined` | :x:                | :x:          | Vue Router location. Absent = renders as `<button />` |
 
 ## Notes
 - The `active` state is automatically detected via `useLink` (Vue Router).

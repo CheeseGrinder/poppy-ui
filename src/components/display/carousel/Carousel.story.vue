@@ -23,8 +23,8 @@ const state = reactive<CarouselProps>({
         <template #controls>
           <HstSelect title="Direction" v-model="state.direction" :options="['horizontal', 'vertical']" />
           <HstSelect title="Snap" v-model="state.snap" :options="['start', 'center', 'end']" />
-          <HstCheckbox title="Indicators" v-model="state.indicators" />
-          <HstCheckbox title="Autoplay" v-model="state.autoplay" />
+          <HstCheckbox title="Indicators" v-model="(state.indicators as boolean)" />
+          <HstCheckbox title="Autoplay" v-model="(state.autoplay as boolean)" />
         </template>
 
         <div class="w-full max-w-lg mx-auto">
@@ -145,18 +145,18 @@ A responsive, accessible carousel/slider component built on DaisyUI's `carousel`
 
 ## Carousel props
 
-| Prop           | Type                | Default        | Required | Configurable | Description                                               |
-|----------------|---------------------|----------------|----------|--------------|-----------------------------------------------------------|
-| `direction`    | `CarouselDirection` | `'horizontal'` | ❌       | ✅          | Direction of the carousel. `'horizontal'` / `'vertical'`. |
-| `snap`         | `CarouselSnap`      | `'start'`      | ❌       | ✅          | Snap alignment. `'start'` / `'center'` / `'end'`.         |
-| `indicators`   | `Booleanish`        | `false`        | ❌       | ✅          | When `true`, shows navigation indicator dots.             |
-| `controls`     | `Booleanish`        | `true`         | ❌       | ✅          | When `true`, shows prev/next navigation controls.         |
-| `infinite`     | `Booleanish`        | `true`         | ❌       | ✅          | When `true`, enables infinite looping.                    |
-| `autoplay`     | `Booleanish`        | `false`        | ❌       | ✅          | When `true`, enables autoplay.                            |
-| `interval`     | `number`            | `3000`         | ❌       | ✅          | Autoplay interval in milliseconds.                        |
-| `initialIndex` | `number`            | `0`            | ❌       | ❌          | Index of the initial slide.                               |
+| Prop           | Type                | Default        | Required | Configurable       | Description                                               |
+|----------------|---------------------|----------------|----------|--------------------|-----------------------------------------------------------|
+| `direction`    | `CarouselDirection` | `'horizontal'` | :x:      | :white_check_mark: | Direction of the carousel. `'horizontal'` / `'vertical'`. |
+| `snap`         | `CarouselSnap`      | `'start'`      | :x:      | :white_check_mark: | Snap alignment. `'start'` / `'center'` / `'end'`.         |
+| `indicators`   | `Booleanish`        | `false`        | :x:      | :white_check_mark: | When `true`, shows navigation indicator dots.             |
+| `controls`     | `Booleanish`        | `true`         | :x:      | :white_check_mark: | When `true`, shows prev/next navigation controls.         |
+| `infinite`     | `Booleanish`        | `true`         | :x:      | :white_check_mark: | When `true`, enables infinite looping.                    |
+| `autoplay`     | `Booleanish`        | `false`        | :x:      | :white_check_mark: | When `true`, enables autoplay.                            |
+| `interval`     | `number`            | `3000`         | :x:      | :white_check_mark: | Autoplay interval in milliseconds.                        |
+| `initialIndex` | `number`            | `0`            | :x:      | :x:                | Index of the initial slide.                               |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.carousel` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.carousel` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 

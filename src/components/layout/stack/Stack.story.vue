@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import Stack from './Stack.vue'
 import type { StackProps } from './stack.props'
+import type { StackDirection } from './stack.types.ts'
 </script>
 
 <script setup lang="ts">
@@ -9,7 +10,7 @@ const state = reactive<StackProps>({
   direction: undefined,
 })
 
-const directions = ['start', 'end', 'top', 'bottom']
+const directions = ['start', 'end', 'top', 'bottom'] as StackDirection[]
 </script>
 
 <template>
@@ -137,11 +138,11 @@ Use it to group elements that should appear connected.
 
 ## Props
 
-| Prop       | Type            | Default     | Required | Configurable | Description                              |
-|------------|-----------------|-------------|----------|--------------|------------------------------------------|
-| `direction`| `StackDirection`| `undefined` | ❌       | ✅            | Layout direction: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+| Prop       | Type            | Default     | Required | Configurable       | Description                                                |
+|------------|-----------------|-------------|----------|--------------------|------------------------------------------------------------|
+| `direction`| `StackDirection`| `undefined` | :x:      | :white_check_mark: | Layout direction: `'start'`, `'end'`, `'top'`, `'bottom'`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.stack` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.stack` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 

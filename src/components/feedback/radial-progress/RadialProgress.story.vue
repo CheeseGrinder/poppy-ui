@@ -90,12 +90,12 @@ Radial progress bar used to show the completion of a task or the passing of time
 Renders as a `<div role="progressbar" />` for cross-browser compatibility (Firefox doesn't support pseudo-elements inside `<progress />`).
 
 ## Props
-| Prop        | Type                  | Default     | Required | Configurable | Description                                        |
-|-------------|-----------------------|-------------|----------|--------------|----------------------------------------------------|
-| `value`     | `number`              | `0`         | ❌       | ❌          | Current value (0–100)                              |
-| `color`     | `RadialProgressColor` | `undefined` | ❌       | ✅          | Color of the progress arc (`text-{color}`)         |
-| `size`      | `string`              | `'5rem'`    | ❌       | ✅          | Size of the circle (any CSS value, e.g. `'8rem'`)  |
-| `thickness` | `string`              | `'10%'`     | ❌       | ✅          | Thickness of the arc (any CSS value, e.g. `'2px'`) |
+| Prop        | Type                  | Default     | Required | Configurable       | Description                                        |
+|-------------|-----------------------|-------------|----------|--------------------|----------------------------------------------------|
+| `value`     | `number`              | `0`         | :x:      | :x:                | Current value (0–100)                              |
+| `color`     | `RadialProgressColor` | `undefined` | :x:      | :white_check_mark: | Color of the progress arc (`text-{color}`)         |
+| `size`      | `string`              | `'5rem'`    | :x:      | :white_check_mark: | Size of the circle (any CSS value, e.g. `'8rem'`)  |
+| `thickness` | `string`              | `'10%'`     | :x:      | :white_check_mark: | Thickness of the arc (any CSS value, e.g. `'2px'`) |
 
 ## Slots
 | Slot      | Description                                             |

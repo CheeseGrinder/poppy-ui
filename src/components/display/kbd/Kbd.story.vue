@@ -184,17 +184,17 @@ Built on DaisyUI's `kbd` class system. Renders a semantic `<kbd />` HTML element
 
 ## Props
 
-| Prop   | Type      | Default | Required | Configurable | Description                                        |
-|--------|-----------|---------|----------|--------------|----------------------------------------------------|
-| `size` | `KbdSize` | `'md'`  | ❌       | ✅          | Size of the key. `xs` / `sm` / `md` / `lg` / `xl`. |
+| Prop   | Type      | Default | Required | Configurable       | Description                                        |
+|--------|-----------|---------|----------|--------------------|----------------------------------------------------|
+| `size` | `KbdSize` | `'md'`  | :x:      | :white_check_mark: | Size of the key. `xs` / `sm` / `md` / `lg` / `xl`. |
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.kbd` option). See [Plugin Configuration](#) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.kbd` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Slots
 
-| Slot      | Description                        |
-|-----------|------------------------------------|
-| `default` | The key label (text or symbol).    |
+| Slot      | Description                     |
+|-----------|---------------------------------|
+| `default` | The key label (text or symbol). |
 
 ## Usage
 
