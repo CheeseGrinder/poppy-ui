@@ -24,6 +24,11 @@
       "import": "./dist/components/actions/public.es.js",
       "require": "./dist/components/actions/public.umd.js"
     },
+    "./components/data": {
+      "types": "./dist/components/data/public.d.ts",
+      "import": "./dist/components/data/public.es.js",
+      "require": "./dist/components/data/public.umd.js"
+    },
     "./components/display": {
       "types": "./dist/components/display/public.d.ts",
       "import": "./dist/components/display/public.es.js",
@@ -78,6 +83,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
     "@histoire/plugin-vue": "^1.0.0-beta.1",
+    "@intlify/unplugin-vue-i18n": "^11.2.3",
     "@types/node": "^24.12.4",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vitest/browser-playwright": "^4.1.7",
@@ -93,6 +99,7 @@
     "vite-plugin-dts": "^5.0.1",
     "vite-plugin-vue-devtools": "^8.1.2",
     "vitest": "^4.1.7",
+    "vue-i18n": "^11.4.4",
     "vue-router": "^5.0.7",
     "vue-tsc": "^3.3.2"
   }

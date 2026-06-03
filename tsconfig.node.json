@@ -28,5 +28,5 @@
     "resolveJsonModule": true,
     "jsx": "preserve"
   },
-  "include": ["vite.config.ts", "env.d.ts", "src/**/*", "src/**/*.vue", "histoire.setup.ts"]
+  "include": ["vite.config.ts", "*.d.ts", "src/**/*", "src/**/*.vue", "histoire.setup.ts"]
 }
