@@ -1,3 +1,6 @@
+// Checkbox
+export type { CheckboxProps } from './checkbox/checkbox.props'
+export * from './checkbox/checkbox.types'
 // Form
 export type { FormProps } from './form/form.props'
 export * from './form/form.types'
