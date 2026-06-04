@@ -10,3 +10,6 @@ export * from './form-field/form-field.types'
 // Input
 export type { InputProps } from './input/input.props'
 export * from './input/input.types'
+// Toggle
+export type { ToggleProps } from './toggle/toggle.props'
+export * from './toggle/toggle.types'

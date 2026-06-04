@@ -6,6 +6,7 @@ import type { CheckboxConfigurableProps } from '@/components/data/checkbox/check
 import type { FormConfigurableProps } from '@/components/data/form/form.props'
 import type { FormFieldConfigurableProps } from '@/components/data/form-field/form-field.props'
 import type { InputConfigurableProps } from '@/components/data/input/input.props'
+import type { ToggleConfigurableProps } from '@/components/data/toggle/toggle.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
 import type { AvatarConfigurableProps } from '@/components/display/avatar/avatar.props'
 import type { BadgeConfigurableProps } from '@/components/display/badge/badge.props'
@@ -44,6 +45,7 @@ export interface PoppyComponentConfig {
   form: FormConfigurableProps
   formField: FormFieldConfigurableProps
   input: InputConfigurableProps
+  toggle: ToggleConfigurableProps
 
   // Display
   accordionItem: AccordionItemConfigurableProps
