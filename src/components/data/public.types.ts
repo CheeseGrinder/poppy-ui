@@ -13,6 +13,9 @@ export * from './input/input.types'
 // Radio
 export type { RadioProps } from './radio/radio.props'
 export * from './radio/radio.types'
+// Textarea
+export type { TextareaProps } from './textarea/textarea.props'
+export * from './textarea/textarea.types'
 // Toggle
 export type { ToggleProps } from './toggle/toggle.props'
 export * from './toggle/toggle.types'
