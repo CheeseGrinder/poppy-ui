@@ -8,6 +8,7 @@ import type { FormFieldConfigurableProps } from '@/components/data/form-field/fo
 import type { InputConfigurableProps } from '@/components/data/input/input.props'
 import type { RadioConfigurableProps } from '@/components/data/radio/radio.props'
 import type { RatingConfigurableProps } from '@/components/data/rating/rating.props'
+import type { SelectConfigurableProps } from '@/components/data/select/select.props'
 import type { TextareaConfigurableProps } from '@/components/data/textarea/textarea.props'
 import type { ToggleConfigurableProps } from '@/components/data/toggle/toggle.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
@@ -50,6 +51,7 @@ export interface PoppyComponentConfig {
   radio: RadioConfigurableProps
   rating: RatingConfigurableProps
   input: InputConfigurableProps
+  select: SelectConfigurableProps
   textarea: TextareaConfigurableProps
   toggle: ToggleConfigurableProps
 

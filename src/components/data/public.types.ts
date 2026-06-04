@@ -16,6 +16,9 @@ export * from './radio/radio.types'
 // Rating
 export type { RatingProps } from './rating/rating.props'
 export * from './rating/rating.types'
+// Select
+export type { SelectProps } from './select/select.props'
+export * from './select/select.types'
 // Textarea
 export type { TextareaProps } from './textarea/textarea.props'
 export * from './textarea/textarea.types'
