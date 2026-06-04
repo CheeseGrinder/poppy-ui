@@ -51,7 +51,7 @@ const triggerEl = useTemplateRef('triggerEl')
 const model = defineModel<ModelType>()
 const props = defineProps<SelectProps<T, M>>()
 
-// @ts-ignore - Ignored due to the genereic in script
+// @ts-expect-error - Ignored due to the genereic in script
 const config = useComponentConfig(SELECT_CONFIG, props, {
   size: 'md',
   clearable: false,
