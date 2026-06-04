@@ -2,7 +2,7 @@ import { createComponentConfigKey } from '@/symbol'
 import type { ComputedRef, InjectionKey, ShallowRef } from 'vue'
 import type { FieldState } from '../form/form.types'
 
-export interface FormFieldContext {
+export interface FormFieldContext<T = unknown> {
   /** Field name / dot-notation path — matches FormContext data keys. */
   name: string
 
@@ -14,7 +14,7 @@ export interface FormFieldContext {
   required: ShallowRef<boolean>
 
   /** Current field value resolved from FormContext. */
-  value: ComputedRef<unknown>
+  value: ComputedRef<T>
 
   /** Current field error resolved from FormContext. */
   error: ComputedRef<string | undefined>

@@ -2,6 +2,7 @@ import type { ButtonConfigurableProps } from '@/components/actions/button/button
 import type { DropdownConfigurableProps } from '@/components/actions/dropdown/dropdown.props'
 import type { FabConfigurableProps } from '@/components/actions/fab/fab.props'
 import type { ModalConfigurableProps } from '@/components/actions/modal/modal.props'
+import type { CheckboxConfigurableProps } from '@/components/data/checkbox/checkbox.props'
 import type { FormConfigurableProps } from '@/components/data/form/form.props'
 import type { FormFieldConfigurableProps } from '@/components/data/form-field/form-field.props'
 import type { InputConfigurableProps } from '@/components/data/input/input.props'
@@ -39,6 +40,7 @@ export interface PoppyComponentConfig {
   modal: ModalConfigurableProps
 
   // Data
+  checkbox: CheckboxConfigurableProps
   form: FormConfigurableProps
   formField: FormFieldConfigurableProps
   input: InputConfigurableProps
