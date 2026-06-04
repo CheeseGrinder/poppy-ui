@@ -13,6 +13,9 @@ export * from './input/input.types'
 // Radio
 export type { RadioProps } from './radio/radio.props'
 export * from './radio/radio.types'
+//Range
+export type { RangeProps } from './range/range.props'
+export * from './range/range.types'
 // Rating
 export type { RatingProps } from './rating/rating.props'
 export * from './rating/rating.types'
