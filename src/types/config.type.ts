@@ -7,9 +7,9 @@ import type { FormConfigurableProps } from '@/components/data/form/form.props'
 import type { FormFieldConfigurableProps } from '@/components/data/form-field/form-field.props'
 import type { InputConfigurableProps } from '@/components/data/input/input.props'
 import type { RadioConfigurableProps } from '@/components/data/radio/radio.props'
-import type { RangeConfigurableProps } from '@/components/data/range/range.props'
 import type { RatingConfigurableProps } from '@/components/data/rating/rating.props'
 import type { SelectConfigurableProps } from '@/components/data/select/select.props'
+import type { SliderConfigurableProps } from '@/components/data/slider/slider.props'
 import type { TextareaConfigurableProps } from '@/components/data/textarea/textarea.props'
 import type { ToggleConfigurableProps } from '@/components/data/toggle/toggle.props'
 import type { AccordionItemConfigurableProps } from '@/components/display/accordion/accordion-item.props'
@@ -50,10 +50,10 @@ export interface PoppyComponentConfig {
   form: FormConfigurableProps
   formField: FormFieldConfigurableProps
   radio: RadioConfigurableProps
-  range: RangeConfigurableProps
   rating: RatingConfigurableProps
   input: InputConfigurableProps
   select: SelectConfigurableProps
+  slider: SliderConfigurableProps
   textarea: TextareaConfigurableProps
   toggle: ToggleConfigurableProps
 
