@@ -1,5 +1,5 @@
 <script lang="ts">
-import Badge from '@/components/display/Badge.vue'
+import { Badge } from '@/components/display/public'
 import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import { useSelectCounter } from '@/composables/use-select-counter'
