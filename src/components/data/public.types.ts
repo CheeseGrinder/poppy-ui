@@ -13,15 +13,15 @@ export * from './input/input.types'
 // Radio
 export type { RadioProps } from './radio/radio.props'
 export * from './radio/radio.types'
-//Range
-export type { RangeProps } from './range/range.props'
-export * from './range/range.types'
 // Rating
 export type { RatingProps } from './rating/rating.props'
 export * from './rating/rating.types'
 // Select
 export type { SelectProps } from './select/select.props'
 export * from './select/select.types'
+// Slider
+export type { SliderProps } from './slider/slider.props'
+export * from './slider/slider.types'
 // Textarea
 export type { TextareaProps } from './textarea/textarea.props'
 export * from './textarea/textarea.types'
