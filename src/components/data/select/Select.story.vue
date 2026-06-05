@@ -1,6 +1,5 @@
 <script lang="ts">
-import Form from '@/components/data/form/Form.vue'
-import FormField from '@/components/data/form-field/FormField.vue'
+import { Form, FormField } from '@/components/data/public'
 import { reactive, ref } from 'vue'
 import { createI18n } from 'vue-i18n'
 import Select from './Select.vue'
@@ -49,7 +48,7 @@ const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
         },
       },
     }}))
-  }">
+  }" :layout="{ type: 'single', iframe: false }">
 
     <Variant title="Default" id="default">
       <template #controls>
