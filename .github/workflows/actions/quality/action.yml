@@ -1,0 +1,30 @@
+name: Code Quality
+
+description: Run format, lint and type checks
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Install
+      run: bun install
+      shell: bash
+
+    - name: Format check
+      run: bunx biome format
+      shell: bash
+
+    - name: Lint check
+      run: bunx biome lint
+      shell: bash
+
+    - name: Type check
+      run: bunx vue-tsc --build --force
+      shell: bash

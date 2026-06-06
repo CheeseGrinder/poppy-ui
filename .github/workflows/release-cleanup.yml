@@ -1,0 +1,72 @@
+name: Cleanup Dev Packages
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Delete old dev package versions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+
+            const packageName = '@poppy-ui/vue';
+            const retentionDays = 30;
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
+
+            // Récupère toutes les versions du package
+            const raw = execSync(`npm view ${packageName} versions --json`).toString();
+            const versions = JSON.parse(raw);
+
+            core.info(`Found ${versions.length} versions`);
+
+            for (const version of versions) {
+              if (!version.includes('-dev.')) continue;
+
+              if (context.eventName === 'pull_request') {
+                core.info(`Unpublishing dev version ${version}`);
+                try {
+                  execSync(`npm unpublish ${packageName}@${version}`, {
+                    env: { ...process.env, NODE_AUTH_TOKEN: process.env.NPM_TOKEN }
+                  });
+                } catch (e) {
+                  core.warning(`Failed to unpublish ${version}: ${e.message}`);
+                }
+                continue;
+              }
+
+              // Pour le schedule, vérifie la date via npm view
+              const infoRaw = execSync(`npm view ${packageName}@${version} time --json`).toString();
+              const publishedAt = new Date(JSON.parse(infoRaw));
+
+              if (publishedAt < cutoffDate) {
+                core.info(`Unpublishing expired dev version ${version}`);
+                try {
+                  execSync(`npm unpublish ${packageName}@${version}`, {
+                    env: { ...process.env, NODE_AUTH_TOKEN: process.env.NPM_TOKEN }
+                  });
+                } catch (e) {
+                  core.warning(`Failed to unpublish ${version}: ${e.message}`);
+                }
+              }
+            }
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

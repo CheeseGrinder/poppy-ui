@@ -1,0 +1,33 @@
+name: Dependency Audit
+
+description: Run bun audit to check for vulnerabilities
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Install
+      run: bun install --production
+      shell: bash
+
+    - name: Audit dependencies
+      run: bun audit --audit-level=high
+      shell: bash
+
+    - name: Check for vulnerabilities
+      run: |
+        if bun audit --audit-level=high --json | jq -e '.vulnerabilities != null and (.vulnerabilities | length > 0)'; then
+          echo "Vulnerabilities found!"
+          bun audit
+          exit 1
+        else
+          echo "No vulnerabilities found"
+        fi
+      shell: bash

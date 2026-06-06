@@ -1,6 +1,6 @@
 {
-  "name": "poppy-vue",
-  "version": "0.0.0",
+  "name": "@poppy-ui/vue",
+  "version": "0.5.6",
   "type": "module",
   "files": [
     "dist"
@@ -15,9 +15,9 @@
       "require": "./dist/public.umd.js"
     },
     "./components/*": {
-      "types": "./dist/components/actions/*",
-      "import": "./dist/components/actions/*",
-      "require": "./dist/components/actions/*"
+      "types": "./dist/components/*",
+      "import": "./dist/components/*",
+      "require": "./dist/components/*"
     },
     "./components/actions": {
       "types": "./dist/components/actions/public.d.ts",
@@ -74,34 +74,34 @@
     "typecheck": "vue-tsc --build --force"
   },
   "dependencies": {
-    "@lucide/vue": "^1.16.0",
+    "@lucide/vue": "^1.17.0",
     "@tailwindcss/vite": "^4.3.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0",
-    "vue": "^3.5.34"
+    "vue": "^3.5.35"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.4.16",
     "@histoire/plugin-vue": "^1.0.0-beta.1",
     "@intlify/unplugin-vue-i18n": "^11.2.3",
-    "@types/node": "^24.12.4",
+    "@types/node": "^24.13.1",
     "@vitejs/plugin-vue": "^6.0.7",
-    "@vitest/browser-playwright": "^4.1.7",
-    "@vitest/coverage-v8": "^4.1.7",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
     "@vue/tsconfig": "^0.9.1",
     "@vueuse/core": "^14.3.0",
     "daisyui": "^5.5.20",
     "histoire": "^1.0.0-beta.1",
-    "lefthook": "^2.1.8",
+    "lefthook": "^2.1.9",
     "playwright": "^1.60.0",
     "sass-embedded": "^1.100.0",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.14",
-    "vite-plugin-dts": "^5.0.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.16",
+    "vite-plugin-dts": "^5.0.2",
     "vite-plugin-vue-devtools": "^8.1.2",
-    "vitest": "^4.1.7",
-    "vue-i18n": "^11.4.4",
-    "vue-router": "^5.0.7",
-    "vue-tsc": "^3.3.2"
+    "vitest": "^4.1.8",
+    "vue-i18n": "^11.4.5",
+    "vue-router": "^5.1.0",
+    "vue-tsc": "^3.3.3"
   }
 }
