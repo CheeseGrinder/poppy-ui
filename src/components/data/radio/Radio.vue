@@ -70,7 +70,7 @@ watch(
   }
 )
 
-function handleChange(event: Event): void {
+function handleChange(): void {
   const value = props.value
   model.value = value
   field?.setValue(value)

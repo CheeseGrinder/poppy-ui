@@ -8,5 +8,5 @@ export * from './dock/dock.types'
 export type { LinkProps } from './link/link.props'
 export * from './link/link.types'
 // Menu
-export type { MenuItemProps, MenuProps, MenuTitleProps } from './menu/menu.props'
+export type { MenuItemProps, MenuProps } from './menu/menu.props'
 export * from './menu/menu.types'

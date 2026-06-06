@@ -1,4 +1,4 @@
-import type { ToastColor } from '@/components/feedback/public-types'
+import type { ToastColor } from '@/components/feedback/public.types'
 import { TOAST_CONTEXT_KEY } from '@/components/feedback/toast/toast.context'
 import { inject, ref } from 'vue'
 

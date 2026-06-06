@@ -1,6 +1,6 @@
 import type { ComponentSize } from '@/types/size.type'
-import type { PoppyComponentConfig } from '@poppy-ui/vue/types'
 import type { InjectionKey } from 'vue'
+import type { PoppyComponentConfig } from './types/config.type'
 
 const knownComponentConfigKeys = new Map<keyof PoppyComponentConfig, InjectionKey<unknown>>()
 

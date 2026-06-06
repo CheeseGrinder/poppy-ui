@@ -34,21 +34,29 @@ export default defineConfig({
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'es.js' : 'umd.js'}`,
       entry: {
         public: fileURLToPath(new URL('./src/public.ts', import.meta.url)),
-        tailwind: fileURLToPath(new URL('./src/plugin-tailwind.ts', import.meta.url)),
         'components/actions/public': fileURLToPath(new URL('./src/components/actions/public.ts', import.meta.url)),
+        'components/data/public': fileURLToPath(new URL('./src/components/data/public.ts', import.meta.url)),
+        'components/display/public': fileURLToPath(new URL('./src/components/display/public.ts', import.meta.url)),
+        'components/feedback/public': fileURLToPath(new URL('./src/components/feedback/public.ts', import.meta.url)),
+        'components/layout/public': fileURLToPath(new URL('./src/components/layout/public.ts', import.meta.url)),
+        'components/navigation/public': fileURLToPath(
+          new URL('./src/components/navigation/public.ts', import.meta.url),
+        ),
         'composables/public': fileURLToPath(new URL('./src/composables/public.ts', import.meta.url)),
         'types/public': fileURLToPath(new URL('./src/types/public.ts', import.meta.url)),
       },
     },
     rollupOptions: {
-      external: [
-        'vue',
-        'tailwindcss',
-        'tailwindcss/plugin', // Important pour ton plugin-tailwind
-        'daisyui',
-        'node:path',
-        'node:url',
-      ],
+      external: ['@lucide/vue', '@vuese/core', 'vue', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
+      output: {
+        exports: 'named',
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+    rolldownOptions: {
+      external: ['@lucide/vue', '@vuese/core', 'vue', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
       output: {
         exports: 'named',
         globals: {
@@ -57,7 +65,6 @@ export default defineConfig({
       },
     },
   },
-
   histoire: {
     plugins: [HstVue()],
     setupFile: 'histoire.setup.ts',

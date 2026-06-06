@@ -1,0 +1,14 @@
+name: Dependency Audit
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'
+
+jobs:
+  audit:
+    name: Audit Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run Audit
+        uses: ./.github/workflows/actions/audit

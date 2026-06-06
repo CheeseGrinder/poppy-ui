@@ -53,7 +53,6 @@ const emit = defineEmits<{
 }>()
 
 const sliderRoot = useTemplateRef('sliderRoot')
-const railRef = useTemplateRef('railRef')
 const thumbRefs = useTemplateRefsList<HTMLElement>()
 
 const isDragging = shallowRef(false)

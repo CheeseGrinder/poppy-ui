@@ -2,7 +2,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
-    "lib": ["ESNext", "ESNext.Temporal"],
+    "lib": ["DOM", "ESNext", "ESNext.Temporal"],
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
@@ -26,7 +26,10 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["vite.config.ts", "*.d.ts", "src/**/*", "src/**/*.vue", "histoire.setup.ts"]
 }
