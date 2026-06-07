@@ -35,6 +35,7 @@ export default defineConfig({
       entry: {
         public: fileURLToPath(new URL('./src/public.ts', import.meta.url)),
         'components/actions/public': fileURLToPath(new URL('./src/components/actions/public.ts', import.meta.url)),
+        'components/app/public': fileURLToPath(new URL('./src/components/app/public.ts', import.meta.url)),
         'components/data/public': fileURLToPath(new URL('./src/components/data/public.ts', import.meta.url)),
         'components/display/public': fileURLToPath(new URL('./src/components/display/public.ts', import.meta.url)),
         'components/feedback/public': fileURLToPath(new URL('./src/components/feedback/public.ts', import.meta.url)),
