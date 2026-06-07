@@ -246,7 +246,15 @@ Toggles the visibility of two (or three) elements using a reactive `v-model`.
 Built on DaisyUI's `swap` class system — no native checkbox involved, state is managed via `swap-active`.
 Supports rotate and flip transition effects.
 
-## Props
+## API
+
+### v-model
+
+| Name      | Type      | Modifiers | Description          |
+|-----------|-----------|-----------|----------------------|
+| `v-model` | `boolean` | `undefined` | Bound checked state. |
+
+### Props
 
 | Prop            | Type          | Default     | Required | Configurable       | Description                                                           |
 |-----------------|---------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
@@ -255,13 +263,7 @@ Supports rotate and flip transition effects.
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.swap` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Events
-
-| Event               | Payload   | Description                     |
-|---------------------|-----------|---------------------------------|
-| `@update:modelValue`| `boolean` | Emitted when the state toggles. |
-
-## Slots
+### Slots
 
 | Slot            | Description                                                     |
 |-----------------|-----------------------------------------------------------------|

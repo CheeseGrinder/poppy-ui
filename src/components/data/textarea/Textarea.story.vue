@@ -138,47 +138,58 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
 # Textarea
 
 ## Description
+
 Multi-line text input component built on the DaisyUI `textarea` element.
 Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
 Supports an `autoGrow` mode that expands the height automatically to fit the content.
 
-## defineModel
+## API
+
+### v-model
+
 | Name         | Type     | Modifiers | Description                                                            |
 |--------------|----------|-----------|------------------------------------------------------------------------|
 | `modelValue` | `string` | `.trim`   | The current text content. `.trim` removes leading/trailing whitespace. |
 
-## Props
-| Prop            | Type                    | Default               | Configurable       | Description                                                                     |
-|-----------------|-------------------------|-----------------------|--------------------|---------------------------------------------------------------------------------|
-| `color`         | `TextareaColor`         | `—`                   | :white_check_mark: | Color variant.                                                                  |
-| `size`          | `TextareaSize`          | `'md'`                | :white_check_mark: | Size.                                                                           |
-| `variant`       | `'bordered' \| 'ghost'` | `—`                   | :white_check_mark: | Visual style variant.                                                           |
-| `autoGrow`      | `Booleanish`            | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
-| `counter`       | `Booleanish`            | `false`               | :white_check_mark: | Shows character counter.                                                        |
-| `minLength`     | `number`                | `—`                   | :white_check_mark: | Min length (counter warning + native).                                          |
-| `maxLength`     | `number`                | `—`                   | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
-| `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |
-| `rows`          | `number`                | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
-| `label`         | `string`                | `—`                   | :x:                | Inline label (standalone use).                                                  |
-| `hint`          | `string`                | `—`                   | :x:                | Hint text (standalone use).                                                     |
-| `disabled`      | `boolean`               | `—`                   | :x:                | Native disabled.                                                                |
-| `required`      | `boolean`               | `—`                   | :x:                | Native required.                                                                |
-| `placeholder`   | `string`                | `—`                   | :x:                | Placeholder text.                                                               |
+### Props
 
-## Events
+| Prop            | Type                  | Default               | Configurable       | Description                                                                     |
+|-----------------|-----------------------|-----------------------|--------------------|---------------------------------------------------------------------------------|
+| `color`         | `TextareaColor`       | `undefined`           | :white_check_mark: | Color variant.                                                                  |
+| `size`          | `TextareaSize`        | `'md'`                | :white_check_mark: | Size.                                                                           |
+| `variant`       | `TextareaVariant`     | `undefined`           | :white_check_mark: | Visual style variant.                                                           |
+| `autoGrow`      | `Booleanish`          | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
+| `counter`       | `Booleanish`          | `false`               | :white_check_mark: | Shows character counter.                                                        |
+| `minLength`     | `number`              | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                          |
+| `maxLength`     | `number`              | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
+| `counterFormat` | `string \| CounterFn` | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |
+| `rows`          | `number`              | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
+| `label`         | `string`              | `undefined`           | :x:                | Inline label (standalone use).                                                  |
+| `hint`          | `string`              | `undefined`           | :x:                | Hint text (standalone use).                                                     |
+| `disabled`      | `boolean`             | `undefined`           | :x:                | Native disabled.                                                                |
+| `required`      | `boolean`             | `undefined`           | :x:                | Native required.                                                                |
+| `placeholder`   | `string`              | `undefined`           | :x:                | Placeholder text.                                                               |
+
+### Events
+
 | Event    | Payload | Description                                                                             |
 |----------|---------|-----------------------------------------------------------------------------------------|
 | `@input` | `Event` | Emitted on every keystroke (native input event).                                        |
 | `@blur`  | `Event` | Emitted when the textarea loses focus. Triggers validation when inside `<FormField />`. |
 
-## Slots
+### Slots
+
 | Slot      | Scope                   | Description                            |
 |-----------|-------------------------|----------------------------------------|
-| `label`   | —                       | Top-left inline label (standalone).    |
-| `hint`    | —                       | Bottom-left hint / error (standalone). |
+| `label`   | undefined                       | Top-left inline label (standalone).    |
+| `hint`    | undefined                       | Bottom-left hint / error (standalone). |
 | `counter` | `{ current, min, max }` | Bottom-right character count.          |
 
-## Counter cascade
+> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Note
+
+### Counter cascade
 Counter resolution order (first defined wins):
 1. `counter` prop on `<Textarea />` itself
 2. `counter` on `<FormField />`

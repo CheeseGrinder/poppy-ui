@@ -309,7 +309,7 @@ The `Toast` component itself remains available as a low-level primitive for cust
 | Field     | Type         | Default     | Description                                            |
 |-----------|--------------|-------------|--------------------------------------------------------|
 | `id`      | `number`     | auto        | Auto-incremented identifier.                           |
-| `message` | `string`     | —           | Text content of the notification.                      |
+| `message` | `string`     | `undefined` | Text content of the notification.                      |
 | `color`   | `ToastColor` | `undefined` | Alert color. `info` / `success` / `warning` / `error`. |
 | `duration`| `number`     | `3000`      | Overrides the global default for this toast.           |
 

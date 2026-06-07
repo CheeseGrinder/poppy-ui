@@ -212,16 +212,29 @@ import MenuItem from './MenuItem.vue'
 # Menu
 
 ## Description
+
 Displays a list of navigation links vertically or horizontally.
 Supports icons, badges, titles, static submenus, and collapsible submenus.
 
-## Menu Props
+## API
+
+<details>
+<summary>Menu</summary>
+
+### Props
+
 | Prop        | Type            | Default      | Required | Configurable       | Description           |
 |-------------|-----------------|--------------|----------|--------------------|-----------------------|
 | `size`      | `MenuSize`      | `'md'`       | :x:      | :white_check_mark: | Size of the menu      |
 | `direction` | `MenuDirection` | `'vertical'` | :x:      | :white_check_mark: | Direction of the menu |
 
-## MenuItem Props
+</details>
+
+<details>
+<summary>MenuItem</summary>
+
+### Props
+
 | Prop          | Type               | Default     | Required | Configurable | Description                                                            |
 |---------------|--------------------|-------------|----------|--------------|------------------------------------------------------------------------|
 | `icon`        | `Component`        | `undefined` | :x:      | :x:          | Icon component (e.g. Lucide icon)                                      |
@@ -231,14 +244,18 @@ Supports icons, badges, titles, static submenus, and collapsible submenus.
 | `disabled`    | `Booleanish`       | `false`     | :x:      | :x:          | Disables the item                                                      |
 | `collapsible` | `Booleanish`       | `false`     | :x:      | :x:          | Wraps `submenu` slot in `<details />` when true                        |
 
-## MenuItem Slots
+### Slots
+
 | Slot      | Description                              |
 |-----------|------------------------------------------|
 | `default` | Item label                               |
 | `badge`   | Optional badge displayed after the label |
 | `submenu` | Nested `MenuItem` components             |
 
+</details>
+
 ## Notes
+
 - `active` state is automatically detected via `useLink` (Vue Router) when `to` is provided.
 - Without `to`, the item renders as a plain `<a />` tag.
 - `collapsible` only takes effect when the `submenu` slot is populated.

@@ -297,13 +297,30 @@ Built on DaisyUI's `list` / `list-row` class system. `ListItem` renders as a `<l
 and switches to a `RouterLink` automatically when `to` is provided.
 It provides a great DX by supporting multiple named slots for easy composition.
 
-## List props
+## API
+
+<details>
+<summary>List</summary>
+
+### Props
 
 | Prop    | Type     | Default     | Required | Description                                       |
 |---------|----------|-------------|----------|---------------------------------------------------|
 | `title` | `string` | `undefined` | :x:      | Optional title to display at the top of the list. |
 
-## ListItem props
+### Slots
+
+| Slot      | Description                        |
+|-----------|------------------------------------|
+| `title`   | Custom title element for the list. |
+| `default` | The items.                         |
+
+</details>
+
+<details>
+<summary>ListItem</summary>
+
+### Props
 
 | Prop          | Type              | Default     | Required | Description                                                                                        |
 |---------------|-------------------|-------------|----------|----------------------------------------------------------------------------------------------------|
@@ -311,19 +328,18 @@ It provides a great DX by supporting multiple named slots for easy composition.
 | `title`       | `string`          | `undefined` | :x:      | Title text for the list item.                                                                      |
 | `description` | `string`          | `undefined` | :x:      | Description text for the list item.                                                                |
 
-## Slots
+### Slots
 
-`List` provides:
-- `#title`: Custom title element for the list.
-- `#default`: The items.
+| Slot          | Description                                                                          |
+|---------------|--------------------------------------------------------------------------------------|
+| `prefix`      | Content to display before the title (e.g. icon, avatar).                             |
+| `title`       | Custom title content (if prop isn't enough).                                         |
+| `description` | Custom description content (if prop isn't enough).                                   |
+| `default`     | If you don't use title/description slots or props, you can pass custom content here. |
+| `actions`     | Content to display at the end of the row (e.g. buttons).                             |
+| `details`     | Extra content that wraps to a new line below the item (`list-col-wrap`).             |
 
-`ListItem` provides:
-- `#prefix`: Content to display before the title (e.g. icon, avatar).
-- `#title`: Custom title content (if prop isn't enough).
-- `#description`: Custom description content (if prop isn't enough).
-- `#default`: If you don't use title/description slots or props, you can pass custom content here.
-- `#actions`: Content to display at the end of the row (e.g. buttons).
-- `#details`: Extra content that wraps to a new line below the item (`list-col-wrap`).
+</details>
 
 ## Usage
 

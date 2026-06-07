@@ -255,7 +255,9 @@ Built on the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/A
 
 Supports `click`, `hover`, and `context-menu` trigger actions, configurable placement, and programmatic control via exposed methods.
 
-## Props
+## API
+
+### Props
 
 | Prop            | Type                    | Default     | Required | Configurable       | Description                                                                                      |
 |-----------------|------------------------ |-------------|----------|--------------------|--------------------------------------------------------------------------------------------------|
@@ -269,21 +271,21 @@ Supports `click`, `hover`, and `context-menu` trigger actions, configurable plac
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.dropdown` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Events
+### Events
 
-| Event   | Payload | Description                                          |
-|---------|---------|------------------------------------------------------|
-| `@show` | —       | Emitted before the dropdown content becomes visible. |
-| `@hide` | —       | Emitted before the dropdown content is hidden.       |
+| Event   | Payload   | Description                                          |
+|---------|-----------|------------------------------------------------------|
+| `@show` | undefined | Emitted before the dropdown content becomes visible. |
+| `@hide` | undefined | Emitted before the dropdown content is hidden.       |
 
-## Slots
+### Slots
 
 | Slot      | Description                                                              |
 |-----------|--------------------------------------------------------------------------|
 | `trigger` | The element that opens the dropdown. Rendered as a `<button />` wrapper. |
 | `default` | The dropdown content (menu items, panels, forms, etc.).                  |
 
-## Exposed
+### Expose
 
 These methods are accessible via a template ref on the component instance.
 
@@ -305,7 +307,9 @@ These methods are accessible via a template ref on the component instance.
 <Button @click="dropdownRef?.toggle()">Toggle programmatically</Button>
 ```
 
-## Trigger actions
+## Note
+
+### Trigger actions
 
 | Value          | Behaviour                                                                                                                                                   |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|

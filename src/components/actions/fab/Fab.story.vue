@@ -180,8 +180,8 @@ with the first one being the main trigger button.
 
 ## Slots
 
-| Slot | Description                                                                         |
-|------|-------------------------------------------------------------------------------------|
+| Slot          | Description                                                                |
+|---------------|----------------------------------------------------------------------------|
 | `default`     | All action buttons, including the main trigger button.                     |
 | `main-action` | Replaces the main action button content when the FAB is in its open state. |
 | `close`       | A button with `fab-close` class that closes the FAB when clicked.          |

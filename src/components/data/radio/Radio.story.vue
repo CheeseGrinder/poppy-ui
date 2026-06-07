@@ -103,35 +103,41 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
 # Radio
 
 ## Description
+
 Radio button component built on the DaisyUI `radio` element.
 Radio buttons are grouped by sharing the same `v-model` and `name`. When inside a `<FormField />`, the `name` is inferred automatically from the field name.
 
-## defineModel
+## API
+
+### v-model
+
 | Name         | Type                          | Modifiers | Description                                             |
 |--------------|-------------------------------|-----------|---------------------------------------------------------|
-| `modelValue` | `string \| number \| boolean` | —         | Bound group value. Checked when equal to `props.value`. |
+| `modelValue` | `string \| number \| boolean` | `-`       | Bound group value. Checked when equal to `props.value`. |
 
-## Props
-| Prop          | Type                          | Default | Configurable       | Description                                                             |
-|---------------|-------------------------------|---------|--------------------|-------------------------------------------------------------------------|
-| `value`       | `string \| number \| boolean` | —       | :x:                | The value this radio represents (required).                             |
-| `color`       | `RadioColor`                  | `—`     | :white_check_mark: | Color variant.                                                          |
-| `size`        | `RadioSize`                   | `'md'`  | :white_check_mark: | Size.                                                                   |
-| `description` | `string`                      | `—`     | :x:                | Secondary text displayed next to the radio button.                      |
-| `name`        | `string`                      | `—`     | :x:                | Input group name. Inferred from `<FormField />` name when not provided. |
-| `disabled`    | `boolean`                     | `—`     | :x:                | Native disabled.                                                        |
-| `required`    | `boolean`                     | `—`     | :x:                | Native required. Signals `<FormField />` to display `"*"`.              |
+### Props
+| Prop          | Type                          | Default     | Configurable       | Description                                                             |
+|---------------|-------------------------------|-------------|--------------------|-------------------------------------------------------------------------|
+| `value`       | `string \| number \| boolean` | `undefined` | :x:                | The value this radio represents (required).                             |
+| `color`       | `RadioColor`                  | `undefined` | :white_check_mark: | Color variant.                                                          |
+| `size`        | `RadioSize`                   | `'md'`      | :white_check_mark: | Size.                                                                   |
+| `description` | `string`                      | `undefined` | :x:                | Secondary text displayed next to the radio button.                      |
+| `name`        | `string`                      | `undefined` | :x:                | Input group name. Inferred from `<FormField />` name when not provided. |
+| `disabled`    | `boolean`                     | `undefined` | :x:                | Native disabled.                                                        |
+| `required`    | `boolean`                     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.              |
 
-## Events
+### Events
+
 | Event     | Payload | Description                                                                                 |
 |-----------|---------|---------------------------------------------------------------------------------------------|
 | `@change` | `Event` | Emitted when this radio is selected (native change event).                                  |
 | `@blur`   | `Event` | Emitted when the radio button loses focus. Triggers validation when inside `<FormField />`. |
 
-## Slots
-| Slot          | Scope | Description                                        |
-|---------------|-------|----------------------------------------------------|
-| `description` | —     | Secondary text displayed next to the radio button. |
+### Slots
+
+| Slot          | Scope     | Description                                        |
+|---------------|-----------|----------------------------------------------------|
+| `description` | `-`       | Secondary text displayed next to the radio button. |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

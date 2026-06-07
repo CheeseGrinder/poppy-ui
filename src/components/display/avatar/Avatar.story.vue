@@ -277,7 +277,9 @@ A wrapper component to display user or entity representations.
 Built on DaisyUI's `avatar` class system. `Avatar` is a pure wrapper — the content (image, initials, etc.)
 is fully controlled via the `default` slot, making it compatible with any future `Mask` component.
 
-## Props
+## API
+
+### Props
 
 | Prop          | Type            | Default         | Required | Configurable       | Description                                                                                                |
 |---------------|-----------------|-----------------|----------|--------------------|------------------------------------------------------------------------------------------------------------|
@@ -289,7 +291,7 @@ is fully controlled via the `default` slot, making it compatible with any future
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.avatar` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Slots
+### Slots
 
 | Slot      | Description                                                        |
 |-----------|--------------------------------------------------------------------|

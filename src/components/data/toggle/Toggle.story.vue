@@ -93,33 +93,40 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
 # Toggle
 
 ## Description
+
 Toggle (switch) component built on the DaisyUI `toggle` element.
 Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
 
-## defineModel
+## API
+
+### v-model
+
 | Name      | Type      | Modifiers | Description          |
 |-----------|-----------|-----------|----------------------|
-| `v-model` | `boolean` | —         | Bound checked state. |
+| `v-model` | `boolean` | `-`       | Bound checked state. |
 
-## Props
-| Prop          | Type          | Default | Configurable       | Description                                                |
-|---------------|---------------|---------|--------------------|------------------------------------------------------------|
-| `color`       | `ToggleColor` | `—`     | :white_check_mark: | Color variant.                                             |
-| `size`        | `ToggleSize`  | `'md'`  | :white_check_mark: | Size.                                                      |
-| `description` | `string`      | `—`     | :x:                | Secondary text displayed next to the toggle.               |
-| `disabled`    | `boolean`     | `—`     | :x:                | Native disabled.                                           |
-| `required`    | `boolean`     | `—`     | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+### Props
 
-## Events
+| Prop          | Type          | Default     | Configurable       | Description                                                |
+|---------------|---------------|-------------|--------------------|------------------------------------------------------------|
+| `color`       | `ToggleColor` | `undefined` | :white_check_mark: | Color variant.                                             |
+| `size`        | `ToggleSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
+| `description` | `string`      | `undefined` | :x:                | Secondary text displayed next to the toggle.               |
+| `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                           |
+| `required`    | `boolean`     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+
+### Events
+
 | Event     | Payload | Description                                                                           |
 |-----------|---------|---------------------------------------------------------------------------------------|
 | `@change` | `Event` | Emitted when the toggle state changes (native change event).                          |
 | `@blur`   | `Event` | Emitted when the toggle loses focus. Triggers validation when inside `<FormField />`. |
 
-## Slots
+### Slots
+
 | Slot          | Scope | Description                                  |
 |---------------|-------|----------------------------------------------|
-| `description` | —     | Secondary text displayed next to the toggle. |
+| `description` | `-`   | Secondary text displayed next to the toggle. |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

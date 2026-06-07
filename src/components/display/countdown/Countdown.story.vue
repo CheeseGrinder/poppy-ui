@@ -231,27 +231,27 @@ Fully customisable via the `default` slot — the default render shows `hh:mm:ss
 
 ## Props
 
-| Prop | Type                          | Default | Required           | Configurable | Description                                                             |
-|------|-------------------------------|---------|--------------------|--------------|-------------------------------------------------------------------------|
-| `to` | `Date \| string \| number`    | —       | :white_check_mark: | :x:          | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
+| Prop | Type                       | Default     | Required           | Configurable | Description                                                             |
+|------|----------------------------|-------------|--------------------|--------------|-------------------------------------------------------------------------|
+| `to` | `Date \| string \| number` | `undefined` | :white_check_mark: | :x:          | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
 
 ## Events
 
 | Event  | Payload | Description                                   |
 |--------|---------|-----------------------------------------------|
-| `@end` | —       | Emitted once when the countdown reaches zero. |
+| `@end` | `-`     | Emitted once when the countdown reaches zero. |
 
 ## Slot
 
-| Slot      | Bindings                                                                        | Description                              |
-|-----------|---------------------------------------------------------------------------------|------------------------------------------|
-| `default` | `{ days, hours, minutes, seconds, done }` — all `number` except `done: boolean` | Custom render. Falls back to `hh:mm:ss`. |
+| Slot      | Bindings                                                                                | Description                              |
+|-----------|-----------------------------------------------------------------------------------------|------------------------------------------|
+| `default` | `{ days, hours, minutes, seconds, done }` undefined all `number` except `done: boolean` | Custom render. Falls back to `hh:mm:ss`. |
 
 ## Exposed
 
-| Member  | Type                                           | Description                    |
-|---------|------------------------------------------------|--------------------------------|
-| `delta` | `Ref<{ days, hours, minutes, seconds, done }>` | Reactive current delta values. |
+| Member  | Type                                      | Description                    |
+|---------|-------------------------------------------|--------------------------------|
+| `delta` | `{ days, hours, minutes, seconds, done }` | Reactive current delta values. |
 
 ## Usage
 

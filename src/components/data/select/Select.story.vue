@@ -146,45 +146,53 @@ const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
 # Select
 
 ## Description
+
 Custom select component with a dropdown built on DaisyUI `select` styling.
 Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter.
 Works standalone with `v-model` or inside `<FormField />` for full form integration.
 
-## defineModel
-| Name         | Type                    | Modifiers | Description                                                        |
-|--------------|-------------------------|-----------|--------------------------------------------------------------------|
-| `modelValue` | `T \| T[] \| undefined` | —         | Selected value. Array when `multiple` is enabled.                  |
+## API
 
-## Props
-| Prop               | Type                     | Default | Configurable       | Description                                                            |
-|--------------------|--------------------------|---------|--------------------|------------------------------------------------------------------------|
-| `color`            | `SelectColor`            | `—`     | :white_check_mark: | Color variant.                                                         |
-| `size`             | `SelectSize`             | `'md'`  | :white_check_mark: | Size.                                                                  |
-| `variant`          | `SelectVariant`          | `—`     | :white_check_mark: | Visual style variant. `'bordered'` or `'ghost'`.                       |
-| `options`          | `SelectOption[]`         | `—`     | :x:                | List of options to display.                                            |
-| `equals`           | `keyof T \| EqualsArgFn` | `—`     | :x:                | Key or function used for value equality comparison.                    |
-| `multiple`         | `boolean`                | `false` | :x:                | Enables multiple selection. Model becomes an array.                    |
-| `clearable`        | `boolean`                | `false` | :x:                | Shows a clear button when a value is selected (single mode).           |
-| `counterFormatter` | `SelectCounterFormatter` | `—`     | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.        |
-| `placeholder`      | `string`                 | `—`     | :x:                | Text shown when no value is selected.                                  |
-| `name`             | `string`                 | `—`     | :x:                | Native input name. Inferred from `<FormField />` when not provided.    |
-| `disabled`         | `boolean`                | `false` | :x:                | Disables all interaction.                                              |
-| `required`         | `boolean`                | `false` | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`. |
+### v-model
+
+| Name         | Type                    | Modifiers | Description                                       |
+|--------------|-------------------------|-----------|---------------------------------------------------|
+| `modelValue` | `T \| T[] \| undefined` | `-`       | Selected value. Array when `multiple` is enabled. |
+
+### Props
+
+| Prop               | Type                     | Default     | Configurable       | Description                                                            |
+|--------------------|--------------------------|-------------|--------------------|------------------------------------------------------------------------|
+| `color`            | `SelectColor`            | `undefined` | :white_check_mark: | Color variant.                                                         |
+| `size`             | `SelectSize`             | `'md'`      | :white_check_mark: | Size.                                                                  |
+| `variant`          | `SelectVariant`          | `undefined` | :white_check_mark: | Visual style variant. `'bordered'` or `'ghost'`.                       |
+| `options`          | `SelectOption[]`         | `undefined` | :x:                | List of options to display.                                            |
+| `equals`           | `keyof T \| EqualsArgFn` | `undefined` | :x:                | Key or function used for value equality comparison.                    |
+| `multiple`         | `boolean`                | `false`     | :x:                | Enables multiple selection. Model becomes an array.                    |
+| `clearable`        | `boolean`                | `false`     | :x:                | Shows a clear button when a value is selected (single mode).           |
+| `counterFormatter` | `SelectCounterFormatter` | `undefined` | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.        |
+| `placeholder`      | `string`                 | `undefined` | :x:                | Text shown when no value is selected.                                  |
+| `name`             | `string`                 | `undefined` | :x:                | Native input name. Inferred from `<FormField />` when not provided.    |
+| `disabled`         | `boolean`                | `false`     | :x:                | Disables all interaction.                                              |
+| `required`         | `boolean`                | `false`     | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`. |
 
 > The item counter is controlled via native `min` and `max` HTML attributes passed directly to the component.
 
-## Events
+### Events
+
 | Event   | Payload | Description                               |
 |---------|---------|-------------------------------------------|
-| `clear` | —       | Emitted when the clear button is clicked. |
+| `clear` | -       | Emitted when the clear button is clicked. |
 
-## Slots
+### Slots
+
 | Slot       | Scope                  | Description                                       |
 |------------|------------------------|---------------------------------------------------|
 | `option`   | `{ option, selected }` | Custom rendering for each option in the dropdown. |
 | `selected` | `{ option, remove }`   | Custom rendering for the selected value(s).       |
 
-## Exposed
+### Expose
+
 | Name     | Description                           |
 |----------|---------------------------------------|
 | `open`   | Opens the dropdown programmatically.  |

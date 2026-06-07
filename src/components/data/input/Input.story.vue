@@ -142,45 +142,54 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
 Text input component built on the DaisyUI `input` element.
 Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
 
-## defineModel
+## API
+
+### v-model
+
 | Name         | Type               | Modifiers          | Description  |
 |--------------|--------------------|--------------------|--------------|
 | `modelValue` | `string \| number` | `.number`, `.trim` | Bound value. |
 
-## Props
+### Props
 | Prop            | Type                    | Default               | Configurable       | Description                                        |
 |-----------------|-------------------------|-----------------------|--------------------|----------------------------------------------------|
-| `color`         | `InputColor`            | `—`                   | :white_check_mark: | Color variant.                                     |
+| `color`         | `InputColor`            | `undefined`           | :white_check_mark: | Color variant.                                     |
 | `size`          | `InputSize`             | `'md'`                | :white_check_mark: | Size.                                              |
-| `variant`       | `'bordered' \| 'ghost'` | `—`                   | :white_check_mark: | Visual style variant.                              |
+| `variant`       | `'bordered' \| 'ghost'` | `undefined`           | :white_check_mark: | Visual style variant.                              |
 | `counter`       | `Booleanish`            | `false`               | :white_check_mark: | Shows character counter.                           |
-| `minLength`     | `number`                | `—`                   | :white_check_mark: | Min length (counter warning + native).             |
-| `maxLength`     | `number`                | `—`                   | :white_check_mark: | Max length (counter warning + native `maxlength`). |
+| `minLength`     | `number`                | `undefined`           | :white_check_mark: | Min length (counter warning + native).             |
+| `maxLength`     | `number`                | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`). |
 | `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                    |
 | `type`          | `InputType`             | `'text'`              | :x:                | HTML input type.                                   |
-| `defaultValue`  | `string \| number`      | `—`                   | :x:                | Fallback when model is empty.                      |
-| `label`         | `string`                | `—`                   | :x:                | Inline label (standalone use).                     |
-| `hint`          | `string`                | `—`                   | :x:                | Hint text (standalone use).                        |
-| `disabled`      | `boolean`               | `—`                   | :x:                | Native disabled.                                   |
-| `required`      | `boolean`               | `—`                   | :x:                | Native required.                                   |
-| `placeholder`   | `string`                | `—`                   | :x:                | Placeholder text.                                  |
-| `pattern`       | `string`                | `—`                   | :x:                | Constraint validation pattern.                     |
-| `title`         | `string`                | `—`                   | :x:                | Pattern mismatch message.                          |
+| `defaultValue`  | `string \| number`      | `undefined`           | :x:                | Fallback when model is empty.                      |
+| `label`         | `string`                | `undefined`           | :x:                | Inline label (standalone use).                     |
+| `hint`          | `string`                | `undefined`           | :x:                | Hint text (standalone use).                        |
+| `disabled`      | `boolean`               | `undefined`           | :x:                | Native disabled.                                   |
+| `required`      | `boolean`               | `undefined`           | :x:                | Native required.                                   |
+| `placeholder`   | `string`                | `undefined`           | :x:                | Placeholder text.                                  |
+| `pattern`       | `string`                | `undefined`           | :x:                | Constraint validation pattern.                     |
+| `title`         | `string`                | `undefined`           | :x:                | Pattern mismatch message.                          |
 
-## Events
+### Events
+
 | Event    | Payload | Description                                                                          |
 |----------|---------|--------------------------------------------------------------------------------------|
 | `@input` | `Event` | Emitted on every keystroke (native input event).                                     |
 | `@blur`  | `Event` | Emitted when the input loses focus. Triggers validation when inside `<FormField />`. |
 
-## Slots
+### Slots
+
 | Slot      | Scope                   | Description                            |
 |-----------|-------------------------|----------------------------------------|
-| `label`   | —                       | Top-left inline label (standalone).    |
-| `hint`    | —                       | Bottom-left hint / error (standalone). |
+| `label`   | `-`                     | Top-left inline label (standalone).    |
+| `hint`    | `-`                     | Bottom-left hint / error (standalone). |
 | `counter` | `{ current, min, max }` | Bottom-right character count.          |
 
-## Counter cascade
+> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Note
+
+### Counter cascade
 Counter resolution order (first defined wins):
 1. `counter` prop on `<Input />` itself
 2. `counter` on `<FormField />`
