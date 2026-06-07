@@ -6,6 +6,8 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
+    "rootDir": "./src",
+    "declarationDir": "./dist",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -33,5 +35,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["vite.config.ts", "*.d.ts", "src/**/*", "src/**/*.vue", "histoire.setup.ts"]
+  "include": ["../vite.config.ts", "*.d.ts", "src/**/*", "src/**/*.vue"]
 }

@@ -48,7 +48,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['@lucide/vue', '@vuese/core', 'vue', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
+      external: ['@lucide/vue', '@vuese/core', 'vue', 'vue-router', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
       output: {
         exports: 'named',
         globals: {
@@ -57,7 +57,7 @@ export default defineConfig({
       },
     },
     rolldownOptions: {
-      external: ['@lucide/vue', '@vuese/core', 'vue', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
+      external: ['@lucide/vue', '@vuese/core', 'vue', 'vue-router', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
       output: {
         exports: 'named',
         globals: {
