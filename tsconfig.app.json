@@ -5,6 +5,9 @@
     "lib": ["DOM", "ESNext", "ESNext.Temporal"],
     "types": ["node", "vite/client"],
 
+    "declaration": true,
+    "declarationMap": true,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
