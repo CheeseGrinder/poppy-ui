@@ -102,23 +102,28 @@ Rendered as a set of `<input type="radio" />` elements styled as stars.
 Supports half-star precision and a clearable affordance.
 Works standalone with `v-model` or inside `<FormField />` for full form integration.
 
-## defineModel
+## API
+
+### v-model
+
 | Name      | Type     | Modifiers | Description                                                                                   |
 |-----------|----------|-----------|-----------------------------------------------------------------------------------------------|
-| `v-model` | `number` | —         | Current rating value (1-based). `0` means no star selected. Increments by `0.5` in half mode. |
+| `v-model` | `number` | `-`       | Current rating value (1-based). `0` means no star selected. Increments by `0.5` in half mode. |
 
-## Props
-| Prop        | Type           | Default | Configurable       | Description                                                 |
-|-------------|----------------|---------|--------------------|-------------------------------------------------------------|
-| `color`     | `RatingColor`  | `—`     | :white_check_mark: | Color applied to the star icons.                            |
-| `size`      | `RatingSize`   | `'md'`  | :white_check_mark: | Size of the stars.                                          |
-| `count`     | `number`       | `5`     | :white_check_mark: | Total number of stars.                                      |
-| `half`      | `Booleanish`   | `false` | :white_check_mark: | Enables half-star precision (0.5 increments).               |
-| `clearable` | `Booleanish`   | `true`  | :white_check_mark: | Allows clearing the rating by re-selecting the active star. |
-| `disabled`  | `boolean`      | `—`     | :x:                | Disables all interaction.                                   |
-| `required`  | `boolean`      | `—`     | :x:                | Native required. Signals `<FormField />` to display `"*"`.  |
+### Props
 
-## Events
+| Prop        | Type           | Default     | Configurable       | Description                                                 |
+|-------------|----------------|-------------|--------------------|-------------------------------------------------------------|
+| `color`     | `RatingColor`  | `undefined` | :white_check_mark: | Color applied to the star icons.                            |
+| `size`      | `RatingSize`   | `'md'`      | :white_check_mark: | Size of the stars.                                          |
+| `count`     | `number`       | `5`         | :white_check_mark: | Total number of stars.                                      |
+| `half`      | `Booleanish`   | `false`     | :white_check_mark: | Enables half-star precision (0.5 increments).               |
+| `clearable` | `Booleanish`   | `true`      | :white_check_mark: | Allows clearing the rating by re-selecting the active star. |
+| `disabled`  | `boolean`      | `undefined` | :x:                | Disables all interaction.                                   |
+| `required`  | `boolean`      | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.  |
+
+### Events
+
 | Event     | Payload  | Description                                                                            |
 |-----------|----------|----------------------------------------------------------------------------------------|
 | `@change` | `number` | Emitted when the selected star changes. Payload is the new value (`0` when cleared).   |

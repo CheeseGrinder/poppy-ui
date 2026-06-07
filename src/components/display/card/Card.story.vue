@@ -213,7 +213,12 @@ A flexible content container built on DaisyUI's `card` class system.
 Composed of four sub-components — `Card`, `CardBody`, `CardTitle`, and `CardActions` —
 that can be combined freely to build any card layout.
 
-## Card props
+## API
+
+<details>
+<summary>Card</summary>
+
+### Props
 
 | Prop        | Type          | Default     | Required | Configurable       | Description                                                |
 |-------------|---------------|-------------|----------|--------------------|------------------------------------------------------------|
@@ -224,7 +229,12 @@ that can be combined freely to build any card layout.
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.card` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## CardActions props
+</details>
+
+<details>
+<summary>CardActions</summary>
+
+### Props
 
 | Prop    | Type               | Default   | Required | Configurable       | Description                                                  |
 |---------|--------------------|-----------|----------|--------------------|--------------------------------------------------------------|
@@ -232,15 +242,23 @@ that can be combined freely to build any card layout.
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.cardActions` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## CardBody
+</details>
+
+<details>
+<summary>CardBody</summary>
 
 No props. Renders a `<div class="card-body" />` wrapper around its slot content.
 
-## CardTitle
+</details>
+
+<details>
+<summary>CardTitle</summary>
 
 No props. Renders an `<h2 class="card-title" />` around its slot content.
 
-## Slots
+</details>
+
+### Slots
 
 All four components expose a single `default` slot for their content.
 

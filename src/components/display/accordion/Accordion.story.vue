@@ -361,14 +361,19 @@ A vertically stacked set of collapsible sections. Each section is controlled by 
 nested inside `Accordion`. Supports single and multiple open modes, controlled and uncontrolled usage,
 animated transitions, and a customisable icon.
 
-## Accordion props
+## API
+
+<details>
+<summary>Accordion</summary>
+
+### Props
 
 | Prop          | Type                   | Default     | Required | Configurable | Description                                                                                    |
 |---------------|------------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------|
 | `multiple`    | `boolean`              | `false`     | :x:      | :x:          | When `true`, multiple items can be open at the same time.                                      |
 | `defaultOpen` | `string` \| `string[]` | `undefined` | :x:      | :x:          | Item name(s) open on first render. Accepts a string in single mode, an array in multiple mode. |
 
-## Accordion events
+### Events
 
 | Event     | Payload                                   | Description                                                       |
 |-----------|-------------------------------------------|-------------------------------------------------------------------|
@@ -377,7 +382,7 @@ animated transitions, and a customisable icon.
 | `@close`  | `string` \| `string[]`                    | Emitted when an item closes. Payload is inferred from `multiple`. |
 | `@toggle` | `string` \| `string[]`, `isOpen: boolean` | Emitted on every toggle with the name and new state.              |
 
-## Accordion exposed
+### Expose
 
 | Method           | Signature                   | Description                                           |
 |------------------|-----------------------------|------------------------------------------------------ |
@@ -388,24 +393,37 @@ animated transitions, and a customisable icon.
 | `openAll(names)` | `(names: string[]) => void` | Opens all given items. Only works in `multiple` mode. |
 | `closeAll()`     | `() => void`                | Closes all items.                                     |
 
-## AccordionItem props
+</details>
 
-| Prop   | Type                | Default   | Required           | Configurable       | Description                                                                    |
-|--------|---------------------|-----------|--------------------|--------------------|--------------------------------------------------------------------------------|
-| `name` | `string`            | —         | :white_check_mark: | :x:                | Unique identifier within the parent `Accordion`. Used to track open state.     |
-| `icon` | `AccordionItemIcon` | `'arrow'` | :x:                | :white_check_mark: | Icon shown in the header. `'arrow'` rotates on open, `'plus'` becomes a cross. |
+<details>
+<summary>AccordionItem</summary>
+
+### Props
+
+| Prop   | Type                | Default     | Required           | Configurable       | Description                                                                    |
+|--------|---------------------|-------------|--------------------|--------------------|--------------------------------------------------------------------------------|
+| `name` | `string`            | `undefined` | :white_check_mark: | :x:                | Unique identifier within the parent `Accordion`. Used to track open state.     |
+| `icon` | `AccordionItemIcon` | `'arrow'`   | :x:                | :white_check_mark: | Icon shown in the header. `'arrow'` rotates on open, `'plus'` becomes a cross. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.accordionItem` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## AccordionItem events
+### Events
 
 | Event     | Payload          | Description                           |
 |-----------|------------------|---------------------------------------|
-| `@open`   | —                | Emitted when this item opens.         |
-| `@close`  | —                | Emitted when this item closes.        |
+| `@open`   | undefined        | Emitted when this item opens.         |
+| `@close`  | undefined        | Emitted when this item closes.        |
 | `@toggle` | `isOpen: boolean`| Emitted on toggle with the new state. |
 
-## AccordionItem exposed
+### Slots
+
+| Slot      | Bindings              | Description                                                                       |
+|-----------|-----------------------|-----------------------------------------------------------------------------------|
+| `title`   | `{ isOpen: boolean }` | Header content. Rendered inside the clickable trigger area.                       |
+| `icon`    | `{ isOpen: boolean }` | Overrides the default icon. Use `isOpen` to render a custom open/close indicator. |
+| `default` | `{ isOpen: boolean }` | Content revealed when the item is open.                                           |
+
+### Expose
 
 | Member     | Type         | Description                       |
 |------------|------------- |-----------------------------------|
@@ -414,13 +432,7 @@ animated transitions, and a customisable icon.
 | `toggle()` | `() => void` | Toggles this item.                |
 | `isOpen`   | `boolean`    | Reactive open state of this item. |
 
-## AccordionItem slots
-
-| Slot      | Bindings              | Description                                                                       |
-|-----------|-----------------------|-----------------------------------------------------------------------------------|
-| `title`   | `{ isOpen: boolean }` | Header content. Rendered inside the clickable trigger area.                       |
-| `icon`    | `{ isOpen: boolean }` | Overrides the default icon. Use `isOpen` to render a custom open/close indicator. |
-| `default` | `{ isOpen: boolean }` | Content revealed when the item is open.                                           |
+</details>
 
 ## Usage
 

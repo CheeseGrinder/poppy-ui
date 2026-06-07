@@ -178,7 +178,41 @@ const formData = ref<Record<string, unknown>>({
 ## Description
 A custom slider component that allows users to select a value or range of values within a specified range. Based on the Range component with additional features like track inversion, thumb swapping control, and value scaling.
 
-## Features
+## API
+
+### v-model
+
+| Name         | Type                         | Description                                                                        |
+|--------------|------------------------------|------------------------------------------------------------------------------------|
+| `modelValue` | `number \| [number, number]` | Single value, or `[low, high]` tuple in range mode. Values are always kept sorted. |
+
+### Props
+
+| Prop          | Type          | Default     | Description                                           |
+|---------------|---------------|-------------|-------------------------------------------------------|
+| `color`       | `SliderColor` | `undefined` | Color of the track fill and thumb border.             |
+| `size`        | `SliderSize`  | `'md'`      | Size of the slider (track height and thumb diameter). |
+| `min`         | `number`      | `0`         | Minimum value.                                        |
+| `max`         | `number`      | `100`       | Maximum value.                                        |
+| `step`        | `number`      | `1`         | Step increment.                                       |
+| `track`       | `SliderTrack` | `'normal'`  | Track display mode.                                   |
+| `range`       | `boolean`     | `false`     | Enables double thumb mode.                            |
+| `disableSwap` | `boolean`     | `false`     | Prevents thumbs from crossing/swapping.               |
+| `scale`       | `SliderScale` | `undefined` | Function to transform mechanical to business values.  |
+| `disabled`    | `boolean`     | `false`     | Disables all interaction.                             |
+| `required`    | `boolean`     | `undefined` | Native required.                                      |
+| `ariaLabel`   | `string`      | `undefined` | Accessible label for the slider.                      |
+
+### Events
+
+| Event                | Payload                      | Description                                                |
+|----------------------|------------------------------|------------------------------------------------------------|
+| `@input`             | `number \| [number, number]` | Emitted on every value change during interaction.          |
+| `@change`            | `number \| [number, number]` | Emitted when interaction ends (mouse up, touch end, blur). |
+
+## Note
+
+### Features
 - **Single or Range Mode**: Support for single value selection or dual-thumb range selection
 - **Track Modes**: Normal (selected area), Inverted (unselected area), or none
 - **Thumb Swapping**: Configurable behavior when thumbs cross (allow swap or prevent)
@@ -187,48 +221,22 @@ A custom slider component that allows users to select a value or range of values
 - **Accessibility**: ARIA compliant with proper roles, states, and labels
 - **Form Integration**: Works seamlessly with FormField
 
-## defineModel
-| Name         | Type                         | Description                                                                        |
-|--------------|------------------------------|------------------------------------------------------------------------------------|
-| `modelValue` | `number \| [number, number]` | Single value, or `[low, high]` tuple in range mode. Values are always kept sorted. |
-
-## Props
-| Prop          | Type                              | Default      | Description                                         |
-|---------------|-----------------------------------|--------------|-----------------------------------------------------|
-| `color`       | `SliderColor`                     | `—`        | Color of the track fill and thumb border.             |
-| `size`        | `SliderSize`                      | `'md'`     | Size of the slider (track height and thumb diameter). |
-| `min`         | `number`                          | `0`        | Minimum value.                                        |
-| `max`         | `number`                          | `100`      | Maximum value.                                        |
-| `step`        | `number`                          | `1`        | Step increment.                                       |
-| `track`       | `'normal' \| 'inverted' \| false` | `'normal'` | Track display mode.                                   |
-| `range`       | `boolean`                         | `false`    | Enables double thumb mode.                            |
-| `disableSwap` | `boolean`                         | `false`    | Prevents thumbs from crossing/swapping.               |
-| `scale`       | `(value: number) => number`       | `—`        | Function to transform mechanical to business values.  |
-| `disabled`    | `boolean`                         | `false`    | Disables all interaction.                             |
-| `required`    | `boolean`                         | `—`        | Native required.                                      |
-| `ariaLabel`   | `string`                          | `—`        | Accessible label for the slider.                      |
-
-## Events
-| Event                | Payload                      | Description                                                |
-|----------------------|------------------------------|------------------------------------------------------------|
-| `@update:modelValue` | `number \| [number, number]` | Emitted when value changes (v-model compatible).           |
-| `@input`             | `number \| [number, number]` | Emitted on every value change during interaction.          |
-| `@change`            | `number \| [number, number]` | Emitted when interaction ends (mouse up, touch end, blur). |
-
-## Track Modes
+### Track Modes
 | Mode       | Behavior                                                                 |
 |------------|--------------------------------------------------------------------------|
 | `normal`   | Track fills between min and thumb (or between both thumbs in range mode) |
 | `inverted` | Track fills the unselected area                                          |
 | `false`    | No track is displayed                                                    |
 
-## Swap Behavior
+### Swap Behavior
+
 | disableSwap       | Behavior                                                                                                                    |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `false` (default) | Thumbs can cross and swap roles - the left thumb becomes the right one and vice versa. The swap is transparent to the user. |
 | `true`            | Thumbs cannot cross - they are clamped to prevent crossing.                                                                 |
 
-## Scale Function
+### Scale Function
+
 The scale function transforms mechanical values (in min-max range) to business values.
 The mechanical values are used for positioning, while the scaled values are emitted and displayed.
 

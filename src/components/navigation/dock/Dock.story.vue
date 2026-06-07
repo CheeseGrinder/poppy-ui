@@ -90,7 +90,7 @@ Use `DockItem` for each navigation element.
 ## DockItem Props
 | Prop    | Type               | Default     | Required           | Configurable | Description                                           |
 |---------|--------------------|-------------|--------------------|--------------|-------------------------------------------------------|
-| `icon`  | `Component`        | —           | :white_check_mark: | :x:          | Icon component (e.g. Lucide icon)                     |
+| `icon`  | `Component`        | `undefined` | :white_check_mark: | :x:          | Icon component (e.g. Lucide icon)                     |
 | `label` | `string`           | `undefined` | :x:                | :x:          | Text label displayed below the icon                   |
 | `to`    | `RouteLocationRaw` | `undefined` | :x:                | :x:          | Vue Router location. Absent = renders as `<button />` |
 

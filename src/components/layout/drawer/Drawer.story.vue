@@ -237,10 +237,10 @@ Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-
 
 ## Events
 
-| Event   | Payload | Description                          |
-|---------|---------|--------------------------------------|
-| `@present` | —       | Emitted when the drawer opens.       |
-| `@close` | —       | Emitted when the drawer closes.      |
+| Event      | Payload | Description                     |
+|------------|---------|---------------------------------|
+| `@present` | `-`     | Emitted when the drawer opens.  |
+| `@close`   | `-`     | Emitted when the drawer closes. |
 
 ## Slots
 

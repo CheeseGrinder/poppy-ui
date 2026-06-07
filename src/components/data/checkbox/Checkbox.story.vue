@@ -99,34 +99,41 @@ const formData = ref<Record<string, unknown>>({ agree: false })
 # Checkbox
 
 ## Description
+
 Checkbox component built on the DaisyUI `checkbox` element.
 Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
 
-## defineModel
+## API
+
+### v-model
+
 | Name      | Type      | Modifiers | Description          |
 |-----------|-----------|-----------|----------------------|
-| `v-model` | `boolean` | —         | Bound checked state. |
+| `v-model` | `boolean` | `-`       | Bound checked state. |
 
-## Props
-| Prop            | Type            | Default | Configurable       | Description                                                |
-|-----------------|-----------------|---------|--------------------|------------------------------------------------------------|
-| `color`         | `CheckboxColor` | `—`     | :white_check_mark: | Color variant.                                             |
-| `size`          | `CheckboxSize`  | `'md'`  | :white_check_mark: | Size.                                                      |
-| `indeterminate` | `Booleanish`    | `false` | :x:                | Renders the indeterminate visual state.                    |
-| `description`   | `string`        | `—`     | :x:                | Secondary text displayed next to the checkbox.             |
-| `disabled`      | `boolean`       | `—`     | :x:                | Native disabled.                                           |
-| `required`      | `boolean`       | `—`     | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+### Props
 
-## Events
+| Prop            | Type            | Default     | Configurable       | Description                                                |
+|-----------------|-----------------|-------------|--------------------|------------------------------------------------------------|
+| `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                             |
+| `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
+| `indeterminate` | `Booleanish`    | `false`     | :x:                | Renders the indeterminate visual state.                    |
+| `description`   | `string`        | `undefined` | :x:                | Secondary text displayed next to the checkbox.             |
+| `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                           |
+| `required`      | `boolean`       | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+
+### Events
+
 | Event     | Payload | Description                                                                             |
 |-----------|---------|-----------------------------------------------------------------------------------------|
 | `@change` | `Event` | Emitted when the checked state changes (native change event).                           |
 | `@blur`   | `Event` | Emitted when the checkbox loses focus. Triggers validation when inside `<FormField />`. |
 
-## Slots
-| Slot          | Scope | Description                                    |
-|---------------|-------|------------------------------------------------|
-| `description` | —     | Secondary text displayed next to the checkbox. |
+### Slots
+
+| Slot          | Scope     | Description                                    |
+|---------------|-----------|------------------------------------------------|
+| `description` | `-`       | Secondary text displayed next to the checkbox. |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

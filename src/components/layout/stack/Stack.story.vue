@@ -138,9 +138,9 @@ Use it to group elements that should appear connected.
 
 ## Props
 
-| Prop       | Type            | Default     | Required | Configurable       | Description                                                |
-|------------|-----------------|-------------|----------|--------------------|------------------------------------------------------------|
-| `direction`| `StackDirection`| `undefined` | :x:      | :white_check_mark: | Layout direction: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+| Prop       | Type             | Default     | Required | Configurable       | Description                                                |
+|------------|------------------|-------------|----------|--------------------|------------------------------------------------------------|
+| `direction`| `StackDirection` | `undefined` | :x:      | :white_check_mark: | Layout direction: `'start'`, `'end'`, `'top'`, `'bottom'`. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.stack` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

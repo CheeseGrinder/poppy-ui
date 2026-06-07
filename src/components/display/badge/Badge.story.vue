@@ -121,7 +121,9 @@ const state = reactive<BadgeProps>({
 A small inline label used to highlight status, categories, counts, or metadata.
 Built on DaisyUI's `badge` class system with support for colors, variants, and sizes.
 
-## Props
+## API
+
+### Props
 
 | Prop      | Type           | Default     | Required | Configurable       | Description                                             |
 |-----------|----------------|-------------|----------|--------------------|-------------------------------------------------------- |
@@ -131,8 +133,7 @@ Built on DaisyUI's `badge` class system with support for colors, variants, and s
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.badge` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Slots
-
+### Slots
 | Slot      | Description                       |
 |-----------|-----------------------------------|
 | `default` | Text or content inside the badge. |

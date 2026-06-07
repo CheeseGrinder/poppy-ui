@@ -71,7 +71,7 @@ Le dernier item est automatiquement traité comme la page courante (non cliquabl
 ## Props
 | Prop       | Type               | Default     | Required           | Configurable       | Description                                     |
 |------------|--------------------|-------------|--------------------|--------------------|-------------------------------------------------|
-| `items`    | `BreadcrumbItem[]` | —           | :white_check_mark: | :x:                | Liste des items du fil d'Ariane                 |
+| `items`    | `BreadcrumbItem[]` | `undefined` | :white_check_mark: | :x:                | Liste des items du fil d'Ariane                 |
 | `maxWidth` | `string`           | `undefined` | :x:                | :white_check_mark: | Classe Tailwind de largeur max (ex: `max-w-xs`) |
 
 ## Type `BreadcrumbItem`

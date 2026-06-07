@@ -186,7 +186,9 @@ A contextual feedback component used to display informational, success, warning,
 Built on DaisyUI's `alert` class system with support for colors, variants, and layout directions.
 Supports an optional icon via the `icon` slot.
 
-## Props
+## API
+
+### Props
 
 | Prop        | Type             | Default     | Required | Configurable       | Description                                                           |
 |-------------|------------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
@@ -196,7 +198,7 @@ Supports an optional icon via the `icon` slot.
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.alert` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Slots
+### Slots
 
 | Slot      | Description                                                  |
 |-----------|--------------------------------------------------------------|

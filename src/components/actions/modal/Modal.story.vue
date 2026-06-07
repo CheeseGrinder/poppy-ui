@@ -193,31 +193,38 @@ A dialog component built on the native `dialog` element with `showModal()` / `cl
 Content is lazily rendered — it only mounts after the modal has been opened at least once, unless `loadContentWhenClose` is set.
 Controlled via `v-model` or programmatically through exposed methods.
 
-## Props
+## API
+
+### v-model
+
+| Prop         | Type      | Description              |
+|--------------|-----------|--------------------------|
+| `modelValue` | `boolean` | Open state of the modal. |
+
+### Props
 
 | Prop                   | Type             | Default     | Required | Configurable       | Description                                                                                                      |
 |------------------------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------|
-| `modelValue`           | `boolean`        | `false`     | :x:      | :x:                | Open state of the modal. Use `v-model` to bind reactively.                                                       |
 | `placement`            | `ModalPlacement` | `undefined` | :x:      | :white_check_mark: | Position of the modal box on screen. `top` / `middle` / `bottom` / `start` / `end`.                              |
 | `closeOnBackdrop`      | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, clicking the backdrop closes the modal.                                                             |
 | `loadContentWhenClose` | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.modal` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Events
+### Events
 
-| Event    | Payload | Description                                           |
-|----------|---------|-------------------------------------------------------|
-| `@close` | —       | Emitted when the modal closes (native `close` event). |
+| Event    | Payload   | Description                                           |
+|----------|-----------|-------------------------------------------------------|
+| `@close` | `-`       | Emitted when the modal closes (native `close` event). |
 
-## Slots
+### Slots
 
 | Slot      | Description                                                                                |
 |-----------|--------------------------------------------------------------------------------------------|
 | `default` | Main content of the modal box.                                                             |
 | `actions` | Rendered inside a `modal-action` wrapper at the bottom of the box. Only mounted when used. |
 
-## Exposed
+### Expose
 
 | Method      | Signature    | Description       |
 |-------------|--------------|-------------------|
@@ -235,7 +242,9 @@ Controlled via `v-model` or programmatically through exposed methods.
 <Button @click="modalRef?.present()">Open</Button>
 ```
 
-## Content rendering
+## Note
+
+### Content rendering
 
 By default the modal uses **lazy + persistent** rendering:
 - Content is **not rendered** until the modal is opened for the first time.

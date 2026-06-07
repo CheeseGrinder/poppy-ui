@@ -94,6 +94,7 @@ function onFormErrorSubmit() {
 # Form
 
 ## Description
+
 The `Form` component is the root of the form system.
 It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`.
 It owns the form data object, the errors record, and all field state.
@@ -101,29 +102,35 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 `novalidate` is always set on the `<form />` element to suppress native browser popups. Validation is handled programmatically via the HTML5 Constraint Validation API.
 
-## defineModel
+## API
+
+### v-model
+
 | Name         | Type                         | Modifiers | Description                      |
 |--------------|------------------------------|-----------|----------------------------------|
-| `modelValue` | `{ [key: string]: unknown }` | —         | The form data object (required). |
+| `modelValue` | `{ [key: string]: unknown }` | `-`       | The form data object (required). |
 
-## Props
+### Props
+
 | Prop            | Type                   | Default               | Configurable | Description                                     |
 |-----------------|------------------------|-----------------------|--------------|-------------------------------------------------|
 | `counter`       | `Booleanish`           | `false`               | :x:          | Propagates counter display to all child inputs. |
 | `counterFormat` | `string \| Function`   | `'{current} / {max}'` | :x:          | Default counter format for all child inputs.    |
-| `serializer`    | `FormSerializer`       | `—`                   | :x:          | Transforms data before the `submit` event.      |
+| `serializer`    | `FormSerializer`       | `undefined`           | :x:          | Transforms data before the `submit` event.      |
 
-## Emits
+### Events
+
 | Event    | Payload                      | Description                                          |
 |----------|------------------------------|------------------------------------------------------|
 | `submit` | `{ [key: string]: unknown }` | Fired after successful validation and serialization. |
-| `reset`  | —                            | Fired when the form is reset.                        |
+| `reset`  | `undefined`                  | Fired when the form is reset.                        |
 
-## Slots
-| Slot      | Scope                            | Description                                        |
-|-----------|----------------------------------|----------------------------------------------------|
-| `default` | —                                | Form content — FormField components, buttons, etc. |
-| `error`   | `{ error: string \| undefined }` | Global error rendering.                            |
+### Slots
+
+| Slot      | Scope                            | Description                                                |
+|-----------|----------------------------------|------------------------------------------------------------|
+| `default` | `-`                              | Form content undefined FormField components, buttons, etc. |
+| `error`   | `{ error: string \| undefined }` | Global error rendering.                                    |
 
 ## Usage
 ```vue

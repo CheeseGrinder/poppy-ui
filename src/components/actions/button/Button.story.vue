@@ -111,7 +111,9 @@ A versatile button component built on top of DaisyUI's `btn` class system.
 Supports all standard HTML button attributes, Vue Router navigation via `to`, configurable colors, variants, sizes and shapes.
 When `to` is provided, the component renders as a `RouterLink` automatically.
 
-## Props
+## API
+
+### Props
 
 | Prop       | Type                              | Default     | Required | Configurable       | Description                                                                                                       |
 |------------|-----------------------------------|-------------|----------|--------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -132,20 +134,22 @@ When `to` is provided, the component renders as a `RouterLink` automatically.
 > Props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 
-## Events
+### Events
 
 | Event    | Payload      | Description              |
 |----------|--------------|--------------------------|
 | `@click` | `MouseEvent` | Emitted on button click. |
 
-## Slots
+### Slots
 
-| Slot       | Description                                                                                                        |
-|------------|--------------------------------------------------------------------------------------------------------------------|
-| `default`  | Main content of the button (text, icon, etc.).                                                                     |
-| `loading`  | Overrides the default spinner shown when `loading` is `true`. Default: `<span class="loading loading-spinner" />`. |
+| Slot      | Description                                                                                                        |
+|-----------|--------------------------------------------------------------------------------------------------------------------|
+| `default` | Main content of the button (text, icon, etc.).                                                                     |
+| `loading` | Overrides the default spinner shown when `loading` is `true`. Default: `<span class="loading loading-spinner" />`. |
 
-## Automatic behavior
+## Note
+
+### Automatic behavior
 
 - **RouterLink rendering** — When `to` is provided, the root element switches from `<button />` to `<RouterLink />` automatically.
 - **Accessibility** — When `behavior="disabled"` or `disabled=true`, the component automatically adds `disabled`, `aria-disabled="true"` and `tabIndex="-1"`.
