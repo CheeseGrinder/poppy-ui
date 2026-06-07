@@ -2,7 +2,7 @@
 import type { CounterFn } from '@/types/utils.type'
 import { isTrue } from '@/utils/is-true'
 import { getByPath, setByPath } from '@/utils/path'
-import { provide, shallowReactive, shallowRef, watch } from 'vue'
+import { provide, shallowReactive, shallowRef, unref, watch } from 'vue'
 import type { FormContext } from './form.context'
 import { FORM_CONTEXT_KEY } from './form.context'
 import type { FormProps } from './form.props'
@@ -30,7 +30,7 @@ const emit = defineEmits<{
 
 // Internal state
 
-const initialData = structuredClone({ ...model.value })
+const initialData = structuredClone({ ...unref(model.value ?? {}) })
 
 // Shallow reactive copy — mutations here don't affect the model until emitted
 const data = shallowReactive<Record<string, unknown>>({ ...model.value })
