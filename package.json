@@ -14,10 +14,10 @@
       "import": "./dist/public.es.js",
       "require": "./dist/public.umd.js"
     },
-    "./components/*": {
-      "types": "./dist/components/*",
-      "import": "./dist/components/*",
-      "require": "./dist/components/*"
+    "./components": {
+      "types": "./dist/components/public.d.ts",
+      "import": "./dist/components/public.es.js",
+      "require": "./dist/components/public.umd.js"
     },
     "./components/actions": {
       "types": "./dist/components/actions/public.d.ts",
