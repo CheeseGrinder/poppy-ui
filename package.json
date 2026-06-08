@@ -3,63 +3,69 @@
   "version": "0.5.6",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "./dist/public.umd.js",
   "module": "./dist/public.es.js",
   "types": "./dist/public.d.ts",
   "exports": {
     ".": {
+      "source": "./src/public.ts",
       "types": "./dist/public.d.ts",
       "import": "./dist/public.es.js",
       "require": "./dist/public.umd.js"
     },
-    "./components/*": {
-      "types": "./dist/components/*",
-      "import": "./dist/components/*",
-      "require": "./dist/components/*"
-    },
-    "./components/app": {
-      "types": "./dist/components/app/public.d.ts",
-      "import": "./dist/components/app/public.es.js",
-      "require": "./dist/components/app/public.umd.js"
-    },
     "./components/actions": {
+      "source": "./src/components/actions/public.ts",
       "types": "./dist/components/actions/public.d.ts",
       "import": "./dist/components/actions/public.es.js",
       "require": "./dist/components/actions/public.umd.js"
     },
+    "./components/app": {
+      "source": "./src/components/app/public.ts",
+      "types": "./dist/components/app/public.d.ts",
+      "import": "./dist/components/app/public.es.js",
+      "require": "./dist/components/app/public.umd.js"
+    },
     "./components/data": {
+      "source": "./src/components/data/public.ts",
       "types": "./dist/components/data/public.d.ts",
       "import": "./dist/components/data/public.es.js",
       "require": "./dist/components/data/public.umd.js"
     },
     "./components/display": {
+      "source": "./src/components/display/public.ts",
       "types": "./dist/components/display/public.d.ts",
       "import": "./dist/components/display/public.es.js",
       "require": "./dist/components/display/public.umd.js"
     },
     "./components/feedback": {
+      "source": "./src/components/feedback/public.ts",
       "types": "./dist/components/feedback/public.d.ts",
       "import": "./dist/components/feedback/public.es.js",
       "require": "./dist/components/feedback/public.umd.js"
     },
     "./components/layout": {
+      "source": "./src/components/layout/public.ts",
       "types": "./dist/components/layout/public.d.ts",
       "import": "./dist/components/layout/public.es.js",
       "require": "./dist/components/layout/public.umd.js"
     },
     "./components/navigation": {
+      "source": "./src/components/navigation/public.ts",
       "types": "./dist/components/navigation/public.d.ts",
       "import": "./dist/components/navigation/public.es.js",
       "require": "./dist/components/navigation/public.umd.js"
     },
     "./composables": {
+      "source": "./src/composables/public.ts",
       "types": "./dist/composables/public.d.ts",
       "import": "./dist/composables/public.es.js",
       "require": "./dist/composables/public.umd.js"
     },
     "./types": {
+      "source": "./src/types/public.ts",
       "types": "./dist/types/public.d.ts",
       "import": "./dist/types/public.es.js",
       "require": "./dist/types/public.umd.js"
@@ -76,7 +82,7 @@
     "format:check": "biome format",
     "lint": "biome lint --fix",
     "lint:check": "biome lint",
-    "typecheck": "vue-tsc --build --force"
+    "typecheck": "vue-tsc --build --force --noEmit"
   },
   "dependencies": {
     "@lucide/vue": "^1.17.0",
