@@ -117,7 +117,7 @@ jobs:
         run: npm publish --access public
 
       - name: Commit version update
-        if: steps.npm-publish.outcome == 'success'
+        if: steps.npm-publish.outcome == 'success' && (inputs.pre-release == '' || inputs.pre-release == 'rc')
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
@@ -127,11 +127,12 @@ jobs:
           git push origin v${{ steps.next-version.outputs.result }}
 
       - name: Create GitHub Release
-        if: steps.npm-publish.outcome == 'success'
+        if: steps.npm-publish.outcome == 'success' && (inputs.pre-release == '' || inputs.pre-release == 'rc')
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.next-version.outputs.result }}
           body: ${{ steps.changelog.outputs.result }}
           generate_release_notes: false
+          prerelease: ${{ inputs.pre-release == 'rc' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
