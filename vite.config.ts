@@ -29,6 +29,7 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: true,
     lib: {
       name: 'PoppyUI',
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'es.js' : 'umd.js'}`,
@@ -48,7 +49,17 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['@lucide/vue', '@vuese/core', 'vue', 'vue-router', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
+      external: [
+        '@lucide/vue',
+        '@vueuse/core',
+        'vue',
+        'vue-i18n',
+        'vue-router',
+        'tailwindcss',
+        'daisyui',
+        'node:path',
+        'node:url',
+      ],
       output: {
         exports: 'named',
         globals: {
@@ -57,7 +68,17 @@ export default defineConfig({
       },
     },
     rolldownOptions: {
-      external: ['@lucide/vue', '@vuese/core', 'vue', 'vue-router', 'tailwindcss', 'daisyui', 'node:path', 'node:url'],
+      external: [
+        '@lucide/vue',
+        '@vueuse/core',
+        'vue',
+        'vue-i18n',
+        'vue-router',
+        'tailwindcss',
+        'daisyui',
+        'node:path',
+        'node:url',
+      ],
       output: {
         exports: 'named',
         globals: {

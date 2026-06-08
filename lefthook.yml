@@ -38,7 +38,7 @@ pre-commit:
         - "*.json"
 
     - name: vue-tsc
-      run: vue-tsc --noEmit || true # TODO: check why its does not work
+      run: bun typecheck
       glob:
         - "*.ts"
         - "*.vue"

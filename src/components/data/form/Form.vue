@@ -30,7 +30,7 @@ const emit = defineEmits<{
 
 // Internal state
 
-const initialData = structuredClone({ ...unref(model.value ?? {}) })
+const initialData = JSON.parse(JSON.stringify(unref(model.value) ?? {}))
 
 // Shallow reactive copy — mutations here don't affect the model until emitted
 const data = shallowReactive<Record<string, unknown>>({ ...model.value })
