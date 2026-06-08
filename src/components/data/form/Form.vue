@@ -203,7 +203,7 @@ function handleSubmit(): void {
   const isValid = validate()
   if (!isValid) return
 
-  const serialized = props.serializer ? props.serializer({ ...data }) : { ...data }
+  const serialized = props.serializer?.({ ...data }) ?? { ...data }
   emit('submit', serialized)
 }
 </script>

@@ -175,6 +175,7 @@ defineExpose({
 <template>
   <div v-bind="attrs">
     <button
+      class="dropdown-trigger"
       :class="config.triggerClass"
       @click="onTriggerClick"
       @mouseenter="onHover"
@@ -208,7 +209,7 @@ defineExpose({
 </template>
 
 <style scoped>
-button {
+.dropdown-trigger {
   anchor-name: v-bind(anchorName);
 }
 
