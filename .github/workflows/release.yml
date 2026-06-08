@@ -153,7 +153,13 @@ jobs:
 
       - name: Publish to NPM
         id: npm-publish
-        run: npm publish --access public
+        run: npm publish --access public --tag ${{ inputs.pre_release == 'none' && 'latest' || inputs.pre_release }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Add next tag
+        if: inputs.pre_release != 'none'
+        run: npm dist-tag add $(node -p "require('./package.json').name")@${{ needs.version.outputs.next-version }} next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

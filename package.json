@@ -3,7 +3,7 @@
   "version": "0.5.6",
   "type": "module",
   "repository": {
-    "url": "https://github.com/CheeseGrinder/poppy-ui"
+    "url": "git+https://github.com/CheeseGrinder/poppy-ui.git"
   },
   "files": [
     "dist",
