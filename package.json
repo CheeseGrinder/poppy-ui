@@ -9,6 +9,10 @@
     "dist",
     "src"
   ],
+  "sideEffects": [
+    "*.css",
+    "dist/style.css"
+  ],
   "main": "./dist/public.umd.js",
   "module": "./dist/public.es.js",
   "types": "./dist/public.d.ts",
@@ -19,6 +23,7 @@
       "import": "./dist/public.es.js",
       "require": "./dist/public.umd.js"
     },
+    "./style.css": "./dist/app.css",
     "./components/actions": {
       "source": "./src/components/actions/public.ts",
       "types": "./dist/components/actions/public.d.ts",

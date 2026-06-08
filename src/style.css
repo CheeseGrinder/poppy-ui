@@ -1,6 +1,0 @@
-@import "tailwindcss";
-
-@plugin "daisyui" {
-  logs: false;
-  themes: all;
-}

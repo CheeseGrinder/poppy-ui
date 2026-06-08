@@ -1,5 +1,7 @@
 <script lang="ts">
 import Button from '@/components/actions/button/Button.vue'
+import MenuItem from '@/components/navigation/menu/MenuItem.vue'
+import { Menu } from '@/components/navigation/public.ts'
 import { logEvent } from 'histoire/client'
 import { reactive, useTemplateRef } from 'vue'
 import Dropdown from './Dropdown.vue'
@@ -39,95 +41,99 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
               :trigger-action="state.triggerAction"
               :debounce="state.debounce"
               :open="state.open"
+              trigger-class="btn btn-primary"
               @show="logEvent('show', $event)"
               @hide="logEvent('hide', $event)"
             >
               <template #trigger>
                 Open menu
               </template>
-              <ul>
-                <li><a>Profile</a></li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-              </ul>
+              <Menu class="bg-base-100">
+                <MenuItem>Profil</MenuItem>
+                <MenuItem>Settings</MenuItem>
+                <MenuItem>Logout</MenuItem>
+              </Menu>
             </Dropdown>
           </textarea>
         </template>
 
         <Dropdown
           v-bind="state"
+          trigger-class="btn btn-primary"
           @show="logEvent('show', $event)"
           @hide="logEvent('hide', $event)"
         >
-          <template #trigger>
-            Open menu
-          </template>
-          <ul>
-            <li><a>Profile</a></li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
-          </ul>
+          <template #trigger>Open menu</template>
+          <Menu class="bg-base-100">
+            <MenuItem>Profil</MenuItem>
+            <MenuItem>Settings</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </Menu>
         </Dropdown>
       </Variant>
 
       <Variant title="Sides">
-        <div class="dropdown-story dropdown-story--sides">
-          <Dropdown side="bottom">
-            <template #trigger><Button>bottom</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-            </ul>
+        <div class="dropdown-story dropdown-story--sides pt-36 justify-center">
+          <Dropdown side="bottom" trigger-class="btn btn-primary">
+            <template #trigger>bottom</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
-          <Dropdown side="top">
-            <template #trigger><Button>top</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-            </ul>
+          <Dropdown side="top" trigger-class="btn btn-primary">
+            <template #trigger>top</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
-          <Dropdown side="left">
-            <template #trigger><Button>left</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-            </ul>
+          <Dropdown side="left" trigger-class="btn btn-primary">
+            <template #trigger>left</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
-          <Dropdown side="right">
-            <template #trigger><Button>right</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-            </ul>
+          <Dropdown side="right" trigger-class="btn btn-primary">
+            <template #trigger>right</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
         </div>
       </Variant>
 
       <Variant title="Align">
         <div class="dropdown-story dropdown-story--align">
-          <Dropdown align="start">
-            <template #trigger><Button>start</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-              <li><a>Item C</a></li>
-            </ul>
+          <Dropdown align="start" trigger-class="btn btn-primary">
+            <template #trigger>start</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
-          <Dropdown align="center">
-            <template #trigger><Button>center</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-              <li><a>Item C</a></li>
-            </ul>
+          <Dropdown align="center" trigger-class="btn btn-primary">
+            <template #trigger>center</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
-          <Dropdown align="end">
-            <template #trigger><Button>end</Button></template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-              <li><a>Item C</a></li>
-            </ul>
+          <Dropdown align="end" trigger-class="btn btn-primary">
+            <template #trigger>end</template>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
         </div>
       </Variant>
@@ -136,32 +142,35 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
         <div class="dropdown-story dropdown-story--triggers">
           <div class="dropdown-story--trigger-item">
             <span class="dropdown-story--label">click (default)</span>
-            <Dropdown trigger-action="click">
+            <Dropdown trigger-action="click" trigger-class="btn btn-primary">
               <template #trigger>Click me</template>
-              <ul>
-                <li><a>Item A</a></li>
-                <li><a>Item B</a></li>
-              </ul>
+              <Menu class="bg-base-100">
+                <MenuItem>Item A</MenuItem>
+                <MenuItem>Item B</MenuItem>
+                <MenuItem>Item C</MenuItem>
+              </Menu>
             </Dropdown>
           </div>
           <div class="dropdown-story--trigger-item">
             <span class="dropdown-story--label">hover</span>
-            <Dropdown trigger-action="hover">
+            <Dropdown trigger-action="hover" trigger-class="btn btn-primary">
               <template #trigger>Hover me</template>
-              <ul>
-                <li><a>Item A</a></li>
-                <li><a>Item B</a></li>
-              </ul>
+              <Menu class="bg-base-100">
+                <MenuItem>Item A</MenuItem>
+                <MenuItem>Item B</MenuItem>
+                <MenuItem>Item C</MenuItem>
+              </Menu>
             </Dropdown>
           </div>
           <div class="dropdown-story--trigger-item">
             <span class="dropdown-story--label">context-menu</span>
-            <Dropdown trigger-action="context-menu">
+            <Dropdown trigger-action="context-menu" trigger-class="btn btn-primary">
               <template #trigger>Right-click me</template>
-              <ul>
-                <li><a>Item A</a></li>
-                <li><a>Item B</a></li>
-              </ul>
+              <Menu class="bg-base-100">
+                <MenuItem>Item A</MenuItem>
+                <MenuItem>Item B</MenuItem>
+                <MenuItem>Item C</MenuItem>
+              </Menu>
             </Dropdown>
           </div>
         </div>
@@ -169,29 +178,32 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
 
       <Variant title="Events">
         <Dropdown
+          trigger-class="btn btn-primary"
           @show="logEvent('show', $event)"
           @hide="logEvent('hide', $event)"
         >
           <template #trigger>
             Open — watch the event log
           </template>
-          <ul>
-            <li><a>Item A</a></li>
-            <li><a>Item B</a></li>
-          </ul>
+          <Menu class="bg-base-100">
+            <MenuItem>Item A</MenuItem>
+            <MenuItem>Item B</MenuItem>
+            <MenuItem>Item C</MenuItem>
+          </Menu>
         </Dropdown>
       </Variant>
 
       <Variant title="Expose — show / hide / toggle">
         <div class="dropdown-story dropdown-story--expose">
-          <Dropdown ref="dropdown-expose">
+          <Dropdown ref="dropdown-expose" trigger-class="btn btn-primary">
             <template #trigger>
               Trigger (click)
             </template>
-            <ul>
-              <li><a>Item A</a></li>
-              <li><a>Item B</a></li>
-            </ul>
+            <Menu class="bg-base-100">
+              <MenuItem>Item A</MenuItem>
+              <MenuItem>Item B</MenuItem>
+              <MenuItem>Item C</MenuItem>
+            </Menu>
           </Dropdown>
           <div class="dropdown-story--expose-actions">
             <Button variant="outline" size="sm" @click="dropdownExposeRef?.show()">show()</Button>
@@ -200,7 +212,6 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
           </div>
         </div>
       </Variant>
-
     </template>
   </Story>
 </template>

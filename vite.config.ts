@@ -48,25 +48,6 @@ export default defineConfig({
         'types/public': fileURLToPath(new URL('./src/types/public.ts', import.meta.url)),
       },
     },
-    rollupOptions: {
-      external: [
-        '@lucide/vue',
-        '@vueuse/core',
-        'vue',
-        'vue-i18n',
-        'vue-router',
-        'tailwindcss',
-        'daisyui',
-        'node:path',
-        'node:url',
-      ],
-      output: {
-        exports: 'named',
-        globals: {
-          vue: 'Vue',
-        },
-      },
-    },
     rolldownOptions: {
       external: [
         '@lucide/vue',
@@ -83,6 +64,10 @@ export default defineConfig({
         exports: 'named',
         globals: {
           vue: 'Vue',
+        },
+        assetFileNames: assetInfo => {
+          if (assetInfo.names?.some(n => n.endsWith('.css'))) return 'style.css'
+          return '[name][extname]'
         },
       },
     },
