@@ -29,6 +29,12 @@ export type { KbdProps } from './kbd/kbd.props'
 export * from './kbd/kbd.types'
 // List
 export type { ListItemProps } from './list/list-item.props'
+// Stat
+export type { StatConfigurableProps, StatProps } from './stat/stat.props'
+export * from './stat/stat.types'
+// Stats
+export type { StatsConfigurableProps, StatsProps } from './stat/stats.props'
+export * from './stat/stats.types'
 // Status
 export type { StatusProps } from './status/status.props'
 export * from './status/status.types'
