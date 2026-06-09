@@ -246,11 +246,11 @@ Supports icons, badges, titles, static submenus, and collapsible submenus.
 
 ### Slots
 
-| Slot      | Description                              |
-|-----------|------------------------------------------|
-| `default` | Item label                               |
-| `badge`   | Optional badge displayed after the label |
-| `submenu` | Nested `MenuItem` components             |
+| Slot      | Bindings | Description                              |
+|-----------|----------|------------------------------------------|
+| `default` | -        | Item label                               |
+| `badge`   | -        | Optional badge displayed after the label |
+| `submenu` | -        | Nested `MenuItem` components             |
 
 </details>
 

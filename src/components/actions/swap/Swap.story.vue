@@ -265,11 +265,11 @@ Supports rotate and flip transition effects.
 
 ### Slots
 
-| Slot            | Description                                                     |
-|-----------------|-----------------------------------------------------------------|
-| `on`            | Visible when `v-model` is `true`.                               |
-| `off`           | Visible when `v-model` is `false`.                              |
-| `indeterminate` | Visible when `indeterminate` is `true`, overrides `on` / `off`. |
+| Slot            | Bindings | Description                                                     |
+|-----------------|----------|-----------------------------------------------------------------|
+| `on`            | -        | Visible when `v-model` is `true`.                               |
+| `off`           | -        | Visible when `v-model` is `false`.                              |
+| `indeterminate` | -        | Visible when `indeterminate` is `true`, overrides `on` / `off`. |
 
 ## Usage
 

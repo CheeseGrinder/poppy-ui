@@ -239,7 +239,7 @@ Fully customisable via the `default` slot — the default render shows `hh:mm:ss
 
 | Event  | Payload | Description                                   |
 |--------|---------|-----------------------------------------------|
-| `@end` | `-`     | Emitted once when the countdown reaches zero. |
+| `@end` | -       | Emitted once when the countdown reaches zero. |
 
 ## Slot
 

@@ -157,7 +157,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 | Name         | Type                    | Modifiers | Description                                       |
 |--------------|-------------------------|-----------|---------------------------------------------------|
-| `modelValue` | `T \| T[] \| undefined` | `-`       | Selected value. Array when `multiple` is enabled. |
+| `modelValue` | `T \| T[] \| undefined` | -         | Selected value. Array when `multiple` is enabled. |
 
 ### Props
 
@@ -186,7 +186,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot       | Scope                  | Description                                       |
+| Slot       | Bindings               | Description                                       |
 |------------|------------------------|---------------------------------------------------|
 | `option`   | `{ option, selected }` | Custom rendering for each option in the dropdown. |
 | `selected` | `{ option, remove }`   | Custom rendering for the selected value(s).       |

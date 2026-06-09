@@ -134,9 +134,9 @@ Built on DaisyUI's `badge` class system with support for colors, variants, and s
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.badge` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ### Slots
-| Slot      | Description                       |
-|-----------|-----------------------------------|
-| `default` | Text or content inside the badge. |
+| Slot      | Bindings | Description                       |
+|-----------|----------|-----------------------------------|
+| `default` | -        | Text or content inside the badge. |
 
 ## Usage
 

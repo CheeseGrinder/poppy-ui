@@ -142,10 +142,10 @@ When `to` is provided, the component renders as a `RouterLink` automatically.
 
 ### Slots
 
-| Slot      | Description                                                                                                        |
-|-----------|--------------------------------------------------------------------------------------------------------------------|
-| `default` | Main content of the button (text, icon, etc.).                                                                     |
-| `loading` | Overrides the default spinner shown when `loading` is `true`. Default: `<span class="loading loading-spinner" />`. |
+| Slot      | Bindings | Description                                                                                                        |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------|
+| `default` | -        | Main content of the button (text, icon, etc.).                                                                     |
+| `loading` | -        | Overrides the default spinner shown when `loading` is `true`. Default: `<span class="loading loading-spinner" />`. |
 
 ## Note
 

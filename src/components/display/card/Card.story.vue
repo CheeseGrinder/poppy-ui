@@ -260,7 +260,11 @@ No props. Renders an `<h2 class="card-title" />` around its slot content.
 
 ### Slots
 
-All four components expose a single `default` slot for their content.
+| Slot      | Bindings | Description                        |
+|-----------|----------|------------------------------------|
+| `default` | -        | Content of the component.          |
+
+All four components (`Card`, `CardBody`, `CardTitle`, `CardActions`) expose a single `default` slot for their content.
 
 ## Usage
 

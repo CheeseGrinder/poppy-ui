@@ -215,14 +215,14 @@ Controlled via `v-model` or programmatically through exposed methods.
 
 | Event    | Payload   | Description                                           |
 |----------|-----------|-------------------------------------------------------|
-| `@close` | `-`       | Emitted when the modal closes (native `close` event). |
+| `@close` | -         | Emitted when the modal closes (native `close` event). |
 
 ### Slots
 
-| Slot      | Description                                                                                |
-|-----------|--------------------------------------------------------------------------------------------|
-| `default` | Main content of the modal box.                                                             |
-| `actions` | Rendered inside a `modal-action` wrapper at the bottom of the box. Only mounted when used. |
+| Slot      | Bindings | Description                                                                                |
+|-----------|----------|--------------------------------------------------------------------------------------------|
+| `default` | -        | Main content of the modal box.                                                             |
+| `actions` | -        | Rendered inside a `modal-action` wrapper at the bottom of the box. Only mounted when used. |
 
 ### Expose
 

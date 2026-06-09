@@ -103,7 +103,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 | Name      | Type      | Modifiers | Description          |
 |-----------|-----------|-----------|----------------------|
-| `v-model` | `boolean` | `-`       | Bound checked state. |
+| `v-model` | `boolean` | -         | Bound checked state. |
 
 ### Props
 
@@ -124,9 +124,9 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot          | Scope | Description                                  |
-|---------------|-------|----------------------------------------------|
-| `description` | `-`   | Secondary text displayed next to the toggle. |
+| Slot          | Bindings | Description                                  |
+|---------------|----------|----------------------------------------------|
+| `description` | -        | Secondary text displayed next to the toggle. |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

@@ -108,7 +108,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 | Name      | Type     | Modifiers | Description                                                                                   |
 |-----------|----------|-----------|-----------------------------------------------------------------------------------------------|
-| `v-model` | `number` | `-`       | Current rating value (1-based). `0` means no star selected. Increments by `0.5` in half mode. |
+| `v-model` | `number` | -         | Current rating value (1-based). `0` means no star selected. Increments by `0.5` in half mode. |
 
 ### Props
 

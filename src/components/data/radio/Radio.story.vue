@@ -113,7 +113,7 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 
 | Name         | Type                          | Modifiers | Description                                             |
 |--------------|-------------------------------|-----------|---------------------------------------------------------|
-| `modelValue` | `string \| number \| boolean` | `-`       | Bound group value. Checked when equal to `props.value`. |
+| `modelValue` | `string \| number \| boolean` | -         | Bound group value. Checked when equal to `props.value`. |
 
 ### Props
 | Prop          | Type                          | Default     | Configurable       | Description                                                             |
@@ -135,9 +135,9 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 
 ### Slots
 
-| Slot          | Scope     | Description                                        |
-|---------------|-----------|----------------------------------------------------|
-| `description` | `-`       | Secondary text displayed next to the radio button. |
+| Slot          | Bindings | Description                                        |
+|---------------|----------|----------------------------------------------------|
+| `description` | -        | Secondary text displayed next to the radio button. |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

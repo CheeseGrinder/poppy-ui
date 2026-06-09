@@ -179,10 +179,10 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 
 ### Slots
 
-| Slot      | Scope                   | Description                            |
+| Slot      | Bindings                | Description                            |
 |-----------|-------------------------|----------------------------------------|
-| `label`   | undefined                       | Top-left inline label (standalone).    |
-| `hint`    | undefined                       | Bottom-left hint / error (standalone). |
+| `label`   | -                       | Top-left inline label (standalone).    |
+| `hint`    | -                       | Bottom-left hint / error (standalone). |
 | `counter` | `{ current, min, max }` | Bottom-right character count.          |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.

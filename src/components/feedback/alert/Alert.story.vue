@@ -200,10 +200,10 @@ Supports an optional icon via the `icon` slot.
 
 ### Slots
 
-| Slot      | Description                                                  |
-|-----------|--------------------------------------------------------------|
-| `icon`    | Optional icon displayed before the main content.             |
-| `default` | Main content of the alert (text, title + description, etc.). |
+| Slot      | Bindings | Description                                                  |
+|-----------|----------|--------------------------------------------------------------|
+| `icon`    | -        | Optional icon displayed before the main content.             |
+| `default` | -        | Main content of the alert (text, title + description, etc.). |
 
 ## Usage
 

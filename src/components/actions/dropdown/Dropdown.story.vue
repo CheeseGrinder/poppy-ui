@@ -284,17 +284,17 @@ Supports `click`, `hover`, and `context-menu` trigger actions, configurable plac
 
 ### Events
 
-| Event   | Payload   | Description                                          |
-|---------|-----------|------------------------------------------------------|
-| `@show` | undefined | Emitted before the dropdown content becomes visible. |
-| `@hide` | undefined | Emitted before the dropdown content is hidden.       |
+| Event   | Payload | Description                                          |
+|---------|---------|------------------------------------------------------|
+| `@show` | -       | Emitted before the dropdown content becomes visible. |
+| `@hide` | -       | Emitted before the dropdown content is hidden.       |
 
 ### Slots
 
-| Slot      | Description                                                              |
-|-----------|--------------------------------------------------------------------------|
-| `trigger` | The element that opens the dropdown. Rendered as a `<button />` wrapper. |
-| `default` | The dropdown content (menu items, panels, forms, etc.).                  |
+| Slot      | Bindings | Description                                                              |
+|-----------|----------|--------------------------------------------------------------------------|
+| `trigger` | -        | The element that opens the dropdown. Rendered as a `<button />` wrapper. |
+| `default` | -        | The dropdown content (menu items, panels, forms, etc.).                  |
 
 ### Expose
 

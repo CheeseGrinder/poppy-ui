@@ -409,11 +409,11 @@ animated transitions, and a customisable icon.
 
 ### Events
 
-| Event     | Payload          | Description                           |
-|-----------|------------------|---------------------------------------|
-| `@open`   | undefined        | Emitted when this item opens.         |
-| `@close`  | undefined        | Emitted when this item closes.        |
-| `@toggle` | `isOpen: boolean`| Emitted on toggle with the new state. |
+| Event     | Payload   | Description                           |
+|-----------|-----------|---------------------------------------|
+| `@open`   | -         | Emitted when this item opens.         |
+| `@close`  | -         | Emitted when this item closes.        |
+| `@toggle` | `boolean` | Emitted on toggle with the new state. |
 
 ### Slots
 

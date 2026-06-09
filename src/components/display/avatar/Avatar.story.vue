@@ -293,9 +293,9 @@ is fully controlled via the `default` slot, making it compatible with any future
 
 ### Slots
 
-| Slot      | Description                                                        |
-|-----------|--------------------------------------------------------------------|
-| `default` | Avatar content. In group mode, expects nested `Avatar` components. |
+| Slot      | Bindings | Description                                                        |
+|-----------|----------|--------------------------------------------------------------------|
+| `default` | -        | Avatar content. In group mode, expects nested `Avatar` components. |
 
 ## Usage
 

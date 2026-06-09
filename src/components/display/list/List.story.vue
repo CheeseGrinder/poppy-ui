@@ -310,10 +310,10 @@ It provides a great DX by supporting multiple named slots for easy composition.
 
 ### Slots
 
-| Slot      | Description                        |
-|-----------|------------------------------------|
-| `title`   | Custom title element for the list. |
-| `default` | The items.                         |
+| Slot      | Bindings | Description                        |
+|-----------|----------|------------------------------------|
+| `title`   | -        | Custom title element for the list. |
+| `default` | -        | The items.                         |
 
 </details>
 
@@ -330,14 +330,14 @@ It provides a great DX by supporting multiple named slots for easy composition.
 
 ### Slots
 
-| Slot          | Description                                                                          |
-|---------------|--------------------------------------------------------------------------------------|
-| `prefix`      | Content to display before the title (e.g. icon, avatar).                             |
-| `title`       | Custom title content (if prop isn't enough).                                         |
-| `description` | Custom description content (if prop isn't enough).                                   |
-| `default`     | If you don't use title/description slots or props, you can pass custom content here. |
-| `actions`     | Content to display at the end of the row (e.g. buttons).                             |
-| `details`     | Extra content that wraps to a new line below the item (`list-col-wrap`).             |
+| Slot          | Bindings | Description                                                                          |
+|---------------|----------|--------------------------------------------------------------------------------------|
+| `prefix`      | -        | Content to display before the title (e.g. icon, avatar).                             |
+| `title`       | -        | Custom title content (if prop isn't enough).                                         |
+| `description` | -        | Custom description content (if prop isn't enough).                                   |
+| `default`     | -        | If you don't use title/description slots or props, you can pass custom content here. |
+| `actions`     | -        | Content to display at the end of the row (e.g. buttons).                             |
+| `details`     | -        | Extra content that wraps to a new line below the item (`list-col-wrap`).             |
 
 </details>
 

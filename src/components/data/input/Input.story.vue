@@ -179,10 +179,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot      | Scope                   | Description                            |
+| Slot      | Bindings                | Description                            |
 |-----------|-------------------------|----------------------------------------|
-| `label`   | `-`                     | Top-left inline label (standalone).    |
-| `hint`    | `-`                     | Bottom-left hint / error (standalone). |
+| `label`   | -                       | Top-left inline label (standalone).    |
+| `hint`    | -                       | Bottom-left hint / error (standalone). |
 | `counter` | `{ current, min, max }` | Bottom-right character count.          |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.

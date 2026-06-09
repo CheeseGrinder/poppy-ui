@@ -108,15 +108,15 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 | Name         | Type                         | Modifiers | Description                      |
 |--------------|------------------------------|-----------|----------------------------------|
-| `modelValue` | `{ [key: string]: unknown }` | `-`       | The form data object (required). |
+| `modelValue` | `{ [key: string]: unknown }` | -         | The form data object (required). |
 
 ### Props
 
-| Prop            | Type                   | Default               | Configurable | Description                                     |
-|-----------------|------------------------|-----------------------|--------------|-------------------------------------------------|
-| `counter`       | `Booleanish`           | `false`               | :x:          | Propagates counter display to all child inputs. |
-| `counterFormat` | `string \| Function`   | `'{current} / {max}'` | :x:          | Default counter format for all child inputs.    |
-| `serializer`    | `FormSerializer`       | `undefined`           | :x:          | Transforms data before the `submit` event.      |
+| Prop            | Type                 | Default               | Configurable | Description                                     |
+|-----------------|----------------------|-----------------------|--------------|-------------------------------------------------|
+| `counter`       | `Booleanish`         | `false`               | :x:          | Propagates counter display to all child inputs. |
+| `counterFormat` | `string \| Function` | `'{current} / {max}'` | :x:          | Default counter format for all child inputs.    |
+| `serializer`    | `FormSerializer`     | `undefined`           | :x:          | Transforms data before the `submit` event.      |
 
 ### Events
 
@@ -127,9 +127,9 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 ### Slots
 
-| Slot      | Scope                            | Description                                                |
+| Slot      | Bindings                         | Description                                                |
 |-----------|----------------------------------|------------------------------------------------------------|
-| `default` | `-`                              | Form content undefined FormField components, buttons, etc. |
+| `default` | -                                | Form content undefined FormField components, buttons, etc. |
 | `error`   | `{ error: string \| undefined }` | Global error rendering.                                    |
 
 ## Usage
