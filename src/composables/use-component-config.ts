@@ -1,4 +1,4 @@
-import { COMPONENT_SIZE } from '@/symbol'
+import { COMPONENT_SIZE } from '@/config/size.context'
 import { type ComputedRef, computed, type InjectionKey, inject } from 'vue'
 
 /**

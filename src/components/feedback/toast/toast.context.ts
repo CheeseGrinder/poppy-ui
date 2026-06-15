@@ -1,5 +1,5 @@
 import type { ToastItem } from '@/composables/use-toast'
-import { createComponentConfigKey } from '@/symbol'
+import { createComponentConfigKey } from '@/config/symbol'
 import type { InjectionKey } from 'vue'
 
 export const TOAST_CONFIG = createComponentConfigKey('toast')

@@ -1,6 +1,7 @@
 import type { App } from 'vue'
-import { COMPONENT_SIZE, createComponentConfigKey } from './symbol'
-import type { PoppyComponentConfig } from './types/config.type'
+import type { PoppyComponentConfig } from './config/config.type'
+import { COMPONENT_SIZE } from './config/size.context'
+import { createComponentConfigKey } from './config/symbol'
 import type { ComponentSize } from './types/size.type'
 
 type Plugin<T> = import('vue').Plugin<T>

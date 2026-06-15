@@ -44,6 +44,7 @@ export default defineConfig({
         'components/navigation/public': fileURLToPath(
           new URL('./src/components/navigation/public.ts', import.meta.url),
         ),
+        'config/public': fileURLToPath(new URL('./src/config/public.ts', import.meta.url)),
         'composables/public': fileURLToPath(new URL('./src/composables/public.ts', import.meta.url)),
         'types/public': fileURLToPath(new URL('./src/types/public.ts', import.meta.url)),
       },

@@ -66,6 +66,12 @@
       "import": "./dist/components/navigation/public.es.js",
       "require": "./dist/components/navigation/public.umd.js"
     },
+    "./config": {
+      "source": "./src/config/public.ts",
+      "types": "./dist/config/public.d.ts",
+      "import": "./dist/config/public.es.js",
+      "require": "./dist/config/public.umd.js"
+    },
     "./composables": {
       "source": "./src/composables/public.ts",
       "types": "./dist/composables/public.d.ts",

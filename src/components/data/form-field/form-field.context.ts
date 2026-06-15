@@ -1,4 +1,4 @@
-import { createComponentConfigKey } from '@/symbol'
+import { createComponentConfigKey } from '@/config/symbol'
 import type { ComputedRef, InjectionKey, ShallowRef } from 'vue'
 import type { FieldState } from '../form/form.types'
 

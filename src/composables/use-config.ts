@@ -1,4 +1,4 @@
-import { COMPONENT_SIZE } from '@/symbol'
+import { COMPONENT_SIZE } from '@/config/size.context'
 import { inject } from 'vue'
 
 export function useSizeConfig() {

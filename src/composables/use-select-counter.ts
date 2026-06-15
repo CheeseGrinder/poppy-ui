@@ -1,6 +1,5 @@
+import type { CounterFn } from '@/types/utils.type'
 import { computed, type Ref } from 'vue'
-
-export type SelectCounterFormatter = (count: number, min?: number, max?: number) => string
 
 export function useSelectCounter(
   selectedCount: Ref<number>,
@@ -8,7 +7,7 @@ export function useSelectCounter(
     multiple?: Ref<boolean | undefined>
     min?: Ref<number | undefined>
     max?: Ref<number | undefined>
-    formatter?: Ref<SelectCounterFormatter | undefined>
+    formatter?: Ref<CounterFn | undefined>
   },
 ) {
   const counterText = computed(() => {

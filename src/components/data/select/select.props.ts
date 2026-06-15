@@ -1,4 +1,4 @@
-import type { SelectCounterFormatter } from '@/composables/use-select-counter'
+import type { CounterFn } from '@/types/utils.type'
 import type { EqualsArg, SelectColor, SelectOption, SelectSize, SelectVariant } from './select.types'
 
 export interface SelectConfigurableProps {
@@ -33,7 +33,7 @@ export interface SelectConfigurableProps {
    * Custom counter format function.
    * Receives `(count, min?, max?)` and returns a display string.
    */
-  counterFormatter?: SelectCounterFormatter
+  counterFormatter?: CounterFn
 }
 
 export interface SelectProps<T = any, M extends boolean = false> extends SelectConfigurableProps {
