@@ -40,6 +40,7 @@ import type { BreadcrumbsConfigurableProps } from '@/components/navigation/bread
 import type { DockConfigurableProps, DockItemConfigurableProps } from '@/components/navigation/dock/dock.props'
 import type { LinkConfigurableProps } from '@/components/navigation/link/link.props'
 import type { MenuConfigurableProps, MenuItemConfigurableProps } from '@/components/navigation/menu/menu.props'
+import type { TabConfigurableProps, TabsConfigurableProps } from '@/components/navigation/tab/tab.props'
 
 export interface PoppyComponentConfig {
   // Actions
@@ -58,6 +59,8 @@ export interface PoppyComponentConfig {
   input: InputConfigurableProps
   select: SelectConfigurableProps
   slider: SliderConfigurableProps
+  tab: TabConfigurableProps
+  tabs: TabsConfigurableProps
   textarea: TextareaConfigurableProps
   toggle: ToggleConfigurableProps
 
