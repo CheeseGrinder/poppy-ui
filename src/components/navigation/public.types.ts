@@ -10,3 +10,6 @@ export * from './link/link.types'
 // Menu
 export type { MenuItemProps, MenuProps } from './menu/menu.props'
 export * from './menu/menu.types'
+// Tab
+export type { TabProps, TabsProps } from './tab/tab.props'
+export * from './tab/tab.types'
