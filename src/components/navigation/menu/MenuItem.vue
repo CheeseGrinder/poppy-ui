@@ -9,6 +9,7 @@ import type { MenuItemProps } from './menu.props'
 
 <script setup lang="ts">
 const props = defineProps<MenuItemProps>()
+const emit = defineEmits<{ click: [event: MouseEvent] }>()
 const config = useComponentConfig(MENU_ITEM_CONFIG, props, {})
 
 const slots = useSlots()
@@ -77,6 +78,7 @@ const isActive = computed(() => {
         :is="tag"
         v-bind="attr"
         :class="isActive && 'menu-active'"
+        @click="emit('click', $event)"
       >
         <component :is="config.icon" v-if="config.icon" :size="16" />
         <slot />
@@ -93,6 +95,7 @@ const isActive = computed(() => {
         :is="tag"
         v-bind="attr"
         :class="isActive && 'menu-active'"
+        @click="emit('click', $event)"
       >
         <component :is="config.icon" v-if="config.icon" :size="16" />
         <slot />

@@ -9,6 +9,8 @@ import type { SelectProps } from './select.props.ts'
 <script setup lang="ts">
 const model = ref<string>()
 const multiModel = ref<string[]>([])
+const multiSearchModel = ref<string[]>([])
+const remoteDefaultModel = ref<string>('es')
 
 const state = reactive<SelectProps>({
   size: 'md',
@@ -32,6 +34,13 @@ const tags = [
 ]
 
 const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
+
+async function searchCountries({ term, limit, page }: { term: string; limit: number; page: number; lastItem?: unknown }) {
+  await new Promise(r => setTimeout(r, 600))
+  const all = countries.filter(c => c.label.toLowerCase().includes(term.toLowerCase()))
+  const start = (page - 1) * limit
+  return all.slice(start, start + limit)
+}
 </script>
 
 <template>
@@ -43,6 +52,7 @@ const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
             select: {
               placeholder: 'Select an option…',
               empty: 'No options available',
+              search: 'Search…',
             },
           },
         },
@@ -139,6 +149,46 @@ const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
       </Form>
     </Variant>
 
+    <Variant title="Searchable (local)" id="searchable-local">
+      <Select
+        v-model="model"
+        :options="countries"
+        searchable
+        placeholder="Select a country…"
+      />
+    </Variant>
+
+    <Variant title="Searchable (remote)" id="searchable-remote">
+      <Select
+        v-model="model"
+        searchable
+        :search="searchCountries"
+        :limit="3"
+        placeholder="Search countries…"
+      />
+    </Variant>
+
+    <Variant title="Searchable multiple" id="searchable-multiple">
+      <Select
+        v-model="multiSearchModel"
+        :options="countries"
+        searchable
+        multiple
+        clearable
+        placeholder="Search and select countries…"
+      />
+    </Variant>
+
+    <Variant title="Searchable (remote) with default value" id="searchable-remote-default">
+      <Select
+        v-model="remoteDefaultModel"
+        searchable
+        :search="searchCountries"
+        :limit="3"
+        placeholder="Search countries…"
+      />
+    </Variant>
+
   </Story>
 </template>
 
@@ -149,6 +199,7 @@ const formData = ref<Record<string, unknown>>({ country: undefined, stack: [] })
 
 Custom select component with a dropdown built on DaisyUI `select` styling.
 Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter.
+Add `searchable` for local filtering or pass a `search` callback for remote data with debounce, pagination, and infinite scroll.
 Works standalone with `v-model` or inside `<FormField />` for full form integration.
 
 ## API
@@ -161,22 +212,39 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Props
 
-| Prop               | Type                     | Default     | Configurable       | Description                                                            |
-|--------------------|--------------------------|-------------|--------------------|------------------------------------------------------------------------|
-| `color`            | `SelectColor`            | `undefined` | :white_check_mark: | Color variant.                                                         |
-| `size`             | `SelectSize`             | `'md'`      | :white_check_mark: | Size.                                                                  |
-| `variant`          | `SelectVariant`          | `undefined` | :white_check_mark: | Visual style variant. `'bordered'` or `'ghost'`.                       |
-| `options`          | `SelectOption[]`         | `undefined` | :x:                | List of options to display.                                            |
-| `equals`           | `keyof T \| EqualsArgFn` | `undefined` | :x:                | Key or function used for value equality comparison.                    |
-| `multiple`         | `boolean`                | `false`     | :x:                | Enables multiple selection. Model becomes an array.                    |
-| `clearable`        | `boolean`                | `false`     | :x:                | Shows a clear button when a value is selected (single mode).           |
-| `counterFormatter` | `SelectCounterFormatter` | `undefined` | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.        |
-| `placeholder`      | `string`                 | `undefined` | :x:                | Text shown when no value is selected.                                  |
-| `name`             | `string`                 | `undefined` | :x:                | Native input name. Inferred from `<FormField />` when not provided.    |
-| `disabled`         | `boolean`                | `false`     | :x:                | Disables all interaction.                                              |
-| `required`         | `boolean`                | `false`     | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`. |
+| Prop               | Type                     | Default     | Configurable       | Description                                                                                          |
+|--------------------|--------------------------|-------------|--------------------|------------------------------------------------------------------------------------------------------|
+| `color`            | `SelectColor`            | `undefined` | :white_check_mark: | Color variant.                                                                                       |
+| `size`             | `SelectSize`             | `'md'`      | :white_check_mark: | Size.                                                                                                |
+| `variant`          | `SelectVariant`          | `undefined` | :white_check_mark: | Visual style variant. `'bordered'` or `'ghost'`.                                                     |
+| `options`          | `SelectOption[]`         | `undefined` | :x:                | List of options. Required for local mode; optional when using `search`.                              |
+| `equals`           | `keyof T \| EqualsArgFn` | `undefined` | :x:                | Key or function used for value equality comparison.                                                  |
+| `multiple`         | `boolean`                | `false`     | :x:                | Enables multiple selection. Model becomes an array.                                                  |
+| `clearable`        | `boolean`                | `false`     | :x:                | Shows a clear button when a value is selected (single mode).                                         |
+| `counterFormatter` | `SelectCounterFormatter` | `undefined` | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.                                      |
+| `placeholder`      | `string`                 | `undefined` | :x:                | Text shown when no value is selected.                                                                |
+| `name`             | `string`                 | `undefined` | :x:                | Native input name. Inferred from `<FormField />` when not provided.                                  |
+| `disabled`         | `boolean`                | `false`     | :x:                | Disables all interaction.                                                                            |
+| `required`         | `boolean`                | `false`     | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`.                               |
+| `searchable`       | `boolean`                | `false`     | :x:                | Adds a search input inside the dropdown. Filters `options` locally, or delegates to `search`.        |
+| `search`           | `SelectSearchFn`         | `undefined` | :x:                | Async callback for remote search. Called on open (empty term) and on input (debounced).              |
+| `debounce`         | `number`                 | `300`       | :x:                | Debounce delay in ms before triggering `search` on input.                                            |
+| `minChars`         | `number`                 | `0`         | :x:                | Minimum characters required to trigger `search` on input. Does not affect the initial fetch on open. |
+| `limit`            | `number`                 | `20`        | :x:                | Items per page passed to `search`. Also used to detect whether more pages exist.                     |
+| `itemHeight`       | `number`                 | `36`        | :x:                | Height in px of each item in the virtual list. Must match the actual rendered height.                |
 
 > The item counter is controlled via native `min` and `max` HTML attributes passed directly to the component.
+
+### SearchParams
+
+The `search` callback receives a `SearchParams` object:
+
+| Field      | Type             | Description                                                                 |
+|------------|------------------|-----------------------------------------------------------------------------|
+| `term`     | `string`         | Current search query (empty string on initial open).                        |
+| `limit`    | `number`         | Number of items per page (from the `limit` prop).                           |
+| `page`     | `number`         | Current page number, starting at `1`. Increments on infinite scroll.        |
+| `lastItem` | `T \| undefined` | Value of the last fetched item. Use as cursor for cursor-based pagination.  |
 
 ### Events
 
@@ -186,10 +254,14 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot       | Bindings               | Description                                       |
-|------------|------------------------|---------------------------------------------------|
-| `option`   | `{ option, selected }` | Custom rendering for each option in the dropdown. |
-| `selected` | `{ option, remove }`   | Custom rendering for the selected value(s).       |
+| Slot           | Bindings                      | Description                                                          |
+|----------------|-------------------------------|----------------------------------------------------------------------|
+| `option`       | `{ option, selected, index }` | Custom rendering for each option in the dropdown.                    |
+| `selected`     | `{ option, remove }`          | Custom rendering for the selected value(s).                          |
+| `empty`        | `{ query }`                   | Content shown when the option list is empty.                         |
+| `loading`      | `{ query }`                   | Content shown during the initial remote fetch.                       |
+| `loading-more` | `{ page }`                    | Content shown at the bottom of the list while loading the next page. |
+| `error`        | `{ query, retry }`            | Content shown when `search` throws. `retry` re-triggers the fetch.   |
 
 ### Expose
 
@@ -212,6 +284,23 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 <!-- Object values with key equality -->
 <Select v-model="user" :options="users" equals="id" />
+
+<!-- Searchable local -->
+<Select v-model="country" :options="countries" searchable placeholder="Search a country…" />
+
+<!-- Remote search with offset pagination -->
+<Select
+  v-model="user"
+  searchable
+  :search="({ term, limit, page }) => fetchUsers({ term, limit, page })"
+/>
+
+<!-- Remote search with cursor-based pagination -->
+<Select
+  v-model="user"
+  searchable
+  :search="({ term, limit, lastItem }) => fetchUsers({ term, limit, after: lastItem?.id })"
+/>
 
 <!-- Inside FormField -->
 <FormField name="country" label="Country">
