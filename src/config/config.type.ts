@@ -59,8 +59,6 @@ export interface PoppyComponentConfig {
   input: InputConfigurableProps
   select: SelectConfigurableProps
   slider: SliderConfigurableProps
-  tab: TabConfigurableProps
-  tabs: TabsConfigurableProps
   textarea: TextareaConfigurableProps
   toggle: ToggleConfigurableProps
 
@@ -100,4 +98,6 @@ export interface PoppyComponentConfig {
   link: LinkConfigurableProps
   menu: MenuConfigurableProps
   menuItem: MenuItemConfigurableProps
+  tab: TabConfigurableProps
+  tabs: TabsConfigurableProps
 }
