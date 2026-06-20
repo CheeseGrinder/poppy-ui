@@ -135,32 +135,32 @@ Supports two modes:
 
 ### Tabs (container)
 
-| Prop | Type | Default | Configurable | Description |
-|------|------|---------|--------------|-------------|
-| `v-model` | `string` | `undefined` | :x: | Active tab value. When omitted, first tab with `active` prop is shown. |
-| `variant` | `TabVariant` | `undefined` | :white_check_mark: | Visual style: `'border'`, `'lift'`, `'box'`. |
-| `size` | `TabSize` | `'md'` | :white_check_mark: | Tab size. |
-| `placement` | `TabPlacement` | `'top'` | :white_check_mark: | Tabs position: `'top'`, `'bottom'`. |
+| Prop        | Type           | Default     | Configurable       | Description                                                           |
+|-------------|----------------|-------------|--------------------|-----------------------------------------------------------------------|
+| `v-model`   | `string`       | `undefined` | :x:                | Active tab value. When omitted, first tab with `active` prop is used. |
+| `variant`   | `TabVariant`   | `undefined` | :white_check_mark: | Visual style: `'border'`, `'lift'`, `'box'`.                          |
+| `size`      | `TabSize`      | `'md'`      | :white_check_mark: | Tab size.                                                             |
+| `placement` | `TabPlacement` | `'top'`     | :white_check_mark: | Tabs position: `'top'`, `'bottom'`.                                   |
 
 ### Tab (item)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`. |
-| `title` | `string` | `undefined` | Tab header label. Use `#title` slot for rich content. |
-| `active` | `Booleanish` | `false` | Forces active state (fallback when no `v-model`). |
-| `disabled` | `Booleanish` | `false` | Disables the tab. |
-| `icon` | `Component` | `undefined` | Icon displayed before the label. |
-| `to` | `string` | `undefined` | Router target. Renders as `RouterLink`; no content panel is rendered. |
+| Prop       | Type         | Default     | Description                                                     |
+|------------|--------------|-------------|-----------------------------------------------------------------|
+| `value`    | `string`     | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`.        |
+| `title`    | `string`     | `undefined` | Tab header label. Use `#title` slot for rich content.           |
+| `active`   | `Booleanish` | `false`     | Initial active state hint (ignored once context is set).        |
+| `disabled` | `Booleanish` | `false`     | Disables the tab.                                               |
+| `icon`     | `Component`  | `undefined` | Icon displayed before the label.                                |
+| `to`       | `string`     | `undefined` | Router target. Renders as `RouterLink`; no content panel shown. |
 
 ### Slots
 
-| Slot | Component | Description |
-|------|-----------|-------------|
-| `default` | `Tabs` | `Tab` items. |
-| `default` | `Tab` | Content panel shown when tab is active. |
-| `title` | `Tab` | Tab header label (overrides `title` prop, supports rich content). |
-| `icon` | `Tab` | Icon content (overrides `icon` prop). |
+| Slot      | Component | Description                                               |
+|-----------|-----------|-----------------------------------------------------------|
+| `default` | `Tabs`    | `Tab` items.                                              |
+| `default` | `Tab`     | Content panel shown when tab is active.                   |
+| `title`   | `Tab`     | Tab header label (overrides `title` prop, rich content).  |
+| `icon`    | `Tab`     | Icon content (overrides `icon` prop).                     |
 
 ## Usage
 
