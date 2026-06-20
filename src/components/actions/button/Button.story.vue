@@ -124,14 +124,11 @@ When `to` is provided, the component renders as a `RouterLink` automatically.
 | `shape`    | `ButtonShape`                     | `undefined` | :x:      | :white_check_mark: | Shape or width constraint of the button.                                                                          |
 | `behavior` | `ButtonBehavior`                  | `undefined` | :x:      | :x:                | Forces a specific visual state. Use `'disabled'` to apply disabled styling without the HTML `disabled` attribute. |
 | `disabled` | `boolean`                         | `false`     | :x:      | :x:                | Disables interactions. Also sets `aria-disabled="true"` and `tabIndex="-1"` automatically.                        |
-| `loading`  | `boolean`                      | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button.            |
+| `loading`  | `boolean`                         | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button.            |
 | `to`       | `RouteLocationRaw`                | `undefined` | :x:      | :x:                | If provided, the component renders as a `RouterLink`. Accepts a string path or a route location object.           |
 | `form`     | `string`                          | `undefined` | :x:      | :x:                | ID of the form the button is associated with (native HTML attribute).                                             |
 
-> **Configurable** props can be overridden at the application level via `BUTTON_CONFIG` using the `useComponentConfig` composable, enabling default theming without prop drilling.
-
-> **Configurable**
-> Props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.button` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 
 ### Events

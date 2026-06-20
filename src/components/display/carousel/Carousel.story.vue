@@ -149,10 +149,10 @@ A responsive, accessible carousel/slider component built on DaisyUI's `carousel`
 |----------------|---------------------|----------------|----------|--------------------|-----------------------------------------------------------|
 | `direction`    | `CarouselDirection` | `'horizontal'` | :x:      | :white_check_mark: | Direction of the carousel. `'horizontal'` / `'vertical'`. |
 | `snap`         | `CarouselSnap`      | `'start'`      | :x:      | :white_check_mark: | Snap alignment. `'start'` / `'center'` / `'end'`.         |
-| `indicators`   | `boolean`        | `false`        | :x:      | :white_check_mark: | When `true`, shows navigation indicator dots.             |
-| `controls`     | `boolean`        | `true`         | :x:      | :white_check_mark: | When `true`, shows prev/next navigation controls.         |
-| `infinite`     | `boolean`        | `true`         | :x:      | :white_check_mark: | When `true`, enables infinite looping.                    |
-| `autoplay`     | `boolean`        | `false`        | :x:      | :white_check_mark: | When `true`, enables autoplay.                            |
+| `indicators`   | `boolean`           | `false`        | :x:      | :white_check_mark: | When `true`, shows navigation indicator dots.             |
+| `controls`     | `boolean`           | `true`         | :x:      | :white_check_mark: | When `true`, shows prev/next navigation controls.         |
+| `infinite`     | `boolean`           | `true`         | :x:      | :white_check_mark: | When `true`, enables infinite looping.                    |
+| `autoplay`     | `boolean`           | `false`        | :x:      | :white_check_mark: | When `true`, enables autoplay.                            |
 | `interval`     | `number`            | `3000`         | :x:      | :white_check_mark: | Autoplay interval in milliseconds.                        |
 | `initialIndex` | `number`            | `0`            | :x:      | :x:                | Index of the initial slide.                               |
 

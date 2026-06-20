@@ -239,10 +239,10 @@ Supports icons, badges, titles, static submenus, and collapsible submenus.
 |---------------|--------------------|-------------|----------|--------------|------------------------------------------------------------------------|
 | `icon`        | `Component`        | `undefined` | :x:      | :x:          | Icon component (e.g. Lucide icon)                                      |
 | `to`          | `RouteLocationRaw` | `undefined` | :x:      | :x:          | Vue Router location. Absent = renders as `<a />`                       |
-| `title`       | `boolean`       | `false`     | :x:      | :x:          | Renders the item as a non-interactive section title                    |
-| `active`      | `boolean`       | `false`     | :x:      | :x:          | Forces the active state (auto-detected via `useLink` when `to` is set) |
-| `disabled`    | `boolean`       | `false`     | :x:      | :x:          | Disables the item                                                      |
-| `collapsible` | `boolean`       | `false`     | :x:      | :x:          | Wraps `submenu` slot in `<details />` when true                        |
+| `title`       | `boolean`          | `false`     | :x:      | :x:          | Renders the item as a non-interactive section title                    |
+| `active`      | `boolean`          | `false`     | :x:      | :x:          | Forces the active state (auto-detected via `useLink` when `to` is set) |
+| `disabled`    | `boolean`          | `false`     | :x:      | :x:          | Disables the item                                                      |
+| `collapsible` | `boolean`          | `false`     | :x:      | :x:          | Wraps `submenu` slot in `<details />` when true                        |
 
 ### Slots
 

@@ -146,7 +146,7 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 |---------------|----------|----------------------------------------------------|
 | `description` | -        | Secondary text displayed next to the radio button. |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.radio` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue

@@ -148,19 +148,19 @@ Supports two modes:
 |------------|--------------|-------------|-----------------------------------------------------------------|
 | `value`    | `string`     | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`.        |
 | `title`    | `string`     | `undefined` | Tab header label. Use `#title` slot for rich content.           |
-| `active`   | `boolean` | `false`     | Initial active state hint (ignored once context is set).        |
-| `disabled` | `boolean` | `false`     | Disables the tab.                                               |
+| `active`   | `boolean`    | `false`     | Initial active state hint (ignored once context is set).        |
+| `disabled` | `boolean`    | `false`     | Disables the tab.                                               |
 | `icon`     | `Component`  | `undefined` | Icon displayed before the label.                                |
 | `to`       | `string`     | `undefined` | Router target. Renders as `RouterLink`; no content panel shown. |
 
 ### Slots
 
-| Slot      | Component | Description                                               |
-|-----------|-----------|-----------------------------------------------------------|
-| `default` | `Tabs`    | `Tab` items.                                              |
-| `default` | `Tab`     | Content panel shown when tab is active.                   |
-| `title`   | `Tab`     | Tab header label (overrides `title` prop, rich content).  |
-| `icon`    | `Tab`     | Icon content (overrides `icon` prop).                     |
+| Slot      | Component | Description                                              |
+|-----------|-----------|----------------------------------------------------------|
+| `default` | `Tabs`    | `Tab` items.                                             |
+| `default` | `Tab`     | Content panel shown when tab is active.                  |
+| `title`   | `Tab`     | Tab header label (overrides `title` prop, rich content). |
+| `icon`    | `Tab`     | Icon content (overrides `icon` prop).                    |
 
 ## Usage
 

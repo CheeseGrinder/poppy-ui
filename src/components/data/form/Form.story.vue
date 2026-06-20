@@ -114,7 +114,7 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 | Prop            | Type                 | Default               | Configurable | Description                                     |
 |-----------------|----------------------|-----------------------|--------------|-------------------------------------------------|
-| `counter`       | `boolean`         | `false`               | :x:          | Propagates counter display to all child inputs. |
+| `counter`       | `boolean`            | `false`               | :x:          | Propagates counter display to all child inputs. |
 | `counterFormat` | `string \| Function` | `'{current} / {max}'` | :x:          | Default counter format for all child inputs.    |
 | `serializer`    | `FormSerializer`     | `undefined`           | :x:          | Transforms data before the `submit` event.      |
 

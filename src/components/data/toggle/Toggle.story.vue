@@ -135,7 +135,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 |---------------|----------|----------------------------------------------|
 | `description` | -        | Secondary text displayed next to the toggle. |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.toggle` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue

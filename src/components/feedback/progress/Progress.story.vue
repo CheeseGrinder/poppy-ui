@@ -80,7 +80,7 @@ Omitting `value` or setting `indeterminate` renders an animated indeterminate st
 | `color`         | `ProgressColor` | `undefined` | :x:      | :white_check_mark: | Color of the progress bar                                            |
 | `value`         | `number`        | `undefined` | :x:      | :x:                | Current value. Omit for indeterminate state                          |
 | `max`           | `number`        | `100`       | :x:      | :white_check_mark: | Maximum value                                                        |
-| `indeterminate` | `boolean`    | `false`     | :x:      | :x:                | Forces indeterminate (animated) state, takes precedence over `value` |
+| `indeterminate` | `boolean`       | `false`     | :x:      | :x:                | Forces indeterminate (animated) state, takes precedence over `value` |
 
 ## Usage
 ```vue

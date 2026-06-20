@@ -224,8 +224,8 @@ that can be combined freely to build any card layout.
 |-------------|---------------|-------------|----------|--------------------|------------------------------------------------------------|
 | `variant`   | `CardVariant` | `undefined` | :x:      | :white_check_mark: | Visual style of the card. `border` / `dash`.               |
 | `size`      | `CardSize`    | `undefined` | :x:      | :white_check_mark: | Size of the card. `xs` / `sm` / `md` / `lg` / `xl`.        |
-| `side`      | `boolean`  | `false`     | :x:      | :x:                | When `true`, switches to a horizontal side-by-side layout. |
-| `imageFull` | `boolean`  | `false`     | :x:      | :x:                | When `true`, the image covers the full card background.    |
+| `side`      | `boolean`     | `false`     | :x:      | :x:                | When `true`, switches to a horizontal side-by-side layout. |
+| `imageFull` | `boolean`     | `false`     | :x:      | :x:                | When `true`, the image covers the full card background.    |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.card` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

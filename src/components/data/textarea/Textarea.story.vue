@@ -192,7 +192,7 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 | `hint`    | -                       | Bottom-left hint / error (standalone). |
 | `counter` | `{ current, min, max }` | Bottom-right character count.          |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.textarea` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Note
 
@@ -204,7 +204,7 @@ Counter resolution order (first defined wins):
 4. Plugin config
 5. Default: `false`
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.textarea` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue

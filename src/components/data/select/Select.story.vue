@@ -279,7 +279,7 @@ The `search` callback receives a `SearchParams` object:
 | `toggle` | `() => void`            | Toggles the dropdown.                       |
 | `clear`  | `() => void`            | Clears the current selection.               |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.select` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue

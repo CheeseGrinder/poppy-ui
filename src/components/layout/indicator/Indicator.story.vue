@@ -226,11 +226,11 @@ The indicator content is automatically wrapped in a `span` with the `indicator-i
 
 ## Props
 
-| Prop   | Type              | Default     | Required | Configurable       | Description                                                              |
-|--------|-------------------|-------------|----------|--------------------|--------------------------------------------------------------------------|
-| `side` | `IndicatorSide`   | `undefined` | :x:      | :white_check_mark: | Side where indicator is placed: `'start'`, `'end'`, `'top'`, `'bottom'`. |
-| `align`| `IndicatorAlign`  | `undefined` | :x:      | :white_check_mark: | Alignment along the side: `'start'`, `'end'`, `'center'`, `'middle'`.    |
-| `hide` | `boolean`      | `false`     | :x:      | :x:                | When `true`, hides the indicator content.                                |
+| Prop   | Type             | Default     | Required | Configurable       | Description                                                              |
+|--------|------------------|-------------|----------|--------------------|--------------------------------------------------------------------------|
+| `side` | `IndicatorSide`  | `undefined` | :x:      | :white_check_mark: | Side where indicator is placed: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+| `align`| `IndicatorAlign` | `undefined` | :x:      | :white_check_mark: | Alignment along the side: `'start'`, `'end'`, `'center'`, `'middle'`.    |
+| `hide` | `boolean`        | `false`     | :x:      | :x:                | When `true`, hides the indicator content.                                |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.indicator` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

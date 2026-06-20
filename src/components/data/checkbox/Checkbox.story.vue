@@ -117,7 +117,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 |-----------------|-----------------|-------------|--------------------|------------------------------------------------------------|
 | `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                             |
 | `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
-| `indeterminate` | `boolean`    | `false`     | :x:                | Renders the indeterminate visual state.                    |
+| `indeterminate` | `boolean`       | `false`     | :x:                | Renders the indeterminate visual state.                    |
 | `description`   | `string`        | `undefined` | :x:                | Secondary text displayed next to the checkbox.             |
 | `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                           |
 | `required`      | `boolean`       | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
@@ -142,7 +142,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 |---------------|----------|------------------------------------------------|
 | `description` | -        | Secondary text displayed next to the checkbox. |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.checkbox` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue

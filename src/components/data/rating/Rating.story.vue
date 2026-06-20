@@ -117,8 +117,8 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `color`     | `RatingColor`  | `undefined` | :white_check_mark: | Color applied to the star icons.                            |
 | `size`      | `RatingSize`   | `'md'`      | :white_check_mark: | Size of the stars.                                          |
 | `count`     | `number`       | `5`         | :white_check_mark: | Total number of stars.                                      |
-| `half`      | `boolean`   | `false`     | :white_check_mark: | Enables half-star precision (0.5 increments).               |
-| `clearable` | `boolean`   | `true`      | :white_check_mark: | Allows clearing the rating by re-selecting the active star. |
+| `half`      | `boolean`      | `false`     | :white_check_mark: | Enables half-star precision (0.5 increments).               |
+| `clearable` | `boolean`      | `true`      | :white_check_mark: | Allows clearing the rating by re-selecting the active star. |
 | `disabled`  | `boolean`      | `undefined` | :x:                | Disables all interaction.                                   |
 | `required`  | `boolean`      | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.  |
 
@@ -129,7 +129,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `@change` | `number` | Emitted when the selected star changes. Payload is the new value (`0` when cleared).   |
 | `@blur`   | `Event`  | Emitted when focus leaves the rating. Triggers validation when inside `<FormField />`. |
 
-> **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.rating` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue
