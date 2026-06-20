@@ -42,8 +42,8 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
               :debounce="state.debounce"
               :open="state.open"
               trigger-class="btn btn-primary"
-              @show="logEvent('show', $event)"
-              @hide="logEvent('hide', $event)"
+              @open="logEvent('open', $event)"
+              @close="logEvent('close', $event)"
             >
               <template #trigger>
                 Open menu
@@ -60,8 +60,8 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
         <Dropdown
           v-bind="state"
           trigger-class="btn btn-primary"
-          @show="logEvent('show', $event)"
-          @hide="logEvent('hide', $event)"
+          @open="logEvent('open', $event)"
+          @close="logEvent('close', $event)"
         >
           <template #trigger>Open menu</template>
           <Menu class="bg-base-100">
@@ -179,8 +179,8 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
       <Variant title="Events">
         <Dropdown
           trigger-class="btn btn-primary"
-          @show="logEvent('show', $event)"
-          @hide="logEvent('hide', $event)"
+          @open="logEvent('open', $event)"
+          @close="logEvent('close', $event)"
         >
           <template #trigger>
             Open — watch the event log
@@ -193,7 +193,7 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
         </Dropdown>
       </Variant>
 
-      <Variant title="Expose — show / hide / toggle">
+      <Variant title="Expose — open / close / toggle">
         <div class="dropdown-story dropdown-story--expose">
           <Dropdown ref="dropdown-expose" trigger-class="btn btn-primary">
             <template #trigger>
@@ -206,8 +206,8 @@ const dropdownExposeRef = useTemplateRef('dropdown-expose')
             </Menu>
           </Dropdown>
           <div class="dropdown-story--expose-actions">
-            <Button variant="outline" size="sm" @click="dropdownExposeRef?.show()">show()</Button>
-            <Button variant="outline" size="sm" @click="dropdownExposeRef?.hide()">hide()</Button>
+            <Button variant="outline" size="sm" @click="dropdownExposeRef?.open()">open()</Button>
+            <Button variant="outline" size="sm" @click="dropdownExposeRef?.close()">close()</Button>
             <Button variant="outline" size="sm" @click="dropdownExposeRef?.toggle()">toggle()</Button>
           </div>
         </div>
@@ -284,10 +284,10 @@ Supports `click`, `hover`, and `context-menu` trigger actions, configurable plac
 
 ### Events
 
-| Event   | Payload | Description                                          |
-|---------|---------|------------------------------------------------------|
-| `@show` | -       | Emitted before the dropdown content becomes visible. |
-| `@hide` | -       | Emitted before the dropdown content is hidden.       |
+| Event    | Payload | Description                                          |
+|----------|---------|------------------------------------------------------|
+| `@open`  | -       | Emitted before the dropdown content becomes visible. |
+| `@close` | -       | Emitted before the dropdown content is hidden.       |
 
 ### Slots
 
@@ -302,10 +302,10 @@ These methods are accessible via a template ref on the component instance.
 
 | Method     | Signature             | Description                                  |
 |------------|-----------------------|----------------------------------------------|
-| `show()`   | `() => void`          | Opens the dropdown.                          |
-| `hide()`   | `() => void`          | Closes the dropdown.                         |
+| `open()`   | `() => void`          | Opens the dropdown.                          |
+| `close()`  | `() => void`          | Closes the dropdown.                         |
 | `toggle()` | `() => void`          | Opens if closed, closes if open.             |
-| `$ref`     | `HTMLElement \| null` | Direct reference to the popover DOM element. |
+| `$el`      | `HTMLElement \| null` | Direct reference to the popover DOM element. |
 
 ```vue
 <Dropdown ref="dropdownRef">
@@ -355,6 +355,6 @@ These methods are accessible via a template ref on the component instance.
   <template #trigger>Open</template>
   <ul>...</ul>
 </Dropdown>
-<Button @click="menu?.show()">Open externally</Button>
+<Button @click="menu?.open()">Open externally</Button>
 ```
 </docs>

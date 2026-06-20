@@ -105,18 +105,18 @@ const exposeOpen = shallowRef(false)
         </Modal>
       </Variant>
 
-      <Variant title="Expose — present / dismiss">
+      <Variant title="Expose — open / close">
         <div class="modal-story modal-story--expose">
           <Modal ref="modal-expose" v-model="exposeOpen">
             <h3>Controlled externally</h3>
-            <p>This modal was opened via <code>present()</code>.</p>
+            <p>This modal was opened via <code>open()</code>.</p>
             <template #actions>
-              <Button @click="modalExposeRef?.dismiss()">dismiss()</Button>
+              <Button @click="modalExposeRef?.close()">close()</Button>
             </template>
           </Modal>
           <div class="modal-story--row">
-            <Button variant="outline" size="sm" @click="modalExposeRef?.present()">present()</Button>
-            <Button variant="outline" size="sm" @click="modalExposeRef?.dismiss()">dismiss()</Button>
+            <Button variant="outline" size="sm" @click="modalExposeRef?.open()">open()</Button>
+            <Button variant="outline" size="sm" @click="modalExposeRef?.close()">close()</Button>
           </div>
         </div>
       </Variant>
@@ -213,9 +213,10 @@ Controlled via `v-model` or programmatically through exposed methods.
 
 ### Events
 
-| Event    | Payload   | Description                                           |
-|----------|-----------|-------------------------------------------------------|
-| `@close` | -         | Emitted when the modal closes (native `close` event). |
+| Event    | Payload | Description                                           |
+|----------|---------|-------------------------------------------------------|
+| `@open`  | -       | Emitted when the modal opens.                         |
+| `@close` | -       | Emitted when the modal closes (native `close` event). |
 
 ### Slots
 
@@ -226,20 +227,20 @@ Controlled via `v-model` or programmatically through exposed methods.
 
 ### Expose
 
-| Method      | Signature    | Description       |
-|-------------|--------------|-------------------|
-| `present()` | `() => void` | Opens the modal.  |
-| `dismiss()` | `() => void` | Closes the modal. |
+| Method    | Signature    | Description       |
+|-----------|--------------|-------------------|
+| `open()`  | `() => void` | Opens the modal.  |
+| `close()` | `() => void` | Closes the modal. |
 
 ```vue
 <Modal ref="modalRef">
   <p>Content</p>
   <template #actions>
-    <Button @click="modalRef?.dismiss()">Close</Button>
+    <Button @click="modalRef?.close()">Close</Button>
   </template>
 </Modal>
 
-<Button @click="modalRef?.present()">Open</Button>
+<Button @click="modalRef?.open()">Open</Button>
 ```
 
 ## Note
@@ -279,6 +280,6 @@ Set `loadContentWhenClose="true"` to keep the content mounted **from the start**
 
 <!-- Programmatic control -->
 <Modal ref="modalRef">...</Modal>
-<Button @click="modalRef?.present()">Open</Button>
+<Button @click="modalRef?.open()">Open</Button>
 ```
 </docs>

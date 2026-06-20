@@ -28,8 +28,8 @@ const dropdownId = `dropdown-${id}`
 const anchorName = `--anchor-${id}`
 
 const emit = defineEmits<{
-  show: []
-  hide: []
+  open: []
+  close: []
 }>()
 
 const props = defineProps<DropdownProps>()
@@ -45,11 +45,11 @@ const { class: classAttr, ...attrs } = useAttrs()
 
 // ── Popover helpers ──────────────────────────────────────────────────────────
 
-function show() {
+function open() {
   popoverRef.value?.showPopover()
 }
 
-function hide() {
+function close() {
   popoverRef.value?.hidePopover()
 }
 
@@ -60,7 +60,7 @@ function toggle() {
   }
 
   const isOpen = el.matches(':popover-open')
-  isOpen ? hide() : show()
+  isOpen ? close() : open()
 }
 
 // ── Trigger with ─────────────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ function onTriggerClick() {
   // The dropdown has been triggered by a click to stay open in "hover" mode
   // Since the dropdown is open we need to close it if the user click on the dropdown "trigger"
   if (triggeredWith === 'click' && config.value.triggerAction === 'hover') {
-    hide();
+    close();
     return;
   }
 
@@ -89,7 +89,7 @@ function onTriggerClick() {
   // it prevent to close the dropdown from the "debounce" timer
   if (config.value.triggerAction === 'hover') {
     triggeredWith = 'click';
-    show()
+    open()
     return;
   }
 
@@ -109,7 +109,7 @@ function onHover() {
 
   triggeredWith = 'hover';
   clearTimeout(debounceTimer);
-  show();
+  open();
 }
 
 function onBlur() {
@@ -120,7 +120,7 @@ function onBlur() {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     if (triggeredWith === 'hover') {
-      hide();
+      close();
     }
   }, config.value.debounce);
 }
@@ -147,7 +147,7 @@ function onKeyUp(ev: KeyboardEvent) {
   ev.preventDefault();
 
   if (ev.key === 'Escape') {
-    hide();
+    close();
   } else {
     toggle();
   }
@@ -157,18 +157,17 @@ function onKeyUp(ev: KeyboardEvent) {
 
 function onBeforeToggle(ev: ToggleEvent) {
   if (ev.newState === 'open') {
-    emit('show');
+    emit('open');
   } else {
-    emit('hide');
-
+    emit('close');
   }
 }
 
 defineExpose({
-  show,
-  hide,
+  open,
+  close,
   toggle,
-  $ref: popoverRef,
+  $el: popoverRef,
 });
 </script>
 

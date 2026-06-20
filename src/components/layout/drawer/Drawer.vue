@@ -18,10 +18,10 @@ const BASE = 20
 
 <script setup lang="ts">
 const props = defineProps<DrawerProps>()
-const open = defineModel<boolean>({ default: false })
+const isOpen = defineModel<boolean>({ default: false })
 
 const emit = defineEmits<{
-  present: []
+  open: []
   close: []
 }>()
 
@@ -37,22 +37,20 @@ provide('drawer-level', level)
 const zIndex = BASE + level * 10 + 1
 const drawerId = `drawer-${useId()}`
 
-watch(open, isOpen => {
-  isOpen ? emit('present') : emit('close')
+watch(isOpen, state => {
+  state ? emit('open') : emit('close')
 })
 
-function present() {
-  open.value = true
-  emit('present')
+function open() {
+  isOpen.value = true
 }
 
 function close() {
-  open.value = false
-  emit('close')
+  isOpen.value = false
 }
 
 defineExpose({
-  present,
+  open,
   close,
 })
 </script>
@@ -64,13 +62,13 @@ defineExpose({
   >
     <input
       :id="drawerId"
-      v-model="open"
+      v-model="isOpen"
       type="checkbox"
       class="drawer-toggle"
     />
 
     <div class="drawer-content" :class="config.contentClass">
-      <slot :drawer-id="drawerId" :is-open="open" :present="present" :close="close" />
+      <slot :drawer-id="drawerId" :is-open="isOpen" :open="open" :close="close" />
     </div>
 
     <aside
@@ -85,7 +83,7 @@ defineExpose({
         class="drawer-overlay"
       />
 
-      <slot name="sidebar" :drawer-id="drawerId" :is-open="open" :present="present" :close="close" />
+      <slot name="sidebar" :drawer-id="drawerId" :is-open="isOpen" :open="open" :close="close" />
     </aside>
   </div>
 </template>

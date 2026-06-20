@@ -24,7 +24,7 @@ const dialogEl = useTemplateRef('dialog-el')
  *
  * @default false
  */
-const open = defineModel<boolean>({ default: false })
+const isOpen = defineModel<boolean>({ default: false })
 
 const props = defineProps<ModalProps>()
 const config = useComponentConfig(MODAL_CONFIG, props, {
@@ -34,13 +34,14 @@ const config = useComponentConfig(MODAL_CONFIG, props, {
 })
 
 const emit = defineEmits<{
+  open: []
   close: []
 }>()
 
 const hasBeenOpened = shallowRef(false)
 
-watch(open, isOpen => {
-  if (isOpen) {
+watch(isOpen, state => {
+  if (state) {
     hasBeenOpened.value = true
   }
 })
@@ -49,37 +50,38 @@ const shouldRenderContent = computed(() => {
   if (isTrue(config.value.loadContentWhenClose)) {
     return true
   }
-  return open.value || hasBeenOpened.value
+  return isOpen.value || hasBeenOpened.value
 })
 
-watch(open, isOpen => {
+watch(isOpen, state => {
   if (!dialogEl.value) {
     return
   }
 
-  if (isOpen) {
+  if (state) {
     dialogEl.value.showModal()
+    emit('open')
   } else {
     dialogEl.value.close()
   }
 }, { immediate: true })
 
-function present() {
-  open.value = true
+function open() {
+  isOpen.value = true
 }
 
-function dismiss() {
-  open.value = false
+function close() {
+  isOpen.value = false
 }
 
 function onClose() {
-  open.value = false
+  isOpen.value = false
   emit('close')
 }
 
 defineExpose({
-  present, 
-  dismiss,
+  open,
+  close,
 })
 </script>
 

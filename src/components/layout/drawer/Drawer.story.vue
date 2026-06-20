@@ -169,7 +169,7 @@ const isOpen = shallowRef(false)
       <Variant title="Events">
         <Drawer
           v-model="isOpen"
-          @present="logEvent('present', $event)"
+          @open="logEvent('open', $event)"
           @close="logEvent('close', $event)"
         >
           <Button @click="isOpen = true">Open — watch the event log</Button>
@@ -177,18 +177,18 @@ const isOpen = shallowRef(false)
           <template #sidebar>
             <div class="p-4 w-80 bg-base-100 h-full">
               <h2 class="text-xl font-bold">Events</h2>
-              <p class="mt-4">Check the event log for @present and @close.</p>
+              <p class="mt-4">Check the event log for @open and @close.</p>
               <Button class="mt-4" @click="isOpen = false">Close</Button>
             </div>
           </template>
         </Drawer>
       </Variant>
 
-      <Variant title="Expose — present / close">
+      <Variant title="Expose — open / close">
         <template #source>
           <textarea v-pre>
             <Drawer ref="drawerRef">
-              <Button @click="drawerRef?.present()">Open programmatically</Button>
+              <Button @click="drawerRef?.open()">Open programmatically</Button>
 
               <template #sidebar>
                 <div class="p-4 w-80 bg-base-100 h-full">
@@ -201,7 +201,7 @@ const isOpen = shallowRef(false)
 
         <Drawer ref="drawer-ref" v-model="isOpen">
           <div class="flex gap-2">
-            <Button @click="drawerRef?.present()">present()</Button>
+            <Button @click="drawerRef?.open()">open()</Button>
             <Button @click="drawerRef?.close()">close()</Button>
           </div>
 
@@ -237,26 +237,26 @@ Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-
 
 ## Events
 
-| Event      | Payload | Description                     |
-|------------|---------|---------------------------------|
-| `@present` | -       | Emitted when the drawer opens.  |
-| `@close`   | -       | Emitted when the drawer closes. |
+| Event    | Payload | Description                     |
+|----------|---------|---------------------------------|
+| `@open`  | -       | Emitted when the drawer opens.  |
+| `@close` | -       | Emitted when the drawer closes. |
 
 ## Slots
 
-| Slot      | Description                                                                  |
-|-----------|------------------------------------------------------------------------------|
-| `default` | Main content area. Receives `drawer-id`, `is-open`, `present`, `close`.      |
-| `sidebar` | Drawer sidebar content. Receives `drawer-id`, `is-open`, `present`, `close`. |
+| Slot      | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+| `default` | Main content area. Receives `drawer-id`, `is-open`, `open`, `close`.      |
+| `sidebar` | Drawer sidebar content. Receives `drawer-id`, `is-open`, `open`, `close`. |
 
 ## Exposed
 
 These methods are accessible via a template ref on the component instance.
 
-| Method      | Signature    | Description        |
-|-------------|--------------|--------------------|
-| `present()` | `() => void` | Opens the drawer.  |
-| `close()`   | `() => void` | Closes the drawer. |
+| Method    | Signature    | Description        |
+|-----------|--------------|--------------------|
+| `open()`  | `() => void` | Opens the drawer.  |
+| `close()` | `() => void` | Closes the drawer. |
 
 ## Usage
 
@@ -283,7 +283,7 @@ These methods are accessible via a template ref on the component instance.
 <!-- With events -->
 <Drawer
   v-model="isOpen"
-  @present="console.log('opened')"
+  @open="console.log('opened')"
   @close="console.log('closed')"
 />
 
@@ -295,7 +295,7 @@ These methods are accessible via a template ref on the component instance.
 <!-- Programmatic control -->
 const drawerRef = useTemplateRef('drawer')
 
-drawerRef.value?.present()  // Open
-drawerRef.value?.close()   // Close
+drawerRef.value?.open()   // Open
+drawerRef.value?.close()  // Close
 ```
 </docs>
