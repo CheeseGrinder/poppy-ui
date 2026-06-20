@@ -1,184 +1,119 @@
 <script setup lang="ts">
 import { Home, Settings, User } from '@lucide/vue'
+import { ref } from 'vue'
 import Tab from './Tab.vue'
 import Tabs from './Tabs.vue'
+
+const activeBottom = ref('tab1')
 </script>
 
 <template>
-  <Story group="components" title="Data/Tab" auto-props-disabled>
+  <Story group="components" title="Navigation/Tab" auto-props-disabled>
 
-    <Variant title="Default">
-      <template #source>
-        <textarea v-pre>
-          <Tabs>
-            <Tab active>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-          </Tabs>
-        </textarea>
-      </template>
-      <Tabs>
-        <Tab active>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-      </Tabs>
-    </Variant>
-
-    <Variant title="Lift variant">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="lift">
-            <Tab active>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-          </Tabs>
-        </textarea>
-      </template>
-      <Tabs variant="lift">
-        <Tab active>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-      </Tabs>
-    </Variant>
-
-    <Variant title="Border variant">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="border">
-            <Tab active>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-          </Tabs>
-        </textarea>
-      </template>
+    <Variant title="Border" id="border">
       <Tabs variant="border">
-        <Tab active>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
+        <Tab value="tab1" title="Tab 1">
+          <p>Content of Tab 1 — Lorem ipsum dolor sit amet.</p>
+        </Tab>
+        <Tab value="tab2" title="Tab 2">
+          <p>Content of Tab 2 — Consectetur adipiscing elit.</p>
+        </Tab>
+        <Tab value="tab3" title="Tab 3">
+          <p>Content of Tab 3 — Sed do eiusmod tempor.</p>
+        </Tab>
       </Tabs>
     </Variant>
 
-    <Variant title="Box variant">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="box">
-            <Tab active>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-          </Tabs>
-        </textarea>
-      </template>
+    <Variant title="Lift" id="lift">
+      <Tabs variant="lift">
+        <Tab value="tab1" title="Tab 1">
+          <p>Content of Tab 1 — Lorem ipsum dolor sit amet.</p>
+        </Tab>
+        <Tab value="tab2" title="Tab 2">
+          <p>Content of Tab 2 — Consectetur adipiscing elit.</p>
+        </Tab>
+        <Tab value="tab3" title="Tab 3">
+          <p>Content of Tab 3 — Sed do eiusmod tempor.</p>
+        </Tab>
+      </Tabs>
+    </Variant>
+
+    <Variant title="Box" id="box">
       <Tabs variant="box">
-        <Tab active>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
+        <Tab value="tab1" title="Tab 1">
+          <p>Content of Tab 1 — Lorem ipsum dolor sit amet.</p>
+        </Tab>
+        <Tab value="tab2" title="Tab 2">
+          <p>Content of Tab 2 — Consectetur adipiscing elit.</p>
+        </Tab>
+        <Tab value="tab3" title="Tab 3">
+          <p>Content of Tab 3 — Sed do eiusmod tempor.</p>
+        </Tab>
       </Tabs>
     </Variant>
 
-    <Variant title="With icons (slot)">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="lift">
-            <Tab active>
-              <template #icon>
-                <Home :size="16" />
-              </template>
-              Home
-            </Tab>
-            <Tab>
-              <template #icon>
-                <User :size="16" />
-              </template>
-              Profile
-            </Tab>
-            <Tab>
-              <template #icon>
-                <Settings :size="16" />
-              </template>
-              Settings
-            </Tab>
-          </Tabs>
-        </textarea>
-      </template>
+    <Variant title="With icons" id="with-icons">
       <Tabs variant="lift">
-        <Tab active>
-          <template #icon>
-            <Home :size="16" />
-          </template>
-          Home
+        <Tab value="home" :icon="Home">
+          <template #title>Home</template>
+          <p>Welcome to the home page.</p>
         </Tab>
-        <Tab>
-          <template #icon>
-            <User :size="16" />
-          </template>
-          Profile
+        <Tab value="profile" :icon="User">
+          <template #title>Profile</template>
+          <p>Manage your profile here.</p>
         </Tab>
-        <Tab>
-          <template #icon>
-            <Settings :size="16" />
-          </template>
-          Settings
+        <Tab value="settings" :icon="Settings">
+          <template #title>Settings</template>
+          <p>Configure your settings here.</p>
         </Tab>
       </Tabs>
     </Variant>
 
-    <Variant title="With icons (prop)">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="lift">
-            <Tab :icon="Home" active>Home</Tab>
-            <Tab :icon="User">Profile</Tab>
-            <Tab :icon="Settings">Settings</Tab>
-          </Tabs>
-        </textarea>
-      </template>
-      <Tabs variant="lift">
-        <Tab :icon="Home" active>Home</Tab>
-        <Tab :icon="User">Profile</Tab>
-        <Tab :icon="Settings">Settings</Tab>
+    <Variant title="Bottom placement" id="bottom">
+      <Tabs v-model="activeBottom" variant="border" placement="bottom">
+        <Tab value="tab1" title="Tab 1">
+          <p>Content of Tab 1.</p>
+        </Tab>
+        <Tab value="tab2" title="Tab 2">
+          <p>Content of Tab 2.</p>
+        </Tab>
+        <Tab value="tab3" title="Tab 3">
+          <p>Content of Tab 3.</p>
+        </Tab>
       </Tabs>
     </Variant>
 
-    <Variant title="Sizes">
+    <Variant title="Sizes" id="sizes">
       <div class="flex flex-col gap-4">
         <Tabs v-for="size in ['xs', 'sm', 'md', 'lg', 'xl']" :key="size" :size="size" variant="lift">
-          <Tab active>{{ size }}</Tab>
-          <Tab>{{ size }}</Tab>
+          <Tab value="a" :title="size" active>Active</Tab>
+          <Tab value="b" title="Tab">Normal</Tab>
         </Tabs>
       </div>
     </Variant>
 
-    <Variant title="Disabled tabs">
-      <template #source>
-        <textarea v-pre>
-          <Tabs variant="lift">
-            <Tab active>Active</Tab>
-            <Tab disabled>Disabled</Tab>
-            <Tab>Normal</Tab>
-          </Tabs>
-        </textarea>
-      </template>
+    <Variant title="Disabled" id="disabled">
       <Tabs variant="lift">
-        <Tab active>Active</Tab>
-        <Tab disabled>Disabled</Tab>
-        <Tab>Normal</Tab>
+        <Tab value="a" title="Active" active>Content</Tab>
+        <Tab value="b" title="Disabled" disabled>Hidden</Tab>
+        <Tab value="c" title="Normal">Content</Tab>
       </Tabs>
     </Variant>
 
-    <Variant title="Bottom placement">
+    <Variant title="Router mode" id="router">
       <template #source>
         <textarea v-pre>
-          <Tabs variant="border" placement="bottom">
-            <Tab active>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
+          <Tabs variant="border">
+            <Tab to="/home" title="Home" />
+            <Tab to="/profile" title="Profile" />
+            <Tab to="/settings" title="Settings" />
           </Tabs>
         </textarea>
       </template>
-      <Tabs variant="border" placement="bottom">
-        <Tab active>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
+      <Tabs variant="border">
+        <Tab to="#" title="Home" />
+        <Tab to="#" title="Profile" />
+        <Tab to="#" title="Settings" />
       </Tabs>
     </Variant>
 
@@ -190,67 +125,62 @@ import Tabs from './Tabs.vue'
 
 ## Description
 
-Tabs component for displaying content in a tabbed interface based on DaisyUI.
+Tabs component for switching between views. Each `<Tab />` renders both the tab button and its content panel as adjacent elements — matching DaisyUI's structure.
+
+Supports two modes:
+- **Controlled mode** (`v-model`): First tab is active by default. Click switches tabs via JS.
+- **Router mode** (`to` prop): Each `Tab` renders as a `RouterLink`. Content is provided by `<RouterView />`.
 
 ## API
 
-### Tabs (Container)
+### Tabs (container)
 
-| Prop | Type | Default | Required | Configurable | Description |
-|------|------|---------|----------|--------------|-------------|
-| `variant` | `TabVariant` | `undefined` | :x: | :white_check_mark: | Visual variant (box, border, lift) |
-| `size` | `TabSize` | `'md'` | :x: | :white_check_mark: | Size of tabs (xs, sm, md, lg, xl) |
-| `placement` | `TabPlacement` | `'top'` | :x: | :white_check_mark: | Placement (top, bottom) |
-| `class` | `string` | `undefined` | :x: | :x: | Additional CSS classes |
+| Prop | Type | Default | Configurable | Description |
+|------|------|---------|--------------|-------------|
+| `v-model` | `string` | `undefined` | :x: | Active tab value. When omitted, first tab with `active` prop is shown. |
+| `variant` | `TabVariant` | `undefined` | :white_check_mark: | Visual style: `'border'`, `'lift'`, `'box'`. |
+| `size` | `TabSize` | `'md'` | :white_check_mark: | Tab size. |
+| `placement` | `TabPlacement` | `'top'` | :white_check_mark: | Tabs position: `'top'`, `'bottom'`. |
 
-### Tab (Item)
+### Tab (item)
 
-| Prop | Type | Default | Required | Configurable | Description |
-|------|------|---------|----------|--------------|-------------|
-| `active` | `Booleanish` | `false` | :x: | :x: | Whether the tab is active |
-| `disabled` | `Booleanish` | `false` | :x: | :x: | Whether the tab is disabled |
-| `icon` | `Component` | `undefined` | :x: | :x: | Icon component to display before the label |
-| `to` | `string` | `undefined` | :x: | :x: | Navigation target (renders as RouterLink) |
-
-### Slots
-
-| Slot | Description |
-|------|-------------|
-| `default` | Tab label content |
-| `icon` | Icon to display before the label (overrides `icon` prop) |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`. |
+| `title` | `string` | `undefined` | Tab header label. Use `#title` slot for rich content. |
+| `active` | `Booleanish` | `false` | Forces active state (fallback when no `v-model`). |
+| `disabled` | `Booleanish` | `false` | Disables the tab. |
+| `icon` | `Component` | `undefined` | Icon displayed before the label. |
+| `to` | `string` | `undefined` | Router target. Renders as `RouterLink`; no content panel is rendered. |
 
 ### Slots
 
 | Slot | Component | Description |
 |------|-----------|-------------|
-| `default` | Tabs | Tab items |
-| `default` | Tab | Tab label content |
+| `default` | `Tabs` | `Tab` items. |
+| `default` | `Tab` | Content panel shown when tab is active. |
+| `title` | `Tab` | Tab header label (overrides `title` prop, supports rich content). |
+| `icon` | `Tab` | Icon content (overrides `icon` prop). |
 
 ## Usage
 
 ```vue
-<!-- Using slot -->
-<Tabs variant="lift">
-  <Tab active>
-    <template #icon>
-      <Home :size="16" />
-    </template>
-    Home
+<!-- Controlled mode (v-model) -->
+<Tabs v-model="activeTab" variant="lift">
+  <Tab value="home" title="Home">
+    Home content here
   </Tab>
-  <Tab :icon="User">Profile</Tab>
+  <Tab value="profile">
+    <template #title>Profile <span class="badge">New</span></template>
+    Profile content here
+  </Tab>
 </Tabs>
 
-<!-- Using prop -->
-<Tabs variant="lift">
-  <Tab :icon="Home" active>Home</Tab>
-  <Tab :icon="User">Profile</Tab>
+<!-- Router mode -->
+<Tabs variant="border">
+  <Tab to="/home" title="Home" />
+  <Tab to="/profile" title="Profile" />
 </Tabs>
+<RouterView />
 ```
-
-## Notes
-
-- Tabs use native HTML/CSS where possible
-- The `active` prop controls the visual state
-- For routing, use the `to` prop to render as RouterLink
-- Icons are displayed before the label text
 </docs>

@@ -26,19 +26,25 @@ export interface TabsConfigurableProps {
   placement?: TabPlacement
 }
 
-export interface TabsProps extends TabsConfigurableProps {
-  /**
-   * Additional custom class for the tabs container.
-   */
-  class?: string
-}
+export interface TabsProps extends TabsConfigurableProps {}
 
 // biome-ignore lint/suspicious/noEmptyInterface: Intentionally empty to allow future configurable props and global plugin configuration
 export interface TabConfigurableProps {}
 
 export interface TabProps extends TabConfigurableProps {
   /**
-   * Whether the tab is active.
+   * Unique value identifying this tab. Used with `v-model` on the parent `<Tabs>` for controlled mode.
+   */
+  value?: string
+
+  /**
+   * Tab header label. Rendered inside the tab button.
+   * Can also be set via the `#title` slot for rich content.
+   */
+  title?: string
+
+  /**
+   * Whether the tab is active. Auto-computed when `value` is set and a parent `<Tabs v-model>` exists.
    *
    * @default false
    */
@@ -52,13 +58,12 @@ export interface TabProps extends TabConfigurableProps {
   disabled?: Booleanish
 
   /**
-   * Optional icon component to display before the label.
+   * Optional icon component displayed before the tab label.
    */
   icon?: Component
 
   /**
-   * Navigation target (Vue Router location).
-   * When provided, renders as RouterLink.
+   * Navigation target (Vue Router location). When provided, renders as RouterLink.
    */
   to?: string
 }
