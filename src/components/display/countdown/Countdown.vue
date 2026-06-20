@@ -1,5 +1,7 @@
 <script lang="ts">
+import { useComponentConfig } from '@/composables/use-component-config'
 import { computed, onUnmounted, ref, watch } from 'vue'
+import { COUNTDOWN_CONFIG } from './countdown.context'
 import type { CountdownProps } from './countdown.props'
 import type { CountdownDelta, CountdownTarget } from './countdown.types'
 
@@ -47,8 +49,9 @@ function getDelta(targetMs: number): CountdownDelta {
 
 <script setup lang="ts">
 const props = defineProps<CountdownProps>()
+const config = useComponentConfig(COUNTDOWN_CONFIG, props, { digits: 2 })
 
-const digits = computed(() => props.digits ?? 2)
+const digits = computed(() => config.value.digits)
 
 const emit = defineEmits<{
   /**

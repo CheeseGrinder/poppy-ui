@@ -1,6 +1,16 @@
 import type { CountdownTarget } from './countdown.types'
 
-export interface CountdownProps {
+export interface CountdownConfigurableProps {
+  /**
+   * Minimum number of digits displayed per value.
+   * `2` forces `05` instead of `5`.
+   *
+   * @default 2
+   */
+  digits?: 1 | 2 | 3
+}
+
+export interface CountdownProps extends CountdownConfigurableProps {
   /**
    * Target date/time to count down to.
    *
@@ -13,12 +23,4 @@ export interface CountdownProps {
    * - `Temporal.PlainDateTime` — TC39 Temporal API (assumed local timezone)
    */
   to: CountdownTarget
-
-  /**
-   * Minimum number of digits displayed per value.
-   * `2` forces `05` instead of `5`.
-   *
-   * @default 2
-   */
-  digits?: 1 | 2 | 3
 }

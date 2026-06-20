@@ -231,9 +231,10 @@ Fully customisable via the `default` slot — the default render shows `hh:mm:ss
 
 ## Props
 
-| Prop | Type                       | Default     | Required           | Configurable | Description                                                             |
-|------|----------------------------|-------------|--------------------|--------------|-------------------------------------------------------------------------|
-| `to` | `Date \| string \| number` | `undefined` | :white_check_mark: | :x:          | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
+| Prop     | Type                       | Default     | Required           | Configurable       | Description                                                             |
+|----------|----------------------------|-------------|--------------------|--------------------|-------------------------------------------------------------------------|
+| `to`     | `Date \| string \| number` | `undefined` | :white_check_mark: | :x:                | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
+| `digits` | `1 \| 2 \| 3`             | `2`         | :x:                | :white_check_mark: | Minimum number of digits per value. `2` forces `05` instead of `5`.    |
 
 ## Events
 

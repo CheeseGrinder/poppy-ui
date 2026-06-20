@@ -20,6 +20,7 @@ import type { CardConfigurableProps } from '@/components/display/card/card.props
 import type { CardActionsConfigurableProps } from '@/components/display/card/card-actions.props'
 import type { CarouselConfigurableProps } from '@/components/display/carousel/carousel.props'
 import type { ChatConfigurableProps } from '@/components/display/chat/chat.props'
+import type { CountdownConfigurableProps } from '@/components/display/countdown/countdown.props'
 import type { KbdConfigurableProps } from '@/components/display/kbd/kbd.props'
 import type { StatConfigurableProps } from '@/components/display/stat/stat.props'
 import type { StatsConfigurableProps } from '@/components/display/stat/stats.props'
@@ -70,6 +71,7 @@ export interface PoppyComponentConfig {
   cardActions: CardActionsConfigurableProps
   carousel: CarouselConfigurableProps
   chat: ChatConfigurableProps
+  countdown: CountdownConfigurableProps
   kbd: KbdConfigurableProps
   stat: StatConfigurableProps
   stats: StatsConfigurableProps
