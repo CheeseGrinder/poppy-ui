@@ -33,14 +33,12 @@ const props = defineProps<ToggleProps>()
 
 /**
  * Whether the toggle is on or off.
- * Use `v-model` to bind to a boolean reactive value.
  */
 const model = defineModel<boolean>()
 
 const config = useComponentConfig(TOGGLE_CONFIG, props, { size: 'md' })
 
 const inputEl = useTemplateRef('inputEl')
-
 const slots = useSlots()
 
 // ── Form field ───────────────────────────────────────────────────────────────
@@ -55,6 +53,10 @@ const { field, fieldValue, onBlur, clearError } = useFormField<boolean>({
 const resolvedValue = computed(() => field ? fieldValue.value : model.value)
 
 function handleChange(event: Event): void {
+  if (props.readonly) {
+    event.preventDefault()
+    return
+  }
   const checked = (event.target as HTMLInputElement).checked
   model.value = checked
   field?.setValue(checked)
@@ -62,13 +64,12 @@ function handleChange(event: Event): void {
   clearError()
 }
 
-// ── Error ────────────────────────────────────────────────────────────────────
+// ── Error / description ──────────────────────────────────────────────────────
 
 const hasError = computed(() => !!field?.error.value)
-
-// ── Description presence ─────────────────────────────────────────────────────
-
 const hasDescription = computed(() => !!(props.description || slots.description))
+const hasHint = computed(() => !!(props.hint || slots.hint))
+const hasLabel = computed(() => hasDescription.value || hasHint.value)
 
 defineExpose({
   $el: inputEl,
@@ -77,43 +78,59 @@ defineExpose({
 </script>
 
 <template>
-  <!-- Bare toggle — no description -->
+  <!-- Toggle with description / hint label to the right -->
+  <label
+    v-if="hasLabel"
+    class="flex cursor-pointer items-start gap-2"
+    :class="{ 'opacity-60 pointer-events-none': disabled || readonly }"
+  >
+    <input
+      ref="inputEl"
+      type="checkbox"
+      role="switch"
+      class="toggle mt-0.5"
+      :class="[
+        getClass(colors, config.color),
+        getClass(sizes, config.size),
+        { 'toggle-error': hasError },
+        { validator: required },
+      ]"
+      :checked="resolvedValue"
+      :disabled="disabled"
+      :required="required"
+      :aria-invalid="hasError || undefined"
+      @change="handleChange"
+      @blur="onBlur"
+    />
+    <span class="flex flex-col gap-0.5">
+      <span v-if="hasDescription" class="label-text leading-snug">
+        <slot name="description">{{ description }}</slot>
+        <span v-if="required" class="text-error ml-0.5" aria-hidden="true">*</span>
+      </span>
+      <span v-if="hasHint" class="label-text text-xs text-base-content/60 leading-snug">
+        <slot name="hint">{{ hint }}</slot>
+      </span>
+    </span>
+  </label>
+
+  <!-- Bare toggle — no label -->
   <input
-    v-if="!hasDescription"
+    v-else
     ref="inputEl"
     type="checkbox"
+    role="switch"
     class="toggle"
     :class="[
       getClass(colors, config.color),
       getClass(sizes, config.size),
       { 'toggle-error': hasError },
+      { validator: required },
     ]"
     :checked="resolvedValue"
     :disabled="disabled"
     :required="required"
+    :aria-invalid="hasError || undefined"
     @change="handleChange"
     @blur="onBlur"
   />
-
-  <!-- Toggle with description -->
-  <label v-else class="flex cursor-pointer items-center gap-2">
-    <input
-      ref="inputEl"
-      type="checkbox"
-      class="toggle"
-      :class="[
-        getClass(colors, config.color),
-        getClass(sizes, config.size),
-        { 'toggle-error': hasError },
-      ]"
-      :checked="resolvedValue"
-      :disabled="disabled"
-      :required="required"
-      @change="handleChange"
-      @blur="onBlur"
-    />
-    <span class="label-text text-base-content/60">
-      <slot name="description">{{ description }}</slot>
-    </span>
-  </label>
 </template>

@@ -19,9 +19,7 @@ const formCtx = inject(FORM_CONTEXT_KEY, null)
 
 const required = shallowRef<boolean>(false)
 
-// Counter — stored as raw boolean | undefined, same logic as Form.
-// The input resolves the final value via mergeProps(defaults, pluginConfig, formCtx, fieldCtx, props).
-// FormField exposes its own raw prop value; the input picks up formCtx separately.
+// Counter config — same lazy-undefined logic as Form.
 
 const counter = shallowRef<boolean | undefined>(
   props.counter !== undefined ? props.counter : undefined,
@@ -34,6 +32,16 @@ watch(() => props.counter, (val) => {
   counter.value = val !== undefined ? val : undefined
 })
 watch(() => props.counterFormat, (val) => { counterFormat.value = val })
+
+// Counter display — pushed up by child inputs
+
+const counterText = shallowRef('')
+const counterColor = shallowRef('')
+
+function setCounterText(text: string, colorClass: string): void {
+  counterText.value = text
+  counterColor.value = colorClass
+}
 
 // Computed field state from FormContext
 
@@ -82,51 +90,77 @@ const fieldContext: FormFieldContext = {
   state: fieldState,
   counter,
   counterFormat,
+  counterText,
+  counterColor,
   setValue,
   setRequired,
   setDirty,
   setTouched,
   setError,
-}
+  setCounterText,
+} satisfies FormFieldContext
 
 provide(FORM_FIELD_CONTEXT_KEY, fieldContext)
+
+// Bottom row visibility
+
+const showBottom = computed(() =>
+  !!(fieldError.value || props.hint || counterText.value),
+)
 </script>
 
 <template>
-  <div class="form-control w-full">
-    <!-- Top label row -->
-    <label v-if="label || $slots.label" class="label">
-      <slot name="label" :required="required">
-        <span class="label-text">
-          {{ label }}
-          <slot name="required" :required="required">
-            <span
-              v-if="required"
-              class="text-error ml-0.5"
-              aria-hidden="true"
-            >*</span>
+  <fieldset class="fieldset w-full">
+    <!-- Floating label mode: label floats over the input -->
+    <template v-if="floating">
+      <label class="floating-label">
+        <span v-if="label || $slots.label">
+          <slot name="label" :required="required">
+            {{ label }}<span v-if="required" class="text-error ml-0.5" aria-hidden="true">*</span>
           </slot>
         </span>
-      </slot>
-    </label>
+        <slot />
+      </label>
+    </template>
 
-    <!-- Input slot -->
-    <slot />
-
-    <!-- Bottom label row: error/hint -->
-    <label
-      v-if="fieldError || hint || $slots.hint"
-      class="label"
-    >
-      <span
-        class="label-text-alt"
-        :class="{ 'text-error': fieldError }"
-        role="alert"
-      >
-        <slot name="error" :error="fieldError">
-          <slot name="hint">{{ fieldError || hint }}</slot>
+    <!-- Default mode: legend above the field -->
+    <template v-else>
+      <legend v-if="label || $slots.label" class="fieldset-legend">
+        <slot name="label" :required="required">
+          {{ label }}<span v-if="required" class="text-error ml-0.5" aria-hidden="true">*</span>
         </slot>
-      </span>
-    </label>
-  </div>
+      </legend>
+      <slot />
+    </template>
+
+    <!-- Bottom row: error/hint left, counter right -->
+    <div v-if="showBottom" class="flex items-center justify-between gap-2 mt-1">
+      <Transition name="field-message" mode="out-in">
+        <p v-if="fieldError" key="error" class="label text-error text-xs" role="alert">
+          <slot name="error" :error="fieldError">{{ fieldError }}</slot>
+        </p>
+        <p v-else-if="hint" key="hint" class="label text-xs">
+          <slot name="hint">{{ hint }}</slot>
+        </p>
+        <span v-else key="empty" />
+      </Transition>
+      <span
+        v-if="counterText"
+        class="label text-xs shrink-0"
+        :class="counterColor"
+      >{{ counterText }}</span>
+    </div>
+  </fieldset>
 </template>
+
+<style scoped>
+.field-message-enter-active,
+.field-message-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.field-message-enter-from,
+.field-message-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+</style>

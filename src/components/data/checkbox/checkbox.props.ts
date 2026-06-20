@@ -26,7 +26,17 @@ export interface CheckboxProps extends CheckboxConfigurableProps, NativeCheckbox
    */
   indeterminate?: boolean
   /**
-   * Secondary description displayed below the checkbox.
+   * Primary label text displayed to the right of the checkbox.
+   * Use the `#description` slot for richer content.
    */
   description?: string
+  /**
+   * Secondary hint text displayed below the description label.
+   * Use the `#hint` slot for richer content.
+   */
+  hint?: string
+  /**
+   * Makes the checkbox read-only (prevents toggling).
+   */
+  readonly?: boolean
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 import Form from '@/components/data/form/Form.vue'
 import FormField from '@/components/data/form-field/FormField.vue'
+import { SearchIcon, UserIcon } from '@lucide/vue'
 import { reactive, ref } from 'vue'
 import { createI18n } from 'vue-i18n'
 import Input from './Input.vue'
@@ -50,11 +51,11 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
         <HstCheckbox v-model="(state.counter as boolean)" title="counter" />
         <HstSlider v-model="state.maxLength" title="maxLength" :min="0" :max="200" />
         <HstText v-model="state.autocomplete" title="autocomplete" />
-        <HstCheckbox v-model="state.disabled" title="disabled" />
-        <HstCheckbox v-model="state.required" title="required" />
+        <HstCheckbox v-model="(state.disabled as boolean)" title="disabled" />
+        <HstCheckbox v-model="(state.readonly as boolean)" title="readonly" />
+        <HstCheckbox v-model="(state.clearable as boolean)" title="clearable" />
+        <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.placeholder" title="placeholder" />
-        <HstText v-model="state.label" title="label" />
-        <HstText v-model="state.hint" title="hint" />
       </template>
 
       <Input v-model="model" v-bind="state" />
@@ -77,6 +78,42 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       <Input v-model="model" disabled placeholder="Disabled input" />
     </Variant>
 
+    <Variant title="Readonly" id="readonly">
+      <Input v-model="model" readonly placeholder="Readonly input" variant="bordered" />
+    </Variant>
+
+    <Variant title="Clearable" id="clearable">
+      <Input v-model="model" clearable placeholder="Type something…" variant="bordered" />
+    </Variant>
+
+    <Variant title="With Addons" id="with-addons">
+      <div class="flex flex-col gap-3">
+        <!-- Start icon -->
+        <Input v-model="model" placeholder="Search…" variant="bordered">
+          <template #start>
+            <SearchIcon class="size-4 opacity-50" />
+          </template>
+        </Input>
+
+        <!-- Start + end icons -->
+        <Input v-model="model" placeholder="Username" variant="bordered">
+          <template #start>
+            <UserIcon class="size-4 opacity-50" />
+          </template>
+          <template #end>
+            <span class="text-xs text-base-content/50">@example.com</span>
+          </template>
+        </Input>
+
+        <!-- Start icon + clearable -->
+        <Input v-model="model" placeholder="Search…" variant="bordered" clearable>
+          <template #start>
+            <SearchIcon class="size-4 opacity-50" />
+          </template>
+        </Input>
+      </div>
+    </Variant>
+
     <Variant title="With Counter" id="with-counter">
       <Input v-model="model" counter :max-length="100" placeholder="Max 100 chars" />
     </Variant>
@@ -88,20 +125,18 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       </div>
     </Variant>
 
-    <Variant title="Standalone with label + hint" id="standalone-label-hint">
-      <Input
-        v-model="model"
-        label="Full name"
-        hint="As it appears on your ID"
-        variant="bordered"
-        placeholder="John Doe"
-      />
-    </Variant>
-
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="email" label="Email" hint="We'll never share it">
           <Input type="email" required placeholder="you@example.com" />
+        </FormField>
+      </Form>
+    </Variant>
+
+    <Variant title="Floating label" id="floating-label" class="p-4">
+      <Form v-model="formData">
+        <FormField name="name" floating label="Name">
+          <Input type="text" placeholder="Name" required variant="bordered" />
         </FormField>
       </Form>
     </Variant>
@@ -142,6 +177,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
 ## Description
 Text input component built on the DaisyUI `input` element.
 Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Add `#start`/`#end` slots for icons, prefixes, or suffixes — they activate the addon wrapper automatically.
 
 ## API
 
@@ -152,24 +188,24 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `modelValue` | `string \| number` | `.number`, `.trim` | Bound value. |
 
 ### Props
-| Prop            | Type                    | Default               | Configurable       | Description                                        |
-|-----------------|-------------------------|-----------------------|--------------------|----------------------------------------------------|
-| `color`         | `InputColor`            | `undefined`           | :white_check_mark: | Color variant.                                     |
-| `size`          | `InputSize`             | `'md'`                | :white_check_mark: | Size.                                              |
-| `variant`       | `'bordered' \| 'ghost'` | `undefined`           | :white_check_mark: | Visual style variant.                              |
-| `counter`       | `boolean`               | `false`               | :white_check_mark: | Shows character counter.                           |
-| `minLength`     | `number`                | `undefined`           | :white_check_mark: | Min length (counter warning + native).             |
-| `maxLength`     | `number`                | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`). |
-| `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                    |
-| `type`          | `InputType`             | `'text'`              | :x:                | HTML input type.                                   |
-| `defaultValue`  | `string \| number`      | `undefined`           | :x:                | Fallback when model is empty.                      |
-| `label`         | `string`                | `undefined`           | :x:                | Inline label (standalone use).                     |
-| `hint`          | `string`                | `undefined`           | :x:                | Hint text (standalone use).                        |
-| `disabled`      | `boolean`               | `undefined`           | :x:                | Native disabled.                                   |
-| `required`      | `boolean`               | `undefined`           | :x:                | Native required.                                   |
-| `placeholder`   | `string`                | `undefined`           | :x:                | Placeholder text.                                  |
-| `pattern`       | `string`                | `undefined`           | :x:                | Constraint validation pattern.                     |
-| `title`         | `string`                | `undefined`           | :x:                | Pattern mismatch message.                          |
+| Prop            | Type                    | Default               | Configurable       | Description                                                               |
+|-----------------|-------------------------|-----------------------|--------------------|---------------------------------------------------------------------------|
+| `color`         | `InputColor`            | `undefined`           | :white_check_mark: | Color variant.                                                            |
+| `size`          | `InputSize`             | `'md'`                | :white_check_mark: | Size.                                                                     |
+| `variant`       | `'bordered' \| 'ghost'` | `undefined`           | :white_check_mark: | Visual style variant.                                                     |
+| `counter`       | `boolean`               | `false`               | :white_check_mark: | Shows character counter.                                                  |
+| `minLength`     | `number`                | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                    |
+| `maxLength`     | `number`                | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                        |
+| `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                           |
+| `type`          | `InputType`             | `'text'`              | :x:                | HTML input type.                                                          |
+| `defaultValue`  | `string \| number`      | `undefined`           | :x:                | Fallback when model is empty.                                             |
+| `clearable`     | `boolean`               | `false`               | :x:                | Shows a ✕ button when the field has a value. Activates the addon wrapper. |
+| `disabled`      | `boolean`               | `undefined`           | :x:                | Native disabled.                                                          |
+| `readonly`      | `boolean`               | `undefined`           | :x:                | Native read-only.                                                         |
+| `required`      | `boolean`               | `undefined`           | :x:                | Native required (implicit `validator` class).                             |
+| `placeholder`   | `string`                | `undefined`           | :x:                | Placeholder text.                                                         |
+| `pattern`       | `string`                | `undefined`           | :x:                | Constraint validation pattern (implicit `validator` class).               |
+| `title`         | `string`                | `undefined`           | :x:                | Pattern mismatch message.                                                 |
 
 ### Expose
 
@@ -187,15 +223,20 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot      | Bindings                | Description                            |
-|-----------|-------------------------|----------------------------------------|
-| `label`   | -                       | Top-left inline label (standalone).    |
-| `hint`    | -                       | Bottom-left hint / error (standalone). |
-| `counter` | `{ current, min, max }` | Bottom-right character count.          |
+| Slot    | Bindings | Description                                            |
+|---------|----------|--------------------------------------------------------|
+| `start` | -        | Content placed before the input (icon, text, badge).   |
+| `end`   | -        | Content placed after the input (icon, text, suffix).   |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.input` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Note
+## Notes
+
+### Addon wrapper
+Using a `#start` or `#end` slot, or setting `clearable`, automatically switches the root element to a `<label class="input" />` wrapper, enabling icons and suffix text. This makes the component compatible with `<Join />`.
+
+### Implicit validator
+The DaisyUI `validator` class (`:user-invalid` styling) is applied automatically when `required`, `pattern`, `minlength`, `maxlength`, `min`, or `max` are present.
 
 ### Counter cascade
 Counter resolution order (first defined wins):
@@ -205,12 +246,20 @@ Counter resolution order (first defined wins):
 4. Plugin config
 5. Default: `false`
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.input` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
-
 ## Usage
 ```vue
-<!-- Standalone -->
-<Input v-model="name" label="Name" variant="bordered" counter :max-length="100" />
+<!-- Standalone with placeholder -->
+<Input v-model="name" placeholder="Full name" variant="bordered" />
+
+<!-- With start icon -->
+<Input v-model="query" placeholder="Search…" variant="bordered">
+  <template #start>
+    <SearchIcon class="size-4 opacity-50" />
+  </template>
+</Input>
+
+<!-- Clearable -->
+<Input v-model="email" clearable placeholder="you@example.com" />
 
 <!-- Inside FormField -->
 <FormField name="email" label="Email">
@@ -219,7 +268,7 @@ Counter resolution order (first defined wins):
 
 <!-- Counter inherited from Form -->
 <Form v-model="data" counter>
-  <FormField name="bio">
+  <FormField name="bio" label="Bio">
     <Input :max-length="200" />
   </FormField>
 </Form>

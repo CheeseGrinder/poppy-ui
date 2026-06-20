@@ -1,11 +1,12 @@
 <script lang="ts">
 import type { FormFieldContext } from '@/components/data/form-field/form-field.context'
 import { FORM_FIELD_CONTEXT_KEY } from '@/components/data/form-field/form-field.context'
+import { RADIO_GROUP_CONTEXT_KEY } from '@/components/data/radio-group/radio-group.context'
 import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { computed, inject, useId, useTemplateRef, watch } from 'vue'
+import { computed, inject, useId, useSlots, useTemplateRef } from 'vue'
 import { RADIO_CONFIG } from './radio.context'
 import type { RadioProps } from './radio.props'
 import type { RadioColor, RadioSize } from './radio.types'
@@ -34,51 +35,51 @@ const sizes: ComponentClass<'radio', RadioSize> = {
 const props = defineProps<RadioProps>()
 const model = defineModel<string | number | boolean>()
 const inputEl = useTemplateRef('inputEl')
+const slots = useSlots()
 
-const config = useComponentConfig(RADIO_CONFIG, props, {
-  size: 'md',
-})
+const config = useComponentConfig(RADIO_CONFIG, props, { size: 'md' })
 
 const inputId = `radio-${useId()}`
 
-// Try to get name from FormField context
+// Priority: FormField > RadioGroup > standalone prop
 const fieldCtx = inject(FORM_FIELD_CONTEXT_KEY, null as FormFieldContext | null)
-const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? 'radio-group')
+const groupCtx = inject(RADIO_GROUP_CONTEXT_KEY, null)
+
+const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? groupCtx?.name ?? 'radio-group')
 
 // Bridge to form field context
 const { field, onBlur } = useFormField({
-  required: computed(() => !!props.required),
+  required: computed(() => !!props.required || !!groupCtx?.required.value),
   inputEl,
 })
 
-// Resolved value: field context wins when inside FormField
-const resolvedValue = computed(() =>
-  field ? field.value.value : model.value
-)
+// Resolved value priority: FormField > RadioGroup > local model
+const resolvedValue = computed(() => {
+  if (field) return field.value.value
+  if (groupCtx) return groupCtx.modelValue.value
+  return model.value
+})
 
 // Checked state
 const isChecked = computed(() => resolvedValue.value === props.value)
 
-// Sync model with field context
-watch(
-  () => field?.value.value,
-  (val) => {
-    if (val !== undefined && model.value !== val) {
-      model.value = val as string | number | boolean
-    }
-  }
-)
-
 function handleChange(): void {
-  const value = props.value
-  model.value = value
-  field?.setValue(value)
-  field?.setDirty(true)
+  model.value = props.value
+  if (field) {
+    field.setValue(props.value)
+    field.setDirty(true)
+  }
+  else if (groupCtx) {
+    groupCtx.setValue(props.value)
+  }
 }
 
-function handleBlur(): void {
-  onBlur()
-}
+// ── Description / hint ────────────────────────────────────────────────────────
+
+const hasError = computed(() => !!field?.error.value)
+const hasDescription = computed(() => !!(props.description || slots.description))
+const hasHint = computed(() => !!(props.hint || slots.hint))
+const hasLabel = computed(() => hasDescription.value || hasHint.value)
 
 defineExpose({
   $el: inputEl,
@@ -87,23 +88,64 @@ defineExpose({
 </script>
 
 <template>
-  <div class="flex items-center gap-3">
+  <!-- Radio with description / hint label to the right -->
+  <label
+    v-if="hasLabel"
+    :for="inputId"
+    class="flex cursor-pointer items-start gap-2"
+    :class="{ 'opacity-60 pointer-events-none': disabled }"
+  >
     <input
-      ref="inputEl"
       :id="inputId"
+      ref="inputEl"
       type="radio"
-      class="radio bg-base-200"
-      :class="[getClass(colors, config.color), getClass(sizes, config.size)]"
+      class="radio mt-0.5"
+      :class="[
+        getClass(colors, config.color),
+        getClass(sizes, config.size),
+        { 'radio-error': hasError },
+        { validator: required },
+      ]"
       :name="resolvedName"
       :value="value"
       :checked="isChecked"
       :disabled="disabled"
       :required="required"
+      :aria-invalid="hasError || undefined"
       @change="handleChange"
-      @blur="handleBlur"
+      @blur="onBlur"
     />
-    <label v-if="description || $slots.description" :for="inputId" class="text-sm text-base-content/70 cursor-pointer">
-      <slot name="description">{{ description }}</slot>
-    </label>
-  </div>
+    <span class="flex flex-col gap-0.5">
+      <span v-if="hasDescription" class="label-text leading-snug">
+        <slot name="description">{{ description }}</slot>
+        <span v-if="required" class="text-error ml-0.5" aria-hidden="true">*</span>
+      </span>
+      <span v-if="hasHint" class="label-text text-xs text-base-content/60 leading-snug">
+        <slot name="hint">{{ hint }}</slot>
+      </span>
+    </span>
+  </label>
+
+  <!-- Bare radio — no label -->
+  <input
+    v-else
+    :id="inputId"
+    ref="inputEl"
+    type="radio"
+    class="radio"
+    :class="[
+      getClass(colors, config.color),
+      getClass(sizes, config.size),
+      { 'radio-error': hasError },
+      { validator: required },
+    ]"
+    :name="resolvedName"
+    :value="value"
+    :checked="isChecked"
+    :disabled="disabled"
+    :required="required"
+    :aria-invalid="hasError || undefined"
+    @change="handleChange"
+    @blur="onBlur"
+  />
 </template>

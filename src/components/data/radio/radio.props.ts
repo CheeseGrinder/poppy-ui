@@ -40,7 +40,14 @@ export interface RadioProps extends RadioConfigurableProps, NativeRadio {
   value: string | number | boolean
 
   /**
-   * Description text displayed next to the radio.
+   * Primary label text displayed to the right of the radio.
+   * Use the `#description` slot for richer content.
    */
   description?: string
+
+  /**
+   * Secondary hint text displayed below the description label.
+   * Use the `#hint` slot for richer content.
+   */
+  hint?: string
 }

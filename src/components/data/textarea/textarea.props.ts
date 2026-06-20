@@ -58,7 +58,9 @@ export interface TextareaConfigurableProps {
 interface NativeTextarea {
   /** Disables the textarea. */
   disabled?: TextareaHTMLAttributes['disabled']
-  /** Marks the field as required. */
+  /** Makes the textarea read-only. */
+  readonly?: TextareaHTMLAttributes['readonly']
+  /** Marks the field as required — signals FormField to display "*". */
   required?: TextareaHTMLAttributes['required']
   /** Placeholder text. */
   placeholder?: TextareaHTMLAttributes['placeholder']
@@ -66,10 +68,4 @@ interface NativeTextarea {
   rows?: number | `${number}`
 }
 
-export interface TextareaProps extends TextareaConfigurableProps, NativeTextarea {
-  /** Inline label text (standalone use). */
-  label?: string
-
-  /** Hint / helper text rendered below the textarea. */
-  hint?: string
-}
+export interface TextareaProps extends TextareaConfigurableProps, NativeTextarea {}

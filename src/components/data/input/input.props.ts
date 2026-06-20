@@ -50,7 +50,9 @@ export interface InputConfigurableProps {
 interface NativeInput {
   /** Disables the input. */
   disabled?: InputHTMLAttributes['disabled']
-  /** Marks the field as required. */
+  /** Makes the input read-only. */
+  readonly?: InputHTMLAttributes['readonly']
+  /** Marks the field as required — signals FormField to display "*". */
   required?: InputHTMLAttributes['required']
   /** Placeholder text. */
   placeholder?: InputHTMLAttributes['placeholder']
@@ -75,9 +77,11 @@ export interface InputProps extends InputConfigurableProps, NativeInput {
    */
   defaultValue?: string | number
 
-  /** Inline label text (standalone use). */
-  label?: string
-
-  /** Hint / helper text rendered below the input. */
-  hint?: string
+  /**
+   * Displays a clear (✕) button when the field has a value.
+   * Requires the addon wrapper (`start`/`end` slots or `clearable` itself triggers it).
+   *
+   * @default false
+   */
+  clearable?: boolean
 }

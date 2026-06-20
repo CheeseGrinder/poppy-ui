@@ -23,7 +23,7 @@ export interface FormFieldProps extends FormFieldConfigurableProps {
   name: string
 
   /**
-   * Label text displayed above the field.
+   * Label text rendered as the fieldset legend above the field.
    */
   label?: string
 
@@ -31,4 +31,12 @@ export interface FormFieldProps extends FormFieldConfigurableProps {
    * Helper text displayed below the field (hidden when an error is active).
    */
   hint?: string
+
+  /**
+   * When true, wraps the field in a `floating-label` layout so the label
+   * floats above the input when focused or filled.
+   *
+   * @default false
+   */
+  floating?: boolean
 }

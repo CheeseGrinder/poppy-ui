@@ -35,8 +35,10 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
           :options="['xs', 'sm', 'md', 'lg', 'xl']"
         />
         <HstCheckbox v-model="(state.disabled as boolean)" title="disabled" />
+        <HstCheckbox v-model="(state.readonly as boolean)" title="readonly" />
         <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.description" title="description" />
+        <HstText v-model="state.hint" title="hint" />
       </template>
 
       <Toggle v-model="model" v-bind="state" />
@@ -71,6 +73,13 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
       </div>
     </Variant>
 
+    <Variant title="Readonly" id="readonly">
+      <div class="flex gap-4">
+        <Toggle v-model="model" readonly />
+        <Toggle :model-value="true" readonly description="Cannot be toggled" />
+      </div>
+    </Variant>
+
     <Variant title="With Description" id="with-description">
       <div class="flex flex-col gap-3">
         <Toggle v-model="model" description="Enable email notifications" />
@@ -78,10 +87,30 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
       </div>
     </Variant>
 
+    <Variant title="With Hint" id="with-hint">
+      <div class="flex flex-col gap-3">
+        <Toggle
+          v-model="model"
+          description="Enable email notifications"
+          hint="We'll send you updates about your account activity"
+        />
+        <Toggle
+          v-model="model"
+          color="primary"
+          description="Dark mode"
+          hint="Reduces eye strain in low-light environments"
+        />
+      </div>
+    </Variant>
+
+    <Variant title="Required" id="required">
+      <Toggle v-model="model" description="I accept the terms and conditions" required />
+    </Variant>
+
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="notifications" label="Notifications">
-          <Toggle required />
+          <Toggle required description="Enable email notifications" />
         </FormField>
       </Form>
     </Variant>
@@ -107,13 +136,15 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Props
 
-| Prop          | Type          | Default     | Configurable       | Description                                                |
-|---------------|---------------|-------------|--------------------|------------------------------------------------------------|
-| `color`       | `ToggleColor` | `undefined` | :white_check_mark: | Color variant.                                             |
-| `size`        | `ToggleSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
-| `description` | `string`      | `undefined` | :x:                | Secondary text displayed next to the toggle.               |
-| `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                           |
-| `required`    | `boolean`     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+| Prop          | Type          | Default     | Configurable       | Description                                                      |
+|---------------|---------------|-------------|--------------------|--------------------------------------------------------------------|
+| `color`       | `ToggleColor` | `undefined` | :white_check_mark: | Color variant.                                                   |
+| `size`        | `ToggleSize`  | `'md'`      | :white_check_mark: | Size.                                                            |
+| `description` | `string`      | `undefined` | :x:                | Primary label text displayed to the right of the toggle.         |
+| `hint`        | `string`      | `undefined` | :x:                | Secondary hint text displayed below the description.             |
+| `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                                 |
+| `readonly`    | `boolean`     | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
+| `required`    | `boolean`     | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
 
 ### Expose
 
@@ -131,9 +162,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot          | Bindings | Description                                  |
-|---------------|----------|----------------------------------------------|
-| `description` | -        | Secondary text displayed next to the toggle. |
+| Slot          | Bindings | Description                                          |
+|---------------|----------|------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of toggle. |
+| `hint`        | -        | Secondary hint text displayed below the description. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.toggle` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
@@ -145,9 +177,19 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <!-- With description -->
 <Toggle v-model="enabled" description="Enable dark mode" />
 
+<!-- With description and hint -->
+<Toggle
+  v-model="enabled"
+  description="Enable email notifications"
+  hint="We'll send updates about your account"
+/>
+
+<!-- Required -->
+<Toggle v-model="agreed" description="I accept the terms" required />
+
 <!-- Inside FormField -->
 <FormField name="notifications" label="Notifications">
-  <Toggle required />
+  <Toggle required description="Enable email notifications" />
 </FormField>
 ```
 </docs>

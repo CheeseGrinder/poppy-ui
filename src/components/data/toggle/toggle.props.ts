@@ -24,7 +24,17 @@ interface NativeToggle {
 
 export interface ToggleProps extends ToggleConfigurableProps, NativeToggle {
   /**
-   * Secondary description displayed next to the toggle.
+   * Primary label text displayed to the right of the toggle.
+   * Use the `#description` slot for richer content.
    */
   description?: string
+  /**
+   * Secondary hint text displayed below the description label.
+   * Use the `#hint` slot for richer content.
+   */
+  hint?: string
+  /**
+   * Makes the toggle read-only (prevents toggling).
+   */
+  readonly?: boolean
 }

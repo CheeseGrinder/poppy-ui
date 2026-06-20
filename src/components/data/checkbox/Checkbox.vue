@@ -34,7 +34,6 @@ const model = defineModel<boolean>()
 const config = useComponentConfig(CHECKBOX_CONFIG, props, { size: 'md' })
 
 const inputEl = useTemplateRef('inputEl')
-
 const slots = useSlots()
 
 // ── Indeterminate — must be set imperatively on the DOM node ─────────────────
@@ -59,6 +58,10 @@ const resolvedValue = computed(() =>
 )
 
 function handleChange(event: Event): void {
+  if (props.readonly) {
+    event.preventDefault()
+    return
+  }
   const checked = (event.target as HTMLInputElement).checked
   model.value = checked
   field?.setValue(checked)
@@ -66,13 +69,12 @@ function handleChange(event: Event): void {
   clearError()
 }
 
-// ── Error ────────────────────────────────────────────────────────────────────
+// ── Error / description ──────────────────────────────────────────────────────
 
 const hasError = computed(() => !!field?.error.value)
-
-// ── Description presence ─────────────────────────────────────────────────────
-
 const hasDescription = computed(() => !!(props.description || slots.description))
+const hasHint = computed(() => !!(props.hint || slots.hint))
+const hasLabel = computed(() => hasDescription.value || hasHint.value)
 
 defineExpose({
   $el: inputEl,
@@ -81,26 +83,12 @@ defineExpose({
 </script>
 
 <template>
-  <!-- Bare checkbox — no description -->
-  <input
-    v-if="!hasDescription"
-    ref="inputEl"
-    type="checkbox"
-    class="checkbox"
-    :class="[
-      getClass(colors, config.color),
-      getClass(sizes, config.size),
-      { 'checkbox-error': hasError },
-    ]"
-    :checked="resolvedValue"
-    :disabled="disabled"
-    :required="required"
-    @change="handleChange"
-    @blur="onBlur"
-  />
-
-  <!-- Checkbox with description -->
-  <label v-else class="flex cursor-pointer items-start gap-2">
+  <!-- Checkbox with description / hint label to the right -->
+  <label
+    v-if="hasLabel"
+    class="flex cursor-pointer items-start gap-2"
+    :class="{ 'opacity-60 pointer-events-none': disabled || readonly }"
+  >
     <input
       ref="inputEl"
       type="checkbox"
@@ -109,15 +97,43 @@ defineExpose({
         getClass(colors, config.color),
         getClass(sizes, config.size),
         { 'checkbox-error': hasError },
+        { validator: required },
       ]"
       :checked="resolvedValue"
       :disabled="disabled"
       :required="required"
+      :aria-invalid="hasError || undefined"
       @change="handleChange"
       @blur="onBlur"
     />
-    <span class="label-text text-base-content/60">
-      <slot name="description">{{ description }}</slot>
+    <span class="flex flex-col gap-0.5">
+      <span v-if="hasDescription" class="label-text leading-snug">
+        <slot name="description">{{ description }}</slot>
+        <span v-if="required" class="text-error ml-0.5" aria-hidden="true">*</span>
+      </span>
+      <span v-if="hasHint" class="label-text text-xs text-base-content/60 leading-snug">
+        <slot name="hint">{{ hint }}</slot>
+      </span>
     </span>
   </label>
+
+  <!-- Bare checkbox — no label -->
+  <input
+    v-else
+    ref="inputEl"
+    type="checkbox"
+    class="checkbox"
+    :class="[
+      getClass(colors, config.color),
+      getClass(sizes, config.size),
+      { 'checkbox-error': hasError },
+      { validator: required },
+    ]"
+    :checked="resolvedValue"
+    :disabled="disabled"
+    :required="required"
+    :aria-invalid="hasError || undefined"
+    @change="handleChange"
+    @blur="onBlur"
+  />
 </template>

@@ -36,9 +36,11 @@ const formData = ref<Record<string, unknown>>({ agree: false })
           :options="['xs', 'sm', 'md', 'lg', 'xl']"
         />
         <HstCheckbox v-model="(state.indeterminate as boolean)" title="indeterminate" />
-        <HstCheckbox v-model="state.disabled" title="disabled" />
-        <HstCheckbox v-model="state.required" title="required" />
+        <HstCheckbox v-model="(state.disabled as boolean)" title="disabled" />
+        <HstCheckbox v-model="(state.readonly as boolean)" title="readonly" />
+        <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.description" title="description" />
+        <HstText v-model="state.hint" title="hint" />
       </template>
 
       <Checkbox v-model="model" v-bind="state" />
@@ -63,6 +65,7 @@ const formData = ref<Record<string, unknown>>({ agree: false })
         <Checkbox v-model="model" size="sm" />
         <Checkbox v-model="model" size="md" />
         <Checkbox v-model="model" size="lg" />
+        <Checkbox v-model="model" size="xl" />
       </div>
     </Variant>
 
@@ -77,6 +80,13 @@ const formData = ref<Record<string, unknown>>({ agree: false })
       </div>
     </Variant>
 
+    <Variant title="Readonly" id="readonly">
+      <div class="flex gap-4">
+        <Checkbox v-model="model" readonly />
+        <Checkbox :model-value="true" readonly description="Cannot be toggled" />
+      </div>
+    </Variant>
+
     <Variant title="With Description" id="with-description">
       <div class="flex flex-col gap-3">
         <Checkbox v-model="model" description="Enable notifications for new messages" />
@@ -84,10 +94,30 @@ const formData = ref<Record<string, unknown>>({ agree: false })
       </div>
     </Variant>
 
+    <Variant title="With Hint" id="with-hint">
+      <div class="flex flex-col gap-3">
+        <Checkbox
+          v-model="model"
+          description="Enable two-factor authentication"
+          hint="Adds an extra layer of security to your account"
+        />
+        <Checkbox
+          v-model="model"
+          color="primary"
+          description="Subscribe to the newsletter"
+          hint="You can unsubscribe at any time"
+        />
+      </div>
+    </Variant>
+
+    <Variant title="Required" id="required">
+      <Checkbox v-model="model" description="I accept the terms and conditions" required />
+    </Variant>
+
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="agree" label="Terms & conditions">
-          <Checkbox required />
+          <Checkbox required description="I agree to the terms and conditions" />
         </FormField>
       </Form>
     </Variant>
@@ -113,14 +143,16 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Props
 
-| Prop            | Type            | Default     | Configurable       | Description                                                |
-|-----------------|-----------------|-------------|--------------------|------------------------------------------------------------|
-| `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                             |
-| `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
-| `indeterminate` | `boolean`       | `false`     | :x:                | Renders the indeterminate visual state.                    |
-| `description`   | `string`        | `undefined` | :x:                | Secondary text displayed next to the checkbox.             |
-| `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                           |
-| `required`      | `boolean`       | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+| Prop            | Type            | Default     | Configurable       | Description                                                      |
+|-----------------|-----------------|-------------|--------------------|--------------------------------------------------------------------|
+| `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                                   |
+| `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                            |
+| `indeterminate` | `boolean`       | `false`     | :x:                | Renders the indeterminate visual state.                          |
+| `description`   | `string`        | `undefined` | :x:                | Primary label text displayed to the right of the checkbox.       |
+| `hint`          | `string`        | `undefined` | :x:                | Secondary hint text displayed below the description.             |
+| `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                                 |
+| `readonly`      | `boolean`       | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
+| `required`      | `boolean`       | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
 
 ### Expose
 
@@ -138,9 +170,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot          | Bindings | Description                                    |
-|---------------|----------|------------------------------------------------|
-| `description` | -        | Secondary text displayed next to the checkbox. |
+| Slot          | Bindings | Description                                                    |
+|---------------|----------|----------------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of the checkbox.     |
+| `hint`        | -        | Secondary hint text displayed below the description.           |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.checkbox` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
@@ -152,12 +185,22 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <!-- With description -->
 <Checkbox v-model="accepted" description="Subscribe to the newsletter" />
 
+<!-- With description and hint -->
+<Checkbox
+  v-model="enabled"
+  description="Enable two-factor authentication"
+  hint="Adds an extra layer of security"
+/>
+
+<!-- Required -->
+<Checkbox v-model="agreed" description="I accept the terms" required />
+
 <!-- Indeterminate -->
 <Checkbox v-model="partialSelection" indeterminate />
 
 <!-- Inside FormField -->
 <FormField name="agree" label="Terms & conditions">
-  <Checkbox required />
+  <Checkbox required description="I agree to the terms and conditions" />
 </FormField>
 ```
 </docs>

@@ -29,6 +29,13 @@ export interface FormFieldContext<T = unknown> {
   counter: ShallowRef<boolean | undefined>
   counterFormat: ShallowRef<string | ((c: number, min?: number, max?: number) => string) | undefined>
 
+  /**
+   * Counter display — pushed up by child inputs so FormField can render
+   * the counter on the same line as the error/hint.
+   */
+  counterText: ShallowRef<string>
+  counterColor: ShallowRef<string>
+
   /** Updates the field value in FormContext. */
   setValue: (value: unknown) => void
 
@@ -43,6 +50,9 @@ export interface FormFieldContext<T = unknown> {
 
   /** Sets the field error in FormContext. */
   setError: (message: string | undefined) => void
+
+  /** Called by child inputs to push counter text/color up to FormField for rendering. */
+  setCounterText: (text: string, colorClass: string) => void
 }
 
 export const FORM_FIELD_CONTEXT_KEY: InjectionKey<FormFieldContext> = Symbol('FormFieldContext')

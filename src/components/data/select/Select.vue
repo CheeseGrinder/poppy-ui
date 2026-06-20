@@ -529,7 +529,7 @@ defineExpose({
       <button
         ref="triggerEl"
         type="button"
-        class="select w-full text-left min-h-10 h-auto py-2 pr-10"
+        class="select w-full text-left min-h-10 h-auto py-2"
         :class="[
           getClass(selectColors, config.color),
           getClass(selectSizes, config.size),
@@ -537,6 +537,7 @@ defineExpose({
           disabled && 'select-disabled',
           hasServerError && 'select-error',
           readonly && 'cursor-default',
+          config.clearable && hasValue ? 'pr-14' : 'pr-10',
         ]"
         :tabindex="disabled ? '-1' : undefined"
         :disabled="disabled"
@@ -544,37 +545,46 @@ defineExpose({
         @click="toggle()"
         @keydown="onTriggerKeydown"
       >
-        <div v-if="multiple && selectedOptions.length > 0" class="flex flex-wrap gap-1">
-          <slot
-            v-for="opt in selectedOptions"
-            :key="String(opt.value)"
-            name="selected"
-            :option="opt"
-            :remove="() => removeSelected(opt)"
-          >
-            <Badge color="primary" size="sm" class="gap-1 cursor-default">
-              {{ opt.label }}
-              <button
-                v-if="!readonly"
-                type="button"
-                class="hover:opacity-70"
-                @click.stop="removeSelected(opt)"
-              >
-                <XIcon class="size-3" />
-              </button>
-            </Badge>
-          </slot>
+        <div class="flex items-center gap-2 min-w-0">
+          <!-- Start slot (icon, badge, prefix) -->
+          <slot name="start" />
+
+          <!-- Selected values -->
+          <div v-if="multiple && selectedOptions.length > 0" class="flex flex-wrap gap-1 flex-1 min-w-0">
+            <slot
+              v-for="opt in selectedOptions"
+              :key="String(opt.value)"
+              name="selected"
+              :option="opt"
+              :remove="() => removeSelected(opt)"
+            >
+              <Badge color="primary" size="sm" class="gap-1 cursor-default">
+                {{ opt.label }}
+                <button
+                  v-if="!readonly"
+                  type="button"
+                  class="hover:opacity-70"
+                  @click.stop="removeSelected(opt)"
+                >
+                  <XIcon class="size-3" />
+                </button>
+              </Badge>
+            </slot>
+          </div>
+
+          <template v-else-if="!multiple && selectedOptions.length > 0">
+            <slot name="selected" :option="selectedOptions[0]" :remove="onClear">
+              <span class="flex-1 min-w-0 truncate">{{ selectedOptions[0]?.label }}</span>
+            </slot>
+          </template>
+
+          <span v-else class="opacity-40 flex-1 min-w-0 truncate">
+            {{ placeholder || $t('common.field.select.placeholder') }}
+          </span>
+
+          <!-- End slot (icon, badge, suffix) -->
+          <slot name="end" />
         </div>
-
-        <template v-else-if="!multiple && selectedOptions.length > 0">
-          <slot name="selected" :option="selectedOptions[0]" :remove="onClear">
-            <span>{{ selectedOptions[0]?.label }}</span>
-          </slot>
-        </template>
-
-        <span v-else class="opacity-40">
-          {{ placeholder || $t('common.field.select.placeholder') }}
-        </span>
       </button>
 
       <ChevronDownIcon

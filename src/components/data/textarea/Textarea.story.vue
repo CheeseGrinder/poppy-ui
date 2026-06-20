@@ -47,11 +47,10 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
         <HstSlider v-model="state.maxLength" title="maxLength" :min="0" :max="500" />
         <HstSlider v-model="(state.rows as number)" title="rows" :min="1" :max="20" />
         <HstCheckbox v-model="(state.autoGrow as boolean)" title="autoGrow" />
-        <HstCheckbox v-model="state.disabled" title="disabled" />
-        <HstCheckbox v-model="state.required" title="required" />
+        <HstCheckbox v-model="(state.disabled as boolean)" title="disabled" />
+        <HstCheckbox v-model="(state.readonly as boolean)" title="readonly" />
+        <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.placeholder" title="placeholder" />
-        <HstText v-model="state.label" title="label" />
-        <HstText v-model="state.hint" title="hint" />
       </template>
 
       <Textarea v-model="model" v-bind="state" />
@@ -74,6 +73,10 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       <Textarea v-model="model" disabled placeholder="Disabled textarea" />
     </Variant>
 
+    <Variant title="Readonly" id="readonly">
+      <Textarea v-model="model" readonly placeholder="Readonly textarea" variant="bordered" />
+    </Variant>
+
     <Variant title="With Counter" id="with-counter">
       <Textarea v-model="model" counter :max-length="300" placeholder="Max 300 chars" />
     </Variant>
@@ -89,20 +92,18 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       </div>
     </Variant>
 
-    <Variant title="Standalone with label + hint" id="standalone-label-hint">
-      <Textarea
-        v-model="model"
-        label="Bio"
-        hint="Tell us a bit about yourself"
-        variant="bordered"
-        placeholder="I am…"
-      />
-    </Variant>
-
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="bio" label="Bio" hint="Max 500 characters">
           <Textarea required placeholder="Tell us about yourself" :max-length="500" />
+        </FormField>
+      </Form>
+    </Variant>
+
+    <Variant title="Floating label" id="floating-label">
+      <Form v-model="formData">
+        <FormField name="bio" floating>
+          <Textarea placeholder="Bio" :rows="3" variant="bordered" />
         </FormField>
       </Form>
     </Variant>
@@ -159,15 +160,14 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 | `size`          | `TextareaSize`        | `'md'`                | :white_check_mark: | Size.                                                                           |
 | `variant`       | `TextareaVariant`     | `undefined`           | :white_check_mark: | Visual style variant.                                                           |
 | `autoGrow`      | `boolean`             | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
-| `counter`       | `boolean`             | `false`               | :white_check_mark: | Shows character counter.                                                        |
+| `counter`       | `boolean`             | `false`               | :white_check_mark: | Shows character counter (pushed to FormField when inside one).                  |
 | `minLength`     | `number`              | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                          |
 | `maxLength`     | `number`              | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
 | `counterFormat` | `string \| CounterFn` | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |
 | `rows`          | `number \| string`    | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
-| `label`         | `string`              | `undefined`           | :x:                | Inline label (standalone use).                                                  |
-| `hint`          | `string`              | `undefined`           | :x:                | Hint text (standalone use).                                                     |
 | `disabled`      | `boolean`             | `undefined`           | :x:                | Native disabled.                                                                |
-| `required`      | `boolean`             | `undefined`           | :x:                | Native required.                                                                |
+| `readonly`      | `boolean`             | `undefined`           | :x:                | Native read-only.                                                               |
+| `required`      | `boolean`             | `undefined`           | :x:                | Native required (implicit `validator` class).                                   |
 | `placeholder`   | `string`              | `undefined`           | :x:                | Placeholder text.                                                               |
 
 ### Expose
@@ -184,17 +184,12 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 | `@input` | `Event` | Emitted on every keystroke (native input event).                                        |
 | `@blur`  | `Event` | Emitted when the textarea loses focus. Triggers validation when inside `<FormField />`. |
 
-### Slots
-
-| Slot      | Bindings                | Description                            |
-|-----------|-------------------------|----------------------------------------|
-| `label`   | -                       | Top-left inline label (standalone).    |
-| `hint`    | -                       | Bottom-left hint / error (standalone). |
-| `counter` | `{ current, min, max }` | Bottom-right character count.          |
-
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.textarea` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
-## Note
+## Notes
+
+### Implicit validator
+The DaisyUI `validator` class (`:user-invalid` styling) is applied automatically when `required`, `minlength`, or `maxlength` are present.
 
 ### Counter cascade
 Counter resolution order (first defined wins):
@@ -204,24 +199,22 @@ Counter resolution order (first defined wins):
 4. Plugin config
 5. Default: `false`
 
-> **Configurable** props can be set globally via the Poppy UI plugin (`components.textarea` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
-
 ## Usage
 ```vue
 <!-- Standalone -->
-<Textarea v-model="bio" label="Bio" variant="bordered" counter :max-length="300" />
+<Textarea v-model="bio" placeholder="Tell us about yourself" variant="bordered" />
 
 <!-- Auto grow -->
 <Textarea v-model="notes" auto-grow placeholder="Grows as you type…" />
 
 <!-- Inside FormField -->
-<FormField name="bio" label="Bio">
+<FormField name="bio" label="Bio" hint="Max 500 characters">
   <Textarea required :max-length="500" />
 </FormField>
 
 <!-- Counter inherited from Form -->
 <Form v-model="data" counter>
-  <FormField name="bio">
+  <FormField name="bio" label="Bio">
     <Textarea :max-length="300" />
   </FormField>
 </Form>

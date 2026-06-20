@@ -1,6 +1,8 @@
 <script lang="ts">
+import FieldSet from '@/components/data/field-set/FieldSet.vue'
 import Form from '@/components/data/form/Form.vue'
 import FormField from '@/components/data/form-field/FormField.vue'
+import RadioGroup from '@/components/data/radio-group/RadioGroup.vue'
 import { reactive, ref } from 'vue'
 import { createI18n } from 'vue-i18n'
 import Radio from './Radio.vue'
@@ -34,8 +36,10 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
           title="size"
           :options="['xs', 'sm', 'md', 'lg', 'xl']"
         />
-        <HstCheckbox v-model="state.disabled" title="disabled" />
+        <HstCheckbox v-model="(state.disabled as boolean)" title="disabled" />
+        <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.description" title="description" />
+        <HstText v-model="state.hint" title="hint" />
       </template>
 
       <div class="flex gap-4">
@@ -83,11 +87,59 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
       </div>
     </Variant>
 
+    <Variant title="With Hint" id="with-hint">
+      <div class="flex flex-col gap-3">
+        <Radio
+          v-model="model"
+          value="free"
+          description="Free"
+          hint="Up to 3 projects, community support"
+        />
+        <Radio
+          v-model="model"
+          value="pro"
+          color="primary"
+          description="Pro — 9€/month"
+          hint="Unlimited projects, priority support"
+        />
+        <Radio
+          v-model="model"
+          value="enterprise"
+          color="secondary"
+          description="Enterprise"
+          hint="Custom pricing, dedicated support"
+        />
+      </div>
+    </Variant>
+
+    <Variant title="Via RadioGroup" id="via-radio-group">
+      <!-- RadioGroup manages the shared name + v-model when outside FormField -->
+      <RadioGroup v-model="model">
+        <div class="flex flex-col gap-2">
+          <Radio value="free" description="Free" hint="Up to 3 projects" />
+          <Radio value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
+          <Radio value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
+        </div>
+      </RadioGroup>
+    </Variant>
+
+    <Variant title="Via RadioGroup inside FieldSet" id="radio-group-field-set">
+      <FieldSet legend="Subscription plan" bordered>
+        <RadioGroup v-model="model" class="mt-2">
+          <div class="flex flex-col gap-2">
+            <Radio value="free" description="Free" hint="Up to 3 projects" />
+            <Radio value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
+            <Radio value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
+          </div>
+        </RadioGroup>
+      </FieldSet>
+    </Variant>
+
     <Variant title="Inside FormField" id="inside-form-field">
-      <!-- FormField provides the `name` automatically to all child Radio inputs -->
+      <!-- FormField provides the name automatically to all child Radio inputs -->
       <Form v-model="formData">
         <FormField name="plan" label="Plan">
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2 mt-1">
             <Radio value="free" description="Free" required />
             <Radio value="pro" description="Pro — 9€/month" />
             <Radio value="enterprise" description="Enterprise" />
@@ -105,7 +157,7 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
 ## Description
 
 Radio button component built on the DaisyUI `radio` element.
-Radio buttons are grouped by sharing the same `v-model` and `name`. When inside a `<FormField />`, the `name` is inferred automatically from the field name.
+Radios are grouped by sharing the same `v-model` / `name`, provided automatically by `<RadioGroup />` or `<FormField />`.
 
 ## API
 
@@ -116,15 +168,17 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 | `modelValue` | `string \| number \| boolean` | -         | Bound group value. Checked when equal to `props.value`. |
 
 ### Props
-| Prop          | Type                          | Default     | Configurable       | Description                                                             |
-|---------------|-------------------------------|-------------|--------------------|-------------------------------------------------------------------------|
-| `value`       | `string \| number \| boolean` | `undefined` | :x:                | The value this radio represents (required).                             |
-| `color`       | `RadioColor`                  | `undefined` | :white_check_mark: | Color variant.                                                          |
-| `size`        | `RadioSize`                   | `'md'`      | :white_check_mark: | Size.                                                                   |
-| `description` | `string`                      | `undefined` | :x:                | Secondary text displayed next to the radio button.                      |
-| `name`        | `string`                      | `undefined` | :x:                | Input group name. Inferred from `<FormField />` name when not provided. |
-| `disabled`    | `boolean`                     | `undefined` | :x:                | Native disabled.                                                        |
-| `required`    | `boolean`                     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.              |
+
+| Prop          | Type                          | Default     | Configurable       | Description                                                                                |
+|---------------|-------------------------------|-------------|--------------------|--------------------------------------------------------------------------------------------|
+| `value`       | `string \| number \| boolean` | `undefined` | :x:                | The value this radio represents (required).                                                |
+| `color`       | `RadioColor`                  | `undefined` | :white_check_mark: | Color variant.                                                                             |
+| `size`        | `RadioSize`                   | `'md'`      | :white_check_mark: | Size.                                                                                      |
+| `description` | `string`                      | `undefined` | :x:                | Primary label text displayed to the right of the radio button.                             |
+| `hint`        | `string`                      | `undefined` | :x:                | Secondary hint text displayed below the description.                                       |
+| `name`        | `string`                      | `undefined` | :x:                | Input group name. Inferred from `<FormField />` or `<RadioGroup />` when not provided.     |
+| `disabled`    | `boolean`                     | `undefined` | :x:                | Native disabled.                                                                           |
+| `required`    | `boolean`                     | `undefined` | :x:                | Native required. Displays `"*"` next to the description.                                   |
 
 ### Expose
 
@@ -142,24 +196,33 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 
 ### Slots
 
-| Slot          | Bindings | Description                                        |
-|---------------|----------|----------------------------------------------------|
-| `description` | -        | Secondary text displayed next to the radio button. |
+| Slot          | Bindings | Description                                              |
+|---------------|----------|----------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of the radio.  |
+| `hint`        | -        | Secondary hint text displayed below the description.     |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.radio` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
 ## Usage
 ```vue
-<!-- Standalone group -->
-<Radio v-model="plan" value="free" description="Free tier" />
-<Radio v-model="plan" value="pro" description="Pro — 9€/month" />
+<!-- Via RadioGroup (standalone, outside FormField) -->
+<RadioGroup v-model="plan">
+  <Radio value="free" description="Free" hint="Up to 3 projects" />
+  <Radio value="pro" color="primary" description="Pro — 9€/month" />
+</RadioGroup>
 
-<!-- Inside FormField — name inferred automatically -->
+<!-- Via RadioGroup inside FieldSet -->
+<FieldSet legend="Plan" bordered>
+  <RadioGroup v-model="plan">
+    <Radio value="free" description="Free" />
+    <Radio value="pro" description="Pro" />
+  </RadioGroup>
+</FieldSet>
+
+<!-- Inside FormField — name inferred automatically, no RadioGroup needed -->
 <FormField name="plan" label="Plan">
-  <div class="flex flex-col gap-2">
-    <Radio value="free" description="Free" required />
-    <Radio value="pro" description="Pro — 9€/month" />
-  </div>
+  <Radio value="free" description="Free" required />
+  <Radio value="pro" description="Pro — 9€/month" />
 </FormField>
 ```
 </docs>

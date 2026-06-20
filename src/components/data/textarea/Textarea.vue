@@ -5,7 +5,7 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { computed, inject, useTemplateRef } from 'vue'
+import { computed, inject, useAttrs, useTemplateRef, watchEffect } from 'vue'
 import { TEXTAREA_CONFIG } from './textarea.context'
 import type { TextareaProps } from './textarea.props'
 import type { TextareaColor, TextareaSize, TextareaVariant } from './textarea.types'
@@ -36,12 +36,12 @@ const variants: ComponentClass<'textarea', TextareaVariant> = {
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<TextareaProps>()
 
 /**
- * The current text content of the textarea.
- * Supports the `.trim` modifier:
- * - `v-model.trim` → trims leading and trailing whitespace on update
+ * Bound string value.
  */
 const model = defineModel<string>()
 
@@ -55,25 +55,26 @@ const contextOverrides = {
   get counterFormat() { return fieldCtx?.counterFormat.value ?? formCtx?.counterFormat.value },
 }
 
-const config = useComponentConfig(
-  TEXTAREA_CONFIG,
-  props,
-  { size: 'md', rows: 4, autoGrow: false, counter: false },
-  contextOverrides,
-)
+// @ts-ignore - Type too complex
+const config = useComponentConfig(TEXTAREA_CONFIG, props, { size: 'md', counter: false }, contextOverrides)
 
-// ── Element ref + form field ─────────────────────────────────────────────────
+// ── Element ref ──────────────────────────────────────────────────────────────
 
 const textareaEl = useTemplateRef('textareaEl')
+const attrs = useAttrs()
 
-const { field, fieldValue, onBlur, clearError } = useFormField<string>({
+// ── Form field ───────────────────────────────────────────────────────────────
+
+const { field, onBlur, clearError } = useFormField<string>({
   required: computed(() => !!props.required),
-  inputEl: textareaEl,
+  inputEl: textareaEl as any,
 })
 
 // ── Value resolution ─────────────────────────────────────────────────────────
 
-const resolvedValue = computed(() => field ? fieldValue.value : model.value)
+const resolvedValue = computed(() =>
+  field ? (field.value.value as string | undefined) : model.value,
+)
 
 function handleUpdate(event: Event): void {
   const raw = (event.target as HTMLTextAreaElement).value
@@ -83,31 +84,53 @@ function handleUpdate(event: Event): void {
   clearError()
 }
 
+// ── Implicit validator ───────────────────────────────────────────────────────
+
+const hasConstraints = computed(() =>
+  !!props.required
+  || attrs.minlength != null
+  || attrs.maxlength != null,
+)
+
 // ── Counter ──────────────────────────────────────────────────────────────────
 
 const currentLength = computed(() => (resolvedValue.value ?? '').length)
-
 const showCounter = computed(() => config.value.counter)
 
-const formattedCounter = computed(() => {
+const counterText = computed<string>(() => {
+  if (!showCounter.value) return ''
   const fmt = config.value.counterFormat ?? '{current} / {max}'
   const current = currentLength.value
   const min = config.value.minLength
   const max = config.value.maxLength
-
   if (typeof fmt === 'function') return fmt(current, min, max)
-
   return fmt
     .replace('{current}', String(current))
     .replace('{min}', min != null ? String(min) : '')
     .replace('{max}', max != null ? String(max) : '')
 })
 
-// ── Error display ────────────────────────────────────────────────────────────
+const counterColor = computed<string>(() => {
+  const max = config.value.maxLength
+  const min = config.value.minLength
+  const current = currentLength.value
+  if (max != null && current > max) return 'text-error'
+  if (min != null && current < min) return 'text-warning'
+  return ''
+})
 
-const activeError = computed(() => field?.error.value)
+// Push counter up to FormField
+watchEffect(() => {
+  if (!field) return
+  field.setCounterText(
+    showCounter.value ? counterText.value : '',
+    showCounter.value ? counterColor.value : '',
+  )
+})
 
-const hasError = computed(() => !!activeError.value)
+// ── Error ────────────────────────────────────────────────────────────────────
+
+const hasError = computed(() => !!field?.error.value)
 
 defineExpose({
   $el: textareaEl,
@@ -116,68 +139,30 @@ defineExpose({
 </script>
 
 <template>
-  <div class="w-full">
-    <!-- Top label row — standalone use only -->
-    <div v-if="!field && (label || $slots.label)" class="label">
-      <span class="label-text">
-        <slot name="label">{{ label }}</slot>
-      </span>
-    </div>
+  <textarea
+    ref="textareaEl"
+    v-bind="$attrs"
+    class="textarea w-full"
+    :class="[
+      getClass(colors, config.color),
+      getClass(sizes, config.size),
+      getClass(variants, config.variant),
+      { 'textarea-error': hasError },
+      { validator: hasConstraints },
+      { 'resize-none': !autoGrow },
+    ]"
+    :value="resolvedValue"
+    :disabled="disabled"
+    :readonly="readonly"
+    :required="required"
+    :placeholder="placeholder"
+    :rows="rows"
+    @input="handleUpdate"
+    @blur="onBlur"
+  />
 
-    <textarea
-      ref="textareaEl"
-      class="textarea w-full"
-      :class="[
-        getClass(colors, config.color),
-        getClass(sizes, config.size),
-        getClass(variants, config.variant),
-        { 'textarea-error': hasError },
-        { 'field-sizing-content': config.autoGrow },
-      ]"
-      :value="resolvedValue"
-      :disabled="disabled"
-      :required="required"
-      :placeholder="placeholder"
-      :rows="config.autoGrow ? undefined : config.rows"
-      :maxlength="config.maxLength"
-      :minlength="config.minLength"
-      @input="handleUpdate"
-      @blur="onBlur"
-    />
-
-    <!-- Bottom label row — standalone use only -->
-    <div
-      v-if="!field && (activeError || hint || $slots.hint || showCounter)"
-      class="label"
-    >
-      <span
-        class="label-text-alt"
-        :class="{ 'text-error': activeError }"
-      >
-        <slot name="hint">{{ activeError || hint }}</slot>
-      </span>
-      <span v-if="showCounter" class="label-text-alt">
-        <slot
-          name="counter"
-          :current="currentLength"
-          :min="config.minLength"
-          :max="config.maxLength"
-        >
-          {{ formattedCounter }}
-        </slot>
-      </span>
-    </div>
-
-    <!-- Counter slot exposed for FormField's bottom row when inside a FormField -->
-    <template v-if="field && showCounter">
-      <slot
-        name="counter"
-        :current="currentLength"
-        :min="config.minLength"
-        :max="config.maxLength"
-      >
-        <!-- rendered by FormField in its own label row -->
-      </slot>
-    </template>
+  <!-- Standalone counter (no FormField) -->
+  <div v-if="!field && showCounter" class="flex justify-end mt-1">
+    <span class="text-xs" :class="counterColor">{{ counterText }}</span>
   </div>
 </template>
