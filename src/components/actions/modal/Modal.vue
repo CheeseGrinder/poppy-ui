@@ -79,6 +79,7 @@ function onClose() {
 }
 
 defineExpose({
+  $el: dialogEl,
   open,
   close,
 })

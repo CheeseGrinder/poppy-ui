@@ -108,6 +108,11 @@ const formattedCounter = computed(() => {
 const activeError = computed(() => field?.error.value)
 
 const hasError = computed(() => !!activeError.value)
+
+defineExpose({
+  $el: textareaEl,
+  focus: () => textareaEl.value?.focus(),
+})
 </script>
 
 <template>

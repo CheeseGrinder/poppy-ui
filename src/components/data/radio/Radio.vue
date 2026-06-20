@@ -79,6 +79,11 @@ function handleChange(): void {
 function handleBlur(): void {
   onBlur()
 }
+
+defineExpose({
+  $el: inputEl,
+  focus: () => inputEl.value?.focus(),
+})
 </script>
 
 <template>

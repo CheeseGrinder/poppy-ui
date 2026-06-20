@@ -73,6 +73,11 @@ const hasError = computed(() => !!field?.error.value)
 // ── Description presence ─────────────────────────────────────────────────────
 
 const hasDescription = computed(() => !!(props.description || slots.description))
+
+defineExpose({
+  $el: inputEl,
+  focus: () => inputEl.value?.focus(),
+})
 </script>
 
 <template>

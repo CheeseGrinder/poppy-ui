@@ -1,6 +1,6 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
-import { computed, inject, useSlots } from 'vue'
+import { computed, inject, useSlots, useTemplateRef } from 'vue'
 import { RouterLink, useLink } from 'vue-router'
 import { TAB_CONFIG, TABS_CONTEXT } from './tab.context'
 import type { TabProps } from './tab.props'
@@ -68,10 +68,18 @@ function onClick() {
     tabsContext.setActive(props.value)
   }
 }
+
+const tabEl = useTemplateRef('tab-el')
+
+defineExpose({
+  $el: tabEl,
+  focus: () => tabEl.value?.focus(),
+})
 </script>
 
 <template>
   <component
+    ref="tab-el"
     :is="tag"
     v-bind="attr"
     role="tab"

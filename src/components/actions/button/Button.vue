@@ -2,7 +2,7 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { clsx, getClass } from '@/utils/build-class.util'
-import { computed, useAttrs } from 'vue'
+import { computed, useAttrs, useTemplateRef } from 'vue'
 import { RouterLink } from 'vue-router'
 import { BUTTON_CONFIG } from './button.context'
 import type { ButtonProps } from './button.props'
@@ -74,10 +74,18 @@ const disabledAttrs = computed(() =>
       }
     : {},
 )
+
+const buttonEl = useTemplateRef('button-el')
+
+defineExpose({
+  $el: buttonEl,
+  focus: () => buttonEl.value?.focus(),
+})
 </script>
 
 <template>
   <component
+    ref="button-el"
     :is="tag"
     :type="config.type"
     class="btn"

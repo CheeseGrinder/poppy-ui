@@ -123,6 +123,11 @@ const activeError = computed(() => field?.error.value)
 
 // Error color applied to the input element itself in both modes.
 const hasError = computed(() => !!activeError.value)
+
+defineExpose({
+  $el: inputEl,
+  focus: () => inputEl.value?.focus(),
+})
 </script>
 
 <template>
