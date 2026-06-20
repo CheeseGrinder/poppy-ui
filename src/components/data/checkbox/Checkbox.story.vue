@@ -117,7 +117,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 |-----------------|-----------------|-------------|--------------------|------------------------------------------------------------|
 | `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                             |
 | `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                      |
-| `indeterminate` | `Booleanish`    | `false`     | :x:                | Renders the indeterminate visual state.                    |
+| `indeterminate` | `boolean`    | `false`     | :x:                | Renders the indeterminate visual state.                    |
 | `description`   | `string`        | `undefined` | :x:                | Secondary text displayed next to the checkbox.             |
 | `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                           |
 | `required`      | `boolean`       | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |

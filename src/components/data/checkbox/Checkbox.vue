@@ -3,7 +3,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, useSlots, useTemplateRef, watchEffect } from 'vue'
 import { CHECKBOX_CONFIG } from './checkbox.context'
 import type { CheckboxProps } from './checkbox.props'
@@ -42,14 +41,14 @@ const slots = useSlots()
 
 watchEffect(() => {
   if (inputEl.value) {
-    inputEl.value.indeterminate = isTrue(props.indeterminate)
+    inputEl.value.indeterminate = !!props.indeterminate
   }
 })
 
 // ── Form field ───────────────────────────────────────────────────────────────
 
 const { field, onBlur, clearError } = useFormField<boolean>({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl,
 })
 
@@ -90,7 +89,7 @@ const hasDescription = computed(() => !!(props.description || slots.description)
     ]"
     :checked="resolvedValue"
     :disabled="disabled"
-    :required="isTrue(required)"
+    :required="required"
     @change="handleChange"
     @blur="onBlur"
   />
@@ -108,7 +107,7 @@ const hasDescription = computed(() => !!(props.description || slots.description)
       ]"
       :checked="resolvedValue"
       :disabled="disabled"
-      :required="isTrue(required)"
+      :required="required"
       @change="handleChange"
       @blur="onBlur"
     />

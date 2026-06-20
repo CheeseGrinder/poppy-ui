@@ -3,7 +3,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, useTemplateRef } from 'vue'
 import { RATING_CONFIG } from './rating.context'
 import type { RatingProps } from './rating.props'
@@ -71,7 +70,7 @@ const config = useComponentConfig(RATING_CONFIG, props, {
 const hiddenEl = useTemplateRef('hiddenEl')
 
 const { field, fieldValue, onBlur, clearError } = useFormField<number>({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl: hiddenEl,
 })
 
@@ -97,7 +96,7 @@ interface StarInput {
 
 const stars = computed<StarInput[]>(() => {
   const count = config.value.count ?? 5
-  const half = isTrue(config.value.half)
+  const half = config.value.half
   const result: StarInput[] = []
   const mask = getClass(masks, config.value.mask)
 
@@ -135,7 +134,7 @@ const hasError = computed(() => !!field?.error.value)
     class="rating"
     :class="[
       getClass(sizes, config.size),
-      { 'rating-half': isTrue(config.half) },
+      { 'rating-half': config.half },
       { 'opacity-50 pointer-events-none': disabled },
     ]"
     @blur.capture="onBlur"
@@ -145,13 +144,13 @@ const hasError = computed(() => !!field?.error.value)
       ref="hiddenEl"
       type="radio"
       class="hidden"
-      :required="isTrue(required)"
+      :required="required"
       :checked="resolvedValue > 0"
     />
 
     <!-- Clear affordance — hidden radio at index 0 -->
     <input
-      v-if="isTrue(config.clearable)"
+      v-if="config.clearable"
       type="radio"
       class="rating-hidden"
       name="rating"

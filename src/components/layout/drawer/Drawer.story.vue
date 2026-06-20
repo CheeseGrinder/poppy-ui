@@ -102,7 +102,7 @@ const isOpen = shallowRef(false)
         </template>
 
         <div class="p-4">
-          <Drawer v-model="isOpen" overlay="false">
+          <Drawer v-model="isOpen" :overlay="false">
             <Button @click="isOpen = true">Open (no overlay)</Button>
 
             <template #sidebar>
@@ -231,7 +231,7 @@ Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-
 | Prop           | Type         | Default     | Required | Configurable       | Description                                     |
 |----------------|--------------|-------------|----------|--------------------|-------------------------------------------------|
 | `side`         | `DrawerSide` | `'start'`   | :x:      | :white_check_mark: | Side where drawer opens: `'start'` or `'end'`.  |
-| `overlay`      | `Booleanish` | `true`      | :x:      | :white_check_mark: | When `true`, shows overlay to close the drawer. |
+| `overlay`      | `boolean` | `true`      | :x:      | :white_check_mark: | When `true`, shows overlay to close the drawer. |
 | `contentClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer content.      |
 | `sidebarClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer sidebar.      |
 

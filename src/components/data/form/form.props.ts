@@ -1,4 +1,4 @@
-import type { Booleanish, CounterFn } from '@/types/utils.type'
+import type { CounterFn } from '@/types/utils.type'
 import type { FormSerializer } from './form.types'
 
 export interface FormConfigurableProps {
@@ -8,7 +8,7 @@ export interface FormConfigurableProps {
    *
    * @default false
    */
-  counter?: Booleanish
+  counter?: boolean
 
   /**
    * Default counter format applied to all child inputs.

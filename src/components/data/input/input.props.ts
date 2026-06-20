@@ -1,4 +1,4 @@
-import type { Booleanish, CounterFn } from '@/types/utils.type'
+import type { CounterFn } from '@/types/utils.type'
 import type { InputHTMLAttributes } from 'vue'
 import type { InputColor, InputSize, InputType, InputVariant } from './input.types'
 
@@ -27,7 +27,7 @@ export interface InputConfigurableProps {
    *
    * @default false
    */
-  counter?: Booleanish
+  counter?: boolean
 
   /**
    * Minimum character length (counter warning state).

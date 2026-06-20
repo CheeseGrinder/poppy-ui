@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { LINK_CONFIG } from './link.context'
@@ -50,7 +49,7 @@ const attr = computed(() => {
     class="link"
     :class="[
       getClass(colors, config.color),
-      isTrue(config.hover) && 'link-hover',
+      config.hover && 'link-hover',
     ]"
   >
     <slot />

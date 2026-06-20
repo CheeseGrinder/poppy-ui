@@ -148,7 +148,7 @@ icons, or any content that needs non-rectangular clipping.
 |-----------|---------------|-------------|----------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `variant` | `MaskVariant` | `undefined` | :x:      | :white_check_mark: | Shape of the mask: squircle, heart, hexagon, hexagon-2, decagon, pentagon, diamond, square, circle, star, star-2, triangle, triangle-2, triangle-3, triangle-4. |
 | `half`    | `MaskHalf`    | `undefined` | :x:      | :white_check_mark: | When set, only masks half of the content: `'half-1'` or `'half-2'`.                                                                                             |
-| `inline`  | `Booleanish`  | `false`     | :x:      | :x:                | When `true`, renders the mask as inline-block element.                                                                                                          |
+| `inline`  | `boolean`  | `false`     | :x:      | :x:                | When `true`, renders the mask as inline-block element.                                                                                                          |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.mask` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

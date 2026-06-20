@@ -107,7 +107,7 @@ Supports Vue Router navigation, or native anchors (`#`, `#section`) for in-page 
 | Prop    | Type               | Default     | Required | Configurable       | Description                                                        |
 |---------|--------------------|-------------|----------|--------------------|--------------------------------------------------------------------|
 | `color` | `LinkColor`        | `undefined` | :x:      | :white_check_mark: | Color theme of the link                                            |
-| `hover` | `Booleanish`       | `false`     | :x:      | :white_check_mark: | Only shows underline on hover                                      |
+| `hover` | `boolean`       | `false`     | :x:      | :white_check_mark: | Only shows underline on hover                                      |
 | `to`    | `RouteLocationRaw` | `undefined` | :x:      | :x:                | Vue Router location or anchor (`#`). Renders as `<a />` when `'#'` |
 
 ## Slots

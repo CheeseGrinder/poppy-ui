@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed } from 'vue'
 import { PROGRESS_CONFIG } from './progress.context'
 import type { ProgressProps } from './progress.props'
@@ -24,7 +23,7 @@ const colors: ComponentClass<'progress', ProgressColor> = {
 const props = defineProps<ProgressProps>()
 const config = useComponentConfig(PROGRESS_CONFIG, props, { max: 100 })
 
-const isIndeterminate = computed(() => isTrue(props.indeterminate) || props.value === undefined)
+const isIndeterminate = computed(() => props.indeterminate || props.value === undefined)
 </script>
 
 <template>

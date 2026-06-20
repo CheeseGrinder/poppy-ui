@@ -1,6 +1,4 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { MaskHalf, MaskVariant } from './mask.types'
-
 export interface MaskConfigurableProps {
   /**
    * Shape of the mask to apply to the content.
@@ -21,7 +19,6 @@ export interface MaskConfigurableProps {
    * - `'triangle-4'`: Triangle pointing right.
    */
   variant?: MaskVariant
-
   /**
    * When set, only masks half of the content.
    * - `'half-1'`: Masks the first half.
@@ -29,12 +26,11 @@ export interface MaskConfigurableProps {
    */
   half?: MaskHalf
 }
-
 export interface MaskProps extends MaskConfigurableProps {
   /**
    * When `true`, renders the mask as inline element.
    *
    * @default false
    */
-  inline?: Booleanish
+  inline?: boolean
 }

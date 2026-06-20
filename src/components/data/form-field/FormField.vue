@@ -1,5 +1,4 @@
 <script lang="ts">
-import { isTrue } from '@/utils/is-true'
 import { computed, inject, provide, shallowRef, watch } from 'vue'
 import { FORM_CONTEXT_KEY } from '../form/form.context'
 import type { FieldState } from '../form/form.types'
@@ -25,14 +24,14 @@ const required = shallowRef<boolean>(false)
 // FormField exposes its own raw prop value; the input picks up formCtx separately.
 
 const counter = shallowRef<boolean | undefined>(
-  props.counter !== undefined ? isTrue(props.counter) : undefined,
+  props.counter !== undefined ? props.counter : undefined,
 )
 const counterFormat = shallowRef<
   string | ((c: number, min?: number, max?: number) => string) | undefined
 >(props.counterFormat)
 
 watch(() => props.counter, (val) => {
-  counter.value = val !== undefined ? isTrue(val) : undefined
+  counter.value = val !== undefined ? val : undefined
 })
 watch(() => props.counterFormat, (val) => { counterFormat.value = val })
 

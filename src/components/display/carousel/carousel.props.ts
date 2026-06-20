@@ -1,6 +1,4 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { CarouselDirection, CarouselSnap } from './carousel.types'
-
 export interface CarouselConfigurableProps {
   /**
    * Direction of the carousel.
@@ -10,7 +8,6 @@ export interface CarouselConfigurableProps {
    * @default 'horizontal'
    */
   direction?: CarouselDirection
-
   /**
    * Snap alignment for carousel items.
    * - `'start'`: Snap elements to start.
@@ -20,28 +17,24 @@ export interface CarouselConfigurableProps {
    * @default 'start'
    */
   snap?: CarouselSnap
-
   /**
    * When `true`, shows carousel indicators.
    *
    * @default false
    */
-  indicators?: Booleanish
-
+  indicators?: boolean
   /**
    * When `true`, shows prev/next navigation controls.
    *
    * @default false
    */
-  controls?: Booleanish
-
+  controls?: boolean
   /**
    * When `true`, enables autoplay.
    *
    * @default false
    */
-  autoplay?: Booleanish
-
+  autoplay?: boolean
   /**
    * Autoplay interval in milliseconds.
    *
@@ -49,7 +42,6 @@ export interface CarouselConfigurableProps {
    */
   interval?: number
 }
-
 export interface CarouselProps extends CarouselConfigurableProps {
   /**
    * Index of the initial slide.

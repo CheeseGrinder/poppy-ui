@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { CARD_CONFIG } from './card.context'
 import type { CardProps } from './card.props'
 import type { CardSize, CardVariant } from './card.types'
@@ -32,8 +31,8 @@ const config = useComponentConfig(CARD_CONFIG, props, {})
     :class="[
       getClass(cardVariants, config.variant),
       getClass(cardSizes, config.size),
-      isTrue(config.side) && 'card-side',
-      isTrue(config.imageFull) && 'image-full',
+      config.side && 'card-side',
+      config.imageFull && 'image-full',
     ]"
   >
     <slot />

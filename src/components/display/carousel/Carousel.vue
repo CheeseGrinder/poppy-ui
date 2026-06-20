@@ -2,7 +2,6 @@
 import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, onMounted, onUnmounted, shallowRef, useTemplateRef } from 'vue'
 import { CAROUSEL_CONFIG } from './carousel.context'
 import type { CarouselProps } from './carousel.props'
@@ -91,7 +90,7 @@ function startAutoplay() {
     clearInterval(autoplayTimer)
   }
 
-  if (isTrue(config.value.autoplay) && getItemCount() > 1) {
+  if (config.value.autoplay && getItemCount() > 1) {
     autoplayTimer = setInterval(next, config.value.interval)
   }
 }
@@ -129,7 +128,7 @@ onUnmounted(() => {
       <slot />
     </ClassWrapper>
 
-    <template v-if="isTrue(config.indicators) && count > 1">
+    <template v-if="config.indicators && count > 1">
       <div class="carousel-indicators absolute bottom-4 left-4 flex gap-2">
         <button
           v-for="(_, index) in count"
@@ -142,7 +141,7 @@ onUnmounted(() => {
     </template>
   </div>
 
-  <template v-if="isTrue(config.controls) && count > 1">
+  <template v-if="config.controls && count > 1">
     <button class="carousel-control carousel-prev absolute left-4 top-1/2 -translate-y-1/2 btn btn-circle" @click="prev">
       <slot name="prev-icon">
         <ChevronLeftIcon class="size-6" />

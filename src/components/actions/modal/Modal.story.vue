@@ -206,8 +206,8 @@ Controlled via `v-model` or programmatically through exposed methods.
 | Prop                   | Type             | Default     | Required | Configurable       | Description                                                                                                      |
 |------------------------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------|
 | `placement`            | `ModalPlacement` | `undefined` | :x:      | :white_check_mark: | Position of the modal box on screen. `top` / `middle` / `bottom` / `start` / `end`.                              |
-| `closeOnBackdrop`      | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, clicking the backdrop closes the modal.                                                             |
-| `loadContentWhenClose` | `Booleanish`     | `false`     | :x:      | :white_check_mark: | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
+| `closeOnBackdrop`      | `boolean`     | `false`     | :x:      | :white_check_mark: | When `true`, clicking the backdrop closes the modal.                                                             |
+| `loadContentWhenClose` | `boolean`     | `false`     | :x:      | :white_check_mark: | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.modal` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 

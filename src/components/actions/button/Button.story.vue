@@ -124,7 +124,7 @@ When `to` is provided, the component renders as a `RouterLink` automatically.
 | `shape`    | `ButtonShape`                     | `undefined` | :x:      | :white_check_mark: | Shape or width constraint of the button.                                                                          |
 | `behavior` | `ButtonBehavior`                  | `undefined` | :x:      | :x:                | Forces a specific visual state. Use `'disabled'` to apply disabled styling without the HTML `disabled` attribute. |
 | `disabled` | `boolean`                         | `false`     | :x:      | :x:                | Disables interactions. Also sets `aria-disabled="true"` and `tabIndex="-1"` automatically.                        |
-| `loading`  | `Booleanish`                      | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button. Accepts `boolean` or `'true'` / `'false'` strings.            |
+| `loading`  | `boolean`                      | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button.            |
 | `to`       | `RouteLocationRaw`                | `undefined` | :x:      | :x:                | If provided, the component renders as a `RouterLink`. Accepts a string path or a route location object.           |
 | `form`     | `string`                          | `undefined` | :x:      | :x:                | ID of the form the button is associated with (native HTML attribute).                                             |
 

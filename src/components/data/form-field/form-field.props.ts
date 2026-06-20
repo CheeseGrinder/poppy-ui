@@ -1,10 +1,10 @@
-import type { Booleanish, CounterFn } from '@/types/utils.type'
+import type { CounterFn } from '@/types/utils.type'
 
 export interface FormFieldConfigurableProps {
   /**
    * Overrides the counter setting inherited from `<Form>`.
    */
-  counter?: Booleanish
+  counter?: boolean
 
   /**
    * Overrides the counter format inherited from `<Form>`.

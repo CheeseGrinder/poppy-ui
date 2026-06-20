@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { clsx, getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, useAttrs } from 'vue'
 import { RouterLink } from 'vue-router'
 import { BUTTON_CONFIG } from './button.context'
@@ -67,7 +66,7 @@ const extraClasses = computed(() => {
 })
 
 const disabledAttrs = computed(() =>
-  props.behavior === 'disabled' || isTrue(props.disabled)
+  props.behavior === 'disabled' || !!props.disabled
     ? {
         disabled: true,
         'aria-disabled': true,
@@ -95,7 +94,7 @@ const disabledAttrs = computed(() =>
     :to="config.to"
     @click="$emit('click', $event)"
   >
-    <slot v-if="isTrue(config.loading)" name="loading">
+    <slot v-if="config.loading" name="loading">
       <span class="loading loading-spinner"></span>
     </slot>
     <slot></slot>

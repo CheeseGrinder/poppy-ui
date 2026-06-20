@@ -14,7 +14,7 @@ const state = reactive<DropdownProps>({
   side: 'bottom' as const,
   triggerAction: 'click' as const,
   debounce: 500,
-  open: 'false',
+  open: false,
 })
 
 const dropdownExposeRef = useTemplateRef('dropdown-expose')
@@ -276,7 +276,7 @@ Supports `click`, `hover`, and `context-menu` trigger actions, configurable plac
 | `side`          | `DropdownSide`          | `'bottom'`  | :x:      | :white_check_mark: | Which side of the trigger the content appears on. `bottom` / `top` / `left` / `right`.           |
 | `triggerAction` | `DropdownTriggerAction` | `'click'`   | :x:      | :white_check_mark: | Interaction that opens the dropdown. `click` / `hover` / `context-menu`.                         |
 | `debounce`      | `number`                | `500`       | :x:      | :white_check_mark: | Delay in ms before closing on `triggerAction="hover"` after the pointer leaves.                  |
-| `open`          | `Booleanish`            | `false`     | :x:      | :x:                | Forces the dropdown open. Accepts `boolean` or `'true'` / `'false'` strings.                     |
+| `open`          | `boolean`            | `false`     | :x:      | :x:                | Forces the dropdown open.                     |
 | `triggerClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the internal trigger `<button />` wrapper.                              |
 | `contentClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the popover content element.                                            |
 

@@ -5,7 +5,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, inject, useTemplateRef } from 'vue'
 import { INPUT_CONFIG } from './input.context'
 import type { InputProps } from './input.props'
@@ -75,7 +74,7 @@ const config = useComponentConfig(
 const inputEl = useTemplateRef('inputEl')
 
 const { field, onBlur, clearError } = useFormField({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl,
 })
 
@@ -99,7 +98,7 @@ function handleUpdate(event: Event): void {
 
 const currentLength = computed(() => String(resolvedValue.value ?? '').length)
 
-const showCounter = computed(() => isTrue(config.value.counter))
+const showCounter = computed(() => config.value.counter)
 
 const formattedCounter = computed(() => {
   const fmt = config.value.counterFormat ?? '{current} / {max}'
@@ -147,7 +146,7 @@ const hasError = computed(() => !!activeError.value)
       :type="config.type"
       :value="resolvedValue"
       :disabled="disabled"
-      :required="isTrue(required)"
+      :required="required"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :pattern="pattern"

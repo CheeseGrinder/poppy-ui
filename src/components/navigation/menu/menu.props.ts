@@ -1,8 +1,6 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { Component } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import type { MenuDirection, MenuSize } from './menu.types'
-
 export interface MenuConfigurableProps {
   /**
    * Size of the menu.
@@ -10,7 +8,6 @@ export interface MenuConfigurableProps {
    * @default 'md'
    */
   size?: MenuSize
-
   /**
    * Direction of the menu.
    *
@@ -18,39 +15,32 @@ export interface MenuConfigurableProps {
    */
   direction?: MenuDirection
 }
-
 export interface MenuProps extends MenuConfigurableProps {}
-
 // biome-ignore lint/suspicious/noEmptyInterface: Intentionally empty to allow future configurable props and global plugin configuration
 export interface MenuItemConfigurableProps {}
-
 export interface MenuItemProps extends MenuItemConfigurableProps {
   /**
    * Optional icon component to display before the label (e.g. Lucide icon).
    */
   icon?: Component
-
   /**
    * Navigation target (Vue Router location).
    * When provided, renders as RouterLink.
    */
   to?: RouteLocationRaw
-
   /**
    * Renders the item as a section title (non-interactive).
    * Renders the item as a non-interactive section title (`menu-title`).
    *
    * @default false
    */
-  title?: Booleanish
-
+  title?: boolean
   /**
    * Disables the item.
    *
    * @default false
    */
-  disabled?: Booleanish
-
+  disabled?: boolean
   /**
    * Forces the active state on the item.
    * When `to` is provided, the active state is automatically detected via `useLink`.
@@ -58,13 +48,12 @@ export interface MenuItemProps extends MenuItemConfigurableProps {
    *
    * @default false
    */
-  active?: Booleanish
-
+  active?: boolean
   /**
    * When true and a `submenu` slot is provided, wraps the submenu
    * in a `<details>/<summary>` for native collapsible behavior.
    *
    * @default false
    */
-  collapsible?: Booleanish
+  collapsible?: boolean
 }

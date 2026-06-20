@@ -5,7 +5,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, inject, useId, useTemplateRef, watch } from 'vue'
 import { RADIO_CONFIG } from './radio.context'
 import type { RadioProps } from './radio.props'
@@ -48,7 +47,7 @@ const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? 'radio-group
 
 // Bridge to form field context
 const { field, onBlur } = useFormField({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl,
 })
 

@@ -3,7 +3,6 @@ import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { INDICATOR_CONFIG } from './indicator.context'
 import type { IndicatorProps } from './indicator.props'
 import type { IndicatorAlign, IndicatorSide } from './indicator.types'
@@ -36,7 +35,7 @@ const config = useComponentConfig(INDICATOR_CONFIG, props)
       getClass(indicatorAligns, config.align),
     ]"
   >
-    <ClassWrapper v-if="$slots.indicator && !isTrue(config.hide)" class="indicator-item">
+    <ClassWrapper v-if="$slots.indicator && !config.hide" class="indicator-item">
       <slot name="indicator" />
     </ClassWrapper>
     <slot />

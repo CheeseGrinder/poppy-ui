@@ -3,7 +3,6 @@ import ClassWrapper from '@/components/ClassWrapper.vue'
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { SWAP_CONFIG } from './swap.context'
 import type { SwapProps } from './swap.props'
 import type { SwapVariant } from './swap.types'
@@ -27,7 +26,7 @@ const props = defineProps<SwapProps>()
 const config = useComponentConfig(SWAP_CONFIG, props, {})
 
 function toggle() {
-  if (!isTrue(props.indeterminate)) {
+  if (!props.indeterminate) {
     model.value = !model.value
   }
 }
@@ -38,14 +37,14 @@ function toggle() {
     class="swap"
     :class="[
       getClass(swapVariants, config.variant),
-      isTrue(indeterminate) ? 'swap-indeterminate' : model && 'swap-active',
+      indeterminate ? 'swap-indeterminate' : model && 'swap-active',
     ]"
     role="button"
     tabindex="0"
     @click="toggle"
     @keydown.enter.space.prevent="toggle"
   >
-    <template v-if="isTrue(indeterminate) && $slots.indeterminate">
+    <template v-if="indeterminate && $slots.indeterminate">
       <slot name="indeterminate"></slot>
     </template>
     <template v-else>

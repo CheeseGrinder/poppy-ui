@@ -5,7 +5,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, inject, useTemplateRef } from 'vue'
 import { TEXTAREA_CONFIG } from './textarea.context'
 import type { TextareaProps } from './textarea.props'
@@ -68,7 +67,7 @@ const config = useComponentConfig(
 const textareaEl = useTemplateRef('textareaEl')
 
 const { field, fieldValue, onBlur, clearError } = useFormField<string>({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl: textareaEl,
 })
 
@@ -88,7 +87,7 @@ function handleUpdate(event: Event): void {
 
 const currentLength = computed(() => (resolvedValue.value ?? '').length)
 
-const showCounter = computed(() => isTrue(config.value.counter))
+const showCounter = computed(() => config.value.counter)
 
 const formattedCounter = computed(() => {
   const fmt = config.value.counterFormat ?? '{current} / {max}'
@@ -128,13 +127,13 @@ const hasError = computed(() => !!activeError.value)
         getClass(sizes, config.size),
         getClass(variants, config.variant),
         { 'textarea-error': hasError },
-        { 'field-sizing-content': isTrue(config.autoGrow) },
+        { 'field-sizing-content': config.autoGrow },
       ]"
       :value="resolvedValue"
       :disabled="disabled"
-      :required="isTrue(required)"
+      :required="required"
       :placeholder="placeholder"
-      :rows="isTrue(config.autoGrow) ? undefined : config.rows"
+      :rows="config.autoGrow ? undefined : config.rows"
       :maxlength="config.maxLength"
       :minlength="config.minLength"
       @input="handleUpdate"

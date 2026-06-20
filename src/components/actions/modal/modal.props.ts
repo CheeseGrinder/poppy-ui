@@ -1,6 +1,4 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { ModalPlacement } from './modal.types'
-
 export interface ModalConfigurableProps {
   /**
    * Placement of the modal box on screen.
@@ -13,14 +11,12 @@ export interface ModalConfigurableProps {
    * @default undefined
    */
   placement?: ModalPlacement
-
   /**
    * When `true`, clicking the backdrop (outside the modal box) closes the modal.
    *
    * @default false
    */
-  closeOnBackdrop?: Booleanish
-
+  closeOnBackdrop?: boolean
   /**
    * When `true`, the modal content is rendered even while the modal is closed.
    * Useful to preserve internal component state between open/close cycles.
@@ -28,7 +24,6 @@ export interface ModalConfigurableProps {
    *
    * @default false
    */
-  loadContentWhenClose?: Booleanish
+  loadContentWhenClose?: boolean
 }
-
 export interface ModalProps extends ModalConfigurableProps {}

@@ -1,6 +1,4 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { AvatarPresence, AvatarShape, AvatarSize } from './avatar.types'
-
 export interface AvatarConfigurableProps {
   /**
    * Size of the avatar. Mapped to Tailwind `w-*` utilities.
@@ -11,7 +9,6 @@ export interface AvatarConfigurableProps {
    * - `xl` → `w-32`
    */
   size?: AvatarSize
-
   /**
    * Shape of the avatar image container.
    * - `'rounded'`: Slightly rounded corners.
@@ -22,7 +19,6 @@ export interface AvatarConfigurableProps {
    * @default 'rounded-full'
    */
   shape?: AvatarShape
-
   /**
    * Shows a presence indicator dot.
    * - `'online'`: Green dot.
@@ -30,7 +26,6 @@ export interface AvatarConfigurableProps {
    */
   presence?: AvatarPresence
 }
-
 export interface AvatarProps extends AvatarConfigurableProps {
   /**
    * When `true`, renders as an `avatar-group` container
@@ -38,13 +33,12 @@ export interface AvatarProps extends AvatarConfigurableProps {
    *
    * @default false
    */
-  group?: Booleanish
-
+  group?: boolean
   /**
    * When `true`, adds the `avatar-placeholder` modifier.
    * Use with text initials instead of an image.
    *
    * @default false
    */
-  placeholder?: Booleanish
+  placeholder?: boolean
 }

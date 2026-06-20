@@ -1,4 +1,4 @@
-import type { Booleanish, CounterFn } from '@/types/utils.type'
+import type { CounterFn } from '@/types/utils.type'
 import type { TextareaHTMLAttributes } from 'vue'
 import type { TextareaColor, TextareaSize, TextareaVariant } from './textarea.types'
 
@@ -28,14 +28,14 @@ export interface TextareaConfigurableProps {
    *
    * @default false
    */
-  autoGrow?: Booleanish
+  autoGrow?: boolean
 
   /**
    * Displays a character counter below the textarea.
    *
    * @default false
    */
-  counter?: Booleanish
+  counter?: boolean
 
   /**
    * Minimum character length (counter warning state).

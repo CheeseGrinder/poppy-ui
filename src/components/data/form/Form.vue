@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { CounterFn } from '@/types/utils.type'
-import { isTrue } from '@/utils/is-true'
 import { getByPath, setByPath } from '@/utils/path'
 import { provide, shallowReactive, shallowRef, watch } from 'vue'
 import type { FormContext } from './form.context'
@@ -48,12 +47,12 @@ watch(model, val => Object.assign(data, val))
 // false = explicitly disabled: mergeProps propagates it, overriding any lower-priority true.
 
 const counter = shallowRef<boolean | undefined>(
-  props.counter !== undefined ? isTrue(props.counter) : undefined,
+  props.counter !== undefined ? props.counter : undefined,
 )
 const counterFormat = shallowRef<string | CounterFn | undefined>(props.counterFormat)
 
 watch(() => props.counter, val => {
-  counter.value = val !== undefined ? isTrue(val) : undefined
+  counter.value = val !== undefined ? val : undefined
 })
 watch(() => props.counterFormat, (val) => { counterFormat.value = val })
 

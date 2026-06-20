@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { MASK_CONFIG } from './mask.context'
 import type { MaskProps } from './mask.props'
 import type { MaskHalf, MaskVariant } from './mask.types'
@@ -41,7 +40,7 @@ const config = useComponentConfig(MASK_CONFIG, props)
     class="mask"
     :class="[
       getClass(maskVariants, config.variant),
-      isTrue(config.inline) && 'inline-block',
+      config.inline && 'inline-block',
       getClass(maskHalfs, config.half),
     ]"
   >

@@ -156,7 +156,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `color`         | `InputColor`            | `undefined`           | :white_check_mark: | Color variant.                                     |
 | `size`          | `InputSize`             | `'md'`                | :white_check_mark: | Size.                                              |
 | `variant`       | `'bordered' \| 'ghost'` | `undefined`           | :white_check_mark: | Visual style variant.                              |
-| `counter`       | `Booleanish`            | `false`               | :white_check_mark: | Shows character counter.                           |
+| `counter`       | `boolean`            | `false`               | :white_check_mark: | Shows character counter.                           |
 | `minLength`     | `number`                | `undefined`           | :white_check_mark: | Min length (counter warning + native).             |
 | `maxLength`     | `number`                | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`). |
 | `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                    |

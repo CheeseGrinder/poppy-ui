@@ -1,6 +1,5 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
-import { isTrue } from '@/utils/is-true'
 import { computed, useSlots } from 'vue'
 import { RouterLink, useLink } from 'vue-router'
 import { MENU_ITEM_CONFIG } from './menu.context'
@@ -15,7 +14,7 @@ const config = useComponentConfig(MENU_ITEM_CONFIG, props, {})
 const slots = useSlots()
 
 const hasSubmenu = computed(() => !!slots.submenu)
-const isTitle = computed(() => isTrue(props.title))
+const isTitle = computed(() => props.title)
 
 const tag = computed(() => {
   if (!props.to) return 'a'
@@ -28,7 +27,7 @@ const attr = computed(() => {
 })
 
 const isActive = computed(() => {
-  if (isTrue(props.active)) return true
+  if (props.active) return true
   if (!props.to || props.to === '#') return false
   const { isActive } = useLink({ to: computed(() => props.to!) })
   return isActive.value
@@ -55,11 +54,11 @@ const isActive = computed(() => {
 
   <!-- Regular item -->
   <li v-else :class="{
-    'menu-disabled': isTrue(config.disabled)
+    'menu-disabled': config.disabled
   }">
 
     <!-- With submenu + collapsible: <details>/<summary> -->
-    <template v-if="hasSubmenu && isTrue(config.collapsible)">
+    <template v-if="hasSubmenu && config.collapsible">
       <details>
         <summary>
           <component :is="config.icon" v-if="config.icon" :size="16" />

@@ -158,8 +158,8 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 | `color`         | `TextareaColor`       | `undefined`           | :white_check_mark: | Color variant.                                                                  |
 | `size`          | `TextareaSize`        | `'md'`                | :white_check_mark: | Size.                                                                           |
 | `variant`       | `TextareaVariant`     | `undefined`           | :white_check_mark: | Visual style variant.                                                           |
-| `autoGrow`      | `Booleanish`          | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
-| `counter`       | `Booleanish`          | `false`               | :white_check_mark: | Shows character counter.                                                        |
+| `autoGrow`      | `boolean`          | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
+| `counter`       | `boolean`          | `false`               | :white_check_mark: | Shows character counter.                                                        |
 | `minLength`     | `number`              | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                          |
 | `maxLength`     | `number`              | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
 | `counterFormat` | `string \| CounterFn` | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |

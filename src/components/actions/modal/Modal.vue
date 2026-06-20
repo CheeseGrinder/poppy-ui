@@ -1,6 +1,5 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
-import { isTrue } from '@/utils/is-true'
 import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { MODAL_CONFIG } from './modal.context'
 import type { ModalProps } from './modal.props'
@@ -47,7 +46,7 @@ watch(isOpen, state => {
 })
 
 const shouldRenderContent = computed(() => {
-  if (isTrue(config.value.loadContentWhenClose)) {
+  if (config.value.loadContentWhenClose) {
     return true
   }
   return isOpen.value || hasBeenOpened.value
@@ -99,7 +98,7 @@ defineExpose({
       </div>
     </div>
 
-    <form v-if="!isTrue(config.closeOnBackdrop)" method="dialog" class="modal-backdrop">
+    <form v-if="!config.closeOnBackdrop" method="dialog" class="modal-backdrop">
       <button>close</button>
     </form>
   </dialog>

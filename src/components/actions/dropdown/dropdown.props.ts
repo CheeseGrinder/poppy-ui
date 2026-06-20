@@ -1,7 +1,5 @@
-import type { Booleanish } from '@/types/utils.type'
 import type { ClassValue } from 'vue'
 import type { DropdownAlign, DropdownSide, DropdownTriggerAction } from './dropdown.types'
-
 export interface DropdownConfigurableProps {
   /**
    * Describes how the dropdown has to be alined
@@ -12,7 +10,6 @@ export interface DropdownConfigurableProps {
    * @default "start"
    */
   align?: DropdownAlign
-
   /**
    * Describe where the content is displayed relatively to the trigger element
    * - `"left"`: Open on left
@@ -23,7 +20,6 @@ export interface DropdownConfigurableProps {
    * @default "bottom"
    */
   side?: DropdownSide
-
   /**
    * Describes what kind of intertion with the trigger (sloted element) that should cause the dropdown to open.
    * - `"click"`: the dropdown will be presented when the trigger is left clicked.
@@ -33,7 +29,6 @@ export interface DropdownConfigurableProps {
    * @default "click"
    */
   triggerAction?: DropdownTriggerAction
-
   /**
    * Set the amount of time, in **milliseconds** after the user no longer hover the trigger or dropdown, will dismiss.
    * Only apply on `triggerAction=hover`
@@ -42,22 +37,19 @@ export interface DropdownConfigurableProps {
    */
   debounce?: number
 }
-
 export interface DropdownProps extends DropdownConfigurableProps {
   /**
    * Force the dropdown to be shown
    *
    * @default false
    */
-  open?: Booleanish
-
+  open?: boolean
   /**
    * CSS class to apply to the trigger element.
    *
    * @default ''
    */
   triggerClass?: ClassValue
-
   /**
    * CSS class to apply to the content element.
    *

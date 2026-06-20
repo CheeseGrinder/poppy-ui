@@ -2,7 +2,6 @@
 import { useComponentConfig } from '@/composables/use-component-config'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { inject, provide, useId, watch } from 'vue'
 import { DRAWER_CONFIG } from './drawer.context'
 import type { DrawerProps } from './drawer.props'
@@ -77,7 +76,7 @@ defineExpose({
       :style="{ zIndex }"
     >
       <label
-        v-if="isTrue(config.overlay)"
+        v-if="config.overlay"
         :for="drawerId"
         aria-label="close"
         class="drawer-overlay"

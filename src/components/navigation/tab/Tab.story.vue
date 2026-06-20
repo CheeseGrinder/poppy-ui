@@ -148,8 +148,8 @@ Supports two modes:
 |------------|--------------|-------------|-----------------------------------------------------------------|
 | `value`    | `string`     | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`.        |
 | `title`    | `string`     | `undefined` | Tab header label. Use `#title` slot for rich content.           |
-| `active`   | `Booleanish` | `false`     | Initial active state hint (ignored once context is set).        |
-| `disabled` | `Booleanish` | `false`     | Disables the tab.                                               |
+| `active`   | `boolean` | `false`     | Initial active state hint (ignored once context is set).        |
+| `disabled` | `boolean` | `false`     | Disables the tab.                                               |
 | `icon`     | `Component`  | `undefined` | Icon displayed before the label.                                |
 | `to`       | `string`     | `undefined` | Router target. Renders as `RouterLink`; no content panel shown. |
 

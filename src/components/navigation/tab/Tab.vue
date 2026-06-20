@@ -1,6 +1,5 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
-import { isTrue } from '@/utils/is-true'
 import { computed, inject, useSlots } from 'vue'
 import { RouterLink, useLink } from 'vue-router'
 import { TAB_CONFIG, TABS_CONTEXT } from './tab.context'
@@ -14,7 +13,7 @@ const tabsContext = inject(TABS_CONTEXT, null)
 const slots = useSlots()
 
 if (tabsContext && props.value !== undefined) {
-  tabsContext.register(props.value, isTrue(props.active))
+  tabsContext.register(props.value, !!props.active)
 }
 
 const tag = computed(() => {
@@ -59,7 +58,7 @@ const isActive = computed(() => {
     return isRouterActive.value
   }
 
-  return isTrue(config.value.active)
+  return config.value.active
 })
 
 const hasContent = computed(() => !!slots.default)
@@ -79,9 +78,9 @@ function onClick() {
     class="tab"
     :class="{
       'tab-active': isActive,
-      'tab-disabled': isTrue(config.disabled)
+      'tab-disabled': config.disabled
     }"
-    :disabled="!props.to && isTrue(config.disabled)"
+    :disabled="!props.to && config.disabled"
     @click="onClick"
   >
     <slot name="icon">

@@ -3,7 +3,6 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { isTrue } from '@/utils/is-true'
 import { computed, useSlots, useTemplateRef } from 'vue'
 import { TOGGLE_CONFIG } from './toggle.context'
 import type { ToggleProps } from './toggle.props'
@@ -47,7 +46,7 @@ const slots = useSlots()
 // ── Form field ───────────────────────────────────────────────────────────────
 
 const { field, fieldValue, onBlur, clearError } = useFormField<boolean>({
-  required: computed(() => isTrue(props.required)),
+  required: computed(() => !!props.required),
   inputEl,
 })
 
@@ -86,7 +85,7 @@ const hasDescription = computed(() => !!(props.description || slots.description)
     ]"
     :checked="resolvedValue"
     :disabled="disabled"
-    :required="isTrue(required)"
+    :required="required"
     @change="handleChange"
     @blur="onBlur"
   />
@@ -104,7 +103,7 @@ const hasDescription = computed(() => !!(props.description || slots.description)
       ]"
       :checked="resolvedValue"
       :disabled="disabled"
-      :required="isTrue(required)"
+      :required="required"
       @change="handleChange"
       @blur="onBlur"
     />
