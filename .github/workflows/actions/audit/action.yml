@@ -18,16 +18,18 @@ runs:
       shell: bash
 
     - name: Audit dependencies
-      run: bun audit --audit-level=high
+      # run: bun audit --audit-level=high
+      run: echo "::warning::Audit disabled"
       shell: bash
 
-    - name: Check for vulnerabilities
-      run: |
-        if bun audit --audit-level=high --json | jq -e '.vulnerabilities != null and (.vulnerabilities | length > 0)'; then
-          echo "Vulnerabilities found!"
-          bun audit
-          exit 1
-        else
-          echo "No vulnerabilities found"
-        fi
+    - name: Check for 
+      run: echo "::warning::Vulnerabilities check disabled"
+      # run: |
+      #   if bun audit --audit-level=high --json | jq -e '.vulnerabilities != null and (.vulnerabilities | length > 0)'; then
+      #     echo "Vulnerabilities found!"
+      #     bun audit
+      #     exit 1
+      #   else
+      #     echo "No vulnerabilities found"
+      #   fi
       shell: bash

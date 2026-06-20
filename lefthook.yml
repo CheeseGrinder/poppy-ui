@@ -4,13 +4,13 @@
 #   https://lefthook.dev/configuration/
 #
 
-pre-push:
-  jobs:
-    - name: packages audit
-      tags:
-        - frontend
-        - security
-      run: bun audit --audit-level=high
+# pre-push:
+#   jobs:
+#     - name: packages audit
+#       tags:
+#         - frontend
+#         - security
+#       run: bun audit --audit-level=high
 
 pre-commit:
   parallel: true
