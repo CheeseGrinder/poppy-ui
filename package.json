@@ -1,6 +1,6 @@
 {
   "name": "@poppy-ui/vue",
-  "version": "0.6.0-rc.0",
+  "version": "0.6.0-rc.1",
   "type": "module",
   "repository": {
     "url": "git+https://github.com/CheeseGrinder/poppy-ui.git"
