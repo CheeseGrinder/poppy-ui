@@ -126,6 +126,13 @@ Radio buttons are grouped by sharing the same `v-model` and `name`. When inside 
 | `disabled`    | `boolean`                     | `undefined` | :x:                | Native disabled.                                                        |
 | `required`    | `boolean`                     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.              |
 
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the radio button.     |
+
 ### Events
 
 | Event     | Payload | Description                                                                                 |

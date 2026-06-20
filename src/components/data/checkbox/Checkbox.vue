@@ -47,7 +47,7 @@ watchEffect(() => {
 
 // ── Form field ───────────────────────────────────────────────────────────────
 
-const { field, onBlur, clearError } = useFormField<boolean>({
+const { field, fieldValue, onBlur, clearError } = useFormField<boolean>({
   required: computed(() => !!props.required),
   inputEl,
 })
@@ -55,7 +55,7 @@ const { field, onBlur, clearError } = useFormField<boolean>({
 // ── Value resolution ─────────────────────────────────────────────────────────
 
 const resolvedValue = computed(() =>
-  field ? field.value.value : model.value,
+  field ? fieldValue.value : model.value,
 )
 
 function handleChange(event: Event): void {

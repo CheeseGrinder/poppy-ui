@@ -101,9 +101,9 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### v-model
 
-| Name      | Type      | Modifiers | Description          |
-|-----------|-----------|-----------|----------------------|
-| `v-model` | `boolean` | -         | Bound checked state. |
+| Name         | Type      | Modifiers | Description          |
+|--------------|-----------|-----------|----------------------|
+| `modelValue` | `boolean` | -         | Bound checked state. |
 
 ### Props
 
@@ -114,6 +114,13 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `description` | `string`      | `undefined` | :x:                | Secondary text displayed next to the toggle.               |
 | `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                           |
 | `required`    | `boolean`     | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the toggle.           |
 
 ### Events
 

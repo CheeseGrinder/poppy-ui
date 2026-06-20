@@ -33,7 +33,7 @@ const formData = ref<Record<string, unknown>>({ agree: false })
         <HstSelect
           v-model="state.size"
           title="size"
-          :options="['xs', 'sm', 'md', 'lg']"
+          :options="['xs', 'sm', 'md', 'lg', 'xl']"
         />
         <HstCheckbox v-model="(state.indeterminate as boolean)" title="indeterminate" />
         <HstCheckbox v-model="state.disabled" title="disabled" />
@@ -107,9 +107,9 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### v-model
 
-| Name      | Type      | Modifiers | Description          |
-|-----------|-----------|-----------|----------------------|
-| `v-model` | `boolean` | -         | Bound checked state. |
+| Name         | Type      | Modifiers | Description          |
+|--------------|-----------|-----------|----------------------|
+| `modelValue` | `boolean` | -         | Bound checked state. |
 
 ### Props
 
@@ -121,6 +121,13 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `description`   | `string`        | `undefined` | :x:                | Secondary text displayed next to the checkbox.             |
 | `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                           |
 | `required`      | `boolean`       | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`. |
+
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the checkbox.         |
 
 ### Events
 

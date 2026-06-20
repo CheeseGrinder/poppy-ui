@@ -35,7 +35,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
         <HstSelect
           v-model="state.size"
           title="size"
-          :options="['xs', 'sm', 'md', 'lg']"
+          :options="['xs', 'sm', 'md', 'lg', 'xl']"
         />
         <HstSelect
           v-model="state.variant"
@@ -49,6 +49,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
         />
         <HstCheckbox v-model="(state.counter as boolean)" title="counter" />
         <HstSlider v-model="state.maxLength" title="maxLength" :min="0" :max="200" />
+        <HstText v-model="state.autocomplete" title="autocomplete" />
         <HstCheckbox v-model="state.disabled" title="disabled" />
         <HstCheckbox v-model="state.required" title="required" />
         <HstText v-model="state.placeholder" title="placeholder" />
@@ -169,6 +170,13 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `placeholder`   | `string`                | `undefined`           | :x:                | Placeholder text.                                  |
 | `pattern`       | `string`                | `undefined`           | :x:                | Constraint validation pattern.                     |
 | `title`         | `string`                | `undefined`           | :x:                | Pattern mismatch message.                          |
+
+### Expose
+
+| Name    | Type                   | Description                                     |
+|---------|------------------------|-------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element.  |
+| `focus` | `() => void`           | Programmatically focuses the input.             |
 
 ### Events
 

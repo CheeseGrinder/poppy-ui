@@ -158,17 +158,24 @@ Supports an `autoGrow` mode that expands the height automatically to fit the con
 | `color`         | `TextareaColor`       | `undefined`           | :white_check_mark: | Color variant.                                                                  |
 | `size`          | `TextareaSize`        | `'md'`                | :white_check_mark: | Size.                                                                           |
 | `variant`       | `TextareaVariant`     | `undefined`           | :white_check_mark: | Visual style variant.                                                           |
-| `autoGrow`      | `boolean`          | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
-| `counter`       | `boolean`          | `false`               | :white_check_mark: | Shows character counter.                                                        |
+| `autoGrow`      | `boolean`             | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
+| `counter`       | `boolean`             | `false`               | :white_check_mark: | Shows character counter.                                                        |
 | `minLength`     | `number`              | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                          |
 | `maxLength`     | `number`              | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
 | `counterFormat` | `string \| CounterFn` | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |
-| `rows`          | `number`              | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
+| `rows`          | `number \| string`    | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
 | `label`         | `string`              | `undefined`           | :x:                | Inline label (standalone use).                                                  |
 | `hint`          | `string`              | `undefined`           | :x:                | Hint text (standalone use).                                                     |
 | `disabled`      | `boolean`             | `undefined`           | :x:                | Native disabled.                                                                |
 | `required`      | `boolean`             | `undefined`           | :x:                | Native required.                                                                |
 | `placeholder`   | `string`              | `undefined`           | :x:                | Placeholder text.                                                               |
+
+### Expose
+
+| Name    | Type                      | Description                                       |
+|---------|---------------------------|---------------------------------------------------|
+| `$el`   | `HTMLTextAreaElement ref` | Ref to the underlying `<textarea />` DOM element. |
+| `focus` | `() => void`              | Programmatically focuses the textarea.            |
 
 ### Events
 

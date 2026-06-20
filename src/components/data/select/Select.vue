@@ -213,7 +213,7 @@ function onClear(): void {
 }
 
 function open(): void {
-  if (props.disabled) {
+  if (props.disabled || props.readonly) {
     return
   }
 
@@ -536,9 +536,11 @@ defineExpose({
           getClass(selectVariants, config.variant),
           disabled && 'select-disabled',
           hasServerError && 'select-error',
+          readonly && 'cursor-default',
         ]"
         :tabindex="disabled ? '-1' : undefined"
         :disabled="disabled"
+        :aria-readonly="readonly || undefined"
         @click="toggle()"
         @keydown="onTriggerKeydown"
       >
@@ -553,6 +555,7 @@ defineExpose({
             <Badge color="primary" size="sm" class="gap-1 cursor-default">
               {{ opt.label }}
               <button
+                v-if="!readonly"
                 type="button"
                 class="hover:opacity-70"
                 @click.stop="removeSelected(opt)"
@@ -580,7 +583,7 @@ defineExpose({
       />
 
       <button
-        v-if="config.clearable && hasValue"
+        v-if="config.clearable && hasValue && !readonly"
         type="button"
         class="absolute right-8 top-1/2 -translate-y-1/2 btn btn-ghost btn-xs btn-circle opacity-50 hover:opacity-100"
         @click="onClear"

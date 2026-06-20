@@ -80,6 +80,7 @@ async function searchCountries({ term, limit, page }: { term: string; limit: num
         <HstCheckbox v-model="state.clearable" title="clearable" />
         <HstCheckbox v-model="state.disabled" title="disabled" />
         <HstCheckbox v-model="state.required" title="required" />
+        <HstCheckbox v-model="state.readonly" title="readonly" />
         <HstText v-model="state.placeholder" title="placeholder" />
       </template>
 
@@ -101,6 +102,10 @@ async function searchCountries({ term, limit, page }: { term: string; limit: num
 
     <Variant title="Disabled" id="disabled">
       <Select v-model="model" :options="countries" disabled placeholder="Disabled" />
+    </Variant>
+
+    <Variant title="Readonly" id="readonly">
+      <Select v-model="model" :options="countries" readonly clearable placeholder="Select a country…" />
     </Variant>
 
     <Variant title="Clearable" id="clearable">
@@ -220,12 +225,13 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 | `options`          | `SelectOption[]`         | `undefined` | :x:                | List of options. Required for local mode; optional when using `search`.                              |
 | `equals`           | `keyof T \| EqualsArgFn` | `undefined` | :x:                | Key or function used for value equality comparison.                                                  |
 | `multiple`         | `boolean`                | `false`     | :x:                | Enables multiple selection. Model becomes an array.                                                  |
-| `clearable`        | `boolean`                | `false`     | :x:                | Shows a clear button when a value is selected (single mode).                                         |
+| `clearable`        | `boolean`                | `false`     | :white_check_mark: | Shows a clear button when a value is selected (single mode). Hidden when `readonly`.                 |
 | `counterFormatter` | `SelectCounterFormatter` | `undefined` | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.                                      |
 | `placeholder`      | `string`                 | `undefined` | :x:                | Text shown when no value is selected.                                                                |
 | `name`             | `string`                 | `undefined` | :x:                | Native input name. Inferred from `<FormField />` when not provided.                                  |
 | `disabled`         | `boolean`                | `false`     | :x:                | Disables all interaction.                                                                            |
 | `required`         | `boolean`                | `false`     | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`.                               |
+| `readonly`         | `boolean`                | `false`     | :x:                | Shows the current value but prevents any change. Clear button and dropdown are disabled.             |
 | `searchable`       | `boolean`                | `false`     | :x:                | Adds a search input inside the dropdown. Filters `options` locally, or delegates to `search`.        |
 | `search`           | `SelectSearchFn`         | `undefined` | :x:                | Async callback for remote search. Called on open (empty term) and on input (debounced).              |
 | `debounce`         | `number`                 | `300`       | :x:                | Debounce delay in ms before triggering `search` on input.                                            |
@@ -239,12 +245,12 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 The `search` callback receives a `SearchParams` object:
 
-| Field      | Type             | Description                                                                 |
-|------------|------------------|-----------------------------------------------------------------------------|
-| `term`     | `string`         | Current search query (empty string on initial open).                        |
-| `limit`    | `number`         | Number of items per page (from the `limit` prop).                           |
-| `page`     | `number`         | Current page number, starting at `1`. Increments on infinite scroll.        |
-| `lastItem` | `T \| undefined` | Value of the last fetched item. Use as cursor for cursor-based pagination.  |
+| Field      | Type             | Description                                                                |
+|------------|------------------|----------------------------------------------------------------------------|
+| `term`     | `string`         | Current search query (empty string on initial open).                       |
+| `limit`    | `number`         | Number of items per page (from the `limit` prop).                          |
+| `page`     | `number`         | Current page number, starting at `1`. Increments on infinite scroll.       |
+| `lastItem` | `T \| undefined` | Value of the last fetched item. Use as cursor for cursor-based pagination. |
 
 ### Events
 
@@ -265,12 +271,13 @@ The `search` callback receives a `SearchParams` object:
 
 ### Expose
 
-| Name     | Description                           |
-|----------|---------------------------------------|
-| `open`   | Opens the dropdown programmatically.  |
-| `close`  | Closes the dropdown programmatically. |
-| `toggle` | Toggles the dropdown.                 |
-| `clear`  | Clears the current selection.         |
+| Name     | Type                    | Description                                 |
+|----------|-------------------------|---------------------------------------------|
+| `$el`    | `HTMLButtonElement ref` | Ref to the underlying trigger `<button />`. |
+| `open`   | `() => void`            | Opens the dropdown programmatically.        |
+| `close`  | `() => void`            | Closes the dropdown programmatically.       |
+| `toggle` | `() => void`            | Toggles the dropdown.                       |
+| `clear`  | `() => void`            | Clears the current selection.               |
 
 > **Configurable** props can be configured in the Poppy Plugin `install` function via the `Poppy` object. See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
 
