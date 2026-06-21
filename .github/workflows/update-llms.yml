@@ -1,0 +1,43 @@
+name: Update LLMs documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**/*.story.vue'
+      - 'src/stories/**'
+      - 'scripts/generate-llms.ts'
+
+permissions:
+  contents: write
+
+jobs:
+  update-llms:
+    name: Regenerate llms.txt and llms-full.txt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Generate LLMs documentation
+        run: bun run generate:llms
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add llms.txt llms-full.txt
+          if git diff --cached --quiet; then
+            echo "No changes to llms files, skipping commit."
+          else
+            git commit -m "docs: regenerate llms.txt and llms-full.txt [skip ci]"
+            git push
+          fi

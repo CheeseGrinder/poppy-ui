@@ -1,0 +1,109 @@
+# Poppy UI
+
+> Poppy UI is an open-source Vue 3 component library built on Tailwind CSS 4 and DaisyUI 5.
+> Package: `@poppy-ui/vue` — GitHub: https://github.com/CheeseGrinder/poppy-ui
+
+## Installation
+
+```sh
+bun add @poppy-ui/vue
+# or: npm install @poppy-ui/vue
+```
+
+## Quick setup
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { PoppyUi } from '@poppy-ui/vue'
+import '@poppy-ui/vue/style.css'
+import App from './App.vue'
+
+createApp(App)
+  .use(PoppyUi, {
+    // optional global defaults
+  })
+  .mount('#app')
+```
+
+## Plugin configuration
+
+The `PoppyUi` plugin is installed once in `main.ts` and lets you define global defaults for every component. This avoids prop-drilling and keeps your design tokens consistent across the entire application.
+
+Full config reference: see `llms-full.txt`.
+
+## Components
+
+### Actions (5)
+
+- **Button** — A versatile button component built on top of DaisyUI's `btn` class system. Supports all standard HTML button attributes, Vue Router navigation via `to`, configurable colors, variants, sizes and shapes. When `to` is provided, the component renders as a `RouterLink` automatically.
+- **Dropdown** — A floating content panel anchored to a trigger element. Built on the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) — the content is teleported to `<body />` and positioned via CSS anchor positioning, so it always renders above other content without z-index management.
+- **Fab** — A floating action button with a dial of related actions that appear around it. Built on DaisyUI's `fab` component. All direct children are treated as action buttons, with the first one being the main trigger button.
+- **Modal** — A dialog component built on the native `dialog` element with `showModal()` / `close()` lifecycle management. Content is lazily rendered — it only mounts after the modal has been opened at least once, unless `loadContentWhenClose` is set. Controlled via `v-model` or programmatically through exposed methods.
+- **Swap** — Toggles the visibility of two (or three) elements using a reactive `v-model`. Built on DaisyUI's `swap` class system — no native checkbox involved, state is managed via `swap-active`. Supports rotate and flip transition effects.
+
+### Data (11)
+
+- **Checkbox** — Checkbox component built on the DaisyUI `checkbox` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+- **FieldSet** — Semantic `<fieldset />` wrapper with a legend and layout slots. Designed to visually group related fields inside a `<Form />`. Supports optional border, background, and header/footer slots for introductory and summary content.
+- **Form** — The `Form` component is the root of the form system. It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`. It owns the form data object, the errors record, and all field state. It handles programmatic validation, serialization, and emits `submit` / `reset` events.
+- **Input** — Text input component built on the DaisyUI `input` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade). Add `#start`/`#end` slots for icons, prefixes, or suffixes — they activate the addon wrapper automatically.
+- **RadioGroup** — Standalone radio group that shares a `name` and a `v-model` value across all child `<Radio />` components. Use it when radio buttons live **outside** a `<FormField />`. When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormField already provides the name and value automatically.
+- **Radio** — Radio button component built on the DaisyUI `radio` element. Radios are grouped by sharing the same `v-model` / `name`, provided automatically by `<RadioGroup />` or `<FormField />`.
+- **Rating** — Star rating component built on the DaisyUI `rating` element. Rendered as a set of `<input type="radio" />` elements styled as stars. Supports half-star precision and a clearable affordance. Works standalone with `v-model` or inside `<FormField />` for full form integration.
+- **Select** — Custom select component with a dropdown built on DaisyUI `select` styling. Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter. Add `searchable` for local filtering or pass a `search` callback for remote data with debounce, pagination, and infinite scroll. Works standalone with `v-model` or inside `<FormField />` for full form integration.
+- **Slider** — A custom slider component that allows users to select a value or range of values within a specified range. Based on the Range component with additional features like track inversion, thumb swapping control, and value scaling.
+- **Textarea** — Multi-line text input component built on the DaisyUI `textarea` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade). Supports an `autoGrow` mode that expands the height automatically to fit the content.
+- **Toggle** — Toggle (switch) component built on the DaisyUI `toggle` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+
+### Display (14)
+
+- **Accordion** — A vertically stacked set of collapsible sections. Each section is controlled by an `AccordionItem` nested inside `Accordion`. Supports single and multiple open modes, controlled and uncontrolled usage, animated transitions, and a customisable icon.
+- **Avatar** — A wrapper component to display user or entity representations. Built on DaisyUI's `avatar` class system. `Avatar` is a pure wrapper — the content (image, initials, etc.) is fully controlled via the `default` slot, making it compatible with any future `Mask` component.
+- **Badge** — A small inline label used to highlight status, categories, counts, or metadata. Built on DaisyUI's `badge` class system with support for colors, variants, and sizes.
+- **Card** — A flexible content container built on DaisyUI's `card` class system. Composed of four sub-components — `Card`, `CardBody`, `CardTitle`, and `CardActions` — that can be combined freely to build any card layout.
+- **Carousel** — A responsive, accessible carousel/slider component built on DaisyUI's `carousel` class system. Supports horizontal and vertical layouts, autoplay, infinite looping, indicators, and custom controls.
+- **Chat** — A chat bubble component for displaying conversation messages. Built on DaisyUI's `chat` class system. Supports avatars, headers, footers, and color-coded bubbles.
+- **Countdown** — Displays an animated countdown to a target date/time. Built on DaisyUI's `countdown` class system with an internal `setInterval` that ticks every 500ms. Fully customisable via the `default` slot — the default render shows `hh:mm:ss`.
+- **Diff** — A side-by-side comparison component with a draggable resizer. Built on DaisyUI's `diff` class system. Works with any content — images, text, UI components.
+- **Hover3d** — A wrapper that adds a 3D tilt effect on hover. Built on DaisyUI's `hover-3d` class system. The effect works by placing 8 invisible hover zones over the content — these are injected automatically.
+- **HoverGallery** — A container that creates a hover gallery effect. The first image is visible by default, and hovering horizontally reveals other images. Built on DaisyUI's `hover-gallery` class. Always renders as a `<figure />` element.
+- **Kbd** — Displays keyboard shortcuts and key combinations. Built on DaisyUI's `kbd` class system. Renders a semantic `<kbd />` HTML element.
+- **List** — A vertical layout component to display information in rows. Built on DaisyUI's `list` / `list-row` class system. `ListItem` renders as a `<li />` by default and switches to a `RouterLink` automatically when `to` is provided. It provides a great DX by supporting multiple named slots for easy composition.
+- **Stat** — A component used to display key metrics, statistics, or numerical data with optional titles, descriptions, icons, and actions.
+- **Status** — A small visual indicator used to represent the current state of an element — online, offline, error, etc. Built on DaisyUI's `status` class system. Supports colors, sizes, and animations for active states.
+
+### Feedback (6)
+
+- **Alert** — A contextual feedback component used to display informational, success, warning, or error messages. Built on DaisyUI's `alert` class system with support for colors, variants, and layout directions. Supports an optional icon via the `icon` slot.
+- **Loading** — An animated loading indicator built on DaisyUI's `loading` class system. Supports multiple visual styles, sizes, and colors. Use it inline, inside buttons, or as a full-page overlay.
+- **Progress** — Progress bar used to show the completion of a task or the passing of time. Omitting `value` or setting `indeterminate` renders an animated indeterminate state.
+- **RadialProgress** — Radial progress bar used to show the completion of a task or the passing of time. Renders as a `<div role="progressbar" />` for cross-browser compatibility (Firefox doesn't support pseudo-elements inside `<progress />`).
+- **Toast** — A fixed-position container for stacked notification messages. Built on DaisyUI's `toast` class system. Each notification is rendered as an `Alert` inside the `Toast` container.
+- **Tooltip** — A floating label that appears on hover, anchored to a trigger element. Built on the native Popover API with CSS anchor positioning — the tooltip is teleported to `<body />` to avoid overflow/clipping issues regardless of the trigger's position in the DOM.
+
+### Layout (6)
+
+- **Divider** — A simple line to visually separate content. Built on DaisyUI's `divider` component. Supports horizontal and vertical orientations, multiple colors, and text placement.
+- **Drawer** — A sidebar that can be toggled open or closed, typically used for mobile navigation menus. Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-index management.
+- **Indicator** — Wraps an element to add a small indicator (like a badge or notification dot) at various positions. Built on DaisyUI's `indicator` component. Use it to add notification badges, status markers, or any small visual indicator to elements.
+- **Join** — Groups items together side by side or in a column with joined borders. Built on DaisyUI's `join` component. Use it to create button groups, segmented controls, or any set of elements that should visually appear connected.
+- **Mask** — Applies CSS mask shapes to crop content into common geometric forms. Built on DaisyUI's `mask` class system. Use it to create visually interesting image shapes, icons, or any content that needs non-rectangular clipping.
+- **Stack** — Stacks items together with automatic spacing. Built on DaisyUI's `stack` component. Use it to group elements that should appear connected.
+
+### Media (1)
+
+- **Img** — A smart image wrapper with IntersectionObserver-based lazy loading, skeleton placeholder, error fallback, and `<picture />` art-direction support.
+
+### Navigation (6)
+
+- **Breadcrumbs** — Affiche un fil d'Ariane pour aider les utilisateurs à naviguer dans le site. Le dernier item est automatiquement traité comme la page courante (non cliquable).
+- **Dock** — Bottom navigation bar fixed to the bottom of the screen. Use `DockItem` for each navigation element.
+- **Link** — Adds the missing underline style to links. Supports Vue Router navigation, or native anchors (`#`, `#section`) for in-page links.
+- **Menu** — Displays a list of navigation links vertically or horizontally. Supports icons, badges, titles, static submenus, and collapsible submenus.
+- **Navbar** — A responsive navigation bar component based on DaisyUI.
+- **Tab** — Tabs component for switching between views. Each `<Tab />` renders both the tab button and its content panel as adjacent elements — matching DaisyUI's structure.
+
+## Full API reference
+
+See `llms-full.txt` for complete props, events, slots, and usage examples.

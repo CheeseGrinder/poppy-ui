@@ -94,6 +94,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "generate:llms": "bun run scripts/generate-llms.ts",
     "preview": "vite preview",
     "story:dev": "histoire dev",
     "story:build": "histoire build",

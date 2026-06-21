@@ -1,0 +1,3206 @@
+# Poppy UI
+
+> Poppy UI is an open-source Vue 3 component library built on Tailwind CSS 4 and DaisyUI 5.
+> Package: `@poppy-ui/vue` — GitHub: https://github.com/CheeseGrinder/poppy-ui
+
+## Installation
+
+```sh
+bun add @poppy-ui/vue
+# or: npm install @poppy-ui/vue
+```
+
+## Quick setup
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { PoppyUi } from '@poppy-ui/vue'
+import '@poppy-ui/vue/style.css'
+import App from './App.vue'
+
+createApp(App)
+  .use(PoppyUi, {
+    // optional global defaults
+  })
+  .mount('#app')
+```
+
+---
+
+## Plugin configuration
+
+## Overview
+
+The `PoppyUi` plugin is installed once in `main.ts` and lets you define global defaults
+for every component. This avoids prop-drilling and keeps your design tokens consistent
+across the entire application.
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { PoppyUi } from '@poppy-ui/vue'
+import App from './App.vue'
+
+createApp(App)
+  .use(PoppyUi, {
+    size: 'md',
+    components: {
+      button: {
+        color: 'primary',
+        variant: 'solid',
+      },
+    },
+  })
+  .mount('#app')
+```
+
+## Options
+
+| Option       | Type                   | Default     | Description                                                                       |
+|--------------|------------------------|-------------|-----------------------------------------------------------------------------------|
+| `size`       | `ComponentSize`        | `'md'`      | Global size fallback for all components.                                          |
+| `components` | `PoppyComponentConfig` | `{}`        | Per-component default configurable props.                                         |
+| `debug`      | `true`                 | `undefined` | Logs options to console and exposes them on `window.__POPPY_UI_PLUGIN_OPTIONS__`. |
+
+## Priority order
+
+When resolving a prop value, the following priority applies (highest to lowest):
+
+1. Prop passed directly to the component instance
+2. `components.[name]` in plugin options
+3. Global `size` in plugin options
+4. Component's own internal default
+
+## Configurable props
+
+Only props marked **Configurable :white_check_mark:** in each component's documentation can be set
+via the plugin. Non-configurable props (e.g. `disabled`, `loading`, `type`) must always
+be passed directly to the component instance.
+
+---
+
+## Component API reference
+
+---
+
+# Actions
+
+# Button
+
+## Description
+
+A versatile button component built on top of DaisyUI's `btn` class system.
+Supports all standard HTML button attributes, Vue Router navigation via `to`, configurable colors, variants, sizes and shapes.
+When `to` is provided, the component renders as a `RouterLink` automatically.
+
+## API
+
+### Props
+
+| Prop       | Type                              | Default     | Required | Configurable       | Description                                                                                                       |
+|------------|-----------------------------------|-------------|----------|--------------------|-------------------------------------------------------------------------------------------------------------------|
+| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | :x:      | :x:                | HTML type attribute for the button element.                                                                       |
+| `color`    | `ButtonColor`                     | `undefined` | :x:      | :white_check_mark: | Color theme of the button based on the DaisyUI palette.                                                           |
+| `variant`  | `ButtonVariant`                   | `'solid'`   | :x:      | :white_check_mark: | Visual style of the button.                                                                                       |
+| `size`     | `ButtonSize`                      | `'md'`      | :x:      | :white_check_mark: | Size of the button.                                                                                               |
+| `shape`    | `ButtonShape`                     | `undefined` | :x:      | :white_check_mark: | Shape or width constraint of the button.                                                                          |
+| `behavior` | `ButtonBehavior`                  | `undefined` | :x:      | :x:                | Forces a specific visual state. Use `'disabled'` to apply disabled styling without the HTML `disabled` attribute. |
+| `disabled` | `boolean`                         | `false`     | :x:      | :x:                | Disables interactions. Also sets `aria-disabled="true"` and `tabIndex="-1"` automatically.                        |
+| `loading`  | `boolean`                         | `false`     | :x:      | :x:                | Displays a loading spinner and disables the button.            |
+| `to`       | `RouteLocationRaw`                | `undefined` | :x:      | :x:                | If provided, the component renders as a `RouterLink`. Accepts a string path or a route location object.           |
+| `form`     | `string`                          | `undefined` | :x:      | :x:                | ID of the form the button is associated with (native HTML attribute).                                             |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.button` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+
+### Events
+
+| Event    | Payload      | Description              |
+|----------|--------------|--------------------------|
+| `@click` | `MouseEvent` | Emitted on button click. |
+
+### Slots
+
+| Slot      | Bindings | Description                                                                                                        |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------|
+| `default` | -        | Main content of the button (text, icon, etc.).                                                                     |
+| `loading` | -        | Overrides the default spinner shown when `loading` is `true`. Default: `<span class="loading loading-spinner" />`. |
+
+## Note
+
+### Automatic behavior
+
+- **RouterLink rendering** — When `to` is provided, the root element switches from `<button />` to `<RouterLink />` automatically.
+- **Accessibility** — When `behavior="disabled"` or `disabled=true`, the component automatically adds `disabled`, `aria-disabled="true"` and `tabIndex="-1"`.
+- **Attribute inheritance** — Unrecognized HTML attributes (`$attrs`) are forwarded to the root element. The `class` attribute is merged manually to preserve internal class logic.
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Button color="primary">Confirm</Button>
+
+<!-- Loading state -->
+<Button color="primary" :loading="isSubmitting" @click="submit">
+  Submit
+</Button>
+
+<!-- Router navigation -->
+<Button :to="{ name: 'home' }" variant="outline">
+  Back to home
+</Button>
+
+<!-- Submit form -->
+<Button type="submit" color="success" size="lg" shape="wide">
+  Save
+</Button>
+
+<!-- Custom loading slot -->
+<Button color="primary" :loading="true">
+  <template #loading>
+    <MySpinner />
+  </template>
+  Processing…
+</Button>
+```
+
+# Dropdown
+
+## Description
+
+A floating content panel anchored to a trigger element.
+Built on the native [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) — the content is teleported to `<body />` and positioned via CSS anchor positioning, so it always renders above other content without z-index management.
+
+Supports `click`, `hover`, and `context-menu` trigger actions, configurable placement, and programmatic control via exposed methods.
+
+## API
+
+### Props
+
+| Prop            | Type                    | Default     | Required | Configurable       | Description                                                                                      |
+|-----------------|------------------------ |-------------|----------|--------------------|--------------------------------------------------------------------------------------------------|
+| `align`         | `DropdownAlign`         | `'start'`   | :x:      | :white_check_mark: | Alignment of the content relative to the trigger. `start` / `center` / `end` (respects LTR/RTL). |
+| `side`          | `DropdownSide`          | `'bottom'`  | :x:      | :white_check_mark: | Which side of the trigger the content appears on. `bottom` / `top` / `left` / `right`.           |
+| `triggerAction` | `DropdownTriggerAction` | `'click'`   | :x:      | :white_check_mark: | Interaction that opens the dropdown. `click` / `hover` / `context-menu`.                         |
+| `debounce`      | `number`                | `500`       | :x:      | :white_check_mark: | Delay in ms before closing on `triggerAction="hover"` after the pointer leaves.                  |
+| `open`          | `boolean`            | `false`     | :x:      | :x:                | Forces the dropdown open.                     |
+| `triggerClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the internal trigger `<button />` wrapper.                              |
+| `contentClass`  | `ClassValue`            | `undefined` | :x:      | :x:                | CSS class(es) applied to the popover content element.                                            |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.dropdown` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Events
+
+| Event    | Payload | Description                                          |
+|----------|---------|------------------------------------------------------|
+| `@open`  | -       | Emitted before the dropdown content becomes visible. |
+| `@close` | -       | Emitted before the dropdown content is hidden.       |
+
+### Slots
+
+| Slot      | Bindings | Description                                                              |
+|-----------|----------|--------------------------------------------------------------------------|
+| `trigger` | -        | The element that opens the dropdown. Rendered as a `<button />` wrapper. |
+| `default` | -        | The dropdown content (menu items, panels, forms, etc.).                  |
+
+### Expose
+
+These methods are accessible via a template ref on the component instance.
+
+| Method     | Signature             | Description                                  |
+|------------|-----------------------|----------------------------------------------|
+| `open()`   | `() => void`          | Opens the dropdown.                          |
+| `close()`  | `() => void`          | Closes the dropdown.                         |
+| `toggle()` | `() => void`          | Opens if closed, closes if open.             |
+| `$el`      | `HTMLElement \| null` | Direct reference to the popover DOM element. |
+
+```vue
+<Dropdown ref="dropdownRef">
+  <template #trigger>
+    Open
+  </template>
+  <ul>...</ul>
+</Dropdown>
+
+<Button @click="dropdownRef?.toggle()">Toggle programmatically</Button>
+```
+
+## Note
+
+### Trigger actions
+
+| Value          | Behaviour                                                                                                                                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `click`        | Opens/closes on left click. Keyboard accessible (`Enter`, `Space`, `Escape`).                                                                               |
+| `hover`        | Opens on pointer enter, closes after `debounce` ms once the pointer leaves the trigger or content. A click while hovered locks it open until clicked again. |
+| `context-menu` | Opens on right click (desktop) or long press (mobile). Prevents the native context menu.                                                                    |
+
+## Usage
+
+```vue
+<!-- Basic click dropdown -->
+<Dropdown>
+  <template #trigger>
+    Options
+  </template>
+  <ul>
+    <li><a>Edit</a></li>
+    <li><a>Delete</a></li>
+  </ul>
+</Dropdown>
+
+<!-- Hover with custom debounce -->
+<Dropdown trigger-action="hover" :debounce="200" side="right">
+  <template #trigger>
+    Hover me
+  </template>
+  <ul>...</ul>
+</Dropdown>
+
+<!-- Programmatic control -->
+<Dropdown ref="menu">
+  <template #trigger>Open</template>
+  <ul>...</ul>
+</Dropdown>
+<Button @click="menu?.open()">Open externally</Button>
+```
+
+# Fab (Speed Dial)
+
+## Description
+
+A floating action button with a dial of related actions that appear around it.
+Built on DaisyUI's `fab` component. All direct children are treated as action buttons,
+with the first one being the main trigger button.
+
+## Props
+
+| Prop   | Type      | Default     | Required | Configurable       | Description                                         |
+|--------|-----------|-------------|----------|--------------------|-----------------------------------------------------|
+| `mode` | `FabMode` | `undefined` | :x:      | :white_check_mark: | Visual mode: `'flower'` for radial opening pattern. |
+
+## Slots
+
+| Slot          | Description                                                                |
+|---------------|----------------------------------------------------------------------------|
+| `default`     | All action buttons, including the main trigger button.                     |
+| `main-action` | Replaces the main action button content when the FAB is in its open state. |
+| `close`       | A button with `fab-close` class that closes the FAB when clicked.          |
+
+## Usage
+
+```vue
+<!-- Basic FAB -->
+<Fab>
+  <button class="btn btn-circle btn-primary">+</button>
+  <button class="btn btn-circle btn-accent">Action 1</button>
+  <button class="btn btn-circle">Action 2</button>
+  <button class="btn btn-circle">Action 3</button>
+  <template #close>
+    <button class="btn btn-circle fab-close">×</button>
+  </template>
+</Fab>
+
+<!-- Flower mode (radial opening) -->
+<Fab mode="flower">
+  <button class="btn btn-circle btn-primary">+</button>
+  <button class="btn btn-circle">1</button>
+  <button class="btn btn-circle">2</button>
+  <button class="btn btn-circle">3</button>
+  <template #close>
+    <button class="btn btn-circle fab-close">×</button>
+  </template>
+</Fab>
+
+<!-- With main-action slot -->
+<Fab mode="flower">
+  <button class="btn btn-circle btn-primary">+</button>
+  <button class="btn btn-circle">1</button>
+  <button class="btn btn-circle">2</button>
+  <template #main-action>
+    <button class="btn btn-circle btn-success">✓</button>
+  </template>
+  <template #close>
+    <button class="btn btn-circle fab-close">×</button>
+  </template>
+</Fab>
+```
+
+# Modal
+
+## Description
+
+A dialog component built on the native `dialog` element with `showModal()` / `close()` lifecycle management.
+Content is lazily rendered — it only mounts after the modal has been opened at least once, unless `loadContentWhenClose` is set.
+Controlled via `v-model` or programmatically through exposed methods.
+
+## API
+
+### v-model
+
+| Prop         | Type      | Description              |
+|--------------|-----------|--------------------------|
+| `modelValue` | `boolean` | Open state of the modal. |
+
+### Props
+
+| Prop                   | Type             | Default     | Required | Configurable       | Description                                                                                                      |
+|------------------------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------|
+| `placement`            | `ModalPlacement` | `undefined` | :x:      | :white_check_mark: | Position of the modal box on screen. `top` / `middle` / `bottom` / `start` / `end`.                              |
+| `closeOnBackdrop`      | `boolean`        | `false`     | :x:      | :white_check_mark: | When `true`, clicking the backdrop closes the modal.                                                             |
+| `loadContentWhenClose` | `boolean`        | `false`     | :x:      | :white_check_mark: | When `true`, content stays mounted while the modal is closed. Preserves internal component state between cycles. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.modal` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Events
+
+| Event    | Payload | Description                                           |
+|----------|---------|-------------------------------------------------------|
+| `@open`  | -       | Emitted when the modal opens.                         |
+| `@close` | -       | Emitted when the modal closes (native `close` event). |
+
+### Slots
+
+| Slot      | Bindings | Description                                                                                |
+|-----------|----------|--------------------------------------------------------------------------------------------|
+| `default` | -        | Main content of the modal box.                                                             |
+| `actions` | -        | Rendered inside a `modal-action` wrapper at the bottom of the box. Only mounted when used. |
+
+### Expose
+
+| Method    | Signature    | Description       |
+|-----------|--------------|-------------------|
+| `open()`  | `() => void` | Opens the modal.  |
+| `close()` | `() => void` | Closes the modal. |
+
+```vue
+<Modal ref="modalRef">
+  <p>Content</p>
+  <template #actions>
+    <Button @click="modalRef?.close()">Close</Button>
+  </template>
+</Modal>
+
+<Button @click="modalRef?.open()">Open</Button>
+```
+
+## Note
+
+### Content rendering
+
+By default the modal uses **lazy + persistent** rendering:
+- Content is **not rendered** until the modal is opened for the first time.
+- Once opened, the content **stays mounted** even after closing — preserving any internal state (scroll position, form values, counters, etc.).
+
+Set `loadContentWhenClose="true"` to keep the content mounted **from the start**, even before the first open.
+
+| `loadContentWhenClose` | First render  | After close   |
+|------------------------|---------------|---------------|
+| `false` (default)      | On first open | Stays mounted |
+| `true`                 | Immediately   | Stays mounted |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Button @click="open = true">Open</Button>
+<Modal v-model="open">
+  <h3>Title</h3>
+  <p>Content goes here.</p>
+  <template #actions>
+    <Button color="primary" @click="open = false">Confirm</Button>
+    <Button variant="ghost" @click="open = false">Cancel</Button>
+  </template>
+</Modal>
+
+<!-- Close on backdrop click -->
+<Modal v-model="open" close-on-backdrop>...</Modal>
+
+<!-- Top placement -->
+<Modal v-model="open" placement="top">...</Modal>
+
+<!-- Programmatic control -->
+<Modal ref="modalRef">...</Modal>
+<Button @click="modalRef?.open()">Open</Button>
+```
+
+# Swap
+
+## Description
+
+Toggles the visibility of two (or three) elements using a reactive `v-model`.
+Built on DaisyUI's `swap` class system — no native checkbox involved, state is managed via `swap-active`.
+Supports rotate and flip transition effects.
+
+## API
+
+### v-model
+
+| Name      | Type      | Modifiers | Description          |
+|-----------|-----------|-----------|----------------------|
+| `v-model` | `boolean` | `undefined` | Bound checked state. |
+
+### Props
+
+| Prop            | Type          | Default     | Required | Configurable       | Description                                                           |
+|-----------------|---------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
+| `variant`       | `SwapVariant` | `undefined` | :x:      | :white_check_mark: | Transition effect. `'rotate'` / `'flip'`.                             |
+| `indeterminate` | `boolean`     | `false`     | :x:      | :x:                | When `true`, shows the `#indeterminate` slot regardless of `v-model`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.swap` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Slots
+
+| Slot            | Bindings | Description                                                     |
+|-----------------|----------|-----------------------------------------------------------------|
+| `on`            | -        | Visible when `v-model` is `true`.                               |
+| `off`           | -        | Visible when `v-model` is `false`.                              |
+| `indeterminate` | -        | Visible when `indeterminate` is `true`, overrides `on` / `off`. |
+
+## Usage
+
+```vue
+<!-- Basic text swap -->
+<Swap v-model="active">
+  <template #on>ON</template>
+  <template #off>OFF</template>
+</Swap>
+
+<!-- Sun / Moon with rotate effect -->
+<Swap v-model="isDark" variant="rotate">
+  <template #on><SunIcon class="w-10 h-10" /></template>
+  <template #off><MoonIcon class="w-10 h-10" /></template>
+</Swap>
+
+<!-- Hamburger menu with rotate effect -->
+<Swap v-model="menuOpen" variant="rotate" class="btn btn-circle">
+  <template #on><XIcon class="w-6 h-6" /></template>
+  <template #off><MenuIcon class="w-6 h-6" /></template>
+</Swap>
+
+<!-- With indeterminate state -->
+<Swap v-model="active" :indeterminate="isLoading">
+  <template #on>✓</template>
+  <template #indeterminate>...</template>
+  <template #off>✗</template>
+</Swap>
+```
+
+---
+
+# Data
+
+# Checkbox
+
+## Description
+
+Checkbox component built on the DaisyUI `checkbox` element.
+Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+
+## API
+
+### v-model
+
+| Name         | Type      | Modifiers | Description          |
+|--------------|-----------|-----------|----------------------|
+| `modelValue` | `boolean` | -         | Bound checked state. |
+
+### Props
+
+| Prop            | Type            | Default     | Configurable       | Description                                                      |
+|-----------------|-----------------|-------------|--------------------|--------------------------------------------------------------------|
+| `color`         | `CheckboxColor` | `undefined` | :white_check_mark: | Color variant.                                                   |
+| `size`          | `CheckboxSize`  | `'md'`      | :white_check_mark: | Size.                                                            |
+| `indeterminate` | `boolean`       | `false`     | :x:                | Renders the indeterminate visual state.                          |
+| `description`   | `string`        | `undefined` | :x:                | Primary label text displayed to the right of the checkbox.       |
+| `hint`          | `string`        | `undefined` | :x:                | Secondary hint text displayed below the description.             |
+| `disabled`      | `boolean`       | `undefined` | :x:                | Native disabled.                                                 |
+| `readonly`      | `boolean`       | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
+| `required`      | `boolean`       | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
+
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the checkbox.         |
+
+### Events
+
+| Event     | Payload | Description                                                                             |
+|-----------|---------|-----------------------------------------------------------------------------------------|
+| `@change` | `Event` | Emitted when the checked state changes (native change event).                           |
+| `@blur`   | `Event` | Emitted when the checkbox loses focus. Triggers validation when inside `<FormField />`. |
+
+### Slots
+
+| Slot          | Bindings | Description                                                    |
+|---------------|----------|----------------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of the checkbox.     |
+| `hint`        | -        | Secondary hint text displayed below the description.           |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.checkbox` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+```vue
+<!-- Standalone -->
+<Checkbox v-model="accepted" color="primary" />
+
+<!-- With description -->
+<Checkbox v-model="accepted" description="Subscribe to the newsletter" />
+
+<!-- With description and hint -->
+<Checkbox
+  v-model="enabled"
+  description="Enable two-factor authentication"
+  hint="Adds an extra layer of security"
+/>
+
+<!-- Required -->
+<Checkbox v-model="agreed" description="I accept the terms" required />
+
+<!-- Indeterminate -->
+<Checkbox v-model="partialSelection" indeterminate />
+
+<!-- Inside FormField -->
+<FormField name="agree" label="Terms & conditions">
+  <Checkbox required description="I agree to the terms and conditions" />
+</FormField>
+```
+
+# FieldSet
+
+## Description
+
+Semantic `<fieldset />` wrapper with a legend and layout slots.
+Designed to visually group related fields inside a `<Form />`.
+Supports optional border, background, and header/footer slots for introductory and summary content.
+
+## API
+
+### Props
+
+| Prop         | Type      | Default     | Description                                   |
+|--------------|-----------|-------------|-----------------------------------------------|
+| `legend`     | `string`  | `undefined` | Text displayed as the fieldset legend.        |
+| `bordered`   | `boolean` | `false`     | Adds a visible border around the fieldset.    |
+| `background` | `boolean` | `false`     | Adds a `base-200` background to the fieldset. |
+
+### Slots
+
+| Slot       | Bindings | Description                                               |
+|------------|----------|-----------------------------------------------------------|
+| `legend`   | -        | Custom legend content (replaces the `legend` prop text).  |
+| `header`   | -        | Content rendered above the default slot.                  |
+| `default`  | -        | Main fieldset content (form fields, text, etc.).          |
+| `footer`   | -        | Content rendered below the default slot.                  |
+
+## Usage
+```vue
+<!-- Simple -->
+<FieldSet legend="Personal info" bordered>
+  <FormField name="name" label="Name">
+    <Input />
+  </FormField>
+</FieldSet>
+
+<!-- With header and footer -->
+<FieldSet legend="Advanced" bordered>
+  <template #header>
+    <p class="text-xs text-base-content/50">These settings affect all users.</p>
+  </template>
+  <FormField name="timeout" label="Session timeout">
+    <Input type="number" />
+  </FormField>
+  <template #footer>
+    <p class="text-xs text-base-content/50">Changes are applied immediately.</p>
+  </template>
+</FieldSet>
+
+<!-- Custom legend slot -->
+<FieldSet bordered>
+  <template #legend>
+    🔒 Security
+  </template>
+  …
+</FieldSet>
+```
+
+# Form
+
+## Description
+
+The `Form` component is the root of the form system.
+It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`.
+It owns the form data object, the errors record, and all field state.
+It handles programmatic validation, serialization, and emits `submit` / `reset` events.
+
+`novalidate` is always set on the `<form />` element to suppress native browser popups. Validation is handled programmatically via the HTML5 Constraint Validation API.
+
+## API
+
+### v-model
+
+| Name         | Type                         | Modifiers | Description                      |
+|--------------|------------------------------|-----------|----------------------------------|
+| `modelValue` | `{ [key: string]: unknown }` | -         | The form data object (required). |
+
+### Props
+
+| Prop            | Type                 | Default               | Configurable | Description                                     |
+|-----------------|----------------------|-----------------------|--------------|-------------------------------------------------|
+| `counter`       | `boolean`            | `false`               | :x:          | Propagates counter display to all child inputs. |
+| `counterFormat` | `string \| Function` | `'{current} / {max}'` | :x:          | Default counter format for all child inputs.    |
+| `serializer`    | `FormSerializer`     | `undefined`           | :x:          | Transforms data before the `submit` event.      |
+
+### Events
+
+| Event    | Payload                      | Description                                          |
+|----------|------------------------------|------------------------------------------------------|
+| `submit` | `{ [key: string]: unknown }` | Fired after successful validation and serialization. |
+| `reset`  | `undefined`                  | Fired when the form is reset.                        |
+
+### Slots
+
+| Slot      | Bindings                         | Description                                                |
+|-----------|----------------------------------|------------------------------------------------------------|
+| `default` | -                                | Form content undefined FormField components, buttons, etc. |
+| `error`   | `{ error: string \| undefined }` | Global error rendering.                                    |
+
+## Usage
+```vue
+<Form v-model="formData" :serializer="mySerializer" @submit="onSubmit">
+  <FormField name="email" label="Email">
+    <Input type="email" required />
+  </FormField>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</Form>
+```
+
+# Input
+
+## Description
+Text input component built on the DaisyUI `input` element.
+Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Add `#start`/`#end` slots for icons, prefixes, or suffixes — they activate the addon wrapper automatically.
+
+## API
+
+### v-model
+
+| Name         | Type               | Modifiers          | Description  |
+|--------------|--------------------|--------------------|--------------|
+| `modelValue` | `string \| number` | `.number`, `.trim` | Bound value. |
+
+### Props
+| Prop            | Type                    | Default               | Configurable       | Description                                                               |
+|-----------------|-------------------------|-----------------------|--------------------|---------------------------------------------------------------------------|
+| `color`         | `InputColor`            | `undefined`           | :white_check_mark: | Color variant.                                                            |
+| `size`          | `InputSize`             | `'md'`                | :white_check_mark: | Size.                                                                     |
+| `variant`       | `'bordered' \| 'ghost'` | `undefined`           | :white_check_mark: | Visual style variant.                                                     |
+| `counter`       | `boolean`               | `false`               | :white_check_mark: | Shows character counter.                                                  |
+| `minLength`     | `number`                | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                    |
+| `maxLength`     | `number`                | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                        |
+| `counterFormat` | `string \| CounterFn`   | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                           |
+| `type`          | `InputType`             | `'text'`              | :x:                | HTML input type.                                                          |
+| `defaultValue`  | `string \| number`      | `undefined`           | :x:                | Fallback when model is empty.                                             |
+| `clearable`     | `boolean`               | `false`               | :x:                | Shows a ✕ button when the field has a value. Activates the addon wrapper. |
+| `disabled`      | `boolean`               | `undefined`           | :x:                | Native disabled.                                                          |
+| `readonly`      | `boolean`               | `undefined`           | :x:                | Native read-only.                                                         |
+| `required`      | `boolean`               | `undefined`           | :x:                | Native required (implicit `validator` class).                             |
+| `placeholder`   | `string`                | `undefined`           | :x:                | Placeholder text.                                                         |
+| `pattern`       | `string`                | `undefined`           | :x:                | Constraint validation pattern (implicit `validator` class).               |
+| `title`         | `string`                | `undefined`           | :x:                | Pattern mismatch message.                                                 |
+
+### Expose
+
+| Name    | Type                   | Description                                     |
+|---------|------------------------|-------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element.  |
+| `focus` | `() => void`           | Programmatically focuses the input.             |
+
+### Events
+
+| Event    | Payload | Description                                                                          |
+|----------|---------|--------------------------------------------------------------------------------------|
+| `@input` | `Event` | Emitted on every keystroke (native input event).                                     |
+| `@blur`  | `Event` | Emitted when the input loses focus. Triggers validation when inside `<FormField />`. |
+
+### Slots
+
+| Slot    | Bindings | Description                                            |
+|---------|----------|--------------------------------------------------------|
+| `start` | -        | Content placed before the input (icon, text, badge).   |
+| `end`   | -        | Content placed after the input (icon, text, suffix).   |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.input` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Notes
+
+### Addon wrapper
+Using a `#start` or `#end` slot, or setting `clearable`, automatically switches the root element to a `<label class="input" />` wrapper, enabling icons and suffix text. This makes the component compatible with `<Join />`.
+
+### Implicit validator
+The DaisyUI `validator` class (`:user-invalid` styling) is applied automatically when `required`, `pattern`, `minlength`, `maxlength`, `min`, or `max` are present.
+
+### Counter cascade
+Counter resolution order (first defined wins):
+1. `counter` prop on `<Input />` itself
+2. `counter` on `<FormField />`
+3. `counter` on `<Form />`
+4. Plugin config
+5. Default: `false`
+
+## Usage
+```vue
+<!-- Standalone with placeholder -->
+<Input v-model="name" placeholder="Full name" variant="bordered" />
+
+<!-- With start icon -->
+<Input v-model="query" placeholder="Search…" variant="bordered">
+  <template #start>
+    <SearchIcon class="size-4 opacity-50" />
+  </template>
+</Input>
+
+<!-- Clearable -->
+<Input v-model="email" clearable placeholder="you@example.com" />
+
+<!-- Inside FormField -->
+<FormField name="email" label="Email">
+  <Input type="email" required />
+</FormField>
+
+<!-- Counter inherited from Form -->
+<Form v-model="data" counter>
+  <FormField name="bio" label="Bio">
+    <Input :max-length="200" />
+  </FormField>
+</Form>
+```
+
+# RadioGroup
+
+## Description
+
+Standalone radio group that shares a `name` and a `v-model` value across all child `<Radio />` components.
+Use it when radio buttons live **outside** a `<FormField />`.
+When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormField already provides the name and value automatically.
+
+## API
+
+### v-model
+
+| Name         | Type                          | Modifiers | Description                                          |
+|--------------|-------------------------------|-----------|------------------------------------------------------|
+| `modelValue` | `string \| number \| boolean` | -         | Currently selected value shared across child radios. |
+
+### Props
+
+| Prop       | Type      | Default     | Description                                                                |
+|------------|-----------|-------------|----------------------------------------------------------------------------|
+| `name`     | `string`  | auto        | Shared `name` for all child `<Radio />` inputs. Auto-generated when omitted. |
+| `required` | `boolean` | `undefined` | Marks all radios in the group as required.                                 |
+
+### Slots
+
+| Slot      | Bindings | Description                 |
+|-----------|----------|-----------------------------|
+| `default` | -        | Child `<Radio />` elements. |
+
+## Usage
+```vue
+<!-- Standalone group -->
+<RadioGroup v-model="plan">
+  <Radio value="free" description="Free" />
+  <Radio value="pro" description="Pro — 9€/month" />
+  <Radio value="enterprise" description="Enterprise" />
+</RadioGroup>
+
+<!-- Inside a FieldSet for visual grouping -->
+<FieldSet legend="Subscription" bordered>
+  <RadioGroup v-model="plan">
+    <Radio value="free" description="Free" hint="Up to 3 projects" />
+    <Radio value="pro" color="primary" description="Pro" hint="Unlimited projects" />
+  </RadioGroup>
+</FieldSet>
+
+<!-- Inside FormField — use Radio directly, no RadioGroup needed -->
+<FormField name="plan" label="Plan">
+  <Radio value="free" description="Free" required />
+  <Radio value="pro" description="Pro — 9€/month" />
+</FormField>
+```
+
+# Radio
+
+## Description
+
+Radio button component built on the DaisyUI `radio` element.
+Radios are grouped by sharing the same `v-model` / `name`, provided automatically by `<RadioGroup />` or `<FormField />`.
+
+## API
+
+### v-model
+
+| Name         | Type                          | Modifiers | Description                                             |
+|--------------|-------------------------------|-----------|---------------------------------------------------------|
+| `modelValue` | `string \| number \| boolean` | -         | Bound group value. Checked when equal to `props.value`. |
+
+### Props
+
+| Prop          | Type                          | Default     | Configurable       | Description                                                                                |
+|---------------|-------------------------------|-------------|--------------------|--------------------------------------------------------------------------------------------|
+| `value`       | `string \| number \| boolean` | `undefined` | :x:                | The value this radio represents (required).                                                |
+| `color`       | `RadioColor`                  | `undefined` | :white_check_mark: | Color variant.                                                                             |
+| `size`        | `RadioSize`                   | `'md'`      | :white_check_mark: | Size.                                                                                      |
+| `description` | `string`                      | `undefined` | :x:                | Primary label text displayed to the right of the radio button.                             |
+| `hint`        | `string`                      | `undefined` | :x:                | Secondary hint text displayed below the description.                                       |
+| `name`        | `string`                      | `undefined` | :x:                | Input group name. Inferred from `<FormField />` or `<RadioGroup />` when not provided.     |
+| `disabled`    | `boolean`                     | `undefined` | :x:                | Native disabled.                                                                           |
+| `required`    | `boolean`                     | `undefined` | :x:                | Native required. Displays `"*"` next to the description.                                   |
+
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the radio button.     |
+
+### Events
+
+| Event     | Payload | Description                                                                                 |
+|-----------|---------|---------------------------------------------------------------------------------------------|
+| `@change` | `Event` | Emitted when this radio is selected (native change event).                                  |
+| `@blur`   | `Event` | Emitted when the radio button loses focus. Triggers validation when inside `<FormField />`. |
+
+### Slots
+
+| Slot          | Bindings | Description                                              |
+|---------------|----------|----------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of the radio.  |
+| `hint`        | -        | Secondary hint text displayed below the description.     |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.radio` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+```vue
+<!-- Via RadioGroup (standalone, outside FormField) -->
+<RadioGroup v-model="plan">
+  <Radio value="free" description="Free" hint="Up to 3 projects" />
+  <Radio value="pro" color="primary" description="Pro — 9€/month" />
+</RadioGroup>
+
+<!-- Via RadioGroup inside FieldSet -->
+<FieldSet legend="Plan" bordered>
+  <RadioGroup v-model="plan">
+    <Radio value="free" description="Free" />
+    <Radio value="pro" description="Pro" />
+  </RadioGroup>
+</FieldSet>
+
+<!-- Inside FormField — name inferred automatically, no RadioGroup needed -->
+<FormField name="plan" label="Plan">
+  <Radio value="free" description="Free" required />
+  <Radio value="pro" description="Pro — 9€/month" />
+</FormField>
+```
+
+# Rating
+
+## Description
+Star rating component built on the DaisyUI `rating` element.
+Rendered as a set of `<input type="radio" />` elements styled as stars.
+Supports half-star precision and a clearable affordance.
+Works standalone with `v-model` or inside `<FormField />` for full form integration.
+
+## API
+
+### v-model
+
+| Name      | Type     | Modifiers | Description                                                                                   |
+|-----------|----------|-----------|-----------------------------------------------------------------------------------------------|
+| `v-model` | `number` | -         | Current rating value (1-based). `0` means no star selected. Increments by `0.5` in half mode. |
+
+### Props
+
+| Prop        | Type           | Default     | Configurable       | Description                                                 |
+|-------------|----------------|-------------|--------------------|-------------------------------------------------------------|
+| `color`     | `RatingColor`  | `undefined` | :white_check_mark: | Color applied to the star icons.                            |
+| `size`      | `RatingSize`   | `'md'`      | :white_check_mark: | Size of the stars.                                          |
+| `count`     | `number`       | `5`         | :white_check_mark: | Total number of stars.                                      |
+| `half`      | `boolean`      | `false`     | :white_check_mark: | Enables half-star precision (0.5 increments).               |
+| `clearable` | `boolean`      | `true`      | :white_check_mark: | Allows clearing the rating by re-selecting the active star. |
+| `disabled`  | `boolean`      | `undefined` | :x:                | Disables all interaction.                                   |
+| `required`  | `boolean`      | `undefined` | :x:                | Native required. Signals `<FormField />` to display `"*"`.  |
+
+### Events
+
+| Event     | Payload  | Description                                                                            |
+|-----------|----------|----------------------------------------------------------------------------------------|
+| `@change` | `number` | Emitted when the selected star changes. Payload is the new value (`0` when cleared).   |
+| `@blur`   | `Event`  | Emitted when focus leaves the rating. Triggers validation when inside `<FormField />`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.rating` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+```vue
+<!-- Standalone -->
+<Rating v-model="score" color="warning" />
+
+<!-- Half precision -->
+<Rating v-model="score" half />
+
+<!-- Not clearable -->
+<Rating v-model="score" :clearable="false" />
+
+<!-- Inside FormField -->
+<FormField name="rating" label="Your rating">
+  <Rating required />
+</FormField>
+```
+
+# Select
+
+## Description
+
+Custom select component with a dropdown built on DaisyUI `select` styling.
+Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter.
+Add `searchable` for local filtering or pass a `search` callback for remote data with debounce, pagination, and infinite scroll.
+Works standalone with `v-model` or inside `<FormField />` for full form integration.
+
+## API
+
+### v-model
+
+| Name         | Type                    | Modifiers | Description                                       |
+|--------------|-------------------------|-----------|---------------------------------------------------|
+| `modelValue` | `T \| T[] \| undefined` | -         | Selected value. Array when `multiple` is enabled. |
+
+### Props
+
+| Prop               | Type                     | Default     | Configurable       | Description                                                                                          |
+|--------------------|--------------------------|-------------|--------------------|------------------------------------------------------------------------------------------------------|
+| `color`            | `SelectColor`            | `undefined` | :white_check_mark: | Color variant.                                                                                       |
+| `size`             | `SelectSize`             | `'md'`      | :white_check_mark: | Size.                                                                                                |
+| `variant`          | `SelectVariant`          | `undefined` | :white_check_mark: | Visual style variant. `'bordered'` or `'ghost'`.                                                     |
+| `options`          | `SelectOption[]`         | `undefined` | :x:                | List of options. Required for local mode; optional when using `search`.                              |
+| `equals`           | `keyof T \| EqualsArgFn` | `undefined` | :x:                | Key or function used for value equality comparison.                                                  |
+| `multiple`         | `boolean`                | `false`     | :x:                | Enables multiple selection. Model becomes an array.                                                  |
+| `clearable`        | `boolean`                | `false`     | :white_check_mark: | Shows a clear button when a value is selected (single mode). Hidden when `readonly`.                 |
+| `counterFormatter` | `SelectCounterFormatter` | `undefined` | :white_check_mark: | Custom counter format function `(count, min?, max?) => string`.                                      |
+| `placeholder`      | `string`                 | `undefined` | :x:                | Text shown when no value is selected.                                                                |
+| `name`             | `string`                 | `undefined` | :x:                | Native input name. Inferred from `<FormField />` when not provided.                                  |
+| `disabled`         | `boolean`                | `false`     | :x:                | Disables all interaction.                                                                            |
+| `required`         | `boolean`                | `false`     | :x:                | Marks the field as required. Signals `<FormField />` to display `"*"`.                               |
+| `readonly`         | `boolean`                | `false`     | :x:                | Shows the current value but prevents any change. Clear button and dropdown are disabled.             |
+| `searchable`       | `boolean`                | `false`     | :x:                | Adds a search input inside the dropdown. Filters `options` locally, or delegates to `search`.        |
+| `search`           | `SelectSearchFn`         | `undefined` | :x:                | Async callback for remote search. Called on open (empty term) and on input (debounced).              |
+| `debounce`         | `number`                 | `300`       | :x:                | Debounce delay in ms before triggering `search` on input.                                            |
+| `minChars`         | `number`                 | `0`         | :x:                | Minimum characters required to trigger `search` on input. Does not affect the initial fetch on open. |
+| `limit`            | `number`                 | `20`        | :x:                | Items per page passed to `search`. Also used to detect whether more pages exist.                     |
+| `itemHeight`       | `number`                 | `36`        | :x:                | Height in px of each item in the virtual list. Must match the actual rendered height.                |
+
+> The item counter is controlled via native `min` and `max` HTML attributes passed directly to the component.
+
+### SearchParams
+
+The `search` callback receives a `SearchParams` object:
+
+| Field      | Type             | Description                                                                |
+|------------|------------------|----------------------------------------------------------------------------|
+| `term`     | `string`         | Current search query (empty string on initial open).                       |
+| `limit`    | `number`         | Number of items per page (from the `limit` prop).                          |
+| `page`     | `number`         | Current page number, starting at `1`. Increments on infinite scroll.       |
+| `lastItem` | `T \| undefined` | Value of the last fetched item. Use as cursor for cursor-based pagination. |
+
+### Events
+
+| Event   | Payload | Description                               |
+|---------|---------|-------------------------------------------|
+| `clear` | -       | Emitted when the clear button is clicked. |
+
+### Slots
+
+| Slot           | Bindings                      | Description                                                          |
+|----------------|-------------------------------|----------------------------------------------------------------------|
+| `option`       | `{ option, selected, index }` | Custom rendering for each option in the dropdown.                    |
+| `selected`     | `{ option, remove }`          | Custom rendering for the selected value(s).                          |
+| `empty`        | `{ query }`                   | Content shown when the option list is empty.                         |
+| `loading`      | `{ query }`                   | Content shown during the initial remote fetch.                       |
+| `loading-more` | `{ page }`                    | Content shown at the bottom of the list while loading the next page. |
+| `error`        | `{ query, retry }`            | Content shown when `search` throws. `retry` re-triggers the fetch.   |
+
+### Expose
+
+| Name     | Type                    | Description                                 |
+|----------|-------------------------|---------------------------------------------|
+| `$el`    | `HTMLButtonElement ref` | Ref to the underlying trigger `<button />`. |
+| `open`   | `() => void`            | Opens the dropdown programmatically.        |
+| `close`  | `() => void`            | Closes the dropdown programmatically.       |
+| `toggle` | `() => void`            | Toggles the dropdown.                       |
+| `clear`  | `() => void`            | Clears the current selection.               |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.select` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+```vue
+<!-- Single -->
+<Select v-model="country" :options="countries" placeholder="Select a country…" clearable />
+
+<!-- Multiple with counter -->
+<Select v-model="tags" :options="tagOptions" multiple :max="3" />
+
+<!-- Object values with key equality -->
+<Select v-model="user" :options="users" equals="id" />
+
+<!-- Searchable local -->
+<Select v-model="country" :options="countries" searchable placeholder="Search a country…" />
+
+<!-- Remote search with offset pagination -->
+<Select
+  v-model="user"
+  searchable
+  :search="({ term, limit, page }) => fetchUsers({ term, limit, page })"
+/>
+
+<!-- Remote search with cursor-based pagination -->
+<Select
+  v-model="user"
+  searchable
+  :search="({ term, limit, lastItem }) => fetchUsers({ term, limit, after: lastItem?.id })"
+/>
+
+<!-- Inside FormField -->
+<FormField name="country" label="Country">
+  <Select :options="countries" required placeholder="Select a country…" />
+</FormField>
+```
+
+# Slider
+
+## Description
+A custom slider component that allows users to select a value or range of values within a specified range. Based on the Range component with additional features like track inversion, thumb swapping control, and value scaling.
+
+## API
+
+### v-model
+
+| Name         | Type                         | Description                                                                        |
+|--------------|------------------------------|------------------------------------------------------------------------------------|
+| `modelValue` | `number \| [number, number]` | Single value, or `[low, high]` tuple in range mode. Values are always kept sorted. |
+
+### Props
+
+| Prop          | Type          | Default     | Description                                           |
+|---------------|---------------|-------------|-------------------------------------------------------|
+| `color`       | `SliderColor` | `undefined` | Color of the track fill and thumb border.             |
+| `size`        | `SliderSize`  | `'md'`      | Size of the slider (track height and thumb diameter). |
+| `min`         | `number`      | `0`         | Minimum value.                                        |
+| `max`         | `number`      | `100`       | Maximum value.                                        |
+| `step`        | `number`      | `1`         | Step increment.                                       |
+| `track`       | `SliderTrack` | `'normal'`  | Track display mode.                                   |
+| `range`       | `boolean`     | `false`     | Enables double thumb mode.                            |
+| `disableSwap` | `boolean`     | `false`     | Prevents thumbs from crossing/swapping.               |
+| `scale`       | `SliderScale` | `undefined` | Function to transform mechanical to business values.  |
+| `disabled`    | `boolean`     | `false`     | Disables all interaction.                             |
+| `required`    | `boolean`     | `undefined` | Native required.                                      |
+| `ariaLabel`   | `string`      | `undefined` | Accessible label for the slider.                      |
+
+### Events
+
+| Event                | Payload                      | Description                                                |
+|----------------------|------------------------------|------------------------------------------------------------|
+| `@input`             | `number \| [number, number]` | Emitted on every value change during interaction.          |
+| `@change`            | `number \| [number, number]` | Emitted when interaction ends (mouse up, touch end, blur). |
+
+## Note
+
+### Features
+- **Single or Range Mode**: Support for single value selection or dual-thumb range selection
+- **Track Modes**: Normal (selected area), Inverted (unselected area), or none
+- **Thumb Swapping**: Configurable behavior when thumbs cross (allow swap or prevent)
+- **Value Scaling**: Transform mechanical values to business values via scale function
+- **Keyboard Navigation**: Full keyboard support (Arrow keys, Page Up/Down, Home/End)
+- **Accessibility**: ARIA compliant with proper roles, states, and labels
+- **Form Integration**: Works seamlessly with FormField
+
+### Track Modes
+| Mode       | Behavior                                                                 |
+|------------|--------------------------------------------------------------------------|
+| `normal`   | Track fills between min and thumb (or between both thumbs in range mode) |
+| `inverted` | Track fills the unselected area                                          |
+| `false`    | No track is displayed                                                    |
+
+### Swap Behavior
+
+| disableSwap       | Behavior                                                                                                                    |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `false` (default) | Thumbs can cross and swap roles - the left thumb becomes the right one and vice versa. The swap is transparent to the user. |
+| `true`            | Thumbs cannot cross - they are clamped to prevent crossing.                                                                 |
+
+### Scale Function
+
+The scale function transforms mechanical values (in min-max range) to business values.
+The mechanical values are used for positioning, while the scaled values are emitted and displayed.
+
+```typescript
+// Example: Map 0-100 to 20-20000 (frequency)
+const frequencyScale = (value: number) => 20 + (value / 100) * 19980
+
+// Example: Map 0-100 to -50 to +50 (temperature)
+const temperatureScale = (value: number) => value - 50
+```
+
+## Usage
+```vue
+<!-- Basic slider -->
+<Slider v-model="volume" :min="0" :max="100" />
+
+<!-- Range slider -->
+<Slider v-model="priceRange" range :min="0" :max="500" :step="10" />
+
+<!-- Inverted track -->
+<Slider v-model="value" track="inverted" />
+
+<!-- No track -->
+<Slider v-model="value" :track="false" />
+
+<!-- Prevent thumb swapping -->
+<Slider v-model="[min, max]" range disable-swap />
+
+<!-- With scale function (frequency) -->
+<Slider v-model="freq" :scale="v => 20 + (v/100)*19980" :min="0" :max="100" />
+
+<!-- Inside FormField -->
+<FormField name="budget" label="Budget range">
+  <Slider v-model="budget" range :min="0" :max="1000" :step="50" />
+</FormField>
+```
+
+# Textarea
+
+## Description
+
+Multi-line text input component built on the DaisyUI `textarea` element.
+Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Supports an `autoGrow` mode that expands the height automatically to fit the content.
+
+## API
+
+### v-model
+
+| Name         | Type     | Modifiers | Description                                                            |
+|--------------|----------|-----------|------------------------------------------------------------------------|
+| `modelValue` | `string` | `.trim`   | The current text content. `.trim` removes leading/trailing whitespace. |
+
+### Props
+
+| Prop            | Type                  | Default               | Configurable       | Description                                                                     |
+|-----------------|-----------------------|-----------------------|--------------------|---------------------------------------------------------------------------------|
+| `color`         | `TextareaColor`       | `undefined`           | :white_check_mark: | Color variant.                                                                  |
+| `size`          | `TextareaSize`        | `'md'`                | :white_check_mark: | Size.                                                                           |
+| `variant`       | `TextareaVariant`     | `undefined`           | :white_check_mark: | Visual style variant.                                                           |
+| `autoGrow`      | `boolean`             | `false`               | :white_check_mark: | Grows height to fit content via `field-sizing-content`. Ignores `rows` when on. |
+| `counter`       | `boolean`             | `false`               | :white_check_mark: | Shows character counter (pushed to FormField when inside one).                  |
+| `minLength`     | `number`              | `undefined`           | :white_check_mark: | Min length (counter warning + native).                                          |
+| `maxLength`     | `number`              | `undefined`           | :white_check_mark: | Max length (counter warning + native `maxlength`).                              |
+| `counterFormat` | `string \| CounterFn` | `'{current} / {max}'` | :white_check_mark: | Counter format.                                                                 |
+| `rows`          | `number \| string`    | `4`                   | :x:                | Visible row count. Ignored when `autoGrow` is on.                               |
+| `disabled`      | `boolean`             | `undefined`           | :x:                | Native disabled.                                                                |
+| `readonly`      | `boolean`             | `undefined`           | :x:                | Native read-only.                                                               |
+| `required`      | `boolean`             | `undefined`           | :x:                | Native required (implicit `validator` class).                                   |
+| `placeholder`   | `string`              | `undefined`           | :x:                | Placeholder text.                                                               |
+
+### Expose
+
+| Name    | Type                      | Description                                       |
+|---------|---------------------------|---------------------------------------------------|
+| `$el`   | `HTMLTextAreaElement ref` | Ref to the underlying `<textarea />` DOM element. |
+| `focus` | `() => void`              | Programmatically focuses the textarea.            |
+
+### Events
+
+| Event    | Payload | Description                                                                             |
+|----------|---------|-----------------------------------------------------------------------------------------|
+| `@input` | `Event` | Emitted on every keystroke (native input event).                                        |
+| `@blur`  | `Event` | Emitted when the textarea loses focus. Triggers validation when inside `<FormField />`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.textarea` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Notes
+
+### Implicit validator
+The DaisyUI `validator` class (`:user-invalid` styling) is applied automatically when `required`, `minlength`, or `maxlength` are present.
+
+### Counter cascade
+Counter resolution order (first defined wins):
+1. `counter` prop on `<Textarea />` itself
+2. `counter` on `<FormField />`
+3. `counter` on `<Form />`
+4. Plugin config
+5. Default: `false`
+
+## Usage
+```vue
+<!-- Standalone -->
+<Textarea v-model="bio" placeholder="Tell us about yourself" variant="bordered" />
+
+<!-- Auto grow -->
+<Textarea v-model="notes" auto-grow placeholder="Grows as you type…" />
+
+<!-- Inside FormField -->
+<FormField name="bio" label="Bio" hint="Max 500 characters">
+  <Textarea required :max-length="500" />
+</FormField>
+
+<!-- Counter inherited from Form -->
+<Form v-model="data" counter>
+  <FormField name="bio" label="Bio">
+    <Textarea :max-length="300" />
+  </FormField>
+</Form>
+```
+
+# Toggle
+
+## Description
+
+Toggle (switch) component built on the DaisyUI `toggle` element.
+Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+
+## API
+
+### v-model
+
+| Name         | Type      | Modifiers | Description          |
+|--------------|-----------|-----------|----------------------|
+| `modelValue` | `boolean` | -         | Bound checked state. |
+
+### Props
+
+| Prop          | Type          | Default     | Configurable       | Description                                                      |
+|---------------|---------------|-------------|--------------------|--------------------------------------------------------------------|
+| `color`       | `ToggleColor` | `undefined` | :white_check_mark: | Color variant.                                                   |
+| `size`        | `ToggleSize`  | `'md'`      | :white_check_mark: | Size.                                                            |
+| `description` | `string`      | `undefined` | :x:                | Primary label text displayed to the right of the toggle.         |
+| `hint`        | `string`      | `undefined` | :x:                | Secondary hint text displayed below the description.             |
+| `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                                 |
+| `readonly`    | `boolean`     | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
+| `required`    | `boolean`     | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
+
+### Expose
+
+| Name    | Type                   | Description                                    |
+|---------|------------------------|------------------------------------------------|
+| `$el`   | `HTMLInputElement ref` | Ref to the underlying `<input />` DOM element. |
+| `focus` | `() => void`           | Programmatically focuses the toggle.           |
+
+### Events
+
+| Event     | Payload | Description                                                                           |
+|-----------|---------|---------------------------------------------------------------------------------------|
+| `@change` | `Event` | Emitted when the toggle state changes (native change event).                          |
+| `@blur`   | `Event` | Emitted when the toggle loses focus. Triggers validation when inside `<FormField />`. |
+
+### Slots
+
+| Slot          | Bindings | Description                                          |
+|---------------|----------|------------------------------------------------------|
+| `description` | -        | Primary label text displayed to the right of toggle. |
+| `hint`        | -        | Secondary hint text displayed below the description. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.toggle` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+```vue
+<!-- Standalone -->
+<Toggle v-model="enabled" color="primary" />
+
+<!-- With description -->
+<Toggle v-model="enabled" description="Enable dark mode" />
+
+<!-- With description and hint -->
+<Toggle
+  v-model="enabled"
+  description="Enable email notifications"
+  hint="We'll send updates about your account"
+/>
+
+<!-- Required -->
+<Toggle v-model="agreed" description="I accept the terms" required />
+
+<!-- Inside FormField -->
+<FormField name="notifications" label="Notifications">
+  <Toggle required description="Enable email notifications" />
+</FormField>
+```
+
+---
+
+# Display
+
+# Accordion
+
+## Description
+
+A vertically stacked set of collapsible sections. Each section is controlled by an `AccordionItem`
+nested inside `Accordion`. Supports single and multiple open modes, controlled and uncontrolled usage,
+animated transitions, and a customisable icon.
+
+## API
+
+<details>
+<summary>Accordion</summary>
+
+### Props
+
+| Prop          | Type                   | Default     | Required | Configurable | Description                                                                                    |
+|---------------|------------------------|-------------|----------|--------------|------------------------------------------------------------------------------------------------|
+| `multiple`    | `boolean`              | `false`     | :x:      | :x:          | When `true`, multiple items can be open at the same time.                                      |
+| `defaultOpen` | `string` \| `string[]` | `undefined` | :x:      | :x:          | Item name(s) open on first render. Accepts a string in single mode, an array in multiple mode. |
+
+### Events
+
+| Event     | Payload                                   | Description                                                       |
+|-----------|-------------------------------------------|-------------------------------------------------------------------|
+| `@change` | `string \| null` \| `string[]`            | Emitted on every state change with the new value.                 |
+| `@open`   | `string` \| `string[]`                    | Emitted when an item opens. Payload is inferred from `multiple`.  |
+| `@close`  | `string` \| `string[]`                    | Emitted when an item closes. Payload is inferred from `multiple`. |
+| `@toggle` | `string` \| `string[]`, `isOpen: boolean` | Emitted on every toggle with the name and new state.              |
+
+### Expose
+
+| Method           | Signature                   | Description                                           |
+|------------------|-----------------------------|------------------------------------------------------ |
+| `open(name)`     | `(name: string) => void`    | Opens the item with the given name.                   |
+| `close(name)`    | `(name: string) => void`    | Closes the item with the given name.                  |
+| `toggle(name)`   | `(name: string) => void`    | Toggles the item with the given name.                 |
+| `isOpen(name)`   | `(name: string) => boolean` | Returns `true` if the item is currently open.         |
+| `openAll(names)` | `(names: string[]) => void` | Opens all given items. Only works in `multiple` mode. |
+| `closeAll()`     | `() => void`                | Closes all items.                                     |
+
+</details>
+
+<details>
+<summary>AccordionItem</summary>
+
+### Props
+
+| Prop   | Type                | Default     | Required           | Configurable       | Description                                                                    |
+|--------|---------------------|-------------|--------------------|--------------------|--------------------------------------------------------------------------------|
+| `name` | `string`            | `undefined` | :white_check_mark: | :x:                | Unique identifier within the parent `Accordion`. Used to track open state.     |
+| `icon` | `AccordionItemIcon` | `'arrow'`   | :x:                | :white_check_mark: | Icon shown in the header. `'arrow'` rotates on open, `'plus'` becomes a cross. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.accordionItem` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Events
+
+| Event     | Payload   | Description                           |
+|-----------|-----------|---------------------------------------|
+| `@open`   | -         | Emitted when this item opens.         |
+| `@close`  | -         | Emitted when this item closes.        |
+| `@toggle` | `boolean` | Emitted on toggle with the new state. |
+
+### Slots
+
+| Slot      | Bindings              | Description                                                                       |
+|-----------|-----------------------|-----------------------------------------------------------------------------------|
+| `title`   | `{ isOpen: boolean }` | Header content. Rendered inside the clickable trigger area.                       |
+| `icon`    | `{ isOpen: boolean }` | Overrides the default icon. Use `isOpen` to render a custom open/close indicator. |
+| `default` | `{ isOpen: boolean }` | Content revealed when the item is open.                                           |
+
+### Expose
+
+| Member     | Type         | Description                       |
+|------------|------------- |-----------------------------------|
+| `open()`   | `() => void` | Opens this item.                  |
+| `close()`  | `() => void` | Closes this item.                 |
+| `toggle()` | `() => void` | Toggles this item.                |
+| `isOpen`   | `boolean`    | Reactive open state of this item. |
+
+</details>
+
+## Usage
+
+```vue
+<!-- Basic single -->
+<Accordion>
+  <AccordionItem name="faq-1">
+    <template #title>What is Poppy UI?</template>
+    A Vue component library built on DaisyUI.
+  </AccordionItem>
+</Accordion>
+
+<!-- Multiple open -->
+<Accordion :multiple="true" @open="onOpen" @close="onClose">
+  <AccordionItem name="a">
+    <template #title>Section A</template>
+    ...
+  </AccordionItem>
+  <AccordionItem name="b">
+    <template #title>Section B</template>
+    ...
+  </AccordionItem>
+</Accordion>
+
+<!-- Programmatic control via Accordion ref -->
+<Accordion ref="accordionRef" :multiple="true">
+  <AccordionItem name="item-1">
+    <template #title>Item 1</template>
+    ...
+  </AccordionItem>
+  <AccordionItem name="item-2">
+    <template #title>Item 2</template>
+    ...
+  </AccordionItem>
+</Accordion>
+<button @click="accordionRef?.openAll(['item-1', 'item-2'])">Open all</button>
+
+<!-- Programmatic control via AccordionItem ref -->
+<Accordion>
+  <AccordionItem ref="itemRef" name="item-1" @toggle="onToggle">
+    <template #title>Item 1</template>
+    Content here.
+  </AccordionItem>
+</Accordion>
+<button @click="itemRef?.open()">Open item</button>
+```
+
+# Avatar
+
+## Description
+
+A wrapper component to display user or entity representations.
+Built on DaisyUI's `avatar` class system. `Avatar` is a pure wrapper — the content (image, initials, etc.)
+is fully controlled via the `default` slot, making it compatible with any future `Mask` component.
+
+## API
+
+### Props
+
+| Prop          | Type            | Default         | Required | Configurable       | Description                                                                                                |
+|---------------|-----------------|-----------------|----------|--------------------|------------------------------------------------------------------------------------------------------------|
+| `size`        | `AvatarSize`    | `undefined`     | :x:      | :white_check_mark: | Size of the inner container. `xs` → `w-8` / `sm` → `w-16` / `md` → `w-20` / `lg` → `w-24` / `xl` → `w-32`. |
+| `shape`       | `AvatarShape`   | `'rounded-full'`| :x:      | :white_check_mark: | Shape of the inner container. `rounded` / `rounded-xl` / `rounded-full` / `rounded-none`.                  |
+| `presence`    | `AvatarPresence`| `undefined`     | :x:      | :white_check_mark: | Shows a presence dot. `'online'` (green) / `'offline'` (gray).                                             |
+| `placeholder` | `boolean`       | `false`         | :x:      | :x:                | Adds `avatar-placeholder`. Use with text initials instead of an image.                                     |
+| `group`       | `boolean`       | `false`         | :x:      | :x:                | Renders as `avatar-group` to stack multiple avatars with overlap.                                          |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.avatar` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Slots
+
+| Slot      | Bindings | Description                                                        |
+|-----------|----------|--------------------------------------------------------------------|
+| `default` | -        | Avatar content. In group mode, expects nested `Avatar` components. |
+
+## Usage
+
+```vue
+<!-- Basic image -->
+<Avatar size="md" shape="rounded-full">
+  <img src="..." alt="John Doe" />
+</Avatar>
+
+<!-- With presence indicator -->
+<Avatar size="md" shape="rounded-full" presence="online">
+  <img src="..." alt="John Doe" />
+</Avatar>
+
+<!-- Placeholder with initials -->
+<Avatar size="md" shape="rounded-full" :placeholder="true">
+  <div class="bg-neutral text-neutral-content w-full h-full flex items-center justify-center">
+    <span>JD</span>
+  </div>
+</Avatar>
+
+<!-- Group -->
+<Avatar group>
+  <Avatar size="sm" shape="rounded-full">
+    <img src="..." alt="User 1" />
+  </Avatar>
+  <Avatar size="sm" shape="rounded-full">
+    <img src="..." alt="User 2" />
+  </Avatar>
+  <Avatar size="sm" shape="rounded-full" :placeholder="true">
+    <div class="bg-neutral text-neutral-content w-full h-full flex items-center justify-center">
+      <span class="text-xs">+5</span>
+    </div>
+  </Avatar>
+</Avatar>
+
+<Avatar size="lg">
+  <Mask shape="squircle">
+    <img src="..." alt="Avatar" />
+  </Mask>
+</Avatar>
+```
+
+# Badge
+
+## Description
+
+A small inline label used to highlight status, categories, counts, or metadata.
+Built on DaisyUI's `badge` class system with support for colors, variants, and sizes.
+
+## API
+
+### Props
+
+| Prop      | Type           | Default     | Required | Configurable       | Description                                             |
+|-----------|----------------|-------------|----------|--------------------|-------------------------------------------------------- |
+| `color`   | `BadgeColor`   | `undefined` | :x:      | :white_check_mark: | Color theme of the badge based on the DaisyUI palette.  |
+| `variant` | `BadgeVariant` | `undefined` | :x:      | :white_check_mark: | Visual style of the badge. `outline` / `soft` / `dash`. |
+| `size`    | `BadgeSize`    | `'md'`      | :x:      | :white_check_mark: | Size of the badge. `xs` / `sm` / `md` / `lg` / `xl`.    |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.badge` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Slots
+| Slot      | Bindings | Description                       |
+|-----------|----------|-----------------------------------|
+| `default` | -        | Text or content inside the badge. |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Badge>New</Badge>
+
+<!-- With color -->
+<Badge color="success">Active</Badge>
+
+<!-- With variant -->
+<Badge color="primary" variant="outline">Draft</Badge>
+
+<!-- Small -->
+<Badge color="error" size="sm">3</Badge>
+```
+
+# Card
+
+## Description
+
+A flexible content container built on DaisyUI's `card` class system.
+Composed of four sub-components — `Card`, `CardBody`, `CardTitle`, and `CardActions` —
+that can be combined freely to build any card layout.
+
+## API
+
+<details>
+<summary>Card</summary>
+
+### Props
+
+| Prop        | Type          | Default     | Required | Configurable       | Description                                                |
+|-------------|---------------|-------------|----------|--------------------|------------------------------------------------------------|
+| `variant`   | `CardVariant` | `undefined` | :x:      | :white_check_mark: | Visual style of the card. `border` / `dash`.               |
+| `size`      | `CardSize`    | `undefined` | :x:      | :white_check_mark: | Size of the card. `xs` / `sm` / `md` / `lg` / `xl`.        |
+| `side`      | `boolean`     | `false`     | :x:      | :x:                | When `true`, switches to a horizontal side-by-side layout. |
+| `imageFull` | `boolean`     | `false`     | :x:      | :x:                | When `true`, the image covers the full card background.    |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.card` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+</details>
+
+<details>
+<summary>CardActions</summary>
+
+### Props
+
+| Prop    | Type               | Default   | Required | Configurable       | Description                                                  |
+|---------|--------------------|-----------|----------|--------------------|--------------------------------------------------------------|
+| `align` | `CardActionsAlign` | `'start'` | :x:      | :white_check_mark: | Horizontal alignment of actions. `start` / `center` / `end`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.cardActions` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+</details>
+
+<details>
+<summary>CardBody</summary>
+
+No props. Renders a `<div class="card-body" />` wrapper around its slot content.
+
+</details>
+
+<details>
+<summary>CardTitle</summary>
+
+No props. Renders an `<h2 class="card-title" />` around its slot content.
+
+</details>
+
+### Slots
+
+| Slot      | Bindings | Description                        |
+|-----------|----------|------------------------------------|
+| `default` | -        | Content of the component.          |
+
+All four components (`Card`, `CardBody`, `CardTitle`, `CardActions`) expose a single `default` slot for their content.
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Card variant="border">
+  <CardBody>
+    <CardTitle>Hello</CardTitle>
+    <p>Some content here.</p>
+    <CardActions>
+      <Button color="primary">Action</Button>
+    </CardActions>
+  </CardBody>
+</Card>
+
+<!-- With image -->
+<Card>
+  <figure>
+    <img src="..." alt="..." />
+  </figure>
+  <CardBody>
+    <CardTitle>With image</CardTitle>
+    <p>Content below the image.</p>
+  </CardBody>
+</Card>
+
+<!-- Side layout -->
+<Card side>
+  <figure><img src="..." alt="..." /></figure>
+  <CardBody>
+    <CardTitle>Side</CardTitle>
+    <p>Image and content side by side.</p>
+  </CardBody>
+</Card>
+
+<!-- Image full -->
+<Card image-full>
+  <figure><img src="..." alt="..." /></figure>
+  <CardBody>
+    <CardTitle class="text-white">Overlay</CardTitle>
+    <p class="text-white/80">Text over the image.</p>
+  </CardBody>
+</Card>
+```
+
+# Carousel
+
+## Description
+
+A responsive, accessible carousel/slider component built on DaisyUI's `carousel` class system. Supports horizontal and vertical layouts, autoplay, infinite looping, indicators, and custom controls.
+
+## Carousel props
+
+| Prop           | Type                | Default        | Required | Configurable       | Description                                               |
+|----------------|---------------------|----------------|----------|--------------------|-----------------------------------------------------------|
+| `direction`    | `CarouselDirection` | `'horizontal'` | :x:      | :white_check_mark: | Direction of the carousel. `'horizontal'` / `'vertical'`. |
+| `snap`         | `CarouselSnap`      | `'start'`      | :x:      | :white_check_mark: | Snap alignment. `'start'` / `'center'` / `'end'`.         |
+| `indicators`   | `boolean`           | `false`        | :x:      | :white_check_mark: | When `true`, shows navigation indicator dots.             |
+| `controls`     | `boolean`           | `true`         | :x:      | :white_check_mark: | When `true`, shows prev/next navigation controls.         |
+| `infinite`     | `boolean`           | `true`         | :x:      | :white_check_mark: | When `true`, enables infinite looping.                    |
+| `autoplay`     | `boolean`           | `false`        | :x:      | :white_check_mark: | When `true`, enables autoplay.                            |
+| `interval`     | `number`            | `3000`         | :x:      | :white_check_mark: | Autoplay interval in milliseconds.                        |
+| `initialIndex` | `number`            | `0`            | :x:      | :x:                | Index of the initial slide.                               |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.carousel` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Slots
+
+| Name        | Description                                                                                    |
+|-------------|------------------------------------------------------------------------------------------------|
+| `default`   | The carousel items content. Each direct child will receive the `carousel-item w-full` classes. |
+| `prev-icon` | Custom previous button icon.                                                                   |
+| `next-icon` | Custom next button icon.                                                                       |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Carousel>
+  <div v-for="i in 5" :key="i">
+    Slide {{ i }}
+  </div>
+</Carousel>
+
+<!-- With images -->
+<Carousel indicators>
+  <img v-for="item in items" :key="item.id" :src="item.image" alt="" />
+</Carousel>
+
+<!-- Direction Vertical -->
+<Carousel direction="vertical" class="h-96">
+  <div v-for="i in 5" :key="i" class="h-full">
+    Slide {{ i }}
+  </div>
+</Carousel>
+
+<!-- Snap center -->
+<Carousel snap="center">
+  <div v-for="i in 4" :key="i">
+    Slide {{ i }}
+  </div>
+</Carousel>
+
+<!-- With autoplay -->
+<Carousel autoplay :interval="5000" indicators>
+  <img v-for="i in 4" :key="i" :src="`image${i}.jpg`" alt="" />
+</Carousel>
+
+<!-- Custom controls -->
+<Carousel>
+  <div v-for="i in 3" :key="i">
+    Slide {{ i }}
+  </div>
+  <template #prev-icon>
+    <MyCustomPrevIcon />
+  </template>
+  <template #next-icon>
+    <MyCustomNextIcon />
+  </template>
+</Carousel>
+```
+
+# Chat
+
+## Description
+
+A chat bubble component for displaying conversation messages.
+Built on DaisyUI's `chat` class system. Supports avatars, headers, footers, and color-coded bubbles.
+
+## Props
+
+| Prop    | Type        | Default     | Required | Configurable       | Description                                             |
+|---------|-------------|-------------|----------|--------------------|---------------------------------------------------------|
+| `side`  | `ChatSide`  | `'start'`   | :x:      | :x:                | Side of the bubble. `'start'` (left) / `'end'` (right). |
+| `color` | `ChatColor` | `undefined` | :x:      | :white_check_mark: | Color theme applied to the chat bubble.                 |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.chat` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Slots
+
+| Slot      | Description                                                              |
+|-----------|--------------------------------------------------------------------------|
+| `image`   | Avatar or image displayed beside the bubble. Wrapped in `chat-image`.    |
+| `header`  | Name or title above the bubble. Wrapped in `chat-header`.                |
+| `default` | Main content of the chat bubble.                                         |
+| `footer`  | Metadata below the bubble (timestamp, status). Wrapped in `chat-footer`. |
+| `meta`    | Additional metadata. Wrapped in `chat-meta`.                             |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Chat side="start">Hello world!</Chat>
+
+<!-- With avatar and header -->
+<Chat side="start" color="neutral">
+  <template #image>
+    <Avatar size="xs" shape="rounded-full">
+      <img src="..." alt="User" />
+    </Avatar>
+  </template>
+  <template #header>John Doe</template>
+  Hey, how are you?
+</Chat>
+
+<!-- With footer -->
+<Chat side="end" color="primary">
+  <template #footer>
+    <span class="text-xs opacity-50">Delivered ✓</span>
+  </template>
+  I'm doing great, thanks!
+</Chat>
+```
+
+# Countdown
+
+## Description
+
+Displays an animated countdown to a target date/time.
+Built on DaisyUI's `countdown` class system with an internal `setInterval` that ticks every 500ms.
+Fully customisable via the `default` slot — the default render shows `hh:mm:ss`.
+
+## Props
+
+| Prop     | Type                       | Default     | Required           | Configurable       | Description                                                             |
+|----------|----------------------------|-------------|--------------------|--------------------|-------------------------------------------------------------------------|
+| `to`     | `Date \| string \| number` | `undefined` | :white_check_mark: | :x:                | Target date/time. Accepts a `Date`, ISO string, or Unix timestamp (ms). |
+| `digits` | `1 \| 2 \| 3`              | `2`         | :x:                | :white_check_mark: | Minimum number of digits per value. `2` forces `05` instead of `5`.    |
+
+## Events
+
+| Event  | Payload | Description                                   |
+|--------|---------|-----------------------------------------------|
+| `@end` | -       | Emitted once when the countdown reaches zero. |
+
+## Slot
+
+| Slot      | Bindings                                                                                | Description                              |
+|-----------|-----------------------------------------------------------------------------------------|------------------------------------------|
+| `default` | `{ days, hours, minutes, seconds, done }` undefined all `number` except `done: boolean` | Custom render. Falls back to `hh:mm:ss`. |
+
+## Exposed
+
+| Member  | Type                                      | Description                    |
+|---------|-------------------------------------------|--------------------------------|
+| `delta` | `{ days, hours, minutes, seconds, done }` | Reactive current delta values. |
+
+## Usage
+
+```vue
+<!-- Default render (hh:mm:ss) -->
+<Countdown :to="new Date('2026-12-31')" @end="onEnd" />
+
+<!-- ISO string -->
+<Countdown to="2026-12-31T23:59:59" />
+
+<!-- Unix timestamp -->
+<Countdown :to="Date.now() + 60_000" />
+
+<!-- Custom slot -->
+<Countdown :to="targetDate">
+  <template #default="{ days, hours, minutes, seconds, done }">
+    <span v-if="done">Time's up!</span>
+    <div v-else class="flex gap-4">
+      <div>
+        <span class="countdown font-mono text-5xl">
+          <span :style="{ '--value': days }">{{ days }}</span>
+        </span>
+        days
+      </div>
+      <!-- etc. -->
+    </div>
+  </template>
+</Countdown>
+```
+
+# Diff
+
+## Description
+
+A side-by-side comparison component with a draggable resizer.
+Built on DaisyUI's `diff` class system. Works with any content — images, text, UI components.
+
+## Slots
+
+| Slot     | Description                         |
+|----------|-------------------------------------|
+| `item-1` | Left/front content (`diff-item-1`). |
+| `item-2` | Right/back content (`diff-item-2`). |
+
+The resizer handle is rendered automatically.
+
+## Usage
+
+```vue
+<!-- Images -->
+<Diff class="aspect-16/9">
+  <template #item-1>
+    <img src="original.jpg" alt="original" />
+  </template>
+  <template #item-2>
+    <img src="modified.jpg" alt="modified" />
+  </template>
+</Diff>
+
+<!-- Text -->
+<Diff class="aspect-16/9">
+  <template #item-1>
+    <div class="bg-primary text-primary-content grid place-content-center text-9xl font-black h-full">
+      Before
+    </div>
+  </template>
+  <template #item-2>
+    <div class="bg-base-200 grid place-content-center text-9xl font-black h-full">
+      After
+    </div>
+  </template>
+</Diff>
+```
+
+# Hover3d
+
+## Description
+
+A wrapper that adds a 3D tilt effect on hover. Built on DaisyUI's `hover-3d` class system.
+The effect works by placing 8 invisible hover zones over the content — these are injected automatically.
+
+> Only use non-interactive content inside `Hover3d`. If you want the whole card to be clickable,
+> use the `to` prop to render as a `RouterLink` instead of putting interactive elements inside.
+
+## Props
+
+| Prop | Type               | Default     | Required | Configurable | Description                                                                               |
+|------|--------------------|-------------|----------|--------------|-------------------------------------------------------------------------------------------|
+| `to` | `RouteLocationRaw` | `undefined` | :x:      | :x:          | If provided, renders as a `RouterLink`. Accepts a string path or a route location object. |
+
+## Slots
+
+| Slot      | Description                        |
+|-----------|------------------------------------|
+| `default` | Content to apply the 3D effect to. |
+
+## Usage
+
+```vue
+<!-- Basic image -->
+<Hover3d>
+  <figure class="max-w-xs rounded-2xl overflow-hidden">
+    <img src="..." alt="3D card" />
+  </figure>
+</Hover3d>
+
+<!-- Clickable card via RouterLink -->
+<Hover3d :to="{ name: 'product', params: { id: 1 } }" class="cursor-pointer">
+  <Card class="w-80">
+    <CardBody>...</CardBody>
+  </Card>
+</Hover3d>
+```
+
+# HoverGallery
+
+## Description
+
+A container that creates a hover gallery effect. The first image is visible by default, and hovering horizontally reveals other images. Built on DaisyUI's `hover-gallery` class. Always renders as a `<figure />` element.
+
+> Hover Gallery can include up to 10 images.
+
+## Slots
+
+| Slot      | Description                             |
+|-----------|-----------------------------------------|
+| `default` | Images to display in the hover gallery. |
+
+## Usage
+
+```vue
+<!-- Basic usage -->
+<HoverGallery class="max-w-60">
+  <img src="image-1.webp" alt="Image 1" />
+  <img src="image-2.webp" alt="Image 2" />
+  <img src="image-3.webp" alt="Image 3" />
+  <img src="image-4.webp" alt="Image 4" />
+</HoverGallery>
+
+<!-- In a card -->
+<Card class="bg-base-200 max-w-60 shadow">
+  <HoverGallery>
+    <img src="..." />
+    <img src="..." />
+    <img src="..." />
+  </HoverGallery>
+  <CardBody>
+    <CardTitle>Product Name</CardTitle>
+    <p>Product description</p>
+  </CardBody>
+</Card>
+
+```
+
+# Kbd
+
+## Description
+
+Displays keyboard shortcuts and key combinations.
+Built on DaisyUI's `kbd` class system. Renders a semantic `<kbd />` HTML element.
+
+## Props
+
+| Prop   | Type      | Default | Required | Configurable       | Description                                        |
+|--------|-----------|---------|----------|--------------------|----------------------------------------------------|
+| `size` | `KbdSize` | `'md'`  | :x:      | :white_check_mark: | Size of the key. `xs` / `sm` / `md` / `lg` / `xl`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.kbd` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Slots
+
+| Slot      | Description                     |
+|-----------|---------------------------------|
+| `default` | The key label (text or symbol). |
+
+## Usage
+
+```vue
+<!-- Single key -->
+<Kbd>K</Kbd>
+
+<!-- Key combination -->
+<Kbd>ctrl</Kbd> + <Kbd>shift</Kbd> + <Kbd>S</Kbd>
+
+<!-- Mac function keys -->
+<Kbd>⌘</Kbd> <Kbd>⌥</Kbd> <Kbd>⇧</Kbd> <Kbd>⌃</Kbd>
+
+<!-- Inline in text -->
+<p>Press <Kbd size="sm">F</Kbd> to pay respects.</p>
+```
+
+# List
+
+## Description
+
+A vertical layout component to display information in rows.
+Built on DaisyUI's `list` / `list-row` class system. `ListItem` renders as a `<li />` by default
+and switches to a `RouterLink` automatically when `to` is provided.
+It provides a great DX by supporting multiple named slots for easy composition.
+
+## API
+
+<details>
+<summary>List</summary>
+
+### Props
+
+| Prop    | Type     | Default     | Required | Description                                       |
+|---------|----------|-------------|----------|---------------------------------------------------|
+| `title` | `string` | `undefined` | :x:      | Optional title to display at the top of the list. |
+
+### Slots
+
+| Slot      | Bindings | Description                        |
+|-----------|----------|------------------------------------|
+| `title`   | -        | Custom title element for the list. |
+| `default` | -        | The items.                         |
+
+</details>
+
+<details>
+<summary>ListItem</summary>
+
+### Props
+
+| Prop          | Type              | Default     | Required | Description                                                                                        |
+|---------------|-------------------|-------------|----------|----------------------------------------------------------------------------------------------------|
+| `to`          | `RouteLocationRaw`| `undefined` | :x:      | If provided, the item renders as a `RouterLink`. Accepts a string path or a route location object. |
+| `title`       | `string`          | `undefined` | :x:      | Title text for the list item.                                                                      |
+| `description` | `string`          | `undefined` | :x:      | Description text for the list item.                                                                |
+
+### Slots
+
+| Slot          | Bindings | Description                                                                          |
+|---------------|----------|--------------------------------------------------------------------------------------|
+| `prefix`      | -        | Content to display before the title (e.g. icon, avatar).                             |
+| `title`       | -        | Custom title content (if prop isn't enough).                                         |
+| `description` | -        | Custom description content (if prop isn't enough).                                   |
+| `default`     | -        | If you don't use title/description slots or props, you can pass custom content here. |
+| `actions`     | -        | Content to display at the end of the row (e.g. buttons).                             |
+| `details`     | -        | Extra content that wraps to a new line below the item (`list-col-wrap`).             |
+
+</details>
+
+## Usage
+
+```vue
+<!-- Basic Composition -->
+<List title="Settings">
+  <ListItem title="Profile" description="Update your info">
+    <template #actions>
+      <Button>Edit</Button>
+    </template>
+  </ListItem>
+</List>
+
+<!-- Advanced with slots -->
+<List>
+  <template #title>
+    <div class="text-primary font-bold">Latest activity</div>
+  </template>
+  
+  <ListItem>
+    <template #prefix>
+      <img src="..." class="size-10 rounded-box" />
+    </template>
+    <template #title>
+      <strong>New User</strong>
+    </template>
+    <template #description>
+      <span class="text-success">Online now</span>
+    </template>
+    <template #actions>
+      <Button>View</Button>
+    </template>
+    <template #details>
+      User signed up 2 minutes ago via Google.
+    </template>
+  </ListItem>
+</List>
+```
+
+# Stat
+
+## Description
+
+A component used to display key metrics, statistics, or numerical data with optional titles, descriptions, icons, and actions.
+
+## API
+
+<details>
+<summary>Stats</summary>
+
+### Props
+
+| Prop        | Type             | Default        | Required | Configurable       | Description                    |
+|-------------|------------------|----------------|----------|--------------------|--------------------------------|
+| `direction` | `StatsDirection` | `'horizontal'` | :x:      | :white_check_mark: | Direction of the stats layout. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.stats` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Slots (Stats)
+
+| Slot      | Bindings | Description                     |
+|-----------|----------|---------------------------------|
+| `default` | -        | Contains `<Stat />` components. |
+
+</details>
+
+<details>
+<summary>Stat</summary>
+
+### Props
+
+| Prop           | Type               | Default     | Required | Configurable       | Description                             |
+|----------------|--------------------|-------------|----------|--------------------|-----------------------------------------|
+| `title`        | `string`           | `undefined` | :x:      | :x:                | Title of the stat.                      |
+| `value`        | `string \| number` | `undefined` | :x:      | :x:                | Value displayed in the stat.            |
+| `desc`         | `string`           | `undefined` | :x:      | :x:                | Description text for the stat.          |
+| `align`        | `StatAlign`        | `undefined` | :x:      | :white_check_mark: | Alignment of the stat content.          |
+| `titleClass`   | `string`           | `undefined` | :x:      | :white_check_mark: | Custom class for the title.             |
+| `valueClass`   | `string`           | `undefined` | :x:      | :white_check_mark: | Custom class for the value.             |
+| `descClass`    | `string`           | `undefined` | :x:      | :white_check_mark: | Custom class for the description.       |
+| `figureClass`  | `string`           | `undefined` | :x:      | :white_check_mark: | Custom class for the figure container.  |
+| `actionsClass` | `string`           | `undefined` | :x:      | :white_check_mark: | Custom class for the actions container. |
+
+### Slots
+
+| Slot      | Bindings | Description                          |
+|-----------| -------- |--------------------------------------|
+| `default` | -        | Default content of the stat.         |
+| `figure`  | -        | Icon or figure displayed at the top. |
+| `title`   | -        | Custom title content.                |
+| `value`   | -        | Custom value content.                |
+| `desc`    | -        | Custom description content.          |
+| `actions` | -        | Actions container (e.g., buttons).   |
+
+</details>
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Stats>
+  <Stat title="Total Page Views" value="89,400" desc="21% more than last month" />
+</Stats>
+
+<!-- With icon -->
+<Stats>
+  <Stat>
+    <template #figure>
+      <Icon name="heart" />
+    </template>
+    <template #title>Total Likes</template>
+    <template #value>25.6K</template>
+    <template #desc>21% more than last month</template>
+  </Stat>
+</Stats>
+
+<!-- Centered -->
+<Stats>
+  <Stat align="center" title="Downloads" value="31K" desc="Jan 1st - Feb 1st" />
+</Stats>
+
+<!-- With actions -->
+<Stats>
+  <Stat title="Account balance" value="$89,400">
+    <template #actions>
+      <button class="btn btn-xs">Add funds</button>
+    </template>
+  </Stat>
+</Stats>
+
+<!-- Vertical layout -->
+<Stats direction="vertical">
+  <Stat title="Downloads" value="31K" />
+  <Stat title="New Users" value="4,200" />
+</Stats>
+```
+
+# Status
+
+## Description
+
+A small visual indicator used to represent the current state of an element — online, offline, error, etc.
+Built on DaisyUI's `status` class system. Supports colors, sizes, and animations for active states.
+
+## Props
+
+| Prop        | Type              | Default     | Required | Configurable       | Description                                                                        |
+|-------------|-------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------|
+| `color`     | `StatusColor`     | `undefined` | :x:      | :white_check_mark: | Color theme based on the DaisyUI palette.                                          |
+| `size`      | `StatusSize`      | `'md'`      | :x:      | :white_check_mark: | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                           |
+| `animation` | `StatusAnimation` | `undefined` | :x:      | :white_check_mark: | `'ping'` renders two overlapping elements for urgency. `'bounce'` draws attention. |
+| `label`     | `string`          | `undefined` | :x:      | :x:                | Accessible label set as `aria-label` on the root element.                          |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.status` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Status color="success" />
+
+<!-- Ping animation -->
+<Status color="error" animation="ping" />
+
+<!-- Bounce animation -->
+<Status color="info" animation="bounce" />
+
+<!-- Inline with text -->
+<div class="flex items-center gap-2">
+  <Status color="success" size="sm" />
+  <span>Online</span>
+</div>
+```
+
+---
+
+# Feedback
+
+# Alert
+
+## Description
+
+A contextual feedback component used to display informational, success, warning, or error messages.
+Built on DaisyUI's `alert` class system with support for colors, variants, and layout directions.
+Supports an optional icon via the `icon` slot.
+
+## API
+
+### Props
+
+| Prop        | Type             | Default     | Required | Configurable       | Description                                                           |
+|-------------|------------------|-------------|----------|--------------------|-----------------------------------------------------------------------|
+| `color`     | `AlertColor`     | `undefined` | :x:      | :white_check_mark: | Color theme of the alert. `info` / `success` / `warning` / `error`.   |
+| `variant`   | `AlertVariant`   | `undefined` | :x:      | :white_check_mark: | Visual style. `outline` / `dash` / `soft`.                            |
+| `direction` | `AlertDirection` | `undefined` | :x:      | :white_check_mark: | Layout direction. `horizontal` (side by side) / `vertical` (stacked). |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.alert` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+### Slots
+
+| Slot      | Bindings | Description                                                  |
+|-----------|----------|--------------------------------------------------------------|
+| `icon`    | -        | Optional icon displayed before the main content.             |
+| `default` | -        | Main content of the alert (text, title + description, etc.). |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Alert color="info">
+  Here is some useful information.
+</Alert>
+
+<!-- With icon and structured content -->
+<Alert color="success">
+  <template #icon>
+    <CheckCircleIcon class="size-5" />
+  </template>
+  <div>
+    <div class="font-semibold">Success</div>
+    <div class="text-sm">Your changes have been saved.</div>
+  </div>
+</Alert>
+
+<!-- Soft variant -->
+<Alert color="warning" variant="soft">
+  <template #icon>
+    <TriangleAlertIcon class="size-5" />
+  </template>
+  Please review before continuing.
+</Alert>
+
+<!-- Vertical direction -->
+<Alert color="error" direction="vertical">
+  <template #icon>
+    <XCircleIcon class="size-5 mx-auto" />
+  </template>
+  <div class="text-center">Something went wrong.</div>
+</Alert>
+```
+
+# Loading
+
+## Description
+
+An animated loading indicator built on DaisyUI's `loading` class system.
+Supports multiple visual styles, sizes, and colors. Use it inline, inside buttons, or as a full-page overlay.
+
+## Props
+
+| Prop      | Type             | Default     | Required | Configurable       | Description                                                                                                                                                |
+|-----------|------------------|-------------|----------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `variant` | `LoadingVariant` | `'spinner'` | :x:      | :white_check_mark: | Visual style. `spinner` / `dots` / `ring` / `ball` / `bars` / `infinity`.                                                                                  |
+| `size`    | `LoadingSize`    | `'md'`      | :x:      | :white_check_mark: | Size of the indicator. `xs` / `sm` / `md` / `lg` / `xl`.                                                                                                   |
+| `color`   | `LoadingColor`   | `undefined` | :x:      | :white_check_mark: | Color of the indicator. Applied as a Tailwind `text-*` utility. `primary` / `secondary` / `accent` / `neutral` / `info` / `success` / `warning` / `error`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.loading` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Loading />
+
+<!-- With variant and size -->
+<Loading variant="dots" size="lg" />
+
+<!-- With color -->
+<Loading variant="spinner" color="primary" />
+
+<!-- Inside a button -->
+<Button :loading="true">
+  <template #loading>
+    <Loading variant="spinner" size="sm" />
+  </template>
+  Saving…
+</Button>
+```
+
+# Progress
+
+## Description
+Progress bar used to show the completion of a task or the passing of time.
+Omitting `value` or setting `indeterminate` renders an animated indeterminate state.
+
+## Props
+| Prop            | Type            | Default     | Required | Configurable       | Description                                                          |
+|-----------------|-----------------|-------------|----------|--------------------|----------------------------------------------------------------------|
+| `color`         | `ProgressColor` | `undefined` | :x:      | :white_check_mark: | Color of the progress bar                                            |
+| `value`         | `number`        | `undefined` | :x:      | :x:                | Current value. Omit for indeterminate state                          |
+| `max`           | `number`        | `100`       | :x:      | :white_check_mark: | Maximum value                                                        |
+| `indeterminate` | `boolean`       | `false`     | :x:      | :x:                | Forces indeterminate (animated) state, takes precedence over `value` |
+
+## Usage
+```vue
+<!-- Determinate -->
+<Progress color="primary" :value="40" :max="100" />
+
+<!-- Indeterminate -->
+<Progress color="primary" indeterminate />
+
+<!-- Indeterminate (no value) -->
+<Progress color="primary" />
+```
+
+# RadialProgress
+
+## Description
+Radial progress bar used to show the completion of a task or the passing of time.
+Renders as a `<div role="progressbar" />` for cross-browser compatibility (Firefox doesn't support pseudo-elements inside `<progress />`).
+
+## Props
+| Prop        | Type                  | Default     | Required | Configurable       | Description                                        |
+|-------------|-----------------------|-------------|----------|--------------------|----------------------------------------------------|
+| `value`     | `number`              | `0`         | :x:      | :x:                | Current value (0–100)                              |
+| `color`     | `RadialProgressColor` | `undefined` | :x:      | :white_check_mark: | Color of the progress arc (`text-{color}`)         |
+| `size`      | `string`              | `'5rem'`    | :x:      | :white_check_mark: | Size of the circle (any CSS value, e.g. `'8rem'`)  |
+| `thickness` | `string`              | `'10%'`     | :x:      | :white_check_mark: | Thickness of the arc (any CSS value, e.g. `'2px'`) |
+
+## Slots
+| Slot      | Description                                             |
+|-----------|---------------------------------------------------------|
+| `default` | Content displayed at the center. Defaults to `{value}%` |
+
+## Usage
+```vue
+<!-- Default -->
+<RadialProgress color="primary" :value="70" />
+
+<!-- Custom size & thickness -->
+<RadialProgress color="success" :value="40" size="8rem" thickness="4px" />
+
+<!-- Custom center content -->
+<RadialProgress color="warning" :value="30">
+  Low
+</RadialProgress>
+```
+
+# Toast
+
+## Description
+
+A fixed-position container for stacked notification messages. Built on DaisyUI's `toast` class system.
+Each notification is rendered as an `Alert` inside the `Toast` container.
+
+In most cases, use `<PoppyApp />` at the root and `useToast()` anywhere in the tree to push notifications transparently.
+The `Toast` component itself remains available as a low-level primitive for custom implementations.
+
+## Toast props
+
+| Prop       | Type         | Default    | Required | Configurable       | Description                                                           |
+|------------|--------------|------------|----------|--------------------|-----------------------------------------------------------------------|
+| `align`    | `ToastAlign` | `'end'`    | :x:      | :white_check_mark: | Horizontal position. `start` / `center` / `end`.                      |
+| `side`     | `ToastSide`  | `'bottom'` | :x:      | :white_check_mark: | Vertical position. `top` / `middle` / `bottom`.                       |
+| `duration` | `number`     | `3000`     | :x:      | :white_check_mark: | Default auto-dismiss delay in ms. Set to `0` to disable auto-dismiss. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.toast` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## ToastItem
+
+| Field     | Type         | Default     | Description                                            |
+|-----------|--------------|-------------|--------------------------------------------------------|
+| `id`      | `number`     | auto        | Auto-incremented identifier.                           |
+| `message` | `string`     | `undefined` | Text content of the notification.                      |
+| `color`   | `ToastColor` | `undefined` | Alert color. `info` / `success` / `warning` / `error`. |
+| `duration`| `number`     | `3000`      | Overrides the global default for this toast.           |
+
+## useToast()
+
+```ts
+const { push, dismiss } = useToast()
+
+// Push a notification
+push('Saved!', { color: 'success' })
+
+// Push with custom duration
+push('Check this out', { color: 'info', duration: 5000 })
+
+// Push with no auto-dismiss
+push('Action required', { color: 'warning', duration: 0 })
+
+// Dismiss manually
+dismiss(id)
+```
+
+## PoppyApp
+
+Wrap your root component with `<PoppyApp />` to enable `useToast()` anywhere in the tree.
+The toast container is rendered automatically via `Teleport`.
+
+```vue
+<!-- App.vue -->
+<PoppyApp>
+  <MyLayout>
+    <RouterView />
+  </MyLayout>
+</PoppyApp>
+```
+
+> **Nuxt note** — `useToast()` uses `inject()` to read state from `<PoppyApp />`, avoiding module-level singletons that would be shared across SSR requests.
+
+## Slots
+
+| Component  | Slot      | Description                         |
+|------------|-----------|-------------------------------------|
+| `Toast`    | `default` | Alert components to display.        |
+| `PoppyApp` | `default` | App content (layouts, RouterView…). |
+
+# Tooltip
+
+## Description
+
+A floating label that appears on hover, anchored to a trigger element.
+Built on the native Popover API with CSS anchor positioning — the tooltip is teleported to `<body />`
+to avoid overflow/clipping issues regardless of the trigger's position in the DOM.
+
+## Props
+
+| Prop        | Type               | Default     | Required | Configurable       | Description                                                                  |
+|-------------|--------------------|-------------|----------|--------------------|------------------------------------------------------------------------------|
+| `tip`       | `string`           | `undefined` | :x:      | :x:                | Text content of the tooltip. Can be overridden by the `content` slot.        |
+| `placement` | `TooltipPlacement` | `'top'`     | :x:      | :white_check_mark: | Placement relative to the anchor. `top` / `bottom` / `left` / `right`.       |
+| `color`     | `TooltipColor`     | `undefined` | :x:      | :white_check_mark: | Color theme based on the DaisyUI palette.                                    |
+| `as`        | `string`           | `'div'`     | :x:      | :white_check_mark: | HTML tag used to render the anchor wrapper. Use `'span'` for inline content. |
+| `open`      | `boolean`          | `false`     | :x:      | :x:                | When `true`, the tooltip is always visible regardless of hover state.        |
+| `disabled`  | `boolean`          | `false`     | :x:      | :x:                | When `true`, the tooltip is never shown.                                     |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.tooltip` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Slots
+
+| Slot      | Description                                                                  |
+|-----------|----------------------------------------------------------------------------- |
+| `default` | The anchor element the tooltip is attached to.                               |
+| `content` | Overrides `tip` with rich HTML content. Rendered inside the tooltip popover. |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Tooltip tip="Save your changes">
+  <Button color="primary">Save</Button>
+</Tooltip>
+
+<!-- Placement -->
+<Tooltip tip="On the right" placement="right">
+  <Button>Hover me</Button>
+</Tooltip>
+
+<!-- With color -->
+<Tooltip tip="Something went wrong" color="error">
+  <Button color="error">Delete</Button>
+</Tooltip>
+
+<!-- Rich content slot -->
+<Tooltip color="primary">
+  <template #content>
+    <strong>Pro tip</strong> — press <kbd>⌘S</kbd> to save
+  </template>
+  <Button>Hover for tip</Button>
+</Tooltip>
+
+<!-- Inline anchor -->
+<Tooltip tip="User profile" as="span">
+  <Badge color="primary">@john</Badge>
+</Tooltip>
+
+<!-- Always open -->
+<Tooltip tip="Always visible" :open="true">
+  <Button>Trigger</Button>
+</Tooltip>
+```
+
+---
+
+# Layout
+
+# Divider
+
+## Description
+
+A simple line to visually separate content. Built on DaisyUI's `divider` component.
+Supports horizontal and vertical orientations, multiple colors, and text placement.
+
+## Props
+
+| Prop         | Type                 | Default       | Required | Configurable       | Description                                                                                                |
+|--------------|----------------------|---------------|----------|--------------------|------------------------------------------------------------------------------------------------------------|
+| `orientation`| `DividerOrientation` | `'horizontal'`| :x:      | :white_check_mark: | Orientation: `'horizontal'` or `'vertical'`.                                                               |
+| `color`      | `DividerColor`       | `undefined`   | :x:      | :white_check_mark: | Color: `'neutral'`, `'primary'`, `'secondary'`, `'accent'`, `'info'`, `'success'`, `'warning'`, `'error'`. |
+| `placement`  | `DividerPlacement`   | `undefined`   | :x:      | :white_check_mark: | Text placement: `'start'`, `'end'`, `'middle'`, `'none'`.                                                  |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.divider` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Horizontal divider (default) -->
+<div class="flex gap-4">
+  <span>Left</span>
+  <Divider />
+  <span>Right</span>
+</div>
+
+<!-- Vertical divider -->
+<div class="flex gap-4">
+  <span>Top</span>
+  <Divider orientation="vertical" />
+  <span>Bottom</span>
+</div>
+
+<!-- With color -->
+<Divider color="primary" />
+
+<!-- With text and placement -->
+<Divider placement="middle">OR</Divider>
+
+<!-- All options -->
+<Divider orientation="horizontal" color="success" placement="start">
+  Text
+</Divider>
+```
+
+# Drawer
+
+## Description
+
+A sidebar that can be toggled open or closed, typically used for mobile navigation menus.
+Built on DaisyUI's `drawer` component. Supports nested drawers with automatic z-index management.
+
+## Props
+
+| Prop           | Type         | Default     | Required | Configurable       | Description                                     |
+|----------------|--------------|-------------|----------|--------------------|-------------------------------------------------|
+| `side`         | `DrawerSide` | `'start'`   | :x:      | :white_check_mark: | Side where drawer opens: `'start'` or `'end'`.  |
+| `overlay`      | `boolean`    | `true`      | :x:      | :white_check_mark: | When `true`, shows overlay to close the drawer. |
+| `contentClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer content.      |
+| `sidebarClass` | `ClassValue` | `undefined` | :x:      | :white_check_mark: | Additional classes for the drawer sidebar.      |
+
+## Events
+
+| Event    | Payload | Description                     |
+|----------|---------|---------------------------------|
+| `@open`  | -       | Emitted when the drawer opens.  |
+| `@close` | -       | Emitted when the drawer closes. |
+
+## Slots
+
+| Slot      | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+| `default` | Main content area. Receives `drawer-id`, `is-open`, `open`, `close`.      |
+| `sidebar` | Drawer sidebar content. Receives `drawer-id`, `is-open`, `open`, `close`. |
+
+## Exposed
+
+These methods are accessible via a template ref on the component instance.
+
+| Method    | Signature    | Description        |
+|-----------|--------------|--------------------|
+| `open()`  | `() => void` | Opens the drawer.  |
+| `close()` | `() => void` | Closes the drawer. |
+
+## Usage
+
+```vue
+<!-- Basic drawer -->
+<Drawer v-model="isOpen">
+  <Button @click="isOpen = true">Open drawer</Button>
+  
+  <template #sidebar>
+    <div class="p-4 w-80 bg-base-100 h-full">
+      <h2>Drawer content</h2>
+    </div>
+  </template>
+</Drawer>
+
+<!-- Drawer opening from end -->
+<Drawer v-model="isOpen" side="end">
+  <Button @click="isOpen = true">Open</Button>
+  <template #sidebar>
+    <div>Content</div>
+  </template>
+</Drawer>
+
+<!-- With events -->
+<Drawer
+  v-model="isOpen"
+  @open="console.log('opened')"
+  @close="console.log('closed')"
+/>
+
+<!-- Without overlay -->
+<Drawer v-model="isOpen" :overlay="false">
+  <!-- User must provide their own close mechanism -->
+</Drawer>
+
+<!-- Programmatic control -->
+const drawerRef = useTemplateRef('drawer')
+
+drawerRef.value?.open()   // Open
+drawerRef.value?.close()  // Close
+```
+
+# Indicator
+
+## Description
+
+Wraps an element to add a small indicator (like a badge or notification dot) at various positions.
+Built on DaisyUI's `indicator` component. Use it to add notification badges, status markers,
+or any small visual indicator to elements.
+
+The indicator content is automatically wrapped in a `span` with the `indicator-item` class.
+
+## Props
+
+| Prop   | Type             | Default     | Required | Configurable       | Description                                                              |
+|--------|------------------|-------------|----------|--------------------|--------------------------------------------------------------------------|
+| `side` | `IndicatorSide`  | `undefined` | :x:      | :white_check_mark: | Side where indicator is placed: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+| `align`| `IndicatorAlign` | `undefined` | :x:      | :white_check_mark: | Alignment along the side: `'start'`, `'end'`, `'center'`, `'middle'`.    |
+| `hide` | `boolean`        | `false`     | :x:      | :x:                | When `true`, hides the indicator content.                                |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.indicator` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Basic indicator on end side -->
+<Indicator side="end">
+  <button class="btn">Messages</button>
+  <template #indicator>
+    <Badge color="error">5</Badge>
+  </template>
+</Indicator>
+
+<!-- With alignment: centered vertically on end side -->
+<Indicator side="end" align="middle">
+  <button class="btn h-16">Settings</button>
+  <template #indicator>
+    <Badge color="primary">new</Badge>
+  </template>
+</Indicator>
+
+<!-- Top side with center alignment -->
+<Indicator side="top" align="center">
+  <div class="w-32 h-16 bg-base-200 rounded-lg"></div>
+  <template #indicator>
+    <Badge color="success">new</Badge>
+  </template>
+</Indicator>
+```
+
+# Join
+
+## Description
+
+Groups items together side by side or in a column with joined borders.
+Built on DaisyUI's `join` component. Use it to create button groups, segmented controls,
+or any set of elements that should visually appear connected.
+
+## Props
+
+| Prop       | Type            | Default        | Required | Configurable       | Description                                       |
+|------------|-----------------|----------------|----------|--------------------|---------------------------------------------------|
+| `direction`| `JoinDirection` | `'horizontal'` | :x:      | :white_check_mark: | Layout direction: `'horizontal'` or `'vertical'`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.join` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Horizontal join (default) -->
+<Join>
+  <Button>First</Button>
+  <Button>Second</Button>
+  <Button>Third</Button>
+</Join>
+
+<!-- Vertical join -->
+<Join direction="vertical">
+  <Button>Top</Button>
+  <Button>Bottom</Button>
+</Join>
+
+<!-- With custom content -->
+<Join>
+  <button class="btn">One</button>
+  <button class="btn">Two</button>
+  <button class="btn">Three</button>
+</Join>
+```
+
+# Mask
+
+## Description
+
+Applies CSS mask shapes to crop content into common geometric forms.
+Built on DaisyUI's `mask` class system. Use it to create visually interesting image shapes,
+icons, or any content that needs non-rectangular clipping.
+
+## Props
+
+| Prop      | Type          | Default     | Required | Configurable       | Description                                                                                                                                                     |
+|-----------|---------------|-------------|----------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `variant` | `MaskVariant` | `undefined` | :x:      | :white_check_mark: | Shape of the mask: squircle, heart, hexagon, hexagon-2, decagon, pentagon, diamond, square, circle, star, star-2, triangle, triangle-2, triangle-3, triangle-4. |
+| `half`    | `MaskHalf`    | `undefined` | :x:      | :white_check_mark: | When set, only masks half of the content: `'half-1'` or `'half-2'`.                                                                                             |
+| `inline`  | `boolean`     | `false`     | :x:      | :x:                | When `true`, renders the mask as inline-block element.                                                                                                          |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.mask` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Basic squircle mask -->
+<Mask variant="squircle">
+  <img src="path/to/image.jpg" />
+</Mask>
+
+<!-- Heart-shaped image -->
+<Mask variant="heart" inline class="w-32 h-32">
+  <img src="path/to/image.jpg" class="w-full h-full object-cover" />
+</Mask>
+
+<!-- Half mask effect -->
+<Mask variant="circle" half="half-1" class="w-40 h-40">
+  <img src="path/to/image.jpg" class="w-full h-full object-cover" />
+</Mask>
+
+<!-- Inline mask in text -->
+<div class="flex items-center gap-2">
+  <Mask variant="star" inline class="w-8 h-8">
+    <img src="path/to/icon.png" class="w-full h-full object-cover" />
+  </Mask>
+  <span>Premium Feature</span>
+</div>
+```
+
+# Stack
+
+## Description
+
+Stacks items together with automatic spacing. Built on DaisyUI's `stack` component.
+Use it to group elements that should appear connected.
+
+## Props
+
+| Prop       | Type             | Default     | Required | Configurable       | Description                                                |
+|------------|------------------|-------------|----------|--------------------|------------------------------------------------------------|
+| `direction`| `StackDirection` | `undefined` | :x:      | :white_check_mark: | Layout direction: `'start'`, `'end'`, `'top'`, `'bottom'`. |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.stack` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
+
+## Usage
+
+```vue
+<!-- Basic stack -->
+<Stack>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</Stack>
+
+<!-- With direction -->
+<Stack direction="start">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</Stack>
+
+<!-- With custom content -->
+<Stack direction="end">
+  <div class="bg-primary text-primary-content grid place-content-center rounded-box">1</div>
+  <div class="bg-accent text-accent-content grid place-content-center rounded-box">2</div>
+  <div class="bg-secondary text-secondary-content grid place-content-center rounded-box">3</div>
+</Stack>
+```
+
+---
+
+# Media
+
+# Img
+
+## Description
+
+A smart image wrapper with IntersectionObserver-based lazy loading, skeleton placeholder, error fallback,
+and `<picture />` art-direction support.
+
+## API
+
+### Props
+
+| Prop          | Type                                      | Default     | Required           | Configurable       | Description                                               |
+|---------------|-------------------------------------------|-------------|--------------------|--------------------|-----------------------------------------------------------|
+| `src`         | `string`                                  | -           | :white_check_mark: | :x:                | Image source URL.                                         |
+| `alt`         | `string`                                  | -           | :white_check_mark: | :x:                | Accessible alt text.                                      |
+| `fallbackSrc` | `string`                                  | `undefined` | :x:                | :x:                | Secondary URL used when the primary image fails to load.  |
+| `sources`     | `ImgSource[]`                             | `undefined` | :x:                | :x:                | `<source />` descriptors for `<picture />` art direction. |
+| `width`       | `number \| string`                        | `undefined` | :x:                | :x:                | Intrinsic width forwarded to `<img />` (CLS prevention).  |
+| `height`      | `number \| string`                        | `undefined` | :x:                | :x:                | Intrinsic height forwarded to `<img />` (CLS prevention). |
+| `aspect`      | `'auto' \| 'square' \| 'video' \| string` | `'auto'`    | :x:                | :x:                | Forced aspect ratio of the container.                     |
+| `fit`         | `ImgFit`                                  | `undefined` | :x:                | :white_check_mark: | Tailwind `object-*` sizing mode.                          |
+| `rounded`     | `ImgRounded`                              | `undefined` | :x:                | :white_check_mark: | Border radius of the container.                           |
+| `skeleton`    | `boolean`                                 | `true`      | :x:                | :white_check_mark: | Show skeleton placeholder while loading.                  |
+| `threshold`   | `number`                                  | `0`         | :x:                | :white_check_mark: | IntersectionObserver threshold.                           |
+| `rootMargin`  | `string`                                  | `'200px'`   | :x:                | :white_check_mark: | IntersectionObserver rootMargin.                          |
+| `eager`       | `boolean`                                 | `false`     | :x:                | :x:                | Disable lazy loading and load immediately.                |
+
+### Slots
+
+| Slot       | Bindings | Description                                                                                  |
+|------------|----------|----------------------------------------------------------------------------------------------|
+| `fallback` | —        | Shown when the image (and `fallbackSrc`) fail to load. Defaults to "Image unavailable" text. |
+
+### Exposed
+
+| Name       | Type      | Description                   |
+|------------|-----------|-------------------------------|
+| `isLoaded` | `boolean` | `true` once the image loaded. |
+| `hasError` | `boolean` | `true` if all sources failed. |
+
+## Usage
+
+```vue
+<!-- Basic -->
+<Img src="/photo.jpg" alt="A photo" aspect="video" fit="cover" />
+
+<!-- With fallback src -->
+<Img src="/photo.jpg" fallback-src="/placeholder.jpg" alt="Photo" aspect="video" fit="cover" />
+
+<!-- With custom fallback slot -->
+<Img src="/photo.jpg" alt="Photo" aspect="square">
+  <template #fallback>
+    <span>Could not load image</span>
+  </template>
+</Img>
+
+<!-- Art direction -->
+<Img
+  src="/hero-desktop.jpg"
+  alt="Hero"
+  aspect="video"
+  fit="cover"
+  :sources="[
+    { srcset: '/hero-mobile.webp', media: '(max-width: 640px)', type: 'image/webp' },
+    { srcset: '/hero-desktop.webp', type: 'image/webp' },
+  ]"
+/>
+
+<!-- Eager (above the fold) -->
+<Img src="/logo.png" alt="Logo" :eager="true" />
+```
+
+---
+
+# Navigation
+
+# Breadcrumbs
+
+## Description
+Affiche un fil d'Ariane pour aider les utilisateurs à naviguer dans le site.
+Le dernier item est automatiquement traité comme la page courante (non cliquable).
+
+## Props
+| Prop       | Type               | Default     | Required           | Configurable       | Description                                     |
+|------------|--------------------|-------------|--------------------|--------------------|-------------------------------------------------|
+| `items`    | `BreadcrumbItem[]` | `undefined` | :white_check_mark: | :x:                | Liste des items du fil d'Ariane                 |
+| `maxWidth` | `string`           | `undefined` | :x:                | :white_check_mark: | Classe Tailwind de largeur max (ex: `max-w-xs`) |
+
+## Type `BreadcrumbItem`
+| Prop    | Type               | Description                                   |
+|---------|--------------------|-----------------------------------------------|
+| `label` | `string`           | Texte affiché                                 |
+| `to`    | `RouteLocationRaw` | Route Vue Router. Absent = item non cliquable |
+| `icon`  | `Component`        | SVG inline optionnel                          |
+
+## Usage
+```vue
+<Breadcrumbs
+  :items="[
+    { label: 'Home', to: '/' },
+    { label: 'Documents', to: { name: 'documents' } },
+    { label: 'Add Document' },
+  ]"
+/>
+```
+
+# Dock
+
+## Description
+Bottom navigation bar fixed to the bottom of the screen.
+Use `DockItem` for each navigation element.
+
+> Add `<meta name="viewport" content="viewport-fit=cover" />` for iOS support.
+
+## Dock Props
+| Prop   | Type       | Default | Required | Configurable       | Description      |
+|--------|------------|---------|----------|--------------------|------------------|
+| `size` | `DockSize` | `'md'`  | :x:      | :white_check_mark: | Size of the dock |
+
+## DockItem Props
+| Prop    | Type               | Default     | Required           | Configurable | Description                                           |
+|---------|--------------------|-------------|--------------------|--------------|-------------------------------------------------------|
+| `icon`  | `Component`        | `undefined` | :white_check_mark: | :x:          | Icon component (e.g. Lucide icon)                     |
+| `label` | `string`           | `undefined` | :x:                | :x:          | Text label displayed below the icon                   |
+| `to`    | `RouteLocationRaw` | `undefined` | :x:                | :x:          | Vue Router location. Absent = renders as `<button />` |
+
+## Notes
+- The `active` state is automatically detected via `useLink` (Vue Router).
+- Without `to`, the item renders as a native `<button />`.
+
+## Usage
+```vue
+<Dock size="md">
+  <DockItem :icon="HomeIcon" label="Home" to="/" />
+  <DockItem :icon="InboxIcon" label="Inbox" to="/inbox" />
+  <DockItem :icon="SettingsIcon" label="Settings" to="/settings" />
+</Dock>
+```
+
+# Link
+
+## Description
+Adds the missing underline style to links.
+Supports Vue Router navigation, or native anchors (`#`, `#section`) for in-page links.
+
+## Props
+| Prop    | Type               | Default     | Required | Configurable       | Description                                                        |
+|---------|--------------------|-------------|----------|--------------------|--------------------------------------------------------------------|
+| `color` | `LinkColor`        | `undefined` | :x:      | :white_check_mark: | Color theme of the link                                            |
+| `hover` | `boolean`          | `false`     | :x:      | :white_check_mark: | Only shows underline on hover                                      |
+| `to`    | `RouteLocationRaw` | `undefined` | :x:      | :x:                | Vue Router location or anchor (`#`). Renders as `<a />` when `'#'` |
+
+## Slots
+| Slot      | Description  |
+|-----------|--------------|
+| `default` | Link content |
+
+## Usage
+```vue
+<!-- Vue Router link -->
+<Link to="/dashboard" color="primary">Dashboard</Link>
+
+<!-- Native anchor -->
+<Link to="#section">Jump to section</Link>
+
+<!-- Hover only underline -->
+<Link to="#" hover>Hover me</Link>
+```
+
+# Menu
+
+## Description
+
+Displays a list of navigation links vertically or horizontally.
+Supports icons, badges, titles, static submenus, and collapsible submenus.
+
+## API
+
+<details>
+<summary>Menu</summary>
+
+### Props
+
+| Prop        | Type            | Default      | Required | Configurable       | Description           |
+|-------------|-----------------|--------------|----------|--------------------|-----------------------|
+| `size`      | `MenuSize`      | `'md'`       | :x:      | :white_check_mark: | Size of the menu      |
+| `direction` | `MenuDirection` | `'vertical'` | :x:      | :white_check_mark: | Direction of the menu |
+
+</details>
+
+<details>
+<summary>MenuItem</summary>
+
+### Props
+
+| Prop          | Type               | Default     | Required | Configurable | Description                                                            |
+|---------------|--------------------|-------------|----------|--------------|------------------------------------------------------------------------|
+| `icon`        | `Component`        | `undefined` | :x:      | :x:          | Icon component (e.g. Lucide icon)                                      |
+| `to`          | `RouteLocationRaw` | `undefined` | :x:      | :x:          | Vue Router location. Absent = renders as `<a />`                       |
+| `title`       | `boolean`          | `false`     | :x:      | :x:          | Renders the item as a non-interactive section title                    |
+| `active`      | `boolean`          | `false`     | :x:      | :x:          | Forces the active state (auto-detected via `useLink` when `to` is set) |
+| `disabled`    | `boolean`          | `false`     | :x:      | :x:          | Disables the item                                                      |
+| `collapsible` | `boolean`          | `false`     | :x:      | :x:          | Wraps `submenu` slot in `<details />` when true                        |
+
+### Slots
+
+| Slot      | Bindings | Description                              |
+|-----------|----------|------------------------------------------|
+| `default` | -        | Item label                               |
+| `badge`   | -        | Optional badge displayed after the label |
+| `submenu` | -        | Nested `MenuItem` components             |
+
+</details>
+
+## Notes
+
+- `active` state is automatically detected via `useLink` (Vue Router) when `to` is provided.
+- Without `to`, the item renders as a plain `<a />` tag.
+- `collapsible` only takes effect when the `submenu` slot is populated.
+- `<details />` collapsible is CSS-only, no JS required.
+
+## Usage
+```vue
+<Menu size="md">
+  <MenuItem title>Navigation</MenuItem>
+  <MenuItem :icon="Home" to="/">Home</MenuItem>
+  <MenuItem :icon="Inbox" to="/inbox">
+    Inbox
+    <template #badge>
+      <span class="badge badge-xs badge-warning">99+</span>
+    </template>
+  </MenuItem>
+  <MenuItem collapsible>
+    Settings
+    <template #submenu>
+      <MenuItem to="/settings/profile">Profile</MenuItem>
+      <MenuItem to="/settings/security">Security</MenuItem>
+    </template>
+  </MenuItem>
+</Menu>
+```
+
+# Navbar
+
+## Description
+
+A responsive navigation bar component based on DaisyUI.
+
+## API
+
+### Slots
+
+| Slot      | Description         |
+|-----------|---------------------|
+| `default` | Main navbar content |
+
+## Usage
+
+```vue
+<Navbar>
+  <div class="navbar-start">
+    <a class="btn btn-ghost text-xl">Brand</a>
+  </div>
+  <div class="navbar-center">
+    <Menu direction="horizontal">
+      <MenuItem to="/">Home</MenuItem>
+      <MenuItem to="/about">About</MenuItem>
+    </Menu>
+  </div>
+  <div class="navbar-end">
+    <button class="btn btn-ghost">Button</button>
+  </div>
+</Navbar>
+```
+
+# Tab
+
+## Description
+
+Tabs component for switching between views. Each `<Tab />` renders both the tab button and its content panel as adjacent elements — matching DaisyUI's structure.
+
+Supports two modes:
+- **Controlled mode** (`v-model`): First tab is active by default. Click switches tabs via JS.
+- **Router mode** (`to` prop): Each `Tab` renders as a `RouterLink`. Content is provided by `<RouterView />`.
+
+## API
+
+### Tabs (container)
+
+| Prop        | Type           | Default     | Configurable       | Description                                                           |
+|-------------|----------------|-------------|--------------------|-----------------------------------------------------------------------|
+| `v-model`   | `string`       | `undefined` | :x:                | Active tab value. When omitted, first tab with `active` prop is used. |
+| `variant`   | `TabVariant`   | `undefined` | :white_check_mark: | Visual style: `'border'`, `'lift'`, `'box'`.                          |
+| `size`      | `TabSize`      | `'md'`      | :white_check_mark: | Tab size.                                                             |
+| `placement` | `TabPlacement` | `'top'`     | :white_check_mark: | Tabs position: `'top'`, `'bottom'`.                                   |
+
+### Tab (item)
+
+| Prop       | Type         | Default     | Description                                                     |
+|------------|--------------|-------------|-----------------------------------------------------------------|
+| `value`    | `string`     | `undefined` | Tab identifier — matches `v-model` on parent `<Tabs />`.        |
+| `title`    | `string`     | `undefined` | Tab header label. Use `#title` slot for rich content.           |
+| `active`   | `boolean`    | `false`     | Initial active state hint (ignored once context is set).        |
+| `disabled` | `boolean`    | `false`     | Disables the tab.                                               |
+| `icon`     | `Component`  | `undefined` | Icon displayed before the label.                                |
+| `to`       | `string`     | `undefined` | Router target. Renders as `RouterLink`; no content panel shown. |
+
+### Slots
+
+| Slot      | Component | Description                                              |
+|-----------|-----------|----------------------------------------------------------|
+| `default` | `Tabs`    | `Tab` items.                                             |
+| `default` | `Tab`     | Content panel shown when tab is active.                  |
+| `title`   | `Tab`     | Tab header label (overrides `title` prop, rich content). |
+| `icon`    | `Tab`     | Icon content (overrides `icon` prop).                    |
+
+## Usage
+
+```vue
+<!-- Controlled mode (v-model) -->
+<Tabs v-model="activeTab" variant="lift">
+  <Tab value="home" title="Home">
+    Home content here
+  </Tab>
+  <Tab value="profile">
+    <template #title>Profile <span class="badge">New</span></template>
+    Profile content here
+  </Tab>
+</Tabs>
+
+<!-- Router mode -->
+<Tabs variant="border">
+  <Tab to="/home" title="Home" />
+  <Tab to="/profile" title="Profile" />
+</Tabs>
+<RouterView />
+```
+
