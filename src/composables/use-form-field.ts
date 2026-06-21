@@ -1,7 +1,7 @@
 import type { FormFieldContext } from '@/components/data/form-field/form-field.context'
 import { FORM_FIELD_CONTEXT_KEY } from '@/components/data/form-field/form-field.context'
 import { getValidationMessage } from '@/utils/get-validation-message'
-import { type ComputedRef, computed, inject, onMounted, type Ref, watch } from 'vue'
+import { type ComputedRef, computed, inject, onMounted, onUnmounted, type Ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export interface UseFormFieldOptions {
@@ -38,6 +38,21 @@ export function useFormField<T = unknown>(options: UseFormFieldOptions): UseForm
 
   watch(options.required, val => {
     field?.setRequired(val)
+  })
+
+  // Register this input's validator with the parent Form so it runs on submit
+  const validatorKey = Symbol()
+
+  onMounted(() => {
+    if (!field) return
+    field.registerValidator(validatorKey, () => {
+      field.setTouched(true)
+      return validate()
+    })
+  })
+
+  onUnmounted(() => {
+    field?.unregisterValidator(validatorKey)
   })
 
   const fieldValue = computed<T | undefined>(() => field?.value.value as T | undefined)

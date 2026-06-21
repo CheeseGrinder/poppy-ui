@@ -48,7 +48,7 @@ const groupCtx = inject(RADIO_GROUP_CONTEXT_KEY, null)
 const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? groupCtx?.name ?? 'radio-group')
 
 // Bridge to form field context
-const { field, onBlur } = useFormField({
+const { field, onBlur, clearError } = useFormField({
   required: computed(() => !!props.required || !!groupCtx?.required.value),
   inputEl,
 })
@@ -68,6 +68,7 @@ function handleChange(): void {
   if (field) {
     field.setValue(props.value)
     field.setDirty(true)
+    clearError()
   }
   else if (groupCtx) {
     groupCtx.setValue(props.value)

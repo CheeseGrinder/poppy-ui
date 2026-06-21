@@ -53,6 +53,16 @@ export interface FormFieldContext<T = unknown> {
 
   /** Called by child inputs to push counter text/color up to FormField for rendering. */
   setCounterText: (text: string, colorClass: string) => void
+
+  /**
+   * Registers a field-level validator with the parent Form.
+   * Called by child inputs on mount via `useFormField`.
+   * Key must be unique per input instance (use `Symbol()`).
+   */
+  registerValidator: (key: symbol, fn: () => boolean) => void
+
+  /** Removes a previously registered field-level validator. */
+  unregisterValidator: (key: symbol) => void
 }
 
 export const FORM_FIELD_CONTEXT_KEY: InjectionKey<FormFieldContext> = Symbol('FormFieldContext')

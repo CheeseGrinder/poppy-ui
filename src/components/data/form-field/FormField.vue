@@ -82,6 +82,14 @@ function setError(message: string | undefined): void {
   formCtx?.setFieldError(props.name, message)
 }
 
+function registerValidator(key: symbol, fn: () => boolean): void {
+  formCtx?.registerValidator(key, fn)
+}
+
+function unregisterValidator(key: symbol): void {
+  formCtx?.unregisterValidator(key)
+}
+
 const fieldContext: FormFieldContext = {
   name: props.name,
   required,
@@ -98,6 +106,8 @@ const fieldContext: FormFieldContext = {
   setTouched,
   setError,
   setCounterText,
+  registerValidator,
+  unregisterValidator,
 } satisfies FormFieldContext
 
 provide(FORM_FIELD_CONTEXT_KEY, fieldContext)

@@ -29,7 +29,7 @@ const emit = defineEmits<{
 
 // Internal state
 
-// const initialData = JSON.parse(JSON.stringify(unref(model.value) ?? {}))
+const initialData: Record<string, unknown> = JSON.parse(JSON.stringify(model.value ?? {}))
 
 // Shallow reactive copy — mutations here don't affect the model until emitted
 const data = shallowReactive<Record<string, unknown>>({ ...model.value })
@@ -144,6 +144,17 @@ function setTouched(path: string, value = true): void {
   ensureFieldState(path).isTouched = value
 }
 
+// Registered validate callbacks from child inputs (via useFormField)
+const validators: Map<symbol, () => boolean> = new Map()
+
+function registerValidator(key: symbol, fn: () => boolean): void {
+  validators.set(key, fn)
+}
+
+function unregisterValidator(key: symbol): void {
+  validators.delete(key)
+}
+
 function validate(): boolean {
   let allValid = true
   for (const [, validateFn] of validators) {
@@ -152,11 +163,12 @@ function validate(): boolean {
   return allValid
 }
 
-// Registered validate callbacks from child inputs (via useFormField)
-const validators: Map<string, () => boolean> = new Map()
-
 function reset(): void {
-  Object.assign(data, {})
+  // Clear all current keys, then restore snapshot taken at component creation
+  for (const key of Object.keys(data)) {
+    delete data[key]
+  }
+  Object.assign(data, JSON.parse(JSON.stringify(initialData)))
   model.value = { ...data }
   clearErrors()
   for (const path of Object.keys(fieldStates)) {
@@ -191,6 +203,8 @@ const formContext: FormContext = {
   setTouched,
   validate,
   reset,
+  registerValidator,
+  unregisterValidator,
 }
 
 provide(FORM_CONTEXT_KEY, formContext)

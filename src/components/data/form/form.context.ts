@@ -71,6 +71,12 @@ export interface FormContext {
 
   /** Resets data to initial values, clears all errors and field states. */
   reset: () => void
+
+  /** Registers a field validator (called on form submit). Key must be unique per input instance. */
+  registerValidator: (key: symbol, fn: () => boolean) => void
+
+  /** Removes a previously registered field validator. */
+  unregisterValidator: (key: symbol) => void
 }
 
 export const FORM_CONTEXT_KEY: InjectionKey<FormContext> = Symbol('FormContext')

@@ -64,6 +64,10 @@ const config = useComponentConfig(RATING_CONFIG, props, {
   mask: 'star',
 })
 
+// ── Refs ─────────────────────────────────────────────────────────────────────
+
+const rootEl = useTemplateRef('rootEl')
+
 // ── Form field ───────────────────────────────────────────────────────────────
 
 // Rating uses a hidden input as the form field anchor for constraint validation
@@ -127,10 +131,18 @@ const stars = computed<StarInput[]>(() => {
 // ── Error ────────────────────────────────────────────────────────────────────
 
 const hasError = computed(() => !!field?.error.value)
+
+defineExpose({
+  $el: rootEl,
+  focus: () => rootEl.value
+    ?.querySelector<HTMLInputElement>('input[type="radio"]:not(.hidden):not(.rating-hidden)')
+    ?.focus(),
+})
 </script>
 
 <template>
   <div
+    ref="rootEl"
     class="rating"
     :class="[
       getClass(sizes, config.size),
@@ -154,6 +166,7 @@ const hasError = computed(() => !!field?.error.value)
       type="radio"
       class="rating-hidden"
       name="rating"
+      :disabled="disabled"
       :checked="resolvedValue === 0"
       @change="handleChange(0)"
     />

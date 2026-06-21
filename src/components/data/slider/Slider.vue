@@ -1,5 +1,6 @@
 <script lang="ts">
 import { useComponentConfig } from '@/composables/use-component-config'
+import { useFormField } from '@/composables/use-form-field'
 import { getClass } from '@/utils/build-class.util'
 import { useTemplateRefsList } from '@vueuse/core'
 import { computed, onBeforeUnmount, ref, shallowRef, useTemplateRef, watch } from 'vue'
@@ -53,7 +54,15 @@ const emit = defineEmits<{
 }>()
 
 const sliderRoot = useTemplateRef('sliderRoot')
+const anchorEl = useTemplateRef('anchorEl')
 const thumbRefs = useTemplateRefsList<HTMLElement>()
+
+// ── Form field ───────────────────────────────────────────────────────────────
+
+const { field } = useFormField({
+  required: computed(() => !!props.required),
+  inputEl: anchorEl,
+})
 
 const isDragging = shallowRef(false)
 const activeThumbIndex = shallowRef<number | null>(null)
@@ -358,6 +367,9 @@ function updateMechanicalValue(newMechanicalValue: number, thumbIndex: number) {
     model.value = scaledValue
   }
 
+  field?.setValue(model.value)
+  field?.setDirty(true)
+
   // @ts-expect-error
   emit('input', model.value)
 }
@@ -519,6 +531,11 @@ function handleThumbKeydown(event: KeyboardEvent, thumbIndex: number) {
   emit('change', model.value)
 }
 
+defineExpose({
+  $el: sliderRoot,
+  focus: () => thumbRefs.value[0]?.focus(),
+})
+
 // Cleanup event listeners
 onBeforeUnmount(() => {
   window.removeEventListener('mousemove', handleMove)
@@ -548,6 +565,19 @@ onBeforeUnmount(() => {
     @touchstart.prevent="handleRailClick"
     @keydown="handleContainerKeydown"
   >
+    <!-- Hidden anchor for form field constraint validation -->
+    <input
+      ref="anchorEl"
+      type="number"
+      class="sr-only"
+      tabindex="-1"
+      aria-hidden="true"
+      :value="Array.isArray(model) ? model[0] : model"
+      :required="required"
+      :min="min"
+      :max="max"
+    />
+
     <!-- Rail -->
     <div class="slider-rail" ref="railRef"></div>
 
