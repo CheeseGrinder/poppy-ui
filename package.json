@@ -60,6 +60,12 @@
       "import": "./dist/components/layout/public.es.js",
       "require": "./dist/components/layout/public.umd.js"
     },
+    "./components/media": {
+      "source": "./src/components/media/public.ts",
+      "types": "./dist/components/media/public.d.ts",
+      "import": "./dist/components/media/public.es.js",
+      "require": "./dist/components/media/public.umd.js"
+    },
     "./components/navigation": {
       "source": "./src/components/navigation/public.ts",
       "types": "./dist/components/navigation/public.d.ts",

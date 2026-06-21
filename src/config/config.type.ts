@@ -37,6 +37,7 @@ import type { IndicatorConfigurableProps } from '@/components/layout/indicator/i
 import type { JoinConfigurableProps } from '@/components/layout/join/join.props'
 import type { MaskConfigurableProps } from '@/components/layout/mask/mask.props'
 import type { StackConfigurableProps } from '@/components/layout/stack/stack.props'
+import type { ImgConfigurableProps } from '@/components/media/img/img.props'
 import type { BreadcrumbsConfigurableProps } from '@/components/navigation/breadcrumbs/breadcrumbs.props'
 import type { DockConfigurableProps, DockItemConfigurableProps } from '@/components/navigation/dock/dock.props'
 import type { LinkConfigurableProps } from '@/components/navigation/link/link.props'
@@ -102,4 +103,7 @@ export interface PoppyComponentConfig {
   menuItem: MenuItemConfigurableProps
   tab: TabConfigurableProps
   tabs: TabsConfigurableProps
+
+  // Media
+  img: ImgConfigurableProps
 }
