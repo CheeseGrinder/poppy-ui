@@ -14,7 +14,7 @@ runs:
         bun-version: latest
 
     - name: Install
-      run: bun install --production
+      run: bun install
       shell: bash
 
     - name: Audit dependencies
