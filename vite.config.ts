@@ -41,6 +41,7 @@ export default defineConfig({
         'components/display/public': fileURLToPath(new URL('./src/components/display/public.ts', import.meta.url)),
         'components/feedback/public': fileURLToPath(new URL('./src/components/feedback/public.ts', import.meta.url)),
         'components/layout/public': fileURLToPath(new URL('./src/components/layout/public.ts', import.meta.url)),
+        'components/media/public': fileURLToPath(new URL('./src/components/media/public.ts', import.meta.url)),
         'components/navigation/public': fileURLToPath(
           new URL('./src/components/navigation/public.ts', import.meta.url),
         ),
