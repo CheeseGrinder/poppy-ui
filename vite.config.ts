@@ -10,6 +10,9 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  // HISTOIRE_BASE is set in CI when deploying to GitHub Pages (e.g. /poppy-ui/).
+  // Vite ignores base in library mode, so it does not affect the lib build.
+  base: process.env.HISTOIRE_BASE ?? '/',
   plugins: [
     vue(),
     tailwindcss(),
