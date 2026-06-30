@@ -56,7 +56,7 @@ Full config reference: see `llms-full.txt`.
 - **Textarea** — Multi-line text input component built on the DaisyUI `textarea` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade). Supports an `autoGrow` mode that expands the height automatically to fit the content.
 - **Toggle** — Toggle (switch) component built on the DaisyUI `toggle` element. Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
 
-### Display (14)
+### Display (15)
 
 - **Accordion** — A vertically stacked set of collapsible sections. Each section is controlled by an `AccordionItem` nested inside `Accordion`. Supports single and multiple open modes, controlled and uncontrolled usage, animated transitions, and a customisable icon.
 - **Avatar** — A wrapper component to display user or entity representations. Built on DaisyUI's `avatar` class system. `Avatar` is a pure wrapper — the content (image, initials, etc.) is fully controlled via the `default` slot, making it compatible with any future `Mask` component.
@@ -72,6 +72,7 @@ Full config reference: see `llms-full.txt`.
 - **List** — A vertical layout component to display information in rows. Built on DaisyUI's `list` / `list-row` class system. `ListItem` renders as a `<li />` by default and switches to a `RouterLink` automatically when `to` is provided. It provides a great DX by supporting multiple named slots for easy composition.
 - **Stat** — A component used to display key metrics, statistics, or numerical data with optional titles, descriptions, icons, and actions.
 - **Status** — A small visual indicator used to represent the current state of an element — online, offline, error, etc. Built on DaisyUI's `status` class system. Supports colors, sizes, and animations for active states.
+- **Timeline** — Display a list of events in chronological order, with optional icons, timestamps, and colored connectors.
 
 ### Feedback (6)
 
