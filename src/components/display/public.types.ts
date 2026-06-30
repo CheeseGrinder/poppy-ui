@@ -38,3 +38,8 @@ export * from './stat/stats.types'
 // Status
 export type { StatusProps } from './status/status.props'
 export * from './status/status.types'
+// Timeline
+export type { TimelineConfigurableProps, TimelineProps } from './timeline/timeline.props'
+export * from './timeline/timeline.types'
+export type { TimelineItemConfigurableProps, TimelineItemProps } from './timeline/timeline-item.props'
+export * from './timeline/timeline-item.types'

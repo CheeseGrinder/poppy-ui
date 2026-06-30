@@ -25,6 +25,8 @@ import type { KbdConfigurableProps } from '@/components/display/kbd/kbd.props'
 import type { StatConfigurableProps } from '@/components/display/stat/stat.props'
 import type { StatsConfigurableProps } from '@/components/display/stat/stats.props'
 import type { StatusConfigurableProps } from '@/components/display/status/status.props'
+import type { TimelineConfigurableProps } from '@/components/display/timeline/timeline.props'
+import type { TimelineItemConfigurableProps } from '@/components/display/timeline/timeline-item.props'
 import type { AlertConfigurableProps } from '@/components/feedback/alert/alert.props'
 import type { LoadingConfigurableProps } from '@/components/feedback/loading/loading.props'
 import type { ProgressConfigurableProps } from '@/components/feedback/progress/progress.props'
@@ -77,6 +79,8 @@ export interface PoppyComponentConfig {
   stat: StatConfigurableProps
   stats: StatsConfigurableProps
   status: StatusConfigurableProps
+  timeline: TimelineConfigurableProps
+  timelineItem: TimelineItemConfigurableProps
 
   // Feedback
   alert: AlertConfigurableProps

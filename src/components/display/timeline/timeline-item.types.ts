@@ -1,0 +1,10 @@
+export type TimelineItemColor =
+  | 'neutral'
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error'
+export type TimelineItemSide = 'start' | 'end'
