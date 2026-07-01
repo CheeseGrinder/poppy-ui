@@ -10,6 +10,11 @@ export * from './link/link.types'
 // Menu
 export type { MenuItemProps, MenuProps } from './menu/menu.props'
 export * from './menu/menu.types'
+// Steps
+export type { StepConfigurableProps, StepProps } from './steps/step.props'
+export * from './steps/step.types'
+export type { StepsConfigurableProps, StepsProps } from './steps/steps.props'
+export * from './steps/steps.types'
 // Tab
 export type { TabProps, TabsProps } from './tab/tab.props'
 export * from './tab/tab.types'

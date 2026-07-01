@@ -44,6 +44,8 @@ import type { BreadcrumbsConfigurableProps } from '@/components/navigation/bread
 import type { DockConfigurableProps, DockItemConfigurableProps } from '@/components/navigation/dock/dock.props'
 import type { LinkConfigurableProps } from '@/components/navigation/link/link.props'
 import type { MenuConfigurableProps, MenuItemConfigurableProps } from '@/components/navigation/menu/menu.props'
+import type { StepConfigurableProps } from '@/components/navigation/steps/step.props'
+import type { StepsConfigurableProps } from '@/components/navigation/steps/steps.props'
 import type { TabConfigurableProps, TabsConfigurableProps } from '@/components/navigation/tab/tab.props'
 
 export interface PoppyComponentConfig {
@@ -105,6 +107,8 @@ export interface PoppyComponentConfig {
   link: LinkConfigurableProps
   menu: MenuConfigurableProps
   menuItem: MenuItemConfigurableProps
+  step: StepConfigurableProps
+  steps: StepsConfigurableProps
   tab: TabConfigurableProps
   tabs: TabsConfigurableProps
 
