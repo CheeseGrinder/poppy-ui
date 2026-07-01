@@ -3243,6 +3243,86 @@ A responsive navigation bar component based on DaisyUI.
 </Navbar>
 ```
 
+# Steps
+
+## Description
+
+Display a list of steps in a process, with support for active, highlighted (accessible), and custom indicator content.
+
+## API
+
+<details>
+<summary>Steps</summary>
+
+### Props
+
+| Prop        | Type             | Default        | Required | Configurable       | Description                     |
+|-------------|------------------|----------------|----------|--------------------|----------------------------------|
+| `direction` | `StepsDirection` | `'horizontal'` | :x:      | :white_check_mark: | Layout direction of the steps.  |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.steps` option).
+
+### Slots
+
+| Slot      | Bindings | Description                          |
+|-----------|----------|--------------------------------------|
+| `default` | -        | Contains `<Step />` components.      |
+
+</details>
+
+<details>
+<summary>Step</summary>
+
+### Props
+
+| Prop          | Type        | Default     | Required | Configurable       | Description                                                               |
+|---------------|-------------|-------------|----------|--------------------|---------------------------------------------------------------------------|
+| `color`       | `StepColor` | `undefined` | :x:      | :white_check_mark: | Color of the step indicator when active or done.                          |
+| `highlighted` | `boolean`   | `false`     | :x:      | :x:                | Accessible but not yet completed. Shows `color` at reduced opacity.       |
+| `content`     | `string`    | `undefined` | :x:      | :x:                | Custom content inside the indicator circle (e.g. `'✓'` or `'!'`).       |
+
+> **Configurable** props can be set globally via the Poppy UI plugin (`components.step` option).
+
+### Slots
+
+| Slot      | Bindings | Description                                                              |
+|-----------|----------|--------------------------------------------------------------------------|
+| `default` | -        | Step label displayed below the indicator.                                |
+| `icon`    | -        | Custom icon rendered inside the indicator circle (replaces the counter). |
+
+</details>
+
+## Usage
+
+```vue
+<!-- Basic steps -->
+<Steps>
+  <Step color="primary">Register</Step>
+  <Step color="primary">Choose plan</Step>
+  <Step color="primary" highlighted>Purchase</Step>
+  <Step>Receive product</Step>
+</Steps>
+
+<!-- Vertical -->
+<Steps direction="vertical">
+  <Step color="success" content="✓">Completed</Step>
+  <Step color="primary" highlighted>In progress</Step>
+  <Step>Pending</Step>
+</Steps>
+
+<!-- With icons -->
+<Steps>
+  <Step color="success">
+    <template #icon><CheckIcon class="size-4" /></template>
+    Done
+  </Step>
+  <Step color="primary" highlighted>
+    <template #icon><LoaderIcon class="size-4" /></template>
+    In progress
+  </Step>
+</Steps>
+```
+
 # Tab
 
 ## Description

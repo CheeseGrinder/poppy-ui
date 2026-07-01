@@ -96,13 +96,14 @@ Full config reference: see `llms-full.txt`.
 
 - **Img** — A smart image wrapper with IntersectionObserver-based lazy loading, skeleton placeholder, error fallback, and `<picture />` art-direction support.
 
-### Navigation (6)
+### Navigation (7)
 
 - **Breadcrumbs** — Affiche un fil d'Ariane pour aider les utilisateurs à naviguer dans le site. Le dernier item est automatiquement traité comme la page courante (non cliquable).
 - **Dock** — Bottom navigation bar fixed to the bottom of the screen. Use `DockItem` for each navigation element.
 - **Link** — Adds the missing underline style to links. Supports Vue Router navigation, or native anchors (`#`, `#section`) for in-page links.
 - **Menu** — Displays a list of navigation links vertically or horizontally. Supports icons, badges, titles, static submenus, and collapsible submenus.
 - **Navbar** — A responsive navigation bar component based on DaisyUI.
+- **Steps** — Display a list of steps in a process, with support for active, highlighted (accessible), and custom indicator content.
 - **Tab** — Tabs component for switching between views. Each `<Tab />` renders both the tab button and its content panel as adjacent elements — matching DaisyUI's structure.
 
 ## Full API reference
