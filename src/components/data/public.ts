@@ -1,7 +1,17 @@
+import FormComponent from './form/Form.vue'
+import FormFieldComponent from './form-field/FormField.vue'
+
 export { default as Checkbox } from './checkbox/Checkbox.vue'
 export { default as FieldSet } from './field-set/FieldSet.vue'
-export { default as Form } from './form/Form.vue'
-export { default as FormField } from './form-field/FormField.vue'
+
+/**
+ * `Form.Field` is an alias for the standalone `FormField` export, for
+ * consumers coming from libraries with compound-component form APIs.
+ * `Form` and `FormField` remain independent named exports.
+ */
+export const Form = Object.assign(FormComponent, { Field: FormFieldComponent })
+export const FormField = FormFieldComponent
+
 export { default as Input } from './input/Input.vue'
 export { default as Radio } from './radio/Radio.vue'
 export { default as RadioGroup } from './radio-group/RadioGroup.vue'
