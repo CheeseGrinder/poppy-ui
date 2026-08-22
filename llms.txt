@@ -28,7 +28,7 @@ createApp(App)
 
 ## Plugin configuration
 
-The `PoppyUi` plugin is installed once in `main.ts` and lets you define global defaults for every component. This avoids prop-drilling and keeps your design tokens consistent across the entire application.
+Poppy UI components build most of their classes dynamically in JavaScript rather than writing them as literal strings in your templates — for example, `<Button shape="block" />` resolves to `btn-block` through an internal lookup table, not a class written in your own source code.
 
 Full config reference: see `llms-full.txt`.
 
