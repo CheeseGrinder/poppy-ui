@@ -102,6 +102,12 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 `novalidate` is always set on the `<form />` element to suppress native browser popups. Validation is handled programmatically via the HTML5 Constraint Validation API.
 
+> [!NOTE]
+> `Form` and `FormField` are two independent named exports — there is no `Form.Field` compound API. Import both explicitly: `import { Form, FormField } from 'poppy-ui'`.
+
+> [!WARNING]
+> The `v-model` value must be a plain data object (field name/path → value). Don't bind a whole composable's return value (e.g. one that also exposes `errors`, `hasError`, or other refs/computed alongside your data) — bind just the plain data object instead. Non-plain values are dropped from the snapshot with a dev-mode warning rather than crashing the component.
+
 ## API
 
 ### v-model

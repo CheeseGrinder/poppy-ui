@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { CounterFn } from '@/types/utils.type'
+import { safeClone } from '@/utils/clone'
 import { getByPath, setByPath } from '@/utils/path'
 import { provide, shallowReactive, shallowRef, watch } from 'vue'
 import type { FormContext } from './form.context'
@@ -29,17 +30,17 @@ const emit = defineEmits<{
 
 // Internal state
 
-const initialData: Record<string, unknown> = JSON.parse(JSON.stringify(model.value ?? {}))
+const initialData: Record<string, unknown> = safeClone(model.value ?? {})
 
 // Shallow reactive copy — mutations here don't affect the model until emitted
-const data = shallowReactive<Record<string, unknown>>({ ...model.value })
+const data = shallowReactive<Record<string, unknown>>(safeClone(model.value ?? {}))
 
 const errors = shallowRef<Record<string, string | undefined>>({})
 
 const fieldStates = shallowReactive<Record<string, FieldState>>({})
 
 // Keep data in sync when the model is updated externally
-watch(model, val => Object.assign(data, val))
+watch(model, val => Object.assign(data, safeClone(val ?? {})))
 
 // Counter — stored as raw boolean | undefined.
 // undefined = "no opinion": mergeProps in useComponentConfig skips it,
@@ -168,7 +169,7 @@ function reset(): void {
   for (const key of Object.keys(data)) {
     delete data[key]
   }
-  Object.assign(data, JSON.parse(JSON.stringify(initialData)))
+  Object.assign(data, safeClone(initialData))
   model.value = { ...data }
   clearErrors()
   for (const path of Object.keys(fieldStates)) {
