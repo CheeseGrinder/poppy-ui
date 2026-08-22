@@ -47,7 +47,22 @@ To use Poppy UI in your Vue project, you can install the package via bun (make s
 bun add @poppy-ui/vue
 ```
 
-> **Note:** Comprehensive documentation on how to configure Tailwind and DaisyUI with Poppy UI can be found in our [Documentation (WIP)](https://www.google.com/search?q=%23).
+> ⚠️ **Required step:** Poppy UI components build their classes dynamically in JavaScript
+> (e.g. `shape="block"` → `btn-block`). Tailwind CSS v4's automatic content detection does
+> **not** scan `node_modules`, so without extra configuration these classes never end up in
+> your compiled CSS — components render but appear unstyled or broken (e.g. a `block` button
+> staying at its content width instead of expanding to 100%). Add an `@source` directive
+> pointing to the package in your global CSS entry point (next to `@import "tailwindcss";`):
+>
+> ```css
+> @import "tailwindcss";
+> @source "../node_modules/@poppy-ui/vue";
+>
+> @plugin "daisyui";
+> ```
+>
+> Adjust the number of `../` to match where your CSS file lives relative to `node_modules`.
+> See the [Configuration](src/stories/Configuration.story.md) story for more details.
 
 ## 🛠️ Getting Started for Development
 
