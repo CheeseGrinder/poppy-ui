@@ -1,52 +1,50 @@
 import { isRef } from 'vue'
 
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-  if (Object.prototype.toString.call(value) !== '[object Object]') return false
-  const proto = Object.getPrototypeOf(value)
-  return proto === Object.prototype || proto === null
-}
-
 /**
  * Deep-clones a value for use as form snapshot data.
  *
- * Unlike `JSON.parse(JSON.stringify(...))`, this tolerates Vue reactivity
- * primitives (refs/computed) nested in the source by unwrapping them instead
- * of throwing on their internal `dep <-> computed` circular references.
- * Non-plain, non-cloneable values (functions, class instances, symbols, ...)
- * are skipped — with a dev-mode warning naming the offending key — since they
- * can't be safely snapshotted as form data.
+ * Unlike `JSON.parse(JSON.stringify(...))`, this tolerates circular
+ * references — including Vue's internal `dep <-> computed` cycle — via a
+ * visited-object guard instead of throwing, and unwraps nested refs/computed
+ * values. Unlike a plain-object allowlist, it still clones the own
+ * properties of class instances / value objects (e.g. `new Airing(...)`),
+ * matching what `JSON.stringify` used to preserve. Functions are dropped
+ * since they can't be meaningfully snapshotted as form data.
  */
-export function safeClone<T>(value: T, path = ''): T {
+export function safeClone<T>(value: T, seen: WeakMap<object, unknown> = new WeakMap()): T {
+  if (typeof value === 'function') {
+    return undefined as unknown as T
+  }
+
   if (isRef(value)) {
-    return safeClone(value.value, path) as T
+    return safeClone(value.value, seen) as T
   }
 
   if (value === null || typeof value !== 'object') {
     return value
   }
 
-  if (Array.isArray(value)) {
-    return value.map((item, i) => safeClone(item, `${path}[${i}]`)) as unknown as T
+  if (seen.has(value)) {
+    return seen.get(value) as T
   }
 
   if (value instanceof Date) {
     return new Date(value.getTime()) as unknown as T
   }
 
-  if (!isPlainObject(value)) {
-    if (import.meta.env.DEV) {
-      console.warn(
-        `[Form] Skipping non-plain value at "${path || '<root>'}" while snapshotting v-model data. ` +
-          `Only plain data objects are supported — avoid binding Vue refs, computed values, class instances, ` +
-          `or other non-serializable values directly to <Form>'s v-model.`,
-      )
+  if (Array.isArray(value)) {
+    const result: unknown[] = []
+    seen.set(value, result)
+    for (const item of value) {
+      result.push(safeClone(item, seen))
     }
-    return undefined as unknown as T
+    return result as unknown as T
   }
 
   const result: Record<string, unknown> = {}
+  seen.set(value, result)
   for (const [key, val] of Object.entries(value)) {
-    const cloned = safeClone(val, path ? `${path}.${key}` : key)
+    const cloned = safeClone(val, seen)
     if (cloned !== undefined) {
       result[key] = cloned
     }
