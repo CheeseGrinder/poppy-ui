@@ -40,13 +40,12 @@ const slots = useSlots()
 const config = useComponentConfig(RADIO_CONFIG, props, { size: 'md' })
 
 const inputId = `radio-${useId()}`
-const fallbackName = `radio-${useId()}`
 
 // Priority: FormField > RadioGroup > standalone prop
 const fieldCtx = inject(FORM_FIELD_CONTEXT_KEY, null as FormFieldContext | null)
 const groupCtx = inject(RADIO_GROUP_CONTEXT_KEY, null)
 
-const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? groupCtx?.name ?? fallbackName)
+const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? groupCtx?.name ?? inputId)
 
 // Bridge to form field context
 const { field, onBlur, clearError } = useFormField({
