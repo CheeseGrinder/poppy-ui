@@ -367,7 +367,6 @@ function updateMechanicalValue(newMechanicalValue: number, thumbIndex: number) {
     model.value = scaledValue
   }
 
-  field?.setValue(model.value)
   field?.setDirty(true)
 
   // @ts-expect-error

@@ -2,8 +2,8 @@ import { createComponentConfigKey } from '@/config/symbol'
 import type { ComputedRef, InjectionKey, ShallowRef } from 'vue'
 import type { FieldState } from '../form/form.types'
 
-export interface FormFieldContext<T = unknown> {
-  /** Field name / dot-notation path — matches FormContext data keys. */
+export interface FormFieldContext {
+  /** Field name / dot-notation path — used for error lookup and id generation only, never to read/write the value. */
   name: string
 
   /**
@@ -12,9 +12,6 @@ export interface FormFieldContext<T = unknown> {
    * Drives the "*" indicator on the FormField label.
    */
   required: ShallowRef<boolean>
-
-  /** Current field value resolved from FormContext. */
-  value: ComputedRef<T>
 
   /** Current field error resolved from FormContext. */
   error: ComputedRef<string | undefined>
@@ -35,9 +32,6 @@ export interface FormFieldContext<T = unknown> {
    */
   counterText: ShallowRef<string>
   counterColor: ShallowRef<string>
-
-  /** Updates the field value in FormContext. */
-  setValue: (value: unknown) => void
 
   /** Called by child inputs to declare themselves required or not. */
   setRequired: (value: boolean) => void

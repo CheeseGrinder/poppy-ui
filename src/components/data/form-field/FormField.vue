@@ -45,13 +45,10 @@ function setCounterText(text: string, colorClass: string): void {
 
 // Computed field state from FormContext
 
-const fieldValue = computed<unknown>(() => formCtx?.getFieldValue(props.name))
-
 const fieldError = computed<string | undefined>(() => formCtx?.getFieldError(props.name))
 
 const fieldState = computed<FieldState>(() =>
   formCtx?.getFieldState(props.name) ?? {
-    value: undefined,
     isDirty: false,
     isTouched: false,
     isValid: true,
@@ -61,10 +58,6 @@ const fieldState = computed<FieldState>(() =>
 )
 
 // FormFieldContext implementation
-
-function setValue(value: unknown): void {
-  formCtx?.setFieldValue(props.name, value)
-}
 
 function setRequired(value: boolean): void {
   required.value = value
@@ -93,14 +86,12 @@ function unregisterValidator(key: symbol): void {
 const fieldContext: FormFieldContext = {
   name: props.name,
   required,
-  value: fieldValue,
   error: fieldError,
   state: fieldState,
   counter,
   counterFormat,
   counterText,
   counterColor,
-  setValue,
   setRequired,
   setDirty,
   setTouched,

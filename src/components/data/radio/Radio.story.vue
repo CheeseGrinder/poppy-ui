@@ -113,12 +113,12 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
     </Variant>
 
     <Variant title="Via RadioGroup" id="via-radio-group">
-      <!-- RadioGroup manages the shared name + v-model when outside FormField -->
+      <!-- RadioGroup shares the `name` — each Radio still binds its own v-model -->
       <RadioGroup v-model="model">
         <div class="flex flex-col gap-2">
-          <Radio value="free" description="Free" hint="Up to 3 projects" />
-          <Radio value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
-          <Radio value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
+          <Radio v-model="model" value="free" description="Free" hint="Up to 3 projects" />
+          <Radio v-model="model" value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
+          <Radio v-model="model" value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
         </div>
       </RadioGroup>
     </Variant>
@@ -127,22 +127,22 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
       <FieldSet legend="Subscription plan" bordered>
         <RadioGroup v-model="model" class="mt-2">
           <div class="flex flex-col gap-2">
-            <Radio value="free" description="Free" hint="Up to 3 projects" />
-            <Radio value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
-            <Radio value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
+            <Radio v-model="model" value="free" description="Free" hint="Up to 3 projects" />
+            <Radio v-model="model" value="pro" color="primary" description="Pro — 9€/month" hint="Unlimited projects" />
+            <Radio v-model="model" value="enterprise" color="secondary" description="Enterprise" hint="Custom pricing" />
           </div>
         </RadioGroup>
       </FieldSet>
     </Variant>
 
     <Variant title="Inside FormField" id="inside-form-field">
-      <!-- FormField provides the name automatically to all child Radio inputs -->
+      <!-- FormField provides the `name` automatically — each Radio still binds its own v-model -->
       <Form v-model="formData">
         <FormField name="plan" label="Plan">
           <div class="flex flex-col gap-2 mt-1">
-            <Radio value="free" description="Free" required />
-            <Radio value="pro" description="Pro — 9€/month" />
-            <Radio value="enterprise" description="Enterprise" />
+            <Radio v-model="(formData.plan as string)" value="free" description="Free" required />
+            <Radio v-model="(formData.plan as string)" value="pro" description="Pro — 9€/month" />
+            <Radio v-model="(formData.plan as string)" value="enterprise" description="Enterprise" />
           </div>
         </FormField>
       </Form>
@@ -157,7 +157,7 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
 ## Description
 
 Radio button component built on the DaisyUI `radio` element.
-Radios are grouped by sharing the same `v-model` / `name`, provided automatically by `<RadioGroup />` or `<FormField />`.
+Always takes an explicit `v-model`, the same one across every `<Radio>` in the group. `<RadioGroup />` or `<FormField />` only provide the shared `name` — never the value.
 
 ## API
 
@@ -207,22 +207,24 @@ Radios are grouped by sharing the same `v-model` / `name`, provided automaticall
 ```vue
 <!-- Via RadioGroup (standalone, outside FormField) -->
 <RadioGroup v-model="plan">
-  <Radio value="free" description="Free" hint="Up to 3 projects" />
-  <Radio value="pro" color="primary" description="Pro — 9€/month" />
+  <Radio v-model="plan" value="free" description="Free" hint="Up to 3 projects" />
+  <Radio v-model="plan" value="pro" color="primary" description="Pro — 9€/month" />
 </RadioGroup>
 
 <!-- Via RadioGroup inside FieldSet -->
 <FieldSet legend="Plan" bordered>
   <RadioGroup v-model="plan">
-    <Radio value="free" description="Free" />
-    <Radio value="pro" description="Pro" />
+    <Radio v-model="plan" value="free" description="Free" />
+    <Radio v-model="plan" value="pro" description="Pro" />
   </RadioGroup>
 </FieldSet>
 
 <!-- Inside FormField — name inferred automatically, no RadioGroup needed -->
-<FormField name="plan" label="Plan">
-  <Radio value="free" description="Free" required />
-  <Radio value="pro" description="Pro — 9€/month" />
-</FormField>
+<Form v-model="state">
+  <FormField name="plan" label="Plan">
+    <Radio v-model="state.plan" value="free" description="Free" required />
+    <Radio v-model="state.plan" value="pro" description="Pro — 9€/month" />
+  </FormField>
+</Form>
 ```
 </docs>

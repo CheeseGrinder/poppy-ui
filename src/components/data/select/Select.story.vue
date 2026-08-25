@@ -141,7 +141,7 @@ async function searchCountries({ term, limit, page }: { term: string; limit: num
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="country" label="Country" hint="Where are you based?">
-          <Select :options="countries" required placeholder="Select a country…" />
+          <Select v-model="(formData.country as string)" :options="countries" required placeholder="Select a country…" />
         </FormField>
       </Form>
     </Variant>
@@ -149,7 +149,7 @@ async function searchCountries({ term, limit, page }: { term: string; limit: num
     <Variant title="Multiple inside FormField" id="multiple-inside-form-field">
       <Form v-model="formData">
         <FormField name="stack" label="Tech stack">
-          <Select :options="tags" multiple :max="3" placeholder="Select up to 3 technologies…" />
+          <Select v-model="(formData.stack as string[])" :options="tags" multiple :max="3" placeholder="Select up to 3 technologies…" />
         </FormField>
       </Form>
     </Variant>
@@ -205,7 +205,7 @@ async function searchCountries({ term, limit, page }: { term: string; limit: num
 Custom select component with a dropdown built on DaisyUI `select` styling.
 Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter.
 Add `searchable` for local filtering or pass a `search` callback for remote data with debounce, pagination, and infinite scroll.
-Works standalone with `v-model` or inside `<FormField />` for full form integration.
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining full form integration.
 
 ## API
 
@@ -310,8 +310,10 @@ The `search` callback receives a `SearchParams` object:
 />
 
 <!-- Inside FormField -->
-<FormField name="country" label="Country">
-  <Select :options="countries" required placeholder="Select a country…" />
-</FormField>
+<Form v-model="state">
+  <FormField name="country" label="Country">
+    <Select v-model="state.country" :options="countries" required placeholder="Select a country…" />
+  </FormField>
+</Form>
 ```
 </docs>

@@ -161,10 +161,10 @@ const formData = ref<Record<string, unknown>>({
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="volume" label="Volume">
-          <Slider :min="0" :max="100" required aria-label="Volume level" />
+          <Slider v-model="(formData.volume as number)" :min="0" :max="100" required aria-label="Volume level" />
         </FormField>
         <FormField name="priceRange" label="Price range" class="mt-4">
-          <Slider :min="0" :max="500" :step="10" range aria-label="Price range" />
+          <Slider v-model="(formData.priceRange as [number, number])" :min="0" :max="500" :step="10" range aria-label="Price range" />
         </FormField>
       </Form>
     </Variant>

@@ -2,8 +2,6 @@
  * Full state for a single registered field in the form.
  */
 export interface FieldState {
-  /** Current value. */
-  value: unknown
   /** True after the user has changed the value at least once. */
   isDirty: boolean
   /** True after the input has lost focus at least once. */

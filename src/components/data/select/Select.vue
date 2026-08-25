@@ -68,7 +68,7 @@ const attrs = useAttrs()
 const isOpen = shallowRef(false)
 const selectionCache = shallowRef<SelectOption<T>[]>([])
 
-const { field, fieldValue, hasServerError, onBlur, clearError } = useFormField<ModelType>({
+const { field, hasServerError, onBlur, clearError } = useFormField({
   required: computed(() => props.required ?? false),
 })
 
@@ -79,7 +79,7 @@ onClickOutside(containerEl, () => {
   }
 })
 
-const value = computed(() => field ? fieldValue.value : model.value)
+const value = computed(() => model.value)
 
 const minItems = computed(() => (attrs.min ? Number(attrs.min) : undefined))
 const maxItems = computed(() => (attrs.max ? Number(attrs.max) : undefined))
@@ -157,7 +157,6 @@ function setValue(next: ModelType): void {
   model.value = next
 
   if (field) {
-    field.setValue(next)
     field.setDirty(true)
     clearError()
   }

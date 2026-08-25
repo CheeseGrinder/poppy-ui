@@ -73,7 +73,7 @@ const rootEl = useTemplateRef('rootEl')
 // Rating uses a hidden input as the form field anchor for constraint validation
 const hiddenEl = useTemplateRef('hiddenEl')
 
-const { field, fieldValue, onBlur, clearError } = useFormField<number>({
+const { field, onBlur, clearError } = useFormField({
   required: computed(() => !!props.required),
   inputEl: hiddenEl,
 })
@@ -82,11 +82,10 @@ const resolvedName = field?.name ?? `rating-${useId()}`
 
 // ── Value resolution ─────────────────────────────────────────────────────────
 
-const resolvedValue = computed(() => field ? (fieldValue.value ?? 0) : (model.value ?? 0))
+const resolvedValue = computed(() => model.value ?? 0)
 
 function handleChange(value: number): void {
   model.value = value
-  field?.setValue(value)
   field?.setDirty(true)
   clearError()
 }

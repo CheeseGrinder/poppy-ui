@@ -90,10 +90,10 @@ const formData = ref<Record<string, unknown>>({ name: '', bio: '' })
       <Form v-model="formData">
         <FieldSet legend="Profile" bordered class="flex flex-col gap-3">
           <FormField name="name" label="Name">
-            <Input placeholder="Your name" />
+            <Input v-model="(formData.name as string)" placeholder="Your name" />
           </FormField>
           <FormField name="bio" label="Bio" hint="Short description about yourself">
-            <Textarea placeholder="I am…" :rows="3" />
+            <Textarea v-model="(formData.bio as string)" placeholder="I am…" :rows="3" />
           </FormField>
         </FieldSet>
       </Form>
@@ -135,7 +135,7 @@ Supports optional border, background, and header/footer slots for introductory a
 <!-- Simple -->
 <FieldSet legend="Personal info" bordered>
   <FormField name="name" label="Name">
-    <Input />
+    <Input v-model="state.name" />
   </FormField>
 </FieldSet>
 
@@ -145,7 +145,7 @@ Supports optional border, background, and header/footer slots for introductory a
     <p class="text-xs text-base-content/50">These settings affect all users.</p>
   </template>
   <FormField name="timeout" label="Session timeout">
-    <Input type="number" />
+    <Input v-model="state.timeout" type="number" />
   </FormField>
   <template #footer>
     <p class="text-xs text-base-content/50">Changes are applied immediately.</p>

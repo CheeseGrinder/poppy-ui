@@ -532,7 +532,7 @@ Supports rotate and flip transition effects.
 ## Description
 
 Checkbox component built on the DaisyUI `checkbox` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation and the required indicator.
 
 ## API
 
@@ -600,9 +600,11 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Checkbox v-model="partialSelection" indeterminate />
 
 <!-- Inside FormField -->
-<FormField name="agree" label="Terms & conditions">
-  <Checkbox required description="I agree to the terms and conditions" />
-</FormField>
+<Form v-model="state">
+  <FormField name="agree" label="Terms & conditions">
+    <Checkbox v-model="state.agree" required description="I agree to the terms and conditions" />
+  </FormField>
+</Form>
 ```
 
 # FieldSet
@@ -637,7 +639,7 @@ Supports optional border, background, and header/footer slots for introductory a
 <!-- Simple -->
 <FieldSet legend="Personal info" bordered>
   <FormField name="name" label="Name">
-    <Input />
+    <Input v-model="state.name" />
   </FormField>
 </FieldSet>
 
@@ -647,7 +649,7 @@ Supports optional border, background, and header/footer slots for introductory a
     <p class="text-xs text-base-content/50">These settings affect all users.</p>
   </template>
   <FormField name="timeout" label="Session timeout">
-    <Input type="number" />
+    <Input v-model="state.timeout" type="number" />
   </FormField>
   <template #footer>
     <p class="text-xs text-base-content/50">Changes are applied immediately.</p>
@@ -668,9 +670,9 @@ Supports optional border, background, and header/footer slots for introductory a
 ## Description
 
 The `Form` component is the root of the form system.
-It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`.
-It owns the form data object, the errors record, and all field state.
-It handles programmatic validation, serialization, and emits `submit` / `reset` events.
+It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`, used only for required/error/aria-invalid/touched-dirty/counter reporting — never for reading or writing field values.
+Its `v-model` is the single shared, reactive data object: every leaf input (`Input`, `Select`, `Checkbox`, `Toggle`, `Textarea`, `Radio`, `Rating`, `Slider`) binds its own explicit `v-model` directly to a property of that same object, so `Form` never copies or writes through it — it only reads it for `reset()` / `submit()`.
+It owns the errors record and all field state (dirty/touched/error), and handles programmatic validation, serialization, and emits `submit` / `reset` events.
 
 `novalidate` is always set on the `<form />` element to suppress native browser popups. Validation is handled programmatically via the HTML5 Constraint Validation API.
 
@@ -714,7 +716,7 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 ```vue
 <Form v-model="formData" :serializer="mySerializer" @submit="onSubmit">
   <FormField name="email" label="Email">
-    <Input type="email" required />
+    <Input v-model="formData.email" type="email" required />
   </FormField>
   <button type="submit" class="btn btn-primary">Submit</button>
 </Form>
@@ -724,7 +726,7 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 
 ## Description
 Text input component built on the DaisyUI `input` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation, error display, and counter cascade.
 Add `#start`/`#end` slots for icons, prefixes, or suffixes — they activate the addon wrapper automatically.
 
 ## API
@@ -810,14 +812,16 @@ Counter resolution order (first defined wins):
 <Input v-model="email" clearable placeholder="you@example.com" />
 
 <!-- Inside FormField -->
-<FormField name="email" label="Email">
-  <Input type="email" required />
-</FormField>
+<Form v-model="state">
+  <FormField name="email" label="Email">
+    <Input v-model="state.email" type="email" required />
+  </FormField>
+</Form>
 
 <!-- Counter inherited from Form -->
-<Form v-model="data" counter>
+<Form v-model="state" counter>
   <FormField name="bio" label="Bio">
-    <Input :max-length="200" />
+    <Input v-model="state.bio" :max-length="200" />
   </FormField>
 </Form>
 ```
@@ -826,9 +830,9 @@ Counter resolution order (first defined wins):
 
 ## Description
 
-Standalone radio group that shares a `name` and a `v-model` value across all child `<Radio />` components.
+Standalone radio group that shares a `name` across all child `<Radio />` components — its own `v-model` is a convenience for standalone (non-FormField) usage, but each `<Radio />` always binds its own explicit `v-model` too (same target).
 Use it when radio buttons live **outside** a `<FormField />`.
-When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormField already provides the name and value automatically.
+When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormField already provides the `name` automatically, and each `<Radio />` binds directly to the shared `Form` state.
 
 ## API
 
@@ -855,24 +859,26 @@ When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormFie
 ```vue
 <!-- Standalone group -->
 <RadioGroup v-model="plan">
-  <Radio value="free" description="Free" />
-  <Radio value="pro" description="Pro — 9€/month" />
-  <Radio value="enterprise" description="Enterprise" />
+  <Radio v-model="plan" value="free" description="Free" />
+  <Radio v-model="plan" value="pro" description="Pro — 9€/month" />
+  <Radio v-model="plan" value="enterprise" description="Enterprise" />
 </RadioGroup>
 
 <!-- Inside a FieldSet for visual grouping -->
 <FieldSet legend="Subscription" bordered>
   <RadioGroup v-model="plan">
-    <Radio value="free" description="Free" hint="Up to 3 projects" />
-    <Radio value="pro" color="primary" description="Pro" hint="Unlimited projects" />
+    <Radio v-model="plan" value="free" description="Free" hint="Up to 3 projects" />
+    <Radio v-model="plan" value="pro" color="primary" description="Pro" hint="Unlimited projects" />
   </RadioGroup>
 </FieldSet>
 
 <!-- Inside FormField — use Radio directly, no RadioGroup needed -->
-<FormField name="plan" label="Plan">
-  <Radio value="free" description="Free" required />
-  <Radio value="pro" description="Pro — 9€/month" />
-</FormField>
+<Form v-model="state">
+  <FormField name="plan" label="Plan">
+    <Radio v-model="state.plan" value="free" description="Free" required />
+    <Radio v-model="state.plan" value="pro" description="Pro — 9€/month" />
+  </FormField>
+</Form>
 ```
 
 # Radio
@@ -880,7 +886,7 @@ When your radios are inside a `<FormField />`, skip `<RadioGroup />` — FormFie
 ## Description
 
 Radio button component built on the DaisyUI `radio` element.
-Radios are grouped by sharing the same `v-model` / `name`, provided automatically by `<RadioGroup />` or `<FormField />`.
+Always takes an explicit `v-model`, the same one across every `<Radio>` in the group. `<RadioGroup />` or `<FormField />` only provide the shared `name` — never the value.
 
 ## API
 
@@ -930,23 +936,25 @@ Radios are grouped by sharing the same `v-model` / `name`, provided automaticall
 ```vue
 <!-- Via RadioGroup (standalone, outside FormField) -->
 <RadioGroup v-model="plan">
-  <Radio value="free" description="Free" hint="Up to 3 projects" />
-  <Radio value="pro" color="primary" description="Pro — 9€/month" />
+  <Radio v-model="plan" value="free" description="Free" hint="Up to 3 projects" />
+  <Radio v-model="plan" value="pro" color="primary" description="Pro — 9€/month" />
 </RadioGroup>
 
 <!-- Via RadioGroup inside FieldSet -->
 <FieldSet legend="Plan" bordered>
   <RadioGroup v-model="plan">
-    <Radio value="free" description="Free" />
-    <Radio value="pro" description="Pro" />
+    <Radio v-model="plan" value="free" description="Free" />
+    <Radio v-model="plan" value="pro" description="Pro" />
   </RadioGroup>
 </FieldSet>
 
 <!-- Inside FormField — name inferred automatically, no RadioGroup needed -->
-<FormField name="plan" label="Plan">
-  <Radio value="free" description="Free" required />
-  <Radio value="pro" description="Pro — 9€/month" />
-</FormField>
+<Form v-model="state">
+  <FormField name="plan" label="Plan">
+    <Radio v-model="state.plan" value="free" description="Free" required />
+    <Radio v-model="state.plan" value="pro" description="Pro — 9€/month" />
+  </FormField>
+</Form>
 ```
 
 # Rating
@@ -955,7 +963,7 @@ Radios are grouped by sharing the same `v-model` / `name`, provided automaticall
 Star rating component built on the DaisyUI `rating` element.
 Rendered as a set of `<input type="radio" />` elements styled as stars.
 Supports half-star precision and a clearable affordance.
-Works standalone with `v-model` or inside `<FormField />` for full form integration.
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining full form integration.
 
 ## API
 
@@ -998,9 +1006,11 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Rating v-model="score" :clearable="false" />
 
 <!-- Inside FormField -->
-<FormField name="rating" label="Your rating">
-  <Rating required />
-</FormField>
+<Form v-model="state">
+  <FormField name="rating" label="Your rating">
+    <Rating v-model="state.rating" required />
+  </FormField>
+</Form>
 ```
 
 # Select
@@ -1010,7 +1020,7 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 Custom select component with a dropdown built on DaisyUI `select` styling.
 Supports single and multiple selection, object values with custom equality, clearable mode, badges for multiple selection, and an item counter.
 Add `searchable` for local filtering or pass a `search` callback for remote data with debounce, pagination, and infinite scroll.
-Works standalone with `v-model` or inside `<FormField />` for full form integration.
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining full form integration.
 
 ## API
 
@@ -1115,9 +1125,11 @@ The `search` callback receives a `SearchParams` object:
 />
 
 <!-- Inside FormField -->
-<FormField name="country" label="Country">
-  <Select :options="countries" required placeholder="Select a country…" />
-</FormField>
+<Form v-model="state">
+  <FormField name="country" label="Country">
+    <Select v-model="state.country" :options="countries" required placeholder="Select a country…" />
+  </FormField>
+</Form>
 ```
 
 # Slider
@@ -1226,7 +1238,7 @@ const temperatureScale = (value: number) => value - 50
 ## Description
 
 Multi-line text input component built on the DaisyUI `textarea` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation, error display, and counter cascade.
 Supports an `autoGrow` mode that expands the height automatically to fit the content.
 
 ## API
@@ -1293,14 +1305,16 @@ Counter resolution order (first defined wins):
 <Textarea v-model="notes" auto-grow placeholder="Grows as you type…" />
 
 <!-- Inside FormField -->
-<FormField name="bio" label="Bio" hint="Max 500 characters">
-  <Textarea required :max-length="500" />
-</FormField>
+<Form v-model="state">
+  <FormField name="bio" label="Bio" hint="Max 500 characters">
+    <Textarea v-model="state.bio" required :max-length="500" />
+  </FormField>
+</Form>
 
 <!-- Counter inherited from Form -->
-<Form v-model="data" counter>
+<Form v-model="state" counter>
   <FormField name="bio" label="Bio">
-    <Textarea :max-length="300" />
+    <Textarea v-model="state.bio" :max-length="300" />
   </FormField>
 </Form>
 ```
@@ -1310,7 +1324,7 @@ Counter resolution order (first defined wins):
 ## Description
 
 Toggle (switch) component built on the DaisyUI `toggle` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation and the required indicator.
 
 ## API
 
@@ -1374,9 +1388,11 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Toggle v-model="agreed" description="I accept the terms" required />
 
 <!-- Inside FormField -->
-<FormField name="notifications" label="Notifications">
-  <Toggle required description="Enable email notifications" />
-</FormField>
+<Form v-model="state">
+  <FormField name="notifications" label="Notifications">
+    <Toggle v-model="state.notifications" required description="Enable email notifications" />
+  </FormField>
+</Form>
 ```
 
 ---

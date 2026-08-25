@@ -96,9 +96,9 @@ function onFormErrorSubmit() {
 ## Description
 
 The `Form` component is the root of the form system.
-It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`.
-It owns the form data object, the errors record, and all field state.
-It handles programmatic validation, serialization, and emits `submit` / `reset` events.
+It provides a `FormContext` to all descendant `FormField` and input components via Vue's `provide/inject`, used only for required/error/aria-invalid/touched-dirty/counter reporting — never for reading or writing field values.
+Its `v-model` is the single shared, reactive data object: every leaf input (`Input`, `Select`, `Checkbox`, `Toggle`, `Textarea`, `Radio`, `Rating`, `Slider`) binds its own explicit `v-model` directly to a property of that same object, so `Form` never copies or writes through it — it only reads it for `reset()` / `submit()`.
+It owns the errors record and all field state (dirty/touched/error), and handles programmatic validation, serialization, and emits `submit` / `reset` events.
 
 `novalidate` is always set on the `<form />` element to suppress native browser popups. Validation is handled programmatically via the HTML5 Constraint Validation API.
 
@@ -142,7 +142,7 @@ It handles programmatic validation, serialization, and emits `submit` / `reset` 
 ```vue
 <Form v-model="formData" :serializer="mySerializer" @submit="onSubmit">
   <FormField name="email" label="Email">
-    <Input type="email" required />
+    <Input v-model="formData.email" type="email" required />
   </FormField>
   <button type="submit" class="btn btn-primary">Submit</button>
 </Form>

@@ -65,21 +65,18 @@ const attrs = useAttrs()
 
 // ── Form field ───────────────────────────────────────────────────────────────
 
-const { field, onBlur, clearError } = useFormField<string>({
+const { field, onBlur, clearError } = useFormField({
   required: computed(() => !!props.required),
   inputEl: textareaEl as any,
 })
 
 // ── Value resolution ─────────────────────────────────────────────────────────
 
-const resolvedValue = computed(() =>
-  field ? (field.value.value as string | undefined) : model.value,
-)
+const resolvedValue = computed(() => model.value)
 
 function handleUpdate(event: Event): void {
   const raw = (event.target as HTMLTextAreaElement).value
   model.value = raw
-  field?.setValue(raw)
   field?.setDirty(true)
   clearError()
 }

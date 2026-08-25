@@ -117,7 +117,7 @@ const formData = ref<Record<string, unknown>>({ agree: false })
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="agree" label="Terms & conditions">
-          <Checkbox required description="I agree to the terms and conditions" />
+          <Checkbox v-model="(formData.agree as boolean)" required description="I agree to the terms and conditions" />
         </FormField>
       </Form>
     </Variant>
@@ -131,7 +131,7 @@ const formData = ref<Record<string, unknown>>({ agree: false })
 ## Description
 
 Checkbox component built on the DaisyUI `checkbox` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation and the required indicator.
 
 ## API
 
@@ -199,8 +199,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Checkbox v-model="partialSelection" indeterminate />
 
 <!-- Inside FormField -->
-<FormField name="agree" label="Terms & conditions">
-  <Checkbox required description="I agree to the terms and conditions" />
-</FormField>
+<Form v-model="state">
+  <FormField name="agree" label="Terms & conditions">
+    <Checkbox v-model="state.agree" required description="I agree to the terms and conditions" />
+  </FormField>
+</Form>
 ```
 </docs>
