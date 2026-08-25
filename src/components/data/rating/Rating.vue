@@ -3,7 +3,7 @@ import { useComponentConfig } from '@/composables/use-component-config'
 import { useFormField } from '@/composables/use-form-field'
 import type { ComponentClass } from '@/types/utils.type'
 import { getClass } from '@/utils/build-class.util'
-import { computed, useTemplateRef } from 'vue'
+import { computed, useId, useTemplateRef } from 'vue'
 import { RATING_CONFIG } from './rating.context'
 import type { RatingProps } from './rating.props'
 import type { RatingColor, RatingMask, RatingSize } from './rating.types'
@@ -77,6 +77,8 @@ const { field, fieldValue, onBlur, clearError } = useFormField<number>({
   required: computed(() => !!props.required),
   inputEl: hiddenEl,
 })
+
+const resolvedName = field?.name ?? `rating-${useId()}`
 
 // ── Value resolution ─────────────────────────────────────────────────────────
 
@@ -165,7 +167,7 @@ defineExpose({
       v-if="config.clearable"
       type="radio"
       class="rating-hidden"
-      name="rating"
+      :name="resolvedName"
       :disabled="disabled"
       :checked="resolvedValue === 0"
       @change="handleChange(0)"
@@ -176,7 +178,7 @@ defineExpose({
       v-for="star in stars"
       :key="star.key"
       type="radio"
-      name="rating"
+      :name="resolvedName"
       :class="[
         star.maskClass,
         getClass(colors, config.color),
