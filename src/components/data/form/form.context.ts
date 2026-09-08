@@ -11,7 +11,7 @@ export interface FormContext {
    */
   errors: ShallowRef<Record<string, string | undefined>>
 
-  /** Shallow reactive mirror of the form's v-model data. */
+  /** The form's v-model data — same object reference as the caller's model, mutated in place. */
   data: Record<string, unknown>
 
   /**

@@ -30,17 +30,14 @@ const emit = defineEmits<{
 
 // Internal state
 
+// Snapshot taken once at creation, used to restore values on reset().
+// safeClone (not JSON.parse(JSON.stringify(...))) so it doesn't choke on
+// refs/computed nested in the model (#119).
 const initialData: Record<string, unknown> = safeClone(model.value ?? {})
-
-// Shallow reactive copy — mutations here don't affect the model until emitted
-const data = shallowReactive<Record<string, unknown>>(safeClone(model.value ?? {}))
 
 const errors = shallowRef<Record<string, string | undefined>>({})
 
 const fieldStates = shallowReactive<Record<string, FieldState>>({})
-
-// Keep data in sync when the model is updated externally
-watch(model, val => Object.assign(data, safeClone(val ?? {})))
 
 // Counter — stored as raw boolean | undefined.
 // undefined = "no opinion": mergeProps in useComponentConfig skips it,
@@ -62,7 +59,7 @@ watch(() => props.counterFormat, (val) => { counterFormat.value = val })
 function ensureFieldState(path: string): FieldState {
   if (!fieldStates[path]) {
     fieldStates[path] = {
-      value: getByPath(data, path),
+      value: getByPath(model.value, path),
       isDirty: false,
       isTouched: false,
       isValid: true,
@@ -76,19 +73,20 @@ function ensureFieldState(path: string): FieldState {
 // FormContext implementation
 
 function setFieldValue(path: string, value: unknown): void {
-  setByPath(data, path, value)
+  // Mutates the model in place — model.value is the same object the
+  // caller passed in (defineModel doesn't clone objects), so this is
+  // visible to the caller without a copy or an update:modelValue emit.
+  setByPath(model.value, path, value)
   const state = ensureFieldState(path)
   state.value = value
-  model.value = { ...data }
 }
 
 function getFieldValue(path: string): unknown {
-  return getByPath(data, path)
+  return getByPath(model.value, path)
 }
 
 function setValues(values: Record<string, unknown>): void {
-  Object.assign(data, values)
-  model.value = { ...data }
+  Object.assign(model.value, values)
 }
 
 function getFieldError(path: string): string | undefined {
@@ -166,15 +164,14 @@ function validate(): boolean {
 
 function reset(): void {
   // Clear all current keys, then restore snapshot taken at component creation
-  for (const key of Object.keys(data)) {
-    delete data[key]
+  for (const key of Object.keys(model.value)) {
+    delete model.value[key]
   }
-  Object.assign(data, safeClone(initialData))
-  model.value = { ...data }
+  Object.assign(model.value, safeClone(initialData))
   clearErrors()
   for (const path of Object.keys(fieldStates)) {
     fieldStates[path] = {
-      value: getByPath(data, path),
+      value: getByPath(model.value, path),
       isDirty: false,
       isTouched: false,
       isValid: true,
@@ -189,7 +186,11 @@ function reset(): void {
 
 const formContext: FormContext = {
   errors,
-  data,
+  // Getter so this always reflects the current model.value, even if the
+  // caller swaps in a whole new object externally.
+  get data() {
+    return model.value
+  },
   counter,
   counterFormat,
   setFieldValue,
@@ -217,7 +218,7 @@ function handleSubmit(): void {
   const isValid = validate()
   if (!isValid) return
 
-  const serialized = props.serializer?.({ ...data }) ?? { ...data }
+  const serialized = props.serializer?.({ ...model.value }) ?? { ...model.value }
   emit('submit', serialized)
 }
 </script>
