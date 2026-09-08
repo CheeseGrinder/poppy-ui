@@ -85,7 +85,7 @@ const formData = ref<Record<string, unknown>>({ rating: 0 })
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="rating" label="Your rating">
-          <Rating required />
+          <Rating v-model="(formData.rating as number)" required />
         </FormField>
       </Form>
     </Variant>
@@ -100,7 +100,7 @@ const formData = ref<Record<string, unknown>>({ rating: 0 })
 Star rating component built on the DaisyUI `rating` element.
 Rendered as a set of `<input type="radio" />` elements styled as stars.
 Supports half-star precision and a clearable affordance.
-Works standalone with `v-model` or inside `<FormField />` for full form integration.
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining full form integration.
 
 ## API
 
@@ -143,8 +143,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Rating v-model="score" :clearable="false" />
 
 <!-- Inside FormField -->
-<FormField name="rating" label="Your rating">
-  <Rating required />
-</FormField>
+<Form v-model="state">
+  <FormField name="rating" label="Your rating">
+    <Rating v-model="state.rating" required />
+  </FormField>
+</Form>
 ```
 </docs>

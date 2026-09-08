@@ -95,7 +95,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="bio" label="Bio" hint="Max 500 characters">
-          <Textarea required placeholder="Tell us about yourself" :max-length="500" />
+          <Textarea v-model="(formData.bio as string)" required placeholder="Tell us about yourself" :max-length="500" />
         </FormField>
       </Form>
     </Variant>
@@ -103,7 +103,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Floating label" id="floating-label">
       <Form v-model="formData">
         <FormField name="bio" floating>
-          <Textarea placeholder="Bio" :rows="3" variant="bordered" />
+          <Textarea v-model="(formData.bio as string)" placeholder="Bio" :rows="3" variant="bordered" />
         </FormField>
       </Form>
     </Variant>
@@ -111,7 +111,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Counter inherited from Form" id="counter-from-form">
       <Form v-model="formCounterData" counter>
         <FormField name="bio" label="Bio">
-          <Textarea :max-length="300" placeholder="Tell us about yourself" />
+          <Textarea v-model="(formCounterData.bio as string)" :max-length="300" placeholder="Tell us about yourself" />
         </FormField>
       </Form>
     </Variant>
@@ -119,7 +119,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Counter overridden on FormField" id="counter-override-form-field">
       <Form v-model="formCounterData" counter>
         <FormField name="bio" label="Bio" :counter="false">
-          <Textarea :max-length="300" placeholder="Counter disabled here" />
+          <Textarea v-model="(formCounterData.bio as string)" :max-length="300" placeholder="Counter disabled here" />
         </FormField>
       </Form>
     </Variant>
@@ -127,7 +127,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Counter overridden on Textarea" id="counter-override-textarea">
       <Form v-model="formCounterData">
         <FormField name="bio" label="Bio">
-          <Textarea counter :max-length="300" placeholder="Counter forced on textarea" />
+          <Textarea v-model="(formCounterData.bio as string)" counter :max-length="300" placeholder="Counter forced on textarea" />
         </FormField>
       </Form>
     </Variant>
@@ -141,7 +141,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
 ## Description
 
 Multi-line text input component built on the DaisyUI `textarea` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation, error display, and counter cascade.
 Supports an `autoGrow` mode that expands the height automatically to fit the content.
 
 ## API
@@ -208,14 +208,16 @@ Counter resolution order (first defined wins):
 <Textarea v-model="notes" auto-grow placeholder="Grows as you type…" />
 
 <!-- Inside FormField -->
-<FormField name="bio" label="Bio" hint="Max 500 characters">
-  <Textarea required :max-length="500" />
-</FormField>
+<Form v-model="state">
+  <FormField name="bio" label="Bio" hint="Max 500 characters">
+    <Textarea v-model="state.bio" required :max-length="500" />
+  </FormField>
+</Form>
 
 <!-- Counter inherited from Form -->
-<Form v-model="data" counter>
+<Form v-model="state" counter>
   <FormField name="bio" label="Bio">
-    <Textarea :max-length="300" />
+    <Textarea v-model="state.bio" :max-length="300" />
   </FormField>
 </Form>
 ```

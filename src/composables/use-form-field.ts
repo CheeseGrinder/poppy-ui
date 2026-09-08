@@ -56,11 +56,14 @@ export interface UseFormFieldOptions {
   inputEl?: Ref<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null>
 }
 
-export interface UseFormFieldReturn<T> {
-  /** The FormFieldContext when inside a <FormField>, null otherwise. */
-  field: FormFieldContext<T> | null
-  /** The current field value typed as T, or undefined when not in a FormField. */
-  fieldValue: ComputedRef<T | undefined>
+export interface UseFormFieldReturn {
+  /**
+   * The FormFieldContext when inside a <FormField>, null otherwise.
+   * Only used for required/error/aria-invalid/touched-dirty/counter reporting —
+   * never for reading or writing the field value. The input's own `v-model`
+   * is always the single source of truth for the value.
+   */
+  field: FormFieldContext | null
   /** True when the field has a server-side error set via setErrors(). */
   hasServerError: ComputedRef<boolean>
   /** Triggers HTML5 constraint validation on the input element. */
@@ -73,10 +76,10 @@ export interface UseFormFieldReturn<T> {
   setDelegateMessage: (msg: string) => void
 }
 
-export function useFormField<T = unknown>(options: UseFormFieldOptions): UseFormFieldReturn<T> {
+export function useFormField(options: UseFormFieldOptions): UseFormFieldReturn {
   const t = useValidationTranslator()
 
-  const field = inject(FORM_FIELD_CONTEXT_KEY, null) as FormFieldContext<T> | null
+  const field = inject(FORM_FIELD_CONTEXT_KEY, null)
 
   // Signal required state to FormField on mount and on change
   onMounted(() => {
@@ -101,8 +104,6 @@ export function useFormField<T = unknown>(options: UseFormFieldOptions): UseForm
   onUnmounted(() => {
     field?.unregisterValidator(validatorKey)
   })
-
-  const fieldValue = computed<T | undefined>(() => field?.value.value as T | undefined)
 
   const hasServerError = computed<boolean>(() => {
     if (!field) return false
@@ -136,7 +137,6 @@ export function useFormField<T = unknown>(options: UseFormFieldOptions): UseForm
 
   return {
     field,
-    fieldValue,
     hasServerError,
     validate,
     onBlur,

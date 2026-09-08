@@ -11,9 +11,6 @@ export interface FormContext {
    */
   errors: ShallowRef<Record<string, string | undefined>>
 
-  /** The form's v-model data — same object reference as the caller's model, mutated in place. */
-  data: Record<string, unknown>
-
   /**
    * Counter config — exposed as raw `boolean | undefined`.
    * `undefined` means "no opinion" — inputs resolve the final value themselves
@@ -21,17 +18,6 @@ export interface FormContext {
    */
   counter: ShallowRef<boolean | undefined>
   counterFormat: ShallowRef<string | ((c: number, min?: number, max?: number) => string) | undefined>
-
-  // ── Field value methods ─────────────────────────────────────────────────
-
-  /** Sets a single field value by dot-notation path. Supports nested objects and arrays. */
-  setFieldValue: (path: string, value: unknown) => void
-
-  /** Returns the current value at a dot-notation path. */
-  getFieldValue: (path: string) => unknown
-
-  /** Replaces the entire data record and emits update:modelValue. */
-  setValues: (values: Record<string, unknown>) => void
 
   // ── Field error methods ─────────────────────────────────────────────────
 

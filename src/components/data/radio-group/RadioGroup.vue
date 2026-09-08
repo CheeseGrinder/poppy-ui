@@ -9,17 +9,19 @@ const props = defineProps<RadioGroupProps>()
 
 /**
  * The currently selected value.
- * Ignored when RadioGroup is inside a FormField (FormField owns the value).
+ * Each child `<Radio>` still owns its own `v-model` — this is only a
+ * convenience model for standalone (non-FormField) usage.
  */
 const model = defineModel<string | number | boolean>()
 
-// RadioGroup must not be used inside FormField — FormField owns the value.
+// RadioGroup should not be used inside FormField — place <Radio> directly
+// inside <FormField> instead, each with its own `v-model`.
 const fieldCtx = inject(FORM_FIELD_CONTEXT_KEY, null)
 
 if (import.meta.env.DEV && fieldCtx) {
   console.warn(
     '[RadioGroup] Do not use <RadioGroup> inside <FormField>. ' +
-      'Place <Radio> components directly inside <FormField> — they share the field value automatically.',
+      'Place <Radio> components directly inside <FormField>, each with its own `v-model`.',
   )
 }
 
@@ -34,18 +36,10 @@ watch(
   },
 )
 
-// When inside FormField, defer to it; otherwise manage value locally.
-const modelValue = computed<string | number | boolean | undefined>(() =>
-  fieldCtx ? (fieldCtx.value.value as string | number | boolean | undefined) : model.value,
-)
+const modelValue = computed<string | number | boolean | undefined>(() => model.value)
 
 function setValue(value: string | number | boolean): void {
-  if (fieldCtx) {
-    fieldCtx.setValue(value)
-    fieldCtx.setDirty(true)
-  } else {
-    model.value = value
-  }
+  model.value = value
 }
 
 const context: RadioGroupContext = {

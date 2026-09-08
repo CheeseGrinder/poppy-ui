@@ -128,7 +128,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="email" label="Email" hint="We'll never share it">
-          <Input type="email" required placeholder="you@example.com" />
+          <Input v-model="(formData.email as string)" type="email" required placeholder="you@example.com" />
         </FormField>
       </Form>
     </Variant>
@@ -136,7 +136,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
     <Variant title="Floating label" id="floating-label" class="p-4">
       <Form v-model="formData">
         <FormField name="name" floating label="Name">
-          <Input type="text" placeholder="Name" required variant="bordered" />
+          <Input v-model="(formData.name as string)" type="text" placeholder="Name" required variant="bordered" />
         </FormField>
       </Form>
     </Variant>
@@ -145,7 +145,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       <!-- counter + counterFormat set on Form, no props on Input -->
       <Form v-model="formCounterData" counter>
         <FormField name="bio" label="Bio">
-          <Input :max-length="200" placeholder="Tell us about yourself" />
+          <Input v-model="(formCounterData.bio as string)" :max-length="200" placeholder="Tell us about yourself" />
         </FormField>
       </Form>
     </Variant>
@@ -154,7 +154,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       <!-- Form enables counter, FormField disables it for this specific field -->
       <Form v-model="formCounterData" counter>
         <FormField name="bio" label="Bio" :counter="false">
-          <Input :max-length="200" placeholder="Counter disabled here" />
+          <Input v-model="(formCounterData.bio as string)" :max-length="200" placeholder="Counter disabled here" />
         </FormField>
       </Form>
     </Variant>
@@ -163,7 +163,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
       <!-- FormField has no counter opinion, Input re-enables it explicitly -->
       <Form v-model="formCounterData">
         <FormField name="bio" label="Bio">
-          <Input counter :max-length="160" placeholder="Counter forced on input" />
+          <Input v-model="(formCounterData.bio as string)" counter :max-length="160" placeholder="Counter forced on input" />
         </FormField>
       </Form>
     </Variant>
@@ -176,7 +176,7 @@ const formCounterData = ref<Record<string, unknown>>({ bio: '' })
 
 ## Description
 Text input component built on the DaisyUI `input` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, error display, counter cascade).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation, error display, and counter cascade.
 Add `#start`/`#end` slots for icons, prefixes, or suffixes — they activate the addon wrapper automatically.
 
 ## API
@@ -262,14 +262,16 @@ Counter resolution order (first defined wins):
 <Input v-model="email" clearable placeholder="you@example.com" />
 
 <!-- Inside FormField -->
-<FormField name="email" label="Email">
-  <Input type="email" required />
-</FormField>
+<Form v-model="state">
+  <FormField name="email" label="Email">
+    <Input v-model="state.email" type="email" required />
+  </FormField>
+</Form>
 
 <!-- Counter inherited from Form -->
-<Form v-model="data" counter>
+<Form v-model="state" counter>
   <FormField name="bio" label="Bio">
-    <Input :max-length="200" />
+    <Input v-model="state.bio" :max-length="200" />
   </FormField>
 </Form>
 ```

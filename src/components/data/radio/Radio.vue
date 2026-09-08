@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { FormFieldContext } from '@/components/data/form-field/form-field.context'
 import { FORM_FIELD_CONTEXT_KEY } from '@/components/data/form-field/form-field.context'
 import { RADIO_GROUP_CONTEXT_KEY } from '@/components/data/radio-group/radio-group.context'
 import { useComponentConfig } from '@/composables/use-component-config'
@@ -41,38 +40,25 @@ const config = useComponentConfig(RADIO_CONFIG, props, { size: 'md' })
 
 const inputId = `radio-${useId()}`
 
-// Priority: FormField > RadioGroup > standalone prop
-const fieldCtx = inject(FORM_FIELD_CONTEXT_KEY, null as FormFieldContext | null)
+// Priority: FormField > RadioGroup > standalone prop — for `name` only, never for the value.
+const fieldCtx = inject(FORM_FIELD_CONTEXT_KEY, null)
 const groupCtx = inject(RADIO_GROUP_CONTEXT_KEY, null)
 
 const resolvedName = computed(() => props.name ?? fieldCtx?.name ?? groupCtx?.name ?? inputId)
 
-// Bridge to form field context
+// Bridge to form field context — required/error/dirty/touched reporting only.
 const { field, onBlur, clearError } = useFormField({
   required: computed(() => !!props.required || !!groupCtx?.required.value),
   inputEl,
 })
 
-// Resolved value priority: FormField > RadioGroup > local model
-const resolvedValue = computed(() => {
-  if (field) return field.value.value
-  if (groupCtx) return groupCtx.modelValue.value
-  return model.value
-})
-
-// Checked state
-const isChecked = computed(() => resolvedValue.value === props.value)
+// Checked state — always driven by this Radio's own v-model.
+const isChecked = computed(() => model.value === props.value)
 
 function handleChange(): void {
   model.value = props.value
-  if (field) {
-    field.setValue(props.value)
-    field.setDirty(true)
-    clearError()
-  }
-  else if (groupCtx) {
-    groupCtx.setValue(props.value)
-  }
+  field?.setDirty(true)
+  clearError()
 }
 
 // ── Description / hint ────────────────────────────────────────────────────────

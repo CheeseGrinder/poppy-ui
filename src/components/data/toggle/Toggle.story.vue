@@ -110,7 +110,7 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="notifications" label="Notifications">
-          <Toggle required description="Enable email notifications" />
+          <Toggle v-model="(formData.notifications as boolean)" required description="Enable email notifications" />
         </FormField>
       </Form>
     </Variant>
@@ -124,7 +124,7 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
 ## Description
 
 Toggle (switch) component built on the DaisyUI `toggle` element.
-Works standalone with `v-model` or inside `<FormField />` for full form integration (validation, required indicator).
+Always takes an explicit `v-model` — inside `<FormField />` it binds directly to the shared `Form` state object, gaining validation and the required indicator.
 
 ## API
 
@@ -188,8 +188,10 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 <Toggle v-model="agreed" description="I accept the terms" required />
 
 <!-- Inside FormField -->
-<FormField name="notifications" label="Notifications">
-  <Toggle required description="Enable email notifications" />
-</FormField>
+<Form v-model="state">
+  <FormField name="notifications" label="Notifications">
+    <Toggle v-model="state.notifications" required description="Enable email notifications" />
+  </FormField>
+</Form>
 ```
 </docs>

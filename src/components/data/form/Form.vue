@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { CounterFn } from '@/types/utils.type'
 import { safeClone } from '@/utils/clone'
-import { getByPath, setByPath } from '@/utils/path'
 import { provide, shallowReactive, shallowRef, watch } from 'vue'
 import type { FormContext } from './form.context'
 import { FORM_CONTEXT_KEY } from './form.context'
@@ -13,8 +12,9 @@ import type { FieldState } from './form.types'
 const props = defineProps<FormProps>()
 
 /**
- * The form data object. All field values are stored under their name/path key.
- * Supports nested paths and arrays via dot-notation.
+ * The shared form data object. Mutated in place by child inputs via their own
+ * `v-model` — Form never copies or writes through it, it only reads it for
+ * `reset()` / `submit()`.
  */
 const model = defineModel<Record<string, unknown>>({ required: true })
 
@@ -59,7 +59,6 @@ watch(() => props.counterFormat, (val) => { counterFormat.value = val })
 function ensureFieldState(path: string): FieldState {
   if (!fieldStates[path]) {
     fieldStates[path] = {
-      value: getByPath(model.value, path),
       isDirty: false,
       isTouched: false,
       isValid: true,
@@ -71,23 +70,6 @@ function ensureFieldState(path: string): FieldState {
 }
 
 // FormContext implementation
-
-function setFieldValue(path: string, value: unknown): void {
-  // Mutates the model in place — model.value is the same object the
-  // caller passed in (defineModel doesn't clone objects), so this is
-  // visible to the caller without a copy or an update:modelValue emit.
-  setByPath(model.value, path, value)
-  const state = ensureFieldState(path)
-  state.value = value
-}
-
-function getFieldValue(path: string): unknown {
-  return getByPath(model.value, path)
-}
-
-function setValues(values: Record<string, unknown>): void {
-  Object.assign(model.value, values)
-}
 
 function getFieldError(path: string): string | undefined {
   return errors.value[path]
@@ -163,15 +145,17 @@ function validate(): boolean {
 }
 
 function reset(): void {
-  // Clear all current keys, then restore snapshot taken at component creation
-  for (const key of Object.keys(model.value)) {
-    delete model.value[key]
+  // Clear all current keys, then restore snapshot taken at component creation.
+  // Mutated in place on the shared model object — never reassigned — so every
+  // input's own `v-model` binding (pointing at the same object) picks it up.
+  const current = model.value
+  for (const key of Object.keys(current)) {
+    delete current[key]
   }
-  Object.assign(model.value, safeClone(initialData))
+  Object.assign(current, safeClone(initialData))
   clearErrors()
   for (const path of Object.keys(fieldStates)) {
     fieldStates[path] = {
-      value: getByPath(model.value, path),
       isDirty: false,
       isTouched: false,
       isValid: true,
@@ -186,16 +170,8 @@ function reset(): void {
 
 const formContext: FormContext = {
   errors,
-  // Getter so this always reflects the current model.value, even if the
-  // caller swaps in a whole new object externally.
-  get data() {
-    return model.value
-  },
   counter,
   counterFormat,
-  setFieldValue,
-  getFieldValue,
-  setValues,
   getFieldError,
   setFieldError,
   setErrors,

@@ -76,21 +76,17 @@ const { field, onBlur, clearError } = useFormField({
 
 // ── Value resolution ─────────────────────────────────────────────────────────
 
-const resolvedValue = computed(() =>
-  field ? field.value.value : (model.value ?? props.defaultValue),
-)
+const resolvedValue = computed(() => model.value ?? props.defaultValue)
 
 function handleUpdate(event: Event): void {
   const raw = (event.target as HTMLInputElement).value
   model.value = raw
-  field?.setValue(raw)
   field?.setDirty(true)
   clearError()
 }
 
 function onClear(): void {
   model.value = undefined as any
-  field?.setValue(undefined)
   clearError()
   inputEl.value?.focus()
 }

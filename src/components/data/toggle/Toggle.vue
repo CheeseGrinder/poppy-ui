@@ -43,14 +43,10 @@ const slots = useSlots()
 
 // ── Form field ───────────────────────────────────────────────────────────────
 
-const { field, fieldValue, onBlur, clearError } = useFormField<boolean>({
+const { field, onBlur, clearError } = useFormField({
   required: computed(() => !!props.required),
   inputEl,
 })
-
-// ── Value resolution ─────────────────────────────────────────────────────────
-
-const resolvedValue = computed(() => field ? fieldValue.value : model.value)
 
 function handleChange(event: Event): void {
   if (props.readonly) {
@@ -59,7 +55,6 @@ function handleChange(event: Event): void {
   }
   const checked = (event.target as HTMLInputElement).checked
   model.value = checked
-  field?.setValue(checked)
   field?.setDirty(true)
   clearError()
 }
@@ -95,7 +90,7 @@ defineExpose({
         { 'toggle-error': hasError },
         { validator: required },
       ]"
-      :checked="resolvedValue"
+      :checked="model"
       :disabled="disabled"
       :required="required"
       :aria-invalid="hasError || undefined"
@@ -126,7 +121,7 @@ defineExpose({
       { 'toggle-error': hasError },
       { validator: required },
     ]"
-    :checked="resolvedValue"
+    :checked="model"
     :disabled="disabled"
     :required="required"
     :aria-invalid="hasError || undefined"
