@@ -1,8 +1,55 @@
 import type { FormFieldContext } from '@/components/data/form-field/form-field.context'
 import { FORM_FIELD_CONTEXT_KEY } from '@/components/data/form-field/form-field.context'
-import { getValidationMessage } from '@/utils/get-validation-message'
-import { type ComputedRef, computed, inject, onMounted, onUnmounted, type Ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
+import {
+  createFallbackValidationTranslator,
+  getValidationMessage,
+  type ValidationTranslator,
+} from '@/utils/get-validation-message'
+import * as Vue from 'vue'
+import { type ComputedRef, computed, inject, onMounted, onUnmounted, type Ref, shallowRef, watch } from 'vue'
+
+/**
+ * `withAsyncContext` preserves the active component instance across an
+ * `await`, so a composable relying on `getCurrentInstance()` (e.g.
+ * `useI18n()`) can still be called after a dynamic `import()`. It's exported
+ * at runtime since Vue 3.3 (the `<script setup>` compiler uses it for
+ * top-level await) but missing from this Vue version's public type
+ * declarations — module augmentation can't add it (`vue`'s types re-export
+ * via `export * from '@vue/runtime-dom'`, which declaration merging for new,
+ * not-already-present exports doesn't reliably attach to), hence this narrow
+ * local cast instead of a `declare module 'vue'` shim.
+ */
+const withAsyncContext = (
+  Vue as unknown as {
+    withAsyncContext: <T>(getAwaitable: () => Promise<T>) => Promise<[T, () => void]>
+  }
+).withAsyncContext
+
+/**
+ * Resolves a translator for validation messages: vue-i18n's `useI18n().t` when
+ * the package is installed AND its plugin is set up on the app; the hardcoded
+ * English fallback otherwise (including while the dynamic import is pending).
+ *
+ * `vue-i18n` is marked `external` in the build, so a static top-level import
+ * would force every consumer's bundler to resolve it even if unused — hence
+ * the dynamic import here, which fails gracefully (a rejected promise) when
+ * the package isn't installed at all, instead of a build-time resolution error.
+ */
+function useValidationTranslator(): Ref<ValidationTranslator> {
+  const t = shallowRef<ValidationTranslator>(createFallbackValidationTranslator())
+
+  ;(async () => {
+    try {
+      const [{ useI18n }, restore] = await withAsyncContext(() => import('vue-i18n'))
+      restore()
+      t.value = useI18n().t
+    } catch {
+      // Package not installed, or its plugin isn't set up on this app — keep the fallback.
+    }
+  })()
+
+  return t
+}
 
 export interface UseFormFieldOptions {
   required: ComputedRef<boolean>
@@ -27,7 +74,7 @@ export interface UseFormFieldReturn<T> {
 }
 
 export function useFormField<T = unknown>(options: UseFormFieldOptions): UseFormFieldReturn<T> {
-  const { t } = useI18n()
+  const t = useValidationTranslator()
 
   const field = inject(FORM_FIELD_CONTEXT_KEY, null) as FormFieldContext<T> | null
 
@@ -67,7 +114,7 @@ export function useFormField<T = unknown>(options: UseFormFieldOptions): UseForm
     const el = options.inputEl?.value
     if (!el || !field) return true
 
-    const message = getValidationMessage(el, t)
+    const message = getValidationMessage(el, t.value)
     field.setError(message ?? undefined)
     return !message
   }

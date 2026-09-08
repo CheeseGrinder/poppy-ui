@@ -7,20 +7,56 @@ type ValidationAnyElement = HTMLElement & {
   validationMessage: string
 }
 
+export type ValidationTranslator = (key: string, params?: Record<string, string | number>, fallback?: string) => string
+
+/**
+ * English defaults for every `common.validation.*` key this module can request.
+ * Used by `createFallbackValidationTranslator` when no i18n library is available.
+ */
+export const DEFAULT_VALIDATION_MESSAGES: Record<string, string> = {
+  'common.validation.required': 'This field is required.',
+  'common.validation.format.default': 'Please enter a valid value.',
+  'common.validation.minLength': 'Must be at least {min} characters.',
+  'common.validation.maxLength': 'Must be at most {max} characters.',
+  'common.validation.min': 'Must be at least {min}.',
+  'common.validation.max': 'Must be at most {max}.',
+  'common.validation.pattern': 'Please match the requested format.',
+  'common.validation.stepMismatch': 'Please enter a valid value.',
+  'common.validation.badInput': 'Please enter a valid value.',
+  'common.validation.customError': 'Invalid value.',
+}
+
+/**
+ * Builds a `t()`-shaped translator from `DEFAULT_VALIDATION_MESSAGES`, for use
+ * when no i18n library is installed on the consuming app.
+ */
+export function createFallbackValidationTranslator(): ValidationTranslator {
+  return (key, params, fallback) => {
+    let message = fallback ?? DEFAULT_VALIDATION_MESSAGES[key] ?? key
+    if (params) {
+      for (const [name, value] of Object.entries(params)) {
+        message = message.replaceAll(`{${name}}`, String(value))
+      }
+    }
+    return message
+  }
+}
+
 /**
  * Reads element's validity state and returns a localized validation message.
  * Returns null when element is valid.
  *
- * This is a factory function that takes a translation function (t) from vue-i18n.
- * The consumer is responsible for providing the translation function.
+ * This is a factory function that takes a `t()`-shaped translator, typically
+ * vue-i18n's `useI18n().t`, or `createFallbackValidationTranslator()` when no
+ * i18n library is installed on the consuming app.
  *
  * @param el - The input/textarea/select element to check
- * @param t - Translation function from vue-i18n's useI18n()
+ * @param t - Translation function
  * @returns Localized error message or null if valid
  */
 export function getValidationMessage(
   el: ValidationElement | ValidationAnyElement,
-  t: (key: string, params?: Record<string, string | number>, fallback?: string) => string,
+  t: ValidationTranslator,
 ): string | null {
   if (el.validity.valid) return null
 
