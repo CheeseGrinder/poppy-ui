@@ -81,6 +81,30 @@ const formData = ref<Record<string, unknown>>({ plan: '' })
       </Form>
     </Variant>
 
+    <Variant title="Inside FormField + RadioGroup (current: dev warning, see #136)" id="inside-form-field-current-warning">
+      <!--
+        Reference case for the ongoing Form API redesign (issue #136).
+        Today, RadioGroup and FormField both try to resolve/own the field's
+        value — nesting them like this logs a dev-mode console.warn (see
+        RadioGroup.vue) and FormField's value silently wins. Once #136 lands
+        (FormField becomes purely presentational, no longer resolves value),
+        this combination should work without warning: RadioGroup would only
+        share the native `name` + `required`, each Radio keeping its own
+        explicit v-model. Open the browser console to see today's warning.
+      -->
+      <Form v-model="formData">
+        <FormField name="plan" label="Plan">
+          <RadioGroup v-model="model" class="mt-1">
+            <div class="flex flex-col gap-2">
+              <Radio value="free" description="Free" />
+              <Radio value="pro" description="Pro — 9€/month" />
+              <Radio value="enterprise" description="Enterprise" />
+            </div>
+          </RadioGroup>
+        </FormField>
+      </Form>
+    </Variant>
+
     <Variant title="Colors" id="colors">
       <RadioGroup v-model="model">
         <div class="flex flex-col gap-2">
