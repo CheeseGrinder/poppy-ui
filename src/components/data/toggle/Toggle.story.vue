@@ -39,6 +39,11 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
         <HstCheckbox v-model="(state.required as boolean)" title="required" />
         <HstText v-model="state.description" title="description" />
         <HstText v-model="state.hint" title="hint" />
+        <HstSelect
+          v-model="state.labelPosition"
+          title="labelPosition"
+          :options="[undefined, 'left', 'right']"
+        />
       </template>
 
       <Toggle v-model="model" v-bind="state" />
@@ -107,6 +112,13 @@ const formData = ref<Record<string, unknown>>({ notifications: false })
       <Toggle v-model="model" description="I accept the terms and conditions" required />
     </Variant>
 
+    <Variant title="Label Position" id="label-position">
+      <div class="flex flex-col gap-3 max-w-xs">
+        <Toggle v-model="model" description="Enable email notifications" hint="Sent about once a week" />
+        <Toggle v-model="model" description="Enable email notifications" hint="Sent about once a week" label-position="left" />
+      </div>
+    </Variant>
+
     <Variant title="Inside FormField" id="inside-form-field">
       <Form v-model="formData">
         <FormField name="notifications" label="Notifications">
@@ -136,15 +148,16 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Props
 
-| Prop          | Type          | Default     | Configurable       | Description                                                      |
-|---------------|---------------|-------------|--------------------|--------------------------------------------------------------------|
-| `color`       | `ToggleColor` | `undefined` | :white_check_mark: | Color variant.                                                   |
-| `size`        | `ToggleSize`  | `'md'`      | :white_check_mark: | Size.                                                            |
-| `description` | `string`      | `undefined` | :x:                | Primary label text displayed to the right of the toggle.         |
-| `hint`        | `string`      | `undefined` | :x:                | Secondary hint text displayed below the description.             |
-| `disabled`    | `boolean`     | `undefined` | :x:                | Native disabled.                                                 |
-| `readonly`    | `boolean`     | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
-| `required`    | `boolean`     | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
+| Prop            | Type                  | Default     | Configurable       | Description                                                      |
+|-----------------|-----------------------|-------------|--------------------|--------------------------------------------------------------------|
+| `color`         | `ToggleColor`         | `undefined` | :white_check_mark: | Color variant.                                                   |
+| `size`          | `ToggleSize`          | `'md'`      | :white_check_mark: | Size.                                                            |
+| `labelPosition` | `ToggleLabelPosition` | `'right'`   | :white_check_mark: | Position of the description/hint label relative to the toggle. `'left'` matches common mobile settings-list conventions. |
+| `description`   | `string`              | `undefined` | :x:                | Primary label text displayed next to the toggle.                 |
+| `hint`          | `string`              | `undefined` | :x:                | Secondary hint text displayed below the description.             |
+| `disabled`      | `boolean`             | `undefined` | :x:                | Native disabled.                                                 |
+| `readonly`      | `boolean`             | `undefined` | :x:                | Prevents toggling without disabling the visual state.            |
+| `required`      | `boolean`             | `undefined` | :x:                | Native required. Displays `"*"` next to the description.         |
 
 ### Expose
 
@@ -162,9 +175,9 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 ### Slots
 
-| Slot          | Bindings | Description                                          |
-|---------------|----------|------------------------------------------------------|
-| `description` | -        | Primary label text displayed to the right of toggle. |
+| Slot          | Bindings | Description                                   |
+|---------------|----------|------------------------------------------------|
+| `description` | -        | Primary label text displayed next to toggle.   |
 | `hint`        | -        | Secondary hint text displayed below the description. |
 
 > **Configurable** props can be set globally via the Poppy UI plugin (`components.toggle` option). See [Plugin Configuration](../../../stories/Configuration.story.md) for more information.
@@ -186,6 +199,9 @@ Works standalone with `v-model` or inside `<FormField />` for full form integrat
 
 <!-- Required -->
 <Toggle v-model="agreed" description="I accept the terms" required />
+
+<!-- Label on the left (mobile-style settings row) -->
+<Toggle v-model="enabled" description="Enable notifications" label-position="left" />
 
 <!-- Inside FormField -->
 <FormField name="notifications" label="Notifications">
