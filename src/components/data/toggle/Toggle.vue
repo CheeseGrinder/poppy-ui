@@ -36,7 +36,7 @@ const props = defineProps<ToggleProps>()
  */
 const model = defineModel<boolean>()
 
-const config = useComponentConfig(TOGGLE_CONFIG, props, { size: 'md' })
+const config = useComponentConfig(TOGGLE_CONFIG, props, { size: 'md', labelPosition: 'right' })
 
 const inputEl = useTemplateRef('inputEl')
 const slots = useSlots()
@@ -78,11 +78,14 @@ defineExpose({
 </script>
 
 <template>
-  <!-- Toggle with description / hint label to the right -->
+  <!-- Toggle with description / hint label to the left or right -->
   <label
     v-if="hasLabel"
     class="flex cursor-pointer items-start gap-2"
-    :class="{ 'opacity-60 pointer-events-none': disabled || readonly }"
+    :class="[
+      { 'opacity-60 pointer-events-none': disabled || readonly },
+      { 'flex-row-reverse justify-between': config.labelPosition === 'left' },
+    ]"
   >
     <input
       ref="inputEl"

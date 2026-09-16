@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'vue'
-import type { ToggleColor, ToggleSize } from './toggle.types'
+import type { ToggleColor, ToggleLabelPosition, ToggleSize } from './toggle.types'
 
 export interface ToggleConfigurableProps {
   /**
@@ -13,6 +13,14 @@ export interface ToggleConfigurableProps {
    * @default 'md'
    */
   size?: ToggleSize
+
+  /**
+   * Position of the description/hint label relative to the toggle control.
+   * Set to `'left'` to match common mobile settings-list conventions.
+   *
+   * @default 'right'
+   */
+  labelPosition?: ToggleLabelPosition
 }
 
 interface NativeToggle {
